@@ -264,6 +264,12 @@
   border-left: 4px solid #16a34a;
 }
 
+.relatedEmpty {
+  font-size: 0.88rem;
+  color: #9ca3af;
+  margin: 0;
+}
+
 .relatedGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

@@ -5,6 +5,7 @@ import matter from "gray-matter";
 import Link from "next/link";
 import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
 import { serialize } from "next-mdx-remote/serialize";
+import remarkGfm from "remark-gfm";
 import Seo from "../../components/common/Seo";
 import Breadcrumb from "../../components/common/Breadcrumb";
 import ViewCounter from "../../components/article/ViewCounter";
@@ -203,9 +204,11 @@ export default function PostPage({
           <ShareButtons title={frontmatter.title} />
 
           {/* Related posts below article */}
-          {relatedPosts.length > 0 && (
-            <section className={styles.relatedSection}>
-              <h2 className={styles.relatedTitle}>関連記事</h2>
+          <section className={styles.relatedSection}>
+            <h2 className={styles.relatedTitle}>関連記事</h2>
+            {relatedPosts.length === 0 ? (
+              <p className={styles.relatedEmpty}>関連記事はまだありません。</p>
+            ) : (
               <div className={styles.relatedGrid}>
                 {relatedPosts.slice(0, 3).map((post) => (
                   <Link key={post.slug} href={`/posts/${post.slug}`} className={styles.relatedCard}>
@@ -224,8 +227,8 @@ export default function PostPage({
                   </Link>
                 ))}
               </div>
-            </section>
-          )}
+            )}
+          </section>
 
           <PostNavigation prevPost={prevPost} nextPost={nextPost} />
         </main>
@@ -261,7 +264,7 @@ export const getStaticProps: GetStaticProps<PostPageProps> = async ({ params }) 
 
   const raw = fs.readFileSync(filePath, "utf-8");
   const { data, content } = matter(raw);
-  const mdxSource = await serialize(content);
+  const mdxSource = await serialize(content, { mdxOptions: { remarkPlugins: [remarkGfm] } });
   const headings = extractHeadings(content);
 
   const allPosts = readAllPosts();
