@@ -14,9 +14,67 @@ import styles from "./post.module.css";
 
 const POSTS_DIR = path.join(process.cwd(), "content/posts");
 
+// MDX-friendly wrappers: MDX v3 (used by next-mdx-remote v6) does not reliably
+// parse multi-line JSX object literals as props. These wrappers accept flat
+// string/number props and a JSON string for arrays instead.
+// MDX v3 silently drops JSX expression props ({value} syntax), so all props
+// are received as strings from MDX files. Numeric values are coerced here.
+function ProductCardMdx({
+  rank,
+  id,
+  name,
+  description,
+  price,
+  rating,
+  reviewCount,
+  affiliateUrl,
+  source,
+  badge,
+}: {
+  rank?: string;
+  id?: string;
+  name: string;
+  description: string;
+  price: string;
+  rating: string;
+  reviewCount: string;
+  affiliateUrl: string;
+  source: "amazon" | "rakuten" | "other";
+  badge?: string;
+}) {
+  return (
+    <ProductCard
+      rank={rank ? Number(rank) : undefined}
+      product={{
+        id: id ?? name,
+        name,
+        description,
+        price: Number(price),
+        rating: Number(rating),
+        reviewCount: Number(reviewCount),
+        affiliateUrl,
+        source,
+        badge,
+      }}
+    />
+  );
+}
+
+function ComparisonTableMdx({ rows, columns }: { rows: string; columns?: string }) {
+  try {
+    const products = JSON.parse(rows);
+    const cols = columns ? JSON.parse(columns) : undefined;
+    return <ComparisonTable products={products} columns={cols} />;
+  } catch {
+    return null;
+  }
+}
+
 const mdxComponents = {
   ProductCard,
   ComparisonTable,
+  ProductCardMdx,
+  ComparisonTableMdx,
 };
 
 type PostPageProps = {
