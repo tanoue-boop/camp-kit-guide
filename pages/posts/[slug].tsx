@@ -30,6 +30,7 @@ const ALL_CATEGORIES: Category[] = [
   { slug: "chair-table", name: "チェア・テーブル", description: "", icon: "🪑" },
   { slug: "lighting", name: "照明・ランタン", description: "", icon: "🔦" },
   { slug: "clothing", name: "ウェア・装備", description: "", icon: "🧥" },
+  { slug: "bonfire", name: "焚き火台", description: "", icon: "🔥" },
 ];
 
 // ─── heading helpers ─────────────────────────────────────────────────────────

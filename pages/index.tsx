@@ -18,6 +18,7 @@ const baseCategories: Omit<Category, "postCount">[] = [
   { slug: "chair-table", name: "チェア・テーブル", description: "軽量・コンパクトなアウトドア家具の選び方", icon: "🪑" },
   { slug: "lighting", name: "照明・ランタン", description: "LEDランタン・ヘッドライトのおすすめ", icon: "🔦" },
   { slug: "clothing", name: "ウェア・装備", description: "レインウェア・防寒着・シューズなど", icon: "🧥" },
+  { slug: "bonfire", name: "焚き火台", description: "初心者向けから本格派まで焚き火台の選び方", icon: "🔥" },
 ];
 
 type HomePageProps = {
