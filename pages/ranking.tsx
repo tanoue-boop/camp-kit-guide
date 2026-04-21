@@ -2,17 +2,37 @@ import type { GetStaticProps } from "next";
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
+import Link from "next/link";
 import Seo from "../components/common/Seo";
 import Breadcrumb from "../components/common/Breadcrumb";
 import type { Post } from "../types/post";
-import Link from "next/link";
 import styles from "./ranking.module.css";
 
 const POSTS_DIR = path.join(process.cwd(), "content/posts");
 
-type RankingPageProps = { posts: Post[] };
+const CATEGORY_MAP: Record<string, { name: string; icon: string }> = {
+  tent:         { name: "テント",       icon: "⛺" },
+  "sleeping-bag": { name: "寝袋・シュラフ", icon: "🛏️" },
+  cookware:     { name: "調理器具",     icon: "🍳" },
+  "chair-table": { name: "チェア・テーブル", icon: "🪑" },
+  lighting:     { name: "照明・ランタン", icon: "🔦" },
+  clothing:     { name: "ウェア・装備", icon: "🧥" },
+  bonfire:      { name: "焚き火台",     icon: "🔥" },
+  backpack:     { name: "バックパック", icon: "🎒" },
+};
 
-export default function RankingPage({ posts }: RankingPageProps) {
+const MEDAL: Record<number, { emoji: string; label: string; mod: string }> = {
+  1: { emoji: "🥇", label: "1位", mod: styles.gold },
+  2: { emoji: "🥈", label: "2位", mod: styles.silver },
+  3: { emoji: "🥉", label: "3位", mod: styles.bronze },
+};
+
+type RankingPageProps = {
+  posts: Post[];
+  updatedAt: string;
+};
+
+export default function RankingPage({ posts, updatedAt }: RankingPageProps) {
   return (
     <>
       <Seo
@@ -22,20 +42,76 @@ export default function RankingPage({ posts }: RankingPageProps) {
       />
       <div className={styles.container}>
         <Breadcrumb items={[{ label: "人気記事ランキング" }]} />
-        <h1 className={styles.title}>人気記事ランキング</h1>
+
+        {/* Page header */}
+        <div className={styles.pageHeader}>
+          <h1 className={styles.pageTitle}>
+            <span className={styles.pageTitleIcon}>🏆</span>
+            人気記事ランキング
+          </h1>
+          <div className={styles.pageMeta}>
+            <span className={styles.metaBadge}>全{posts.length}記事</span>
+            <span className={styles.metaSep}>｜</span>
+            <span className={styles.metaDate}>最終更新：{updatedAt}</span>
+          </div>
+          <p className={styles.pageDesc}>
+            キャンプ用品の選び方・おすすめ比較記事を、公開日の新しい順にランキング形式でご紹介します。
+            テント・寝袋・バーナーなど、人気アイテムの最新情報をチェックしてください。
+          </p>
+        </div>
+
         {posts.length === 0 ? (
           <p className={styles.empty}>記事を準備中です。</p>
         ) : (
           <ol className={styles.list}>
-            {posts.map((post, i) => (
-              <li key={post.slug} className={styles.item}>
-                <span className={styles.rank}>{i + 1}</span>
-                <Link href={`/posts/${post.slug}`} className={styles.link}>
-                  <p className={styles.postTitle}>{post.title}</p>
-                  <p className={styles.postDesc}>{post.description}</p>
-                </Link>
-              </li>
-            ))}
+            {posts.map((post, i) => {
+              const rank = i + 1;
+              const medal = MEDAL[rank];
+              const cat = CATEGORY_MAP[post.category] ?? { name: post.category, icon: "📄" };
+              const isTop3 = rank <= 3;
+
+              return (
+                <li key={post.slug} className={`${styles.card} ${medal ? medal.mod : styles.normal} ${isTop3 ? styles.top3 : ""}`}>
+                  {/* Rank badge */}
+                  <div className={`${styles.rankBadge} ${medal ? medal.mod : styles.normal}`}>
+                    {medal ? (
+                      <>
+                        <span className={styles.rankEmoji}>{medal.emoji}</span>
+                        <span className={styles.rankLabel}>{medal.label}</span>
+                      </>
+                    ) : (
+                      <span className={styles.rankNum}>{rank}</span>
+                    )}
+                  </div>
+
+                  {/* Thumbnail */}
+                  <div className={`${styles.thumb} ${medal ? medal.mod : ""}`}>
+                    {post.thumbnail ? (
+                      <img src={post.thumbnail} alt={post.title} className={styles.thumbImg} />
+                    ) : (
+                      <div className={styles.thumbPlaceholder}>
+                        <span className={styles.thumbCatIcon}>{cat.icon}</span>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Body */}
+                  <div className={styles.body}>
+                    <div className={styles.bodyTop}>
+                      <span className={styles.catBadge}>
+                        {cat.icon} {cat.name}
+                      </span>
+                      <span className={styles.date}>{post.date}</span>
+                    </div>
+                    <h2 className={styles.title}>{post.title}</h2>
+                    <p className={styles.desc}>{post.description}</p>
+                    <Link href={`/posts/${post.slug}`} className={`${styles.btn} ${medal ? medal.mod : styles.normal}`}>
+                      詳細を見る →
+                    </Link>
+                  </div>
+                </li>
+              );
+            })}
           </ol>
         )}
       </div>
@@ -62,5 +138,9 @@ export const getStaticProps: GetStaticProps<RankingPageProps> = async () => {
     }
   }
   posts.sort((a, b) => b.date.localeCompare(a.date));
-  return { props: { posts } };
+
+  const now = new Date();
+  const updatedAt = `${now.getFullYear()}年${now.getMonth() + 1}月${now.getDate()}日`;
+
+  return { props: { posts, updatedAt } };
 };
