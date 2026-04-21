@@ -2,6 +2,7 @@ import type { GetStaticProps } from "next";
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
+import Link from "next/link";
 import Seo from "../components/common/Seo";
 import CategoryGrid from "../components/top/CategoryGrid";
 import RankingWidget from "../components/top/RankingWidget";
@@ -19,6 +20,7 @@ const baseCategories: Omit<Category, "postCount">[] = [
   { slug: "lighting", name: "照明・ランタン", description: "LEDランタン・ヘッドライトのおすすめ", icon: "🔦" },
   { slug: "clothing", name: "ウェア・装備", description: "レインウェア・防寒着・シューズなど", icon: "🧥" },
   { slug: "bonfire", name: "焚き火台", description: "初心者向けから本格派まで焚き火台の選び方", icon: "🔥" },
+  { slug: "backpack", name: "バックパック", description: "容量・用途別のキャンプ用バックパックの選び方", icon: "🎒" },
 ];
 
 type HomePageProps = {
@@ -59,7 +61,17 @@ export default function HomePage({ categories, recentPosts }: HomePageProps) {
               <h2 className={styles.sectionTitle}>新着記事</h2>
               {recentPosts.length === 0 ? (
                 <p className={styles.empty}>記事を準備中です。もうしばらくお待ちください。</p>
-              ) : null}
+              ) : (
+                <div className={styles.postGrid}>
+                  {recentPosts.map((post) => (
+                    <Link key={post.slug} href={`/posts/${post.slug}`} className={styles.postCard}>
+                      <p className={styles.postCardTitle}>{post.title}</p>
+                      <p className={styles.postCardDesc}>{post.description}</p>
+                      <span className={styles.postCardDate}>{post.date}</span>
+                    </Link>
+                  ))}
+                </div>
+              )}
             </section>
           </div>
           <aside className={styles.sideCol}>

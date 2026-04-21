@@ -1,12 +1,18 @@
+import type { GetStaticProps } from "next";
+import fs from "fs";
+import path from "path";
+import matter from "gray-matter";
 import Seo from "../components/common/Seo";
 import Breadcrumb from "../components/common/Breadcrumb";
 import type { Post } from "../types/post";
 import Link from "next/link";
 import styles from "./ranking.module.css";
 
-const posts: Post[] = [];
+const POSTS_DIR = path.join(process.cwd(), "content/posts");
 
-export default function RankingPage() {
+type RankingPageProps = { posts: Post[] };
+
+export default function RankingPage({ posts }: RankingPageProps) {
   return (
     <>
       <Seo
@@ -36,3 +42,25 @@ export default function RankingPage() {
     </>
   );
 }
+
+export const getStaticProps: GetStaticProps<RankingPageProps> = async () => {
+  const posts: Post[] = [];
+  if (fs.existsSync(POSTS_DIR)) {
+    const files = fs.readdirSync(POSTS_DIR).filter((f) => f.endsWith(".mdx"));
+    for (const file of files) {
+      const raw = fs.readFileSync(path.join(POSTS_DIR, file), "utf-8");
+      const { data } = matter(raw);
+      posts.push({
+        slug: file.replace(".mdx", ""),
+        title: data.title ?? "",
+        description: data.description ?? "",
+        date: data.date ?? "",
+        category: data.category ?? "",
+        tags: data.tags ?? [],
+        ...(data.thumbnail ? { thumbnail: data.thumbnail } : {}),
+      });
+    }
+  }
+  posts.sort((a, b) => b.date.localeCompare(a.date));
+  return { props: { posts } };
+};

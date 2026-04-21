@@ -11,6 +11,7 @@ const CATEGORIES = [
   { href: "/category/lighting", label: "照明・ランタン", icon: "🔦" },
   { href: "/category/clothing", label: "ウェア・装備", icon: "🧥" },
   { href: "/category/bonfire", label: "焚き火台", icon: "🔥" },
+  { href: "/category/backpack", label: "バックパック", icon: "🎒" },
 ];
 
 export default function Header() {
