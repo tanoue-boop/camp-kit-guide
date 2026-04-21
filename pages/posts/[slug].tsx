@@ -89,14 +89,16 @@ function ProductCardMdx({
   affiliateUrl: string; source: "amazon" | "rakuten" | "other"; badge?: string;
 }) {
   return (
-    <ProductCard
-      rank={rank ? Number(rank) : undefined}
-      product={{
-        id: id ?? name, name, description,
-        price: Number(price), rating: Number(rating), reviewCount: Number(reviewCount),
-        affiliateUrl, source, badge,
-      }}
-    />
+    <div id={id} style={{ scrollMarginTop: "90px" }}>
+      <ProductCard
+        rank={rank ? Number(rank) : undefined}
+        product={{
+          id: id ?? name, name, description,
+          price: Number(price), rating: Number(rating), reviewCount: Number(reviewCount),
+          affiliateUrl, source, badge,
+        }}
+      />
+    </div>
   );
 }
 
