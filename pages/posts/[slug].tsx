@@ -144,6 +144,7 @@ type PostPageProps = {
   headings: Heading[];
   relatedPosts: Post[];
   recentPosts: Post[];
+  sidebarPosts: Post[];
   prevPost: Post | null;
   nextPost: Post | null;
   categories: Category[];
@@ -152,7 +153,7 @@ type PostPageProps = {
 // ─── component ────────────────────────────────────────────────────────────────
 
 export default function PostPage({
-  slug, frontmatter, mdxSource, headings, relatedPosts, recentPosts, prevPost, nextPost, categories,
+  slug, frontmatter, mdxSource, headings, relatedPosts, recentPosts, sidebarPosts, prevPost, nextPost, categories,
 }: PostPageProps) {
   const catName = ALL_CATEGORIES.find((c) => c.slug === frontmatter.category)?.name ?? frontmatter.category;
 
@@ -238,8 +239,8 @@ export default function PostPage({
         {/* Sidebar */}
         <div className={styles.sidebarWrap}>
           <Sidebar
-            popularPosts={relatedPosts}
-            recentPosts={recentPosts}
+            popularPosts={sidebarPosts}
+            recentPosts={sidebarPosts}
             categories={categories}
           />
         </div>
@@ -273,8 +274,9 @@ export const getStaticProps: GetStaticProps<PostPageProps> = async ({ params }) 
   const currentIndex = allPosts.findIndex((p) => p.slug === slug);
   const prevPost = currentIndex < allPosts.length - 1 ? allPosts[currentIndex + 1] : null;
   const nextPost = currentIndex > 0 ? allPosts[currentIndex - 1] : null;
-  const relatedPosts = allPosts.filter((p) => p.slug !== slug && p.category === data.category).slice(0, 5);
+  const relatedPosts = allPosts.filter((p) => p.slug !== slug && p.category === data.category).slice(0, 3);
   const recentPosts = allPosts.filter((p) => p.slug !== slug).slice(0, 5);
+  const sidebarPosts = allPosts.slice(0, 5);
 
   // Compute postCount for category list
   const countByCategory: Record<string, number> = {};
@@ -294,6 +296,7 @@ export const getStaticProps: GetStaticProps<PostPageProps> = async ({ params }) 
       headings,
       relatedPosts,
       recentPosts,
+      sidebarPosts,
       prevPost,
       nextPost,
       categories,

@@ -142,13 +142,13 @@
   font-size: 0.88rem;
   font-weight: 700;
   text-decoration: none;
-  color: #fff;
+  color: #fff !important;
   transition: filter 0.15s;
 }
 
 .btn:hover {
   filter: brightness(0.9);
-  color: #fff;
+  color: #fff !important;
 }
 
 .btnIcon {
@@ -160,13 +160,13 @@
 }
 
 .amazon {
-  background: #ff9900;
-  color: #fff;
+  background: #ff9900 !important;
+  color: #fff !important;
 }
 
 .rakuten {
-  background: #bf0000;
-  color: #fff;
+  background: #bf0000 !important;
+  color: #fff !important;
   border-left: 1px solid rgba(255, 255, 255, 0.15);
 }
 
