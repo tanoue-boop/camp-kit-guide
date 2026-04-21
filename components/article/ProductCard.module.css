@@ -4,51 +4,74 @@
   border: 1px solid #e5e7eb;
   border-radius: 12px;
   overflow: hidden;
+  margin: 1.5rem 0;
+}
+
+/* Rank badge */
+.rankBadge {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 0.78rem;
+  font-weight: 800;
+  padding: 0.3rem 0.75rem;
+  border-radius: 0 0 10px 0;
+  z-index: 1;
+  color: #fff;
+}
+
+.rank1 { background: linear-gradient(135deg, #f59e0b, #d97706); }
+.rank2 { background: linear-gradient(135deg, #94a3b8, #64748b); }
+.rank3 { background: linear-gradient(135deg, #d97706, #92400e); }
+
+/* Inner layout: image left + info right */
+.inner {
   display: flex;
-  flex-direction: column;
   gap: 0;
 }
 
+.imageWrap {
+  flex-shrink: 0;
+  width: 200px;
+}
+
 .image {
-  width: 100%;
-  height: 180px;
+  width: 200px;
+  height: 200px;
   object-fit: cover;
   display: block;
 }
 
 .imagePlaceholder {
-  width: 100%;
-  height: 180px;
+  width: 200px;
+  height: 200px;
   background: #e8e8e8;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
+  gap: 0.4rem;
 }
 
 .placeholderIcon {
-  width: 40px;
-  height: 40px;
+  width: 36px;
+  height: 36px;
   color: #aaaaaa;
 }
 
 .placeholderText {
-  font-size: 0.78rem;
+  font-size: 0.72rem;
   color: #999999;
   font-weight: 500;
 }
 
-.rank {
-  position: absolute;
-  top: 8px;
-  left: 1rem;
-  background: #16a34a;
-  color: #fff;
-  font-size: 0.72rem;
-  font-weight: 800;
-  padding: 0.2rem 0.6rem;
-  border-radius: 999px;
+.info {
+  flex: 1;
+  padding: 1.25rem 1.25rem 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  min-width: 0;
 }
 
 .badge {
@@ -60,15 +83,6 @@
   padding: 0.2rem 0.6rem;
   border-radius: 6px;
   align-self: flex-start;
-  margin: 1rem 1.25rem 0;
-}
-
-.body {
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-  padding: 0.75rem 1.25rem 0;
-  flex: 1;
 }
 
 .name {
@@ -76,10 +90,11 @@
   font-weight: 700;
   color: #1a3c34;
   margin: 0;
+  line-height: 1.4;
 }
 
 .description {
-  font-size: 0.85rem;
+  font-size: 0.83rem;
   color: #6b7280;
   line-height: 1.6;
   margin: 0;
@@ -89,11 +104,12 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: 0.25rem;
+  margin-top: auto;
+  padding-top: 0.5rem;
 }
 
 .rating {
-  font-size: 0.85rem;
+  font-size: 0.83rem;
   color: #f59e0b;
   font-weight: 600;
 }
@@ -101,28 +117,64 @@
 .reviewCount {
   color: #9ca3af;
   font-weight: 400;
+  font-size: 0.78rem;
 }
 
 .price {
-  font-size: 1.05rem;
+  font-size: 1.1rem;
   font-weight: 800;
   color: #1a3c34;
 }
 
-.cta {
-  display: block;
-  text-align: center;
-  background: #16a34a;
-  color: #fff;
-  font-size: 0.9rem;
-  font-weight: 700;
-  padding: 0.7rem 1rem;
-  border-radius: 0 0 12px 12px;
-  text-decoration: none;
-  transition: background 0.15s;
-  margin-top: 1rem;
+/* CTA Buttons */
+.buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-top: 1px solid #e5e7eb;
 }
 
-.cta:hover {
-  background: #15803d;
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.75rem 1rem;
+  font-size: 0.88rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: opacity 0.15s;
+}
+
+.btn:hover { opacity: 0.85; }
+
+.btnIcon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.amazon {
+  background: #ff9900;
+  color: #fff;
+}
+
+.rakuten {
+  background: #bf0000;
+  color: #fff;
+  border-left: 1px solid rgba(255,255,255,0.2);
+}
+
+/* Mobile: stack image on top */
+@media (max-width: 600px) {
+  .inner {
+    flex-direction: column;
+  }
+  .imageWrap {
+    width: 100%;
+  }
+  .image,
+  .imagePlaceholder {
+    width: 100%;
+    height: 200px;
+  }
 }

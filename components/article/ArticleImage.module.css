@@ -1,0 +1,57 @@
+.figure {
+  margin: 1.75rem 0;
+}
+
+.img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 8px;
+  display: block;
+}
+
+.placeholder {
+  width: 100%;
+  height: 300px;
+  background: #e8e8e8;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.icon {
+  width: 44px;
+  height: 44px;
+  color: #aaaaaa;
+}
+
+.placeholderText {
+  font-size: 0.82rem;
+  color: #999999;
+  font-weight: 500;
+}
+
+.altHint {
+  font-size: 0.72rem;
+  color: #bbbbbb;
+  margin-top: 0.25rem;
+}
+
+.caption {
+  font-size: 0.82rem;
+  color: #6b7280;
+  text-align: center;
+  margin-top: 0.5rem;
+  line-height: 1.5;
+}
+
+.altCaption {
+  font-size: 0.72rem;
+  color: #bbbbbb;
+  text-align: center;
+  margin-top: 0.4rem;
+  font-style: italic;
+}
