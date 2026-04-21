@@ -1,22 +1,193 @@
-.container {
+/* ── Hero ─────────────────────────────────────────────── */
+.hero {
+  background: linear-gradient(135deg, #14532d 0%, #16a34a 55%, #4ade80 100%);
+  padding: 4rem 1.25rem 3.5rem;
+  text-align: center;
+}
+
+.heroInner {
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.heroEyebrow {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.8);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin: 0 0 1rem;
+}
+
+.heroTitle {
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-weight: 900;
+  color: #fff;
+  line-height: 1.3;
+  margin: 0 0 1.25rem;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.heroSub {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.88);
+  line-height: 1.8;
+  margin: 0;
+}
+
+/* ── Page wrapper ─────────────────────────────────────── */
+.page {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 0 4rem;
+}
+
+.breadcrumbWrap {
+  padding: 1rem 1.25rem 0;
+}
+
+/* ── Sections ─────────────────────────────────────────── */
+.section {
+  padding: 3rem 1.25rem;
+}
+
+.sectionAlt {
+  background: #f0fdf4;
+}
+
+.inner {
   max-width: 720px;
   margin: 0 auto;
-  padding: 1.5rem 1.25rem 4rem;
 }
 
-.title {
-  font-size: 1.8rem;
-  margin: 0.5rem 0 2rem;
-}
-
-.body h2 {
-  font-size: 1.15rem;
-  margin: 2rem 0 0.6rem;
+.sectionTitle {
+  font-size: 1.4rem;
+  font-weight: 900;
   color: #1a3c34;
+  margin: 0 0 1.75rem;
+  padding-left: 0.85rem;
+  border-left: 4px solid #16a34a;
 }
 
-.body p {
+/* ── Prose ────────────────────────────────────────────── */
+.prose h3 {
+  font-size: 1rem;
+  font-weight: 800;
+  color: #1a3c34;
+  margin: 1.75rem 0 0.5rem;
+}
+
+.prose h3:first-child {
+  margin-top: 0;
+}
+
+.prose p {
   font-size: 0.95rem;
   color: #374151;
-  line-height: 1.8;
+  line-height: 1.85;
+  margin: 0 0 0.5rem;
+}
+
+/* ── Features grid ────────────────────────────────────── */
+.featuresGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.1rem;
+}
+
+.featureCard {
+  background: #fff;
+  border: 1px solid #bbf7d0;
+  border-radius: 14px;
+  padding: 1.4rem 1.25rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.featureEmoji {
+  font-size: 1.9rem;
+  line-height: 1;
+}
+
+.featureTitle {
+  font-size: 1rem;
+  font-weight: 800;
+  color: #1a3c34;
+  margin: 0;
+}
+
+.featureBody {
+  font-size: 0.88rem;
+  color: #6b7280;
+  line-height: 1.75;
+  margin: 0;
+}
+
+/* ── Disclaimer ───────────────────────────────────────── */
+.disclaimerList {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.disclaimerItem {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 1.1rem 1.25rem;
+}
+
+.disclaimerIcon {
+  font-size: 1.4rem;
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+}
+
+.disclaimerLabel {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #1a3c34;
+  margin: 0 0 0.35rem;
+}
+
+.disclaimerText {
+  font-size: 0.88rem;
+  color: #6b7280;
+  line-height: 1.75;
+  margin: 0;
+}
+
+/* ── CTA ──────────────────────────────────────────────── */
+.ctaInner {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.ctaText {
+  font-size: 0.95rem;
+  color: #374151;
+  margin: 0;
+}
+
+.ctaBtn {
+  display: inline-block;
+  background: #16a34a;
+  color: #fff !important;
+  font-size: 0.95rem;
+  font-weight: 700;
+  padding: 0.85rem 2rem;
+  border-radius: 999px;
+  text-decoration: none;
+  transition: filter 0.15s;
+}
+
+.ctaBtn:hover {
+  filter: brightness(0.9);
 }
