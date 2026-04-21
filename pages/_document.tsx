@@ -7,6 +7,7 @@ export default function Document() {
   return (
     <Html lang="ja">
       <Head>
+        <meta name="google-site-verification" content="ewzaIFqnh6N2uzIQt_0SuS4BfyTnISRLFVRG0Mw1o5I" />
         {gaId && (
           <>
             <script async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`} />
