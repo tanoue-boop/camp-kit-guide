@@ -12,6 +12,7 @@ import ProductCard from "../../components/article/ProductCard";
 import ComparisonTable from "../../components/article/ComparisonTable";
 import ArticleImage from "../../components/article/ArticleImage";
 import Sidebar from "../../components/article/Sidebar";
+import InlineTOC from "../../components/article/InlineTOC";
 import ShareButtons from "../../components/article/ShareButtons";
 import PostNavigation from "../../components/article/PostNavigation";
 import type { PostFrontmatter, Post } from "../../types/post";
@@ -195,6 +196,7 @@ export default function PostPage({
           </header>
 
           <article className={styles.body}>
+            <InlineTOC headings={headings} />
             <MDXRemote {...mdxSource} components={mdxComponents} />
           </article>
 
@@ -230,8 +232,7 @@ export default function PostPage({
         {/* Sidebar */}
         <div className={styles.sidebarWrap}>
           <Sidebar
-            headings={headings}
-            relatedPosts={relatedPosts}
+            popularPosts={relatedPosts}
             recentPosts={recentPosts}
             categories={categories}
           />
