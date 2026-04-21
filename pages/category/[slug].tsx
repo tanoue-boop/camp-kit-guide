@@ -1,10 +1,15 @@
 import type { GetStaticPaths, GetStaticProps } from "next";
 import Link from "next/link";
+import fs from "fs";
+import path from "path";
+import matter from "gray-matter";
 import Seo from "../../components/common/Seo";
 import Breadcrumb from "../../components/common/Breadcrumb";
 import type { Category } from "../../types/category";
 import type { Post } from "../../types/post";
 import styles from "./category.module.css";
+
+const POSTS_DIR = path.join(process.cwd(), "content/posts");
 
 const allCategories: Category[] = [
   { slug: "tent", name: "テント", description: "ソロ・ファミリー・ツーリング向けテントの選び方とおすすめ" },
@@ -14,6 +19,30 @@ const allCategories: Category[] = [
   { slug: "lighting", name: "照明・ランタン", description: "LEDランタン・ヘッドライトのおすすめ" },
   { slug: "clothing", name: "ウェア・装備", description: "レインウェア・防寒着・シューズなど" },
 ];
+
+function readPostsByCategory(categorySlug: string): Post[] {
+  if (!fs.existsSync(POSTS_DIR)) return [];
+  return fs
+    .readdirSync(POSTS_DIR)
+    .filter((f) => f.endsWith(".mdx"))
+    .reduce<Post[]>((acc, file) => {
+      const raw = fs.readFileSync(path.join(POSTS_DIR, file), "utf-8");
+      const { data } = matter(raw);
+      if (data.category === categorySlug) {
+        acc.push({
+          slug: file.replace(".mdx", ""),
+          title: data.title ?? "",
+          description: data.description ?? "",
+          date: data.date ?? "",
+          category: data.category,
+          tags: data.tags ?? [],
+          ...(data.thumbnail ? { thumbnail: data.thumbnail } : {}),
+        });
+      }
+      return acc;
+    }, [])
+    .sort((a, b) => b.date.localeCompare(a.date));
+}
 
 type CategoryPageProps = {
   category: Category;
@@ -62,8 +91,7 @@ export const getStaticProps: GetStaticProps<CategoryPageProps> = async ({ params
   const category = allCategories.find((c) => c.slug === slug);
   if (!category) return { notFound: true };
 
-  // 記事が増えたらここでMDXから絞り込む
-  const posts: Post[] = [];
+  const posts = readPostsByCategory(slug);
 
   return { props: { category, posts } };
 };

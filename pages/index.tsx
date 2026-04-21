@@ -1,3 +1,7 @@
+import type { GetStaticProps } from "next";
+import fs from "fs";
+import path from "path";
+import matter from "gray-matter";
 import Seo from "../components/common/Seo";
 import CategoryGrid from "../components/top/CategoryGrid";
 import RankingWidget from "../components/top/RankingWidget";
@@ -5,18 +9,23 @@ import type { Category } from "../types/category";
 import type { Post } from "../types/post";
 import styles from "./index.module.css";
 
-const categories: Category[] = [
-  { slug: "tent", name: "テント", description: "ソロ・ファミリー・ツーリング向けテントの選び方", icon: "⛺", postCount: 0 },
-  { slug: "sleeping-bag", name: "寝袋・シュラフ", description: "季節別おすすめ寝袋と温度対応の基本", icon: "🛏️", postCount: 0 },
-  { slug: "cookware", name: "調理器具", description: "バーナー・クッカー・焚き火台など", icon: "🍳", postCount: 0 },
-  { slug: "chair-table", name: "チェア・テーブル", description: "軽量・コンパクトなアウトドア家具の選び方", icon: "🪑", postCount: 0 },
-  { slug: "lighting", name: "照明・ランタン", description: "LEDランタン・ヘッドライトのおすすめ", icon: "🔦", postCount: 0 },
-  { slug: "clothing", name: "ウェア・装備", description: "レインウェア・防寒着・シューズなど", icon: "🧥", postCount: 0 },
+const POSTS_DIR = path.join(process.cwd(), "content/posts");
+
+const baseCategories: Omit<Category, "postCount">[] = [
+  { slug: "tent", name: "テント", description: "ソロ・ファミリー・ツーリング向けテントの選び方", icon: "⛺" },
+  { slug: "sleeping-bag", name: "寝袋・シュラフ", description: "季節別おすすめ寝袋と温度対応の基本", icon: "🛏️" },
+  { slug: "cookware", name: "調理器具", description: "バーナー・クッカー・焚き火台など", icon: "🍳" },
+  { slug: "chair-table", name: "チェア・テーブル", description: "軽量・コンパクトなアウトドア家具の選び方", icon: "🪑" },
+  { slug: "lighting", name: "照明・ランタン", description: "LEDランタン・ヘッドライトのおすすめ", icon: "🔦" },
+  { slug: "clothing", name: "ウェア・装備", description: "レインウェア・防寒着・シューズなど", icon: "🧥" },
 ];
 
-const samplePosts: Post[] = [];
+type HomePageProps = {
+  categories: Category[];
+  recentPosts: Post[];
+};
 
-export default function HomePage() {
+export default function HomePage({ categories, recentPosts }: HomePageProps) {
   return (
     <>
       <Seo
@@ -47,16 +56,52 @@ export default function HomePage() {
           <div className={styles.mainCol}>
             <section>
               <h2 className={styles.sectionTitle}>新着記事</h2>
-              {samplePosts.length === 0 ? (
+              {recentPosts.length === 0 ? (
                 <p className={styles.empty}>記事を準備中です。もうしばらくお待ちください。</p>
               ) : null}
             </section>
           </div>
           <aside className={styles.sideCol}>
-            {samplePosts.length > 0 && <RankingWidget posts={samplePosts} />}
+            {recentPosts.length > 0 && <RankingWidget posts={recentPosts} />}
           </aside>
         </div>
       </div>
     </>
   );
 }
+
+export const getStaticProps: GetStaticProps<HomePageProps> = async () => {
+  const countByCategory: Record<string, number> = {};
+  const allPosts: Post[] = [];
+
+  if (fs.existsSync(POSTS_DIR)) {
+    const files = fs.readdirSync(POSTS_DIR).filter((f) => f.endsWith(".mdx"));
+    for (const file of files) {
+      const raw = fs.readFileSync(path.join(POSTS_DIR, file), "utf-8");
+      const { data } = matter(raw);
+      if (data.category) {
+        countByCategory[data.category] = (countByCategory[data.category] || 0) + 1;
+      }
+      allPosts.push({
+        slug: file.replace(".mdx", ""),
+        title: data.title ?? "",
+        description: data.description ?? "",
+        date: data.date ?? "",
+        category: data.category ?? "",
+        tags: data.tags ?? [],
+        ...(data.thumbnail ? { thumbnail: data.thumbnail } : {}),
+      });
+    }
+  }
+
+  const categories: Category[] = baseCategories.map((c) => ({
+    ...c,
+    postCount: countByCategory[c.slug] || 0,
+  }));
+
+  const recentPosts = allPosts
+    .sort((a, b) => b.date.localeCompare(a.date))
+    .slice(0, 6);
+
+  return { props: { categories, recentPosts } };
+};
