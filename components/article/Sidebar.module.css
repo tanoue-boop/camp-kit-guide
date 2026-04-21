@@ -4,51 +4,41 @@
   gap: 1.25rem;
 }
 
+/* ── Widget container ─────────────────────────── */
 .widget {
   background: #fff;
   border: 1px solid #e5e7eb;
   border-radius: 10px;
-  padding: 1rem 1.25rem 1.25rem;
+  padding: 1rem 1.1rem 1.1rem;
 }
 
 .widgetTitle {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
   font-size: 0.8rem;
   font-weight: 800;
   color: #1a3c34;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.07em;
   margin: 0 0 0.75rem;
   padding-bottom: 0.5rem;
   border-bottom: 2px solid #bbf7d0;
 }
 
-/* Related posts */
-.postList {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-}
-
-.postLink {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  text-decoration: none;
-  color: #374151;
-}
-
-.postLink:hover .postLinkTitle {
+.widgetIcon {
+  width: 14px;
+  height: 14px;
   color: #16a34a;
+  flex-shrink: 0;
 }
 
-.postThumb {
+/* ── Shared thumbnail ────────────────────────── */
+.thumb {
   flex-shrink: 0;
-  width: 52px;
-  height: 40px;
-  border-radius: 4px;
+  width: 60px;
+  height: 60px;
+  border-radius: 6px;
   overflow: hidden;
 }
 
@@ -62,19 +52,21 @@
   width: 100%;
   height: 100%;
   background: #e8e8e8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.postLinkTitle {
-  font-size: 0.8rem;
-  line-height: 1.4;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  transition: color 0.1s;
+.thumbCat {
+  font-size: 0.6rem;
+  color: #9ca3af;
+  font-weight: 600;
+  text-align: center;
+  padding: 2px;
+  line-height: 1.2;
 }
 
-/* Ranking */
+/* ── Popular posts ───────────────────────────── */
 .rankList {
   list-style: none;
   padding: 0;
@@ -82,61 +74,104 @@
   display: flex;
   flex-direction: column;
   gap: 0.6rem;
-  counter-reset: rank;
 }
 
 .rankItem {
   display: flex;
   align-items: flex-start;
-  gap: 0.6rem;
+  gap: 0.5rem;
 }
 
 .rankNum {
   flex-shrink: 0;
-  width: 22px;
-  height: 22px;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
   background: #e5e7eb;
   color: #6b7280;
-  font-size: 0.72rem;
+  font-size: 0.68rem;
   font-weight: 800;
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-top: 2px;
 }
 
-.rankItem:nth-child(1) .rankNum { background: #fef3c7; color: #d97706; }
-.rankItem:nth-child(2) .rankNum { background: #f1f5f9; color: #64748b; }
-.rankItem:nth-child(3) .rankNum { background: #fff7ed; color: #c2410c; }
+.rank1 { background: #fef3c7; color: #d97706; }
+.rank2 { background: #f1f5f9; color: #64748b; }
+.rank3 { background: #fff7ed; color: #c2410c; }
 
-.rankLink {
-  font-size: 0.8rem;
-  color: #374151;
+.rankCard {
+  display: flex;
+  gap: 0.55rem;
   text-decoration: none;
+  flex: 1;
+  min-width: 0;
+}
+
+.rankCard:hover .rankTitle {
+  color: #16a34a;
+}
+
+.rankInfo {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.rankCat {
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: #16a34a;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0;
+}
+
+.rankTitle {
+  font-size: 0.78rem;
+  color: #1a3c34;
+  font-weight: 600;
   line-height: 1.4;
+  margin: 0;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  transition: color 0.1s;
 }
 
-.rankLink:hover { color: #16a34a; }
+.rankViews {
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+  font-size: 0.68rem;
+  color: #9ca3af;
+  margin: 0;
+}
 
-/* Category list */
+.eyeIcon {
+  width: 11px;
+  height: 11px;
+}
+
+/* ── Category list ───────────────────────────── */
 .catList {
   list-style: none;
   padding: 0;
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 0.1rem;
+  gap: 0.05rem;
 }
 
 .catLink {
   display: flex;
   align-items: center;
-  gap: 0.4rem;
-  padding: 0.4rem 0.5rem;
+  gap: 0.45rem;
+  padding: 0.38rem 0.5rem;
   border-radius: 6px;
   font-size: 0.83rem;
   color: #374151;
@@ -149,15 +184,62 @@
   color: #16a34a;
 }
 
-.catIcon {
-  font-size: 0.95rem;
-}
+.catIcon { font-size: 0.95rem; }
+
+.catName { flex: 1; }
 
 .catCount {
-  margin-left: auto;
-  font-size: 0.72rem;
+  font-size: 0.68rem;
   color: #9ca3af;
   background: #f3f4f6;
-  padding: 0.1rem 0.4rem;
+  padding: 0.1rem 0.45rem;
   border-radius: 999px;
+}
+
+/* ── Recent posts ────────────────────────────── */
+.recentList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.recentCard {
+  display: flex;
+  gap: 0.55rem;
+  text-decoration: none;
+}
+
+.recentCard:hover .recentTitle {
+  color: #16a34a;
+}
+
+.recentInfo {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  justify-content: center;
+}
+
+.recentTitle {
+  font-size: 0.78rem;
+  color: #1a3c34;
+  font-weight: 600;
+  line-height: 1.4;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  transition: color 0.1s;
+}
+
+.recentDate {
+  font-size: 0.68rem;
+  color: #9ca3af;
+  margin: 0;
 }

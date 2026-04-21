@@ -68,8 +68,19 @@ export default function CategoryPage({ category, posts }: CategoryPageProps) {
           <div className={styles.grid}>
             {posts.map((post) => (
               <Link key={post.slug} href={`/posts/${post.slug}`} className={styles.card}>
-                <p className={styles.postTitle}>{post.title}</p>
-                <p className={styles.postDesc}>{post.description}</p>
+                <div className={styles.cardThumb}>
+                  {post.thumbnail ? (
+                    <img src={post.thumbnail} alt={post.title} className={styles.cardThumbImg} />
+                  ) : (
+                    <div className={styles.cardThumbPlaceholder}>
+                      <span className={styles.cardThumbCatLabel}>{category.name}</span>
+                    </div>
+                  )}
+                </div>
+                <div className={styles.cardBody}>
+                  <p className={styles.postTitle}>{post.title}</p>
+                  <p className={styles.postDesc}>{post.description}</p>
+                </div>
               </Link>
             ))}
           </div>

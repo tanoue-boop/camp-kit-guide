@@ -72,22 +72,31 @@ export default function HomePage({ categories, recentPosts }: HomePageProps) {
 
 export const getStaticProps: GetStaticProps<HomePageProps> = async () => {
   const countByCategory: Record<string, number> = {};
+  const thumbnailByCategory: Record<string, string> = {};
   const allPosts: Post[] = [];
 
   if (fs.existsSync(POSTS_DIR)) {
-    const files = fs.readdirSync(POSTS_DIR).filter((f) => f.endsWith(".mdx"));
+    const files = fs
+      .readdirSync(POSTS_DIR)
+      .filter((f) => f.endsWith(".mdx"))
+      .sort()
+      .reverse();
     for (const file of files) {
       const raw = fs.readFileSync(path.join(POSTS_DIR, file), "utf-8");
       const { data } = matter(raw);
-      if (data.category) {
-        countByCategory[data.category] = (countByCategory[data.category] || 0) + 1;
+      const cat = data.category ?? "";
+      if (cat) {
+        countByCategory[cat] = (countByCategory[cat] || 0) + 1;
+        if (data.thumbnail && !thumbnailByCategory[cat]) {
+          thumbnailByCategory[cat] = data.thumbnail;
+        }
       }
       allPosts.push({
         slug: file.replace(".mdx", ""),
         title: data.title ?? "",
         description: data.description ?? "",
         date: data.date ?? "",
-        category: data.category ?? "",
+        category: cat,
         tags: data.tags ?? [],
         ...(data.thumbnail ? { thumbnail: data.thumbnail } : {}),
       });
@@ -97,6 +106,7 @@ export const getStaticProps: GetStaticProps<HomePageProps> = async () => {
   const categories: Category[] = baseCategories.map((c) => ({
     ...c,
     postCount: countByCategory[c.slug] || 0,
+    ...(thumbnailByCategory[c.slug] ? { latestThumbnail: thumbnailByCategory[c.slug] } : {}),
   }));
 
   const recentPosts = allPosts

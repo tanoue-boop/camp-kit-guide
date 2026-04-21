@@ -4,4 +4,5 @@ export type Category = {
   description: string;
   icon?: string;
   postCount?: number;
+  latestThumbnail?: string;
 };

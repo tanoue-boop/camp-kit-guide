@@ -13,12 +13,24 @@ export default function CategoryGrid({ categories }: CategoryGridProps) {
       <div className={styles.grid}>
         {categories.map((cat) => (
           <Link key={cat.slug} href={`/category/${cat.slug}`} className={styles.card}>
-            {cat.icon && <span className={styles.icon}>{cat.icon}</span>}
-            <p className={styles.name}>{cat.name}</p>
-            <p className={styles.desc}>{cat.description}</p>
-            {cat.postCount !== undefined && (
-              <span className={styles.count}>{cat.postCount}記事</span>
+            {/* Background: thumbnail image or green gradient */}
+            {cat.latestThumbnail ? (
+              <div
+                className={styles.bg}
+                style={{ backgroundImage: `url(${cat.latestThumbnail})` }}
+              />
+            ) : (
+              <div className={styles.bgGradient} />
             )}
+            <div className={styles.overlay} />
+            <div className={styles.content}>
+              {cat.icon && <span className={styles.icon}>{cat.icon}</span>}
+              <p className={styles.name}>{cat.name}</p>
+              <p className={styles.desc}>{cat.description}</p>
+              {cat.postCount !== undefined && (
+                <span className={styles.count}>{cat.postCount}記事</span>
+              )}
+            </div>
           </Link>
         ))}
       </div>
