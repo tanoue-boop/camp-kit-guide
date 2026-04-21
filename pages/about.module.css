@@ -1,0 +1,22 @@
+.container {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 1.5rem 1.25rem 4rem;
+}
+
+.title {
+  font-size: 1.8rem;
+  margin: 0.5rem 0 2rem;
+}
+
+.body h2 {
+  font-size: 1.15rem;
+  margin: 2rem 0 0.6rem;
+  color: #1a3c34;
+}
+
+.body p {
+  font-size: 0.95rem;
+  color: #374151;
+  line-height: 1.8;
+}

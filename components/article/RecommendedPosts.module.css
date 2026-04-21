@@ -1,0 +1,61 @@
+.section {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 2px solid #e5e7eb;
+}
+
+.heading {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #1a3c34;
+  margin: 0 0 1rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1rem;
+}
+
+.card {
+  display: block;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 1rem 1.1rem;
+  text-decoration: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.card:hover {
+  border-color: #86efac;
+  box-shadow: 0 2px 8px rgba(22,163,74,0.08);
+}
+
+.category {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #16a34a;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0 0 0.3rem;
+}
+
+.title {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #1a3c34;
+  margin: 0 0 0.4rem;
+  line-height: 1.4;
+}
+
+.description {
+  font-size: 0.8rem;
+  color: #6b7280;
+  margin: 0;
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
