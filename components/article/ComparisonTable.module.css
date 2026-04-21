@@ -1,16 +1,32 @@
-.wrap {
-  overflow-x: auto;
+/* ── Outer container ──────────────────────────────────── */
+.outer {
   margin: 1.5rem 0;
-  border-radius: 10px;
-  border: 1px solid #e5e7eb;
 }
 
+.scrollHint {
+  display: none;
+  font-size: 0.72rem;
+  color: #9ca3af;
+  text-align: center;
+  margin: 0 0 0.4rem;
+}
+
+/* ── Scroll wrapper ───────────────────────────────────── */
+.wrap {
+  overflow-x: auto;
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ── Table ────────────────────────────────────────────── */
 .table {
   width: 100%;
   border-collapse: collapse;
   font-size: 0.88rem;
 }
 
+/* ── Header cells ─────────────────────────────────────── */
 .th {
   background: #16a34a;
   color: #fff;
@@ -18,18 +34,47 @@
   padding: 0.75rem 1rem;
   text-align: left;
   white-space: nowrap;
+  min-width: 80px;
 }
 
 .th:first-child { border-radius: 9px 0 0 0; }
 .th:last-child  { border-radius: 0 9px 0 0; }
 
+/* Sticky first column header */
+.thSticky {
+  position: sticky;
+  left: 0;
+  z-index: 3;
+  min-width: 120px;
+  /* Box shadow as right-edge separator */
+  box-shadow: 2px 0 4px rgba(0, 0, 0, 0.08);
+}
+
+/* ── Data cells ───────────────────────────────────────── */
 .td {
   padding: 0.7rem 1rem;
   border-bottom: 1px solid #e5e7eb;
   color: #374151;
   vertical-align: middle;
+  white-space: nowrap;
+  min-width: 80px;
 }
 
+/* ── Sticky first column cells ────────────────────────── */
+.tdSticky {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  min-width: 120px;
+  white-space: normal; /* allow wrapping for product name */
+  box-shadow: 2px 0 4px rgba(0, 0, 0, 0.06);
+}
+
+.tdStickyDefault { background: #fff; }
+.tdStickyFirst   { background: #fffbeb; }
+.tdStickyEven    { background: #f9fafb; }
+
+/* ── Row coloring ─────────────────────────────────────── */
 /* 1位 row: light gold */
 .rowFirst .td,
 .tdFirst {
@@ -37,7 +82,7 @@
   font-weight: 600;
 }
 
-/* Even rows (not first): light grey */
+/* Even rows: light grey */
 .rowEven .td {
   background: #f9fafb;
 }
@@ -46,6 +91,7 @@
   border-bottom: none;
 }
 
+/* ── Cell value styles ────────────────────────────────── */
 .price {
   font-weight: 700;
   color: #1a3c34;
@@ -75,4 +121,15 @@
   width: 14px;
   height: 14px;
   flex-shrink: 0;
+}
+
+/* ── SP responsive ────────────────────────────────────── */
+@media (max-width: 640px) {
+  .scrollHint {
+    display: block;
+  }
+
+  .table {
+    font-size: 0.875rem;
+  }
 }

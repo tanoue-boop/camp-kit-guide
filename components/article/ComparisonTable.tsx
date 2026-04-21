@@ -70,27 +70,45 @@ export default function ComparisonTable({ products = [], columns = defaultColumn
   if (!products.length) return null;
 
   return (
-    <div className={styles.wrap}>
-      <table className={styles.table}>
-        <thead>
-          <tr>
-            {columns.map((col) => (
-              <th key={col.key} className={styles.th}>{col.label}</th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {products.map((product, rowIndex) => {
-            const isFirst = rowIndex === 0;
-            const isEven = rowIndex % 2 === 0 && !isFirst;
-            return (
-              <tr key={product.id} className={`${isFirst ? styles.rowFirst : ""} ${isEven ? styles.rowEven : ""}`}>
-                {columns.map((col) => renderCell(col, product, isFirst))}
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+    <div className={styles.outer}>
+      <p className={styles.scrollHint}>← スクロールできます →</p>
+      <div className={styles.wrap}>
+        <table className={styles.table}>
+          <thead>
+            <tr>
+              {columns.map((col, colIndex) => (
+                <th
+                  key={col.key}
+                  className={`${styles.th} ${colIndex === 0 ? styles.thSticky : ""}`}
+                >
+                  {col.label}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {products.map((product, rowIndex) => {
+              const isFirst = rowIndex === 0;
+              const isEven = rowIndex % 2 === 0 && !isFirst;
+              return (
+                <tr key={product.id} className={`${isFirst ? styles.rowFirst : ""} ${isEven ? styles.rowEven : ""}`}>
+                  {columns.map((col, colIndex) => {
+                    const cell = renderCell(col, product, isFirst);
+                    if (colIndex !== 0) return cell;
+                    // First column: add sticky class
+                    const baseClass = `${styles.td} ${isFirst ? styles.tdFirst : ""} ${styles.tdSticky} ${isFirst ? styles.tdStickyFirst : isEven ? styles.tdStickyEven : styles.tdStickyDefault}`;
+                    return (
+                      <td key={col.key} className={baseClass}>
+                        {(product as Record<string, unknown>)[col.key] as string ?? ""}
+                      </td>
+                    );
+                  })}
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }
