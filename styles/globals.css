@@ -24,6 +24,12 @@ a {
   text-decoration: none;
 }
 
+button {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
 img {
   max-width: 100%;
   height: auto;
