@@ -3,8 +3,12 @@ export type Product = {
   name: string;
   description: string;
   price: number;
-  rating: number;
-  reviewCount: number;
+  rating?: number;
+  reviewCount?: number;
+  amazonRating?: number;
+  amazonReviewCount?: number;
+  rakutenRating?: number;
+  rakutenReviewCount?: number;
   affiliateUrl: string;
   source: "amazon" | "rakuten" | "other";
   image?: string;

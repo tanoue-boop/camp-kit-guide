@@ -83,10 +83,14 @@ function readAllPosts(): Post[] {
 // be passed as string literals from MDX files and coerced here.
 
 function ProductCardMdx({
-  rank, id, name, description, price, rating, reviewCount, affiliateUrl, source, badge,
+  rank, id, name, description, price, rating, reviewCount,
+  amazonRating, amazonReviewCount, rakutenRating, rakutenReviewCount,
+  affiliateUrl, source, badge,
 }: {
   rank?: string; id?: string; name: string; description: string;
-  price: string; rating: string; reviewCount: string;
+  price: string; rating?: string; reviewCount?: string;
+  amazonRating?: string; amazonReviewCount?: string;
+  rakutenRating?: string; rakutenReviewCount?: string;
   affiliateUrl: string; source: "amazon" | "rakuten" | "other"; badge?: string;
 }) {
   return (
@@ -95,7 +99,13 @@ function ProductCardMdx({
         rank={rank ? Number(rank) : undefined}
         product={{
           id: id ?? name, name, description,
-          price: Number(price), rating: Number(rating), reviewCount: Number(reviewCount),
+          price: Number(price),
+          ...(rating ? { rating: Number(rating) } : {}),
+          ...(reviewCount ? { reviewCount: Number(reviewCount) } : {}),
+          ...(amazonRating ? { amazonRating: Number(amazonRating) } : {}),
+          ...(amazonReviewCount ? { amazonReviewCount: Number(amazonReviewCount) } : {}),
+          ...(rakutenRating ? { rakutenRating: Number(rakutenRating) } : {}),
+          ...(rakutenReviewCount ? { rakutenReviewCount: Number(rakutenReviewCount) } : {}),
           affiliateUrl, source, badge,
         }}
       />

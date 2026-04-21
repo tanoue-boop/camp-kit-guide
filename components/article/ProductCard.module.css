@@ -1,3 +1,4 @@
+/* ── Card ─────────────────────────────────────────────── */
 .card {
   position: relative;
   background: #fff;
@@ -7,7 +8,7 @@
   margin: 1.5rem 0;
 }
 
-/* Rank badge */
+/* ── Rank badge ───────────────────────────────────────── */
 .rankBadge {
   position: absolute;
   top: 0;
@@ -24,7 +25,7 @@
 .rank2 { background: linear-gradient(135deg, #94a3b8, #64748b); }
 .rank3 { background: linear-gradient(135deg, #d97706, #92400e); }
 
-/* Inner layout: image left + info right */
+/* ── Inner layout: image left + info right ────────────── */
 .inner {
   display: flex;
   gap: 0;
@@ -65,9 +66,10 @@
   font-weight: 500;
 }
 
+/* ── Info column ──────────────────────────────────────── */
 .info {
   flex: 1;
-  padding: 1.25rem 1.25rem 0.75rem;
+  padding: 1.25rem 1.25rem 0.85rem;
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
@@ -100,33 +102,58 @@
   margin: 0;
 }
 
-.meta {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+/* ── Price + ratings block ────────────────────────────── */
+.metaBottom {
   margin-top: auto;
-  padding-top: 0.5rem;
+  padding-top: 0.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
 }
 
-.rating {
-  font-size: 0.83rem;
+.price {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #1a3c34;
+  line-height: 1;
+}
+
+.ratings {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.ratingRow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.78rem;
+}
+
+.ratingSource {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #fff;
+  background: #6b7280;
+  padding: 0.1rem 0.4rem;
+  border-radius: 4px;
+  line-height: 1.4;
+  flex-shrink: 0;
+}
+
+.ratingStars {
   color: #f59e0b;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .reviewCount {
   color: #9ca3af;
   font-weight: 400;
-  font-size: 0.78rem;
+  font-size: 0.75rem;
 }
 
-.price {
-  font-size: 1.1rem;
-  font-weight: 800;
-  color: #1a3c34;
-}
-
-/* CTA Buttons */
+/* ── CTA Buttons ──────────────────────────────────────── */
 .buttons {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -137,10 +164,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.4rem;
-  padding: 0.75rem 1rem;
-  font-size: 0.88rem;
-  font-weight: 700;
+  gap: 0.55rem;
+  padding: 0.7rem 0.75rem;
   text-decoration: none;
   color: #fff !important;
   transition: filter 0.15s;
@@ -152,32 +177,52 @@
 }
 
 .btnIcon {
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
   flex-shrink: 0;
-  fill: #fff;
+  stroke: #fff;
   color: #fff;
+}
+
+.btnText {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: 1.2;
+}
+
+.btnBrand {
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: #fff !important;
+  letter-spacing: 0.01em;
+}
+
+.btnSub {
+  font-size: 0.68rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.85) !important;
 }
 
 .amazon {
   background: #ff9900 !important;
-  color: #fff !important;
 }
 
 .rakuten {
   background: #bf0000 !important;
-  color: #fff !important;
   border-left: 1px solid rgba(255, 255, 255, 0.15);
 }
 
-/* Mobile: stack image on top */
+/* ── Mobile ───────────────────────────────────────────── */
 @media (max-width: 600px) {
   .inner {
     flex-direction: column;
   }
+
   .imageWrap {
     width: 100%;
   }
+
   .image,
   .imagePlaceholder {
     width: 100%;
