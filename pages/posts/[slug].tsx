@@ -217,8 +217,9 @@ export default function PostPage({
                       )}
                     </div>
                     <div className={styles.relatedInfo}>
-                      <p className={styles.relatedCat}>{catName}</p>
+                      <p className={styles.relatedCat}>{ALL_CATEGORIES.find((c) => c.slug === post.category)?.name ?? catName}</p>
                       <p className={styles.relatedCardTitle}>{post.title}</p>
+                      <p className={styles.relatedDate}>{post.date}</p>
                     </div>
                   </Link>
                 ))}

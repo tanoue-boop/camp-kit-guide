@@ -142,15 +142,21 @@
   font-size: 0.88rem;
   font-weight: 700;
   text-decoration: none;
-  transition: opacity 0.15s;
+  color: #fff;
+  transition: filter 0.15s;
 }
 
-.btn:hover { opacity: 0.85; }
+.btn:hover {
+  filter: brightness(0.9);
+  color: #fff;
+}
 
 .btnIcon {
   width: 16px;
   height: 16px;
   flex-shrink: 0;
+  fill: #fff;
+  color: #fff;
 }
 
 .amazon {
@@ -161,7 +167,7 @@
 .rakuten {
   background: #bf0000;
   color: #fff;
-  border-left: 1px solid rgba(255,255,255,0.2);
+  border-left: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 /* Mobile: stack image on top */
