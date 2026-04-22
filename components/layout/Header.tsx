@@ -1,33 +1,43 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { Battery } from "lucide-react";
 import styles from "./Header.module.css";
 
-const CATEGORIES = [
-  { href: "/category/tent", label: "テント", icon: "⛺" },
-  { href: "/category/sleeping-bag", label: "寝袋・シュラフ", icon: "🛏️" },
-  { href: "/category/cookware", label: "調理器具", icon: "🍳" },
-  { href: "/category/chair-table", label: "チェア・テーブル", icon: "🪑" },
-  { href: "/category/lighting", label: "照明・ランタン", icon: "🔦" },
-  { href: "/category/clothing", label: "ウェア・装備", icon: "🧥" },
-  { href: "/category/bonfire", label: "焚き火台", icon: "🔥" },
-  { href: "/category/backpack", label: "バックパック", icon: "🎒" },
-  { href: "/category/power", label: "電源・バッテリー", icon: "🔋" },
+type Category = {
+  href: string;
+  label: string;
+  icon: string | null;
+};
+
+const CATEGORIES: Category[] = [
+  { href: "/category/tent",         label: "テント",           icon: "/icons/categories/tent.svg" },
+  { href: "/category/sleeping-bag", label: "寝袋・シュラフ",   icon: "/icons/categories/sleeping-bag.svg" },
+  { href: "/category/cookware",     label: "調理器具",         icon: "/icons/categories/cookware.svg" },
+  { href: "/category/chair-table",  label: "チェア・テーブル", icon: "/icons/categories/chair-table.svg" },
+  { href: "/category/lighting",     label: "照明・ランタン",   icon: "/icons/categories/lighting.svg" },
+  { href: "/category/clothing",     label: "ウェア・装備",     icon: "/icons/categories/clothing.svg" },
+  { href: "/category/bonfire",      label: "焚き火台",         icon: "/icons/categories/bonfire.svg" },
+  { href: "/category/backpack",     label: "バックパック",     icon: "/icons/categories/backpack.svg" },
+  { href: "/category/power",        label: "電源・バッテリー", icon: null },
 ];
+
+function CategoryIcon({ icon, label }: { icon: string | null; label: string }) {
+  if (icon === null) return <Battery size={20} className={styles.categoryIcon} />;
+  return <img src={icon} alt="" width={20} height={20} className={styles.categoryIcon} />;
+}
 
 export default function Header() {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [categoryOpen, setCategoryOpen] = useState(false);
   const router = useRouter();
 
-  // Close drawer on route change
   useEffect(() => {
     const handleRouteChange = () => setDrawerOpen(false);
     router.events.on("routeChangeStart", handleRouteChange);
     return () => router.events.off("routeChangeStart", handleRouteChange);
   }, [router.events]);
 
-  // Prevent body scroll when drawer is open
   useEffect(() => {
     document.body.style.overflow = drawerOpen ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
@@ -39,8 +49,7 @@ export default function Header() {
         <div className={styles.inner}>
           {/* Logo */}
           <Link href="/" className={styles.logo}>
-            <span className={styles.logoIcon}>🏕️</span>
-            <span className={styles.logoText}>CampKit Guide</span>
+            <img src="/logo.svg" alt="CampKit Guide" className={styles.logoImage} />
           </Link>
 
           {/* PC nav */}
@@ -63,7 +72,7 @@ export default function Header() {
                 <div className={styles.dropdownMenu}>
                   {CATEGORIES.map((cat) => (
                     <Link key={cat.href} href={cat.href} className={styles.dropdownItem}>
-                      <span className={styles.dropdownIcon}>{cat.icon}</span>
+                      <CategoryIcon icon={cat.icon} label={cat.label} />
                       {cat.label}
                     </Link>
                   ))}
@@ -97,7 +106,7 @@ export default function Header() {
       {/* SP Drawer */}
       <div className={`${styles.drawer} ${drawerOpen ? styles.drawerOpen : ""}`} aria-hidden={!drawerOpen}>
         <div className={styles.drawerHeader}>
-          <span className={styles.drawerTitle}>🏕️ メニュー</span>
+          <img src="/logo.svg" alt="CampKit Guide" className={styles.drawerLogoImage} />
           <button
             className={styles.drawerClose}
             type="button"
@@ -110,19 +119,22 @@ export default function Header() {
 
         <nav className={styles.drawerNav}>
           <Link href="/ranking" className={styles.drawerLink}>
-            <span className={styles.drawerLinkIcon}>🏆</span>ランキング
+            <img src="/icons/menu/ranking.svg" alt="" width={20} height={20} className={styles.menuIcon} />
+            ランキング
           </Link>
 
           <p className={styles.drawerSection}>カテゴリ</p>
           {CATEGORIES.map((cat) => (
             <Link key={cat.href} href={cat.href} className={styles.drawerLink}>
-              <span className={styles.drawerLinkIcon}>{cat.icon}</span>{cat.label}
+              <CategoryIcon icon={cat.icon} label={cat.label} />
+              {cat.label}
             </Link>
           ))}
 
           <div className={styles.drawerDivider} />
           <Link href="/about" className={styles.drawerLink}>
-            <span className={styles.drawerLinkIcon}>ℹ️</span>このサイトについて
+            <img src="/icons/menu/about.svg" alt="" width={20} height={20} className={styles.menuIcon} />
+            このサイトについて
           </Link>
         </nav>
       </div>
