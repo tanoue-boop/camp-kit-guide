@@ -9,6 +9,7 @@ type RankingWidgetProps = {
 export default function RankingWidget({ posts }: RankingWidgetProps) {
   return (
     <section className={styles.section}>
+      <p className={styles.sectionLabel}>Ranking</p>
       <div className={styles.header}>
         <h2 className={styles.heading}>人気記事ランキング</h2>
         <Link href="/ranking" className={styles.more}>すべて見る →</Link>
@@ -16,7 +17,9 @@ export default function RankingWidget({ posts }: RankingWidgetProps) {
       <ol className={styles.list}>
         {posts.slice(0, 5).map((post, i) => (
           <li key={post.slug} className={styles.item}>
-            <span className={styles.rank}>{i + 1}</span>
+            <span className={`${styles.rank} ${i < 3 ? styles.rankTop : styles.rankDefault}`}>
+              {i + 1}
+            </span>
             <Link href={`/posts/${post.slug}`} className={styles.link}>
               <p className={styles.title}>{post.title}</p>
               <p className={styles.category}>{post.category}</p>

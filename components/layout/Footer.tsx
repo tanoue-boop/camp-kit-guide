@@ -6,8 +6,7 @@ export default function Footer() {
     <footer className={styles.footer}>
       <div className={styles.inner}>
         <div className={styles.brand}>
-          <span className={styles.logoIcon}>🏕️</span>
-          <span className={styles.logoText}>CampKit Guide</span>
+          <img src="/logo_white.svg" alt="CampKit Guide" className={styles.logoImage} />
           <p className={styles.tagline}>キャンプ用品の選び方をわかりやすく。</p>
         </div>
         <nav className={styles.links}>

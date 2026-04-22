@@ -1,5 +1,5 @@
 .footer {
-  background: #1a3c34;
+  background: var(--color-footer-bg);
   color: #d1fae5;
   margin-top: 5rem;
 }
@@ -15,23 +15,17 @@
 
 .brand {
   display: flex;
-  align-items: center;
-  flex-wrap: wrap;
+  flex-direction: column;
   gap: 0.5rem;
 }
 
-.logoIcon {
-  font-size: 1.4rem;
-}
-
-.logoText {
-  font-size: 1.05rem;
-  font-weight: 800;
-  color: #fff;
+.logoImage {
+  height: 32px;
+  width: auto;
+  display: block;
 }
 
 .tagline {
-  width: 100%;
   font-size: 0.82rem;
   color: #a7f3d0;
   margin: 0;
