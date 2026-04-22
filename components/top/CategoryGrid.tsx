@@ -15,8 +15,8 @@ function CategoryIcon({ icon }: { icon?: string | null }) {
 export default function CategoryGrid({ categories }: CategoryGridProps) {
   return (
     <section className={styles.section}>
-      <p className={styles.sectionLabel}>Category</p>
       <h2 className={styles.heading}>カテゴリから探す</h2>
+      <p className={styles.sectionLabel}>Category</p>
       <div className={styles.grid}>
         {categories.map((cat) => (
           <Link key={cat.slug} href={`/category/${cat.slug}`} className={styles.card}>

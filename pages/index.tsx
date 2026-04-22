@@ -67,8 +67,8 @@ export default function HomePage({ categories, recentPosts }: HomePageProps) {
         <div className={styles.twoCol}>
           <div className={styles.mainCol}>
             <section>
-              <p className={styles.sectionLabel}>News</p>
               <h2 className={styles.sectionTitle}>新着記事</h2>
+              <p className={styles.sectionLabel}>News</p>
               {recentPosts.length === 0 ? (
                 <p className={styles.empty}>記事を準備中です。もうしばらくお待ちください。</p>
               ) : (

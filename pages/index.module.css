@@ -90,6 +90,13 @@
 .sideCol {}
 
 /* ── Section headings ─────────────────────────────────── */
+.sectionTitle {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--color-text);
+  margin: 0 0 0.2rem;
+}
+
 .sectionLabel {
   font-family: var(--font-en);
   font-size: 0.75rem;
@@ -97,13 +104,6 @@
   color: var(--color-accent);
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  margin: 0 0 0.2rem;
-}
-
-.sectionTitle {
-  font-size: 1.2rem;
-  font-weight: 800;
-  color: var(--color-text);
   margin: 0 0 1.25rem;
 }
 
