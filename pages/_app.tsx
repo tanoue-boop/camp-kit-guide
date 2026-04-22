@@ -7,7 +7,7 @@ import { pageview, GA_TRACKING_ID } from "../lib/gtag";
 import { Noto_Sans_JP, Jost } from "next/font/google";
 
 const notoSansJp = Noto_Sans_JP({
-  weight: ["400", "500", "700"],
+  weight: ["400", "500", "700", "800", "900"],
   subsets: ["latin"],
   variable: "--font-noto-sans-jp",
   display: "swap",
