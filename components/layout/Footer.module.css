@@ -7,22 +7,27 @@
 .inner {
   max-width: 1100px;
   margin: 0 auto;
-  padding: 3rem 1.25rem 2rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
+  padding: 3rem 1.5rem;
 }
 
-.brand {
+/* ── Top row: logo+tagline (left) / nav links (right) ─── */
+.topRow {
   display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.brandGroup {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
 .logoImage {
   height: 32px;
   width: auto;
   display: block;
+  flex-shrink: 0;
 }
 
 .tagline {
@@ -33,14 +38,14 @@
 
 .links {
   display: flex;
-  gap: 1.5rem;
-  flex-wrap: wrap;
+  gap: 2.5rem;
 }
 
 .link {
   font-size: 0.85rem;
   color: #a7f3d0;
   text-decoration: none;
+  white-space: nowrap;
 }
 
 .link:hover {
@@ -48,10 +53,12 @@
   text-decoration: underline;
 }
 
-.copy {
-  font-size: 0.78rem;
-  color: #6ee7b7;
-  margin: 0;
+/* ── Bottom row: affiliate (left) / copyright (right) ─── */
+.bottomRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-top: 2rem;
 }
 
 .affiliate {
@@ -59,4 +66,58 @@
   color: #6ee7b7;
   line-height: 1.6;
   margin: 0;
+}
+
+.copy {
+  font-size: 0.78rem;
+  color: #6ee7b7;
+  margin: 0;
+  white-space: nowrap;
+  padding-left: 2rem;
+}
+
+/* ── SP (≤768px): centered vertical stack ─────────────── */
+@media (max-width: 768px) {
+  .inner {
+    text-align: center;
+  }
+
+  .topRow {
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+  }
+
+  .brandGroup {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .links {
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+  }
+
+  .link {
+    display: block;
+    margin-bottom: 0.75rem;
+  }
+
+  .bottomRow {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+
+  .affiliate {
+    text-align: center;
+  }
+
+  .copy {
+    padding-left: 0;
+  }
 }
