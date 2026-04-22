@@ -1,1 +1,189 @@
 @AGENTS.md
+
+# CampKit Guide — Claude 作業ガイド
+
+---
+
+## プロジェクト概要
+
+| 項目 | 内容 |
+|------|------|
+| サイト名 | CampKit Guide |
+| URL | https://www.camp-kit-guide.com |
+| リポジトリ | https://github.com/tanoue-boop/camp-kit-guide |
+| フレームワーク | Next.js 16 (Pages Router) |
+| 言語 | TypeScript |
+| スタイル | CSS Modules（ページ・コンポーネントごとに `.module.css`） |
+| 記事形式 | MDX（`next-mdx-remote` v6 でレンダリング） |
+| DBアクセス | Supabase（閲覧数カウント） |
+| サイトマップ | `next-sitemap`（ビルド後に自動生成） |
+| デプロイ先 | Vercel（`main` ブランチへの push で自動デプロイ） |
+
+---
+
+## ファイル構成
+
+```
+camp-kit-guide/
+├── content/posts/        # MDX記事ファイル（1記事=1ファイル）
+├── pages/
+│   ├── index.tsx         # トップページ（カテゴリグリッド・新着記事）
+│   ├── ranking.tsx       # ランキングページ
+│   ├── category/[slug].tsx  # カテゴリ一覧ページ
+│   ├── posts/[slug].tsx  # 記事詳細ページ（MDXレンダリング）
+│   └── _app.tsx / _document.tsx
+├── components/
+│   ├── layout/           # Header, Footer, Layout
+│   ├── common/           # Seo, Breadcrumb
+│   ├── article/          # ProductCard, ComparisonTable, TOC, Sidebar 等
+│   └── top/              # CategoryGrid, RankingWidget
+├── styles/               # globals.css + 各ページの .module.css
+├── types/                # post.ts, category.ts, product.ts
+└── lib/                  # gtag.ts, amazon.ts, rakuten.ts, supabase.ts
+```
+
+---
+
+## カテゴリ定義（重要：4ファイルに分散）
+
+カテゴリを追加・変更する場合は**以下の4ファイルすべて**を更新すること。
+
+| ファイル | 配列名 |
+|---------|--------|
+| `pages/category/[slug].tsx` | `allCategories` |
+| `pages/index.tsx` | `baseCategories`（icon フィールドあり） |
+| `components/layout/Header.tsx` | `CATEGORIES`（href, label, icon） |
+| `pages/posts/[slug].tsx` | `ALL_CATEGORIES`（サイドバー・パンくず用） |
+
+### 現在のカテゴリ一覧
+
+| slug | 表示名 | アイコン |
+|------|--------|---------|
+| tent | テント | ⛺ |
+| sleeping-bag | 寝袋・シュラフ | 🛏️ |
+| cookware | 調理器具 | 🍳 |
+| chair-table | チェア・テーブル | 🪑 |
+| lighting | 照明・ランタン | 🔦 |
+| clothing | ウェア・装備 | 🧥 |
+| bonfire | 焚き火台 | 🔥 |
+| backpack | バックパック | 🎒 |
+| power | 電源・バッテリー | 🔋 |
+
+---
+
+## 記事作成ルール（重要）
+
+### frontmatter フォーマット
+
+```yaml
+---
+title: "記事タイトル【2026年版】"
+description: "150字以内のSEO説明文"
+date: "YYYY-MM-DD"
+category: "カテゴリslug"
+tags: ["タグ1", "タグ2", "キャンプ", "2026年"]
+thumbnail: ""
+---
+```
+
+- `date` は実際の作成日（未来日付は禁止）
+- `thumbnail` は空文字でOK（プレースホルダー表示あり）
+
+### 記事構成テンプレート
+
+1. **はじめに**（〜200字）：なぜこの商品が必要か、選び方の重要性
+2. **選び方の4ポイント**：カテゴリに応じた重要要素を `### ポイントN：` で記述
+3. **おすすめ5選**：`### 第N位：商品名` で各製品を紹介
+4. **5製品スペック比較表**：`<ComparisonTableMdx>` コンポーネントを使用
+5. **お手入れ・使い方Tips**（4〜5項目、`**太字：**` 形式）
+6. **よくある質問**（5問、`**Q. ...** ` / `A. ...` 形式）
+7. **まとめ**：用途別おすすめ表（markdownテーブル）
+
+### MDXコンポーネントの使い方
+
+#### ProductCardMdx
+
+```mdx
+<ProductCardMdx
+  rank="1"
+  id="product-id"
+  name="メーカー名 商品名"
+  description="30〜50字の商品説明"
+  price="19800"
+  amazonRating="4.5"
+  amazonReviewCount="3200"
+  rakutenRating="4.4"
+  rakutenReviewCount="980"
+  affiliateUrl="#"
+  source="amazon"
+  badge="バッジテキスト（任意）"
+/>
+```
+
+- `price` は数値を文字列で渡す（例: `"19800"`）
+- `affiliateUrl` は実際のアフィリエイトURLまたは `"#"`
+- `id` はページ内アンカーリンクに使う（まとめ表のリンク先）
+
+#### ComparisonTableMdx
+
+```mdx
+<ComparisonTableMdx
+  columns='[{"key":"name","label":"商品名"},{"key":"カスタムキー","label":"表示ラベル"}]'
+  rows='[{"id":"product-id","name":"商品名","カスタムキー":"値"}]'
+/>
+```
+
+- `columns` と `rows` は**シングルクォートで囲んだJSON文字列**
+- `name` キーは必須（第1列に表示）
+- `price` / `rating` / `source` キーは特殊レンダリングあり。数値として扱われるため、価格は `"価格"` などの別キーを使うこと
+
+---
+
+## 商品選定ルール
+
+- **実在する人気ブランドの定番モデルのみ**（架空の商品禁止）
+- Amazonと楽天の両方で購入できることを確認
+- `affiliateUrl` は現時点では `"#"` でOK（後から差し替え）
+- 価格・レビュー数は執筆時点の参考値でOK（仮データ可）
+- 1記事に同一ブランドが3製品以上重複しないようにする
+
+### カテゴリ別推奨ブランド
+
+| カテゴリ | 参考ブランド |
+|---------|-------------|
+| クーラーボックス | コールマン / YETI / ロゴス / ダイワ / イグルー |
+| ポータブル電源 | Jackery / EcoFlow / BLUETTI / Anker |
+| タープ | スノーピーク / DOD / コールマン / DD Hammocks / ロゴス |
+| 寝袋（冬） | ナンガ / モンベル / イスカ / コールマン / スナグパック |
+| ヘッドライト | ペツル / ブラックダイヤモンド / レッドレンザー / ジェントス |
+| バーナー | スノーピーク / SOTO / コールマン / イワタニ / プリムス |
+| テント | スノーピーク / コールマン / ノルディスク / MSR / ロゴス |
+| ナイフ | モーラナイフ / オピネル / ビクトリノックス / スパイダルコ |
+
+---
+
+## 安全ルール
+
+- **既存記事ファイルには触らない**（誤って上書きしないこと）
+- 一括 `sed` や正規表現の一括書き換えは禁止。ファイルごとに確認
+- カテゴリ追加時は4ファイルすべての更新を忘れずに
+- コミット前に `npm run build` でビルドエラーがないことを確認
+
+---
+
+## デプロイ手順
+
+```bash
+# ビルド確認
+npm run build
+
+# コミット
+git add <変更ファイル>
+git commit -m "コミットメッセージ"
+
+# push → Vercel が自動デプロイ
+git push origin main
+```
+
+`main` ブランチに push するだけで Vercel が自動的にビルド・デプロイを実行する。
+Vercel のダッシュボードでデプロイログを確認できる。
