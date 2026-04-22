@@ -1,13 +1,12 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { Battery } from "lucide-react";
 import styles from "./Header.module.css";
 
 type Category = {
   href: string;
   label: string;
-  icon: string | null;
+  icon: string;
 };
 
 const CATEGORIES: Category[] = [
@@ -19,13 +18,8 @@ const CATEGORIES: Category[] = [
   { href: "/category/clothing",     label: "ウェア・装備",     icon: "/icons/categories/clothing.svg" },
   { href: "/category/bonfire",      label: "焚き火台",         icon: "/icons/categories/bonfire.svg" },
   { href: "/category/backpack",     label: "バックパック",     icon: "/icons/categories/backpack.svg" },
-  { href: "/category/power",        label: "電源・バッテリー", icon: null },
+  { href: "/category/power",        label: "電源・バッテリー", icon: "/icons/categories/power.svg" },
 ];
-
-function CategoryIcon({ icon, label }: { icon: string | null; label: string }) {
-  if (icon === null) return <Battery size={20} className={styles.categoryIcon} />;
-  return <img src={icon} alt="" width={20} height={20} className={styles.categoryIcon} />;
-}
 
 export default function Header() {
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -72,7 +66,7 @@ export default function Header() {
                 <div className={styles.dropdownMenu}>
                   {CATEGORIES.map((cat) => (
                     <Link key={cat.href} href={cat.href} className={styles.dropdownItem}>
-                      <CategoryIcon icon={cat.icon} label={cat.label} />
+                      <img src={cat.icon} alt="" width={20} height={20} className={styles.categoryIcon} />
                       {cat.label}
                     </Link>
                   ))}
@@ -126,7 +120,7 @@ export default function Header() {
           <p className={styles.drawerSection}>カテゴリ</p>
           {CATEGORIES.map((cat) => (
             <Link key={cat.href} href={cat.href} className={styles.drawerLink}>
-              <CategoryIcon icon={cat.icon} label={cat.label} />
+              <img src={cat.icon} alt="" width={20} height={20} className={styles.categoryIcon} />
               {cat.label}
             </Link>
           ))}
