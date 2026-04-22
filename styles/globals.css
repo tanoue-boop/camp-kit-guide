@@ -3,12 +3,12 @@
 }
 
 :root {
-  --color-bg-base:    #FAFAFA;
+  --color-bg-base:    #FFFFFF;
   --color-text:       #2A2A2A;
   --color-text-sub:   #666666;
   --color-accent:     #2A4A3A;
   --color-footer-bg:  #2A4A3A;
-  --color-card-bg:    #FFFFFF;
+  --color-card-bg:    #F5F5F5;
   --font-jp: var(--font-noto-sans-jp), "Hiragino Sans", "Yu Gothic", "Meiryo", sans-serif;
   --font-en: var(--font-jost), -apple-system, BlinkMacSystemFont, sans-serif;
 }
