@@ -20,6 +20,7 @@ const allCategories: Category[] = [
   { slug: "clothing", name: "ウェア・装備", description: "レインウェア・防寒着・シューズなど" },
   { slug: "bonfire", name: "焚き火台", description: "初心者向けから本格派まで焚き火台の選び方" },
   { slug: "backpack", name: "バックパック", description: "容量・用途別のキャンプ用バックパックの選び方" },
+  { slug: "power", name: "電源・バッテリー", description: "ポータブル電源・モバイルバッテリーの選び方" },
 ];
 
 function readPostsByCategory(categorySlug: string): Post[] {

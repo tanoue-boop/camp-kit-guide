@@ -31,6 +31,8 @@ const ALL_CATEGORIES: Category[] = [
   { slug: "lighting", name: "照明・ランタン", description: "", icon: "🔦" },
   { slug: "clothing", name: "ウェア・装備", description: "", icon: "🧥" },
   { slug: "bonfire", name: "焚き火台", description: "", icon: "🔥" },
+  { slug: "backpack", name: "バックパック", description: "", icon: "🎒" },
+  { slug: "power", name: "電源・バッテリー", description: "", icon: "🔋" },
 ];
 
 // ─── heading helpers ─────────────────────────────────────────────────────────

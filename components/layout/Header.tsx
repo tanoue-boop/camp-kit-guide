@@ -12,6 +12,7 @@ const CATEGORIES = [
   { href: "/category/clothing", label: "ウェア・装備", icon: "🧥" },
   { href: "/category/bonfire", label: "焚き火台", icon: "🔥" },
   { href: "/category/backpack", label: "バックパック", icon: "🎒" },
+  { href: "/category/power", label: "電源・バッテリー", icon: "🔋" },
 ];
 
 export default function Header() {
