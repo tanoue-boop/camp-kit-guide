@@ -1,9 +1,0 @@
-# *
-User-agent: *
-Allow: /
-
-# Host
-Host: https://www.camp-kit-guide.com
-
-# Sitemaps
-Sitemap: https://www.camp-kit-guide.com/sitemap.xml
