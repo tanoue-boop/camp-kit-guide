@@ -8,6 +8,7 @@ type SeoProps = {
   ogType?: "website" | "article";
   publishedTime?: string;
   modifiedTime?: string;
+  noindex?: boolean;
 };
 
 const SITE_NAME = "CampKit Guide";
@@ -22,6 +23,7 @@ export default function Seo({
   ogType = "website",
   publishedTime,
   modifiedTime,
+  noindex = false,
 }: SeoProps) {
   const fullTitle = title.includes(SITE_NAME) ? title : `${title} | ${SITE_NAME}`;
   const canonicalUrl = canonical ? `${BASE_URL}${canonical}` : undefined;
@@ -48,6 +50,9 @@ export default function Seo({
       {ogType === "article" && modifiedTime && (
         <meta property="article:modified_time" content={modifiedTime} />
       )}
+
+      {/* noindex */}
+      {noindex && <meta name="robots" content="noindex,follow" />}
 
       {/* Twitter Card */}
       <meta name="twitter:card" content="summary_large_image" />

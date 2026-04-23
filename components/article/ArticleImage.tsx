@@ -10,7 +10,7 @@ export default function ArticleImage({ src, alt = "", caption }: ArticleImagePro
   return (
     <figure className={styles.figure}>
       {src ? (
-        <img src={src} alt={alt} className={styles.img} />
+        <img src={src} alt={alt} className={styles.img} loading="lazy" decoding="async" />
       ) : (
         <div className={styles.placeholder}>
           <svg className={styles.icon} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">

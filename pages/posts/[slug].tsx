@@ -233,7 +233,7 @@ export default function PostPage({
       {/* Eyecatch */}
       <div className={styles.eyecatch}>
         {frontmatter.thumbnail ? (
-          <img src={frontmatter.thumbnail} alt={frontmatter.title} className={styles.eyecatchImg} />
+          <img src={frontmatter.thumbnail} alt={frontmatter.title} className={styles.eyecatchImg} loading="eager" decoding="async" />
         ) : (
           <div className={styles.eyecatchGradient}>
             <span className={styles.eyecatchCat}>{catName}</span>
@@ -282,7 +282,7 @@ export default function PostPage({
                   <Link key={post.slug} href={`/posts/${post.slug}`} className={styles.relatedCard}>
                     <div className={styles.relatedThumb}>
                       {post.thumbnail ? (
-                        <img src={post.thumbnail} alt={post.title} className={styles.relatedImg} />
+                        <img src={post.thumbnail} alt={post.title} className={styles.relatedImg} loading="lazy" decoding="async" />
                       ) : (
                         <div className={styles.relatedPlaceholder} />
                       )}

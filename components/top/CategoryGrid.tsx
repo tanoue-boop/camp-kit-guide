@@ -15,7 +15,7 @@ export default function CategoryGrid({ categories }: CategoryGridProps) {
         {categories.map((cat) => (
           <Link key={cat.slug} href={`/category/${cat.slug}`} className={styles.card}>
             {cat.icon && (
-              <img src={cat.icon} alt="" width={44} height={44} className={styles.icon} />
+              <img src={cat.icon} alt="" width={44} height={44} className={styles.icon} loading="lazy" decoding="async" />
             )}
             <p className={styles.name}>{cat.name}</p>
             <p className={styles.desc}>{cat.description}</p>

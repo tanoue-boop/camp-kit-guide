@@ -13,7 +13,7 @@ function PostThumb({ post, catName }: { post: Post; catName: string }) {
   return (
     <div className={styles.thumb}>
       {post.thumbnail ? (
-        <img src={post.thumbnail} alt={post.title} className={styles.thumbImg} />
+        <img src={post.thumbnail} alt={post.title} className={styles.thumbImg} loading="lazy" decoding="async" />
       ) : (
         <div className={styles.thumbPlaceholder}>
           <span className={styles.thumbCat}>{catName}</span>

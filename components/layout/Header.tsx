@@ -43,7 +43,7 @@ export default function Header() {
         <div className={styles.inner}>
           {/* Logo */}
           <Link href="/" className={styles.logo}>
-            <img src="/logo.svg" alt="CampKit Guide" className={styles.logoImage} />
+            <img src="/logo.svg" alt="CampKit Guide" className={styles.logoImage} loading="eager" decoding="async" />
           </Link>
 
           {/* PC nav */}
@@ -66,7 +66,7 @@ export default function Header() {
                 <div className={styles.dropdownMenu}>
                   {CATEGORIES.map((cat) => (
                     <Link key={cat.href} href={cat.href} className={styles.dropdownItem}>
-                      <img src={cat.icon} alt="" width={20} height={20} className={styles.categoryIcon} />
+                      <img src={cat.icon} alt="" width={20} height={20} className={styles.categoryIcon} loading="lazy" decoding="async" />
                       {cat.label}
                     </Link>
                   ))}
@@ -100,7 +100,7 @@ export default function Header() {
       {/* SP Drawer */}
       <div className={`${styles.drawer} ${drawerOpen ? styles.drawerOpen : ""}`} aria-hidden={!drawerOpen}>
         <div className={styles.drawerHeader}>
-          <img src="/logo.svg" alt="CampKit Guide" className={styles.drawerLogoImage} />
+          <img src="/logo.svg" alt="CampKit Guide" className={styles.drawerLogoImage} loading="lazy" decoding="async" />
           <button
             className={styles.drawerClose}
             type="button"
@@ -113,21 +113,21 @@ export default function Header() {
 
         <nav className={styles.drawerNav}>
           <Link href="/ranking" className={styles.drawerLink}>
-            <img src="/icons/menu/ranking.svg" alt="" width={20} height={20} className={styles.menuIcon} />
+            <img src="/icons/menu/ranking.svg" alt="" width={20} height={20} className={styles.menuIcon} loading="lazy" decoding="async" />
             ランキング
           </Link>
 
           <p className={styles.drawerSection}>カテゴリ</p>
           {CATEGORIES.map((cat) => (
             <Link key={cat.href} href={cat.href} className={styles.drawerLink}>
-              <img src={cat.icon} alt="" width={20} height={20} className={styles.categoryIcon} />
+              <img src={cat.icon} alt="" width={20} height={20} className={styles.categoryIcon} loading="lazy" decoding="async" />
               {cat.label}
             </Link>
           ))}
 
           <div className={styles.drawerDivider} />
           <Link href="/about" className={styles.drawerLink}>
-            <img src="/icons/menu/about.svg" alt="" width={20} height={20} className={styles.menuIcon} />
+            <img src="/icons/menu/about.svg" alt="" width={20} height={20} className={styles.menuIcon} loading="lazy" decoding="async" />
             このサイトについて
           </Link>
         </nav>

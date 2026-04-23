@@ -7,7 +7,7 @@ export default function Footer() {
       <div className={styles.inner}>
         <div className={styles.topRow}>
           <div className={styles.brandGroup}>
-            <img src="/logo_white.svg" alt="CampKit Guide" className={styles.logoImage} />
+            <img src="/logo_white.svg" alt="CampKit Guide" className={styles.logoImage} loading="lazy" decoding="async" />
             <p className={styles.tagline}>キャンプ用品の選び方をわかりやすく。</p>
           </div>
           <nav className={styles.links}>

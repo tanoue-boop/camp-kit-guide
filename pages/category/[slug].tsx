@@ -73,7 +73,7 @@ export default function CategoryPage({ category, posts }: CategoryPageProps) {
               <Link key={post.slug} href={`/posts/${post.slug}`} className={styles.card}>
                 <div className={styles.cardThumb}>
                   {post.thumbnail ? (
-                    <img src={post.thumbnail} alt={post.title} className={styles.cardThumbImg} />
+                    <img src={post.thumbnail} alt={post.title} className={styles.cardThumbImg} loading="lazy" decoding="async" />
                   ) : (
                     <div className={styles.cardThumbPlaceholder}>
                       <span className={styles.cardThumbCatLabel}>{category.name}</span>

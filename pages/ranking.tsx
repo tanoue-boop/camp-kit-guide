@@ -87,7 +87,7 @@ export default function RankingPage({ posts, updatedAt }: RankingPageProps) {
                   {/* Thumbnail */}
                   <div className={`${styles.thumb} ${medal ? medal.mod : ""}`}>
                     {post.thumbnail ? (
-                      <img src={post.thumbnail} alt={post.title} className={styles.thumbImg} />
+                      <img src={post.thumbnail} alt={post.title} className={styles.thumbImg} loading="lazy" decoding="async" />
                     ) : (
                       <div className={styles.thumbPlaceholder}>
                         <svg className={styles.thumbPlaceholderIcon} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">

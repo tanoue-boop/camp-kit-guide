@@ -1,0 +1,148 @@
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 48px 20px;
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 48px;
+  align-items: start;
+}
+
+@media (max-width: 768px) {
+  .container {
+    grid-template-columns: 1fr;
+    padding: 32px 16px;
+  }
+
+  .sidebar {
+    display: none;
+  }
+}
+
+/* Hero */
+.hero {
+  text-align: center;
+  padding: 48px 24px;
+  background: #f8f9fa;
+  border-radius: 16px;
+  margin-bottom: 32px;
+}
+
+.code {
+  font-size: 96px;
+  font-weight: 900;
+  color: #e8e8e8;
+  line-height: 1;
+  margin: 0 0 8px;
+  font-family: var(--font-jost), sans-serif;
+}
+
+.title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0 0 12px;
+}
+
+.subtitle {
+  font-size: 0.95rem;
+  color: #666;
+  margin: 0 0 32px;
+  line-height: 1.7;
+}
+
+/* Actions */
+.actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btnPrimary {
+  display: inline-flex;
+  align-items: center;
+  padding: 12px 28px;
+  background: #2d7a2d;
+  color: #fff;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.btnPrimary:hover {
+  background: #245c24;
+}
+
+.btnSecondary {
+  display: inline-flex;
+  align-items: center;
+  padding: 12px 28px;
+  background: #fff;
+  color: #2d7a2d;
+  border: 2px solid #2d7a2d;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s;
+}
+
+.btnSecondary:hover {
+  background: #2d7a2d;
+  color: #fff;
+}
+
+/* Categories */
+.categories {
+  background: #fff;
+  border: 1px solid #e8e8e8;
+  border-radius: 12px;
+  padding: 24px;
+}
+
+.categoriesTitle {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #444;
+  margin: 0 0 16px;
+}
+
+.categoryList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+@media (max-width: 480px) {
+  .categoryList {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.categoryLink {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: #f8f9fa;
+  text-decoration: none;
+  font-size: 0.875rem;
+  color: #333;
+  font-weight: 500;
+  transition: background 0.15s;
+}
+
+.categoryLink:hover {
+  background: #e8f5e9;
+}
+
+.categoryIcon {
+  font-size: 1.1rem;
+}

@@ -7,6 +7,7 @@ export default function Document() {
   return (
     <Html lang="ja">
       <Head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="google-site-verification" content="ewzaIFqnh6N2uzIQt_0SuS4BfyTnISRLFVRG0Mw1o5I" />
         {gaId && (
           <>
