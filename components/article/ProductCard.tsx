@@ -1,7 +1,7 @@
 import type { Product } from "../../types/product";
 import styles from "./ProductCard.module.css";
-import { buildRakutenUrl, buildRakutenSearchUrl } from "@/lib/rakuten";
-import { buildAmazonSearchUrl } from "@/lib/amazon";
+import { buildRakutenSearchUrl } from "@/lib/rakuten";
+import { buildAmazonUrl, buildAmazonSearchUrl } from "@/lib/amazon";
 
 type ProductCardProps = {
   product: Product;
@@ -14,17 +14,22 @@ const RANK_LABELS: Record<number, { label: string; className: string }> = {
   3: { label: "3位", className: styles.rank3 },
 };
 
+const GOOGLE_SEARCH = (name: string) =>
+  `https://www.google.co.jp/search?q=${encodeURIComponent(name)}`;
+
 function getAmazonUrl(product: Product): string {
   if (product.source === "amazon" && product.affiliateUrl && product.affiliateUrl !== "#") {
-    return product.affiliateUrl;
+    return buildAmazonUrl(product.affiliateUrl);
   }
+  if (product.source === "other") return GOOGLE_SEARCH(product.name);
   return buildAmazonSearchUrl(product.name);
 }
 
 function getRakutenUrl(product: Product): string {
   if (product.source === "rakuten" && product.affiliateUrl && product.affiliateUrl !== "#") {
-    return buildRakutenUrl(product.affiliateUrl);
+    return product.affiliateUrl;
   }
+  if (product.source === "other") return GOOGLE_SEARCH(product.name);
   return buildRakutenSearchUrl(product.name);
 }
 
