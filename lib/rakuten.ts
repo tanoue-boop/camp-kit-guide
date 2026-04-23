@@ -6,3 +6,9 @@ export function buildRakutenUrl(itemUrl: string): string {
   if (!AFFILIATE_ID) return itemUrl;
   return `https://hb.afl.rakuten.co.jp/hgc/${AFFILIATE_ID}/?pc=${encodeURIComponent(itemUrl)}`;
 }
+
+export function buildRakutenSearchUrl(keyword: string): string {
+  const base = `https://search.rakuten.co.jp/search/mall/${encodeURIComponent(keyword)}/`;
+  if (!AFFILIATE_ID) return base;
+  return `${base}?rafcid=wsc_i_is_${AFFILIATE_ID}`;
+}

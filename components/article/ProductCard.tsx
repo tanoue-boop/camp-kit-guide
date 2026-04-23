@@ -1,5 +1,7 @@
 import type { Product } from "../../types/product";
 import styles from "./ProductCard.module.css";
+import { buildRakutenUrl, buildRakutenSearchUrl } from "@/lib/rakuten";
+import { buildAmazonSearchUrl } from "@/lib/amazon";
 
 type ProductCardProps = {
   product: Product;
@@ -12,18 +14,18 @@ const RANK_LABELS: Record<number, { label: string; className: string }> = {
   3: { label: "3位", className: styles.rank3 },
 };
 
-function buildAmazonUrl(product: Product): string {
+function getAmazonUrl(product: Product): string {
   if (product.source === "amazon" && product.affiliateUrl && product.affiliateUrl !== "#") {
     return product.affiliateUrl;
   }
-  return `https://www.amazon.co.jp/s?k=${encodeURIComponent(product.name)}`;
+  return buildAmazonSearchUrl(product.name);
 }
 
-function buildRakutenUrl(product: Product): string {
+function getRakutenUrl(product: Product): string {
   if (product.source === "rakuten" && product.affiliateUrl && product.affiliateUrl !== "#") {
-    return product.affiliateUrl;
+    return buildRakutenUrl(product.affiliateUrl);
   }
-  return `https://search.rakuten.co.jp/search/mall/${encodeURIComponent(product.name)}/`;
+  return buildRakutenSearchUrl(product.name);
 }
 
 // Cart icon SVG
@@ -39,8 +41,8 @@ function CartIcon({ className }: { className?: string }) {
 
 export default function ProductCard({ product, rank }: ProductCardProps) {
   const rankInfo = rank !== undefined ? RANK_LABELS[rank] : undefined;
-  const amazonUrl = buildAmazonUrl(product);
-  const rakutenUrl = buildRakutenUrl(product);
+  const amazonUrl = getAmazonUrl(product);
+  const rakutenUrl = getRakutenUrl(product);
 
   // Resolve ratings: explicit platform fields take priority, then fall back to generic rating by source
   const amazonRating = product.amazonRating ?? (product.source === "amazon" ? product.rating : undefined);
