@@ -1,4 +1,5 @@
 import type { Product } from "../../types/product";
+import JsonLd from "../seo/JsonLd";
 import styles from "./ProductCard.module.css";
 import { buildRakutenSearchUrl } from "@/lib/rakuten";
 import { buildAmazonUrl, buildAmazonSearchUrl } from "@/lib/amazon";
@@ -49,7 +50,6 @@ export default function ProductCard({ product, rank }: ProductCardProps) {
   const amazonUrl = getAmazonUrl(product);
   const rakutenUrl = getRakutenUrl(product);
 
-  // Resolve ratings: explicit platform fields take priority, then fall back to generic rating by source
   const amazonRating = product.amazonRating ?? (product.source === "amazon" ? product.rating : undefined);
   const amazonReviewCount = product.amazonReviewCount ?? (product.source === "amazon" ? product.reviewCount : undefined);
   const rakutenRating = product.rakutenRating ?? (product.source === "rakuten" ? product.rating : undefined);
@@ -57,80 +57,109 @@ export default function ProductCard({ product, rank }: ProductCardProps) {
 
   const hasRatings = amazonRating != null || rakutenRating != null;
 
+  const hasAggregateRating =
+    rakutenReviewCount != null && rakutenReviewCount > 0 &&
+    rakutenRating != null && rakutenRating > 0;
+
+  const productSchema: Record<string, unknown> = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: product.name,
+    description: product.description || product.name,
+    ...(product.image ? { image: product.image } : {}),
+    offers: {
+      "@type": "Offer",
+      price: product.price,
+      priceCurrency: "JPY",
+      availability: "https://schema.org/InStock",
+      url: rakutenUrl,
+    },
+    ...(hasAggregateRating ? {
+      aggregateRating: {
+        "@type": "AggregateRating",
+        ratingValue: rakutenRating,
+        reviewCount: rakutenReviewCount,
+      },
+    } : {}),
+  };
+
   return (
-    <div className={styles.card}>
-      {rankInfo && (
-        <span className={`${styles.rankBadge} ${rankInfo.className}`}>{rankInfo.label}</span>
-      )}
+    <>
+      <JsonLd data={productSchema} />
+      <div className={styles.card}>
+        {rankInfo && (
+          <span className={`${styles.rankBadge} ${rankInfo.className}`}>{rankInfo.label}</span>
+        )}
 
-      <div className={styles.inner}>
-        {/* Left: image */}
-        <div className={styles.imageWrap}>
-          {product.image ? (
-            <img src={product.image} alt={product.name} className={styles.image} />
-          ) : (
-            <div className={styles.imagePlaceholder}>
-              <svg className={styles.placeholderIcon} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
-                <circle cx="8.5" cy="8.5" r="1.5" />
-                <polyline points="21 15 16 10 5 21" />
-              </svg>
-              <span className={styles.placeholderText}>画像準備中</span>
-            </div>
-          )}
-        </div>
-
-        {/* Right: info */}
-        <div className={styles.info}>
-          {product.badge && <span className={styles.badge}>{product.badge}</span>}
-          <p className={styles.name}>{product.name}</p>
-          <p className={styles.description}>{product.description}</p>
-
-          <div className={styles.metaBottom}>
-            <span className={styles.price}>¥{product.price.toLocaleString()}</span>
-            {hasRatings && (
-              <div className={styles.ratings}>
-                {amazonRating != null && (
-                  <span className={styles.ratingRow}>
-                    <span className={styles.ratingSource}>Amazon</span>
-                    <span className={styles.ratingStars}>★ {amazonRating.toFixed(1)}</span>
-                    {amazonReviewCount != null && (
-                      <span className={styles.reviewCount}>（{amazonReviewCount.toLocaleString()}件）</span>
-                    )}
-                  </span>
-                )}
-                {rakutenRating != null && (
-                  <span className={styles.ratingRow}>
-                    <span className={styles.ratingSource}>楽天</span>
-                    <span className={styles.ratingStars}>★ {rakutenRating.toFixed(1)}</span>
-                    {rakutenReviewCount != null && (
-                      <span className={styles.reviewCount}>（{rakutenReviewCount.toLocaleString()}件）</span>
-                    )}
-                  </span>
-                )}
+        <div className={styles.inner}>
+          {/* Left: image */}
+          <div className={styles.imageWrap}>
+            {product.image ? (
+              <img src={product.image} alt={product.name} className={styles.image} />
+            ) : (
+              <div className={styles.imagePlaceholder}>
+                <svg className={styles.placeholderIcon} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+                  <circle cx="8.5" cy="8.5" r="1.5" />
+                  <polyline points="21 15 16 10 5 21" />
+                </svg>
+                <span className={styles.placeholderText}>画像準備中</span>
               </div>
             )}
           </div>
+
+          {/* Right: info */}
+          <div className={styles.info}>
+            {product.badge && <span className={styles.badge}>{product.badge}</span>}
+            <p className={styles.name}>{product.name}</p>
+            <p className={styles.description}>{product.description}</p>
+
+            <div className={styles.metaBottom}>
+              <span className={styles.price}>¥{product.price.toLocaleString()}</span>
+              {hasRatings && (
+                <div className={styles.ratings}>
+                  {amazonRating != null && (
+                    <span className={styles.ratingRow}>
+                      <span className={styles.ratingSource}>Amazon</span>
+                      <span className={styles.ratingStars}>★ {amazonRating.toFixed(1)}</span>
+                      {amazonReviewCount != null && (
+                        <span className={styles.reviewCount}>（{amazonReviewCount.toLocaleString()}件）</span>
+                      )}
+                    </span>
+                  )}
+                  {rakutenRating != null && (
+                    <span className={styles.ratingRow}>
+                      <span className={styles.ratingSource}>楽天</span>
+                      <span className={styles.ratingStars}>★ {rakutenRating.toFixed(1)}</span>
+                      {rakutenReviewCount != null && (
+                        <span className={styles.reviewCount}>（{rakutenReviewCount.toLocaleString()}件）</span>
+                      )}
+                    </span>
+                  )}
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+
+        {/* Buttons */}
+        <div className={styles.buttons}>
+          <a href={amazonUrl} target="_blank" rel="noopener noreferrer nofollow" className={`${styles.btn} ${styles.amazon}`}>
+            <CartIcon className={styles.btnIcon} />
+            <span className={styles.btnText}>
+              <span className={styles.btnBrand}>amazon</span>
+              <span className={styles.btnSub}>で購入する</span>
+            </span>
+          </a>
+          <a href={rakutenUrl} target="_blank" rel="noopener noreferrer nofollow" className={`${styles.btn} ${styles.rakuten}`}>
+            <CartIcon className={styles.btnIcon} />
+            <span className={styles.btnText}>
+              <span className={styles.btnBrand}>Rakuten</span>
+              <span className={styles.btnSub}>で購入する</span>
+            </span>
+          </a>
         </div>
       </div>
-
-      {/* Buttons */}
-      <div className={styles.buttons}>
-        <a href={amazonUrl} target="_blank" rel="noopener noreferrer nofollow" className={`${styles.btn} ${styles.amazon}`}>
-          <CartIcon className={styles.btnIcon} />
-          <span className={styles.btnText}>
-            <span className={styles.btnBrand}>amazon</span>
-            <span className={styles.btnSub}>で購入する</span>
-          </span>
-        </a>
-        <a href={rakutenUrl} target="_blank" rel="noopener noreferrer nofollow" className={`${styles.btn} ${styles.rakuten}`}>
-          <CartIcon className={styles.btnIcon} />
-          <span className={styles.btnText}>
-            <span className={styles.btnBrand}>Rakuten</span>
-            <span className={styles.btnSub}>で購入する</span>
-          </span>
-        </a>
-      </div>
-    </div>
+    </>
   );
 }

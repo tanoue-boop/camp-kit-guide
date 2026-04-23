@@ -2,6 +2,7 @@ import type { GetStaticPaths, GetStaticProps } from "next";
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
+import Head from "next/head";
 import Link from "next/link";
 import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
 import { serialize } from "next-mdx-remote/serialize";
@@ -22,6 +23,7 @@ import type { Heading } from "../../components/article/TableOfContents";
 import styles from "./post.module.css";
 
 const POSTS_DIR = path.join(process.cwd(), "content/posts");
+const BASE_URL = "https://www.camp-kit-guide.com";
 
 const ALL_CATEGORIES: Category[] = [
   { slug: "tent", name: "テント", description: "", icon: "⛺" },
@@ -40,7 +42,7 @@ const ALL_CATEGORIES: Category[] = [
 function makeHeadingId(text: string): string {
   const id = text.trim().toLowerCase()
     .replace(/\s+/g, "-")
-    .replace(/[^a-z0-9\u3040-\u9faf\u4e00-\u9fff-]/g, "")
+    .replace(/[^a-z0-9぀-龯一-鿿-]/g, "")
     .replace(/-+/g, "-")
     .replace(/^-|-$/g, "");
   return id || "heading";
@@ -58,6 +60,13 @@ function extractHeadings(content: string): Heading[] {
   return headings;
 }
 
+function formatDateJa(dateStr: string): string {
+  const parts = dateStr.split("-");
+  if (parts.length !== 3) return dateStr;
+  const [y, m, d] = parts;
+  return `${y}年${parseInt(m, 10)}月${parseInt(d, 10)}日`;
+}
+
 // ─── post helpers ─────────────────────────────────────────────────────────────
 
 function readAllPosts(): Post[] {
@@ -72,6 +81,7 @@ function readAllPosts(): Post[] {
         title: data.title ?? "",
         description: data.description ?? "",
         date: data.date ?? "",
+        ...(data.updatedAt ? { updatedAt: data.updatedAt } : {}),
         category: data.category ?? "",
         tags: data.tags ?? [],
         ...(data.thumbnail ? { thumbnail: data.thumbnail } : {}),
@@ -171,6 +181,35 @@ export default function PostPage({
   slug, frontmatter, mdxSource, headings, relatedPosts, recentPosts, sidebarPosts, prevPost, nextPost, categories,
 }: PostPageProps) {
   const catName = ALL_CATEGORIES.find((c) => c.slug === frontmatter.category)?.name ?? frontmatter.category;
+  const datePublished = frontmatter.date;
+  const dateModified = frontmatter.updatedAt || frontmatter.date;
+  const pageUrl = `${BASE_URL}/posts/${slug}`;
+
+  const blogPostingSchema = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: frontmatter.title,
+    description: frontmatter.description,
+    image: frontmatter.thumbnail || `${BASE_URL}/og-default.png`,
+    datePublished,
+    dateModified,
+    author: {
+      "@type": "Organization",
+      name: "CampKit Guide",
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "CampKit Guide",
+      logo: {
+        "@type": "ImageObject",
+        url: `${BASE_URL}/logo.png`,
+      },
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": pageUrl,
+    },
+  };
 
   return (
     <>
@@ -179,7 +218,17 @@ export default function PostPage({
         description={frontmatter.description}
         canonical={`/posts/${slug}`}
         ogImage={frontmatter.thumbnail}
+        ogType="article"
+        publishedTime={datePublished}
+        modifiedTime={dateModified}
       />
+      <Head>
+        <script
+          type="application/ld+json"
+          key="ld-blogposting"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(blogPostingSchema) }}
+        />
+      </Head>
 
       {/* Eyecatch */}
       <div className={styles.eyecatch}>
@@ -188,7 +237,8 @@ export default function PostPage({
         ) : (
           <div className={styles.eyecatchGradient}>
             <span className={styles.eyecatchCat}>{catName}</span>
-            <h1 className={styles.eyecatchTitle}>{frontmatter.title}</h1>
+            {/* aria-hidden: h1 is always rendered below in <header> */}
+            <p className={styles.eyecatchTitle} aria-hidden="true">{frontmatter.title}</p>
           </div>
         )}
       </div>
@@ -205,11 +255,11 @@ export default function PostPage({
 
           <header className={styles.header}>
             <Link href={`/category/${frontmatter.category}`} className={styles.catBadge}>{catName}</Link>
-            {frontmatter.thumbnail && (
-              <h1 className={styles.title}>{frontmatter.title}</h1>
-            )}
+            <h1 className={styles.title}>{frontmatter.title}</h1>
             <div className={styles.meta}>
-              <time className={styles.date}>{frontmatter.date}</time>
+              <time dateTime={datePublished} className={styles.date}>
+                {formatDateJa(datePublished)}
+              </time>
               <ViewCounter slug={slug} />
             </div>
           </header>
@@ -293,7 +343,6 @@ export const getStaticProps: GetStaticProps<PostPageProps> = async ({ params }) 
   const recentPosts = allPosts.filter((p) => p.slug !== slug).slice(0, 5);
   const sidebarPosts = allPosts.slice(0, 5);
 
-  // Compute postCount for category list
   const countByCategory: Record<string, number> = {};
   allPosts.forEach((p) => {
     countByCategory[p.category] = (countByCategory[p.category] || 0) + 1;
