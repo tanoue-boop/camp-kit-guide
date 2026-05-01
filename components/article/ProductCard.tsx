@@ -57,9 +57,16 @@ export default function ProductCard({ product, rank }: ProductCardProps) {
 
   const hasRatings = amazonRating != null || rakutenRating != null;
 
+  // Use source-appropriate rating for JSON-LD
+  const schemaRating      = product.source === "amazon" ? amazonRating      : rakutenRating;
+  const schemaReviewCount = product.source === "amazon" ? amazonReviewCount : rakutenReviewCount;
+
   const hasAggregateRating =
-    rakutenReviewCount != null && rakutenReviewCount > 0 &&
-    rakutenRating != null && rakutenRating > 0;
+    schemaReviewCount != null && schemaReviewCount > 0 &&
+    schemaRating != null && schemaRating > 0;
+
+  // Use source-appropriate URL for JSON-LD offers.url
+  const schemaUrl = product.source === "amazon" ? amazonUrl : rakutenUrl;
 
   const productSchema: Record<string, unknown> = {
     "@context": "https://schema.org",
@@ -72,13 +79,13 @@ export default function ProductCard({ product, rank }: ProductCardProps) {
       price: product.price,
       priceCurrency: "JPY",
       availability: "https://schema.org/InStock",
-      url: rakutenUrl,
+      url: schemaUrl,
     },
     ...(hasAggregateRating ? {
       aggregateRating: {
         "@type": "AggregateRating",
-        ratingValue: rakutenRating,
-        reviewCount: rakutenReviewCount,
+        ratingValue: schemaRating,
+        reviewCount: schemaReviewCount,
       },
     } : {}),
   };
