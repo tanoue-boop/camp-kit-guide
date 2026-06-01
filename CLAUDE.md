@@ -278,3 +278,35 @@ git push origin main
 
 `main` ブランチに push するだけで Vercel が自動的にビルド・デプロイを実行する。
 Vercel のダッシュボードでデプロイログを確認できる。
+
+---
+
+## ファイル配置（ハイブリッド構成 / 2026-06-01 整理）
+
+「作業ファイルはローカルSSD、参照資料・成果物はGoogleドライブ」のハイブリッド構成で管理。
+
+| 区分 | 場所 | 内容 |
+|------|------|------|
+| (a) 作業ファイル | `C:\claude-workspace\projects\camp-kit-guide\`（ここ） | コード一式（pages / components / lib / styles / types / scripts）、設定、`.git` |
+| (b) 参照資料 | `G:\マイドライブ\_claude\_reference\camp-kit-guide\` | `content\`・`design\`・`_file\` の控え |
+| (c) 成果物 | `G:\マイドライブ\_claude\deliverables\camp-kit-guide\` | `docs\`（skill-extraction / handover / test-log / operation-snapshot、`visual\` 画像） |
+| (d) 一時/再生成可能 | ローカルのまま（コピーしない） | `node_modules\`、`.next\` |
+
+### ⚠️ ビルド必須データ（ローカルにも実体を置く）
+
+次の2つは `next build` / メンテスクリプトが参照するため、**ローカルworkspace側に実体が必要**。
+Driveの `_reference` 側はバックアップ控え。**編集はローカル側を正とする**。
+
+| パス | 参照元 | 役割 |
+|------|--------|------|
+| `content\posts\*.mdx` | `pages/index・ranking・category/[slug]・posts/[slug]・404` が `path.join(process.cwd(),"content/posts")` で読込 | 記事ソース（SSG） |
+| `_file\products.tsv` | `scripts/update_products.cjs` | 商品データ更新スクリプトの入力 |
+
+- `design\`（モックアップPNG）は `.gitignore` 対象でコードからの参照なし → **Driveのみ**でOK。
+- `node_modules` はこのフォルダに無い。初回は `npm install`（実績: 207 packages / build成功）。
+- `CUserstanoucamp-kit-guidedocs`（壊れたパス由来の空フォルダ）は移行せず
+  `C:\claude-workspace\_archive\camp-kit-guide-broken\` に隔離済み（中身は空）。
+
+### 整理後のビルド確認（2026-06-01）
+`npm install` → `npm run build` ともに成功（exit 0）。全SSGページのプリレンダリングと
+`next-sitemap` 生成まで通過することを確認済み。
