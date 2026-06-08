@@ -1,0 +1,54 @@
+# camp-kit-guide 運用スナップショット
+
+サイトの現状（記事数・カテゴリ構成・GAS/インフラ構造）を記録するスナップショット。記事追加・カテゴリ変更・GAS構造変更のたびに最新化する（→ 運用ルールは CLAUDE.md「記録更新ルール」を参照）。
+
+- **最終更新: 2026-06-08**
+- 初版作成: 2026-04-28（当時42記事）
+
+---
+
+## 記事数（2026-06-08 時点）
+
+- **総記事数: 90記事**（`ls content/posts/*.mdx | wc -l` で確認）
+
+### カテゴリ別内訳（frontmatter `category` を集計）
+
+| slug | 表示名 | 記事数 |
+|------|--------|-------:|
+| tent | テント | 28 |
+| sleeping-bag | 寝袋・シュラフ | 15 |
+| cookware | 調理器具 | 11 |
+| lighting | 照明・ランタン | 9 |
+| chair-table | チェア・テーブル | 9 |
+| power | 電源・バッテリー | 6 |
+| bonfire | 焚き火台 | 6 |
+| backpack | バックパック | 4 |
+| clothing | ウェア・装備 | 1 |
+| cooler | （旧クーラーボックス） | 1 |
+| **合計** | | **90** |
+
+> ⚠️ `cooler` は正式カテゴリ定義（CLAUDE.md の9カテゴリ）に存在しない残存slugが1件あり。クーラーボックスは `cookware` への寄せが方針のため、次回ブラッシュアップ時に当該記事の `category` を `cookware` へ修正する（4ファイルのカテゴリ定義側ではなく記事側の付け替え）。
+
+---
+
+## カテゴリ整理・frontmatterの解決済み事項
+
+過去に存在した不整合は以下のとおり整理済み。
+
+- **※2026-06時点で解決済み: tarp→tent / cooler→cookware**。タープ記事は `tent` カテゴリに統合、クーラーボックス記事は `cookware` に寄せる方針（cooler残存1件は上記のとおり要付け替え）。
+- **有効な frontmatter キーは `tags` / `thumbnail` / `updatedAt`**。かつて一部記事で使われていた `keywords` / `eyecatch` はコードから一切参照されない死にキーのため使用禁止（commit `fb3c3d6` で全記事修正済）。新規・既存とも `tags`（タグ機能）/ `thumbnail`（OGP・カード画像）/ `updatedAt`（JSON-LD `dateModified`）を使うこと。
+
+---
+
+## GAS / インフラ構造
+
+- **GAS「📊 SEOレポート」**: 手動実行で Google Search Console から順位・表示・クリック・CTRを取得し、スプレッドシートの「SEO履歴」シートに追記。GCPプロジェクト `camp-kit-gsc` で稼働。
+- **SEO効果測定の仕組み（2026-06-08 構築）**: 上記 GAS SEOレポート＋SEO履歴シートで数値推移を追い、施策内容は `docs/seo-change-log.md`（施策台帳）に記録。両者を突き合わせて施策の効果を評価する運用を開始。
+
+---
+
+## 関連ドキュメント
+
+- `CLAUDE.md` — 作業ガイド・記事作成ルール・記録更新ルール
+- `docs/seo-change-log.md` — SEO施策台帳（いつ・どの記事を・なぜ・どう変えたか）
+- `docs/operation-snapshot.md` — 本ファイル（記事数・カテゴリ・GAS構造の現状）
