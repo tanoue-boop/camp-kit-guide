@@ -16,6 +16,20 @@ GASメニュー「📊 SEOレポート」を手動実行し、SEO履歴シート
 
 ---
 
+## 2026-06-15
+
+### 施策9: 新規5記事追加（ブランド軸・lighting/chair-table/sleeping-bag補強）
+lighting のブランド軸が空白だった点に着目し、コールマン／ジェントスでlightingを補強。あわせて chair-table（キャプテンスタッグ／コールマン）と sleeping-bag（Naturehike）のブランド軸を追加。楽天供給フィルタ（採用フラグTRUE 5件確保）を満たすブランドを選定し、ブランド占有ルールを緩和して同一ブランドのラインナップを深掘りする方針で記事化。新規5記事＋既存記事への一方向内部リンクを追加。
+- coleman-lantern（コールマンのランタン）: category=lighting / KW「コールマン ランタン」。ガス（ノーススター/ルミエール）とLED/充電式を光源タイプ・明るさ・電源で比較。camp-lantern-led・family-camp-lantern・camp-lighting-guide・lantern-stand へ内部リンク。
+- captain-stag-chair（キャプテンスタッグのチェア）: category=chair-table / KW「キャプテンスタッグ チェア」。軽量ラウンジ〜背付きベンチ・クッションをタイプ・価格・装備で比較。camp-chair-highback・camp-chair-lightweight・waq-chair・family-camp-chair へ内部リンク。
+- gentos-light（ジェントスのランタン）: category=lighting / KW「ジェントス ランタン」。1100lm高輝度EX-450H〜暖色フィラメント調光をルーメン・電源・調光で比較。coleman-lantern と切り口を分け（コールマン＝燃焼系含む定番、ジェントス＝LED専門・明るさ重視）差別化。camp-headlight-beginner・headlight-rechargeable・camp-lantern-led・mountain-camp-lantern へ内部リンク。
+- coleman-chair（コールマンのチェア）: category=chair-table / KW「コールマン チェア」。無重力インフィニティチェア・サイドテーブル付きデッキチェア・2点セットを比較。camp-chair-highback・camp-chair-lightweight・captain-stag-chair・family-camp-chair へ内部リンク。
+- naturehike-sleeping-bag（Naturehikeの寝袋）: category=sleeping-bag / KW「Naturehike 寝袋」。封筒型化繊5モデルを使用温度・サイズ/人数・連結で比較。mummy-sleeping-bag・nanga-sleeping-bag・sleeping-bag-season-guide・naturehike-mat へ内部リンク。
+- KW選定の学び: lighting はブランド軸が空白で狙い目→コールマン／ジェントスで揃った。クーラー系のブランド軸（coleman-cooler/dod-cooler/logos-cooler）は保冷剤・カバー・別ブランド混入で軒並み5件未満→クーラーはブランド軸より用途軸向き。naturehike寝袋は価格幅制約で自動選定3件だったが、本体5件に手動調整して5選化した。
+- カテゴリ別記事数の変化: lighting 9→11 / chair-table 13→15 / sleeping-bag 17→18。合計 114→119記事。
+
+---
+
 ## 2026-06-08
 
 ### 施策前スナップショット（直近3ヶ月）
