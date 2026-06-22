@@ -10,6 +10,7 @@ export type Product = {
   rakutenRating?: number;
   rakutenReviewCount?: number;
   affiliateUrl: string;
+  amazonUrl?: string;
   source: "amazon" | "rakuten" | "other";
   image?: string;
   badge?: string;

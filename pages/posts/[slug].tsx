@@ -97,13 +97,13 @@ function readAllPosts(): Post[] {
 function ProductCardMdx({
   rank, id, name, description, price, rating, reviewCount,
   amazonRating, amazonReviewCount, rakutenRating, rakutenReviewCount,
-  affiliateUrl, source, badge, image,
+  affiliateUrl, amazonUrl, source, badge, image,
 }: {
   rank?: string; id?: string; name: string; description: string;
   price: string; rating?: string; reviewCount?: string;
   amazonRating?: string; amazonReviewCount?: string;
   rakutenRating?: string; rakutenReviewCount?: string;
-  affiliateUrl: string; source: "amazon" | "rakuten" | "other"; badge?: string;
+  affiliateUrl: string; amazonUrl?: string; source: "amazon" | "rakuten" | "other"; badge?: string;
   image?: string;
 }) {
   return (
@@ -120,6 +120,7 @@ function ProductCardMdx({
           ...(rakutenRating ? { rakutenRating: Number(rakutenRating) } : {}),
           ...(rakutenReviewCount ? { rakutenReviewCount: Number(rakutenReviewCount) } : {}),
           affiliateUrl, source, badge,
+          ...(amazonUrl ? { amazonUrl } : {}),
           ...(image ? { image } : {}),
         }}
       />

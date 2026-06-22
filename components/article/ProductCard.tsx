@@ -2,7 +2,7 @@ import type { Product } from "../../types/product";
 import JsonLd from "../seo/JsonLd";
 import styles from "./ProductCard.module.css";
 import { buildRakutenSearchUrl } from "@/lib/rakuten";
-import { buildAmazonUrl, buildAmazonSearchUrl } from "@/lib/amazon";
+import { buildAmazonUrl } from "@/lib/amazon";
 
 type ProductCardProps = {
   product: Product;
@@ -18,12 +18,15 @@ const RANK_LABELS: Record<number, { label: string; className: string }> = {
 const GOOGLE_SEARCH = (name: string) =>
   `https://www.google.co.jp/search?q=${encodeURIComponent(name)}`;
 
-function getAmazonUrl(product: Product): string {
+// Returns a real Amazon affiliate URL when one is provided (amzn.to short link
+// via `amazonUrl`, or a legacy source="amazon" ASIN). Returns null otherwise —
+// we intentionally no longer fall back to a tagless Amazon search URL.
+function getAmazonUrl(product: Product): string | null {
+  if (product.amazonUrl) return product.amazonUrl;
   if (product.source === "amazon" && product.affiliateUrl && product.affiliateUrl !== "#") {
     return buildAmazonUrl(product.affiliateUrl);
   }
-  if (product.source === "other") return GOOGLE_SEARCH(product.name);
-  return buildAmazonSearchUrl(product.name);
+  return null;
 }
 
 function getRakutenUrl(product: Product): string {
@@ -65,8 +68,9 @@ export default function ProductCard({ product, rank }: ProductCardProps) {
     schemaReviewCount != null && schemaReviewCount > 0 &&
     schemaRating != null && schemaRating > 0;
 
-  // Use source-appropriate URL for JSON-LD offers.url
-  const schemaUrl = product.source === "amazon" ? amazonUrl : rakutenUrl;
+  // Use source-appropriate URL for JSON-LD offers.url. Never emit a tagless
+  // Amazon search URL: fall back to the real Rakuten URL when no Amazon link.
+  const schemaUrl = product.source === "amazon" && amazonUrl ? amazonUrl : rakutenUrl;
 
   const productSchema: Record<string, unknown> = {
     "@context": "https://schema.org",
@@ -151,13 +155,15 @@ export default function ProductCard({ product, rank }: ProductCardProps) {
 
         {/* Buttons */}
         <div className={styles.buttons}>
-          <a href={amazonUrl} target="_blank" rel="noopener noreferrer nofollow" className={`${styles.btn} ${styles.amazon}`}>
-            <CartIcon className={styles.btnIcon} />
-            <span className={styles.btnText}>
-              <span className={styles.btnBrand}>amazon</span>
-              <span className={styles.btnSub}>で購入する</span>
-            </span>
-          </a>
+          {amazonUrl && (
+            <a href={amazonUrl} target="_blank" rel="noopener noreferrer nofollow" className={`${styles.btn} ${styles.amazon}`}>
+              <CartIcon className={styles.btnIcon} />
+              <span className={styles.btnText}>
+                <span className={styles.btnBrand}>amazon</span>
+                <span className={styles.btnSub}>で購入する</span>
+              </span>
+            </a>
+          )}
           <a href={rakutenUrl} target="_blank" rel="noopener noreferrer nofollow" className={`${styles.btn} ${styles.rakuten}`}>
             <CartIcon className={styles.btnIcon} />
             <span className={styles.btnText}>
