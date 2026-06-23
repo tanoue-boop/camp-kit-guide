@@ -61,6 +61,11 @@
 - **全記事Amazon連携ワークシート整備**: `_file/amazon-link-worksheet.tsv`（Git管理外、130記事626商品、クリーニング済）。うち今回94商品が設置済み（手動12＋Cowork82）、残り約530商品が今後の設置対象。
 - **記事数**: 133記事のまま（増産なし）。
 
+### 追記：Coworkバッチ2 Amazonリンク設置（commit 244742a）
+- Coworkバッチ2で **10記事・49商品** を設置（commit 244742a）。対象＝camp-chair-highback / solar-portable-power / sleeping-bag-temperature-guide / nanga-sleeping-bag / dutch-oven / solo-tent-overall / solo-tent-lightweight / sleeping-bag-winter-beginner / lightweight-mountain-tent / large-tent-guide。
+- **Amazonリンク設置 累計143商品**（手動12＋Cowork82＋Coworkバッチ2の49）。ワークシート残りは約480商品。
+- 記事数は133のまま（増産なし）。
+
 ---
 
 ## 関連ドキュメント
