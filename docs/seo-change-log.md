@@ -16,6 +16,24 @@ GASメニュー「📊 SEOレポート」を手動実行し、SEO履歴シート
 
 ---
 
+## 2026-06-23
+
+### Amazon収益基盤の整備（記事増産なし・流入立ち上げ前提の足場固め）
+SEO施策そのものではなく、流入が立ち上がったときに収益化できるようAmazonアフィリエイト連携を一気に整備。記事の増産はなし（133記事のまま）。
+- **申請**: Amazonアソシエイト申請完了（登録ID `campkit26`／リンク `campkit26-22` 形式／仮登録状態、180日以内に3件適格販売で本審査自動開始）。
+- **タグなし検索URL全停止**: ProductCardの `getAmazonUrl` を `amazonUrl` 指定時のみ実リンク化し、検索URLフォールバックを廃止（全記事で垂れ流していたタグなしAmazon検索URLを停止）。
+- **架空リンク3記事修正**: solo-tent-beginner / bonfire-stand-beginner / sleeping-bag-summer-cospa の比較表を実在楽天商品で再構築。
+- **手動3記事併記**: coleman-tent / dod-tarp / fieldoor-tent の12商品にSiteStripe発行の `amzn.to` を設置。
+- **Cowork19記事82商品設置**: 三者分業フロー（Coworkログアウト検索→まーくんamzn.to発行→Claude Code設置）を初完走（commit af9a482）。
+- **全記事ワークシート整備**: `_file/amazon-link-worksheet.tsv`（Git管理外・130記事626商品）。今回94商品設置済み、残り約530商品が今後の対象。
+- 詳細は `docs/operation-snapshot.md` の 2026-06-23 セクションを参照。
+
+### GSC現状・量産方針
+- **GSC現状**: データは2026-06-08取得のまま。サイト全体でクリック約30・表示約900と低水準。次回SEOレポート定期測定は予定どおり 6/23。
+- **量産方針**: 確実に5件揃うブランドは概ね枯渇。6/23の測定までは闇雲な量産を保留し、効果測定の結果を見てから横展開を判断する。
+
+---
+
 ## 2026-06-15
 
 ### 施策9: 新規5記事追加（ブランド軸・lighting/chair-table/sleeping-bag補強）

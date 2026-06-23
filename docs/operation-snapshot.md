@@ -2,7 +2,7 @@
 
 サイトの現状（記事数・カテゴリ構成・GAS/インフラ構造）を記録するスナップショット。記事追加・カテゴリ変更・GAS構造変更のたびに最新化する（→ 運用ルールは CLAUDE.md「記録更新ルール」を参照）。
 
-- **最終更新: 2026-06-15（施策12で133記事）**
+- **最終更新: 2026-06-23（Amazonアフィリエイト基盤整備・記事数133のまま）**
 - 初版作成: 2026-04-28（当時42記事）
 
 ---
@@ -46,6 +46,20 @@
 
 - **GAS「📊 SEOレポート」**: 手動実行で Google Search Console から順位・表示・クリック・CTRを取得し、スプレッドシートの「SEO履歴」シートに追記。GCPプロジェクト `camp-kit-gsc` で稼働。
 - **SEO効果測定の仕組み（2026-06-08 構築）**: 上記 GAS SEOレポート＋SEO履歴シートで数値推移を追い、施策内容は `docs/seo-change-log.md`（施策台帳）に記録。両者を突き合わせて施策の効果を評価する運用を開始。
+
+---
+
+## 2026-06-23：Amazonアフィリエイト基盤整備（記事増産なし・133記事のまま）
+
+サイトの収益化に向けてAmazonアフィリエイト連携を一気に整備。記事の増産はなし（133記事のまま）。全変更push済み・`npm run build` EXIT=0。
+
+- **Amazonアソシエイト申請完了**: 登録ID `campkit26`、リンクは `campkit26-22` 形式。種別はコンテンツメディア/ブロガー。現在は仮登録状態で、本審査は180日以内に3件の適格販売で自動開始。サイト参加表記（アソシエイト・プログラム参加の明記）は `pages/privacy-policy.tsx` / `pages/about.tsx` に既設のため対応不要。
+- **ProductCard.tsx を amazonUrl 対応に改修**: `types/product.ts` に `amazonUrl` を追加。`getAmazonUrl` は `amazonUrl` 指定時のみ実リンクを返し、無ければ `null` でAmazonボタン非表示。タグなしAmazon検索URLのフォールバックを廃止。`pages/posts/[slug].tsx` で `amazonUrl` を受け渡し。これで全記事に垂れ流していたタグなしAmazon検索URLを停止。
+- **架空Amazonリンク・架空商品の修正（3記事）**: `solo-tent-beginner` / `bonfire-stand-beginner` / `sleeping-bag-summer-cospa` の比較表を、本文ProductCardの実在楽天商品で再構築。架空ASIN・ダミータグ・検索URLを撤去。
+- **手動Amazon実リンク併記（3記事・12商品）**: `coleman-tent`(4) / `dod-tarp`(3) / `fieldoor-tent`(5)。SiteStripe発行の `amzn.to` 短縮リンクを設置。
+- **Cowork経由Amazonリンク設置（19記事・82商品 / commit af9a482）**: 「Cowork（ログアウト検索）→まーくん（SiteStripeで `amzn.to` 発行・商品確認）→Claude Code（ProductCardに `amazonUrl` 設置）」の三者分業フローを初めて完走。型番が明確な商品群はほぼ100%一致。「該当なし」5件（TOMOUNT / tousen / family-mat 2件 / コールマンラギッド）はAmazonに無く楽天のまま据え置き。
+- **全記事Amazon連携ワークシート整備**: `_file/amazon-link-worksheet.tsv`（Git管理外、130記事626商品、クリーニング済）。うち今回94商品が設置済み（手動12＋Cowork82）、残り約530商品が今後の設置対象。
+- **記事数**: 133記事のまま（増産なし）。
 
 ---
 
