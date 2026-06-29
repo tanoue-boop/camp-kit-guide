@@ -71,10 +71,19 @@ GASメニュー「📊 SEOレポート」を手動実行し、SEO履歴シート
 
 全記事を id↔name のブランド照合でスキャンした結果、**two-room/winter-beginner と同型の事実誤認が複数記事に存在**することが判明（ProductCardの name/価格/URL/画像だけ実楽天商品へ差し替え、id/description/見出し/比較表は旧ブランドのまま放置）。本番に「別ブランドを名乗る虚偽記述」が公開中＝E-E-A-T／景表法リスク。
 
-- **是正済み（2記事）**: two-room-tent-guide（703228d）／sleeping-bag-winter-beginner（本コミット）。
-- **🔴 確定・未是正（13記事）**: bonfire-stand-beginner／camp-burner-beginner／camp-chair-lightweight／camp-cooker-beginner／camp-cooler-box-beginner／camp-lantern-led／camp-lighting-guide／camp-sleeping-mat／camp-tarp-beginner／family-camp-summer-tent／sleeping-bag-summer-cospa／solo-tent-beginner／group-camp-table／camp-table-folding。※スキャン精緻化で再確認のうえ、two-room型手順（id/desc/badge/見出し/比較表/まとめ表アンカーを実商品=name基準に是正、捏造なし）でバッチ是正する。
+- **是正済み（7記事）**: two-room-tent-guide（703228d）／sleeping-bag-winter-beginner（9a5b763）／【バッチ1・本コミット】bonfire-stand-beginner／camp-burner-beginner／camp-chair-lightweight／camp-cooker-beginner／camp-cooler-box-beginner。
+- **🔴 確定・未是正（8記事）**: camp-lantern-led／camp-lighting-guide／camp-sleeping-mat／camp-tarp-beginner／family-camp-summer-tent／sleeping-bag-summer-cospa／solo-tent-beginner／group-camp-table／camp-table-folding。※two-room型手順でバッチ2/3として是正予定。
 - **⚪ 偽陽性（是正不要）**: inflatable-mat／mummy-sleeping-bag／rectangle-sleeping-bag（id`bearsrock`↔name「Bears Rock」スペース差）／family-camp-mat（id が汎用命名）。
 - **優先度**: 流入のある記事・公開中の虚偽ブランド表示は早期是正が望ましい。差別化リライトより本不整合の解消を優先候補とする。
+
+##### バッチ1是正の詳細（5記事・並列サブエージェント実装→中央でgrep/build検証）
+各カードの真の正体＝`name`フィールドを基準に、id/見出し/badge/description/解説本文/主なスペック/比較表/まとめ表アンカーを実商品へ是正。捏造スペック（火力/重量/FP/保冷時間/温度等）は全削除し、nameに無い項目は「—」。汎用名カードはブランド断定せず属性のみ記述。
+- **bonfire-stand-beginner**: アイリスオーヤマ TKB-ST43／トライポッドTP135／囲炉裏テーブルTB98／TRGR 焚き火台／BaTaRaN J05。※5点中2点（三脚・囲炉裏テーブル）は焚き火台本体でないため関連アクセサリとして整理。アイリス3点はブランド占有緩和（事実是正）。
+- **camp-burner-beginner**: イワタニCB-JCB／SOTOアミカス／キャプテンスタッグM-6400／SOTO ST-310セット／コールマン アウトランダー。id旧ブランド（soto/primus/coleman/iwatani/snowpeak）がnameと食い違っていたためname基準で再割当。
+- **camp-chair-lightweight**: 汎用(YMBStore)／ポンコタン ロー／ポンコタン ハイバック／Moon Lence CH-7／山善 DD-02WT。「32万脚」2枚は実ポンコタンとしてmodelで差別化。
+- **camp-cooker-beginner**: 汎用アルミ3点／スノーピーク パーソナルクッカー／VASTLAND／コールマン パッカウェイ／チタンマニア。id=montbellの実体がスノーピーク、id=uniflameの実体がコールマン等をname基準で是正。
+- **camp-cooler-box-beginner**: アイリス クーラーバッグ／ロゴス ハイパー氷点下M／アイリスHUGEL VITC-40／同VITC-20／ロゴス アクションクーラー25。旧YETI/ダイワ/イグルー/コールマンを除去し、解説の「YETI級が最強」トーンを実ラインナップ寄りに整合。
+- **検証**: 全5本で旧id参照0／消えるべき旧ブランド0／id⇔アンカー5/5一致／updatedAt6/29／build EXIT=0。残存ブランドは全て実name由来（アイリスオーヤマ/SOTO/イワタニ/コールマン/スノーピーク/ロゴス/ポンコタン/Moon Lence/山善/VASTLAND/チタンマニア/TRGR/BaTaRaN）。FAQはcamp-chair-lightweight・camp-cooker-beginnerが元々無し（旧テンプレ・リグレッションではない）。
 
 **効果測定（次回7/7）**
 - グループBの型（判断軸の体系化＋実用情報）で各記事の順位が動くかを確認。動いた型をグループB残へ横展開する。
