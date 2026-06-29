@@ -25,12 +25,37 @@ GASメニュー「📊 SEOレポート」を手動実行し、SEO履歴シート
 - **#4 solo-tent-overall（グループB・commit 2276652）**: ソロテントの選び方を自立式/非自立式・素材・重量などの判断軸で体系化したテント選定比較表中心の構成に再構築。※commitは作成済みだったが本ログへの記録が漏れていたため遡及記載。
 - **#5 stylish-camp-tent（グループB・commit e7bc3f6）**: KW「おしゃれ キャンプ テント」。デザインタイプ別比較表（ワンポール／ベル型／カマボコ／パップ／ロッジ／ドームの7列×6行）・素材傾向表（ポリ／TC＝ポリコットン）・シーン別早見表を新設し、感覚的な「映え」を判断軸として体系化。ProductCard5商品・比較表1・FAQ5問はKEEP。updatedAtを6/29に更新（dateModified反映）。
 - **#6 camp-chair-highback（グループB・commit 3fdc306）**: KW「ハイバックチェア キャンプ おすすめ」。①座面高タイプ別比較表（ハイ/ミドル/ロー×立ち座り・テーブル相性・焚き火距離感・用途）②リクライニング方式の判断軸表（無段階・無重力/段階式/ロッキング/固定）＋ヘッドレスト・生地（ポリ/TC/メッシュ）の使い分けを散文吸収 ③体格・用途別早見表を新設し、「くつろぎ・座り心地」を判断軸として体系化。21.7k→26.4k字、ProductCard5商品・比較表1・FAQ5問はKEEP、updatedAt6/29。カニバ防止のため食事メイン/家族向けは camp-chair-lightweight・family-camp-chair へリンク誘導し本記事は「くつろぎ」入口に純化。
-- **#7 nanga-sleeping-bag（グループB・本コミット）**: KW「ナンガ シュラフ おすすめ」。ブランド軸×判断軸の体系化。①DXナンバー×ダウン量×季節×快適温度×用途の対応表（快適温度は記事掲載の実数値600=-6℃/750=-8℃のみ使用、450/800は質的記述・「目安/各製品表記を確認」明記）②形状選択ガイド表（マミー/封筒）③シリーズ別比較表（オーロラライト/テックス/オリジナル）。19.6k→22.6k字、ProductCard5・比較表1・FAQ5 KEEP、updatedAt6/29。**内部リンク0→3本**（sleeping-bag-temp-guide/season-guide/mummy-sleeping-bag）。温度別の深掘りはリンク誘導に留め、温度ガイド3記事（temp-guide/temperature-guide/camp-sleeping-bag-temperature-guide）とカニバらせず「ナンガの選び方」に純化。
-- **#8 one-pole-tent（グループB・本コミット）**: KW「ワンポールテント おすすめ」。①形状×素材比較表（ティピー/ベル×TC/ポリ）②装備の判断軸表（煙突ポート/スカート/小川張り/火の粉耐性）③人数・スタイル別早見表。23.4k→27.3k字、ProductCard5・比較表1・FAQ5・設営手順 KEEP、updatedAt6/29。内部リンク1→4本、カニバ防止で solo-tent-overall/pup-tent/stylish-camp-tent へリンク誘導し「ワンポール」に純化。
+- **#7 nanga-sleeping-bag（グループB・commit cb35c30）**: KW「ナンガ シュラフ おすすめ」。ブランド軸×判断軸の体系化。①DXナンバー×ダウン量×季節×快適温度×用途の対応表（快適温度は記事掲載の実数値600=-6℃/750=-8℃のみ使用、450/800は質的記述・「目安/各製品表記を確認」明記）②形状選択ガイド表（マミー/封筒）③シリーズ別比較表（オーロラライト/テックス/オリジナル）。19.6k→22.6k字、ProductCard5・比較表1・FAQ5 KEEP、updatedAt6/29。**内部リンク0→3本**（sleeping-bag-temp-guide/season-guide/mummy-sleeping-bag）。温度別の深掘りはリンク誘導に留め、温度ガイド3記事（temp-guide/temperature-guide/camp-sleeping-bag-temperature-guide）とカニバらせず「ナンガの選び方」に純化。
+- **#8 one-pole-tent（グループB・commit cb35c30）**: KW「ワンポールテント おすすめ」。①形状×素材比較表（ティピー/ベル×TC/ポリ）②装備の判断軸表（煙突ポート/スカート/小川張り/火の粉耐性）③人数・スタイル別早見表。23.4k→27.3k字、ProductCard5・比較表1・FAQ5・設営手順 KEEP、updatedAt6/29。内部リンク1→4本、カニバ防止で solo-tent-overall/pup-tent/stylish-camp-tent へリンク誘導し「ワンポール」に純化。
 - **cooler-box-day-camp（スキップ）**: グループB対象に挙げたが、`day-camp-cooler-box` と同一検索意図「デイキャンプ向けクーラーボックス5選」の重複記事（採用商品も AOクーラーズ/LOGOS/DODソフトくらお が重複）。片方をグループB化しても重複が深まるだけで棲み分け不能のためスキップ。クーラー系は overall/beginner も「キャンプ用クーラーボックスおすすめ5選」で重複気味＝カテゴリ全体の統廃合（canonical/統合）は別途方針判断が必要。
+
+#### 12本バッチ（#9〜#20・本コミット／並列サブエージェントで実装→中央でgrep/wc検証＋build EXIT=0を確認）
+
+型は #3〜#8 と同一（判断軸の体系的な表化＋実用情報、E-E-A-T偽装なし、捏造なし、数値は既存データのみ・「目安」明記、updatedAt=6/29、KEEP厳守）。各記事に新要素3つ（タイプ別比較表／判断軸／用途・シーン別早見表）。
+
+**ロットB①：テント形状・スペック軸（solo-tent-overall/stylish/pup-tent とカニバさせず純化、4本相互＋solo-tent-overallへリンク）**
+- **#9 lightweight-mountain-tent（グループB）**: 軽量・山岳特化。①スペック判断軸比較表（人数/重量/耐水圧/自立式/用途）②自立式vs非自立式・ダブル/シングルウォール判断軸 ③登山スタイル別早見表。18.2k→22.4k字、KEEP(PC5/表1/FAQ5)、内部リンク0→3（mountain-camp-tent/solo-tent-lightweight/solo-tent-overall）。
+- **#10 mountain-camp-tent（グループB）**: 山岳キャンプ特化。①判断軸比較表（耐候性/前室/設営/重量）②構造の判断軸 ③季節別早見表。17.8k→20.9k字、KEEP、内部リンク0→3（lightweight-mountain-tent/solo-tent-overall/large-tent-guide）。
+- **#11 large-tent-guide（グループB）**: 大型・グループ用に純化。①人数×形状比較表（ツールーム/トンネル/大型ドーム）②大型選びの判断軸 ③人数別早見表。16.6k→19.4k字、KEEP、内部リンク0→3（two-room-tent-guide/mountain-camp-tent/solo-tent-overall）。
+- **#12 solo-tent-lightweight（グループB）**: ソロ×軽量に純化。①スペック比較表（重量/収納/自立式/耐水圧）②重量・収納・設営の判断軸 ③移動手段別早見表。22.1k→25.8k字、KEEP、**updatedAt空欄を正しい形式で補完**、内部リンク0→3（lightweight-mountain-tent/mountain-camp-tent/solo-tent-overall）。
+
+**ロットB②：ギア・周辺装備軸（各単独カテゴリ・相互カニバなし）**
+- **#13 camp-pillow（グループB）**: ①タイプ別比較表（インフレ/低反発/エア）②寝心地・携行性の判断軸 ③用途別早見表。21.0k→23.4k字、KEEP、内部リンク0→3（inflatable-mat/camp-sleeping-mat/mountain-camp-mat）。
+- **#14 car-side-tarp（グループB）**: ①取付方式比較表 ②車種適合・設営の判断軸 ③シーン別早見表。22.4k→25.6k字、KEEP、内部リンク0→3（car-camp-lighting/car-camp-bed-kit/camp-tarp-beginner）。
+- **#15 car-camp-lighting（グループB）**: ①タイプ別比較表（LEDランタン/テープライト/USB）②明るさ・電源・取付の判断軸 ③用途別早見表。16.8k→19.4k字、KEEP、内部リンク0→3（car-side-tarp/car-camp-bed-kit/camp-lantern-led）。
+- **#16 camp-fan-summer（グループB）**: ①タイプ別比較表（クリップ/卓上/吊下）②風量・駆動時間・サイズの判断軸 ③使用シーン別早見表。17.9k→20.6k字、KEEP、内部リンク1→3（既存family-camp-summer-tent＋mobile-battery-camp/camp-portable-power-beginner）。
+- **#17 inflatable-mat（グループB）**: ①マットタイプ比較表（インフレ/エアー/クローズドセル）②R値・厚み・収納の判断軸（R値は既存数値のみ使用）③季節別早見表。21.6k→24.6k字、KEEP、内部リンク既存4本維持。
+- **#18 solar-portable-power（グループB）**: ①出力・容量比較表（容量Wh/定格出力W/ソーラーW数）②W数・接続・用途の判断軸 ③使用シーン別早見表。19.1k→21.8k字、KEEP、内部リンク1→3（既存solar-panel-folding＋portable-power-large/jackery-power-station）。
+
+**ロットA：解説・ガイド型（逆算・結論先出し）**
+- **#19 karrimor-backpack（グループA）**: ブランド軸×容量逆算。①用途→容量の結論先出し早見表 ②シリーズ・容量別比較表 ③用途別早見表。21.1k→23.2k字、**KEEP(PC4のまま＝5本目を捏造せず維持)**、内部リンク既存4本維持。
+- **#20 sleeping-bag-winter-beginner（グループA）**: 冬・初心者の逆算。①「最初の1着」の結論先出し ②対応温度×素材（ダウン/化繊）の判断軸 ③予算別早見表。25.9k→28.6k字、KEEP、温度の詳細選定は temp-guide/temperature-guide へ誘導し「冬・初心者の選び方」に純化、内部リンク既存5本維持。
+
+**バッチ検証**: 全12本で残留タグ0・KEEP件数維持（karrimorはPC4）・updatedAt6/29 を中央のgrep/wcで確認、build EXIT=0。実装は並列サブエージェント12体、最終検証とbuildはメイン側で実施。
 
 **効果測定（次回7/7）**
 - グループBの型（判断軸の体系化＋実用情報）で各記事の順位が動くかを確認。動いた型をグループB残（two-room-tent-guide＝被リンク7本・要データ不整合修正 他）へ横展開する。
+- 6/29時点でテコ入れ対象22記事のうち差別化リライト済みは #1〜#7・#19・#20＋ロット系（合計17記事相当）。**未着手の主な残**: two-room-tent-guide（要データ修正）、寝袋温度ガイド3記事（カニバ統廃合のため保留）。
 - **積み残しの構造課題**: クーラー系記事のカニバ（デイキャン2本＝cooler-box-day-camp/day-camp-cooler-box、汎用2本＝overall/beginner）と寝袋温度ガイド3記事のカニバは、いずれも統廃合を伴う破壊的整理のため7/7の順位確認後に判断する。
 
 ---
