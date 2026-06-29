@@ -60,6 +60,22 @@ GASメニュー「📊 SEOレポート」を手動実行し、SEO履歴シート
 - **検証**: 旧ブランド名0件／旧id参照0件／ProductCard id⇔まとめ表アンカー5/5一致（切れなし）／PC5・表1・FAQ5維持／updatedAt6/29／build EXIT=0。捏造なし（name内実値のみ）。
 - **注記**: 差別化リライト（判断軸表の追加）は今回未実施。グループB残としての差別化リライトは別途。
 
+#### データ不整合の是正：sleeping-bag-winter-beginner（事実誤認の修正・本コミット）
+
+- **発覚した不整合**: two-room と同型。ProductCardの name/価格/URL/画像は実在楽天商品（Bears Rock×3／Camdoor／AIFLYCY＝いずれも化繊・洗える寝袋）だが、**見出し・id・badge・description・各カード直後の解説本文（社史）・主なスペック・比較表・まとめ表が旧プレミアムブランド（ナンガ/モンベル/イスカ/コールマン/Snugpak）のまま放置**。「650FP/AURORA-TEX/永久保証」「800FP EXダウン」「810FP」等の偽スペックを実在しない商品に対して記載していた（重度のE-E-A-T／景表法リスク）。本記事は6/29の#20で差別化リライト済みだったが、土台のProductCardがこの不整合を抱えたままだった。
+- **是正内容**: 全5カードの見出し・id・badge・description・解説本文・主なスペックを実商品（name基準）に書き直し、旧ブランド名・偽スペックを完全除去。温度は name の表記値（-30度/-25℃/-34度/-15度/3.5シーズン）を「表記・目安」と明記し、捏造の快適温度/限界温度/FP/重量/収納を削除。比較表（列＝商品名/形状/素材/対応温度(表記)/価格）とまとめ表（テキスト・アンカー・価格）を実5商品で再構築。締め本文のブランド言及も是正。
+- **トーン整合（別途同コミット）**: 採用5商品が全て化繊のため、教育セクション（結論ボックス/ダウンvs化繊判断軸表/予算別早見表/ポイント2）の「冬はダウン推奨」トーンを「初心者の冬入門は扱いやすい化繊が現実的、軽さ・本格度・予算余裕でダウンへ」に整合（判断軸表はKEEP、推奨欄のみ修正）。ダウンの軽量・高保温は事実として維持。
+- **検証**: 旧ブランド名は正規内部リンク（[ナンガの寝袋](/posts/nanga-sleeping-bag)）以外0件／旧id参照0件／ProductCard id⇔まとめ表アンカー5/5一致／PC5・表1・FAQ5・判断軸表3つ維持／updatedAt6/29／build EXIT=0。捏造なし。
+
+#### 🚨 サイト横断のブランド不整合スキャン結果（重要・要対応の積み残し）
+
+全記事を id↔name のブランド照合でスキャンした結果、**two-room/winter-beginner と同型の事実誤認が複数記事に存在**することが判明（ProductCardの name/価格/URL/画像だけ実楽天商品へ差し替え、id/description/見出し/比較表は旧ブランドのまま放置）。本番に「別ブランドを名乗る虚偽記述」が公開中＝E-E-A-T／景表法リスク。
+
+- **是正済み（2記事）**: two-room-tent-guide（703228d）／sleeping-bag-winter-beginner（本コミット）。
+- **🔴 確定・未是正（13記事）**: bonfire-stand-beginner／camp-burner-beginner／camp-chair-lightweight／camp-cooker-beginner／camp-cooler-box-beginner／camp-lantern-led／camp-lighting-guide／camp-sleeping-mat／camp-tarp-beginner／family-camp-summer-tent／sleeping-bag-summer-cospa／solo-tent-beginner／group-camp-table／camp-table-folding。※スキャン精緻化で再確認のうえ、two-room型手順（id/desc/badge/見出し/比較表/まとめ表アンカーを実商品=name基準に是正、捏造なし）でバッチ是正する。
+- **⚪ 偽陽性（是正不要）**: inflatable-mat／mummy-sleeping-bag／rectangle-sleeping-bag（id`bearsrock`↔name「Bears Rock」スペース差）／family-camp-mat（id が汎用命名）。
+- **優先度**: 流入のある記事・公開中の虚偽ブランド表示は早期是正が望ましい。差別化リライトより本不整合の解消を優先候補とする。
+
 **効果測定（次回7/7）**
 - グループBの型（判断軸の体系化＋実用情報）で各記事の順位が動くかを確認。動いた型をグループB残へ横展開する。
 - 6/29時点でテコ入れ対象22記事のうち差別化リライト済みは #1〜#7・#19・#20＋ロット系（合計17記事相当）。two-room-tent-guideは**データ不整合を是正済み**（差別化リライトは未／別途）。**未着手の主な残**: 寝袋温度ガイド3記事（カニバ統廃合のため保留）。
