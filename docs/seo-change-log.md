@@ -71,8 +71,8 @@ GASメニュー「📊 SEOレポート」を手動実行し、SEO履歴シート
 
 全記事を id↔name のブランド照合でスキャンした結果、**two-room/winter-beginner と同型の事実誤認が複数記事に存在**することが判明（ProductCardの name/価格/URL/画像だけ実楽天商品へ差し替え、id/description/見出し/比較表は旧ブランドのまま放置）。本番に「別ブランドを名乗る虚偽記述」が公開中＝E-E-A-T／景表法リスク。
 
-- **是正済み（7記事）**: two-room-tent-guide（703228d）／sleeping-bag-winter-beginner（9a5b763）／【バッチ1・本コミット】bonfire-stand-beginner／camp-burner-beginner／camp-chair-lightweight／camp-cooker-beginner／camp-cooler-box-beginner。
-- **🔴 確定・未是正（8記事）**: camp-lantern-led／camp-lighting-guide／camp-sleeping-mat／camp-tarp-beginner／family-camp-summer-tent／sleeping-bag-summer-cospa／solo-tent-beginner／group-camp-table／camp-table-folding。※two-room型手順でバッチ2/3として是正予定。
+- **是正済み（12記事）**: two-room-tent-guide（703228d）／sleeping-bag-winter-beginner（9a5b763）／【バッチ1】bonfire-stand-beginner／camp-burner-beginner／camp-chair-lightweight／camp-cooker-beginner／camp-cooler-box-beginner（5c4e26d）／【バッチ2・本コミット】camp-lantern-led／camp-lighting-guide／camp-sleeping-mat／camp-tarp-beginner／family-camp-summer-tent。
+- **🔴 確定・未是正（5記事＝バッチ3対象）**: sleeping-bag-summer-cospa／solo-tent-beginner／group-camp-table／camp-table-folding／camp-headlight-beginner（※後から真性不整合と判明して追加）。※two-room型手順でバッチ3として是正する。
 - **⚪ 偽陽性（是正不要）**: inflatable-mat／mummy-sleeping-bag／rectangle-sleeping-bag（id`bearsrock`↔name「Bears Rock」スペース差）／family-camp-mat（id が汎用命名）。
 - **優先度**: 流入のある記事・公開中の虚偽ブランド表示は早期是正が望ましい。差別化リライトより本不整合の解消を優先候補とする。
 
@@ -84,6 +84,15 @@ GASメニュー「📊 SEOレポート」を手動実行し、SEO履歴シート
 - **camp-cooker-beginner**: 汎用アルミ3点／スノーピーク パーソナルクッカー／VASTLAND／コールマン パッカウェイ／チタンマニア。id=montbellの実体がスノーピーク、id=uniflameの実体がコールマン等をname基準で是正。
 - **camp-cooler-box-beginner**: アイリス クーラーバッグ／ロゴス ハイパー氷点下M／アイリスHUGEL VITC-40／同VITC-20／ロゴス アクションクーラー25。旧YETI/ダイワ/イグルー/コールマンを除去し、解説の「YETI級が最強」トーンを実ラインナップ寄りに整合。
 - **検証**: 全5本で旧id参照0／消えるべき旧ブランド0／id⇔アンカー5/5一致／updatedAt6/29／build EXIT=0。残存ブランドは全て実name由来（アイリスオーヤマ/SOTO/イワタニ/コールマン/スノーピーク/ロゴス/ポンコタン/Moon Lence/山善/VASTLAND/チタンマニア/TRGR/BaTaRaN）。FAQはcamp-chair-lightweight・camp-cooker-beginnerが元々無し（旧テンプレ・リグレッションではない）。
+
+##### バッチ2是正の詳細（5記事・バッチ1と同一手順）
+バッチ1と同じく `name` フィールドを真の正体として、id/見出し/badge/description/解説本文/主なスペック/比較表/まとめ表アンカーを実商品へ是正。捏造スペック（ルーメン/点灯時間/重量/R値/耐水圧等、nameに根拠のない数値）は全削除し、不明項目は「—」。汎用名カード（ブランド不詳の楽天商品）はブランドを断定せず属性のみ記述。
+- **camp-lantern-led**: Soomloom Helio5000（USB Type-C・5000mAh・300lm・IPX4）／楽天総合1位 LED 63灯（USB・手回し・ソーラー・電池・車載の多電源）／ラドウェザー 1000lm（乾電池式・防滴防塵）／ブルーノ BRUNO LEDランタン（全8色・無段階調光・電池式）／充電式1000LM（5000mAh・150時間）。旧ゴールゼロ／ジェントス／コールマン クアッドマルチ／BioLite／キャプテンスタッグを完全除去。比較表の列も実商品に合わせて「明るさ・点灯時間・重量」→「明るさ・点灯時間・電源方式・防水/特徴」へ再構成。
+- **camp-lighting-guide**: M.O.L MOL-L1200（1200lm）／M.O.L MOL-L400（400lm・ロープハンドル）／バルミューダ The Lantern L02A／KZM ギルバートランタン／ソーラーランタン1800lm（5000mAh・折り畳み）。
+- **camp-sleeping-mat**: 厚手インフレーターマット（枕付き・幅75cm・8/10cm）／Bears Rock 自動膨張式5cm（枕付き）／コールマン キャンパーインフレーターマットハイピーク ダブル（2000036154）／FIELDOOR 折りたたみクッションマット（180×60cm・厚さ2cm）／R値8.93 インフレーターマット8cm。R値はnameに表記のある1点のみ記載し、他は捏造せず「—」。
+- **camp-tarp-beginner**: DOD いつかのタープ（TT5-631-TN）／FIELDOOR ワンタッチタープテント3×3m／Bears Rock しろくまスクエアタープ（SQT-401・ポール2本付）／ヘキサタープ500×480cm（耐水圧2000mm・UPF50+）／FIELDOOR ヘキサタープM（440×470cm）。
+- **family-camp-summer-tent**: TOMOUNT TriArc Tunnel Tent V4（2ルーム・耐水圧2500mm・500×310×195cm）／FIELDOOR ファミリーテント4点セット（テント+タープ+シート+ポール）／RATELWORKS BODEN（RWS0111・2ルーム）／ワンタッチファミリーテント300／WAQ Alpha TC（WAQ-TCFT1・ワンポール）。
+- **検証**: 全5本で旧id参照0／消えるべき旧ブランド0（grepヒット0）／ProductCard id⇔まとめ表アンカー5/5一致（リンク切れなし）／PC5・表1維持／updatedAt6/29／build EXIT=0。FAQは4本が5問維持、**camp-lantern-led のみ元々FAQセクション自体が無い**（旧テンプレ構成＝「用途別おすすめランタン」「電池を長持ちさせるコツ」章立て。バッチ1のcamp-chair-lightweight／camp-cooker-beginnerと同様、本是正によるリグレッションではない）。→ FAQ追加は記事構成リライトとして別途対応。
 
 **効果測定（次回7/7）**
 - グループBの型（判断軸の体系化＋実用情報）で各記事の順位が動くかを確認。動いた型をグループB残へ横展開する。
