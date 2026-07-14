@@ -71,8 +71,8 @@ GASメニュー「📊 SEOレポート」を手動実行し、SEO履歴シート
 
 全記事を id↔name のブランド照合でスキャンした結果、**two-room/winter-beginner と同型の事実誤認が複数記事に存在**することが判明（ProductCardの name/価格/URL/画像だけ実楽天商品へ差し替え、id/description/見出し/比較表は旧ブランドのまま放置）。本番に「別ブランドを名乗る虚偽記述」が公開中＝E-E-A-T／景表法リスク。
 
-- **是正済み（12記事）**: two-room-tent-guide（703228d）／sleeping-bag-winter-beginner（9a5b763）／【バッチ1】bonfire-stand-beginner／camp-burner-beginner／camp-chair-lightweight／camp-cooker-beginner／camp-cooler-box-beginner（5c4e26d）／【バッチ2・本コミット】camp-lantern-led／camp-lighting-guide／camp-sleeping-mat／camp-tarp-beginner／family-camp-summer-tent。
-- **🔴 確定・未是正（5記事＝バッチ3対象）**: sleeping-bag-summer-cospa／solo-tent-beginner／group-camp-table／camp-table-folding／camp-headlight-beginner（※後から真性不整合と判明して追加）。※two-room型手順でバッチ3として是正する。
+- **✅ 是正完了（全17記事）**: two-room-tent-guide（703228d）／sleeping-bag-winter-beginner（9a5b763）／【バッチ1】bonfire-stand-beginner／camp-burner-beginner／camp-chair-lightweight／camp-cooker-beginner／camp-cooler-box-beginner（5c4e26d）／【バッチ2】camp-lantern-led／camp-lighting-guide／camp-sleeping-mat／camp-tarp-beginner／family-camp-summer-tent（1396e19）／【バッチ3・本コミット】sleeping-bag-summer-cospa／solo-tent-beginner／group-camp-table／camp-table-folding／camp-headlight-beginner。
+- **🔴 未是正: なし**。本コミットで**サイト横断のブランド不整合スキャンで検出した全記事の是正が完了**。公開中の「別ブランドを名乗る虚偽記述」は解消済み。
 - **⚪ 偽陽性（是正不要）**: inflatable-mat／mummy-sleeping-bag／rectangle-sleeping-bag（id`bearsrock`↔name「Bears Rock」スペース差）／family-camp-mat（id が汎用命名）。
 - **優先度**: 流入のある記事・公開中の虚偽ブランド表示は早期是正が望ましい。差別化リライトより本不整合の解消を優先候補とする。
 
@@ -94,8 +94,18 @@ GASメニュー「📊 SEOレポート」を手動実行し、SEO履歴シート
 - **family-camp-summer-tent**: TOMOUNT TriArc Tunnel Tent V4（2ルーム・耐水圧2500mm・500×310×195cm）／FIELDOOR ファミリーテント4点セット（テント+タープ+シート+ポール）／RATELWORKS BODEN（RWS0111・2ルーム）／ワンタッチファミリーテント300／WAQ Alpha TC（WAQ-TCFT1・ワンポール）。
 - **検証**: 全5本で旧id参照0／消えるべき旧ブランド0（grepヒット0）／ProductCard id⇔まとめ表アンカー5/5一致（リンク切れなし）／PC5・表1維持／updatedAt6/29／build EXIT=0。FAQは4本が5問維持、**camp-lantern-led のみ元々FAQセクション自体が無い**（旧テンプレ構成＝「用途別おすすめランタン」「電池を長持ちさせるコツ」章立て。バッチ1のcamp-chair-lightweight／camp-cooker-beginnerと同様、本是正によるリグレッションではない）。→ FAQ追加は記事構成リライトとして別途対応。
 
+##### バッチ3是正の詳細（5記事・最終バッチ／バッチ1・2と同一手順）
+`name` を真の正体として、id/見出し/badge/description/解説本文/主なスペック/比較表/まとめ表アンカーを実商品へ是正。捏造スペック（ルーメン/防水等級/重量/耐水圧/耐荷重/温度等）は全削除し、nameに根拠のない項目は「—」。汎用名カードはブランドを断定せず属性のみ記述（ショップ名をブランドとして書かない）。
+- **sleeping-bag-summer-cospa**: 洗える封筒型（限界-15/-5/5度の3タイプ）／Bears Rock ふわ暖 MX-604／薄手インナーシュラフ／Naturehike 3.5シーズン（連結可）／ねぶくろん。旧モンベル/コールマン/ナンガ/イスカ/スノーピークを除去。**第3位は寝袋本体でなくインナーシーツ**のため補助アイテムとして明示（bonfire-stand型の整理）。実5点が全て化繊のため、ポイント2「軽さ重視ならダウン」トーンを「夏のコスパ用途はまず化繊が現実的」へ整合（ダウンは否定せず登山用途の選択肢として残置）。まとめ本文の「軽量重視なら国内ブランドのダウン製品」も削除。
+- **solo-tent-beginner**: BUNDOK ソロティピー BDK-75（ワンポール）／Bears Rock ハヤブサテント TS-201H（自立式）／BUNDOK ソロベース TC BDK-79（パップ型・TC）／BUNDOK ソロドーム BDK-08O／TOMOUNT NY TENT（耐水圧4000mm・20D・自立）。旧DOD/アライテント/MSR/コールマン/キャプテンスタッグを除去。**実5点中2点が非自立**のため、ポイント1・FAQ Q1の「迷わず自立式」断定を「設営の確実さ＝自立式／価格・焚き火＝非自立型」の選び分けへ整合。FAQ Q5の「5モデルすべてスリーシーズン」も検証不能のため一般論＋スカート付き選択可の記述へ修正。BUNDOK3点はブランド占有緩和（事実是正）。
+- **group-camp-table**: ラタン調ガーデンテーブル180cm／FIELDOOR 180・240cm（6〜8人対応・高さ2段階）／waku fimac ロールトップ120×70／折りたたみテーブル180×70cm（KM-F002）／CAPTAIN STAG 木製ヘキサセンターテーブル96（2個組）。**本記事は見出し・id・カード順・比較表・まとめ表が相互に全て不整合**で全面再構築。まとめ表のアンカーは `#1位`〜`#5位` で**5本すべてリンク切れ**だったため新idへ張り替え。選び方ポイント1の旧ブランド例示、FAQ Q3「スチール天板のDODテキーラは熱に強い」、Tips「スチール天板を調理専用に」は**実5点にスチール直火対応天板が無い**ため実ラインナップ基準に書き換え（バーナー・焚き火台の直置き不可を明示）。
+- **camp-table-folding**: MERMONT アルミテーブル（高さ調節・伸縮）／メッシュテーブル135×60cm（**唯一の耐荷重明記＝50kg**）／山善 YAMAZEN 木目アルミ（120/180/240cm）／FIELDOOR テーブル＋ベンチ2脚セット／キャンピングムーン フィールドラック。旧スノーピーク/コールマン/DOD/ユニフレーム/キャプテンスタッグを除去。**第5位はテーブルでなくフィールドラック（棚）**のため関連アイテムとして明示。frontmatter description が**ショップ名「ROUND-ERA」をブランドとして記載**していたため修正。ケア方法「コールマンのような天然木天板はオイル仕上げ」も実商品に天然木が無いため差し替え（山善は木目「調」アルミ）。
+- **camp-headlight-beginner**: SC-200B（32g・乾電池式）／SR-01L（センサー点灯・充電式）／SC-300R・SC-400R（充電式・防水）／6200ルーメン高輝度（充電式）／LAD WEATHER（42g・IP44・センサー）。旧ペツル/ブラックダイヤモンド/レッドレンザー/ジェントスを除去。**捏造が最も深刻な記事**で、全5点のlm・IPX等級・重量・点灯時間が架空だった。name由来の実値は6200ルーメン・IP44・32g・42gのみで他は全て「—」。Tips「赤色LEDモードを活用」（実5点に赤色LED記載なし）、ポイント2「できればIPX6〜7」（該当製品ゼロ）、FAQの「ペツルのコアシリーズ/キッドシリーズ」も除去。**SR-01Lは防水表記が一切ない**ため3箇所で「雨天使用は販売ページで要確認」と明示。6200ルーメンは削除も捏造もせず「メーカー表記」と明示のうえ「lm値は測定条件で変わり各社横並び比較不可」「キャンプでは明るすぎがデメリット」の注意を追記。※name末尾にブランド明記があった第5位のみLAD WEATHERとして記述、残り4枚は汎用名扱い。
+- **検証**: 全5本で旧id参照0／消えるべき旧ブランド0／id⇔アンカー5/5一致（group-camp-tableの壊れアンカー5件も解消）／PC5・表1／updatedAt6/29／build EXIT=0（149ページ生成）。FAQはcamp-table-foldingが元々セクション無し、sleeping-bag-summer-cospaが元々4問（いずれもHEAD比較で確認済・リグレッションではない）。
+
 **効果測定（次回7/7）**
 - グループBの型（判断軸の体系化＋実用情報）で各記事の順位が動くかを確認。動いた型をグループB残へ横展開する。
+- **ブランド不整合の是正完了による副次効果も観測**：17記事で虚偽ブランド記述を解消したため、E-E-A-T評価・CVRへの影響が出るか（特に流入のあるcamp-tarp-beginner・two-room-tent-guide）を7/7で確認する。
 - 6/29時点でテコ入れ対象22記事のうち差別化リライト済みは #1〜#7・#19・#20＋ロット系（合計17記事相当）。two-room-tent-guideは**データ不整合を是正済み**（差別化リライトは未／別途）。**未着手の主な残**: 寝袋温度ガイド3記事（カニバ統廃合のため保留）。
 - **積み残しの構造課題**: クーラー系記事のカニバ（デイキャン2本＝cooler-box-day-camp/day-camp-cooler-box、汎用2本＝overall/beginner）と寝袋温度ガイド3記事のカニバは、いずれも統廃合を伴う破壊的整理のため7/7の順位確認後に判断する。
 
