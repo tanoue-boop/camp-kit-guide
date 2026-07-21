@@ -265,12 +265,14 @@ export default function PostPage({
             </div>
           </header>
 
+          <p className={styles.prNotice}>本記事にはアフィリエイト広告（PR）が含まれます。</p>
+
           <article className={styles.body}>
             <InlineTOC headings={headings} />
             <MDXRemote {...mdxSource} components={mdxComponents} />
           </article>
 
-          <ShareButtons title={frontmatter.title} />
+          <ShareButtons title={frontmatter.title} url={pageUrl} />
 
           {/* Related posts below article */}
           <section className={styles.relatedSection}>

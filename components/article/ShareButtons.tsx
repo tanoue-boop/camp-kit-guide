@@ -3,15 +3,16 @@ import styles from "./ShareButtons.module.css";
 
 type ShareButtonsProps = {
   title: string;
+  url?: string;
 };
 
-export default function ShareButtons({ title }: ShareButtonsProps) {
-  const [url, setUrl] = useState("");
+export default function ShareButtons({ title, url: urlProp }: ShareButtonsProps) {
+  const [url, setUrl] = useState(urlProp ?? "");
   const [copied, setCopied] = useState(false);
 
   useEffect(() => {
-    setUrl(window.location.href);
-  }, []);
+    if (!urlProp) setUrl(window.location.href);
+  }, [urlProp]);
 
   const handleCopy = () => {
     if (!url) return;

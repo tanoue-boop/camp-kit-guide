@@ -16,6 +16,27 @@ GASメニュー「📊 SEOレポート」を手動実行し、SEO履歴シート
 
 ---
 
+## 2026-07-21
+
+### title一括短縮（SERP見切れ対策・全61記事）＋PR表記/シェアURL実装
+
+**狙い**: 日本語SERPのタイトル表示上限（全角約30字＋ブランドサフィックス` | CampKit Guide`）で見切れていた長尺titleを短縮し、CTRを底上げする。型番・機能を羅列していた冒頭外の後半部分を「◯◯で比較／選ぶ」に圧縮し、冒頭にメインKW＋件数＋【2026年版】を残す方針。descriptionは既存（120〜150字）を維持。
+
+- **対象61記事**（変更前後は成果物CSV `CampKit_title短縮ログ_全61記事.csv` に全件記録）。内訳：優先12記事（osprey-backpack / soto-burner / uniflame-burner / naturehike-sleeping-bag / mysteryranch-backpack / kids-sleeping-bag / mountain-camp-lantern / day-camp-led-lantern / rectangle-sleeping-bag / jackery-power-station / coleman-tent / gregory-backpack）は title＋description を最適化（結論ファースト80〜90字メタに刷新）。残り49記事は title のみ短縮。
+- **短縮していない約72記事**: 既に全角約30字以内で適切なため無変更（差分＝デプロイリスクを避けるため意図的にKEEP）。
+- **未変更の型番羅列を避けた理由**: モデル名（AC70/Solix C1000/チェアワン等）はタイトルから外してもdescription・本文・比較表で拾えるため、SERPではメインKWの可読性を優先。
+- **PR表記/シェアURL（別commit想定・コード変更）**: 景表法・ステマ規制対応として記事本文冒頭（H1直後）に「本記事にはアフィリエイト広告（PR）が含まれます。」を追加（`pages/posts/[slug].tsx` ＋ `post.module.css` の`.prNotice`）。あわせてLINE等シェアURLが空になるSSRバグを`ShareButtons.tsx`で修正（`url` propを受け取りSSRでも`/posts/${slug}`を出力）。
+### 横断ハブ記事C1追加: portable-power-guide
+
+- **新規記事（category: power）**: `portable-power-guide`「キャンプのポータブル電源の選び方｜容量目安ガイド【2026年版】」を追加（記事数133→134）。成功済みの逆算型ハブ `camp-backpack-capacity-guide`（グループA）の型を踏襲し、ProductCardリストではなく「使う家電の消費電力からの容量逆算＋定格出力・リン酸鉄・ソーラー」の判断軸ガイドとして構成。
+- **カニバ回避**: 既存の5選リスト `camp-portable-power-beginner`（購入型）とは検索意図を分け、本記事は「ポータブル電源 選び方／容量 目安」の情報型ハブに純化。
+- **内部リンク（ハブ→クラスタ 10本）**: jackery-power-station / anker-power / ecoflow-power / bluetti-power（ブランド4）＋ camp-portable-power-beginner / portable-power-large / portable-power-vehicle-camp / solar-portable-power / solar-panel-folding / mobile-battery-camp（用途別6）へ送客。
+- ⚠️ **残タスク（inbound強化）**: 現状はハブ→各記事の一方向リンクのみ。ハブの評価を高めるため、クラスタ各記事の本文からハブへの被リンク（例: 「選び方の詳細は→ポータブル電源の選び方ガイド」）を後日追加すると効果的。
+- **効果測定**: 次回GSC測定でタイトル変更61記事のCTR・平均掲載順位を6/23比較で確認。特に流入のあるosprey-backpack・寝袋/電源系のCTR改善を主要観測点とする。新規ハブはインデックス状況を優先確認。
+- ⚠️ **ビルド未検証**: 作業時にサンドボックスVMが停止しており`npm run build`未実行。titleはYAML引用符内の文字列置換のみ（構造変更なし）だが、push前にローカルで`npm run build`成功を確認すること。
+
+---
+
 ## 2026-06-29
 
 ### 差別化リライトの横展開（グループB継続）
