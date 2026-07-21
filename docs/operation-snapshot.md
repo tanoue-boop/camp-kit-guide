@@ -2,7 +2,8 @@
 
 サイトの現状（記事数・カテゴリ構成・GAS/インフラ構造）を記録するスナップショット。記事追加・カテゴリ変更・GAS構造変更のたびに最新化する（→ 運用ルールは CLAUDE.md「記録更新ルール」を参照）。
 
-- **最終更新: 2026-06-23（6/23 SEO測定→既存記事テコ入れフェーズへ移行・差別化リライト着手。記事数133のまま）**
+- **最終更新: 2026-07-21（ブランド不整合是正 全17記事完了〔景表法/E-E-A-Tリスク解消〕・差別化リライト継続・Amazonリンク batch3 設置 +70商品。記事数133のまま）**
+- 前回更新: 2026-06-23（6/23 SEO測定→既存記事テコ入れフェーズへ移行・差別化リライト着手）
 - 初版作成: 2026-04-28（当時42記事）
 
 ---
@@ -64,6 +65,12 @@
 - Coworkバッチ2で **10記事・49商品** を設置（commit 244742a）。対象＝camp-chair-highback / solar-portable-power / sleeping-bag-temperature-guide / nanga-sleeping-bag / dutch-oven / solo-tent-overall / solo-tent-lightweight / sleeping-bag-winter-beginner / lightweight-mountain-tent / large-tent-guide。
 - **Amazonリンク設置 累計143商品**（手動12＋Cowork82＋Coworkバッチ2の49）。ワークシート残りは約480商品。
 - 記事数は133のまま（増産なし）。
+
+### 追記：Amazonリンク batch3 設置（+70商品 / 2026-07-21）
+- batch3ワークシート（`_file/amazon-links-batch3-done.tsv`）でG列にアフィリエイトURLが入った全行を、`scripts/place-amazon-batch3.cjs` で ProductCard に `amazonUrl` 設置。**21記事・70商品**（判定内訳：一致55／要確認6／該当なし9〔該当なし全27件中URLがあった9件のみ設置〕、G列URLがある行はすべて設置）。dod-tarp の重複rank1は既設カードを温存し新URLを別カードへ正しく配置。
+- 対象記事: solo-tent-beginner / bonfire-stand-beginner / camp-burner-beginner / camp-chair-lightweight / camp-cooker-beginner / camp-cooler-box-beginner / camp-lantern-led / sleeping-bag-summer-cospa（各5）、barebones-light / camp-sleeping-mat（各4）、camp-lighting-guide / family-camp-summer-tent / group-camp-table / camp-table-folding（各3）、family-camp-mat / camp-headlight-beginner / backpack-large（各2）、camp-table-set / coleman-lantern / dod-tarp / two-room-tent-guide（各1）。
+- **Amazonリンク設置 累計213商品（batch3で+70）**。カバー率 213/626 = **34.0%**（前回 143/626 = 22.8%）。ワークシート残りは約410商品。
+- `npm run build` EXIT=0。記事数は133のまま（増産なし）。
 
 ---
 
