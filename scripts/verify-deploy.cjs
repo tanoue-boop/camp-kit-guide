@@ -1,0 +1,151 @@
+#!/usr/bin/env node
+/**
+ * デプロイ後の本番検証スクリプト
+ *
+ * 使い方:
+ *   node scripts/verify-deploy.cjs                      # 直近コミットで変更された記事を自動検出
+ *   node scripts/verify-deploy.cjs snowpeak-tent ...    # slug を明示指定
+ *
+ * 各記事について次を検証し、PASS/FAIL を出力する。
+ *   1. 本番URLが 200 を返す
+ *   2. <title> がローカル frontmatter の title と一致
+ *   3. アフィリリンク数がローカルの ProductCardMdx 数以上
+ *      （楽天 rafcid付き / Amazon dp?tag= / amzn.to を合算）
+ *   4. PR表記（景表法対応）が本文に含まれる
+ *
+ * 1件でも FAIL があれば exit code 1 で終了する。
+ */
+
+const fs = require('fs');
+const path = require('path');
+const { execSync } = require('child_process');
+
+const BASE = 'https://www.camp-kit-guide.com';
+const POSTS_DIR = path.join(__dirname, '..', 'content', 'posts');
+const PR_TEXT = 'アフィリエイト広告';
+const RETRY = 3;
+const RETRY_WAIT_MS = 15000;
+
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
+function detectChangedSlugs() {
+  try {
+    const out = execSync('git diff --name-only HEAD~1 HEAD', { encoding: 'utf8' });
+    return out
+      .split('\n')
+      .filter((f) => f.startsWith('content/posts/') && f.endsWith('.mdx'))
+      .map((f) => path.basename(f, '.mdx'));
+  } catch {
+    return [];
+  }
+}
+
+function readLocal(slug) {
+  const file = path.join(POSTS_DIR, slug + '.mdx');
+  if (!fs.existsSync(file)) return null;
+  const src = fs.readFileSync(file, 'utf8');
+  const titleMatch = src.match(/^title:\s*"([\s\S]*?)"\s*$/m);
+  const cardCount = (src.match(/<ProductCardMdx/g) || []).length;
+  return { title: titleMatch ? titleMatch[1] : null, cardCount };
+}
+
+async function fetchWithRetry(url) {
+  let last = null;
+  for (let i = 0; i < RETRY; i++) {
+    try {
+      const res = await fetch(url, { redirect: 'follow' });
+      if (res.status === 200) return { status: 200, html: await res.text() };
+      last = { status: res.status, html: '' };
+    } catch (e) {
+      last = { status: 0, html: '', error: e.message };
+    }
+    if (i < RETRY - 1) {
+      console.log(`   …未反映のようです。${RETRY_WAIT_MS / 1000}秒待って再試行 (${i + 2}/${RETRY})`);
+      await sleep(RETRY_WAIT_MS);
+    }
+  }
+  return last;
+}
+
+function countAffiliateLinks(html) {
+  const rakuten = (html.match(/item\.rakuten\.co\.jp\/[^"']*rafcid=/g) || []).length;
+  const amazonTag = (html.match(/amazon\.co\.jp\/dp\/[A-Z0-9]+\?tag=/g) || []).length;
+  const amznTo = (html.match(/amzn\.to\/[A-Za-z0-9]+/g) || []).length;
+  return { rakuten, amazonTag, amznTo, total: rakuten + amazonTag + amznTo };
+}
+
+async function verify(slug) {
+  const results = [];
+  const local = readLocal(slug);
+  console.log(`\n■ ${slug}`);
+
+  if (!local) {
+    console.log('  FAIL  ローカルに content/posts/' + slug + '.mdx が見つかりません');
+    return false;
+  }
+
+  const url = `${BASE}/posts/${slug}`;
+  const res = await fetchWithRetry(url);
+
+  // 1. HTTP 200
+  const ok200 = res.status === 200;
+  results.push(ok200);
+  console.log(`  ${ok200 ? 'PASS' : 'FAIL'}  HTTP ${res.status || 'ERR'}  ${url}`);
+  if (!ok200) return false;
+
+  const html = res.html;
+
+  // 2. title 一致
+  const titleMatch = html.match(/<title>([\s\S]*?)<\/title>/i);
+  const liveTitle = titleMatch ? titleMatch[1].trim() : '';
+  const titleOk = Boolean(local.title) && liveTitle.includes(local.title);
+  results.push(titleOk);
+  console.log(`  ${titleOk ? 'PASS' : 'FAIL'}  title  期待:「${local.title}」 実際:「${liveTitle}」`);
+
+  // 3. アフィリリンク数
+  const links = countAffiliateLinks(html);
+  const linkOk = local.cardCount === 0 ? true : links.total >= local.cardCount;
+  results.push(linkOk);
+  console.log(
+    `  ${linkOk ? 'PASS' : 'FAIL'}  アフィリリンク ${links.total}件` +
+      ` (楽天${links.rakuten} / Amazon-tag${links.amazonTag} / amzn.to${links.amznTo})` +
+      `  ProductCard ${local.cardCount}件`
+  );
+
+  // 4. PR表記
+  const prOk = html.includes(PR_TEXT);
+  results.push(prOk);
+  console.log(`  ${prOk ? 'PASS' : 'FAIL'}  PR表記（景表法対応）`);
+
+  return results.every(Boolean);
+}
+
+(async () => {
+  let slugs = process.argv.slice(2);
+  if (slugs.length === 0) {
+    slugs = detectChangedSlugs();
+    if (slugs.length === 0) {
+      console.log('検証対象の記事が見つかりません。slug を引数で指定してください。');
+      console.log('例: node scripts/verify-deploy.cjs snowpeak-tent');
+      process.exit(0);
+    }
+    console.log(`直近コミットの変更記事を検証します: ${slugs.join(', ')}`);
+  }
+
+  const summary = [];
+  for (const slug of slugs) {
+    summary.push([slug, await verify(slug)]);
+  }
+
+  console.log('\n===== 結果 =====');
+  for (const [slug, ok] of summary) {
+    console.log(`${ok ? 'PASS' : 'FAIL'}  ${slug}`);
+  }
+
+  const failed = summary.filter(([, ok]) => !ok);
+  if (failed.length > 0) {
+    console.log(`\n${failed.length}件 FAIL。Vercelのデプロイ完了を待って再実行するか、内容を確認してください。`);
+    process.exit(1);
+  }
+  console.log('\nすべて PASS。デプロイ検証完了。');
+})();
