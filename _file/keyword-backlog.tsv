@@ -1,0 +1,13 @@
+priority	keyword	slug_案	category	search_intent	buyer_persona	notes	status	source	added_date
+A	スノーピークのテント	snowpeak-tent	tent	ブランド型	中〜上級・高価格帯・ブランド指名	アメニティドーム/ランドブリーズ/ヴォールト等でブランド軸5選可。ブランド占有ルール緩和対象	done	knowledge	2026-07-21	drafted 2026-07-22
+A	モンベルのシュラフ	montbell-sleeping-bag	sleeping-bag	ブランド型	初〜中級・中価格帯・登山/キャンプ	バロウバッグ/ダウンハガー/アルパインを季節別に5選	done	knowledge	2026-07-21	Amazonデータで4選作成(dpタグ付き)。楽天供給薄のためAmazon源
+A	焚き火テーブル	takibi-table	chair-table	購入型	初〜中級・中価格帯・焚き火横の耐熱天板	ユニフレーム/コールマン/キャプスタ/ネイチャーハイク。耐熱・高さで比較	pending	knowledge	2026-07-21
+A	スノーピークの焚き火台	snowpeak-bonfire	bonfire	ブランド型	中〜上級・高価格帯・ブランド指名	焚火台M/L/SR＋ベースプレート等。ブランド軸で占有緩和可	pending	knowledge	2026-07-21
+A	ノースフェイスのリュック	northface-backpack	backpack	ブランド型	初〜中級・中価格帯・タウン兼用	ボレアリス/ヒューズボックス/テルス/ビッグショット	pending	knowledge	2026-07-21
+A	ワンタッチタープ	one-touch-tarp	tent	購入型	初心者・中価格帯・設営簡単/イベント兼用	FIELDOOR/クイックキャンプ/タンスのゲン。サイズ・耐水圧で比較	pending	knowledge	2026-07-21
+B	ユニフレームのファイアグリル	uniflame-fire-grill	bonfire	ブランド型	初〜中級・中価格帯・BBQ/焚き火兼用	ファイアグリル/ラージ/ヘビーロストル等の関連構成	pending	knowledge	2026-07-21
+B	オイルランタン	oil-lantern	lighting	比較型	中級・中価格帯・雰囲気重視	フュアーハンド/デイツ/キャプスタ。燃料・光量で比較	pending	knowledge	2026-07-21
+B	小型ポータブル電源	compact-portable-power	power	比較型	初心者・中価格帯・ソロ/軽量重視	Jackery240/EcoFlow RIVER/Anker521等300Wh級で比較	pending	knowledge	2026-07-21
+B	キャンプ用コーヒードリッパー	camp-coffee-dripper	cookware	購入型	初〜中級・低〜中価格帯・現地コーヒー	折りたたみ/ステンレス/セット。携帯性で比較	pending	knowledge	2026-07-21
+B	モーラナイフ	moraknife	cookware	ブランド型	初〜中級・低価格帯・ブッシュクラフト入門	Companion/Basic/Bushcraft/Eldris。刃長・用途で比較（法令FAQ必須）	pending	knowledge	2026-07-21
+B	ワークマンのキャンプ防寒着	workman-camp-wear	clothing	ブランド型	初〜中級・低価格帯・コスパ防寒	ウェア類はブランド指定KWのみ可。楽天供給/サイズ分散は要確認	pending	knowledge	2026-07-21

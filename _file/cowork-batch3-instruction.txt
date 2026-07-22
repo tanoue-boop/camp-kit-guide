@@ -1,0 +1,34 @@
+【Cowork batch3 作業指示】
+
+■ 対象：_file/amazon-link-batch3.tsv（80商品）
+
+■ 手順
+各商品を Amazon.co.jp で検索し、同一商品のURLと判定を記入する。
+
+■ 条件（前回踏襲）
+- Amazonはログアウト状態で実行（途中でログイン状態に戻らないよう注意）
+- 検索1位を機械的に選ばない。ブランド名・型番の一致を最優先
+- 商品名の【】〔〕＼／内の販促・キャンペーン文言は無視し、ブランド名・型番・商品特徴（サイズ/容量/素材）で検索
+- ノーブランドの汎用品で同一商品が無ければ「該当なし」
+- 迷うもの・確信が持てないものは「要確認」
+- CAPTCHAが出たら何件目かを報告して停止
+
+■ 出力
+- C列（Amazon商品URL）とD列（判定：一致／要確認／該当なし）を記入
+- | slug | 商品名 | Amazon商品URL | 判定 | の表でも出力
+
+■ 事前に判明している注意点
+- 型番・ブランド明記の約45件は検索容易（TKB系=アイリスオーヤマ / CB-JCB=イワタニ / ST-310=SOTO / 各BDK=BUNDOK 等）
+- 汎用名の約25件は「該当なし」判定が多数出る想定（ラタン調テーブル / ノーブランドLED / ワンタッチテント汎用 / インナーシュラフ 等）。無理に似た別商品を当てない
+- TOMOUNT TriArc は2記事（two-room-tent-guide / family-camp-summer-tent）に登場。1回検索すれば両方に使える
+
+■ 最優先8件（別ファイル amazon-link-worksheet2.tsv）
+以下は「あと1〜2枚で記事が完全設置になる」穴埋め分。batch3の80件より先に処理すると効果が早い。
+- coleman-lantern: コールマン ラギッド パッカウェイランタン LED 2000036871（型番あり・容易）
+- dod-tarp: DOD ビッグタープポール XP5-507（型番あり・容易）
+- two-room-tent-guide: TOMOUNT TriArc Tunnel Tent V4 4人用（ブランド品・容易）
+- sleeping-bag-temperature-guide: Mt.happy 寝袋 マミー型 ダウン -25度（ブランド品）
+- family-camp-mat: キャンピングマット 自動膨張 ピロー付き ad011（汎用・該当なしの可能性）
+- family-camp-mat: 防災士監修 リバーシブルマット 厚さ5cm（汎用・該当なしの可能性）
+- camp-backpack-beginner: tousen 登山リュック 40〜60L（汎用・該当なしの可能性）
+- camp-table-set: アウトドアテーブル ベンチ2脚 90cm アルミ（汎用・該当なしの可能性）

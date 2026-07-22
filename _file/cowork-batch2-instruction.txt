@@ -1,0 +1,53 @@
+以下の商品をバッチで検索してください。ログアウト状態で実行。各商品、Amazonで検索し、商品名・ブランド・型番が一致する商品ページを選ぶ（検索1位を機械的に選ばない／型番一致を優先）。ノーブランドの汎用品で同一商品が無ければ「Amazon該当なし」。迷うものは「要確認」。CAPTCHAが出たら停止して何件目かを報告。終わったら | slug | 商品名 | Amazon商品URL | 判定 | の表形式で出してください。
+
+slug / 商品名
+camp-chair-highback / アウトドアチェア ポンコタン ウルトラライト ハイバックチェア 超軽量 折りたたみ コンパクト キャンプ椅子
+camp-chair-highback / モダンデコ 無重力チェア ハイバック リクライニング 耐荷重120kg ひじ掛け 折りたたみ アウトドアチェア
+camp-chair-highback / OneTigris DRAGONHIDE ハイバックチェア キャンピングチェア 折りたたみ コンパクト 収納袋付 ソロキャンプ
+camp-chair-highback / VISIONPEAKS キャンバスリラックスチェア 焚き火チェア ハイバック TC生地 収納袋付き VP1645002
+camp-chair-highback / LAD WEATHER ラドウェザー アウトドアチェア ハイバック 折りたたみ コンパクト 収納袋付き ソロキャンプ
+solar-portable-power / Jackery Solar Generator 2000 New 2042Wh 200W ポータブル電源 ソーラーパネル セット 大容量 定格2200W 急速充電 防災 アウトドア UPS機能 太陽光発電 ジャクリ
+solar-portable-power / Jackery Solar Generator 1000 New 1070Wh 100W ポータブル電源 ソーラーパネル セット リン酸鉄 定格1500W 急速充電 アウトドア 防災 車中泊 UPS機能 太陽光発電 ジャクリ
+solar-portable-power / EcoFlow ポータブル電源 ソーラーパネル セット DELTA 3 Plus 1024Wh+220W 軽量両面ソーラーパネル 大容量 長寿命 太陽光発電 急速充電 キャンプ 停電 防災 エコフロー
+solar-portable-power / 3点セット ポータブル電源 リン酸鉄 大容量 2400W 2048Wh 高出力 UPS ソーラーパネル充電 200W 3500サイクル 正弦波 車中泊 太陽光充電 防災 停電 FOSSiBOT
+solar-portable-power / EcoFlow ポータブル電源 ソーラーパネル セット DELTA 3 Classic 1024Wh 160W 軽量両面ソーラーパネル 大容量 家庭用 蓄電池 節電対策 キャンプ 停電 防災グッズ
+sleeping-bag-temperature-guide / Camdoor 寝袋 冬用 -25℃ 封筒型 シュラフ 防寒 洗える 軽量 キャンプ アウトドア 車中泊 防災
+sleeping-bag-temperature-guide / ねぶくろん 230T 寝袋 封筒型 厚手 シュラフ キャンプ 冬用 防寒 洗える アウトドア 車中泊
+sleeping-bag-temperature-guide / Mt.happy 寝袋 マミー型 ダウン -25度 シュラフ 軽量 コンパクト 冬用 キャンプ 登山 アウトドア
+sleeping-bag-temperature-guide / HAWK GEAR ホークギア 寝袋 マミー型 -15℃ 化繊 シュラフ 防寒 キャンプ アウトドア 洗える
+sleeping-bag-temperature-guide / Soomloom ダウン 寝袋 マミー型 650FP 0〜-20℃対応 軽量 コンパクト シュラフ キャンプ 登山 アウトドア
+nanga-sleeping-bag / ナンガ・オーロラライト 450DX(さかいや別注モデル)(ナンガ純正ストリージバッグプレゼント) 寝袋 ダウンシュラフ 保管袋付き
+nanga-sleeping-bag / ナンガ オーロラテックス 750DX オールブラック ニッチエディション NANGA キャンプ シュラフ 寝袋 マミー型 ダウン 日本製 冬キャンプ 車中泊対応 快適使用温度-8℃
+nanga-sleeping-bag / ナンガ シュラフ オリジナル オーロラライト 800DX スクウェア NANGA H-AURORA800SQ 寝袋 アウトドア 封筒型 キャンプ スクエア ダウン ダウンシュラフ 別注モデル
+nanga-sleeping-bag / ナンガ オーロラテックス 600DX オールブラック ニッチエディション NANGA キャンプ シュラフ 寝袋 マミー型 ダウン 日本製 冬キャンプ 快適使用温度-6℃
+nanga-sleeping-bag / NANGA ナンガ NANGA Original Schlaf 460 オリジナルシュラフ レギュラー 別注 アウトドア キャンプ 登山 コンパクト ダウン 軽量 マミー型 寝袋 スリーピングバッグ 防災
+dutch-oven / TSBBQ ライトステンレス ダッチオーブン 10インチ ミラー仕上げ TSBBQ-005 オール熱源対応 燕三条製
+dutch-oven / スノーピーク 和鉄ダッチオーブン26 CS-520
+dutch-oven / キャプテンスタッグ ダッチオーブンセット 25cm UG-3048 収納バッグ付き
+dutch-oven / キャプテンスタッグ ダッチオーブン 鉄鋳物 22cm UG-3061
+dutch-oven / TSBBQ ライトステンレス ハーフダッチオーブン 10インチ 浅型 ミラー仕上げ TSBBQ-029 オール熱源対応 燕三条製
+solo-tent-overall / テント 一人用 ドームテント UVカット ソロテント ドーム型 耐水圧 1,500mm以上 シルバーコーティング メッシュ フルクローズテント キャノピー キャノピーテント インナーテント テントポール 簡易テント 軽量 FIELDOOR
+solo-tent-overall / OneTigris ポリコットンTC SOLO HOMESTEAD 煙突口あり キャンプテント ポール付き TCグランドシートあり 軍幕 ソロキャンプ 焚き火 1-2人用 グリーン ブラウン ブラック
+solo-tent-overall / ソロベース TC/BUNDOK(バンドック)/BDK-79/テント パップ型 パップテント ソロテント ソロキャンプ ミリタリー 軍幕 焚火 焚き火 ハーフシェルター
+solo-tent-overall / テント 2人用 1人用テント 前室後室あり 4000mm耐水圧 広い空間 コンパクト ソロテント キャンプテント ツーリングテント オールシーズン 簡単設営 軽量 UVカット 通気防風 アウトドア/登山/山岳/釣り/ピクニック/防災用
+solo-tent-overall / Bears Rock ハヤブサテント 登山 1〜2人用 コンパクト ツーリング 幅 長さ 45cm ドームテント ワンタッチテント テント 自立式 自立型 山登り ソロキャンプ 1人用 2人用 一人用 二人用 ツーリングテント ソロテント 自立 防災 キャンプ テント TS-201H
+solo-tent-lightweight / TOMOUNT NY TENT 20D（1〜2人用）
+solo-tent-lightweight / PYKES PEAK ソロドーム（1人用）
+solo-tent-lightweight / Bears Rock ハヤブサテント TS-201H
+solo-tent-lightweight / FIELDOOR ワンタッチテント100
+solo-tent-lightweight / BUNDOK ソロドーム BDK-08O
+sleeping-bag-winter-beginner / Bears Rock -30度 封筒型 ワイド 最強 ふんわり厚みのある布団のような寝心地 大きい サイズ 冬用 シュラフ ゆったり 綿量No1 洗える寝袋 丸洗い 寝袋 キャンプ 車中泊 室内 来客用 -30℃ 寝冷え 防災用 自宅 普段使い 足元 ふとん 厳冬期 光熱費 暖房費節約 寒さ対策
+sleeping-bag-winter-beginner / 寝袋 冬用 単品フリース、最大幅90cm追加 寝袋 シュラフ 冬用 オールシーズン対応 Camdoor 災害 車中泊 シュラフ 布団 コンパクト 封筒型 クッション 軽量 丸洗い 暖かい 防災 最低適応温度-25℃ ねぶくろ 防災グッズ 《3sd05》
+sleeping-bag-winter-beginner / Bears Rock -34度 マミー型 最強 ふっくらと包み込まれる暖かさ 洗える寝袋 丸洗い 冬用 センタージップ 4シーズン 寝袋 シュラフ キャンプ 防災 暖房費節約 多機能シュラフ 普段使い 自宅 室内 受験生 寒さ対策 家で寝る時用 -34℃ 車 車中泊 冬 センタージッパー
+sleeping-bag-winter-beginner / Bears Rock -15度 封筒型 ふんわりと布団のような寝心地 ぽかぽか暖かい 洗える オールシーズン 丸洗い 防災にも使われています 寝袋 シュラフ 冬用 4シーズン 仮眠 防災用 -15℃ 自宅 家で 家の中 コンパクト キャンプ用品 車中泊 ツーリング 夏 冬
+sleeping-bag-winter-beginner / 寝袋 冬用 最大幅90cm追加 寝袋 オールシーズン シュラフ 封筒型 防災 来客用 AIFLYCY 洗える 布団 暖か1.1kg/1.4kg/1.8kg/2.2kg/3.0kg/3.5kg 軽量 ファミリー キャンプ 車中泊 防水 3.5シーズン 2人用 幅広 《3sd01》
+lightweight-mountain-tent / OneTigris Hillridge 軽量テント 登山用テント 2人用 通気性 防水防風 簡単設営 前室あり 結露対策 アップグレード版 3シーズン ULテント 自転車 バイク旅行 ハイキング キャンプ用
+lightweight-mountain-tent / 3f ul gear Lanshan1 超軽量760g ソロ用テント ULテントTipi tent 登山テント 15Dナイロン 片面シリコンコーティング 耐水圧5000mm 1人 超軽量テント
+lightweight-mountain-tent / Teci 超軽量500g ソロ用テント ULテントTipi tent 登山テント 山岳テント 15Dナイロン 片面シリコンコーティング 耐水圧3000mm 1人 超軽量テント
+lightweight-mountain-tent / 山岳軽量テント アライテント RIPENライペン1人用テント エアライズ1 山岳テント 軽量 グリーン テント泊登山
+lightweight-mountain-tent / 「TENPLAY」 2人登山テント 軽量テント キャンプテント ワンポールテント 登山テント コンパクト 超軽量1.35kg 耐水圧5000mm 3シーズン 防風 防雨 通気 結露対策 ピラミッド式 トレッキングポール通用
+large-tent-guide / 法人価格有 特大 3×6m 3×9m ワンタッチ タープテント 3m 6m 簡単 テント イベント 大型 大人数 キャンプ アウトドア 大型テント 運動会 おもり 6人用 着替え 重り ワンタッチタープ 日よけ
+large-tent-guide / 2m / 3m タープテント ワンタッチ サイドシート 1枚 2枚 3mx3m 2m×2m 収納バッグ UV 耐水 ベンチレーション タープ テント サイドシート付 大型 テント 収納ケース コンパクト収納 日除け 日よけ 運動会 公園 庭 プール
+large-tent-guide / テント 4人用 ドームテント 大型 5人用 6人用 キャンプテント UVカット キャノピー ポール 付 耐水圧 1,500mm以上 キャノピーテント フルクローズテント テント メッシュ 日よけ 組み立て式 FIELDOOR
+large-tent-guide / タープ テント 530 x 570cm タープテント ヘキサタープ T/C ポリコットン Lサイズ 6 - 8人用 大型 テントポール ヘキサゴンタープ 収納バッグ付き 日よけ 防カビ 撥水 6人 7人 8人 ヘキサ 簡易テント アウトドア TC FIELDOOR
+large-tent-guide / 大型テント 6人用 5人用 4人用 家族 ドーム型 簡単 軽量 UVカット UPF50+ キャノピーテント キャンプ テント 防水 耐水圧 2000mm 防災 レジャー メッシュ テント 日よけ 海 山 通気 大人数 大型 PYKES PEAK パイクスピーク

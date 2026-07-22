@@ -1,0 +1,91 @@
+以下の商品をバッチで検索してください。ログアウト状態で実行。各商品、Amazonで検索し、商品名・ブランド・型番が一致する商品ページを選ぶ（検索1位を機械的に選ばない／型番一致を優先）。ノーブランドの汎用品で同一商品が無ければ「Amazon該当なし」。迷うものは「要確認」。CAPTCHAが出たら停止して何件目かを報告。終わったら | slug | 商品名 | Amazon商品URL | 判定 | の表形式で出してください。
+
+slug / 商品名
+camp-tarp-beginner / DOD タープ いつかのタープ TT5-631-TN dod アウトドア キャンプ ヘキサタープ ポリエステル ポール ペグ ロープ付属 初心者 簡単
+camp-tarp-beginner / FIELDOOR ワンタッチタープテント 3m×3m 頑丈 スチール テント タープ 300 3.0m ワンタッチテント ワンタッチタープ ワンタッチ 大型 簡単 UVカット 撥水 日よけ プール イベント アウトドア キャンプ BBQ
+camp-tarp-beginner / しろくまスクエアタープ Bears Rock ポール2本付き アレンジ広がる しろくま 自在 タープ 正方形 3×3m テント おすすめ 一泊 コンパクト キャンプ ハンモック ツーリング ソロキャンプ ハヤブサテント ヘキサ 庭 ガーデン 小型 おうち 家 SQT-401
+camp-tarp-beginner / ヘキサタープ 500×480cm タープテント タープ ヘキサゴン テント 天幕 日よけ uvカット 耐水圧2000mm ペグ・ロープ付き 遮光 キャンプ アウトドア レジャー ベランピング ソロキャンプ バーベキュー BBQ UPF50＋
+camp-tarp-beginner / FIELDOOR タープテント ヘキサタープ 大型 Mサイズ 440cm×470cm 日よけ 日除け 六角形 UVカット 高耐水 4人〜6人用 簡易テント サンシェード オーニング ヘキサゴンタープ タープ テント コンパクト アウトドア BBQ キャンプ
+mountain-camp-lantern / キャリーザサン ミディアム LEDランタン 充電式 ライト 太陽光 ソーラーパネル 軽量 防水 防塵 キャンプ 登山 Mサイズ 旧ソーラーパフ おしゃれ 人気 災害 防災グッズ 間接照明 折りたたみ 携帯用 持ち運び
+mountain-camp-lantern / キャリー・ザ・サン スモール CARRY THE SUN SMALL 折り畳み LED ランタン 太陽光パネル ソーラー充電 軽量 防水 防災グッズ 非常用 インテリア雑貨 シンプル かわいい ギフト プレゼント 登山 フェス おしゃれ キャンプ アウトドア
+mountain-camp-lantern / ランタン led レトロ Bruno ブルーノ LEDランタン BOL001ランプ アウトドア 電池式 スタンド アンティーク ランタンハンガー 明るい 照明器具 照明 ピクニックシリーズ 省エネ夜 屋外 おしゃれ アウトドア 登山 結婚祝い オシャレ
+mountain-camp-lantern / ランタン led 充電式 ソーラー 折り畳み キャンプランタン ソーラーランタン 防水防滴 3Way仕様 2色 災害用 懐中電灯 アウトドア キャンプライト 登山 夜釣り 防災グッズ SOS 停電対策 緊急 非常用 おしゃれ 人気
+mountain-camp-lantern / Lepro LEDランタン 4個入り キャンプ ライト 高輝度 3色切替 クリップフック付 吊り下げ使用可能 ポータブル 小型 キャンプランプ アウトドア 登山 夜釣り 防災 停電 緊急 非常用 ledランタン ハロウィン 飾り ライト父の日
+two-room-tent-guide / FIELDOOR テント 大型 ドームテント トンネルテント 620 260cm×620cm 2ルームテント 4人用 6人用 8人用 耐水 遮熱 UVカット インナーテント付き シェルター キャンプテント メッシュ ツールームテント 前室 日よけ キャンプ
+two-room-tent-guide / クーヴァ KURVE 2ルーム トンネルテント 大型 5人用 サンド QC-KURVE SD ドームテント ドーム型テント 2ルームテント キャンプテント 家族 クイックキャンプ QUICKCAMP 春レジャー
+two-room-tent-guide / Naturehike テント 2人用 The hills 1LDK ツールーム 前室付き 軽量 簡単設営 通気性 UVカット 耐水圧2000mm 煙突穴 スカート付き オールシーズン キャノピー付き 持ち運び簡単 多機能 メッシュスクリーン キャンプ
+two-room-tent-guide / TOMOUNT テント 2ルーム トンネルテント 防水 シルバーコーティング ファミリーテント サイドウォール付き キャンプ テント 4人用 耐水圧2500mm ツールームテント 日よけ 通気 コンパクト 収納袋付き 500x310x195cm TriArc Tunnel Tent V4
+two-room-tent-guide / ツールームテント 幅340cm 4〜6人用 テント 大型 アウトドア ファミリーテント 2ルームテント サイドウォール キャノピーポール インナーテント キャンプテント スクリーンテント ドームテント ファミリー キャンプ
+camp-knife-beginner / アウトドア用品 キャンピング折込包丁 ステンレス製 刃渡り11.5cm （ キャプテンスタッグ キャンプ用品 調理器具 CAPTAIN STAG 折りたたみ ナイフ キッチンツール グッズ バーベキュー BBQ ）
+camp-knife-beginner / belmont/ベルモント BM-164 フィールドナイフ-倭-yamato キャンプ インドア アウトドア おしゃれ 収納 牛革 ナイフ 刃物 収納ケース 高級 日本製 ヌメ革 ダガー サバイバル かっこいい SUS6A フルタングブレード バトニング
+camp-knife-beginner / キャンプ まな板セット 5点 COOK'N'ESCAPE 収納ケースカトラリー袋 ウォールナット チタンまな板 フォールディングナイフ コンパクト 折りたたみ アウトドア ソロキャンプ 包丁 ナイフ キャンプ用 調理器具 料理器具
+camp-knife-beginner / belmont/ベルモント BM-163 フィールドナイフ IP-倭-yamato SUS6A キャンプ インドア アウトドア 防災 おしゃれ 収納 牛革 ナイフ 収納ケース 日本製 フルタングブレード バトニング ヌメ革 IPメッキ ダガー サバイバル かっこいい
+camp-knife-beginner / ロゴス Bamboo ナイフまな板セット 81280009 キャンプ クッキング LOGOS
+camp-backpack-beginner / サイバトロン バックパック3Pタクティカル バックパック サイドポーチx2個 防水 軽量 ヒロシさん使用モデル ブッシュクラフト アウトドア キャンプ アサルト ミリタリー U.Sタイプ リュック デイパック
+camp-backpack-beginner / tousen 登山バッグ 登山 リュック 40〜60L 大容量 バックパック リュックサッ 登山用 リュック 登山 リュック レディース/メンズ 山ガールク 防水 軽量 山登り バック 多機能 キャンプ用リュック
+camp-backpack-beginner / バックパック 80L リュックサック メンズ レディース キャンプ HAWK GEAR (ホークギア) 防水 大容量 海外旅行 レインカバー付き アウトドア 防災 災害 登山 旅行 レインカバー ザック 軽量 かわいい ミリタリー おすすめ
+camp-backpack-beginner / バックパック 55L リュックサック メンズ レディース キャンプ HAWK GEAR (ホークギア) 防水 大容量 海外旅行 レインカバー付き アウトドア 防災 災害 登山 旅行 レインカバー ザック 軽量 かわいい ミリタリー おすすめ ソロキャン
+camp-backpack-beginner / キャンプ リュック バックパック リュックサック カバン 帆布 コットン キャンバス 綿 無骨 頑丈 丈夫 タフ ミリタリー アウトドア 大容量 ソロ バイク ツーリングバック ズック KIRIRU キリル 30L 以上 オリーブ カーキ タン コヨーテ サイドポケットモデル
+camp-table-set / アウトドアテーブル 折りたたみ ベンチ 2脚 セット 幅 90cm アルミ 軽量 レジャーテーブル アウトドア テーブル セット イス チェア ベンチ 分離 分割 タイプ ローテーブル
+camp-table-set / アウトドアテーブル 折りたたみ ベンチ 2脚 セット 幅 110cm アルミ 軽量 レジャーテーブル アウトドア テーブル セット イス チェア ベンチ 分離 分割 タイプ ローテーブル
+camp-table-set / レジャーテーブル セット 折りたたみ テーブル チェア 4脚 セット 幅 120cm レジャー テーブル イス アウトドア テーブル セット チェア キャンプ お花見 運動会 防災グッズ MERMONT
+camp-table-set / アウトドア キャンプ 折りたたみ テーブルチェアセット 軽量 アルミ ピクニックテーブル ベンチ レジャー キャンプテーブル セット 2段階 高さ調節 チェアベンチ収納式 椅子付き
+camp-table-set / 折りたたみテーブル 120cm アウトドア テーブル 折りたたみ 木目調 テーブル チェア チェアセット レジャーテーブル アウトドアテーブル 軽量 アルミ 折りたたみテーブル 高さ調節
+family-camp-mat / 自動膨張 2人用 ダブル キャンピングマット 厚さ2.5cm インフレータブル エアマット 車中泊マット ミニバン 宿泊 キャンプ用品 テントマット エアーマット レジャー アウトドア 防災 連結 段差解消 クッション 軽量 ファミリー 簡易ベッド ad089
+family-camp-mat / キャンピングマット エアマット 自動膨張 エアー ピロー付き 車中泊 冬用 エアーマット 防災用品 エアーマット インフレータブル マットレス アウトドア キャンプマット エアーベッド ベランピング おうちキャンプ ad011
+family-camp-mat / 防災士監修 リバーシブル キャンピングマット エアーマット アウトドア 用品 キャンプ 雑貨 インフレータブル 車中泊 エアー マットレス 自動膨張 レジャー 行楽 ハイキング 登山 花見 フェス 厚さ 5cm 防災 おうちキャンプ
+family-camp-mat / おすすめ アウトドア マット キャンプマット キャンピングマット 折りたたみ 蛇腹 キャンプ用品 レジャー 188cm×57cm XPEフォーム 軽量 防水 防湿 車中泊 キャンプ 防災 登山 ピクニック サイズ 57cm×188cm アウトドア寝具
+family-camp-mat / インフレータブルマット 8cm キャンプマット マットピローセット キャンプ用まくら ピロー 自動膨張 連結 インフレータブル
+coleman-lantern / コールマン 2500ノーススター LPガスランタン レッド 2000015521
+coleman-lantern / コールマン ハンギング Eライト 充電式 LEDランタン 2000037352
+coleman-lantern / コールマン ルミエールランタン 純正LPガス燃料セット 205588
+coleman-lantern / コールマン リチャージャブルランタン 充電式 LED 2000038857
+coleman-lantern / コールマン ラギッド パッカウェイランタン 電池式 LED 2000036871
+jackery-power-station / Jackery ポータブル電源 1000 New 1070Wh リン酸鉄 定格1500W 最速1時間満充電 UPS機能 アプリ遠隔操作 純正弦波
+jackery-power-station / Jackery Solar Generator 1000 New 1070Wh 100W ポータブル電源 ソーラーパネル セット リン酸鉄 定格1500W 純正弦波
+jackery-power-station / Jackery ポータブル電源 2000 New 2042Wh リン酸鉄 大容量 定格2200W UPS機能 アプリ遠隔操作 純正弦波
+jackery-power-station / Jackery Solar Generator 2000 New 2042Wh 200W ポータブル電源 ソーラーパネル セット 大容量 定格2200W UPS機能 アプリ 太陽光発電
+jackery-power-station / Jackery Solar Generator 500 New 512Wh ソーラーパネル セット 100W リン酸鉄 コンパクト 軽量 UPS機能 純正弦波
+soto-burner / SOTO マイクロレギュレーターストーブ ウインドマスター SOD-310 4本ゴトクセット
+soto-burner / SOTO レギュレーターストーブ ST-310
+soto-burner / SOTO マイクロトーチ ACTIVE ST-486 充てん式 ガストーチ
+soto-burner / SOTO スライドガストーチ ST-487 充てん式
+soto-burner / SOTO フィールドチャッカー ST-Y451 パワートーチ
+helinox-chair / Helinox ヘリノックス チェアワン Chair One
+helinox-chair / Helinox ヘリノックス チェアワン ホーム Chair One Home
+helinox-chair / Helinox ヘリノックス グラウンドチェア Ground Chair
+helinox-chair / Helinox ヘリノックス チェアツー Chair Two ハイバック
+anker-power / Anker Solix C1000 Gen 2 ポータブル電源 1024Wh 定格1550W 世界最小クラス 急速充電54分 リン酸鉄 長寿命10年 アプリ遠隔操作
+anker-power / Anker Solix C800 ポータブル電源 768Wh 定格1200W 世界最速充電58分 リン酸鉄 長寿命10年 パススルー アプリ遠隔操作
+anker-power / Anker Solix F1200 ポータブル電源 1229Wh 定格1500W 1.5H満充電 リン酸鉄 長寿命10年 純正弦波 アプリ遠隔操作
+anker-power / Anker Solix C1000 Gen 2 ＋ PS100 ソーラーパネル セット 1024Wh 世界最小クラス 急速充電54分 大容量 長寿命10年
+anker-power / Anker Solix C1000 ＋ PS100 Compact ソーラーパネル 100W セット 1056Wh AC充電58分 折りたたみ式 パススルー 長寿命
+gentos-light / ジェントス LEDランタン EX-450H 高輝度 1100ルーメン Explorer
+gentos-light / ジェントス LEDランタン EX-366D Explorer
+gentos-light / ジェントス LEDランタン EX-334D 440ルーメン Explorer
+gentos-light / ジェントス フィラメントLEDランタン EX-700F 700ルーメン 無段階調光 乾電池式 防滴
+gentos-light / ジェントス フィラメントLEDランタン EX-400F 400ルーメン 暖色 ダイヤル式調光 乾電池式 防滴
+naturehike-sleeping-bag / Naturehike 3.5シーズン 封筒型寝袋 洗える コンパクト 軽量 1人用 撥水 連結可能
+naturehike-sleeping-bag / Naturehike 封筒型寝袋 冬用 快適-1.3〜8.5℃ 極限温度-17℃ 2way 連結可能 2人用可能 洗える
+naturehike-sleeping-bag / Naturehike 封筒型寝袋 225×75cm 最大限界温度-12℃ 連結可能 1人用 丸洗い可能
+naturehike-sleeping-bag / Naturehike ファミリー封筒型寝袋 1〜4人使用可能 200×115cm 幅広 ワイド 連結可能 丸洗い
+naturehike-sleeping-bag / Naturehike 三層構造 レイヤー封筒型寝袋 快適0℃〜-13℃ オールシーズン 防水加工 軽量 丸洗い
+dod-chair / DOD グッドラックソファ CS2-500 2人掛け ワンタッチ 車載棚 耐荷重150kg（BK/TN/KH カラー展開）
+dod-chair / DOD スゴイッス C1-774-TN 高さ調整 角度調整 耐荷重100kg 1人用チェア
+captain-stag-chair / キャプテンスタッグ CSシャルマン ラウンジチェア ドリンクホルダー付き 軽量アルミ製
+captain-stag-chair / キャプテンスタッグ ジュール ラウンジチェア ブラック キャンプチェア
+captain-stag-chair / キャプテンスタッグ CS ラウンジチェア グリーン キャンプチェア
+captain-stag-chair / キャプテンスタッグ CSクラシックス リラックスクッションチェア UC-1647
+captain-stag-chair / キャプテンスタッグ CSブラックラベル 背付きベンチ UC-1660
+logos-bonfire / ロゴス the ピラミッドTAKIBI L 焚き火台 81064162
+logos-bonfire / ロゴス バーベキューコンロ the ピラミッドTAKIBI M 焚き火台 コンパクト
+logos-bonfire / ロゴス バーベキューコンロ the ピラミッドTAKIBI L 焚き火 BBQ
+ecoflow-power / EcoFlow ポータブル電源 DELTA 3 1000 Air 超軽量 コンパクト高出力 長寿命
+ecoflow-power / EcoFlow ポータブル電源 RIVER 2 Pro 768Wh 1.2hフル充電 アプリ対応 長寿命
+ecoflow-power / EcoFlow ポータブル電源 ソーラーパネル セット DELTA 3 Classic 1024Wh 軽量両面ソーラーパネル
+ecoflow-power / EcoFlow ポータブル電源 ソーラーパネル セット DELTA 3 Plus 1024Wh 220W 軽量両面ソーラーパネル 長寿命
+ecoflow-power / EcoFlow ポータブル電源 ソーラーパネル セット DELTA 3 Max 2048Wh 220W 長寿命
+karrimor-backpack / karrimor カリマー イクリプス27 eclipse 27 バックパック 27L
+karrimor-backpack / karrimor カリマー トリビュート40 tribute 40 バックパック 40L
+karrimor-backpack / karrimor カリマー VTデイパック F VT daypack F リュック 20L
+karrimor-backpack / karrimor カリマー タトラ20 TATRA20 デイパック 20L
