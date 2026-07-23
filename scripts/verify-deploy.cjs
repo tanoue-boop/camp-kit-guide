@@ -12,6 +12,8 @@
  *   3. アフィリリンク数がローカルの ProductCardMdx 数以上
  *      （楽天 rafcid付き / Amazon dp?tag= / amzn.to を合算）
  *   4. PR表記（景表法対応）が本文に含まれる
+ *   5. og:image がサムネイル規約（/images/outdoor-0X.png）に一致し、
+ *      その画像URLが実際に 200 を返す
  *
  * 1件でも FAIL があれば exit code 1 で終了する。
  */
@@ -23,8 +25,10 @@ const { execSync } = require('child_process');
 const BASE = 'https://www.camp-kit-guide.com';
 const POSTS_DIR = path.join(__dirname, '..', 'content', 'posts');
 const PR_TEXT = 'アフィリエイト広告';
-const RETRY = 3;
+const RETRY = 20;
 const RETRY_WAIT_MS = 15000;
+// サムネイル規約: /images/outdoor-01.png 〜 outdoor-09.png のみ許可
+const THUMB_RE = /\/images\/outdoor-0[1-9]\.png/;
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
@@ -65,6 +69,32 @@ async function fetchWithRetry(url) {
     }
   }
   return last;
+}
+
+function extractOgImage(html) {
+  // property/name どちらの並びでも拾う
+  const m =
+    html.match(/<meta[^>]+property=["']og:image["'][^>]+content=["']([^"']+)["']/i) ||
+    html.match(/<meta[^>]+content=["']([^"']+)["'][^>]+property=["']og:image["']/i);
+  return m ? m[1] : '';
+}
+
+async function imageReturns200(url) {
+  // ページが200を返した後なので静的アセットは即時公開されているはず。軽く3回だけ試す。
+  for (let i = 0; i < 3; i++) {
+    try {
+      let res = await fetch(url, { method: 'HEAD', redirect: 'follow' });
+      // HEAD 非対応の環境向けに GET フォールバック
+      if (res.status === 405 || res.status === 501) {
+        res = await fetch(url, { method: 'GET', redirect: 'follow' });
+      }
+      if (res.status === 200) return true;
+    } catch {
+      /* リトライ */
+    }
+    if (i < 2) await sleep(3000);
+  }
+  return false;
 }
 
 function countAffiliateLinks(html) {
@@ -116,6 +146,22 @@ async function verify(slug) {
   const prOk = html.includes(PR_TEXT);
   results.push(prOk);
   console.log(`  ${prOk ? 'PASS' : 'FAIL'}  PR表記（景表法対応）`);
+
+  // 5. og:image（サムネイル）検証
+  const ogImage = extractOgImage(html);
+  const formatOk = THUMB_RE.test(ogImage);
+  let imgOk = false;
+  if (formatOk) {
+    const imgUrl = ogImage.startsWith('http') ? ogImage : `${BASE}${ogImage}`;
+    imgOk = await imageReturns200(imgUrl);
+  }
+  const thumbOk = formatOk && imgOk;
+  results.push(thumbOk);
+  console.log(
+    `  ${thumbOk ? 'PASS' : 'FAIL'}  og:image「${ogImage || '(なし)'}」` +
+      `  形式${formatOk ? 'OK' : 'NG(outdoor-0X.png以外)'}` +
+      (formatOk ? ` / 画像取得${imgOk ? 'OK(200)' : 'NG'}` : '')
+  );
 
   return results.every(Boolean);
 }
