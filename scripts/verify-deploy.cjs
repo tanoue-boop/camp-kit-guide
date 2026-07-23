@@ -126,7 +126,8 @@ async function verify(slug) {
   const html = res.html;
 
   // 2. title 一致
-  const titleMatch = html.match(/<title>([\s\S]*?)<\/title>/i);
+  // Next.js は <title data-next-head=""> のように属性を付けて出力するため属性を許容する
+  const titleMatch = html.match(/<title[^>]*>([\s\S]*?)<\/title>/i);
   const liveTitle = titleMatch ? titleMatch[1].trim() : '';
   const titleOk = Boolean(local.title) && liveTitle.includes(local.title);
   results.push(titleOk);
