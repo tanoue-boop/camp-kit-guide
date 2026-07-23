@@ -102,7 +102,8 @@ thumbnail: ""
 - `date` は初回公開日（未来日付は禁止）
 - `updatedAt` は最終更新日。新規公開時は `date` と同じ値を入れる（コードがJSON-LD `dateModified` で参照）
 - `description` は120〜150字（メタディスクリプション最適長）
-- `thumbnail` は空文字でOK（プレースホルダー /og-default.png にフォールバック）。楽天商品画像URLを入れるとOGP/カード画像に使用される
+- `thumbnail` は **`/images/outdoor-01〜09.png` のローカル画像プールから記事内容に合うものを指定する**（サイト内の既存記事はすべてこの方式で統一。同じ画像をカテゴリをまたいで再利用してよい）。空文字にするとプレースホルダー /og-default.png にフォールバックする
+- ⚠️ **`thumbnail` に楽天など商品画像のURLを使わない**：小サイズ・URL変動・既存規約との不統一のため。商品画像（楽天画像URL）は各 `ProductCardMdx` の `image=` にのみ使う。frontmatter の `thumbnail` はローカル画像限定
 - ⚠️ **`keywords` / `eyecatch` は使用禁止**：コードから一切参照されない死んだキー（commit `fb3c3d6` で全記事を修正済）。使っても thumbnail が表示されず tags も機能しない。**必ず `tags` / `thumbnail` を使うこと**
 
 ### 記事構成テンプレート
