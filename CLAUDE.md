@@ -346,6 +346,6 @@ Driveの `_reference` 側はバックアップ控え。**編集はローカル�
 > ⚠️ 6/23の第1回SEO効果測定は実施済み（表示2.1倍・クリック3.2倍に立ち上がり）。新規量産を止め、既存22記事のテコ入れ（差別化リライト）フェーズに移行済み。詳細は `docs/seo-change-log.md` 冒頭の2026-06-23セクション。
 
 - **7/7 SEOレポート定期測定**: GASメニュー「📊 SEOレポート」を実行し、6/23比較で効果測定する。最大の観測点は、6/23の差別化リライト（グループA=逆算型／グループB=判断軸の体系化型）で順位の動き方に差が出るか。
-- **差別化リライトの横展開**: 7/7で動いた型を同グループの残り記事へ展開。実施済み4本＝backpack-capacity／tent-size（グループA）、dutch-oven／solo-tent-overall（グループB）。グループB残：two-room-tent-guide（被リンク7本・要データ不整合修正）／stylish-camp-tent／camp-chair-highback／nanga-sleeping-bag 他。グループA残：sleeping-bag-temp-guide 等。
-- **寝袋3記事カニバ整理（保留中）**: temperature-guide を温度別選び方ハブに純化し winter-beginner と棲み分け。本文削除を伴う破壊的操作のため、7/7で3記事の順位を確認してから実行。
+- **差別化リライトの横展開**: 7/7で動いた型を同グループの残り記事へ展開。実施済み4本＝backpack-capacity／tent-size（グループA）、dutch-oven／solo-tent-overall（グループB）。グループB残：two-room-tent-guide（被リンク7本・要データ不整合修正）／stylish-camp-tent／camp-chair-highback／nanga-sleeping-bag 他。グループA残：現在なし（旧「グループA残」に挙げていた寝袋温度系は下記の統合で解消済み）。
+- **寝袋カニバ整理（2026-07-24 完了）**: 温度・季節・3シーズンで票が分散していた3記事を `sleeping-bag-temperature-guide`（「寝袋（シュラフ）の選び方 完全ガイド」）へ統合済み。統合元の `camp-sleeping-bag-temperature-guide` / `sleeping-bag-season-guide` / `sleeping-bag-temp-guide` は削除し、`next.config.ts` の `redirects()` でハブへ恒久リダイレクト（Next.jsの `permanent: true` は 308 を返す＝301と同等にシグナル統合される）。**この3スラッグは新規記事に再利用しないこと**（リダイレクト元として予約済み）。反映後1〜2週間でGSCの対象クエリ順位を再測定する。
 - **Cowork Amazonリンク化フローの継続展開**: `_file/amazon-link-worksheet.tsv` の残り約480商品を、三者分業（Coworkログアウト検索 → まーくんが `amzn.to` 発行 → Claude Code が ProductCard に `amazonUrl` 設置）でバッチ展開する（累計143商品設置済み＝手動12＋Cowork82＋バッチ2の49）。流入のある記事から優先。同一商品の型番違いは楽天商品ID／バッジで区別する。

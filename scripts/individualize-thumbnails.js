@@ -72,7 +72,9 @@ const ARTICLES = [
   { slug: "car-camp-bed-kit" },
   { slug: "kids-sleeping-bag" },
   { slug: "mountain-camp-mat" },
-  { slug: "sleeping-bag-season-guide" },
+  // 2026-07-24 統合により削除: sleeping-bag-season-guide は
+  // sleeping-bag-temperature-guide（下記）へ集約済みのため参照を無効化
+  // { slug: "sleeping-bag-season-guide" },
   { slug: "sleeping-bag-summer-cospa" },
   { slug: "sleeping-bag-temperature-guide" },
   { slug: "sleeping-bag-winter-beginner" },
