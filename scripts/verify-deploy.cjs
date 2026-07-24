@@ -98,7 +98,13 @@ async function imageReturns200(url) {
 }
 
 function countAffiliateLinks(html) {
-  const rakuten = (html.match(/item\.rakuten\.co\.jp\/[^"']*rafcid=/g) || []).length;
+  // 楽天アフィリリンクは2形態ある。両方を有効としてカウントする。
+  //  (1) hb.afl ラッパー形式: hb.afl.rakuten.co.jp/hgc/<affiliateId>/?pc=... （現行規約 / scheduled-task-spec.md）
+  //  (2) 直リンク rafcid付き: item.rakuten.co.jp/.../?rafcid=...            （旧アフィリツール生成分）
+  // ※(1)はpc=内のitem.rakuten.co.jpが%2Fエンコードされ、rafcidも無いため(2)の正規表現には当たらない＝二重計上なし
+  const rakutenHb = (html.match(/hb\.afl\.rakuten\.co\.jp\/hgc\//g) || []).length;
+  const rakutenDirect = (html.match(/item\.rakuten\.co\.jp\/[^"']*rafcid=/g) || []).length;
+  const rakuten = rakutenHb + rakutenDirect;
   const amazonTag = (html.match(/amazon\.co\.jp\/dp\/[A-Z0-9]+\?tag=/g) || []).length;
   const amznTo = (html.match(/amzn\.to\/[A-Za-z0-9]+/g) || []).length;
   return { rakuten, amazonTag, amznTo, total: rakuten + amazonTag + amznTo };
