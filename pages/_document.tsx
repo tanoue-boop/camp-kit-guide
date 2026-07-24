@@ -14,7 +14,7 @@ export default function Document() {
             <script async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`} />
             <script
               dangerouslySetInnerHTML={{
-                __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${gaId}');`,
+                __html: `(function(){try{var d=(location.search.indexOf('ckbot=1')>-1)||(sessionStorage.getItem('ckbot')==='1');if(d){try{sessionStorage.setItem('ckbot','1');}catch(e){}window['ga-disable-${gaId}']=true;}}catch(e){}})();window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${gaId}');`,
               }}
             />
           </>
