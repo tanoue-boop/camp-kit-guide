@@ -5,9 +5,18 @@ A	焚き火テーブル	takibi-table	chair-table	購入型	初〜中級・中価
 A	スノーピークの焚き火台	snowpeak-bonfire	bonfire	ブランド型	中〜上級・高価格帯・ブランド指名	焚火台M/L/SR＋ベースプレート等。ブランド軸で占有緩和可	done	knowledge	2026-07-21	drafted 2026-07-23
 A	ノースフェイスのリュック	northface-backpack	backpack	ブランド型	初〜中級・中価格帯・タウン兼用	ボレアリス/ヒューズボックス/テルス/ビッグショット	done	knowledge	2026-07-21	drafted 2026-07-24
 A	ワンタッチタープ	one-touch-tarp	tent	購入型	初心者・中価格帯・設営簡単/イベント兼用	FIELDOOR/クイックキャンプ/タンスのゲン。サイズ・耐水圧で比較	done	knowledge	2026-07-21	drafted 2026-07-24
-B	ユニフレームのファイアグリル	uniflame-fire-grill	bonfire	ブランド型	初〜中級・中価格帯・BBQ/焚き火兼用	ファイアグリル/ラージ/ヘビーロストル等の関連構成	pending	knowledge	2026-07-21
-B	オイルランタン	oil-lantern	lighting	比較型	中級・中価格帯・雰囲気重視	フュアーハンド/デイツ/キャプスタ。燃料・光量で比較	pending	knowledge	2026-07-21
+B	ユニフレームのファイアグリル	uniflame-fire-grill	bonfire	ブランド型	初〜中級・中価格帯・BBQ/焚き火兼用	ファイアグリル/ラージ/ヘビーロストル等の関連構成	done	knowledge	2026-07-21	drafted 2026-07-27(楽天API実データ5構成:本体/solo/セット/ロストル/収納ケース)
+B	オイルランタン	oil-lantern	lighting	比較型	中級・中価格帯・雰囲気重視	フュアーハンド/デイツ/キャプスタ。燃料・光量で比較	done	knowledge	2026-07-21	drafted 2026-07-27(楽天API実データ5ブランド:VASTLAND/フュアーハンド/ThousWinds/DIETZ/キャプスタ)
 B	小型ポータブル電源	compact-portable-power	power	比較型	初心者・中価格帯・ソロ/軽量重視	Jackery240/EcoFlow RIVER/Anker521等300Wh級で比較	pending	knowledge	2026-07-21
 B	キャンプ用コーヒードリッパー	camp-coffee-dripper	cookware	購入型	初〜中級・低〜中価格帯・現地コーヒー	折りたたみ/ステンレス/セット。携帯性で比較	pending	knowledge	2026-07-21
 B	モーラナイフ	moraknife	cookware	ブランド型	初〜中級・低価格帯・ブッシュクラフト入門	Companion/Basic/Bushcraft/Eldris。刃長・用途で比較（法令FAQ必須）	pending	knowledge	2026-07-21
 B	ワークマンのキャンプ防寒着	workman-camp-wear	clothing	ブランド型	初〜中級・低価格帯・コスパ防寒	ウェア類はブランド指定KWのみ可。楽天供給/サイズ分散は要確認	pending	knowledge	2026-07-21
+A	スクリーンタープ	screen-tarp	tent	購入型	初〜中級・中価格帯・夏の防虫リビング	コールマン/ロゴスneos/クイックキャンプ/DOD/キャプスタでメッシュ壁5選可。旬=盛夏の虫・暑さ対策需要ピーク。既存タープ9記事と用途別で非カニバリ	done	product-scan	2026-07-27	drafted 2026-07-27
+A	ウォータージャグ	water-jug	cookware	比較型	初〜中級・中価格帯・夏の水分補給/保冷	スタンレー/イグルー/コールマン/DOD/キャプスタで保冷ジャグ5選可。旬=盛夏の給水需要ピーク。クーラー系と非カニバリの新規テーマ	done	product-scan	2026-07-27	drafted 2026-07-27
+B	焚き火グローブ	fireproof-gloves	bonfire	購入型	初〜中級・低〜中価格帯・焚き火/薪の火傷防止	グリップスワニー/キャプスタ/ロゴス/ユニフレーム/DODで革・耐熱5選可。旬=秋焚き火シーズン立ち上がり。防寒グローブ(clothing)と用途別で非カニバリ	done	product-scan	2026-07-27	drafted 2026-07-27
+B	保冷剤（キャンプ）	cooler-ice-pack	cookware	比較型	初〜中級・低価格帯・クーラー保冷力の底上げ	ロゴス氷点下パック/倍速凍結/キャプスタ/ダイワ/ネイチャーハイクで5選可。旬=盛夏。低単価だが検索需要大。ふるさと納税混入は要確認	done	product-scan	2026-07-27	drafted 2026-07-27
+B	キャンプ用手斧	hand-axe	bonfire	比較型	中級・中価格帯・薪割り/ブッシュクラフト	ハスクバーナ/ハルタホース/フィスカース/千吉/エストウィングで5選可。旬=秋の薪割り需要立ち上がり。刃物のため法令FAQ必須	done	product-scan	2026-07-27	drafted 2026-07-27
+C	薪ストーブ（テント内）	tent-wood-stove	bonfire	比較型	中〜上級・高価格帯・冬幕内暖房	Winnerwell/G-Stove/ホンマ製作所/テンマクデザイン/CAMPING MOONで5選可。旬=秋冬前倒し準備。煙突・一酸化炭素の安全FAQ必須。価格/供給は要確認	pending	product-scan	2026-07-27
+A	インフィニティチェア	infinity-chair	chair-table	比較型	中級・中価格帯・リクライニング/くつろぎ重視	GSC実データ:「インフィニティチェア 比較」16imp/掲載順位5.8・「インフィニティチェア」9imp/6.7・「コールマン インフィニティチェア」等の指名クエリ多数。専用記事なしで既にpage1(順位5-7)だがCTR0%=専用記事化でクリック獲得見込み大。コールマン(定番)/WAQ/DOD/タンスのゲン/ハイランダーで5選可(実在確認済)。既存chair8記事とリクライニング特化で非カニバリ	pending	keyword-selection	2026-07-27
+B	ペグハンマー	peg-hammer	tent	比較型	初〜中級・中価格帯・設営必需品	スノーピークPRO.C/PRO.S・村の鍛冶屋エリッゼ・キャプスタ・コールマンで5選可(hinata等で17本比較の実在確認済)。既存forged-peg(鍛造ペグ=打たれる杭)とは商材別(打つ道具)で非カニバリ	pending	keyword-selection	2026-07-27
+B	囲炉裏テーブル	irori-table	chair-table	購入型	中級・中価格帯・焚き火を囲む4分割テーブル	コールマン/ロゴス/DOD/キャプスタ/FIELDOORで焚き火囲みテーブル5選想定。既存takibi-table(焚き火サイド卓)・group-camp-tableと形状別で非カニバリ。楽天供給は記事化前に要確認	pending	keyword-selection	2026-07-27
