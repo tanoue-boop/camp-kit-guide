@@ -2,7 +2,8 @@
 
 サイトの現状（記事数・カテゴリ構成・GAS/インフラ構造）を記録するスナップショット。記事追加・カテゴリ変更・GAS構造変更のたびに最新化する（→ 運用ルールは CLAUDE.md「記録更新ルール」を参照）。
 
-- **最終更新: 2026-07-27（記事5本追加〔screen-tarp＝スクリーンタープ5選・tent／water-jug＝ウォータージャグ5選・cookware／fireproof-gloves＝焚き火グローブ5選・bonfire／cooler-ice-pack＝保冷剤5選〔ロゴス氷点下XL/倍速凍結/キャプスタ/ダイワ/アイリス〕・cookware／hand-axe＝キャンプ用手斧5選〔ハスクバーナ/フィスカースX7/エストウィング/千吉/VASTLAND、刃物のため法令FAQ入り〕・bonfire。いずれも新規ドラフト、価格は参考実勢値・affiliateUrl="#"（後段Amazonリンク化フローで差替）。product-scanバックログ上位5本を消化〕。記事数139→144、tent 34→35・cookware 18→20・bonfire 13→15）**
+- **最終更新: 2026-07-27（FAIL5記事を楽天API実データでアフィリリンク化〔screen-tarp／water-jug／cooler-ice-pack／fireproof-gloves／hand-axe〕。affiliateUrl="#"のドラフト状態を解消し、各5品を hb.afl 形式アフィリリンク・実価格・実レビューで整合〔description/badge/本文/比較表/まとめ表/intro/FAQ全面〕。products.tsv に25行追記。記事数144のまま増減なし）**
+- 前回: 2026-07-27（記事5本追加〔screen-tarp＝スクリーンタープ5選・tent／water-jug＝ウォータージャグ5選・cookware／fireproof-gloves＝焚き火グローブ5選・bonfire／cooler-ice-pack＝保冷剤5選〔ロゴス氷点下XL/倍速凍結/キャプスタ/ダイワ/アイリス〕・cookware／hand-axe＝キャンプ用手斧5選〔ハスクバーナ/フィスカースX7/エストウィング/千吉/VASTLAND、刃物のため法令FAQ入り〕・bonfire。いずれも新規ドラフト、価格は参考実勢値・affiliateUrl="#"（後段Amazonリンク化フローで差替）。product-scanバックログ上位5本を消化〕。記事数139→144、tent 34→35・cookware 18→20・bonfire 13→15）**
 - 前回: 2026-07-27（記事2本追加〔uniflame-fire-grill＝ユニフレームのファイアグリル5構成〔本体/solo/セット/ヘビーロストル/収納ケース〕・bonfire／oil-lantern＝オイルランタン5ブランド比較〔VASTLAND/フュアーハンド/ThousWinds/DIETZ/キャプスタ〕・lighting、いずれも楽天API実データ〕。記事数137→139、bonfire 12→13・lighting 12→13）**
 - 前回: 2026-07-24（kids-sleeping-bag 全面リライト〔楽天API実データで商品5点差し替え・年齢別早見表追加〕／mountain-camp-lantern に軽量ランキング比較表＋ゴールゼロ追加。記事数137のまま増減なし）**
 - 前回: 2026-07-24（寝袋カニバ整理：温度・季節・3シーズンの3記事を `sleeping-bag-temperature-guide`「寝袋（シュラフ）の選び方 完全ガイド」へ統合。統合元3本を削除し `next.config.ts` で恒久リダイレクト〔308〕。記事数140→137、sleeping-bag 19→16）**
