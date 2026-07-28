@@ -51,3 +51,10 @@ public/robots.txt
 # Product data: batch input regenerated wholesale per article batch (disposable).
 # Per-batch snapshots are managed on Drive (_reference side), not in Git history.
 _file/products.tsv
+
+# stray editor/script backups
+*.bak
+
+# build logs
+build.log
+kidsbuild.log
