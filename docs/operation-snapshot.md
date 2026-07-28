@@ -2,7 +2,8 @@
 
 サイトの現状（記事数・カテゴリ構成・GAS/インフラ構造）を記録するスナップショット。記事追加・カテゴリ変更・GAS構造変更のたびに最新化する（→ 運用ルールは CLAUDE.md「記録更新ルール」を参照）。
 
-- **最終更新: 2026-07-27（FAIL5記事を楽天API実データでアフィリリンク化〔screen-tarp／water-jug／cooler-ice-pack／fireproof-gloves／hand-axe〕。affiliateUrl="#"のドラフト状態を解消し、各5品を hb.afl 形式アフィリリンク・実価格・実レビューで整合〔description/badge/本文/比較表/まとめ表/intro/FAQ全面〕。products.tsv に25行追記。記事数144のまま増減なし）**
+- **最終更新: 2026-07-28（記事2本追加〔compact-portable-power＝小型ポータブル電源5選・power／infinity-chair＝インフィニティチェア5選・chair-table、いずれも楽天API実データ・source="rakuten"・rafcidアフィリリンク〕。電源＝Jackery240New/AnkerC300/BLUETTI EB3A〔130Wパネルセット〕/BLUETTI AORA30V2/Jackery100Plus〔99Wh・機内持込可〕でソロ小型99〜288Wh級構成。チェア＝コールマン/サイドテーブル付/TIMBER RIDGE〔耐荷重160kg〕/ヘッドレスト付/Re:Gearで無重力系構成。products.tsvに10行追記・amazon-link-worksheetに10行追記〔Amazon存在確認済:Jackery/Anker/BLUETTI/コールマン/TIMBER RIDGE/Re:Gear、GL・vision shopは楽天専売の可能性〕。記事数144→146、power 14→15・chair-table 18→19）**
+- 前回: 2026-07-27（FAIL5記事を楽天API実データでアフィリリンク化〔screen-tarp／water-jug／cooler-ice-pack／fireproof-gloves／hand-axe〕。affiliateUrl="#"のドラフト状態を解消し、各5品を hb.afl 形式アフィリリンク・実価格・実レビューで整合〔description/badge/本文/比較表/まとめ表/intro/FAQ全面〕。products.tsv に25行追記。記事数144のまま増減なし）**
 - 前回: 2026-07-27（記事5本追加〔screen-tarp＝スクリーンタープ5選・tent／water-jug＝ウォータージャグ5選・cookware／fireproof-gloves＝焚き火グローブ5選・bonfire／cooler-ice-pack＝保冷剤5選〔ロゴス氷点下XL/倍速凍結/キャプスタ/ダイワ/アイリス〕・cookware／hand-axe＝キャンプ用手斧5選〔ハスクバーナ/フィスカースX7/エストウィング/千吉/VASTLAND、刃物のため法令FAQ入り〕・bonfire。いずれも新規ドラフト、価格は参考実勢値・affiliateUrl="#"（後段Amazonリンク化フローで差替）。product-scanバックログ上位5本を消化〕。記事数139→144、tent 34→35・cookware 18→20・bonfire 13→15）**
 - 前回: 2026-07-27（記事2本追加〔uniflame-fire-grill＝ユニフレームのファイアグリル5構成〔本体/solo/セット/ヘビーロストル/収納ケース〕・bonfire／oil-lantern＝オイルランタン5ブランド比較〔VASTLAND/フュアーハンド/ThousWinds/DIETZ/キャプスタ〕・lighting、いずれも楽天API実データ〕。記事数137→139、bonfire 12→13・lighting 12→13）**
 - 前回: 2026-07-24（kids-sleeping-bag 全面リライト〔楽天API実データで商品5点差し替え・年齢別早見表追加〕／mountain-camp-lantern に軽量ランキング比較表＋ゴールゼロ追加。記事数137のまま増減なし）**
@@ -17,9 +18,9 @@
 
 ---
 
-## 記事数（2026-07-27 時点）
+## 記事数（2026-07-28 時点）
 
-- **総記事数: 144記事**（`ls content/posts/*.mdx | wc -l` で確認）
+- **総記事数: 146記事**（`ls content/posts/*.mdx | wc -l` で確認）
 
 ### カテゴリ別内訳（frontmatter `category` を集計）
 
@@ -28,13 +29,13 @@
 | tent | テント | 35 |
 | sleeping-bag | 寝袋・シュラフ | 16 |
 | cookware | 調理器具 | 20 |
-| chair-table | チェア・テーブル | 18 |
+| chair-table | チェア・テーブル | 19 |
 | lighting | 照明・ランタン | 13 |
-| power | 電源・バッテリー | 14 |
+| power | 電源・バッテリー | 15 |
 | bonfire | 焚き火台 | 15 |
 | backpack | バックパック | 11 |
 | clothing | ウェア・装備 | 2 |
-| **合計** | | **144** |
+| **合計** | | **146** |
 
 > 直近の増加分: 2026-06-08 のバッチで 90→94（施策3: 焚き火シート/火ばさみ/防寒グローブ/大容量ポータブル電源）→ 99（施策4: 防水リュック/二次燃焼焚き火台/折りたたみソーラーパネル/ダッチオーブン/封筒型寝袋）→ 102（施策5: ファミリー向けキャンプコット/VASTLANDのテント/スキレット）→ 104（施策6: アウトドア用電気毛布/シェラカップ・自動選定パイプライン経由）→ 109（施策7: WAQのチェア/FIELDOORのテント/Naturehikeのマット/コールマンのテント/DODのタープ・ブランド軸5記事）→ 114（施策8: Jackeryのポータブル電源/DODのチェア/ロゴスの焚き火台/キャプテンスタッグのテーブル/EcoFlowのポータブル電源・ブランド軸5記事）→ 119（施策9: コールマンのランタン/キャプテンスタッグのチェア/ジェントスのランタン/コールマンのチェア/Naturehikeの寝袋・ブランド軸5記事）→ 124（施策10: SOTOのバーナー/ヘリノックスのチェア/Ankerのポータブル電源/カリマーのリュック/イワタニのバーナー・空きカテゴリのブランド軸5記事）→ 128（施策11: ユニフレームのバーナー/BLUETTIのポータブル電源/グレゴリーのリュック/オスプレーのリュック・手薄カテゴリのブランド軸4記事）→ 133（施策12: コールマンの焚き火台/DODのテーブル/ドイターのリュック/ベアボーンズのランタン/ミステリーランチのリュック・空きカテゴリのブランド軸5記事）。詳細は `docs/seo-change-log.md` を参照。
 
