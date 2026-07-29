@@ -8,8 +8,8 @@ A	ワンタッチタープ	one-touch-tarp	tent	購入型	初心者・中価格�
 B	ユニフレームのファイアグリル	uniflame-fire-grill	bonfire	ブランド型	初〜中級・中価格帯・BBQ/焚き火兼用	ファイアグリル/ラージ/ヘビーロストル等の関連構成	done	knowledge	2026-07-21	drafted 2026-07-27(楽天API実データ5構成:本体/solo/セット/ロストル/収納ケース)
 B	オイルランタン	oil-lantern	lighting	比較型	中級・中価格帯・雰囲気重視	フュアーハンド/デイツ/キャプスタ。燃料・光量で比較	done	knowledge	2026-07-21	drafted 2026-07-27(楽天API実データ5ブランド:VASTLAND/フュアーハンド/ThousWinds/DIETZ/キャプスタ)
 B	小型ポータブル電源	compact-portable-power	power	比較型	初心者・中価格帯・ソロ/軽量重視	Jackery240/EcoFlow RIVER/Anker521等300Wh級で比較	done	knowledge	2026-07-21	drafted 2026-07-28(楽天API実データ5選:Jackery240New/AnkerC300/BLUETTI_EB3A/AORA30V2/Jackery100Plus。EcoFlow新品供給薄で除外。ソロ小型300Wh級)
-B	キャンプ用コーヒードリッパー	camp-coffee-dripper	cookware	購入型	初〜中級・低〜中価格帯・現地コーヒー	折りたたみ/ステンレス/セット。携帯性で比較	pending	knowledge	2026-07-21
-B	モーラナイフ	moraknife	cookware	ブランド型	初〜中級・低価格帯・ブッシュクラフト入門	Companion/Basic/Bushcraft/Eldris。刃長・用途で比較（法令FAQ必須）	pending	knowledge	2026-07-21
+B	キャンプ用コーヒードリッパー	camp-coffee-dripper	cookware	購入型	初〜中級・低〜中価格帯・現地コーヒー	折りたたみ/ステンレス/セット。携帯性で比較	done	knowledge	drafted 2026-07-29(楽天API実データ5選)
+B	モーラナイフ	moraknife	cookware	ブランド型	初〜中級・低価格帯・ブッシュクラフト入門	Companion/Basic/Bushcraft/Eldris。刃長・用途で比較（法令FAQ必須）	done	knowledge	drafted 2026-07-29(楽天API実データ5選)
 B	ワークマンのキャンプ防寒着	workman-camp-wear	clothing	ブランド型	初〜中級・低価格帯・コスパ防寒	ウェア類はブランド指定KWのみ可。楽天供給/サイズ分散は要確認	pending	knowledge	2026-07-21
 A	スクリーンタープ	screen-tarp	tent	購入型	初〜中級・中価格帯・夏の防虫リビング	コールマン/ロゴスneos/クイックキャンプ/DOD/キャプスタでメッシュ壁5選可。旬=盛夏の虫・暑さ対策需要ピーク。既存タープ9記事と用途別で非カニバリ	done	product-scan	2026-07-27	drafted 2026-07-27
 A	ウォータージャグ	water-jug	cookware	比較型	初〜中級・中価格帯・夏の水分補給/保冷	スタンレー/イグルー/コールマン/DOD/キャプスタで保冷ジャグ5選可。旬=盛夏の給水需要ピーク。クーラー系と非カニバリの新規テーマ	done	product-scan	2026-07-27	drafted 2026-07-27
