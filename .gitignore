@@ -36,6 +36,9 @@ yarn-error.log*
 # vercel
 .vercel
 
+# deploy serialization lock (scripts/deploy.cjs)
+.deploy.lock
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
