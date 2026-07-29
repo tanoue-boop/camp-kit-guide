@@ -44,18 +44,23 @@
   gap: 0.4rem;
   width: 100%;
   box-sizing: border-box;
-  background: var(--color-accent);
-  color: #fff;
-  font-weight: 700;
+  background: #f0791a;
+  color: #fff !important;
+  font-weight: 800;
   font-size: 1rem;
   text-decoration: none;
   padding: 0.85rem 1.25rem;
   border-radius: 8px;
-  transition: opacity 0.15s ease;
+  transition: filter 0.15s ease;
+}
+
+.button:visited {
+  color: #fff !important;
 }
 
 .button:hover {
-  opacity: 0.88;
+  filter: brightness(0.92);
+  color: #fff !important;
 }
 
 .arrow {
