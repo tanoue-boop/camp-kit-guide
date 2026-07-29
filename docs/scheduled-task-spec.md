@@ -34,6 +34,7 @@
   ※個別の git / curl コマンドや待機ループは書かないこと（build→commit→push→本番検証まで deploy.cjs が実施）。
   ```
 
+- **d-2. deploy は直列化される（同時実行対策・2026-07-29 追記）**: `campkit-new-article-draft` は日次、他の実装タスク（price-check=水／seo-competitor-scan=金／technical-seo-audit=月初 等）は朝ほぼ同時刻に発火するため、以前は `deploy.cjs` の多重実行で **`.git/index.lock` 衝突** と **main への多重 push→Vercel が最新コミットを未反映**（新規ページだけ404）という事故が起きていた（2026-07-29 水曜に price-check と 0.4 秒差で同時実行して発生）。対策として `deploy.cjs` にリポジトリ単位の排他ロック `.deploy.lock`（gitignore 済／15分で stale 回収／最大20分待機）と、残存 `.git/index.lock` の待機・stale 除去（2分）を実装済み。**Code は従来どおり `node scripts/deploy.cjs "..."` を1回実行するだけでよい**（同時に別 deploy が走っていれば自動で順番待ちし、`rm -f .git/index.lock` 等の手当ては不要）。
 - **e. 破壊的操作は自動実行しない＝提案のみ**: カニバリ統合・301リダイレクト・本文の大量削除・記事削除・一括 `sed`/正規表現置換。これらはレポートに構成案として書くだけにし、人間の判断を待つ。
 - **f. 編集は対象の1〜数ファイルのみをファイル単位で**。他記事や既存の正しい商品データを壊さない。**実データを確認できない商品の数値（価格・レビュー）は作らない**（必要時は楽天API/Amazon実データで確認、確認不可なら触らず「要確認」と提案に回す）。
 - **g. Codeへ作業を委譲しない（＝往復多発の最大原因を断つ）**: 記事の執筆・楽天/Amazon実データ取得・`products.tsv`更新・MDX編集・FAQ調整・`sed`等の下ごしらえは【このタスクが最後まで自分で終わらせる】。Codeに「タスク1/タスク2…」のような作業指示や長いデータ（キー・商品リスト・草稿）を渡さない。**Codeの仕事は `node scripts/deploy.cjs "..."` を1回実行するだけ**。Codeに手動の `git`/`npm run build`/`fetch`/`sed`/heredocコミットをさせない（それらは静的解析不能で毎回パーミッションプロンプトになり、往復が爆発する）。build・commit・push・本番検証はすべて deploy.cjs の内部で回る。

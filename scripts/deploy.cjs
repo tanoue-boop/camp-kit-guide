@@ -20,9 +20,90 @@
 
 const { execSync } = require('child_process');
 const path = require('path');
+const fs = require('fs');
 
 const REPO = path.join(__dirname, '..');
 const msg = process.argv.slice(2).join(' ').trim();
+
+// ── 同時実行対策（定期タスクのバッティング防止）─────────────────────────
+// この new-article-draft は日次、他の price-check / seo-competitor-scan /
+// technical-seo-audit 等は Mon/Wed/Fri 等の朝に発火するため、deploy.cjs が
+// 同時に複数走ると (1) .git/index.lock 衝突 (2) main への多重 push →
+// Vercel の多重デプロイで最新コミットが未反映、という事故が起きる。
+// そこでリポジトリ単位の排他ロックで deploy を直列化し、古い index.lock も
+// 自動で待機/回収する。
+const LOCK = path.join(REPO, '.deploy.lock');
+const GIT_INDEX_LOCK = path.join(REPO, '.git', 'index.lock');
+const LOCK_STALE_MS = 15 * 60 * 1000; // これより古い .deploy.lock は死んだプロセスとみなし回収
+const LOCK_WAIT_MS = 20 * 60 * 1000; // 別 deploy の完了をこの時間まで待つ
+const IDX_STALE_MS = 2 * 60 * 1000; // これより古い index.lock は stale とみなし除去
+const IDX_WAIT_MS = 3 * 60 * 1000; // index.lock 解放をこの時間まで待つ
+const POLL_MS = 5000;
+
+let lockHeld = false;
+
+function sleepSync(ms) {
+  Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, ms);
+}
+
+function acquireLock() {
+  const deadline = Date.now() + LOCK_WAIT_MS;
+  for (;;) {
+    try {
+      const fd = fs.openSync(LOCK, 'wx'); // 既存なら EEXIST（アトミック作成）
+      fs.writeSync(fd, JSON.stringify({ pid: process.pid, at: new Date().toISOString() }));
+      fs.closeSync(fd);
+      lockHeld = true;
+      return;
+    } catch (e) {
+      if (e.code !== 'EEXIST') throw e;
+      let info = {};
+      try { info = JSON.parse(fs.readFileSync(LOCK, 'utf8')); } catch {}
+      const age = Date.now() - (info.at ? Date.parse(info.at) : 0);
+      if (!Number.isFinite(age) || age > LOCK_STALE_MS) {
+        console.warn(`⚠ 古い .deploy.lock (pid=${info.pid || '?'}, ${Math.round((age || 0) / 1000)}s) を回収します`);
+        try { fs.unlinkSync(LOCK); } catch {}
+        continue;
+      }
+      if (Date.now() > deadline) {
+        abort(`別のデプロイが進行中(pid=${info.pid})で待機タイムアウトに達しました。少し後に再実行してください。`);
+      }
+      console.log(`… 別のデプロイ進行中 (pid=${info.pid})。${POLL_MS / 1000}s 待って再試行します`);
+      sleepSync(POLL_MS);
+    }
+  }
+}
+
+function releaseLock() {
+  if (!lockHeld) return;
+  try { fs.unlinkSync(LOCK); } catch {}
+  lockHeld = false;
+}
+
+// abort()（process.exit）・正常終了・Ctrl-C 等いずれの経路でもロックを解放する
+process.on('exit', releaseLock);
+for (const sig of ['SIGINT', 'SIGTERM', 'SIGHUP']) {
+  process.on(sig, () => { releaseLock(); process.exit(1); });
+}
+
+// 別の git 処理が残した index.lock を待機し、stale なら除去する
+function waitGitIndexLock() {
+  const deadline = Date.now() + IDX_WAIT_MS;
+  while (fs.existsSync(GIT_INDEX_LOCK)) {
+    let age = Infinity;
+    try { age = Date.now() - fs.statSync(GIT_INDEX_LOCK).mtimeMs; } catch { break; }
+    if (age > IDX_STALE_MS) {
+      console.warn(`⚠ 古い .git/index.lock (${Math.round(age / 1000)}s) を除去します`);
+      try { fs.unlinkSync(GIT_INDEX_LOCK); } catch {}
+      break;
+    }
+    if (Date.now() > deadline) {
+      abort('.git/index.lock が解放されません。別の git 処理を確認してください。');
+    }
+    console.log('… 別の git 処理が進行中。index.lock の解放を待機します…');
+    sleepSync(3000);
+  }
+}
 
 function run(cmd) {
   execSync(cmd, { cwd: REPO, stdio: 'inherit' });
@@ -44,8 +125,13 @@ if (!msg) {
   abort('コミットメッセージを引数で指定してください。\n  例: node scripts/deploy.cjs "記事追加: ..."');
 }
 
+// 0. 排他ロック取得（他の deploy が走っていれば直列化のため待機）
+console.log('■ 0. 排他ロック取得 (.deploy.lock)');
+acquireLock();
+
 // 1. 変更確認 + 危険ファイル検出
-console.log('■ 1. 変更確認 (git status)');
+console.log('\n■ 1. 変更確認 (git status)');
+waitGitIndexLock();
 const status = cap('git status --porcelain');
 console.log(status || '(変更なし)');
 if (!status) abort('コミットする変更がありません。');
@@ -63,6 +149,7 @@ try {
 
 // 3. add（対象を限定）
 console.log('\n■ 3. git add（content/posts _file docs pages components styles scripts）');
+waitGitIndexLock();
 run('git add content/posts _file docs pages components styles scripts');
 
 // 3.5 ステージ内容の最終安全確認
@@ -75,6 +162,7 @@ if (hasDangerousPath(staged)) {
 
 // 4. commit
 console.log('\n■ 4. commit');
+waitGitIndexLock();
 run(`git commit -m ${JSON.stringify(msg)}`);
 
 // 5. push（＝本番デプロイ）
