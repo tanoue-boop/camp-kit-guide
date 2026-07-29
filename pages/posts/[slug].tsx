@@ -13,6 +13,7 @@ import ViewCounter from "../../components/article/ViewCounter";
 import ProductCard from "../../components/article/ProductCard";
 import ComparisonTable from "../../components/article/ComparisonTable";
 import ArticleImage from "../../components/article/ArticleImage";
+import CalloutCta from "../../components/article/CalloutCta";
 import Sidebar from "../../components/article/Sidebar";
 import InlineTOC from "../../components/article/InlineTOC";
 import ShareButtons from "../../components/article/ShareButtons";
@@ -138,6 +139,24 @@ function ComparisonTableMdx({ rows, columns }: { rows: string; columns?: string 
   }
 }
 
+function CalloutCtaMdx({
+  title, body, linkText, href, note, variant,
+}: {
+  title: string; body?: string; linkText: string; href: string; note?: string;
+  variant?: "default" | "rental" | "furusato" | "leisure";
+}) {
+  return (
+    <CalloutCta
+      title={title}
+      linkText={linkText}
+      href={href}
+      {...(body ? { body } : {})}
+      {...(note ? { note } : {})}
+      {...(variant ? { variant } : {})}
+    />
+  );
+}
+
 // Custom heading components that add anchor IDs for TOC
 function H2({ children }: { children?: React.ReactNode }) {
   const text = String(children ?? "");
@@ -157,6 +176,7 @@ const mdxComponents = {
   ArticleImage,
   ProductCardMdx,
   ComparisonTableMdx,
+  CalloutCtaMdx,
   h2: H2,
   h3: H3,
 };

@@ -95,3 +95,51 @@
 - [楽天アフィリエイト ふるさと納税で高額報酬](https://note.com/rakutenaffiliate/n/n49ce571618c2)
 - [さとふる アウトドア・キャンプ返礼品](https://www.satofull.jp/products/list.php?cat=6012)
 - [ふるなび キャンプ・アウトドア特集](https://furunavi.jp/c/feature_outdoor)
+
+---
+
+## 実装ログ（2026-07-29）
+
+### A8提携の実結果
+
+A8に直接ログインして優先案件を申請・確認した結果（`_file/asp-programs.tsv` に詳細）。
+
+| 案件 | プログラムID | 成果報酬 | 状態 | テキストリンク（アンカーhref） |
+|------|-------------|---------|------|------------------------------|
+| hinataレンタル（vivit） | s00000022571001 | レンタル申込(税抜)**8%** | **提携済（即時）** | `https://px.a8.net/svt/ejp?a8mat=4B8B4S+5AIQCY+4U5Q+5YJRM` |
+| BLUETTI JAPAN | s00000022499001 | 注文**4%** | **提携済（即時）** | `https://px.a8.net/svt/ejp?a8mat=4B8B4S+633JEA+4TLQ+5YJRM` |
+| さとふる | s00000014771001 | 納税**100円/件** | 提携申請中（審査中） | 承認後に生成 |
+| アソビュー | s00000019330001 | チケット購入**3%** | 提携申請中（審査中） | 承認後に生成 |
+| 楽天ふるさと納税 | －（楽天アフィリ） | 1件数千円規模 | 契約不要で利用可 | 楽天通常リンク＋rafcid |
+
+- hinataの成果報酬は当初「約4%」と見積もっていたが、実データは**レンタル申込(税抜)8%**（確定率91.66%）。BLUETTIは注文4%（確定率94.8%）。
+- A8リンクにはA8提供の表示計測imgピクセルが付属する。CTA部品ではアンカーhref（＝成約計測される機能リンク）を採用。厳密な表示計測を足したい場合はA8のフルコードに差し替える。
+- 掲載後は各案件で「広告掲載URL管理」に記事URLを提出する運用が必要。
+
+### CalloutCta 部品（実装済み）
+
+`components/article/CalloutCta.tsx`（＋`.module.css`）を新設し、`pages/posts/[slug].tsx` の `mdxComponents` に `CalloutCtaMdx` として登録済み（tsc --noEmit エラー0）。ProductCard（Amazon/楽天の商品）とは別建てで、A8のサービス系案件の成約導線に使う。外部リンクは `rel="sponsored nofollow noopener noreferrer"` 固定、PR表記を内包。
+
+MDXでの使い方（hinata例）:
+
+```mdx
+<CalloutCtaMdx
+  variant="rental"
+  title="道具を一式そろえるのが不安なら、まず借りて試す"
+  body="年に数回しか使わない・収納場所がない・失敗したくない人は、購入前にレンタルで使用感を確かめる手も。"
+  linkText="hinataレンタルで料金・在庫を見る"
+  href="https://px.a8.net/svt/ejp?a8mat=4B8B4S+5AIQCY+4U5Q+5YJRM"
+  note="※PR｜hinataレンタル（A8.net）。料金・在庫は公式サイトの最新情報をご確認ください。"
+/>
+```
+
+variant: `rental`（緑）／`furusato`（橙）／`leisure`（青）／`default`。
+
+### 未決の論点：サービス系案件と日次テンプレの不整合
+
+- 日次の `campkit-new-article-draft` は「**商品おすすめ5選＋比較表＋FAQ＋まとめ**」＝**物販ロードマップ用テンプレ**。BLUETTIのような"商品"には合うが、hinata（レンタル）・アソビュー（体験予約）・さとふる（納税）は"**サービス**"で、5選テンプレにそのまま載らない。
+- したがって「バックログにKWを積むだけ」ではサービス記事は綺麗に生成できない。**サービス系は別の記事構造**（例：レンタルなら「借りられる物・料金・使い方・購入との損益分岐・FAQ」）が要る。
+- 対応案は次のいずれか：
+  1. `new-article-draft` に「サービス系KW（`source=asp`等でタグ）はサービス用テンプレ＋`CalloutCtaMdx`を使う」分岐を追加する
+  2. サービス系記事はパイプラインに載せず、手動（またはASP専用タスク）で作る
+- **承認済み先行方針**により、まずは hinata（8%・提携済）と楽天ふるさと納税（契約不要）から着手。さとふる・アソビューは承認後。BLUETTIは物販テンプレで既存powerカテゴリに載せられる。

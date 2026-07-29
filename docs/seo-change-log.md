@@ -3,6 +3,18 @@
 数値の推移はGAS「SEOレポート」の履歴で追う。本ファイルは「いつ・どの記事を・なぜ・どう変えたか」を記録し、次回レポートで効果を評価するための施策台帳。新しい施策は上に追記する。
 
 ---
+## 2026-07-29：新規記事 camp-gear-rental（キャンプ用品レンタル）＋A8サービス系案件の収益化基盤
+
+- **背景**: 物販（Amazon2〜4%／楽天）より単価の高い「キャンプ隣接ASP」を収益化に追加する方針（詳細 `docs/monetization-asp-expansion.md`）。A8に直接ログインして優先案件を提携申請。**hinataレンタル（レンタル申込8%・確定率91.66%）／BLUETTI JAPAN（注文4%）は即時提携済**、**さとふる（納税100円/件）／アソビュー（チケット3%）は提携申請中（審査中）**。承認済みのhinataから先行実装。
+- **新規部品**: `components/article/CalloutCta.tsx`（＋`.module.css`）を新設し、`pages/posts/[slug].tsx` の `mdxComponents` に `CalloutCtaMdx` を登録（`tsc --noEmit` エラー0）。ProductCard（Amazon/楽天の物販）とは別建てで、A8のサービス系案件の成約導線に使う汎用CTA。外部リンクは `rel="sponsored nofollow noopener noreferrer"` 固定、PR表記を内包。variant=rental/furusato/leisure/default。
+- **新規記事**: `content/posts/camp-gear-rental.mdx`（category=tent）。メインKW「キャンプ用品レンタル」。**物販5選テンプレではなくサービス構造**で作成（向き不向き／借りられるギア／料金目安と「買うvs借りる」の損益分岐表／利用の流れ・失敗しないコツ／FAQ5問／まとめ早見表）。`CalloutCtaMdx`（variant=rental）でhinataへの成約導線を1本設置。
+- **狙い**: 購入意図が固まっていない**初心者・ライト層・お試し層・収納難民**を、物販ではこぼしていた層としてレンタルで回収。hinataは物販より高単価（申込8%）でCVインパクト大。既存にレンタル専用記事はなく（`family-summer-large-tent`／`solo-camp-beginners-guide` が言及のみ）非カニバリの新規テーマ。
+- **リンク/運用**: hinata実リンク（`a8mat=4B8B4S+5AIQCY+4U5Q+5YJRM`）を設置。掲載後は各案件でA8「広告掲載URL管理」へ記事URLの提出が必要。
+- **論点（次サイクル）**: サービス系案件（hinata/アソビュー/さとふる）は日次 `campkit-new-article-draft` の物販テンプレに合わないため**今回は手動作成**。型が固まったら日次にサービス系テンプレ分岐を足すか判断する。
+- **未処理**: 反映時に `.git/index.lock`（stale）が残存しておりデプロイ未実施。**lock削除 → `deploy.cjs` で反映**。
+- **測定**: 反映後1〜2週間で「キャンプ用品レンタル」「手ぶらキャンプ」系クエリのインデックス・掲載順位・表示/クリックと、hinataのクリック/CVを確認。
+
+---
 ## 2026-07-27：FAIL5記事を楽天実データでアフィリリンク化（screen-tarp / water-jug / cooler-ice-pack / fireproof-gloves / hand-axe）
 
 - **背景**: 2026-07-27の新規5記事は初回公開時 `affiliateUrl="#"`（ドラフト）で、本番検証のアフィリリンク項目がFAILしていた（収益導線なし）。楽天API実データでリンク化し収益化する。
