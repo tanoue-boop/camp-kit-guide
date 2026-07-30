@@ -20,14 +20,14 @@ C	薪ストーブ（テント内）	tent-wood-stove	bonfire	比較型	中〜上�
 A	インフィニティチェア	infinity-chair	chair-table	比較型	中級・中価格帯・リクライニング/くつろぎ重視	GSC実データ:「インフィニティチェア 比較」16imp/掲載順位5.8・「インフィニティチェア」9imp/6.7・「コールマン インフィニティチェア」等の指名クエリ多数。専用記事なしで既にpage1(順位5-7)だがCTR0%=専用記事化でクリック獲得見込み大。コールマン(定番)/WAQ/DOD/タンスのゲン/ハイランダーで5選可(実在確認済)。既存chair8記事とリクライニング特化で非カニバリ	done	keyword-selection	2026-07-27	drafted 2026-07-28(楽天API実データ5選:コールマン/サイドテーブル付/TIMBER_RIDGE/ヘッドレスト付/Re:Gear。WAQ/DOD等はインフィニティ名称で楽天非ヒットのため定番+無重力系で構成)
 B	ペグハンマー	peg-hammer	tent	比較型	初〜中級・中価格帯・設営必需品	スノーピークPRO.C/PRO.S・村の鍛冶屋エリッゼ・キャプスタ・コールマンで5選可(hinata等で17本比較の実在確認済)。既存forged-peg(鍛造ペグ=打たれる杭)とは商材別(打つ道具)で非カニバリ ／2026-07-30作成(楽天API実データ5選:エリッゼ/スノーピークPRO.S/REIDEN/Freell/軽量360g・価格1680-6600円)	done	keyword-selection	2026-07-27
 B	囲炉裏テーブル	irori-table	chair-table	購入型	中級・中価格帯・焚き火を囲む4分割テーブル	コールマン/ロゴス/DOD/キャプスタ/FIELDOORで焚き火囲みテーブル5選想定。既存takibi-table(焚き火サイド卓)・group-camp-tableと形状別で非カニバリ。楽天供給は記事化前に要確認 ／2026-07-30 skip:楽天供給薄(レビュー15件以上の本体が5点そろわず、温度計/木灰/コーナー天板等が混在)。再挑戦時は要商材再定義	skip	keyword-selection	2026-07-27
-B	手ぶらキャンプ	tebura-camp	tent	情報型	初心者・体験志向・道具ゼロ	ASP=hinataレンタル(提携済8%)/variant=rental。手ぶらで始める体験角度。camp-gear-rental(レンタル総論)と検索意図を分ける	pending	asp	2026-07-29
+B	手ぶらキャンプ	tebura-camp	tent	情報型	初心者・体験志向・道具ゼロ	ASP=hinataレンタル(提携済8%)/variant=rental。手ぶらで始める体験角度。camp-gear-rental(レンタル総論)と検索意図を分ける／done:2026-07-31	done	asp	2026-07-29
 B	ファミリーキャンプ道具レンタル	family-gear-rental	tent	比較型	ファミリー・年数回・大物負担軽減	ASP=hinataレンタル(提携済8%)/variant=rental。家族向けセット角度。対象読者で非カニバリ	pending	asp	2026-07-29
 B	キャンプ用品ふるさと納税	camp-furusato	cookware	情報型	中級・返礼品でギア入手・節税	ASP=楽天ふるさと納税(即利用可・楽天アフィリrafcid)/variant=furusato。さとふる(A8)は審査中。返礼品総論・秋冬需要	pending	asp	2026-07-29
 B	焚き火台ふるさと納税	bonfire-furusato	bonfire	購入型	中級・返礼品・焚き火台	ASP=楽天ふるさと納税/variant=furusato。スノーピ/キャプスタ等の焚き火台返礼品	pending	asp	2026-07-29
 C	アソビュー体験予約	asoview-experience	chair-table	情報型	ファミリー・レジャー予約	ASP=アソビュー(審査中→承認後に着手・link未発行は作らない)/variant=leisure。category要検討	pending	asp	2026-07-29
 A	登山道具レンタル	yamadougu-rental	tent	比較型	登山・富士登山・トレッキング初心者	ASP=やまどうぐレンタル屋(提携済5%)/variant=rental。登山道具レンタル総論。camp(hinata)と別領域で非カニバリ。EPC88.81の実績案件 ／2026-07-30作成(やまどうぐレンタル屋・variant=rental)	done	asp	2026-07-29
-A	テントふるさと納税	tent-furusato	tent	購入型	中級・返礼品でテント入手・秋冬前倒し	ASP=楽天ふるさと納税(即利用可)/variant=furusato。スノーピーク/コールマン/DOD等のテント返礼品。具体自治体・寄付額は創作せず楽天ふるさと納税のテント検索へ誘導	pending	asp	2026-07-29
+A	テントふるさと納税	tent-furusato	tent	購入型	中級・返礼品でテント入手・秋冬前倒し	ASP=楽天ふるさと納税(即利用可)/variant=furusato。スノーピーク/コールマン/DOD等のテント返礼品。具体自治体・寄付額は創作せず楽天ふるさと納税のテント検索へ誘導／done:2026-07-31	done	asp	2026-07-29
 A	クーラーボックスふるさと納税	cooler-furusato	cookware	購入型	中級・返礼品・保冷	ASP=楽天ふるさと納税/variant=furusato。ダイワ/シマノ/YETI級の高額クーラーは控除メリット大。楽天ふるさと納税のクーラー検索へ	pending	asp	2026-07-29
 A	チェアテーブルふるさと納税	chair-table-furusato	chair-table	購入型	中級・返礼品・リビング	ASP=楽天ふるさと納税/variant=furusato。ヘリノックス級/キャプスタ等のアウトドアチェア・テーブル返礼品。楽天ふるさと納税の該当検索へ	pending	asp	2026-07-29
-A	ポータブル電源ふるさと納税	power-furusato	power	購入型	中級〜上級・高額返礼品・控除大	ASP=楽天ふるさと納税/variant=furusato。高額=控除枠を活かせる目玉。Jackery/EcoFlow/BLUETTIの返礼品。BLUETTI(A8)物販とも補完	pending	asp	2026-07-29
+A	ポータブル電源ふるさと納税	power-furusato	power	購入型	中級〜上級・高額返礼品・控除大	ASP=楽天ふるさと納税/variant=furusato。高額=控除枠を活かせる目玉。Jackery/EcoFlow/BLUETTIの返礼品。BLUETTI(A8)物販とも補完／done:2026-07-31	done	asp	2026-07-29
 A	ふるさと納税キャンプ用品いつ限度額	furusato-camp-guide	tent	情報型	初心者・制度理解・限度額シミュ	ASP=楽天ふるさと納税/variant=furusato。情報型ピラー(制度・時期・限度額・ワンストップ)。カテゴリ別返礼品記事への内部リンクハブ。camp-furusato(返礼品総論)と役割を分け非カニバリ	pending	asp	2026-07-29
