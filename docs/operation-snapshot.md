@@ -2,7 +2,8 @@
 
 サイトの現状（記事数・カテゴリ構成・GAS/インフラ構造）を記録するスナップショット。記事追加・カテゴリ変更・GAS構造変更のたびに最新化する（→ 運用ルールは CLAUDE.md「記録更新ルール」を参照）。
 
-- **最終更新: 2026-07-29（新規記事1本追加〔camp-gear-rental＝キャンプ用品レンタル完全ガイド・category=tent〕。物販5選テンプレでなく「サービス構造」〔向き不向き/借りられるギア/料金目安と買うvs借りるの損益分岐表/利用の流れ/FAQ5問/まとめ早見表〕で作成。A8サービス系案件の収益化基盤として汎用CTA部品 `CalloutCta`（`CalloutCtaMdx`）を新設し `pages/posts/[slug].tsx` に登録〔tsc --noEmit エラー0〕。hinataレンタル〔申込8%・提携済〕の成約導線を variant=rental で1本設置。記事数148→149、tent 35→36。詳細は `docs/seo-change-log.md` 2026-07-29／`docs/monetization-asp-expansion.md` 実装ログ。デプロイは `.git/index.lock` 削除後に `deploy.cjs` で反映）**
+- **最終更新: 2026-07-30（日次3本追加〔peg-hammer＝ペグハンマー5選・tent／tent-wood-stove＝テント内薪ストーブ5選・bonfire／yamadougu-rental＝登山道具レンタル・tent〕。ペグハンマー＝村の鍛冶屋エリッゼアルティメット〔★4.82/1638件〕/スノーピークPRO.S N-002/REIDEN/Freell/軽量360gで実勢1,680〜6,600円・比較型。薪ストーブ＝楽天供給の実態としてホンマ製作所が時計型/クッキングストーブを寡占→ブランド占有緩和を適用し同ブランド5モデル〔クッキングRS-41/ガラス窓時計1型/ステンレスセット/AR-360/レジャーカマドRM-410〕8,980〜17,800円・一酸化炭素/煙突の安全FAQ入り。Winnerwell等の高級帯は価格差5倍超で除外し記事内で言及。yamadougu-rental＝やまどうぐレンタル屋〔提携済5%〕をvariant=rentalでCalloutCtaMdx1本設置、camp-gear-rental〔campギア〕と登山ギアで非カニバリ。products.tsvに10行・amazon-link-worksheetに10行追記〔全10品Amazon検索ヒット確認済〕。スキップ2件=workman-camp-wear〔ワークマン自社チャネル専売で楽天/Amazon供給なし〕/irori-table〔楽天供給薄で5選不成立〕。記事数149→152、tent 36→38・bonfire 15→16。デプロイは `deploy.cjs` で反映）**
+- 前回: 2026-07-29（新規記事1本追加〔camp-gear-rental＝キャンプ用品レンタル完全ガイド・category=tent〕。物販5選テンプレでなく「サービス構造」〔向き不向き/借りられるギア/料金目安と買うvs借りるの損益分岐表/利用の流れ/FAQ5問/まとめ早見表〕で作成。A8サービス系案件の収益化基盤として汎用CTA部品 `CalloutCta`（`CalloutCtaMdx`）を新設し `pages/posts/[slug].tsx` に登録〔tsc --noEmit エラー0〕。hinataレンタル〔申込8%・提携済〕の成約導線を variant=rental で1本設置。記事数148→149、tent 35→36。詳細は `docs/seo-change-log.md` 2026-07-29／`docs/monetization-asp-expansion.md` 実装ログ。デプロイは `.git/index.lock` 削除後に `deploy.cjs` で反映）**
 - 前回: 2026-07-29（記事2本追加〔camp-coffee-dripper＝キャンプ用コーヒードリッパー5選・cookware／moraknife＝モーラナイフ5選・cookware、いずれも楽天API実データ・source="rakuten"・rafcidアフィリリンク〕。ドリッパー＝ユニフレーム コーヒーバネットcute/ステンレスメッシュ二重〔レビュー624件〕/キャンピングムーン分解式/薄型ステンレス¥1000/折りたたみスタンドで携帯性軸・実勢1,000〜2,420円構成。モーラナイフ＝コンパニオン ステンレス〔718件〕/ヘビーデューティー/カーボン/スパーク〔ファイヤースターター内蔵〕/エルドリスでブランド軸・法令FAQ入り・実勢2,200〜4,620円構成。products.tsvに10行追記・amazon-link-worksheetに10行追記〔Amazon存在確認済:モーラナイフ全5〔コンパニオンStainless ASIN:B004ZAIXSC〕・ユニフレーム・キャンピングムーン、汎用ステンレスドリッパー3点は同型特定困難で要確認〕。記事数146→148、cookware 20→22）**
 - 前回: 2026-07-28（記事2本追加〔compact-portable-power＝小型ポータブル電源5選・power／infinity-chair＝インフィニティチェア5選・chair-table、いずれも楽天API実データ・source="rakuten"・rafcidアフィリリンク〕。電源＝Jackery240New/AnkerC300/BLUETTI EB3A〔130Wパネルセット〕/BLUETTI AORA30V2/Jackery100Plus〔99Wh・機内持込可〕でソロ小型99〜288Wh級構成。チェア＝コールマン/サイドテーブル付/TIMBER RIDGE〔耐荷重160kg〕/ヘッドレスト付/Re:Gearで無重力系構成。products.tsvに10行追記・amazon-link-worksheetに10行追記〔Amazon存在確認済:Jackery/Anker/BLUETTI/コールマン/TIMBER RIDGE/Re:Gear、GL・vision shopは楽天専売の可能性〕。記事数144→146、power 14→15・chair-table 18→19）**
 - 前回: 2026-07-27（FAIL5記事を楽天API実データでアフィリリンク化〔screen-tarp／water-jug／cooler-ice-pack／fireproof-gloves／hand-axe〕。affiliateUrl="#"のドラフト状態を解消し、各5品を hb.afl 形式アフィリリンク・実価格・実レビューで整合〔description/badge/本文/比較表/まとめ表/intro/FAQ全面〕。products.tsv に25行追記。記事数144のまま増減なし）**
@@ -20,24 +21,24 @@
 
 ---
 
-## 記事数（2026-07-29 時点）
+## 記事数（2026-07-30 時点）
 
-- **総記事数: 149記事**（`ls content/posts/*.mdx | wc -l` で確認）
+- **総記事数: 152記事**（`ls content/posts/*.mdx | wc -l` で確認）
 
 ### カテゴリ別内訳（frontmatter `category` を集計）
 
 | slug | 表示名 | 記事数 |
 |------|--------|-------:|
-| tent | テント | 36 |
+| tent | テント | 38 |
 | sleeping-bag | 寝袋・シュラフ | 16 |
 | cookware | 調理器具 | 22 |
 | chair-table | チェア・テーブル | 19 |
 | lighting | 照明・ランタン | 13 |
 | power | 電源・バッテリー | 15 |
-| bonfire | 焚き火台 | 15 |
+| bonfire | 焚き火台 | 16 |
 | backpack | バックパック | 11 |
 | clothing | ウェア・装備 | 2 |
-| **合計** | | **149** |
+| **合計** | | **152** |
 
 > 直近の増加分: 2026-06-08 のバッチで 90→94（施策3: 焚き火シート/火ばさみ/防寒グローブ/大容量ポータブル電源）→ 99（施策4: 防水リュック/二次燃焼焚き火台/折りたたみソーラーパネル/ダッチオーブン/封筒型寝袋）→ 102（施策5: ファミリー向けキャンプコット/VASTLANDのテント/スキレット）→ 104（施策6: アウトドア用電気毛布/シェラカップ・自動選定パイプライン経由）→ 109（施策7: WAQのチェア/FIELDOORのテント/Naturehikeのマット/コールマンのテント/DODのタープ・ブランド軸5記事）→ 114（施策8: Jackeryのポータブル電源/DODのチェア/ロゴスの焚き火台/キャプテンスタッグのテーブル/EcoFlowのポータブル電源・ブランド軸5記事）→ 119（施策9: コールマンのランタン/キャプテンスタッグのチェア/ジェントスのランタン/コールマンのチェア/Naturehikeの寝袋・ブランド軸5記事）→ 124（施策10: SOTOのバーナー/ヘリノックスのチェア/Ankerのポータブル電源/カリマーのリュック/イワタニのバーナー・空きカテゴリのブランド軸5記事）→ 128（施策11: ユニフレームのバーナー/BLUETTIのポータブル電源/グレゴリーのリュック/オスプレーのリュック・手薄カテゴリのブランド軸4記事）→ 133（施策12: コールマンの焚き火台/DODのテーブル/ドイターのリュック/ベアボーンズのランタン/ミステリーランチのリュック・空きカテゴリのブランド軸5記事）。詳細は `docs/seo-change-log.md` を参照。
 

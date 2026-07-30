@@ -281,6 +281,17 @@ KWの検索意図と紹介商品が一致しなければCVRが落ちる。
 
 ---
 
+## 隣接ASP収益化（CalloutCta ／ 日次3本ルール・2026-07-29〜）
+
+物販（Amazon/楽天）に加え、単価の高いキャンプ隣接ASPを収益化に導入している。管理台帳は `_file/asp-programs.tsv`（案件名／ASP／プログラムID／料率／提携状況／アフィリリンク）。
+
+- **CTA部品**: サービス系案件（レンタル・ふるさと納税・体験予約）の成約導線は `components/article/CalloutCta.tsx` を使う。MDXでは `<CalloutCtaMdx variant="rental|furusato|leisure" title=… body=… linkText=… href=… note=… />`。物販の `ProductCardMdx` とは別建て。外部リンクは `rel="sponsored nofollow"` 固定・PR表記（note）必須。ボタンは原色オレンジ＋白文字。
+- **リンクは提携済みのみ**: `asp-programs.tsv` で『提携済』の案件だけリンクを挿入する。審査中（例: さとふる・アソビュー）は記事化しない／リンクを貼らない。承認され次第リンク生成して差し込む。
+- **日次タスク（campkit-new-article-draft）は平日3本**: 商品5選2本＋隣接ASP専用1本。ASP記事はサービス構造（`content/posts/camp-gear-rental.mdx` が手本）。ASP用KWは `_file/keyword-backlog.tsv` に `source=asp` でタグ。カニバリしない承認済み角度が無い日は商品3本にして『ASP在庫補充が必要』と報告（品質優先の安全弁）。
+- **第一弾**: `content/posts/camp-gear-rental.mdx`（hinataレンタル／申込8%）。詳細は `docs/monetization-asp-expansion.md`。
+
+---
+
 ## 安全ルール
 
 - **既存記事ファイルには触らない**（誤って上書きしないこと）

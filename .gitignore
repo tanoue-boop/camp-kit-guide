@@ -58,6 +58,21 @@ _file/products.tsv
 # stray editor/script backups
 *.bak
 
+# FUSE (Google Drive等) 上でTSVを開いたまま更新した際に残る一時ファイル
+.fuse_hidden*
+
+# 誤配置された無関係ファイル（他案件の見積書PDF等）。公開リポへの混入防止
+components/_deita/
+
 # build logs
 build.log
 kidsbuild.log
+
+# Non-project file accidentally dropped into the repo (2026-07-29): an unrelated
+# business quote PDF under components/_deita/. Kept on disk, excluded from Git so it
+# never reaches the public repo. Move it out to its proper location when convenient.
+components/_deita/
+
+# FUSE (Google Drive mount) leftover artifacts created when TSVs under _file/ are
+# rewritten while a handle is still open (.fuse_hiddenXXXX = stale duplicate, disposable).
+.fuse_hidden*
