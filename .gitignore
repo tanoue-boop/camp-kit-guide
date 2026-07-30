@@ -36,8 +36,10 @@ yarn-error.log*
 # vercel
 .vercel
 
-# local agent/editor settings (machine-specific, not for the repo)
-.claude/
+# local agent/editor settings (machine-specific). Ignore only the per-machine file,
+# NOT the whole .claude/ dir — .claude/skills/ は共有資産なので追跡を維持する
+# （ディレクトリ丸ごと ignore にすると新規スキルが取りこぼされるため）。
+.claude/settings.local.json
 
 # deploy serialization lock (scripts/deploy.cjs)
 .deploy.lock
