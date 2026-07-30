@@ -36,6 +36,9 @@ yarn-error.log*
 # vercel
 .vercel
 
+# local agent/editor settings (machine-specific, not for the repo)
+.claude/
+
 # deploy serialization lock (scripts/deploy.cjs)
 .deploy.lock
 
@@ -67,12 +70,3 @@ components/_deita/
 # build logs
 build.log
 kidsbuild.log
-
-# Non-project file accidentally dropped into the repo (2026-07-29): an unrelated
-# business quote PDF under components/_deita/. Kept on disk, excluded from Git so it
-# never reaches the public repo. Move it out to its proper location when convenient.
-components/_deita/
-
-# FUSE (Google Drive mount) leftover artifacts created when TSVs under _file/ are
-# rewritten while a handle is still open (.fuse_hiddenXXXX = stale duplicate, disposable).
-.fuse_hidden*

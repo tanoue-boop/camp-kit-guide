@@ -148,9 +148,13 @@ try {
 }
 
 // 3. add（対象を限定）
-console.log('\n■ 3. git add（content/posts _file docs pages components styles scripts）');
+console.log('\n■ 3. git add（content/posts _file docs pages components styles scripts + ルート直下 CLAUDE.md .gitignore next.config.ts）');
 waitGitIndexLock();
-run('git add content/posts _file docs pages components styles scripts');
+// サブディレクトリに加え、日次運用で更新し得るルート直下ファイルも明示的に含める。
+// （旧: サブディレクトリのみ→CLAUDE.md/.gitignore/next.config.ts 更新が毎回サイレントに取りこぼされていた）
+// next.config.ts はカニバリ整理時の恒久リダイレクト追記で触る。
+// .env/node_modules は下の hasDangerousPath と .gitignore で二重に防止。
+run('git add content/posts _file docs pages components styles scripts CLAUDE.md .gitignore next.config.ts');
 
 // 3.5 ステージ内容の最終安全確認
 const staged = cap('git diff --cached --name-only');
