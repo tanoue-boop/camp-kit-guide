@@ -34,6 +34,11 @@ const msg = process.argv.slice(2).join(' ').trim();
 // 自動で待機/回収する。
 const LOCK = path.join(REPO, '.deploy.lock');
 const GIT_INDEX_LOCK = path.join(REPO, '.git', 'index.lock');
+const GIT_HEAD_LOCK = path.join(REPO, '.git', 'HEAD.lock');
+const GIT_REF_LOCK = path.join(REPO, '.git', 'refs', 'heads', 'main.lock');
+// commit は index.lock だけでなく HEAD.lock / refs/heads/main.lock も掴む。
+// 残骸が残ると `fatal: cannot lock ref 'HEAD'` で commit が中断するため全て回収対象にする。
+const GIT_LOCKS = [GIT_INDEX_LOCK, GIT_HEAD_LOCK, GIT_REF_LOCK];
 const LOCK_STALE_MS = 15 * 60 * 1000; // これより古い .deploy.lock は死んだプロセスとみなし回収
 const LOCK_WAIT_MS = 20 * 60 * 1000; // 別 deploy の完了をこの時間まで待つ
 const IDX_STALE_MS = 2 * 60 * 1000; // これより古い index.lock は stale とみなし除去
@@ -86,22 +91,26 @@ for (const sig of ['SIGINT', 'SIGTERM', 'SIGHUP']) {
   process.on(sig, () => { releaseLock(); process.exit(1); });
 }
 
-// 別の git 処理が残した index.lock を待機し、stale なら除去する
+// 別の git 処理が残した各種ロック（index.lock / HEAD.lock / refs/heads/main.lock）を
+// 待機し、stale なら除去する。残骸で commit が fatal 落ちするのを防ぐ。
 function waitGitIndexLock() {
-  const deadline = Date.now() + IDX_WAIT_MS;
-  while (fs.existsSync(GIT_INDEX_LOCK)) {
-    let age = Infinity;
-    try { age = Date.now() - fs.statSync(GIT_INDEX_LOCK).mtimeMs; } catch { break; }
-    if (age > IDX_STALE_MS) {
-      console.warn(`⚠ 古い .git/index.lock (${Math.round(age / 1000)}s) を除去します`);
-      try { fs.unlinkSync(GIT_INDEX_LOCK); } catch {}
-      break;
+  for (const lockPath of GIT_LOCKS) {
+    const name = path.relative(REPO, lockPath).replace(/\\/g, '/');
+    const deadline = Date.now() + IDX_WAIT_MS;
+    while (fs.existsSync(lockPath)) {
+      let age = Infinity;
+      try { age = Date.now() - fs.statSync(lockPath).mtimeMs; } catch { break; }
+      if (age > IDX_STALE_MS) {
+        console.warn(`⚠ 古い ${name} (${Math.round(age / 1000)}s) を除去します`);
+        try { fs.unlinkSync(lockPath); } catch {}
+        break;
+      }
+      if (Date.now() > deadline) {
+        abort(`${name} が解放されません。別の git 処理を確認してください。`);
+      }
+      console.log(`… 別の git 処理が進行中。${name} の解放を待機します…`);
+      sleepSync(3000);
     }
-    if (Date.now() > deadline) {
-      abort('.git/index.lock が解放されません。別の git 処理を確認してください。');
-    }
-    console.log('… 別の git 処理が進行中。index.lock の解放を待機します…');
-    sleepSync(3000);
   }
 }
 
