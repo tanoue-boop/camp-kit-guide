@@ -2,7 +2,8 @@
 
 サイトの現状（記事数・カテゴリ構成・GAS/インフラ構造）を記録するスナップショット。記事追加・カテゴリ変更・GAS構造変更のたびに最新化する（→ 運用ルールは CLAUDE.md「記録更新ルール」を参照）。
 
-- **最終更新: 2026-07-31（日次3本＝全てASP専用記事〔tebura-camp＝手ぶらキャンプ・tent／tent-furusato＝テントふるさと納税・tent／power-furusato＝ポータブル電源ふるさと納税・power〕。★商品KWバックログが枯渇（source≠aspのpending=0）につき、この日は商品5選を作れず、提携済ASP案件のみで3本を構成した。tebura-camp＝hinataレンタル〔提携済8%〕variant=rentalで、camp-gear-rental〔買うvs借りる損益分岐総論〕と別角度＝道具ゼロで一泊を体験する初心者導線。tent-furusato/power-furusato＝楽天ふるさと納税〔利用可・rafcidリンク〕variant=furusato。既存にふるさと納税記事は無く新規クラスタの起点。2本はテント/電源で対象カテゴリが異なり相互非カニバリ。いずれも実質2,000円・控除上限・ワンストップ特例の制度説明＋楽天ふるさと納税検索へ誘導（具体自治体・寄付額は創作せず）。CalloutCtaMdxは各1本。products.tsv/amazon-worksheetは追記なし（ASP記事のため楽天API不使用）。記事数152→155、tent 38→40・power 15→16。★要対応:商品KW在庫補充が必要（keyword-backlogのsource≠asp pending=0）。デプロイは `deploy.cjs` で反映）**
+- **最終更新: 2026-07-31（第2便・日次3本追加〔portable-cooler-aircon＝ポータブルクーラー5選・power／ground-sheet＝グランドシート5選・tent／cooler-furusato＝クーラーボックスふるさと納税・cookware〕。ポータブルクーラー＝コンプレッサー式スポットクーラーで統一〔アイリスオーヤマ¥29800/タンスのゲン¥29999/EENOUR¥69990/THREEUP¥25800/QUADS¥24800〕実勢24,800〜69,990円・楽天API実データ・車中泊/猛暑向けでpower記事へ内部リンク。グランドシート＝楽天供給off-intent〔ワンタッチテント/レジャーシート混在でfootprint実績薄〕のためAmazon源で作成〔GEERTOP防水8000mm¥2999・6,311件/TRIWONDER¥1680/ZEN Camps帆布¥5485/GOGlamping420D¥1504/Clostnature¥1899〕source=amazon+ASIN・実勢1,504〜5,485円。cooler-furusato＝楽天ふるさと納税variant=furusato・サービス構造+CalloutCtaMdx1本、既存power-furusato/tent-furusatoと対象カテゴリ別で非カニバリ・断熱方式/容量/控除上限の制度説明+楽天ふるさと納税検索へ誘導（具体自治体・寄付額は創作せず）。skip1件=camp-kotatsu〔『キャンプこたつ』は室内こたつ布団/パネルヒーターが大半で専用こたつ本体の実績品が5点そろわず用途一貫性を満たせない〕。products.tsvに10行・amazon-worksheetに10行追記〔アイリス/タンスのゲン/QUADSはAmazon存在確認・EENOUR/THREEUPは楽天中心で要確認・グランドシート5点はAmazon源〕。記事数155→158、power 16→17・tent 40→41・cookware 22→23。★要対応:商品KW在庫補充が必要（keyword-backlog source≠asp pending=0）。デプロイは `deploy.cjs` で反映）**
+- **前回: 2026-07-31（日次3本＝全てASP専用記事〔tebura-camp＝手ぶらキャンプ・tent／tent-furusato＝テントふるさと納税・tent／power-furusato＝ポータブル電源ふるさと納税・power〕。★商品KWバックログが枯渇（source≠aspのpending=0）につき、この日は商品5選を作れず、提携済ASP案件のみで3本を構成した。tebura-camp＝hinataレンタル〔提携済8%〕variant=rentalで、camp-gear-rental〔買うvs借りる損益分岐総論〕と別角度＝道具ゼロで一泊を体験する初心者導線。tent-furusato/power-furusato＝楽天ふるさと納税〔利用可・rafcidリンク〕variant=furusato。既存にふるさと納税記事は無く新規クラスタの起点。2本はテント/電源で対象カテゴリが異なり相互非カニバリ。いずれも実質2,000円・控除上限・ワンストップ特例の制度説明＋楽天ふるさと納税検索へ誘導（具体自治体・寄付額は創作せず）。CalloutCtaMdxは各1本。products.tsv/amazon-worksheetは追記なし（ASP記事のため楽天API不使用）。記事数152→155、tent 38→40・power 15→16。★要対応:商品KW在庫補充が必要（keyword-backlogのsource≠asp pending=0）。デプロイは `deploy.cjs` で反映）**
 - 前回: 2026-07-30（日次3本追加〔peg-hammer＝ペグハンマー5選・tent／tent-wood-stove＝テント内薪ストーブ5選・bonfire／yamadougu-rental＝登山道具レンタル・tent〕。ペグハンマー＝村の鍛冶屋エリッゼアルティメット〔★4.82/1638件〕/スノーピークPRO.S N-002/REIDEN/Freell/軽量360gで実勢1,680〜6,600円・比較型。薪ストーブ＝楽天供給の実態としてホンマ製作所が時計型/クッキングストーブを寡占→ブランド占有緩和を適用し同ブランド5モデル〔クッキングRS-41/ガラス窓時計1型/ステンレスセット/AR-360/レジャーカマドRM-410〕8,980〜17,800円・一酸化炭素/煙突の安全FAQ入り。Winnerwell等の高級帯は価格差5倍超で除外し記事内で言及。yamadougu-rental＝やまどうぐレンタル屋〔提携済5%〕をvariant=rentalでCalloutCtaMdx1本設置、camp-gear-rental〔campギア〕と登山ギアで非カニバリ。products.tsvに10行・amazon-link-worksheetに10行追記〔全10品Amazon検索ヒット確認済〕。スキップ2件=workman-camp-wear〔ワークマン自社チャネル専売で楽天/Amazon供給なし〕/irori-table〔楽天供給薄で5選不成立〕。記事数149→152、tent 36→38・bonfire 15→16。デプロイは `deploy.cjs` で反映）**
 - 前回: 2026-07-29（新規記事1本追加〔camp-gear-rental＝キャンプ用品レンタル完全ガイド・category=tent〕。物販5選テンプレでなく「サービス構造」〔向き不向き/借りられるギア/料金目安と買うvs借りるの損益分岐表/利用の流れ/FAQ5問/まとめ早見表〕で作成。A8サービス系案件の収益化基盤として汎用CTA部品 `CalloutCta`（`CalloutCtaMdx`）を新設し `pages/posts/[slug].tsx` に登録〔tsc --noEmit エラー0〕。hinataレンタル〔申込8%・提携済〕の成約導線を variant=rental で1本設置。記事数148→149、tent 35→36。詳細は `docs/seo-change-log.md` 2026-07-29／`docs/monetization-asp-expansion.md` 実装ログ。デプロイは `.git/index.lock` 削除後に `deploy.cjs` で反映）**
 - 前回: 2026-07-29（記事2本追加〔camp-coffee-dripper＝キャンプ用コーヒードリッパー5選・cookware／moraknife＝モーラナイフ5選・cookware、いずれも楽天API実データ・source="rakuten"・rafcidアフィリリンク〕。ドリッパー＝ユニフレーム コーヒーバネットcute/ステンレスメッシュ二重〔レビュー624件〕/キャンピングムーン分解式/薄型ステンレス¥1000/折りたたみスタンドで携帯性軸・実勢1,000〜2,420円構成。モーラナイフ＝コンパニオン ステンレス〔718件〕/ヘビーデューティー/カーボン/スパーク〔ファイヤースターター内蔵〕/エルドリスでブランド軸・法令FAQ入り・実勢2,200〜4,620円構成。products.tsvに10行追記・amazon-link-worksheetに10行追記〔Amazon存在確認済:モーラナイフ全5〔コンパニオンStainless ASIN:B004ZAIXSC〕・ユニフレーム・キャンピングムーン、汎用ステンレスドリッパー3点は同型特定困難で要確認〕。記事数146→148、cookware 20→22）**
@@ -22,24 +23,24 @@
 
 ---
 
-## 記事数（2026-07-30 時点）
+## 記事数（2026-07-31 時点）
 
-- **総記事数: 155記事**（`ls content/posts/*.mdx | wc -l` で確認）
+- **総記事数: 158記事**（`ls content/posts/*.mdx | wc -l` で確認）
 
 ### カテゴリ別内訳（frontmatter `category` を集計）
 
 | slug | 表示名 | 記事数 |
 |------|--------|-------:|
-| tent | テント | 40 |
+| tent | テント | 41 |
 | sleeping-bag | 寝袋・シュラフ | 16 |
-| cookware | 調理器具 | 22 |
+| cookware | 調理器具 | 23 |
 | chair-table | チェア・テーブル | 19 |
 | lighting | 照明・ランタン | 13 |
-| power | 電源・バッテリー | 16 |
+| power | 電源・バッテリー | 17 |
 | bonfire | 焚き火台 | 16 |
 | backpack | バックパック | 11 |
 | clothing | ウェア・装備 | 2 |
-| **合計** | | **152** |
+| **合計** | | **158** |
 
 > 直近の増加分: 2026-06-08 のバッチで 90→94（施策3: 焚き火シート/火ばさみ/防寒グローブ/大容量ポータブル電源）→ 99（施策4: 防水リュック/二次燃焼焚き火台/折りたたみソーラーパネル/ダッチオーブン/封筒型寝袋）→ 102（施策5: ファミリー向けキャンプコット/VASTLANDのテント/スキレット）→ 104（施策6: アウトドア用電気毛布/シェラカップ・自動選定パイプライン経由）→ 109（施策7: WAQのチェア/FIELDOORのテント/Naturehikeのマット/コールマンのテント/DODのタープ・ブランド軸5記事）→ 114（施策8: Jackeryのポータブル電源/DODのチェア/ロゴスの焚き火台/キャプテンスタッグのテーブル/EcoFlowのポータブル電源・ブランド軸5記事）→ 119（施策9: コールマンのランタン/キャプテンスタッグのチェア/ジェントスのランタン/コールマンのチェア/Naturehikeの寝袋・ブランド軸5記事）→ 124（施策10: SOTOのバーナー/ヘリノックスのチェア/Ankerのポータブル電源/カリマーのリュック/イワタニのバーナー・空きカテゴリのブランド軸5記事）→ 128（施策11: ユニフレームのバーナー/BLUETTIのポータブル電源/グレゴリーのリュック/オスプレーのリュック・手薄カテゴリのブランド軸4記事）→ 133（施策12: コールマンの焚き火台/DODのテーブル/ドイターのリュック/ベアボーンズのランタン/ミステリーランチのリュック・空きカテゴリのブランド軸5記事）。詳細は `docs/seo-change-log.md` を参照。
 

@@ -53,12 +53,32 @@ function readLocal(slug) {
   return { title: titleMatch ? titleMatch[1] : null, cardCount };
 }
 
-async function fetchWithRetry(url) {
+async function fetchWithRetry(url, expectedTitle = null) {
   let last = null;
   for (let i = 0; i < RETRY; i++) {
     try {
       const res = await fetch(url, { redirect: 'follow' });
-      if (res.status === 200) return { status: 200, html: await res.text() };
+      if (res.status === 200) {
+        const html = await res.text();
+        // 既存記事のリライトは反映前でも200(旧HTML)を返すため、200だけでは反映完了と判断できない。
+        // expectedTitle が指定されていれば、本番の<title>に期待タイトルが含まれるまで
+        // 「反映待ち」とみなして再試行する（新規記事の404リトライと同じ猶予をリライトにも与える）。
+        if (expectedTitle) {
+          const m = html.match(/<title[^>]*>([\s\S]*?)<\/title>/i);
+          const liveTitle = m ? m[1].trim() : '';
+          if (!liveTitle.includes(expectedTitle)) {
+            last = { status: 200, html };
+            if (i < RETRY - 1) {
+              console.log(
+                `   …本番がまだ旧タイトルを返しています（Vercel反映待ち）。${RETRY_WAIT_MS / 1000}秒待って再試行 (${i + 2}/${RETRY})`
+              );
+              await sleep(RETRY_WAIT_MS);
+            }
+            continue;
+          }
+        }
+        return { status: 200, html };
+      }
       last = { status: res.status, html: '' };
     } catch (e) {
       last = { status: 0, html: '', error: e.message };
@@ -121,7 +141,7 @@ async function verify(slug) {
   }
 
   const url = `${BASE}/posts/${slug}`;
-  const res = await fetchWithRetry(url);
+  const res = await fetchWithRetry(url, local.title);
 
   // 1. HTTP 200
   const ok200 = res.status === 200;
