@@ -52,7 +52,10 @@ function readLocal(slug) {
   const cardCount = (src.match(/<ProductCardMdx/g) || []).length;
   // Amazonボタンが出るはずのカードの目安（amazonAsin / amazonUrl / source="amazon"）
   const amazonHints = (src.match(/amazonAsin="|amazonUrl="|source="amazon"/g) || []).length;
-  return { title: titleMatch ? titleMatch[1] : null, cardCount, amazonHints };
+  // 同一記事内での amazonAsin 重複検出（別商品に同じASIN＝誤リンク。例: ST/LX に同じ親ASIN）
+  const asins = [...src.matchAll(/amazonAsin="([A-Z0-9]{10})"/g)].map((m) => m[1]);
+  const dupAsins = [...new Set(asins.filter((a, i) => asins.indexOf(a) !== i))];
+  return { title: titleMatch ? titleMatch[1] : null, cardCount, amazonHints, dupAsins };
 }
 
 async function fetchWithRetry(url, expectedTitle = null) {
@@ -184,6 +187,14 @@ async function verify(slug) {
   console.log(
     `  ${tagOk ? 'PASS' : 'FAIL'}  Amazonタグ健全性` +
       `  空タグ${links.amazonEmptyTag} / プレースホルダ${links.amazonPlaceholderTag}`
+  );
+
+  // 3c. 同一記事内で同じ amazonAsin が複数カードに付いていないか（別商品に同じASIN＝誤リンク）
+  const dupOk = !local.dupAsins || local.dupAsins.length === 0;
+  results.push(dupOk);
+  console.log(
+    `  ${dupOk ? 'PASS' : 'FAIL'}  ASIN重複なし` +
+      (dupOk ? '' : `  重複ASIN: ${local.dupAsins.join(', ')}`)
   );
 
   // 4. PR表記
