@@ -50,7 +50,9 @@ function readLocal(slug) {
   const src = fs.readFileSync(file, 'utf8');
   const titleMatch = src.match(/^title:\s*"([\s\S]*?)"\s*$/m);
   const cardCount = (src.match(/<ProductCardMdx/g) || []).length;
-  return { title: titleMatch ? titleMatch[1] : null, cardCount };
+  // Amazonボタンが出るはずのカードの目安（amazonAsin / amazonUrl / source="amazon"）
+  const amazonHints = (src.match(/amazonAsin="|amazonUrl="|source="amazon"/g) || []).length;
+  return { title: titleMatch ? titleMatch[1] : null, cardCount, amazonHints };
 }
 
 async function fetchWithRetry(url, expectedTitle = null) {
@@ -127,7 +129,10 @@ function countAffiliateLinks(html) {
   const rakuten = rakutenHb + rakutenDirect;
   const amazonTag = (html.match(/amazon\.co\.jp\/dp\/[A-Z0-9]+\?tag=/g) || []).length;
   const amznTo = (html.match(/amzn\.to\/[A-Za-z0-9]+/g) || []).length;
-  return { rakuten, amazonTag, amznTo, total: rakuten + amazonTag + amznTo };
+  // 不正タグ検出: tag= の直後が引用符/&/空白/) = 空タグ。既知プレースホルダも検出。
+  const amazonEmptyTag = (html.match(/amazon\.co\.jp\/dp\/[A-Z0-9]+\?tag=["'&\s)]/g) || []).length;
+  const amazonPlaceholderTag = (html.match(/tag=your-associate-tag-22\b/g) || []).length;
+  return { rakuten, amazonTag, amznTo, amazonEmptyTag, amazonPlaceholderTag, total: rakuten + amazonTag + amznTo };
 }
 
 async function verify(slug) {
@@ -159,14 +164,26 @@ async function verify(slug) {
   results.push(titleOk);
   console.log(`  ${titleOk ? 'PASS' : 'FAIL'}  title  期待:「${local.title}」 実際:「${liveTitle}」`);
 
-  // 3. アフィリリンク数
+  // 3. アフィリリンク数（＋Amazonを持つはずの記事は本番でAmazon検出>0を必須）
   const links = countAffiliateLinks(html);
-  const linkOk = local.cardCount === 0 ? true : links.total >= local.cardCount;
+  const amazonLive = links.amazonTag + links.amznTo;
+  const linkOk =
+    (local.cardCount === 0 ? true : links.total >= local.cardCount) &&
+    (local.amazonHints === 0 || amazonLive > 0);
   results.push(linkOk);
   console.log(
     `  ${linkOk ? 'PASS' : 'FAIL'}  アフィリリンク ${links.total}件` +
       ` (楽天${links.rakuten} / Amazon-tag${links.amazonTag} / amzn.to${links.amznTo})` +
-      `  ProductCard ${local.cardCount}件`
+      `  ProductCard ${local.cardCount}件` +
+      (local.amazonHints > 0 ? ` / Amazon期待${local.amazonHints}→実${amazonLive}` : '')
+  );
+
+  // 3b. Amazonタグ健全性: 空タグ / プレースホルダは成果が計上されないため FAIL
+  const tagOk = links.amazonEmptyTag === 0 && links.amazonPlaceholderTag === 0;
+  results.push(tagOk);
+  console.log(
+    `  ${tagOk ? 'PASS' : 'FAIL'}  Amazonタグ健全性` +
+      `  空タグ${links.amazonEmptyTag} / プレースホルダ${links.amazonPlaceholderTag}`
   );
 
   // 4. PR表記
