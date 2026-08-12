@@ -58,7 +58,7 @@ function readLocal(slug) {
   return { title: titleMatch ? titleMatch[1] : null, cardCount, amazonHints, dupAsins };
 }
 
-async function fetchWithRetry(url, expectedTitle = null) {
+async function fetchWithRetry(url, expectedTitle = null, expectAmazon = 0) {
   let last = null;
   for (let i = 0; i < RETRY; i++) {
     try {
@@ -76,6 +76,21 @@ async function fetchWithRetry(url, expectedTitle = null) {
             if (i < RETRY - 1) {
               console.log(
                 `   …本番がまだ旧タイトルを返しています（Vercel反映待ち）。${RETRY_WAIT_MS / 1000}秒待って再試行 (${i + 2}/${RETRY})`
+              );
+              await sleep(RETRY_WAIT_MS);
+            }
+            continue;
+          }
+        }
+        // 本文のみ変更(title不変)のデプロイでは、期待ありなのに本番Amazonリンクが0本＝未反映のことがある。
+        // その場合も「反映待ち」とみなして再試行する（Amazon期待>0 かつ 本番実0 のとき）。
+        if (expectAmazon > 0) {
+          const l = countAffiliateLinks(html);
+          if (l.amazonTag + l.amznTo === 0) {
+            last = { status: 200, html };
+            if (i < RETRY - 1) {
+              console.log(
+                `   …本番にAmazonリンクがまだ0本です（Vercel反映待ち）。${RETRY_WAIT_MS / 1000}秒待って再試行 (${i + 2}/${RETRY})`
               );
               await sleep(RETRY_WAIT_MS);
             }
@@ -149,7 +164,7 @@ async function verify(slug) {
   }
 
   const url = `${BASE}/posts/${slug}`;
-  const res = await fetchWithRetry(url, local.title);
+  const res = await fetchWithRetry(url, local.title, local.amazonHints);
 
   // 1. HTTP 200
   const ok200 = res.status === 200;
