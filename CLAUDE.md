@@ -292,8 +292,19 @@ KWの検索意図と紹介商品が一致しなければCVRが落ちる。
   3. **提携済でも `最終確認日` が空 or 60日超なら「未再確認」扱い**。実確認できる回に現況を見て `最終確認日`（YYYY-MM-DD）を更新する。実確認できない自律回は、実績のある確実な提携済案件（hinataレンタル／hinataストア／やまどうぐレンタル屋／BLUETTI）に限定してリンクを挿入し、それ以外は使用を保留する。
   4. **報告での表現**: 提携状況に触れるときは「実確認済（YYYY-MM-DD）」か「台帳ベース（最終確認: … ／未確認）」かを必ず明示し、未確認を承認済みのように断定しない。
 - **承認され次第**: 審査中案件（例: さとふる・アソビュー・ふるさとチョイス）は、上記フローで提携済を実確認できた時点で `href` を発行し `最終確認日` を記録してから、該当variant（furusato/leisure）で記事に差し込む。
-- **日次タスク（campkit-new-article-draft）は平日3本**: 商品5選2本＋隣接ASP専用1本。ASP記事はサービス構造（`content/posts/camp-gear-rental.mdx` が手本）。ASP用KWは `_file/keyword-backlog.tsv` に `source=asp` でタグ。カニバリしない承認済み角度が無い日は商品3本にして『ASP在庫補充が必要』と報告（品質優先の安全弁）。
+- **日次タスク（campkit-new-article-draft）は平日3件**: 既定は商品5選2本＋隣接ASP専用1本。ただし後述の既存記事修正キューに pending があれば、それを最優先で当日1件消化し、その分だけ新規商品記事を1本減らす（例: 既存修正1＋商品5選1＋ASP1）。ASP記事はサービス構造（`content/posts/camp-gear-rental.mdx` が手本）。ASP用KWは `_file/keyword-backlog.tsv` に `source=asp` でタグ。カニバリしない承認済み角度が無い日は商品記事に振り替えて『ASP在庫補充が必要』と報告（品質優先の安全弁）。
 - **第一弾**: `content/posts/camp-gear-rental.mdx`（hinataレンタル／申込8%）。詳細は `docs/monetization-asp-expansion.md`。
+
+---
+
+## 既存記事の修正キュー（article-fix-backlog ／ 2026-08-12〜）
+
+価格チェック等で見つかる「価格更新では済まない案件（廃番・掲載ページ404・同URLで別商品に差し替わり・型番差し替えが要る等）」を、提案で埋もれさせず自動で次の作業に乗せるためのキュー。台帳は `_file/article-fix-backlog.tsv`（列: status／priority／target_slug／position(第N位＋商品名)／issue_type(discontinued_404｜product_swap｜price_unconfirmed 等)／detail／rakuten_url／source／added_date／notes）。
+
+- **積む側（detector）**: `campkit-price-check`（水）が、確定できず提案に回す案件を pending 行で自動追記する（同一 target_slug＋position の重複は追記せず最新化）。他の実装タスクも同様に積んでよい。
+- **消化する側（executor）**: `campkit-new-article-draft`（平日日次）が、新規作成より前に pending 最上位1件を手順Fで差し替え実行し、当日3枠の1つに充てる（＝新規商品記事を1本減らす）。差し替え商品は楽天API/Amazonの実在・レビュー実績データで選び直し、KW整合性（価格帯・用途）を満たすこと。
+- **例外の範囲**: 手順Fは「既存記事は上書きしない」原則の明示的な例外。ただし触ってよいのは【対象の該当ProductCard＋その商品に紐づく比較表行・まとめ表行・description中の該当価格/商品名】のみ。記事の他の商品・構成・アフィリリンク・thumbnailは変更しない。適切な代替が無い/構成の作り直しが要る重い案件は status=needs-human にして notes に論点を残し、当日枠は新規に振り替える（品質優先）。
+- **記録**: 差し替えを実行したら `docs/seo-change-log.md` に「対象記事・旧→新・理由(issue_type)」を追記し、backlog 行を status=done（notes に日付）にする。
 
 ---
 

@@ -23,6 +23,7 @@ const GOOGLE_SEARCH = (name: string) =>
 // we intentionally no longer fall back to a tagless Amazon search URL.
 function getAmazonUrl(product: Product): string | null {
   if (product.amazonUrl) return product.amazonUrl;
+  if (product.amazonAsin) return buildAmazonUrl(product.amazonAsin);
   if (product.source === "amazon" && product.affiliateUrl && product.affiliateUrl !== "#") {
     return buildAmazonUrl(product.affiliateUrl);
   }
