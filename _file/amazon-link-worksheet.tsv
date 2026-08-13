@@ -974,7 +974,7 @@ backpack-large	登山リュック 65L 大容量(kuriaafew)				no-amazon (ノー�
 bluetti-power	BLUETTI EB3A 268Wh＋130Wソーラーパネルセット				no-amazon (Amazonは100Wセット/単体のみ・130Wセット不在) 2026-08-12
 bonfire-sheet	山麓工房 焚き火シート 耐熱5層構造				no-amazon (Amazonは3層版のみ・層数スペック不一致) 2026-08-12
 bonfire-sheet	焚き火シート スパッタシート ハトメ付き				no-amazon (ノーブランド汎用・同定不能) 2026-08-12
-bonfire-stand-solo	TokyoCamp 焚き火台		https://www.amazon.co.jp/dp/B08CZWJ7P8		set:B08CZWJ7P8 2026-08-12
+bonfire-stand-solo	TokyoCamp 焚き火台				removed 2026-08-13 (B08CZWJ7P8=Tokyo Camp HAKOSUKA別モデル・標準TokyoCamp焚き火台と不一致→amazonAsin撤去し楽天のみへ差戻し。標準単体はAmazon特定不可)
 bonfire-stand-solo	Mystic Ridge 焚火台 コンパクト ソロ				no-amazon (Mystic RidgeブランドAmazon不在) 2026-08-12
 bonfire-stand-solo	ファイアスタンド 超軽量 ステンレス				no-amazon (ノーブランド汎用・同定不能) 2026-08-12
 camp-backpack-beginner	tousen汎用 登山リュック 40〜60L(rank2)				no-amazon (ノーブランド汎用・同定不能) 2026-08-12
@@ -984,3 +984,29 @@ camp-coffee-dripper	ステンレス製 メッシュ二重構造 ペーパーレ�
 camp-coffee-dripper	折りたためる薄型ステンレス コーヒーフィルター				no-amazon (ノーブランド汎用・同定不能) 2026-08-12
 camp-coffee-dripper	折りたたみ ステンレス コーヒードリッパースタンド R.A.N.				no-amazon (R.A.N.ブランドAmazon不在) 2026-08-12
 camp-cooler-box-overall	アイリスオーヤマ HUGEL VITC-40 保冷材付きセット				no-amazon (カードは保冷材付セット・Amazonは単体のみで構成/価格相違) 2026-08-12
+sleeping-bag-liner	Bears Rock くるむん インナーシュラフ フリース	https://item.rakuten.co.jp/gorilla55/in-sf/?rafcid=wsc_i_is_ea4b84f0-cfca-4a84-b96e-a8423bbc252f			楽天源・Amazon検索待ち(amzn.to発行バッチ待ち) 2026-08-13
+sleeping-bag-liner	軽量 薄手 インナーシーツ 封筒型 丸洗い可能	https://item.rakuten.co.jp/ishi0424/k-innershruff01/?rafcid=wsc_i_is_ea4b84f0-cfca-4a84-b96e-a8423bbc252f			楽天源・Amazon検索待ち(amzn.to発行バッチ待ち) 2026-08-13
+sleeping-bag-liner	防災士監修 封筒型フリース インナーシュラフ	https://item.rakuten.co.jp/patri/ad196/?rafcid=wsc_i_is_ea4b84f0-cfca-4a84-b96e-a8423bbc252f			楽天源・Amazon検索待ち(amzn.to発行バッチ待ち) 2026-08-13
+sleeping-bag-liner	Bears Rock くるむん ボアロング ボアフリース	https://item.rakuten.co.jp/gorilla55/boa_long/?rafcid=wsc_i_is_ea4b84f0-cfca-4a84-b96e-a8423bbc252f			楽天源・Amazon検索待ち(amzn.to発行バッチ待ち) 2026-08-13
+sleeping-bag-liner	GARAGE COLLECTION インナーシュラフ 毛布	https://item.rakuten.co.jp/weiwei/odsbfl/?rafcid=wsc_i_is_ea4b84f0-cfca-4a84-b96e-a8423bbc252f			楽天源・Amazon検索待ち(amzn.to発行バッチ待ち) 2026-08-13
+gas-lantern	コールマン 2500ノーススターLPガスランタン 3点セット	https://item.rakuten.co.jp/naturum/2570772/?rafcid=wsc_i_is_ea4b84f0-cfca-4a84-b96e-a8423bbc252f			楽天源・Amazon検索待ち(amzn.to発行バッチ待ち) 2026-08-13
+gas-lantern	SOTO 虫の寄りにくいランタン ST-233	https://item.rakuten.co.jp/mitsuyoshi/st-233-shinfuji-set/?rafcid=wsc_i_is_ea4b84f0-cfca-4a84-b96e-a8423bbc252f			楽天源・Amazon検索待ち(amzn.to発行バッチ待ち) 2026-08-13
+gas-lantern	スノーピーク リトルランプ ノクターン GL-140	https://item.rakuten.co.jp/canpanera/s06127/?rafcid=wsc_i_is_ea4b84f0-cfca-4a84-b96e-a8423bbc252f			楽天源・Amazon検索待ち(amzn.to発行バッチ待ち) 2026-08-13
+gas-lantern	コールマン ルミエールランタン+純正LPガス燃料	https://item.rakuten.co.jp/naturum/9904256/?rafcid=wsc_i_is_ea4b84f0-cfca-4a84-b96e-a8423bbc252f			楽天源・Amazon検索待ち(amzn.to発行バッチ待ち) 2026-08-13
+gas-lantern	キャンピングムーン ガスランタン ガスキャンドル	https://item.rakuten.co.jp/iwiss/bs-t-1s/?rafcid=wsc_i_is_ea4b84f0-cfca-4a84-b96e-a8423bbc252f			楽天源・Amazon検索待ち(amzn.to発行バッチ待ち) 2026-08-13
+bonfire-stand-solo	TokyoCamp 焚き火台 軽量 ミニ ソロ コンパクト 折りたたみ式		https://www.amazon.co.jp/dp/B08CZWJ7P8		set:B08CZWJ7P8 2026-08-13
+bonfire-stand-solo	焚火台 コンパクト ソロ 折りたたみ ステンレス（Mystic Ridge）				no-amazon(汎用ノーブランド・Amazon同定不可) 2026-08-13
+bonfire-stand-solo	ファイアスタンド 超軽量 ステンレス製 組立式 折りたたみ				no-amazon(汎用ノーブランド) 2026-08-13
+backpack-large	tousen 登山リュック 40〜60L 大容量 バックパック				no-amazon(tousen=楽天専用ショップ・Amazon該当なし) 2026-08-13
+backpack-large	tousen 登山リュック 65L 大容量 防災リュック				no-amazon(tousen=楽天専用・Amazon該当なし) 2026-08-13
+backpack-large	登山リュック 65L 大容量 防水 軽量 多機能（kuriaafew）				no-amazon(汎用ノーブランド) 2026-08-13
+camp-backpack-beginner	tousen正規品 登山リュック 40〜60L 大容量				no-amazon(tousen=楽天専用・Amazon該当なし) 2026-08-13
+bluetti-power	BLUETTI EB3A 268Wh ＋130Wソーラーパネル セット				no-amazon(EB3A+ソーラーのセット品・本体単体と価格相違) 2026-08-13
+bonfire-sheet	山麓工房 焚き火シート 耐熱5層構造 瞬間耐熱1500℃				no-amazon(Amazonは同ブランド3層構造で仕様相違) 2026-08-13
+bonfire-sheet	焚き火シート スパッタシート ガラス繊維 ハトメ付き L/M/S				no-amazon(汎用ノーブランド・サイズ違いのみ) 2026-08-13
+camp-bbq-grill	CAMP FREAKS Tano-b ファイアグリル 日本製				no-amazon(Amazon該当ブランドなし) 2026-08-13
+camp-bbq-grill	焚火台 折りたたみ式 バーベキュー グリル コンロ（汎用）				no-amazon(汎用ノーブランド) 2026-08-13
+camp-coffee-dripper	ステンレス製 メッシュ二重構造 ペーパーレスドリッパー				no-amazon(汎用ノーブランド) 2026-08-13
+camp-coffee-dripper	折りたためる薄型ステンレス コーヒーフィルター				no-amazon(汎用ノーブランド) 2026-08-13
+camp-coffee-dripper	折りたたみ ステンレス コーヒードリッパースタンド R.A.N				no-amazon(R.A.Nブランド該当なし・汎用) 2026-08-13
+camp-cooler-box-overall	アイリスオーヤマ HUGEL VITC-40 HHC-L 40L チャコールグレー 保冷材付きセット				no-amazon(保冷材付きセット・本体単体と価格相違/VITC-40 vs 40R曖昧) 2026-08-13

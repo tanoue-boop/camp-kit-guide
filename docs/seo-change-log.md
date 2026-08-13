@@ -3,6 +3,27 @@
 数値の推移はGAS「SEOレポート」の履歴で追う。本ファイルは「いつ・どの記事を・なぜ・どう変えたか」を記録し、次回レポートで効果を評価するための施策台帳。新しい施策は上に追記する。
 
 ---
+## 2026-08-13（追補）：bonfire-stand-solo TokyoCamp の Amazon 誤リンク撤去（型番不一致）
+
+- **背景**: 「production で3リンク中2つしか出ない」との指摘を受け本番DOMを実確認。結論=**現在は3ボタンとも表示されている**（`3cb8cbb` で2 ASIN設置→`80e0e1b` で3つ目=TokyoCamp を追加し、本日のデプロイで反映されて3/3に。指摘時点は`80e0e1b`未反映の2/3状態だったと判断）。
+- **確認中に発見した実問題（型番不一致の誤リンク）**: 第1位 TokyoCamp のASIN `B08CZWJ7P8` は Amazon 実ページが **「Tokyo Camp 焚き火台 HAKOSUKA（985g・別SKU）」**。カード記載は標準の「TokyoCamp 焚き火台（楽天1位・レビュー1,810件・¥5,980）」で**別モデル**。amazon-worksheet でも当初 `no-amazon (AmazonはHAKOSUKA/セットのみ・標準単体特定不可)` と正しく判定されていたが、後続バッチ(`80e0e1b`)がHAKOSUKAのASINを設定してしまっていた（「近い別物にリンクを貼らない／迷ったら付けない＝保守側」ルール違反）。
+- **施策**: 第1位 ProductCard から `amazonAsin="B08CZWJ7P8"` を撤去し**楽天ボタンのみに差戻し**。他商品・構成・価格・楽天リンクは不変。amazon-worksheet の該当行を `removed 2026-08-13` に更新。
+- **検証済み（残す2件は正しい）**: 第2位 OneTigris `B08V1J1DL3`＝「OneTigris ROCUBOID ミニ焚き火台 チタン」で一致 ✓／第5位 LAD WEATHER `B0GRFMG3MV`＝「ラドウェザー 焚き火台 767g A4」で一致 ✓。
+- **横展開の学び**: Amazon穴埋めバッチで「標準モデルがAmazonに無く別モデル/セットのみ」の商材は、近縁SKUのASINを充てない（HAKOSUKAのような別ライン混入に注意）。worksheet が一度 `no-amazon` と判定した行を後続バッチが `set:` で上書きする際は、型番一致を再確認する。
+
+---
+## 2026-08-13：日次ドラフト（既存修正1＋新規商品2）— 電源記事の廃番/差替修正＋インナーシュラフ・ガスランタン
+
+- **既存記事修正（手順F／article-fix-backlog 消化）**: `portable-power-vehicle-camp` の2件を楽天API実在品へ差替（8/12価格チェックで検出したpending 2件）。
+  - **第2位 KENWOOD BN-RK600（旧¥49,800・rc1）→ Jackery ポータブル電源500 New 512Wh（¥59,800・rc1,368・4.69／リン酸鉄・UPS機能・純正弦波）**。理由=issue_type=discontinued_404（掲載ページHTTP404・廃番）。「信頼ブランド・防災兼用」スロットの役割を国内定番Jackeryで継続。
+  - **第5位 EcoFlow RIVER 2 256Wh（旧¥29,900）→ EcoFlow RIVER 3 230Wh（¥30,900・rc853・4.65／リン酸鉄・2年保証・AC300W）**。理由=issue_type=product_swap（同URL ecoflow/river-2 が現行RIVER 3を配信し掲載モデル乖離）。アフィリリンクは現行RIVER 3を指すrafcid直リンクへ更新。
+  - 変更範囲は該当2枚のProductCard＋比較表の該当2行＋まとめ表の該当2行＋frontmatter description（KENWOOD言及→Jackery）＋締め段落のみ。他3商品・構成・thumbnailは不変。
+- **新規① `sleeping-bag-liner`（インナーシュラフおすすめ5選・sleeping-bag）**: 楽天API実データ5選（Bears Rockくるむん¥1,980/2,446件・薄手シーツ封筒型¥1,298/591件・防災士監修フリース¥1,599/394件・Bears Rockボアロング¥3,850/350件・GARAGE毛布型¥1,880/226件）。素材/形状/洗濯で選び分け・price比2.97x・Bears Rock2点で占有OK。SEA TO SUMMIT/コクーン等premiumは楽天レビュー薄で不採用。寝袋各記事の高アタッチ関連商材で相互内部リンク想定。
+- **新規② `gas-lantern`（ガスランタンおすすめ5選・lighting）**: 楽天API実データ5選（コールマン2500ノーススター3点セット¥11,342/42件・SOTO虫の寄りにくいランタンST-233¥11,550/40件・スノーピークノクターン¥4,660/51件・コールマンルミエール¥5,247/60件・キャンピングムーン¥4,260/43件）。明るさ/マントル式vsキャンドル式/燃料(OD缶vsCB缶)で比較・price比2.71x・Coleman2点で占有OK。SOTO/プリムスのランタンは楽天供給薄。既存coleman-lantern(ブランド軸)/oil-lantern(オイル)/camp-lantern-led(LED)と燃料軸(ガス)×複数ブランド比較で非カニバリ。テント内・車内不可のCO安全注記を明記。
+- **狙い**: nitecore-lantern(C)より priority が上の gas-lantern(B) を優先。nitecoreは楽天供給薄(rc≥15が0)のため見送り継続。ASP枠は承認済み・非カニバリ角度が枯渇のため見送り（=ASP在庫補充が必要）。
+- **メモ**: 新規10品はsource=rakuten・amazonAsin未設定（Amazon未確認/amzn.to発行バッチ待ち=保守側）。products.tsv/amazon-worksheetへ各10行追記。git push未実施（人間レビュー後にCodeが deploy.cjs で反映）。
+
+---
 ## 2026-08-12：定期価格チェック（campkit-price-check）→ mummy-sleeping-bag の OneTigris 価格更新
 
 - **背景**: 週次の価格チェック（GSCは対象アカウント tanoue@mjo-style.com に camp-kit-guide.com プロパティが無く取得不可→フォールバックで収益貢献既知の電源系・寝袋・バックパック計8記事を updatedAt 古い順で選定）。各記事のProductCard掲載商品の楽天item.rakuten.co.jp掲載ページを実閲覧し、`itemprop=price`（クーポン・タイムセール前の通常価格）と記載価格を照合。

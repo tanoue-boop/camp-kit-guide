@@ -334,6 +334,15 @@ git push origin main
 `main` ブランチに push するだけで Vercel が自動的にビルド・デプロイを実行する。
 Vercel のダッシュボードでデプロイログを確認できる。
 
+### ⚠️ Claude Code へのデプロイ受け渡しルール（確認プロンプト削減／2026-08-12）
+
+Cowork の穴埋め等を Claude Code に渡してデプロイする際、**Claude Code 側で独自の検証bashを生成しないこと**。`git diff`＋`grep`／`awk`／`for`ループ／`exec`／`$(...)` を含む照合ワンライナーは、command-substitution を含むため許可リストでも毎回「Do you want to proceed?」が出て手間になる（`Bash(*)` 許可や bypass でも `exec`/`$()` は確認対象）。
+
+- **実行して良いのは `node scripts/deploy.cjs "<メッセージ>"` の1コマンドのみ。** build → commit → push → 本番検証は deploy.cjs が内部で実施する。
+- ASIN数の照合・記事内重複チェック・書式検証などの**独自ワンライナーは組み立てない／実行しない**（deploy.cjs の検証に一任）。
+- どうしても事前確認が要る場合でも `git diff --numstat content/posts/`（削除列が0か）程度の単純コマンドに留め、`$(...)`・`exec`・ループは使わない。
+- Cowork 側がデプロイ受け渡しを報告する際は、この方針（「deploy.cjs 単体実行・検証bash不要」）を受け渡し文に明記する。
+
 ---
 
 ## ファイル配置（ハイブリッド構成 / 2026-06-01 整理）
