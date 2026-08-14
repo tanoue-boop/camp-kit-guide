@@ -994,7 +994,7 @@ gas-lantern	SOTO 虫の寄りにくいランタン ST-233	https://item.rakuten.c
 gas-lantern	スノーピーク リトルランプ ノクターン GL-140	https://item.rakuten.co.jp/canpanera/s06127/?rafcid=wsc_i_is_ea4b84f0-cfca-4a84-b96e-a8423bbc252f			楽天源・Amazon検索待ち(amzn.to発行バッチ待ち) 2026-08-13
 gas-lantern	コールマン ルミエールランタン+純正LPガス燃料	https://item.rakuten.co.jp/naturum/9904256/?rafcid=wsc_i_is_ea4b84f0-cfca-4a84-b96e-a8423bbc252f			楽天源・Amazon検索待ち(amzn.to発行バッチ待ち) 2026-08-13
 gas-lantern	キャンピングムーン ガスランタン ガスキャンドル	https://item.rakuten.co.jp/iwiss/bs-t-1s/?rafcid=wsc_i_is_ea4b84f0-cfca-4a84-b96e-a8423bbc252f			楽天源・Amazon検索待ち(amzn.to発行バッチ待ち) 2026-08-13
-bonfire-stand-solo	TokyoCamp 焚き火台 軽量 ミニ ソロ コンパクト 折りたたみ式		https://www.amazon.co.jp/dp/B08CZWJ7P8		set:B08CZWJ7P8 2026-08-13
+bonfire-stand-solo	TokyoCamp 焚き火台 軽量 ミニ ソロ コンパクト 折りたたみ式				no-amazon(唯一のAmazon候補B08CZWJ7P8=HAKOSUKA別モデル・commit4931931で撤去済み・再設置不可) 2026-08-13[訂正]
 bonfire-stand-solo	焚火台 コンパクト ソロ 折りたたみ ステンレス（Mystic Ridge）				no-amazon(汎用ノーブランド・Amazon同定不可) 2026-08-13
 bonfire-stand-solo	ファイアスタンド 超軽量 ステンレス製 組立式 折りたたみ				no-amazon(汎用ノーブランド) 2026-08-13
 backpack-large	tousen 登山リュック 40〜60L 大容量 バックパック				no-amazon(tousen=楽天専用ショップ・Amazon該当なし) 2026-08-13
@@ -1010,3 +1010,38 @@ camp-coffee-dripper	ステンレス製 メッシュ二重構造 ペーパーレ�
 camp-coffee-dripper	折りたためる薄型ステンレス コーヒーフィルター				no-amazon(汎用ノーブランド) 2026-08-13
 camp-coffee-dripper	折りたたみ ステンレス コーヒードリッパースタンド R.A.N				no-amazon(R.A.Nブランド該当なし・汎用) 2026-08-13
 camp-cooler-box-overall	アイリスオーヤマ HUGEL VITC-40 HHC-L 40L チャコールグレー 保冷材付きセット				no-amazon(保冷材付きセット・本体単体と価格相違/VITC-40 vs 40R曖昧) 2026-08-13
+snowpeak-bonfire	スノーピーク 焚火台 M ST-033R		https://www.amazon.co.jp/dp/B00FXFFST0		set:B00FXFFST0 (子ASIN=Mサイズ本体) 2026-08-13
+snowpeak-bonfire	スノーピーク 焚火台 S ST-031R		https://www.amazon.co.jp/dp/B00FR6CFIM		set:B00FR6CFIM (子ASIN=Sサイズ本体) 2026-08-13
+snowpeak-bonfire	スノーピーク 焚火台 L ST-032RS		https://www.amazon.co.jp/dp/B08HMPH45X		set:B08HMPH45X (子ASIN=Lサイズ本体) 2026-08-13
+snowpeak-bonfire	スノーピーク 焚火台Mスターターセット SET-111		https://www.amazon.co.jp/dp/B00JYCRZ80		set:B00JYCRZ80 (子ASIN=Mスターターセット) 2026-08-13
+snowpeak-bonfire	スノーピーク 焚火台Lスターターセット SET-112S		https://www.amazon.co.jp/dp/B08HMPC73K		set:B08HMPC73K (子ASIN=Lスターターセット) 2026-08-13
+fireproof-gloves	【ランキング1位入賞】耐火グローブ BBQ バーベキュー 耐熱グローブ 耐熱手袋 キャンプ 手袋 キャンプグローブ 革手袋 作業用手袋 防寒				no-amazon (ノーブランド汎用品・特定不能) 2026-08-14
+fireproof-gloves	ZEN Camps 耐熱 手袋 グローブ 耐熱グローブ キャンプグローブ 焚き火グローブ 革手袋 作業手袋 耐火グローブ キャンプ アウトド				no-amazon (3サイズ変種でサイズ不特定) 2026-08-14
+fireproof-gloves	《雑誌掲載◆2万個突破》★楽天1位3冠★TRAN 耐熱グローブ キャンプ グローブ 手袋 キャンプ手袋 耐熱手袋 作業用手袋 camp ou				no-amazon (同名2ASIN色変種で不特定) 2026-08-14
+fireproof-gloves	morso 薪ストーブ グローブ 右手用 左手用 革 手袋 片手 焚き火 焚火 薪 耐熱 アクセサリー 黒 暖炉 バーベキュー BBQ キャ		https://www.amazon.co.jp/dp/B00IM50T1A		set:B00IM50T1A 2026-08-14
+fireproof-gloves	【楽天ランキング1位獲得】 耐熱グローブ 耐火グローブ 耐熱手袋 キャンプ 料理用 レザー ロング 手袋 牛革 本革 耐熱 防火 防炎 アウ				no-amazon (ノーブランド汎用品・特定不能) 2026-08-14
+hand-axe	＼ランキング1位!!／【二度研磨・刃付き】 キャンプ 斧 薪割り手斧 おの オノ 手斧 手おの キャンプ斧 ハチェット アックス ハンドアッ				no-amazon (ノーブランド汎用品・特定不能) 2026-08-14
+hand-axe	ハスクバーナ 手斧 38cm 5769264-01 旧 5026402-01 アウトドア 薪割り斧 キャンプ 斧 薪 薪割り 焚き火 焚火 		https://www.amazon.co.jp/dp/B00HC077GQ		set:B00HC077GQ 2026-08-14
+hand-axe	[決算セール◆大特価] プラウ 薪割り用 ハンマー斧 PH-HMR(390mm　910mm　915mm) テント ペグ打ち 楔 クサビ キャ				no-amazon (多サイズ列挙・Amazon型番HMR系と不一致) 2026-08-14
+hand-axe	手斧 600g AX946 | カーボンスチール ヒッコリー柄 保護ラバー付 斧 オノ 手斧 ハンドアックス 薪 薪割り アウトドア キャン		https://www.amazon.co.jp/dp/B07QGJZF4R		set:B07QGJZF4R 2026-08-14
+hand-axe	【日本限定モデル】ハスクバーナ 手斧 ハチェットヤンキー 700g 正規品 純正 599674401 日本限定モデル【Husqvarna 斧		https://www.amazon.co.jp/dp/B08TGQFV1N		set:B08TGQFV1N 2026-08-14
+oil-lantern	VASTLAND オイルランタン				no-amazon (色/サイズ変種で不特定) 2026-08-14
+oil-lantern	FEUERHAND フュアーハンド ランタン 276 ベイビースペシャル		https://www.amazon.co.jp/dp/B01B8F0MTY		set:B01B8F0MTY 2026-08-14
+oil-lantern	ThousWinds Twilight オイルランタン				no-amazon (暮色2ASIN色変種で不特定) 2026-08-14
+oil-lantern	DIETZ デイツ30 ブラック				no-amazon (AmazonはD76/D80のみ・#30不在) 2026-08-14
+oil-lantern	キャプテンスタッグ CSオイルランタン UK-506（オイル＆ケース付き）				no-amazon (オイル＆ケース付きセット) 2026-08-14
+screen-tarp	【楽天1位】FIELDOOR テント スクリーンタープ スクリーンテント 幅285×奥行285cm 日よけ ドームテント タープテント ター				no-amazon (Amazonは本体＋日よけシート2枚セット・完全遮光別仕様/価格相違) 2026-08-14
+screen-tarp	【楽天1位】FIELDOOR テント スクリーンタープ スクリーンテント ワンタッチ 幅285×奥行285cm 日よけ ドームテント タープ				no-amazon (Amazonはセット¥19700・構成/価格相違) 2026-08-14
+screen-tarp	スクリーンタープ ワンタッチテント タープテント 3m×3m 遮光 遮熱 断熱 日よけ 日陰 ブラックコーティング シルバーコーティング U				no-amazon (ノーブランド汎用品・特定不能) 2026-08-14
+screen-tarp	ワイドスクリーンタープ ワンタッチテント タープテント 4m×2.8m 遮光 遮熱 断熱 日除け 日陰 シルバーコーティング ブラックコーテ				no-amazon (ノーブランド汎用品・特定不能) 2026-08-14
+screen-tarp	ワンタッチタープ 2.5m ワンタッチテント 遮光 遮熱 UVカット タープテント プール テント サイドシート ブラックコーティング シル				no-amazon (ノーブランド汎用品・特定不能) 2026-08-14
+uniflame-fire-grill	ユニフレーム ファイアグリル 683040		https://www.amazon.co.jp/dp/B000AR5Y90		set:B000AR5Y90 2026-08-14
+uniflame-fire-grill	ユニフレーム ファイアグリルsolo 683095		https://www.amazon.co.jp/dp/B085Y1KHLC		set:B085Y1KHLC 2026-08-14
+uniflame-fire-grill	ユニフレーム ファイアグリル＋収納ケース 2点セット 683040+683187				no-amazon (2点セット・単体と構成/価格相違) 2026-08-14
+uniflame-fire-grill	ユニフレーム ファイアグリル ヘビーロストル 683118		https://www.amazon.co.jp/dp/B000SXPWL6		set:B000SXPWL6 2026-08-14
+uniflame-fire-grill	ユニフレーム ファイアグリル収納ケース 683187		https://www.amazon.co.jp/dp/B003DSUODY		set:B003DSUODY 2026-08-14
+water-jug	【楽天1位】FIELDOOR 折りたたみ ウォータータンク 15リットル 15L 蛇口コック付き 災害時の備えからレジャー・アウトドアまで 		https://www.amazon.co.jp/dp/B08TQLQKHX		set:B08TQLQKHX 2026-08-14
+water-jug	【楽天1位】アレジア アイスコンテナ ジャグ アウトドア 真空 ボトル 1.8L 3.5L 氷 持ち運び 長時間 保冷 HOTも対応 ステン				no-amazon (サイズ/色変種で不特定) 2026-08-14
+water-jug	VASTLAND アイスコンテナ 1.9L 3.8L キャンプ用 氷入れ 水筒 保冷 真空断熱				no-amazon (サイズ/色変種で不特定) 2026-08-14
+water-jug	【楽天1位】FIELDOOR アイスコンテナ 3.8L ウォータージャグ 小型 キャンプ用 氷入れ アウトドア 保冷 保温 水筒 広口 大容				no-amazon (同名複数ASIN変種で不特定) 2026-08-14
+water-jug	ウォータータンク 3タイプ 10L 12L 20L コック付き （ 水 タンク 防災グッズ ウォータージャグ 給水タンク 給水 ポリタンク 				no-amazon (ノーブランド汎用品・特定不能) 2026-08-14
