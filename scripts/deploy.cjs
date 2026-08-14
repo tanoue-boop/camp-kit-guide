@@ -23,7 +23,14 @@ const path = require('path');
 const fs = require('fs');
 
 const REPO = path.join(__dirname, '..');
-const msg = process.argv.slice(2).join(' ').trim();
+// 引数: <コミットメッセージ...> [-- <このデプロイで公開する記事ファイル...>]
+// `--` 以降にファイルを渡すと、その記事(content/posts)だけをステージ＝他タスクが置いたドラフトの混入を防ぐ。
+// `--` が無ければ従来どおり content/posts 全体をステージ（後方互換）。
+const _rawArgs = process.argv.slice(2);
+const _sepIdx = _rawArgs.indexOf('--');
+const scoped = _sepIdx !== -1; // `--` があれば「スコープ指定」モード（記事は明示分だけ公開）
+const msg = (scoped ? _rawArgs.slice(0, _sepIdx) : _rawArgs).join(' ').trim();
+const scopedFiles = scoped ? _rawArgs.slice(_sepIdx + 1).filter(Boolean) : [];
 
 // ── 同時実行対策（定期タスクのバッティング防止）─────────────────────────
 // この new-article-draft は日次、他の price-check / seo-competitor-scan /
@@ -157,13 +164,28 @@ try {
 }
 
 // 3. add（対象を限定）
-console.log('\n■ 3. git add（content/posts _file docs pages components styles scripts lib types + ルート直下 CLAUDE.md .gitignore next.config.ts）');
+// 記事(content/posts)以外の共有ディレクトリ/ルート直下ファイル（データ・コード・docs等）。
+// ここは共有なので常に最新化してよい（.env/node_modules は hasDangerousPath と .gitignore で二重防止）。
+const NON_ARTICLE_PATHS = '_file docs pages components styles scripts lib types CLAUDE.md .gitignore next.config.ts';
 waitGitIndexLock();
-// サブディレクトリに加え、日次運用で更新し得るルート直下ファイルも明示的に含める。
-// （旧: サブディレクトリのみ→CLAUDE.md/.gitignore/next.config.ts 更新が毎回サイレントに取りこぼされていた）
-// next.config.ts はカニバリ整理時の恒久リダイレクト追記で触る。
-// .env/node_modules は下の hasDangerousPath と .gitignore で二重に防止。
-run('git add content/posts _file docs pages components styles scripts lib types CLAUDE.md .gitignore next.config.ts');
+if (scoped) {
+  // スコープ指定あり（-- を付けた）: 記事は明示ファイルだけ + 非記事は従来どおり全体。
+  // → 他タスクが content/posts に置いた未コミットのドラフトは混入しない。
+  // 記事0件（-- の後が空＝データ/docsのみ更新の回）も content/posts は一切ステージしない。
+  console.log(
+    '\n■ 3. git add（記事=' +
+      (scopedFiles.length ? scopedFiles.join(', ') : '(なし=非記事のみ)') +
+      ' ／ 非記事=' + NON_ARTICLE_PATHS + '）'
+  );
+  if (scopedFiles.length > 0) {
+    run('git add -- ' + scopedFiles.map((f) => JSON.stringify(f)).join(' '));
+  }
+  run('git add ' + NON_ARTICLE_PATHS);
+} else {
+  // スコープ未指定（-- 無し）: 従来どおり content/posts 全体（後方互換）。
+  console.log('\n■ 3. git add（content/posts 全体 ＋ ' + NON_ARTICLE_PATHS + '）※スコープ未指定=従来動作');
+  run('git add content/posts ' + NON_ARTICLE_PATHS);
+}
 
 // 3.5 ステージ内容の最終安全確認
 const staged = cap('git diff --cached --name-only');
