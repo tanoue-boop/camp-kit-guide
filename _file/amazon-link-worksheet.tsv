@@ -1050,8 +1050,8 @@ camp-smoker	SOTO 燻家（スモークハウス）ST-114	https://item.rakuten.co
 camp-smoker	キャメロンズ ミニスモーカー Camerons	https://item.rakuten.co.jp/upi-outdoor/10000100/?rafcid=wsc_i_is_ea4b84f0-cfca-4a84-b96e-a8423bbc252f			Amazon存在:要確認(楽天源・今回MDX非設定)/amzn.to未発行 2026-08-14
 camp-smoker	カクテルスモーカー（スモークガン）	https://item.rakuten.co.jp/modern-culture-store/cocktailsmoker/?rafcid=wsc_i_is_ea4b84f0-cfca-4a84-b96e-a8423bbc252f			no-amazon (ノーブランド汎用品・特定不能) 2026-08-14
 camp-smoker	EASY SMOKER イージースモーカー	https://item.rakuten.co.jp/global-wd/10000025/?rafcid=wsc_i_is_ea4b84f0-cfca-4a84-b96e-a8423bbc252f			no-amazon (ショップ独自品で不特定) 2026-08-14
-alcohol-stove	チタンマニア アルコールストーブ チタン製	https://item.rakuten.co.jp/legare-factory/titan1837/?rafcid=wsc_i_is_ea4b84f0-cfca-4a84-b96e-a8423bbc252f			Amazon存在:要確認(楽天源・今回MDX非設定)/amzn.to未発行 2026-08-14
-alcohol-stove	ガオバブ Gaobabu アルコールバーナー	https://item.rakuten.co.jp/gaobabushop/10010286/?rafcid=wsc_i_is_ea4b84f0-cfca-4a84-b96e-a8423bbc252f			Amazon存在:要確認(楽天源・今回MDX非設定)/amzn.to未発行 2026-08-14
+alcohol-stove	チタンマニア アルコールストーブ チタン製	https://item.rakuten.co.jp/legare-factory/titan1837/?rafcid=wsc_i_is_ea4b84f0-cfca-4a84-b96e-a8423bbc252f	https://www.amazon.co.jp/dp/B0DPZH59QY		set:ASIN一致確認済(B0DPZH59QY=TITAN MANIA Ver.2単体)・MDX amazonAsin設置済 2026-08-14(下行1064のbackfillと同一・重複記録)
+alcohol-stove	ガオバブ Gaobabu アルコールバーナー	https://item.rakuten.co.jp/gaobabushop/10010286/?rafcid=wsc_i_is_ea4b84f0-cfca-4a84-b96e-a8423bbc252f	https://www.amazon.co.jp/dp/B07C2NRWX8		set:ASIN一致確認済(B07C2NRWX8=Gaobabuアルコールバーナー単体)・MDX amazonAsin設置済 2026-08-14(下行1065のbackfillと同一・重複記録)
 alcohol-stove	アルコールストーブ 五徳セット（収納袋付き）	https://item.rakuten.co.jp/umbrelland/co768/?rafcid=wsc_i_is_ea4b84f0-cfca-4a84-b96e-a8423bbc252f			no-amazon (ノーブランド汎用品・特定不能) 2026-08-14
 alcohol-stove	アルコールストーブ バーナー（燃料ボトル付き）	https://item.rakuten.co.jp/suports-kuiyouo/skittle1/?rafcid=wsc_i_is_ea4b84f0-cfca-4a84-b96e-a8423bbc252f			no-amazon (ノーブランド汎用品・特定不能) 2026-08-14
 alcohol-stove	ALOCS アロクス アルコールバーナー（ゴトク付き）	https://item.rakuten.co.jp/purple7/alocs-cs-b02/?rafcid=wsc_i_is_ea4b84f0-cfca-4a84-b96e-a8423bbc252f			Amazon存在:要確認(楽天源・今回MDX非設定)/amzn.to未発行 2026-08-14
@@ -1080,3 +1080,18 @@ camp-bbq-grill	焚火台 折りたたみ式 BBQグリル 汎用				backfill no-a
 camp-coffee-dripper	ステンレス メッシュ二重 ペーパーレスドリッパー				backfill no-amazon(汎用ノーブランド・同定不可) 2026-08-14
 camp-coffee-dripper	折りたためる薄型ステンレス コーヒーフィルター				backfill no-amazon(汎用ノーブランド・同定不可) 2026-08-14
 camp-coffee-dripper	折りたたみ ステンレス ドリッパースタンド R.A.N.				backfill no-amazon(無名ブランド同定不可) 2026-08-14
+folding-cutting-board	良木工房(YOSHIKI) 竹製 包丁まな板セット M YK-KBM1	https://item.rakuten.co.jp/takemicorp/yk-kbm1/	https://www.amazon.co.jp/dp/B095KHVRQ6		set 2026-08-14
+folding-cutting-board	スノーピーク マナイタセット M CS-207	https://item.rakuten.co.jp/snowpeak-official/cs-207/	https://www.amazon.co.jp/dp/B001UGID3E		set 2026-08-14
+folding-cutting-board	h tag カッティングマット S DH-010-S	https://item.rakuten.co.jp/mecu/dh-010-s/	https://www.amazon.co.jp/dp/B08BTR3CPV		set 2026-08-14
+folding-cutting-board	良木工房 竹製 包丁まな板セット Lサイズ	https://item.rakuten.co.jp/takemicorp/yoshiki_023/			no-amazon(サイズ同定不可・LのASIN確認できず) 2026-08-14
+folding-cutting-board	h tag カッティングマット SS DH-010-SS	https://item.rakuten.co.jp/mecu/dh-010-ss/	https://www.amazon.co.jp/dp/B08TC2WD93		set 2026-08-14
+car-shade	LIBER-E 傘式サンシェード フロント用	https://item.rakuten.co.jp/liberesta/ray-g05/			no-amazon(楽天ショップ独自・型番なし) 2026-08-14
+car-shade	Hariti マグネットカーテン 2枚入り	https://item.rakuten.co.jp/babykids-hrt/h155/			no-amazon(楽天ショップ独自・型番なし) 2026-08-14
+car-shade	趣味職人 日本製 車カーテン 汎用	https://item.rakuten.co.jp/hobbyman/kc-maker/			no-amazon(楽天専売・受注生産系) 2026-08-14
+car-shade	autorder 汎用フロントサンシェード	https://item.rakuten.co.jp/autorder/au743744/			no-amazon(楽天ショップ独自・型番なし) 2026-08-14
+car-shade	趣味職人 メッシュ マグネットカーテン 大判90cm	https://item.rakuten.co.jp/hobbyman/mc-maker/			no-amazon(楽天専売・受注生産系) 2026-08-14
+portable-electric-kettle	車載電気ケトル DC12V/24V 450ml	https://item.rakuten.co.jp/meiyiduoshop/3113220051211/			no-amazon(ノーブランド・同定不可) 2026-08-14
+portable-electric-kettle	折りたたみ電気ケトル 600ml シリコン製	https://item.rakuten.co.jp/shimachan-store/bw5116/			no-amazon(ノーブランド・同定不可) 2026-08-14
+portable-electric-kettle	ポータブル電気ケトル 400ml 300W	https://item.rakuten.co.jp/sunshine-store/24008/			no-amazon(ノーブランド・同定不可) 2026-08-14
+portable-electric-kettle	ポータブル電気ケトル 400ml AC100-240V	https://item.rakuten.co.jp/snailax-shop/24010/			no-amazon(ノーブランド・同定不可) 2026-08-14
+portable-electric-kettle	車載電気ケトル 保温機能付き 450ml	https://item.rakuten.co.jp/mhpro/cc625/			no-amazon(ノーブランド・同定不可) 2026-08-14
