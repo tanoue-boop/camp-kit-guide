@@ -61,7 +61,9 @@ public/robots.txt
 _file/products.tsv
 
 # stray editor/script backups
-*.bak
+# 連番付き（.bak2 / .bak3 …）も除外する。`*.bak` だけだと末尾一致しないため
+# 2026-08-17 に keyword-backlog.tsv.bak2/.bak3 が誤ってコミットされた。
+*.bak*
 
 # FUSE (Google Drive等) 上でTSVを開いたまま更新した際に残る一時ファイル
 .fuse_hidden*
