@@ -3,6 +3,22 @@
 数値の推移はGAS「SEOレポート」の履歴で追う。本ファイルは「いつ・どの記事を・なぜ・どう変えたか」を記録し、次回レポートで効果を評価するための施策台帳。新しい施策は上に追記する。
 
 ---
+## 2026-08-19：価格チェック（campkit-price-check）— GSC流入上位7記事・34商品を実価格照合、4記事で価格更新
+
+- **対象選定**: GSC（プロパティ `https://www.camp-kit-guide.com/`・過去28日／クリック357・表示6,570）の「ページ」上位から、ProductCardを持つ記事7本（`osprey-backpack` / `family-camp-summer-tent` / `fieldoor-tent` / `inflatable-mat` / `coleman-chair` / `karrimor-backpack` / `mountain-camp-lantern`）を選定。上位の `osprey-daily-backpack` はAmazon ASIN運用で楽天照合対象外、`camp-backpack-capacity-guide` はProductCard非搭載のため除外。
+- **照合方法**: 楽天API（`openapi.rakuten.co.jp`）は今回サンドボックス側の外向き通信が塞がっており、代替として **Chromeで `item.rakuten.co.jp` の掲載ページを同一オリジンfetchし `itemprop="price"` を抽出**（docs/scheduled-task-spec.md で楽天APIと同等の確定手段として認められた方法）。34商品すべてHTTP200＝廃番・404はゼロ。
+- **価格更新（±15%超のずれのみ反映。旧→新）**
+  - `family-camp-summer-tent` 第5位 WAQ Alpha TC（TC/FT）WAQ-TCFT1：**¥31,500 → ¥43,800**（+39.0%）。ProductCard price／比較表「価格帯」／まとめ表を整合。
+  - `inflatable-mat` 第3位 OneTigris DREAMSTAR 8cm：**¥11,130 → ¥15,900**（+42.9%）。ProductCard price／比較表 price／まとめ表「11,000円台→15,000円台」／description の実勢レンジ「3,000〜11,000円台→3,000〜15,000円台」を整合。
+  - `coleman-chair` 第1位 コールマン インフィニティチェア ベージュ 2000033139：**¥11,980 → ¥9,980**（-16.7%）。ProductCard price／比較表 price／まとめ表／description の実勢レンジ「4,800〜11,980円→4,800〜11,900円」を整合。加えて**値下がりで第2位（¥9,980）と同額になったため、第1位本文の「価格は上位ですが」と第2位の「ベージュより手頃」という価格比較の記述が事実と矛盾する**ので、第2位の訴求軸を「価格の手頃さ」から「レビュー★4.72の評価の高さ」へ書き換えた（商品・順位・アフィリリンクは不変）。
+  - `mountain-camp-lantern` 第2位 キャリー・ザ・サン スモール：**¥3,300 → ¥3,800**（+15.2%）。ProductCard price／スペック比較表／用途別比較表を整合（まとめ表は「3,000円台」のままで正）。
+  - 上記4記事の `updatedAt` を 2026-08-19 に更新。
+- **据え置き（±15%以内のため未変更）**: `osprey-backpack` 第1位 デイライトプラス ¥11,484→¥12,760(+11.1%)、`inflatable-mat` 第1位 Aiflycy ¥6,680→¥7,480(+12.0%)／第2位 電動 ¥9,480→¥9,980(+5.3%)、`family-camp-summer-tent` 第3位 RATELWORKS BODEN ¥129,800→¥138,000(+6.3%)、`coleman-chair` 第5位 オリーブ ¥11,900→¥11,080(-6.9%)、`mountain-camp-lantern` 第1位 ミディアム ¥4,400→¥4,800(+9.1%)／第4位 E-Finds ¥1,980→¥1,780(-10.1%)／第5位 Lepro ¥1,614→¥1,599(-0.9%)。`fieldoor-tent` は5商品すべて掲載価格と完全一致。
+- **提案に回した案件（記事は未変更・`_file/article-fix-backlog.tsv` に status=pending で追記済み）**
+  - `karrimor-backpack` 第3位 VTデイパック F（priority A・issue_type=price_unconfirmed）：掲載¥11,000に対し現在¥7,700（-30%）だが、出品店 canpanera がページタイトルに「SALE Max20%OFF」を掲げたセール期間中で**通常価格が確定できない**ため、数値を作らず据え置き。セール終了後に再測定する。
+  - `family-camp-summer-tent` 第1位 TOMOUNT TriArc Tunnel Tent V4（priority B・issue_type=price_unconfirmed）：掲載¥39,999はバリエーションとして現存し価格自体は正だが、**楽天ページが複数SKU化して既定表示が「4,999円〜」**になっており、記事から遷移したユーザーが別SKUを見る動線になっている。SKU直リンク化か本文明記の検討をキューに積んだ。
+
+---
 ## 2026-08-18：日次記事作成（campkit-new-article-draft）— 商品5選2本＋隣接ASP専用1本＋既存記事リライト1本
 
 - **対象**: 新規3記事＋リライト1記事（+内部リンク元2記事に1行追加）。`article-fix-backlog` に pending なしのため手順F（既存記事の商品差し替え）は発動せず。4枠は「商品2＋ASP1＋リライト1」の既定構成で消化。

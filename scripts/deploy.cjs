@@ -108,7 +108,16 @@ function waitGitIndexLock() {
       let age = Infinity;
       try { age = Date.now() - fs.statSync(lockPath).mtimeMs; } catch { break; }
       if (age > IDX_STALE_MS) {
-        console.warn(`⚠ 古い ${name} (${Math.round(age / 1000)}s) を除去します`);
+        const createdAt = new Date(Date.now() - age);
+        console.warn(`⚠ 古い ${name} (${Math.round(age / 1000)}s / 作成推定 ${createdAt.toLocaleString('ja-JP')}) を除去します`);
+        // ロックが日をまたいで繰り返し出るため、犯人特定用に発生時刻を追記記録する。
+        // 1週間ぶん貯めて定期タスクの実行時刻（09:01/09:04/09:05/09:08/14:07 等）と突き合わせる。
+        try {
+          fs.appendFileSync(
+            path.join(REPO, '_file', 'git-lock-events.log'),
+            `${new Date().toISOString()}\t${name}\tage_s=${Math.round(age / 1000)}\tcreated=${createdAt.toISOString()}\n`
+          );
+        } catch {}
         try { fs.unlinkSync(lockPath); } catch {}
         break;
       }

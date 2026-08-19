@@ -82,15 +82,17 @@ async function fetchWithRetry(url, expectedTitle = null, expectAmazon = 0) {
             continue;
           }
         }
-        // 本文のみ変更(title不変)のデプロイでは、期待ありなのに本番Amazonリンクが0本＝未反映のことがある。
-        // その場合も「反映待ち」とみなして再試行する（Amazon期待>0 かつ 本番実0 のとき）。
+        // 本文のみ変更(title不変)のデプロイでは、期待ありなのに本番Amazonリンクが足りない＝未反映のことがある。
+        // 旧実装は「実0本」のときしか再試行しなかったため、1本でも旧リンクが残っていると
+        // 【デプロイ前の古いHTML】をそのまま検証してPASSしていた（毎回「期待N→実N-1」が出る原因）。
+        // 期待数に満たない間は「反映待ち」とみなして再試行する。
         if (expectAmazon > 0) {
           const l = countAffiliateLinks(html);
-          if (l.amazonTag + l.amznTo === 0) {
+          if (l.amazonTag + l.amznTo < expectAmazon) {
             last = { status: 200, html };
             if (i < RETRY - 1) {
               console.log(
-                `   …本番にAmazonリンクがまだ0本です（Vercel反映待ち）。${RETRY_WAIT_MS / 1000}秒待って再試行 (${i + 2}/${RETRY})`
+                `   …本番のAmazonリンクが${l.amazonTag + l.amznTo}本で期待${expectAmazon}本に未達です（Vercel反映待ち）。${RETRY_WAIT_MS / 1000}秒待って再試行 (${i + 2}/${RETRY})`
               );
               await sleep(RETRY_WAIT_MS);
             }

@@ -1,0 +1,878 @@
+status	slug	card_id	asin	checked_date	reason
+set	alcohol-stove	al-titanmania	B0DPZH59QY		
+set	alcohol-stove	al-gaobabu	B07C2NRWX8		
+no-amazon	alcohol-stove	al-gotoku-set		2026-08-18	汎用OEM・Amazon側は別ブランドのみ(155g/五徳セット一致なし)
+no-amazon	alcohol-stove	al-bottle-set		2026-08-18	汎用OEM・同構成セット特定不可
+set	alcohol-stove	al-alocs	B0BX8HLLKR		
+set	anker-power	anker-c1000	(amazonUrl)		
+set	anker-power	anker-c800	(amazonUrl)		
+set	anker-power	anker-f1200	(amazonUrl)		
+set	anker-power	anker-c1000-solar	(amazonUrl)		
+set	anker-power	anker-c1000-ps100	(amazonUrl)		
+no-amazon	backpack-large	tousen-40-60l		2026-08-18	tousenは楽天ショップ名。Amazon側は別OEMで寸法不一致
+no-amazon	backpack-large	tousen-65l		2026-08-18	同上
+set	backpack-large	hawkgear-80l	(amazonUrl)		
+no-amazon	backpack-large	kuriaafew-65l		2026-08-18	汎用OEM・55x38x20cm/1.2kg一致なし
+set	backpack-large	mstyle-90l-3way	(amazonUrl)		
+set	barebones-light	barebones-edison-stick	(amazonUrl)		
+set	barebones-light	barebones-railroad	(amazonUrl)		
+set	barebones-light	barebones-beacon	(amazonUrl)		
+set	barebones-light	barebones-mini-edison	(amazonUrl)		
+set	bluetti-power	bluetti-ac70	B0CC8ZKBVC		
+set	bluetti-power	bluetti-ac180	B0BZZ616G2		
+set	bluetti-power	bluetti-aora100	B0FB3Y7V59		
+set	bluetti-power	bluetti-aora30	B0FB3Y46SB		
+no-amazon	bluetti-power	bluetti-eb3a		2026-08-18	楽天は130Wパネルセット。Amazonは100Wセットのみで構成不一致
+set	bonfire-sheet	zen-camps-sheet	B08WRWRXJS		
+set	bonfire-sheet	sanroku-sheet	B0CTG77JXB		
+set	bonfire-sheet	chillcamping-sheet	B0B86W8MN3		
+no-amazon	bonfire-sheet	hatome-sheet		2026-08-18	楽天はS/M/Lサイズ展開。Amazon候補は80x120cm単品で不一致
+set	bonfire-sheet	futurefox-sheet	B0CDFQR266		
+set	bonfire-stand-beginner	irisohyama-st43	(amazonUrl)		
+set	bonfire-stand-beginner	irisohyama-tp135	(amazonUrl)		
+set	bonfire-stand-beginner	irisohyama-tb98	(amazonUrl)		
+set	bonfire-stand-beginner	trgr-takibi	(amazonUrl)		
+set	bonfire-stand-beginner	bataran-j05	(amazonUrl)		
+set	bonfire-stand-solo	tokyocamp-takibidai	B08CZWJ7P8		
+set	bonfire-stand-solo	onetigris-rocuboid-titanium	B08V1J1DL3		
+no-amazon	bonfire-stand-solo	mysticridge-solo-takibi		2026-08-18	739g/26.5cm/収納2.5cm に一致する商品なし
+set	bonfire-stand-solo	firestand-ultralight	B0CXHNZ8BB		
+set	bonfire-stand-solo	ladweather-takibidai-a4	B0GRFMG3MV		
+no-amazon	bonfire-tripod	civillife-tripod-alu		2026-08-18	実スペック10kg/500g/52x78cm。候補k-outdoor SJ-01は20kg/300gで別物
+set	bonfire-tripod	campingmoon-ms105	B07VK428JN		
+no-amazon	bonfire-tripod	fukulife-tripod-25kg		2026-08-18	耐荷重25kg/7段階/1070g/117.5cm 一致なし
+set	bonfire-tripod	goodsland-tripod-black	B07ZPY7JWD		
+no-amazon	bonfire-tripod	patri-tripod-handy		2026-08-18	34cm/300g/10kg 一致なし
+set	camp-backpack-beginner	osprey-kestrel-48	(amazonUrl)		
+no-amazon	camp-backpack-beginner	gregory-baltoro-65		2026-08-18	tousenは楽天ショップ名。Amazon側に同一品なし
+set	camp-backpack-beginner	deuter-aircontact-core	(amazonUrl)		
+set	camp-backpack-beginner	millet-sas-fee	(amazonUrl)		
+set	camp-backpack-beginner	karrimor-ridge-40	(amazonUrl)		
+no-amazon	camp-bbq-grill	grill-rank-1		2026-08-18	CAMP FREAKS/Tano-bはショップ独自ブランド。SUS430/1.7kg 一致なし
+no-amazon	camp-bbq-grill	grill-rank-2		2026-08-18	汎用OEM・36x32cm/3.25kg 一致なし
+set	camp-bbq-grill	grill-rank-3	B0CQT95CM3		
+set	camp-bbq-grill	grill-rank-4	B0CS5BJGQ5		
+set	camp-bbq-grill	grill-rank-5	B01MSZKB3O		
+set	camp-burner-beginner	iwatani-cb-jcb	(amazonUrl)		
+set	camp-burner-beginner	soto-amicus	(amazonUrl)		
+set	camp-burner-beginner	captainstag-m6400	(amazonUrl)		
+set	camp-burner-beginner	soto-st-310-set	(amazonUrl)		
+set	camp-burner-beginner	coleman-outlander-micro	(amazonUrl)		
+set	camp-chair-highback	poncotan-ultralight-highback	(amazonUrl)		
+set	camp-chair-highback	moderndeco-zerogravity	(amazonUrl)		
+set	camp-chair-highback	onetigris-dragonhide-highback	(amazonUrl)		
+set	camp-chair-highback	visionpeaks-canvas-relax	(amazonUrl)		
+set	camp-chair-highback	ladweather-highback	(amazonUrl)		
+set	camp-chair-lightweight	ymbstore-ultralight-chair	(amazonUrl)		
+set	camp-chair-lightweight	poncotan-ultralight-fit-low	(amazonUrl)		
+set	camp-chair-lightweight	poncotan-ultralight-highback	(amazonUrl)		
+set	camp-chair-lightweight	moon-lence-ch7	(amazonUrl)		
+set	camp-chair-lightweight	yamazen-director-dd02wt	(amazonUrl)		
+set	camp-coffee-dripper	uniflame-bannet-cute	B001TPDMLE		
+pending	camp-coffee-dripper	stainless-mesh-dripper			
+set	camp-coffee-dripper	campingmoon-dripper	B0BXBY5YHS		
+pending	camp-coffee-dripper	thin-stainless-filter			
+pending	camp-coffee-dripper	fold-stainless-stand			
+set	camp-cooker-beginner	rakuten-alumi-cookset	(amazonUrl)		
+set	camp-cooker-beginner	snowpeak-personal-cooker	(amazonUrl)		
+set	camp-cooker-beginner	vastland-cookset	(amazonUrl)		
+set	camp-cooker-beginner	coleman-packaway-cookset	(amazonUrl)		
+set	camp-cooker-beginner	titanmania-cookset	(amazonUrl)		
+set	camp-cooler-box-beginner	iris-cooler-bag	(amazonUrl)		
+set	camp-cooler-box-beginner	logos-hyper-hyoutenka-m-12l	(amazonUrl)		
+set	camp-cooler-box-beginner	iris-hugel-vitc40	(amazonUrl)		
+set	camp-cooler-box-beginner	iris-hugel-vitc20	(amazonUrl)		
+set	camp-cooler-box-beginner	logos-action-cooler-25	(amazonUrl)		
+set	camp-cooler-box-overall	cooler-rank-1	B003KTSCQW		
+set	camp-cooler-box-overall	cooler-rank-2	B004MX6O5G		
+set	camp-cooler-box-overall	cooler-rank-3	B001ADVZ0U		
+set	camp-cooler-box-overall	cooler-rank-4	B0B7S1MQ3L		
+pending	camp-cooler-box-overall	cooler-rank-5			
+set	camp-cooler-soft	waq-soft-42l	B0B6PXXDTZ		
+pending	camp-cooler-soft	soft-cooler-30l			
+set	camp-cooler-soft	albatre-18l	B0BS5Q5CC4		
+pending	camp-cooler-soft	soft-cooler-40l			
+pending	camp-cooler-soft	square-soft-9l			
+pending	camp-cutlery	cl-cesabeams-set			
+pending	camp-cutlery	cl-stainless-set			
+pending	camp-cutlery	cl-muranokajiya			
+pending	camp-cutlery	cl-tritan-fork			
+pending	camp-cutlery	cl-titanmania-chopsticks			
+pending	camp-fan-summer	fan-soppy			
+set	camp-fan-summer	fan-hagoogi	B0BYYTZHNL		
+pending	camp-fan-summer	fan-icarry			
+pending	camp-fan-summer	fan-pse			
+pending	camp-fan-summer	fan-marz			
+pending	camp-grill-plate	grill-zeoor			
+pending	camp-grill-plate	grill-captainstag			
+set	camp-grill-plate	grill-shos-a4	B07P2L1DH2		
+set	camp-grill-plate	grill-bushcraft	B09GKQ7MXY		
+pending	camp-grill-plate	grill-shos-bgo			
+pending	camp-hammock	adepeche-3way-set			
+set	camp-hammock	groovy-3way	B07BYHSY8D		
+set	camp-hammock	osoto-normal	B01ANFAAFG		
+pending	camp-hammock	marz-3way-long			
+set	camp-hammock	osoto-long	B072FMZZK6		
+set	camp-headlight-beginner	headlight-sc200b-32g	(amazonUrl)		
+pending	camp-headlight-beginner	headlight-sr01l-sensor			
+set	camp-headlight-beginner	headlight-sc300r-400r	(amazonUrl)		
+pending	camp-headlight-beginner	headlight-6200lm			
+set	camp-headlight-beginner	ladweather-headlight-42g	B096B3XDH3		
+pending	camp-kettle-recommend	campingmoon-kettle-alu			
+set	camp-kettle-recommend	vastland-kettle-13l	B0B1PVD4SL		
+pending	camp-kettle-recommend	campingmoon-kettle-flat			
+set	camp-kettle-recommend	fielddoor-titanium-kettle	B09JG6FCF5		
+pending	camp-kettle-recommend	campingmoon-kettle-steel			
+set	camp-knife-beginner	mora-companion	(amazonUrl)		
+set	camp-knife-beginner	opinel-no8	(amazonUrl)		
+set	camp-knife-beginner	victorinox-hunter	(amazonUrl)		
+set	camp-knife-beginner	spyderco-tenacious	(amazonUrl)		
+set	camp-knife-beginner	buck-110	(amazonUrl)		
+set	camp-lantern-led	soomloom-helio5000	(amazonUrl)		
+set	camp-lantern-led	rakuten-led-63	(amazonUrl)		
+set	camp-lantern-led	lad-weather-led	(amazonUrl)		
+set	camp-lantern-led	bruno-led-lantern	(amazonUrl)		
+set	camp-lantern-led	led-lantern-1000lm	(amazonUrl)		
+set	camp-lighting-guide	mol-l1200	(amazonUrl)		
+set	camp-lighting-guide	mol-l400	(amazonUrl)		
+set	camp-lighting-guide	balmuda-the-lantern-l02a	(amazonUrl)		
+set	camp-lighting-guide	kzm-gilbert-lantern	B09QM8KYZ3		
+pending	camp-lighting-guide	solar-lantern-1800lm			
+pending	camp-nata	nata-takibi-110			
+pending	camp-nata	nata-daishin-tetsuhiro-180			
+pending	camp-nata	nata-daishin-dgn001			
+pending	camp-nata	nata-senkichi-ebinata			
+set	camp-nata	nata-bohken-ns180	B000FFL0X6		
+set	camp-oil-stove	alpaca-plus-ts77	B0G1YDBHCD		
+set	camp-oil-stove	toyotomi-rainbow-rl2524	B0C5DDYDSL		
+set	camp-oil-stove	toyotomi-ks67h	B01AU4Z8F2		
+pending	camp-oil-stove	corona-sz-f32a			
+pending	camp-oil-stove	generic-convection-8800			
+pending	camp-pillow	komkom-air-pillow			
+set	camp-pillow	waq-relaxing-pillow	B0BCFL5CB4		
+set	camp-pillow	zencamps-air-pillow	B0DBHCCSKS		
+pending	camp-pillow	grandoor-urethane-pillow			
+pending	camp-pillow	origintree-air-pillow			
+pending	camp-portable-power-beginner	jackery-explorer-1000pro			
+set	camp-portable-power-beginner	ecoflow-delta2	B07FPVTFYC		
+set	camp-portable-power-beginner	bluetti-ac180	B0FWJJLDYN		
+pending	camp-portable-power-beginner	anker-solix-c800			
+pending	camp-portable-power-beginner	jackery-explorer-300plus			
+pending	camp-rainwear	rw-ocstyle-nasr100			
+set	camp-rainwear	rw-mizuno-a2mg8a01	B0784B94T2		
+pending	camp-rainwear	rw-workerbee-7572			
+pending	camp-rainwear	rw-makku-as7100			
+pending	camp-rainwear	rw-makku-as900			
+set	camp-skillet	cs-skillet-20	B099KC98R6		
+set	camp-skillet	cs-skillet-25	B06XW4ZDCG		
+pending	camp-skillet	cs-skillet-frypan25			
+set	camp-skillet	cs-skillet-mini	B01CRVT43S		
+set	camp-skillet	barebones-skillet	B01M2BTDCD		
+set	camp-sleeping-mat	thick-inflater-mat-75cm	(amazonUrl)		
+set	camp-sleeping-mat	bears-rock-inflatable-5cm	(amazonUrl)		
+set	camp-sleeping-mat	coleman-camper-inflater-highpeak	(amazonUrl)		
+set	camp-sleeping-mat	fieldoor-folding-cushion-mat	(amazonUrl)		
+pending	camp-sleeping-mat	r893-inflater-mat			
+pending	camp-smoker	sm-honma-f240s			
+pending	camp-smoker	sm-soto-smokehouse			
+pending	camp-smoker	sm-camerons-mini			
+pending	camp-smoker	sm-easy-smoker			
+pending	camp-smoker	sm-cocktail-smoker			
+set	camp-table-folding	mermont-alumi-table	(amazonUrl)		
+pending	camp-table-folding	mesh-table-135x60			
+set	camp-table-folding	yamazen-wood-alumi-table	(amazonUrl)		
+set	camp-table-folding	fieldoor-table-bench-set-90	B071HW4LNR		
+set	camp-table-folding	campingmoon-field-rack	(amazonUrl)		
+set	camp-table-set	tableset-rank-1	(amazonUrl)		
+set	camp-table-set	tableset-rank-2	(amazonUrl)		
+set	camp-table-set	tableset-rank-3	(amazonUrl)		
+set	camp-table-set	tableset-rank-4	(amazonUrl)		
+set	camp-table-set	tableset-rank-5	(amazonUrl)		
+set	camp-tarp-beginner	dod-itsukano-tarp	(amazonUrl)		
+set	camp-tarp-beginner	fieldoor-onetouch-tarp-3x3	(amazonUrl)		
+set	camp-tarp-beginner	bearsrock-shirokuma-square-tarp	(amazonUrl)		
+set	camp-tarp-beginner	hexa-tarp-500x480	(amazonUrl)		
+set	camp-tarp-beginner	fieldoor-hexa-tarp-m440	(amazonUrl)		
+pending	camp-windscreen	windscreen-pineagle-reflector			
+set	camp-windscreen	windscreen-wakufimac-large	B09K7K8D4Q		
+pending	camp-windscreen	windscreen-dreambrother-compact			
+pending	camp-windscreen	windscreen-onetigris-tc			
+pending	camp-windscreen	windscreen-dreambrother-2set			
+set	captain-stag-chair	cs-charmant	(amazonUrl)		
+set	captain-stag-chair	cs-joule	(amazonUrl)		
+set	captain-stag-chair	cs-lounge-green	(amazonUrl)		
+set	captain-stag-chair	cs-relax-cushion	(amazonUrl)		
+set	captain-stag-chair	cs-bench	(amazonUrl)		
+set	captain-stag-table	cs-roll-table-m3713	B000AR4TJQ		
+set	captain-stag-table	cs-laforet-uc510	B00CZ749C6		
+set	captain-stag-table	cs-bistro-hightable	B09NBKVJXF		
+set	captain-stag-table	cs-blacklabel-uc551	B081V29MSV		
+set	captain-stag-table	cs-laforet-uc513	B00CZ7499Y		
+pending	car-camp-bed-kit	car-rank-1			
+pending	car-camp-bed-kit	car-rank-2			
+pending	car-camp-bed-kit	car-rank-3			
+pending	car-camp-lighting	sbn21-led-1000			
+set	car-camp-lighting	mtk-led-1600	B0CCHS8K8S		
+pending	car-camp-lighting	zashbear-led-1000			
+set	car-camp-lighting	livelife-aurora-1200	B09QCXMY6J		
+pending	car-camp-lighting	fukubook-magnet-led			
+pending	car-shade	liberesta-umbrella-shade			
+pending	car-shade	hariti-magnet-curtain			
+pending	car-shade	hobbyman-car-curtain			
+pending	car-shade	autorder-front-shade			
+pending	car-shade	hobbyman-mesh-magnet-curtain			
+set	car-side-tarp	fielddoor-carside-230	B0DNQ2NF9F		
+set	car-side-tarp	sharestyle-shelter-330	B0BH8MXKSR		
+pending	car-side-tarp	fielddoor-shelter-blackout			
+set	car-side-tarp	sharestyle-onetouch-280	B0CWGM5F4F		
+pending	car-side-tarp	ogawa-carside-al2			
+set	cassette-gas-heater	iwatani-dekadan3	B0FN821Y16		
+set	cassette-gas-heater	iwatani-kazedan-gfh5	B0B7BDQWCY		
+set	cassette-gas-heater	iwatani-dekadan2	B0B7B6559B		
+set	cassette-gas-heater	iwatani-izamaru	B0G7CQWG2M		
+set	cassette-gas-heater	iwatani-maidan3	B0DBV3BYP1		
+set	charcoal-starter	captainstag-ug3281	(source=amazon)		
+set	charcoal-starter	uniflame-chacosta2	(source=amazon)		
+set	charcoal-starter	campingmoon-fd	(source=amazon)		
+set	charcoal-starter	captainstag-firepot-set	(source=amazon)		
+set	charcoal-starter	campingmoon-mt17	(source=amazon)		
+pending	co-checker	co-checker-jsm-rank1			
+pending	co-checker	co-checker-next-light			
+pending	co-checker	co-checker-wake-alarm			
+pending	co-checker	co-checker-ptkey-cert			
+set	co-checker	co-checker-camg-mini	B0CBJS3G3J		
+set	coleman-bonfire	coleman-firedisk	B01LT5ES1Q		
+pending	coleman-bonfire	coleman-firedisk-solo			
+pending	coleman-bonfire	coleman-firedisk-sheet			
+pending	coleman-bonfire	coleman-firedisk-table			
+pending	coleman-chair	coleman-infinity-beige			
+pending	coleman-chair	coleman-infinity-grey			
+set	coleman-chair	coleman-deck-chair	B07H38HX1G		
+pending	coleman-chair	coleman-chair-set			
+set	coleman-chair	coleman-infinity-olive	B09MS61HDW		
+set	coleman-lantern	coleman-northstar	(amazonUrl)		
+set	coleman-lantern	coleman-hanging-elight	(amazonUrl)		
+set	coleman-lantern	coleman-lumiere	(amazonUrl)		
+set	coleman-lantern	coleman-rechargeable	(amazonUrl)		
+set	coleman-lantern	coleman-rugged-packaway	(amazonUrl)		
+set	coleman-sleeping-bag	coleman-sb-multilayer	B07M7D4Y5D		
+set	coleman-sleeping-bag	coleman-sb-performer3-c5	B07HRQMV4M		
+set	coleman-sleeping-bag	coleman-sb-cozy2-c5	B07HRKNWWT		
+pending	coleman-sleeping-bag	coleman-sb-cozy2-set			
+pending	coleman-sleeping-bag	coleman-sb-northrim			
+set	coleman-tent	coleman-bc-crossdome	(amazonUrl)		
+set	coleman-tent	coleman-touring-dome-st	(amazonUrl)		
+set	coleman-tent	coleman-popup-shade	(amazonUrl)		
+set	coleman-tent	coleman-quickup-shade	(amazonUrl)		
+pending	coleman-two-burner	cb-coleman-set-table			
+pending	coleman-two-burner	cb-coleman-powerhouse-gasset			
+set	coleman-two-burner	cb-coleman-powerhouse2-red	B00SLOACVE		
+pending	coleman-two-burner	cb-coleman-red-gasset			
+pending	coleman-two-burner	cb-coleman-powerhouse2			
+set	compact-portable-power	jackery-240new	B0C4DY1C3H		
+set	compact-portable-power	anker-c300	B0D5XGP6CW		
+pending	compact-portable-power	bluetti-eb3a			
+set	compact-portable-power	bluetti-aora30	B0FB3Y46SB		
+set	compact-portable-power	jackery-100plus	B0D9NM8YGQ		
+set	cooler-box-day-camp	cool-rank-1	B0D69W361V		
+set	cooler-box-day-camp	cool-rank-2	B0G7K6Z93R		
+set	cooler-box-day-camp	cool-rank-3	B0GP9JKSKF		
+pending	cooler-box-day-camp	cool-rank-4			
+set	cooler-box-day-camp	cool-rank-5	B08CXDQ667		
+pending	cooler-ice-pack	ip-atone-stainless			
+pending	cooler-ice-pack	ip-covell-stainless			
+set	cooler-ice-pack	ip-logos-hyoutenka	B001USYFWU		
+pending	cooler-ice-pack	ip-sanyouki-16			
+pending	cooler-ice-pack	ip-yunide-hard			
+set	day-camp-cooler-box	cooler-rank-1	B0D69W361V		
+pending	day-camp-cooler-box	cooler-rank-2			
+pending	day-camp-cooler-box	cooler-rank-3			
+set	day-camp-cooler-box	cooler-rank-4	B0G7K6Z93R		
+set	day-camp-cooler-box	cooler-rank-5	B08CXDQ667		
+pending	day-camp-grill	grill-rank-1			
+pending	day-camp-grill	grill-rank-2			
+pending	day-camp-grill	grill-rank-3			
+pending	day-camp-grill	grill-rank-4			
+set	day-camp-grill	grill-rank-5	B0792GT2DB		
+set	day-camp-led-lantern	lantern2-rank-1	B0CL6GFW6Q		
+set	day-camp-led-lantern	lantern2-rank-2	B0CCHS8K8S		
+pending	day-camp-led-lantern	lantern2-rank-3			
+pending	day-camp-led-lantern	lantern2-rank-4			
+pending	day-camp-led-lantern	lantern2-rank-5			
+pending	day-camp-starter-set	starter-rank-1			
+pending	day-camp-starter-set	starter-rank-2			
+set	day-camp-starter-set	starter-rank-3	B01H4OPQ76		
+set	day-camp-starter-set	starter-rank-4	B01GCNW3LM		
+pending	day-camp-starter-set	starter-rank-5			
+set	day-camp-tarp-cheap	tarp-rank-1	B0DNSGC9MG		
+set	day-camp-tarp-cheap	tarp-rank-2	B07VF37G57		
+pending	day-camp-tarp-cheap	tarp-rank-3			
+pending	day-camp-tarp-cheap	tarp-rank-4			
+pending	day-camp-tarp-cheap	tarp-rank-5			
+pending	day-camp-tent	tent-rank-1			
+pending	day-camp-tent	tent-rank-2			
+pending	day-camp-tent	tent-rank-3			
+pending	day-camp-tent	tent-rank-4			
+pending	deuter-backpack	deuter-orcha			
+pending	deuter-backpack	deuter-race-air			
+pending	deuter-backpack	deuter-lugano			
+pending	deuter-backpack	deuter-futura-pro			
+pending	deuter-backpack	deuter-aircontact-core			
+set	dod-chair	dod-good-rack-sofa	(amazonUrl)		
+set	dod-chair	dod-sugoiss	(amazonUrl)		
+pending	dod-table	dod-tequila			
+pending	dod-table	dod-stealthx-mini			
+pending	dod-table	dod-multi-kitchen			
+pending	dod-table	dod-goodluck			
+set	dod-tarp	dod-okla-tarp	(amazonUrl)		
+set	dod-tarp	dod-itsukano-tarp	(amazonUrl)		
+set	dod-tarp	dod-beetle-tarp	(amazonUrl)		
+set	dod-tarp	dod-big-tarp-pole	(amazonUrl)		
+pending	dod-tent	dod-onetouch-m			
+pending	dod-tent	dod-onepole-l			
+pending	dod-tent	dod-ei-tent			
+pending	dod-tent	dod-yadokari			
+pending	dod-tent	dod-onetouch-t2			
+set	duo-tent	dt-coleman-st	B08P5811G7		
+pending	duo-tent	dt-dod-onetouch			
+set	duo-tent	dt-naturehike-light	B0D75V13BG		
+set	duo-tent	dt-coleman-lx	B08P589XPT		
+set	duo-tent	dt-dod-riders	B01FHMR0DA		
+set	dutch-oven	tsbbq-dutch10	(amazonUrl)		
+set	dutch-oven	snowpeak-wattetsu26	(amazonUrl)		
+set	dutch-oven	captainstag-ug3048	(amazonUrl)		
+set	dutch-oven	captainstag-ug3061	(amazonUrl)		
+set	dutch-oven	tsbbq-half-dutch	(amazonUrl)		
+set	ecoflow-power	ecoflow-delta3-1000air	(amazonUrl)		
+set	ecoflow-power	ecoflow-river2-pro	(amazonUrl)		
+set	ecoflow-power	ecoflow-delta3-classic	(amazonUrl)		
+set	ecoflow-power	ecoflow-delta3-plus	(amazonUrl)		
+set	ecoflow-power	ecoflow-delta3-max	(amazonUrl)		
+pending	electric-blanket-camp	cordless-30000mah			
+pending	electric-blanket-camp	usb-hotmat			
+pending	electric-blanket-camp	usb-shiki-cospa			
+pending	electric-blanket-camp	cordless-blanket-large			
+pending	electric-blanket-camp	kakeshiki-jet			
+pending	family-camp-bbq	darche-bbq-starter			
+pending	family-camp-bbq	onway-seika-more			
+pending	family-camp-bbq	yumeka-bbq-firepot			
+pending	family-camp-bbq	musouka-firepot			
+pending	family-camp-bbq	gyokuhou-takibi			
+pending	family-camp-chair	chair-f-rank-1			
+pending	family-camp-chair	chair-f-rank-2			
+pending	family-camp-chair	chair-f-rank-3			
+pending	family-camp-chair	chair-f-rank-4			
+pending	family-camp-chair	chair-f-rank-5			
+pending	family-camp-cot	coleman-converta-cot2			
+pending	family-camp-cot	logos-comfort-bed			
+pending	family-camp-cot	gussuri-air-cot			
+pending	family-camp-cot	bundok-low-cot			
+pending	family-camp-cot	yurafuwa-hammock			
+pending	family-camp-lantern	lantern-rank-1			
+pending	family-camp-lantern	lantern-rank-2			
+pending	family-camp-lantern	lantern-rank-3			
+pending	family-camp-lantern	lantern-rank-4			
+pending	family-camp-lantern	lantern-rank-5			
+set	family-camp-mat	mat-patri-double	(amazonUrl)		
+set	family-camp-mat	mat-patri-pillow	(amazonUrl)		
+set	family-camp-mat	mat-alice-reversible	(amazonUrl)		
+set	family-camp-mat	mat-alice-double	(amazonUrl)		
+set	family-camp-mat	mat-waq-8cm	(amazonUrl)		
+set	family-camp-summer-tent	tomount-triarc-tunnel-v4	(amazonUrl)		
+set	family-camp-summer-tent	fieldoor-4set-family-tent	(amazonUrl)		
+pending	family-camp-summer-tent	ratelworks-boden-rws0111			
+pending	family-camp-summer-tent	onetouch-family-tent-300			
+set	family-camp-summer-tent	waq-alpha-tc-ft	(amazonUrl)		
+pending	family-camp-tent	tent-f-rank-1			
+pending	family-camp-tent	tent-f-rank-2			
+pending	family-camp-tent	tent-f-rank-3			
+pending	family-camp-tent	tent-f-rank-4			
+pending	family-camp-tent	tent-f-rank-5			
+pending	family-summer-large-tent	tent-rank-1			
+pending	family-summer-large-tent	tent-rank-2			
+pending	family-summer-large-tent	tent-rank-3			
+pending	family-summer-large-tent	tent-rank-4			
+pending	family-summer-large-tent	tent-rank-5			
+pending	field-rack	hibari-fieldrack			
+pending	field-rack	chillcamping-lockrack			
+pending	field-rack	uniflame-fieldrack			
+pending	field-rack	campingmoon-3tier			
+pending	field-rack	pykespeak-camprack			
+set	fieldoor-tent	fieldoor-tarp-25-side	(amazonUrl)		
+set	fieldoor-tent	fieldoor-tarp-30	(amazonUrl)		
+set	fieldoor-tent	fieldoor-popup-200	(amazonUrl)		
+set	fieldoor-tent	fieldoor-tarp-25	(amazonUrl)		
+set	fieldoor-tent	fieldoor-hexa-dome	(amazonUrl)		
+pending	fire-blower	sanroku-fire-blow			
+pending	fire-blower	vastland-fuigo			
+pending	fire-blower	zencamps-blaster			
+pending	fire-blower	dotwest-wood			
+pending	fire-blower	campingmoon-ms43			
+pending	fire-extinguish-pot	zencamps-ashcarry			
+pending	fire-extinguish-pot	byousoku-tsubo			
+pending	fire-extinguish-pot	captainstag-alster			
+pending	fire-extinguish-pot	greenlife-hot150			
+pending	fire-extinguish-pot	fielddoor-4l			
+pending	fire-tongs	snowpeak-n020			
+pending	fire-tongs	dod-futsuno-tong			
+pending	fire-tongs	ventlax-takibi-tongs			
+pending	fire-tongs	zen-camps-tong			
+pending	fire-tongs	field-to-summit-tong			
+pending	fireproof-gloves	fg-komkom			
+pending	fireproof-gloves	fg-zencamps			
+pending	fireproof-gloves	fg-tran			
+set	fireproof-gloves	fg-morso	B00IM50T1A		
+pending	fireproof-gloves	fg-longleather			
+set	folding-cutting-board	yoshiki-yk-kbm1-m	B095KHVRQ6		
+set	folding-cutting-board	snowpeak-cs-207	B001UGID3E		
+set	folding-cutting-board	htag-dh-010-s	B08BTR3CPV		
+pending	folding-cutting-board	yoshiki-bamboo-set-l			
+set	folding-cutting-board	htag-dh-010-ss	B08TC2WD93		
+pending	forged-peg	elliise-28-8			
+pending	forged-peg	iwano-30-8			
+pending	forged-peg	elliise-28-5			
+pending	forged-peg	reiden-set			
+pending	forged-peg	peg-hammer-set			
+pending	gas-lantern	gaslantern-rank-1			
+pending	gas-lantern	gaslantern-rank-2			
+pending	gas-lantern	gaslantern-rank-3			
+pending	gas-lantern	gaslantern-rank-4			
+pending	gas-lantern	gaslantern-rank-5			
+pending	gear-storage-box	risu-tc70			
+pending	gear-storage-box	chill-camping-container-l			
+pending	gear-storage-box	risu-tc-stacking			
+pending	gear-storage-box	muranokajiya-container			
+pending	gear-storage-box	irisohyama-rvbox-1000			
+set	gentos-light	gentos-ex450h	(amazonUrl)		
+set	gentos-light	gentos-ex366d	(amazonUrl)		
+set	gentos-light	gentos-ex334d	(amazonUrl)		
+set	gentos-light	gentos-ex700f	(amazonUrl)		
+set	gentos-light	gentos-ex400f	(amazonUrl)		
+pending	gregory-backpack	gregory-daypack			
+pending	gregory-backpack	gregory-easypeasy			
+pending	gregory-backpack	gregory-campusday			
+pending	gregory-backpack	gregory-rhune			
+pending	gregory-backpack	gregory-casualday			
+set	ground-sheet	geertop-groundsheet	(source=amazon)		
+set	ground-sheet	triwonder-groundsheet	(source=amazon)		
+set	ground-sheet	zencamps-groundsheet	(source=amazon)		
+set	ground-sheet	goglamping-groundsheet	(source=amazon)		
+set	ground-sheet	clostnature-groundsheet	(source=amazon)		
+pending	group-camp-table	rattan-garden-table-180			
+set	group-camp-table	fieldoor-outdoor-table-180-240	(amazonUrl)		
+set	group-camp-table	wakufimac-rolltop-120x70	(amazonUrl)		
+pending	group-camp-table	folding-table-180x70			
+set	group-camp-table	captainstag-hexa-center-table-96	(amazonUrl)		
+pending	group-camp-tent	tent-rank-1			
+pending	group-camp-tent	tent-rank-2			
+pending	group-camp-tent	tent-rank-3			
+pending	group-camp-tent	tent-rank-4			
+pending	group-camp-tent	tent-rank-5			
+pending	guy-rope-recommend	dailycompass-tentrope-8			
+set	guy-rope-recommend	soomloom-guyrope-50m	B07WX7S936		
+pending	guy-rope-recommend	muranokajiya-tgr-4jset			
+set	guy-rope-recommend	campgreeb-guyrope-4mm-50m	B0BG22H6TJ		
+pending	guy-rope-recommend	unicona-guyrope-3mm-4			
+pending	hand-axe	ax-outbear			
+set	hand-axe	ax-husqvarna-38	B00HC077GQ		
+pending	hand-axe	ax-plow			
+set	hand-axe	ax-astro	B07QGJZF4R		
+set	hand-axe	ax-husqvarna-yankee	B08TGQFV1N		
+pending	headlight-rechargeable	nforce-sr01l			
+pending	headlight-rechargeable	relief10-3led			
+pending	headlight-rechargeable	5200lm-headlight			
+pending	headlight-rechargeable	nforce-sc300r			
+pending	headlight-rechargeable	lepro-usbc-300lm			
+set	helinox-chair	helinox-chair-one	(amazonUrl)		
+set	helinox-chair	helinox-chair-one-home	(amazonUrl)		
+set	helinox-chair	helinox-ground-chair	(amazonUrl)		
+set	helinox-chair	helinox-chair-two	(amazonUrl)		
+pending	hexa-tarp	dod-itsukano-tarp			
+pending	hexa-tarp	fieldoor-hexa-m			
+pending	hexa-tarp	vastland-tc-hexa			
+pending	hexa-tarp	fieldoor-hexa-l			
+pending	hexa-tarp	polycotton-takibi-tarp			
+pending	hot-sandwich-maker	vastland-hsm-ih			
+pending	hot-sandwich-maker	chums-hot-sandwich			
+pending	hot-sandwich-maker	vastland-hsm-tsubame			
+pending	hot-sandwich-maker	campingmoon-hsm			
+pending	hot-sandwich-maker	grill-hotpan-single			
+pending	hot-water-bottle	maruka-ace-25			
+pending	hot-water-bottle	hagoogi-lxe01			
+pending	hot-water-bottle	maruka-ace-35			
+pending	hot-water-bottle	mottole-mtlw001			
+pending	hot-water-bottle	sleepplus-danloop			
+set	infinity-chair	coleman-infinity	B079C1K6DH		
+pending	infinity-chair	sidetable-recliner			
+set	infinity-chair	timberridge-recliner	B08SLKMGLB		
+pending	infinity-chair	headrest-infinity			
+set	infinity-chair	regear-infinity	B0CCP4L4YV		
+pending	inflatable-mat	aiflycy-inflatable			
+pending	inflatable-mat	electric-inflatable-10cm			
+pending	inflatable-mat	onetigris-dreamstar			
+pending	inflatable-mat	pykespeak-r893			
+pending	inflatable-mat	bearsrock-3cm			
+pending	iwatani-stove	iwatani-cb-jcb			
+pending	iwatani-stove	iwatani-primus-p153			
+pending	iwatani-stove	iwatani-torch-ii			
+set	jackery-power-station	jackery-1000-new	(amazonUrl)		
+set	jackery-power-station	jackery-solar-1000	(amazonUrl)		
+set	jackery-power-station	jackery-2000-new	(amazonUrl)		
+set	jackery-power-station	jackery-solar-2000	(amazonUrl)		
+set	jackery-power-station	jackery-solar-500	(amazonUrl)		
+set	karrimor-backpack	karrimor-eclipse27	(amazonUrl)		
+set	karrimor-backpack	karrimor-tribute40	(amazonUrl)		
+set	karrimor-backpack	karrimor-vt-daypack	(amazonUrl)		
+set	karrimor-backpack	karrimor-tatra20	(amazonUrl)		
+pending	kids-sleeping-bag	kids-sb-rank-1			
+pending	kids-sleeping-bag	kids-sb-rank-2			
+pending	kids-sleeping-bag	kids-sb-rank-3			
+pending	kids-sleeping-bag	kids-sb-rank-4			
+pending	kids-sleeping-bag	kids-sb-rank-5			
+pending	lantern-stand	yamazaki-tower			
+pending	lantern-stand	vastland-stand			
+pending	lantern-stand	futurefox-stand			
+pending	lantern-stand	multitool-stand			
+pending	lantern-stand	tabletop-2way			
+pending	large-tarp-recommend	tansu-tarp-3x6			
+pending	large-tarp-recommend	fielddoor-onetouch-3x3			
+pending	large-tarp-recommend	coleman-13x13-shelter			
+pending	large-tarp-recommend	fielddoor-hexa-l			
+pending	large-tarp-recommend	moderndeco-onetouch-3m			
+set	large-tent-guide	tent-endlessbase	(amazonUrl)		
+set	large-tent-guide	tent-tansu	(amazonUrl)		
+set	large-tent-guide	tent-fieldoor-dome	(amazonUrl)		
+set	large-tent-guide	tent-fieldoor-hexa	(amazonUrl)		
+set	large-tent-guide	tent-pykespeak	(amazonUrl)		
+set	lightweight-mountain-tent	ul-tent-rank-1	(amazonUrl)		
+set	lightweight-mountain-tent	ul-tent-rank-2	(amazonUrl)		
+set	lightweight-mountain-tent	ul-tent-rank-3	(amazonUrl)		
+set	lightweight-mountain-tent	ul-tent-rank-4	(amazonUrl)		
+set	lightweight-mountain-tent	ul-tent-rank-5	(amazonUrl)		
+pending	log-carrier	canvas-log-tote			
+pending	log-carrier	bundok-bd904			
+pending	log-carrier	value-log-tote			
+pending	log-carrier	yoler-waterproof			
+pending	log-carrier	zukk-leather			
+set	logos-bonfire	logos-takibi-l-fire	(amazonUrl)		
+set	logos-bonfire	logos-takibi-m-bbq	(amazonUrl)		
+set	logos-bonfire	logos-takibi-l-bbq	(amazonUrl)		
+pending	low-style-table	quickcamp-3fold			
+pending	low-style-table	ladweather-alu-table			
+pending	low-style-table	fielddoor-wood-roll			
+pending	low-style-table	fielddoor-bamboo-roll			
+pending	low-style-table	alu-roll-60			
+pending	mestin-recommend	campingmoon-mestin-large			
+pending	mestin-recommend	laughmarket-teflon-mestin			
+pending	mestin-recommend	fieldtosummit-ofcarc2			
+pending	mestin-recommend	titanmania-mestin			
+pending	mestin-recommend	mr250-mestin-set			
+pending	mobile-battery-camp	furumiya-23600			
+pending	mobile-battery-camp	hiyori-40000			
+pending	mobile-battery-camp	breakthrough-22000			
+pending	mobile-battery-camp	livelylife-40000			
+pending	mobile-battery-camp	casebycase-10000			
+set	montbell-sleeping-bag	montbell-seamless-downhugger800-3	(source=amazon)		
+set	montbell-sleeping-bag	montbell-downhugger650-3	(source=amazon)		
+set	montbell-sleeping-bag	montbell-seamless-burrow-3	(source=amazon)		
+set	montbell-sleeping-bag	montbell-seamless-burrow-0	(source=amazon)		
+set	moraknife	companion-stainless	B004ZAIXSC		
+set	moraknife	companion-hd-stainless	B07M7LQFZR		
+set	moraknife	companion-carbon	B004TNWD40		
+set	moraknife	companion-spark	B07RP4C84N		
+set	moraknife	eldris-stainless	B0GVSZYL4W		
+pending	mountain-backpack-30l	bp-rank-1			
+pending	mountain-backpack-30l	bp-rank-2			
+pending	mountain-backpack-30l	bp-rank-3			
+pending	mountain-backpack-30l	bp-rank-4			
+pending	mountain-backpack-30l	bp-rank-5			
+set	mountain-camp-lantern	lantern-carry-medium	(amazonUrl)		
+set	mountain-camp-lantern	lantern-carry-small	(amazonUrl)		
+set	mountain-camp-lantern	lantern-bruno	(amazonUrl)		
+set	mountain-camp-lantern	lantern-solar-fold	(amazonUrl)		
+set	mountain-camp-lantern	lantern-lepro-4set	(amazonUrl)		
+pending	mountain-camp-lantern	lantern-goalzero			
+pending	mountain-camp-mat	mat-rank-1			
+pending	mountain-camp-mat	mat-rank-2			
+pending	mountain-camp-mat	mat-rank-3			
+pending	mountain-camp-mat	mat-rank-4			
+pending	mountain-camp-mat	mat-rank-5			
+pending	mountain-camp-tent	mountain-tent-rank-1			
+pending	mountain-camp-tent	mountain-tent-rank-2			
+pending	mountain-camp-tent	mountain-tent-rank-3			
+pending	mountain-camp-tent	mountain-tent-rank-4			
+pending	mountain-camp-tent	mountain-tent-rank-5			
+pending	mountain-tent-cheap	fieldoor-dome100			
+pending	mountain-tent-cheap	geertop-tent			
+pending	mountain-tent-cheap	naturehike-solo-tent			
+pending	mountain-tent-cheap	onetigris-hillridge			
+pending	mountain-tent-cheap	onetigris-tetra			
+pending	mummy-sleeping-bag	bearsrock-15			
+pending	mummy-sleeping-bag	hawkgear-3852			
+pending	mummy-sleeping-bag	hawkgear-2500			
+pending	mummy-sleeping-bag	hawkgear-4280			
+pending	mummy-sleeping-bag	onetigris-3season			
+pending	mysteryranch-backpack	mr-coulee-30			
+pending	mysteryranch-backpack	mr-gallagator			
+pending	mysteryranch-backpack	mr-coulee-40			
+pending	mysteryranch-backpack	mr-blitz-35			
+set	nanga-sleeping-bag	ns-aurora-light-450dx	(amazonUrl)		
+set	nanga-sleeping-bag	ns-auroratex-750dx	(amazonUrl)		
+set	nanga-sleeping-bag	ns-aurora-light-800dx-sq	(amazonUrl)		
+set	nanga-sleeping-bag	ns-auroratex-600dx	(amazonUrl)		
+set	nanga-sleeping-bag	ns-original-schlaf-460	(amazonUrl)		
+pending	naturehike-mat	naturehike-highr-air			
+pending	naturehike-mat	naturehike-inflatable			
+pending	naturehike-mat	naturehike-r65			
+pending	naturehike-mat	naturehike-airbed-electric			
+pending	naturehike-mat	naturehike-airbed-25cm			
+set	naturehike-sleeping-bag	naturehike-3season	(amazonUrl)		
+set	naturehike-sleeping-bag	naturehike-winter-2way	(amazonUrl)		
+set	naturehike-sleeping-bag	naturehike-225	(amazonUrl)		
+set	naturehike-sleeping-bag	naturehike-family	(amazonUrl)		
+set	naturehike-sleeping-bag	naturehike-layer	(amazonUrl)		
+pending	naturehike-tent	nh-cloudup2-pro			
+pending	naturehike-tent	nh-light-1-2p			
+pending	naturehike-tent	nh-dune76			
+pending	naturehike-tent	nh-lodge-13			
+pending	naturehike-tent	nh-village13			
+pending	northface-backpack	nf-fusebox			
+pending	northface-backpack	nf-vault			
+pending	northface-backpack	nf-bigshot			
+pending	northface-backpack	nf-hotshot			
+pending	northface-backpack	nf-borealis			
+pending	oil-lantern	vastland-oil			
+set	oil-lantern	feuerhand-276	B01B8F0MTY		
+pending	oil-lantern	thouswinds-twilight			
+pending	oil-lantern	dietz-30			
+pending	oil-lantern	captainstag-uk506			
+pending	one-pole-tent	tentmark-circus-tcdx			
+pending	one-pole-tent	onetigris-conifer			
+pending	one-pole-tent	waq-alpha-tc			
+pending	one-pole-tent	dod-onepole-s			
+pending	one-pole-tent	onepole-family-4p			
+pending	one-touch-tarp	tarp-fieldoor3			
+pending	one-touch-tarp	tarp-fieldoor25			
+pending	one-touch-tarp	tarp-modeco3			
+pending	one-touch-tarp	tarp-quickcamp			
+pending	one-touch-tarp	tarp-modeco25			
+pending	osprey-backpack	osprey-daylite-plus			
+pending	osprey-backpack	osprey-stratos-36			
+pending	osprey-backpack	osprey-sirrus-24			
+pending	osprey-backpack	osprey-fairview-40			
+set	osprey-daily-backpack	osprey-daylite-plus	(source=amazon)		
+set	osprey-daily-backpack	osprey-daylite	(source=amazon)		
+set	osprey-daily-backpack	osprey-arcane-largeday	(source=amazon)		
+set	osprey-daily-backpack	osprey-hikelite-26	(source=amazon)		
+set	osprey-daily-backpack	osprey-ul-stuffpack	(source=amazon)		
+pending	outdoor-coffee-mill	mill-porlex			
+pending	outdoor-coffee-mill	mill-captainstag			
+pending	outdoor-coffee-mill	mill-campingmoon			
+pending	outdoor-coffee-mill	mill-sukizuki			
+pending	outdoor-coffee-mill	mill-atlas			
+pending	outdoor-kitchen-table	kt-coleman			
+pending	outdoor-kitchen-table	kt-dod			
+pending	outdoor-kitchen-table	kt-visionpeaks			
+pending	outdoor-kitchen-table	kt-fieldoor-wood			
+pending	outdoor-kitchen-table	kt-fieldoor-alu			
+pending	outdoor-wagon	coleman-wagon			
+pending	outdoor-wagon	waq-wagon-w1			
+pending	outdoor-wagon	lysin-wagon-e230			
+pending	outdoor-wagon	fieldoor-wagon			
+pending	outdoor-wagon	tansu-renew-wagon			
+pending	peg-hammer	ellisse-ultimate-hammer			
+pending	peg-hammer	snowpeak-pro-s-n002			
+pending	peg-hammer	reiden-peg-hammer			
+pending	peg-hammer	freell-peg-hammer			
+pending	peg-hammer	dfresh-peg-hammer-360g			
+pending	portable-cooler-aircon	irisohyama-spot-cooler			
+pending	portable-cooler-aircon	tansu-spot-cooler			
+pending	portable-cooler-aircon	eenour-spot-cooler			
+pending	portable-cooler-aircon	threeup-spot-cooler			
+pending	portable-cooler-aircon	quads-spot-cooler			
+pending	portable-electric-kettle	dc12v-car-kettle-450			
+pending	portable-electric-kettle	silicone-folding-kettle-600			
+pending	portable-electric-kettle	portable-travel-kettle-300w			
+pending	portable-electric-kettle	ac100-240v-kettle-400			
+pending	portable-electric-kettle	car-kettle-keepwarm-450			
+pending	portable-fridge	eenour-db01			
+pending	portable-fridge	lifeidea-18l-2way			
+pending	portable-fridge	thn-compressor-fridge			
+pending	portable-fridge	powerarq-iceberg			
+pending	portable-fridge	regear-9l			
+pending	portable-power-large	jackery-2000-new			
+pending	portable-power-large	ecoflow-delta3-max			
+pending	portable-power-large	dabbsson-2000l			
+pending	portable-power-large	eenour-p2001plus			
+pending	portable-power-large	solar-panel-set			
+pending	portable-power-vehicle-camp	power-rank-1			
+pending	portable-power-vehicle-camp	power-rank-2			
+pending	portable-power-vehicle-camp	power-rank-3			
+pending	portable-power-vehicle-camp	power-rank-4			
+pending	portable-power-vehicle-camp	power-rank-5			
+pending	pup-tent	onetigris-solo-homestead			
+pending	pup-tent	tomount-pup-tc			
+pending	pup-tent	soomloom-pup-tc			
+pending	pup-tent	onetigris-roc-shield			
+pending	pup-tent	goglamping-gg-pup			
+pending	rectangle-sleeping-bag	bearsrock-mx604			
+pending	rectangle-sleeping-bag	nuuca-sleep			
+pending	rectangle-sleeping-bag	nebukuron			
+pending	rectangle-sleeping-bag	aiflycy-2nin			
+pending	rectangle-sleeping-bag	erabu-4type			
+pending	screen-tarp	st-fieldoor-285			
+pending	screen-tarp	st-fieldoor-ot			
+pending	screen-tarp	st-yoca-3m			
+pending	screen-tarp	st-yoca-wide			
+pending	screen-tarp	st-yoca-25			
+pending	secondary-combustion-bonfire	ftos-flamestove-max			
+pending	secondary-combustion-bonfire	ftos-flamestove-mini			
+pending	secondary-combustion-bonfire	glass-window-stove			
+pending	secondary-combustion-bonfire	soomloom-sparkjarr			
+pending	secondary-combustion-bonfire	octagon-black			
+pending	sierra-cup	snowpeak-titanium-e104			
+pending	sierra-cup	sierra-3set			
+pending	sierra-cup	campingmoon-seiro			
+pending	sierra-cup	campingmoon-lid			
+pending	sierra-cup	uniflame-coffee-bannet			
+pending	sleeping-bag-liner	liner-rank-1			
+pending	sleeping-bag-liner	liner-rank-2			
+pending	sleeping-bag-liner	liner-rank-3			
+pending	sleeping-bag-liner	liner-rank-4			
+pending	sleeping-bag-liner	liner-rank-5			
+set	sleeping-bag-summer-cospa	washable-envelope-allseason	(amazonUrl)		
+set	sleeping-bag-summer-cospa	bearsrock-mx604	(amazonUrl)		
+set	sleeping-bag-summer-cospa	inner-sheet-envelope	(amazonUrl)		
+set	sleeping-bag-summer-cospa	naturehike-washable-3-5season	(amazonUrl)		
+set	sleeping-bag-summer-cospa	nebukuron-envelope	(amazonUrl)		
+set	sleeping-bag-temperature-guide	camdoor-winter-25	(amazonUrl)		
+set	sleeping-bag-temperature-guide	nebukulon-230t	(amazonUrl)		
+pending	sleeping-bag-temperature-guide	mthappy-down-mummy-25			
+set	sleeping-bag-temperature-guide	hawkgear-mummy-15	(amazonUrl)		
+set	sleeping-bag-temperature-guide	soomloom-down-650fp	(amazonUrl)		
+set	sleeping-bag-winter-beginner	bearsrock-wide-30	(amazonUrl)		
+set	sleeping-bag-winter-beginner	camdoor-fuutou-allseason	(amazonUrl)		
+set	sleeping-bag-winter-beginner	bearsrock-mummy-34	(amazonUrl)		
+set	sleeping-bag-winter-beginner	bearsrock-fuutou-15	(amazonUrl)		
+set	sleeping-bag-winter-beginner	aiflycy-fuutou-wide	(amazonUrl)		
+set	snowpeak-bonfire	snowpeak-m	B00FXFFST0		
+set	snowpeak-bonfire	snowpeak-s	B00FR6CFIM		
+set	snowpeak-bonfire	snowpeak-l	B08HMPH45X		
+set	snowpeak-bonfire	snowpeak-set111	B00JYCRZ80		
+set	snowpeak-bonfire	snowpeak-set112	B08HMPC73K		
+pending	snowpeak-tent	snowpeak-entrypack-tt			
+pending	snowpeak-tent	snowpeak-landnest-dome-s			
+pending	snowpeak-tent	snowpeak-landnest-m-set			
+pending	snowpeak-tent	snowpeak-amenity-dome-m-set			
+pending	snowpeak-tent	snowpeak-landnest-shelter			
+pending	solar-panel-folding	jackery-solarsaga100			
+pending	solar-panel-folding	powerarq-solar120			
+pending	solar-panel-folding	togopower-120			
+pending	solar-panel-folding	lacita-81w			
+pending	solar-panel-folding	motteru-24w			
+set	solar-portable-power	sp-jackery-2000	(amazonUrl)		
+set	solar-portable-power	sp-jackery-1000	(amazonUrl)		
+set	solar-portable-power	sp-ecoflow-delta3plus	(amazonUrl)		
+set	solar-portable-power	sp-fossibot-f2400	(amazonUrl)		
+set	solar-portable-power	sp-ecoflow-delta3classic	(amazonUrl)		
+pending	solo-camp-beginners-guide	solo-camp-tent			
+pending	solo-camp-beginners-guide	solo-camp-sleeping-bag			
+pending	solo-camp-beginners-guide	solo-camp-mat			
+pending	solo-camp-beginners-guide	solo-camp-burner			
+pending	solo-camp-beginners-guide	solo-camp-cooker			
+pending	solo-camp-cot	cot-rank-1			
+pending	solo-camp-cot	cot-rank-2			
+pending	solo-camp-cot	cot-rank-3			
+set	solo-tent-beginner	bundok-solo-tipi-bdk75	(amazonUrl)		
+set	solo-tent-beginner	bearsrock-hayabusa-ts201h	(amazonUrl)		
+set	solo-tent-beginner	bundok-solo-base-tc-bdk79	(amazonUrl)		
+set	solo-tent-beginner	bundok-solo-dome-bdk08o	(amazonUrl)		
+set	solo-tent-beginner	tomount-ny-tent	(amazonUrl)		
+set	solo-tent-lightweight	tomount-ny-tent	(amazonUrl)		
+set	solo-tent-lightweight	pykes-peak-solo	(amazonUrl)		
+set	solo-tent-lightweight	bears-rock-hayabusa	(amazonUrl)		
+set	solo-tent-lightweight	fieldoor-onetouch100	(amazonUrl)		
+set	solo-tent-lightweight	bundok-solo-dome	(amazonUrl)		
+set	solo-tent-overall	solo-tent-rank-1	(amazonUrl)		
+set	solo-tent-overall	solo-tent-rank-2	(amazonUrl)		
+set	solo-tent-overall	solo-tent-rank-3	(amazonUrl)		
+set	solo-tent-overall	solo-tent-rank-4	(amazonUrl)		
+set	solo-tent-overall	solo-tent-rank-5	(amazonUrl)		
+set	soto-burner	soto-windmaster	(amazonUrl)		
+set	soto-burner	soto-st310	(amazonUrl)		
+set	soto-burner	soto-microtorch	(amazonUrl)		
+set	soto-burner	soto-slidetorch	(amazonUrl)		
+set	soto-burner	soto-fieldchucker	(amazonUrl)		
+pending	stylish-camp-tent	tent-s-rank-1			
+pending	stylish-camp-tent	tent-s-rank-2			
+pending	stylish-camp-tent	tent-s-rank-3			
+pending	stylish-camp-tent	tent-s-rank-4			
+pending	stylish-camp-tent	tent-s-rank-5			
+pending	takibi-table	uniflame-682104			
+pending	takibi-table	pykespeak-rack			
+pending	takibi-table	campingmoon-table			
+pending	takibi-table	yoler-mesh			
+pending	takibi-table	bundok-bd274			
+pending	tarp-pole	vastland-pole-33			
+pending	tarp-pole	fielddoor-pole-28			
+pending	tarp-pole	soomloom-pole-28			
+pending	tarp-pole	fielddoor-pole-32			
+pending	tarp-pole	futurefox-pole			
+pending	tent-wood-stove	honma-rs41-cooking			
+pending	tent-wood-stove	honma-clock1-glass			
+pending	tent-wood-stove	honma-stainless-clock1-set			
+pending	tent-wood-stove	honma-arata-ar360			
+pending	tent-wood-stove	honma-rm410-leisure			
+pending	thermal-bottle	tb-thermos-2way			
+pending	thermal-bottle	tb-tiger-sahara			
+pending	thermal-bottle	tb-zojirushi-seamless			
+pending	thermal-bottle	tb-atlas-tempeak			
+pending	thermal-bottle	tb-stanley-classic			
+pending	titanium-mug	tm-waq-450			
+pending	titanium-mug	tm-snowpeak-450			
+pending	titanium-mug	tm-hikinglife-300			
+pending	titanium-mug	tm-fielddoor-450			
+pending	titanium-mug	tm-pykespeak-junchitan			
+pending	torch-burner	soto-microtorch-active			
+pending	torch-burner	iwatani-torch-2			
+pending	torch-burner	soto-fieldchucker-760			
+pending	torch-burner	soto-slidetorch-487			
+pending	torch-burner	iwatani-aburi-2			
+set	two-room-tent-guide	fielddoor-620	(amazonUrl)		
+set	two-room-tent-guide	quickcamp-kurve	(amazonUrl)		
+set	two-room-tent-guide	naturehike-the-hills-1ldk	(amazonUrl)		
+set	two-room-tent-guide	tomount-triarc-v4	(amazonUrl)		
+set	two-room-tent-guide	tansu-2room-340	(amazonUrl)		
+pending	uniflame-burner	uniflame-us1900			
+pending	uniflame-burner	uniflame-usd2			
+pending	uniflame-burner	uniflame-uss			
+set	uniflame-fire-grill	uniflame-firegrill	B000AR5Y90		
+set	uniflame-fire-grill	uniflame-solo	B085Y1KHLC		
+pending	uniflame-fire-grill	uniflame-set			
+set	uniflame-fire-grill	uniflame-rostle	B000SXPWL6		
+set	uniflame-fire-grill	uniflame-case	B003DSUODY		
+pending	vastland-tent	vastland-tunnel-m			
+pending	vastland-tent	vastland-2room-dome			
+pending	vastland-tent	vastland-tunnel-s			
+pending	vastland-tent	vastland-tc-teepee			
+pending	vastland-tent	vastland-groundsheet			
+pending	waq-chair	waq-rlc1			
+pending	waq-chair	waq-fwc1			
+pending	waq-chair	waq-rlc1hb			
+pending	waq-chair	waq-rcc1			
+pending	waq-chair	waq-rlc2			
+set	water-jug	wj-fieldoor-15l	B08TQLQKHX		
+pending	water-jug	wj-allegia			
+pending	water-jug	wj-vastland			
+pending	water-jug	wj-fieldoor-38			
+pending	water-jug	wj-livingut			
+pending	waterproof-backpack	zettai-nurenai			
+pending	waterproof-backpack	tousen-daiyouryou			
+pending	waterproof-backpack	taotech-drybag			
+pending	waterproof-backpack	coleman-shield30			
+pending	waterproof-backpack	mthappy-25l			
+pending	winter-camp-gloves	lad-weather-main			
+pending	winter-camp-gloves	temres-01winter			
+pending	winter-camp-gloves	boukan-uragebana			
+pending	winter-camp-gloves	silvabond-leather			
+pending	winter-camp-gloves	lad-weather-alt			
