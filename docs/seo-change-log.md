@@ -3,6 +3,41 @@
 数値の推移はGAS「SEOレポート」の履歴で追う。本ファイルは「いつ・どの記事を・なぜ・どう変えたか」を記録し、次回レポートで効果を評価するための施策台帳。新しい施策は上に追記する。
 
 ---
+## 2026-08-19：日次記事作成（campkit-new-article-draft）— 商品5選2本＋ASP専用1本＋既存リライト1本
+
+- **枠の内訳**: `article-fix-backlog` に pending なし＝手順Fは発動せず。商品5選2本＋隣接ASP専用1本＋リライト1本の既定4枠で実行。
+- **① hanging-rack（ハンギングラックおすすめ5選・chair-table／新規）**
+  - 楽天API実データ5点：FIELDOOR系 アウトドアハンガーラック M（超々ジュラルミン）¥4,950／★4.51・253件、ICHIFUJI ハンギングラック（物干しフック付）¥3,680／★4.5・105件、Moon Lence 3段階高さ調節（耐荷重20kg）¥3,399／★4.42・93件、Naturehike M・Lサイズ ¥4,690／★4.35・40件、MAVEEK ¥4,450／★4.46・39件。価格比1.46x。
+  - **backlog notes が想定していたブランド（キャプテンスタッグ／DOD／ロゴス／ハイランダー／尾上製作所）は、楽天でレビュー実績のある本体が1件も確認できなかった**ため、レビュー実績のあるアルミ系OEM＋Moon Lence／Naturehike で構成し、想定価格帯を4,000〜12,000円 → 3,000〜5,000円台へ実態に合わせて修正した。記事内でも「この価格帯ではどれを買っても大きく外さない」と明記し、素材・調節・サイズの優先順位で選ばせる構成にしている。
+  - Amazon型番一致2点に `amazonAsin` 設置（Moon Lence=B0C49RJLXQ／Naturehike=B08ZHWTGBH）。残3点はノーブランド／楽天専売OEMで同定不可のため no-amazon（保守側）。
+  - 内部リンク：lantern-stand（1灯スタンドとの役割分担をFAQでも明示）／gear-storage-box／camp-table-folding。
+- **② disaster-portable-power（防災用ポータブル電源おすすめ5選・power／新規）**
+  - 楽天API実データ5点：Jackery 1000 New 1070Wh ¥119,800／★4.72・1,942件、EcoFlow RIVER 3 Max Plus 858Wh ¥99,700／★4.74・1,383件、BLUETTI AC70 768Wh ¥88,000／★4.71・176件、LACITA エナーボックス 444Wh ¥69,800／★4.58・3,072件、Jackery 240 New 256Wh ¥32,800／★4.66・1,785件。価格比3.65x・Jackery×2でブランド占有ルール内。
+  - **powerカテゴリは既存19本と過密なため、backlog notes の指示どおり「停電シナリオ別のWh逆算」を主軸に据えて差別化**：`必要容量＝100〜150Wh × 人数 × 日数` の計算式と、世帯×日数の早見表を導入直後に配置。portable-power-guide（選び方総論）・portable-power-large（大容量）・compact-portable-power（携帯性）とは切り口を分離し、相互内部リンクで送客。
+  - 「容量（Wh）＝どれだけ長く使えるか／定格出力（W）＝何を動かせるか」の区別と、備蓄用途でリン酸鉄（LiFePO4）を選ぶ理由（サイクル寿命）を独立見出しで解説。BLUETTI は物販テンプレ扱い（CalloutCta の rental/furusato/leisure には載せない）で ProductCard に収容。
+  - Amazon型番一致3点に `amazonAsin` 設置（Jackery 1000 New=B0D3HJM175／BLUETTI AC70=B0CC8ZKBVC／Jackery 240 New=B0CZ7145K1、うち2点は価格も完全一致）。EcoFlow RIVER 3 Max Plus と LACITA は Amazon で同型番の単体商品を特定できず no-amazon。
+  - **事実の保守運用**：RIVER 3 Max Plus は楽天の掲載名に定格出力の記載がなく、Chrome接続が落ちて公式仕様を実確認できなかったため、比較表の定格出力欄は数値を作らず「記載なし(公式要確認)」とした（既存 inflatable-mat のR値欄と同じ扱い）。
+- **③ sleeping-bag-furusato（寝袋のふるさと納税・NANGA返礼品／sleeping-bag／新規・ASP枠）**
+  - 案件＝楽天ふるさと納税（契約不要・rafcidリンク）／variant=furusato／CalloutCtaMdx 1本（「寝袋 ふるさと納税」検索へ誘導）。意図型＝シーン・季節（秋冬の寝袋需要 × 年末の寄付駆け込み）。
+  - 既存ふるさと納税7本（tent／power／cooler／chair-table／bonfire／camp／furusato-camp-guide）に **sleeping-bag カテゴリが無く非カニバリ**。制度の手順そのものは furusato-camp-guide へ委譲し、本記事は「快適使用温度・ダウン量とFP・形状・修理体制」という寝袋固有の判断軸に寄せて役割分担した。
+  - **NANGAの取扱自治体・モデル・寄付額は変動するため、個別自治体名や寄付額は断定せず**「滋賀県に本社を置き複数自治体から返礼品登録の実績がある」という水準に留め、最新ラインナップの検索へ誘導。返礼品の調達費は寄付額の3割以下という制度上の上限も明記し、「10万円寄付で10万円の寝袋」という誤解を先に潰している。
+  - 内部リンク：furusato-camp-guide／sleeping-bag-temperature-guide／mummy-sleeping-bag／nanga-sleeping-bag／sleeping-bag-winter-beginner。
+- **④ inflatable-mat リライト（rewrite-backlog priority A・lever=structure）**
+  - **狙ったクエリ（GSC28日）**：「インフレーターマット 耐久性」15表示/48.4位、「同 寝心地」18表示/35.8位、「同 エアマット 違い」6表示/29.8位、「同 何センチ」5表示/17.2位。おすすめ5選型のため判断軸セクションが不足し、下位クエリを取りこぼしていた。
+  - **変更した箇所（比較表とお手入れTipsの間にH2を3本【追記】）**：
+    1. `## インフレーターマットは何センチを選ぶ？8cmと10cmの境界` — 3〜5cm/8cm/10cm以上の使い分けに加え、**体格・寝姿勢別の推奨厚さ表**を新設（横向き寝は肩と腰の2点に荷重が集中するため厚みが必要、という判断根拠を明示）。狙い＝「何センチ」「寝心地」。
+    2. `## インフレーター式とエアー式（エアマット）の違い` — 内部構造／膨らませ方／断熱／収納／パンク時／向く用途の6項目比較表を新設し、「車で行くならインフレーター式、担ぐならエアー式」という決定ルールを提示。狙い＝「エアマット 違い」。
+    3. `## 耐久性とバルブ故障：長持ちさせる使い方` — バルブの砂噛み・満充填放置による樹脂変形／圧縮保管によるウレタンのへたり／湿気とカビ／グランドシート併用によるパンク予防の4節。狙い＝「耐久性」48.4位。
+  - frontmatter は description を書き換え（何センチ・エアマットとの違い・耐久性を前方に明記）、tags に「耐久性」「エアマット」「厚さ」を追加。**title は変更せず**（「おすすめ」17.6位＝ページ1に最も近いクエリを毀損しないため）。
+  - **★ProductCardMdx の商品・価格・レビュー数・アフィリリンク・比較表の商品行・thumbnail は一切変更していない**（追記中心＝低リグレッション）。`updatedAt` は同日の campkit-price-check が既に 2026-08-19 へ更新済み。
+  - 効果測定は2〜3週間後の campkit-seo-competitor-scan（金）で、上記4クエリの順位推移を確認する。
+- **skip 1件：snowpeak-chair（priority A・keyword-selection）**
+  - 楽天・Amazonの両方を実確認した結果、**レビュー実績のある「別モデル」が5点そろわない**ため skip。楽天で rc≥7 はローチェア30（128件/★4.82）・ローチェアショート（43件/★4.93）・FDチェアワイド（13件/★4.77）の3モデルのみで、Take!チェア LV-085＝rc1、メッシュローチェア30 LV-110M＝rc0、ノガチェア LV-510／エントリーローチェア＝取扱いなし。Amazon側も ローチェア30(4.6/776)・ショート(4.7/235)・FDチェアワイド(4.6/200) の3点までで、ノガチェア(B0HBW3D4YT)はレビュー0、Take!チェアは第三者出品でレビュー集約なし。**0レビュー品を混ぜて5選にしない方針（手順2e）に従い見送り**、代わりに priority B の hanging-rack を繰り上げた。モデル別レビューが積み上がったら pending へ戻す。
+- **台帳更新**: products.tsv に10行、amazon-link-worksheet.tsv に10行追記。keyword-backlog は hanging-rack／sleeping-bag-furusato を done、snowpeak-chair を skip。rewrite-backlog は inflatable-mat を done。
+- **ASP在庫**: source=asp の pending は4件（camp-gear-sale-timing／lantern-furusato／camp-rental-trouble／winter-mountain-rental）でいずれも提携済案件に紐づく。**約4営業日分＝CLAUDE.md の警戒ライン（3営業日）に接近**しており、次回の campkit-new-product-scan（月）での補充が必要。
+- **提携状況の確認レベル**: 今回使用した楽天ふるさと納税は「契約不要・利用可」で確認不要。他案件の『提携状況』は台帳ベース（asp-programs.tsv の最終確認日は空＝未再確認）。
+
+---
 ## 2026-08-19：価格チェック（campkit-price-check）— GSC流入上位7記事・34商品を実価格照合、4記事で価格更新
 
 - **対象選定**: GSC（プロパティ `https://www.camp-kit-guide.com/`・過去28日／クリック357・表示6,570）の「ページ」上位から、ProductCardを持つ記事7本（`osprey-backpack` / `family-camp-summer-tent` / `fieldoor-tent` / `inflatable-mat` / `coleman-chair` / `karrimor-backpack` / `mountain-camp-lantern`）を選定。上位の `osprey-daily-backpack` はAmazon ASIN運用で楽天照合対象外、`camp-backpack-capacity-guide` はProductCard非搭載のため除外。
