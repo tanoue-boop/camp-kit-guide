@@ -3,6 +3,46 @@
 数値の推移はGAS「SEOレポート」の履歴で追う。本ファイルは「いつ・どの記事を・なぜ・どう変えたか」を記録し、次回レポートで効果を評価するための施策台帳。新しい施策は上に追記する。
 
 ---
+## 2026-08-20：日次記事作成（campkit-new-article-draft）— 既存記事修正1本＋商品5選1本＋ASP専用1本＋既存リライト1本（調査）
+
+- **枠の内訳**: `article-fix-backlog` に pending 2件あり＝**手順Fが発動**したため、既定の商品5選2本を1本に減らし「既存修正1＋商品5選1＋ASP1＋リライト1」の4枠で実行した。
+- **⓪ 手順F-1：karrimor-backpack（priority A・price_unconfirmed）→ 記事変更なしで done**
+  - 8/19に「掲載11,000円 vs 楽天ページ7,700円」で保留になっていた案件。本日の実測では掲載店（canpanera/10000866）は **¥6,600 かつタイトルに「SALE Max20%OFF」が継続表示**＝セールがまだ終わっておらず、価格はさらに下落していた。
+  - 一方、**同一モデル（VTデイパックF 20L）を galleria（126件）・aranciato・NewbagWakamatsu の3店が ¥11,000 で掲載**しており、**通常価格は¥11,000で確定**。記事の `price="11000"` は正しいため据え置き、アフィリリンク・レビュー数・本文とも変更なしで backlog を done にした。
+- **⓪ 手順F-2：family-camp-summer-tent（priority B・price_unconfirmed）→ 記事側の明示で対応（当日の修正枠）**
+  - 楽天API実測で当該URL（tomount/triarc-tunnel-tent-v4）の `itemPrice` が **4,999**＝既定表示が最安SKUであることを再確認（掲載の39,999円自体は本体SKUとして正）。
+  - 商品差し替えではなく**記事側で誤認を防ぐ**方針を採り、第1位ProductCardの `description` 末尾に「販売ページは複数SKU構成のため、テント本体は『TriArc Tunnel Tent V4』（39,999円）のSKUを選択してください」を追記。比較表の価格帯を「約¥39,999（本体SKU）」、まとめ表も同様に修正。
+  - **price・アフィリリンク・amazonUrl・thumbnail・他4製品・記事構成は一切変更していない**（手順Fの許容範囲内）。
+- **① camp-dust-stand（キャンプ用ゴミ箱おすすめ5選・chair-table／新規）**
+  - 楽天API実データ5点：PYKES PEAK トラッシュボックス40L ¥3,480／★4.67・99件、オレゴニアンキャンパー ポップアップトラッシュボックスR2 45L ¥5,280／★4.71・66件、South Light 60L ¥4,380／★4.68・34件、トラッシュボックス30L ¥1,980／★4.62・68件、90L ¥2,480／★4.55・60件。**価格比2.67x**。
+  - **backlog notes が想定していたブランド（DOD ステルスエックス／ロゴス ダストボックス／キャプテンスタッグ UC-1633／ハイランダー／尾上製作所）は、楽天でレビュー実績（rc≥15）のある出品が1件も確認できなかった**ため、実在のレビュー実績で構成し直した。OneTigris（★4.86・21件）は掲載ページに「完売次第廃盤」の表記があるため採用を見送っている。
+  - 差別化の主軸は**「45Lゴミ袋が入るか」で容量を判断する**という実務的な軸で、カタログ表記のL数と実際に使う袋サイズのズレを冒頭で解消する構成にした。加えてポップアップ式/骨組み式の構造比較、蓋による防臭・防虫、たたみやすさの4ポイント。
+  - Amazon型番一致2点に `amazonAsin` 設置（PYKES PEAK 40L=**B0DMJLGFKK**／オレゴニアンキャンパーR2=**B093L1PZ5P**）。PYKES PEAK は統合リスティングの親ASIN（60L=B0DMJDRLJ9）を使わず、**楽天側SKUが40Lのため子ASIN B0DMJLGFKK を特定して設置**した。South Light はAmazon側が50L/60L・色別に複数ASINへ分散し楽天側の容量表記と突合できないため no-amazon（保守側）。30L/90Lはノーブランドで同定不可。
+  - 内部リンク：low-style-table／gear-storage-box。
+- **② camp-gear-sale-timing（キャンプ用品の買い時・セール時期／tent／新規・ASP枠）**
+  - hinataストア（提携済8%・確定率100%）を CalloutCtaMdx 1本で設置。**variant は物販セレクトショップのため rental/furusato/leisure が意味的に合わず default を使用**（camp-gear-where-to-buy と同じ扱い）。
+  - **既存 camp-gear-where-to-buy（＝「どこで買う」＝販路比較）に対し、本記事は「いつ買うか」＝時期軸で分離**。既存記事のH2に時期・セールを扱う見出しが無いことを確認したうえで公開しており非カニバリ。
+  - 構成：値引きが起きる4つの理由（シーズンオフ／型落ち／決算期／大型セール）→月別カレンダー表→アイテム別に「待つ価値が大きい／中／待たなくていい」→**「待つことのコスト」3つの落とし穴**→買い時を逃さない3つの準備→FAQ5問→まとめ早見表。
+  - **円建ての具体的なセール価格・割引率は創作せず**、時期と判断基準のみで構成した。CTAは「セール前に候補を絞る」文脈に置き、PR表記を必須で付与。
+  - 内部リンク：camp-gear-where-to-buy／camp-gear-rental／camp-rental-price。
+- **③ リライト solo-tent-lightweight（rewrite-backlog priority A・lever=cannibal-check）→ 調査のみ実施、statusは needs-human**
+  - lever の定義どおり**統合・リダイレクトは実行していない**（破壊的操作のため）。狙ったクエリは「ソロキャンプ テント 軽量」33.2位／「テント 軽量 ソロ」36.5位／「最軽量 テント 一人用」38.3位／「一人用テント 軽い」31.0位ほか計約80表示。
+  - **調査で判明した3点**：
+    1. **商品在庫が構造的に重複**。Bears Rock ハヤブサTS-201H が solo-tent-lightweight(3位)／solo-tent-overall(5位)／solo-tent-beginner(2位) の**3記事**に、TOMOUNT NY TENT が lightweight(1位)/beginner(5位)、BUNDOK BDK-08O が lightweight(5位)/beginner(4位)、FIELDOOR が lightweight(4位)/overall(1位)/mountain-tent-cheap(1位) に重複。**ソロ3記事は5製品中4製品が他記事と重なっており、枠組みだけ変えた同一在庫**になっている。
+    2. **「軽量」を名乗りながら重量の比較軸が本文に存在しない**。solo-tent-lightweight の比較表の列は 収容人数／設営方式／耐水圧／レビュー件数／参考価格 のみで**重量列が無い**。H2も「ソロキャンプテントおすすめ5選」「ソロキャンプスタイルで選ぶ最適テント」で solo-tent-overall とほぼ同一。
+    3. **タイトルの狙いと中身がねじれている**。採用5製品は実重量2〜3kg級（ワンタッチ／自立ドーム中心）で、500g／760g／1.35kg級を並べる lightweight-mountain-tent のほうが「最軽量 テント 一人用」の意図に合致する。
+    - 補足：内部リンクの被リンク数は overall=8／lightweight-mountain=4／lightweight=3／beginner=1／cheap=1 で、**リンク評価は solo-tent-overall に集中**しており票の分散を助長している。
+  - **できなかったこと**：GSCのページ別データを本実行では参照できず（GSC連携が本セッションで未認可）、**どのURLが実際の受け皿になっているかは未確定**。統合可否の最終判断にはGSCページ別の確認が必須。
+  - **needs-human とした理由**：根本原因が商品在庫の重複（＝ProductCardの差し替えが必要）と統合判断にあり、**rewriteの許容範囲（本文追記・frontmatter・内部リンクのみ）では解消できない**ため。人間に委ねる論点は「案A：軽量記事の5製品を1.5kg以下の実軽量モデルへ入れ替える（article-fix-backlog管轄・重い）」「案B：308統合（破壊的・2026-07-24の寝袋カニバ整理と同手順）」「案C：統合せず重量軸の追記のみで差別化（低リスク）」の3択。
+  - **副産物として rewrite-backlog に新規pending（priority B・lever=structure）を追加**：既存の比較表・商品カードを触らずに、比較表直後へ「5製品の重量とパッキングサイズ」H2＋独立表を追記し、選び方にも重量の判断軸を足す案C相当の低リスク施策。統合判断とは独立に実行可能。
+- **台帳**: products.tsv に5行、amazon-link-worksheet.tsv に5行追記。keyword-backlog は camp-dust-stand／camp-gear-sale-timing を done に更新。
+- **keyword-backlog の補正2件**：
+  - `disaster-portable-power`（priority A）は **2026-08-19 に既に公開済みだったが status が pending のまま残っていた**ため done に補正（本日の重複作成を回避）。
+  - `fire-starter`（priority B）を **skip** に更新。5クエリを実行したが、rc≥15の上位は着火剤（メイク／ドラゴン／ダッチウエスト）とノーブランドの火吹き棒セットが大半で、**Light My Fire・SOTO・バークリバー・キャプテンスタッグ・ユニフレームはレビュー実績のある新品出品が0件**（Bush Craft ファイヤースチール2.0 が rc=8 で唯一）。「実在する人気ブランドの定番モデルのみ」を楽天で満たせないため、Amazon源での再検討が必要と記録して camp-dust-stand へ振り替えた（wooden-tableware と同じ前例）。
+- **ASP在庫**: `source=asp` の pending は3件（lantern-furusato／camp-rental-trouble／winter-mountain-rental）に減少。**警戒ライン（3営業日分）に到達したため、次回の campkit-new-product-scan（月）での補充が必須**。
+- **ASP提携状況は台帳ベース**（`asp-programs.tsv` の最終確認日は空＝未再確認）。今回使用した hinataストアは CLAUDE.md が自律回で許可している実績案件4件に含まれるため、そのままリンクを挿入した。
+
+---
 ## 2026-08-19：日次記事作成（campkit-new-article-draft）— 商品5選2本＋ASP専用1本＋既存リライト1本
 
 - **枠の内訳**: `article-fix-backlog` に pending なし＝手順Fは発動せず。商品5選2本＋隣接ASP専用1本＋リライト1本の既定4枠で実行。
