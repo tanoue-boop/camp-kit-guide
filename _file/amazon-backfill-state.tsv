@@ -313,11 +313,11 @@ pending	day-camp-tent	tent-rank-1
 pending	day-camp-tent	tent-rank-2			
 pending	day-camp-tent	tent-rank-3			
 pending	day-camp-tent	tent-rank-4			
-no-amazon	deuter-backpack	deuter-orcha		2026-08-19	オルチャ25はカラー統合(ブラック/カーキ/マリン)。記事側に色指定が無く子ASIN特定不可
-no-amazon	deuter-backpack	deuter-race-air		2026-08-19	レースエアー14+3は色別ASIN(D3204423-7000/1374)。記事側に色指定なし
-no-amazon	deuter-backpack	deuter-lugano		2026-08-19	ルガーノ20はカラー統合(ブラック/ジェード/レッドウッド)。色指定なし
-no-amazon	deuter-backpack	deuter-futura-pro		2026-08-19	型番D3401121-7403に一致するASINなし(Amazonは別カラーコードのみ)
-no-amazon	deuter-backpack	deuter-aircontact-core		2026-08-19	エアコンタクトコア60+10はカラー統合(ブルー/ブラック/サバンナ)。色指定なし
+pending	deuter-backpack	deuter-orcha		2026-08-19	[再照合待ち] 楽天ページで実売の色/サイズを確認して子ASINを特定する。旧理由: オルチャ25はカラー統合(ブラック/カーキ/マリン)。記事側に色指定が無く子ASIN特定不可
+pending	deuter-backpack	deuter-race-air		2026-08-19	[再照合待ち] 楽天ページで実売の色/サイズを確認して子ASINを特定する。旧理由: レースエアー14+3は色別ASIN(D3204423-7000/1374)。記事側に色指定なし
+pending	deuter-backpack	deuter-lugano		2026-08-19	[再照合待ち] 楽天ページで実売の色/サイズを確認して子ASINを特定する。旧理由: ルガーノ20はカラー統合(ブラック/ジェード/レッドウッド)。色指定なし
+pending	deuter-backpack	deuter-futura-pro		2026-08-19	[再照合待ち] 楽天ページで実売の色/サイズを確認して子ASINを特定する。旧理由: 型番D3401121-7403に一致するASINなし(Amazonは別カラーコードのみ)
+pending	deuter-backpack	deuter-aircontact-core		2026-08-19	[再照合待ち] 楽天ページで実売の色/サイズを確認して子ASINを特定する。旧理由: エアコンタクトコア60+10はカラー統合(ブルー/ブラック/サバンナ)。色指定なし
 set	dod-chair	dod-good-rack-sofa	(amazonUrl)		
 set	dod-chair	dod-sugoiss	(amazonUrl)		
 pending	dod-table	dod-tequila			
@@ -365,7 +365,7 @@ pending	family-camp-chair	chair-f-rank-4
 pending	family-camp-chair	chair-f-rank-5			
 set	family-camp-cot	coleman-converta-cot2	B00363PS3W	2026-08-19	型番/仕様一致で採用
 no-amazon	family-camp-cot	logos-comfort-bed		2026-08-19	ロゴス73173089に一致せず(候補B07NBHCBHTは型番73188034のテーブル系)
-no-amazon	family-camp-cot	gussuri-air-cot		2026-08-19	DOEARTH Gussuriはブラック/ブラウンのカラー統合。色指定なく子ASIN特定不可
+pending	family-camp-cot	gussuri-air-cot		2026-08-19	[再照合待ち] 楽天ページで実売の色/サイズを確認して子ASINを特定する。旧理由: DOEARTH Gussuriはブラック/ブラウンのカラー統合。色指定なく子ASIN特定不可
 set	family-camp-cot	bundok-low-cot	B09ZXGVH9M	2026-08-19	型番/仕様一致で採用
 no-amazon	family-camp-cot	yurafuwa-hammock		2026-08-19	楽天19000円に対しAmazonはノーマル8980/ロング10800。該当モデル特定不可
 pending	family-camp-lantern	lantern-rank-1			
@@ -409,7 +409,7 @@ pending	fire-blower	zencamps-blaster
 pending	fire-blower	dotwest-wood			
 pending	fire-blower	campingmoon-ms43			
 set	fire-extinguish-pot	zencamps-ashcarry	B09K65JX3G	2026-08-19	型番/仕様一致で採用
-no-amazon	fire-extinguish-pot	byousoku-tsubo		2026-08-19	OUTBEAR秒速消火はS/Mのサイズ統合。記事側にサイズ記載がなく子ASIN特定不可
+pending	fire-extinguish-pot	byousoku-tsubo		2026-08-19	[再照合待ち] 楽天ページで実売の色/サイズを確認して子ASINを特定する。旧理由: OUTBEAR秒速消火はS/Mのサイズ統合。記事側にサイズ記載がなく子ASIN特定不可
 set	fire-extinguish-pot	captainstag-alster	B0065UYDAW	2026-08-19	型番/仕様一致で採用
 set	fire-extinguish-pot	greenlife-hot150	B00BG57XOE	2026-08-19	型番/仕様一致で採用
 set	fire-extinguish-pot	fielddoor-4l	B09FJLPYGP	2026-08-19	型番/仕様一致で採用
@@ -448,11 +448,11 @@ set	gentos-light	gentos-ex366d	(amazonUrl)
 set	gentos-light	gentos-ex334d	(amazonUrl)		
 set	gentos-light	gentos-ex700f	(amazonUrl)		
 set	gentos-light	gentos-ex400f	(amazonUrl)		
-no-amazon	gregory-backpack	gregory-daypack		2026-08-19	DAY PACKクラシックは6色統合。色指定なく子ASIN特定不可
+pending	gregory-backpack	gregory-daypack		2026-08-19	[再照合待ち] 楽天ページで実売の色/サイズを確認して子ASINを特定する。旧理由: DAY PACKクラシックは6色統合。色指定なく子ASIN特定不可
 no-amazon	gregory-backpack	gregory-easypeasy		2026-08-19	記事18Lに対しAmazon候補は16L(103868-1041)。容量不一致
-no-amazon	gregory-backpack	gregory-campusday		2026-08-19	キャンパスデイMは色統合(ブラック/ガーデンタペストリー/スノーレオパード)。色指定なし
+pending	gregory-backpack	gregory-campusday		2026-08-19	[再照合待ち] 楽天ページで実売の色/サイズを確認して子ASINを特定する。旧理由: キャンパスデイMは色統合(ブラック/ガーデンタペストリー/スノーレオパード)。色指定なし
 set	gregory-backpack	gregory-rhune	B09VS9CSQL	2026-08-19	型番/仕様一致で採用
-no-amazon	gregory-backpack	gregory-casualday		2026-08-19	カジュアルデイV2は素材違い2種(09J*29348/09J*09348)。記事側に指定なし
+pending	gregory-backpack	gregory-casualday		2026-08-19	[再照合待ち] 楽天ページで実売の仕様を確認して子ASINを特定する。旧理由: カジュアルデイV2は素材違い2種(09J*29348/09J*09348)。記事側に指定なし
 set	ground-sheet	geertop-groundsheet	(source=amazon)		
 set	ground-sheet	triwonder-groundsheet	(source=amazon)		
 set	ground-sheet	zencamps-groundsheet	(source=amazon)		
@@ -488,9 +488,9 @@ set	helinox-chair	helinox-chair-one-home	(amazonUrl)
 set	helinox-chair	helinox-ground-chair	(amazonUrl)		
 set	helinox-chair	helinox-chair-two	(amazonUrl)		
 set	hexa-tarp	dod-itsukano-tarp	B07VF37G57	2026-08-19	型番/仕様一致で採用
-no-amazon	hexa-tarp	fieldoor-hexa-m		2026-08-19	FIELDOORヘキサMは4色統合(5100円)。色指定なく子ASIN特定不可
+pending	hexa-tarp	fieldoor-hexa-m		2026-08-19	[再照合待ち] 楽天ページで実売の色/サイズを確認して子ASINを特定する。旧理由: FIELDOORヘキサMは4色統合(5100円)。色指定なく子ASIN特定不可
 no-amazon	hexa-tarp	vastland-tc-hexa		2026-08-19	AmazonのVASTLANDはTCレクタタープのみ。TCヘキサタープ420x420の取扱いなし
-no-amazon	hexa-tarp	fieldoor-hexa-l		2026-08-19	FIELDOORヘキサLは3色統合(7880円)。色指定なし
+pending	hexa-tarp	fieldoor-hexa-l		2026-08-19	[再照合待ち] 楽天ページで実売の色/サイズを確認して子ASINを特定する。旧理由: FIELDOORヘキサLは3色統合(7880円)。色指定なし
 no-amazon	hexa-tarp	polycotton-takibi-tarp		2026-08-19	ノーブランド汎用ポリコットンタープ。同一品を特定不可
 set	hot-sandwich-maker	vastland-hsm-ih	B09Z2JCM6Q	2026-08-19	型番/仕様一致で採用
 set	hot-sandwich-maker	chums-hot-sandwich	B00WSHHWC2	2026-08-19	型番/仕様一致で採用
@@ -524,7 +524,7 @@ set	karrimor-backpack	karrimor-eclipse27	(amazonUrl)
 set	karrimor-backpack	karrimor-tribute40	(amazonUrl)		
 set	karrimor-backpack	karrimor-vt-daypack	(amazonUrl)		
 set	karrimor-backpack	karrimor-tatra20	(amazonUrl)		
-no-amazon	kids-sleeping-bag	kids-sb-rank-1		2026-08-19	Bears Rock MX-604Jはモカライン/スモーキーネイビーの色統合。色指定なし
+pending	kids-sleeping-bag	kids-sb-rank-1		2026-08-19	[再照合待ち] 楽天ページで実売の色/サイズを確認して子ASINを特定する。旧理由: Bears Rock MX-604Jはモカライン/スモーキーネイビーの色統合。色指定なし
 set	kids-sleeping-bag	kids-sb-rank-2	B0GHG3CKWR	2026-08-19	型番/仕様一致で採用
 no-amazon	kids-sleeping-bag	kids-sb-rank-3		2026-08-19	ノーブランド汎用寝袋(在庫処分品)。同一品を特定不可
 no-amazon	kids-sleeping-bag	kids-sb-rank-4		2026-08-19	ノーブランド汎用2人用寝袋。同一品を特定不可
@@ -558,7 +558,7 @@ set	logos-bonfire	logos-takibi-l-fire	(amazonUrl)
 set	logos-bonfire	logos-takibi-m-bbq	(amazonUrl)		
 set	logos-bonfire	logos-takibi-l-bbq	(amazonUrl)		
 set	low-style-table	quickcamp-3fold	B0F3P4MZCN	2026-08-19	型番/仕様一致で採用
-no-amazon	low-style-table	ladweather-alu-table		2026-08-19	ラドウェザーは楽天1780円に対しAmazon2980円の3色統合。価格・色とも特定不可
+pending	low-style-table	ladweather-alu-table		2026-08-19	[再照合待ち] 楽天ページで実売の色/サイズを確認して子ASINを特定する。旧理由: ラドウェザーは楽天1780円に対しAmazon2980円の3色統合。価格・色とも特定不可
 set	low-style-table	fielddoor-wood-roll	B0832CJ39Z	2026-08-19	型番/仕様一致で採用
 no-amazon	low-style-table	fielddoor-bamboo-roll		2026-08-19	FIELDOORバンブー60x100に該当なし(Amazonは木製120x70等)
 no-amazon	low-style-table	alu-roll-60		2026-08-19	ノーブランド汎用アルミロールテーブル。同一品を特定不可
@@ -603,7 +603,7 @@ pending	mountain-camp-tent	mountain-tent-rank-3
 pending	mountain-camp-tent	mountain-tent-rank-4			
 pending	mountain-camp-tent	mountain-tent-rank-5			
 no-amazon	mountain-tent-cheap	fieldoor-dome100		2026-08-19	ノーブランド汎用ソロテント(楽天1位表記のみ)。同一品を特定不可
-no-amazon	mountain-tent-cheap	geertop-tent		2026-08-19	GEERTOPは耐水圧5000/3色統合。記事の140cm仕様に一致する子ASINを特定不可
+pending	mountain-tent-cheap	geertop-tent		2026-08-19	[再照合待ち] 楽天ページで実売の色/サイズを確認して子ASINを特定する。旧理由: GEERTOPは耐水圧5000/3色統合。記事の140cm仕様に一致する子ASINを特定不可
 no-amazon	mountain-tent-cheap	naturehike-solo-tent		2026-08-19	Naturehike 1人用20D耐水圧3000/4000に価格・仕様が一致する商品なし
 set	mountain-tent-cheap	onetigris-hillridge	B0CDWXN38R	2026-08-19	型番/仕様一致で採用
 set	mountain-tent-cheap	onetigris-tetra	B0BJ63G2SJ	2026-08-19	型番/仕様一致で採用
@@ -621,8 +621,8 @@ set	nanga-sleeping-bag	ns-auroratex-750dx	(amazonUrl)
 set	nanga-sleeping-bag	ns-aurora-light-800dx-sq	(amazonUrl)		
 set	nanga-sleeping-bag	ns-auroratex-600dx	(amazonUrl)		
 set	nanga-sleeping-bag	ns-original-schlaf-460	(amazonUrl)		
-no-amazon	naturehike-mat	naturehike-highr-air		2026-08-19	R4.6/R5.8/R8.8・8cm/12cmの多段バリエーション。記事側に指定なく子ASIN特定不可
-no-amazon	naturehike-mat	naturehike-inflatable		2026-08-19	5cm/10cm選択式。記事側に指定なく子ASIN特定不可
+pending	naturehike-mat	naturehike-highr-air		2026-08-19	[再照合待ち] 楽天ページで実売の仕様を確認して子ASINを特定する。旧理由: R4.6/R5.8/R8.8・8cm/12cmの多段バリエーション。記事側に指定なく子ASIN特定不可
+pending	naturehike-mat	naturehike-inflatable		2026-08-19	[再照合待ち] 楽天ページで実売の仕様を確認して子ASINを特定する。旧理由: 5cm/10cm選択式。記事側に指定なく子ASIN特定不可
 no-amazon	naturehike-mat	naturehike-r65		2026-08-19	R6.5サイドウォール厚手10cmに一致する商品なし(AmazonはTuye R3.2~8.8)
 no-amazon	naturehike-mat	naturehike-airbed-electric		2026-08-19	Naturehikeの電動エアーベッドに該当なし(汎用品のみヒット)
 no-amazon	naturehike-mat	naturehike-airbed-25cm		2026-08-19	厚さ25cm枕付きは楽天10990円に対しAmazon該当品19990円。価格・仕様が一致せず
@@ -675,15 +675,15 @@ pending	outdoor-kitchen-table	kt-dod
 pending	outdoor-kitchen-table	kt-visionpeaks			
 pending	outdoor-kitchen-table	kt-fieldoor-wood			
 pending	outdoor-kitchen-table	kt-fieldoor-alu			
-pending	outdoor-wagon	coleman-wagon			
-pending	outdoor-wagon	waq-wagon-w1			
-pending	outdoor-wagon	lysin-wagon-e230			
-pending	outdoor-wagon	fieldoor-wagon			
-pending	outdoor-wagon	tansu-renew-wagon			
-pending	peg-hammer	ellisse-ultimate-hammer			
-pending	peg-hammer	snowpeak-pro-s-n002			
-pending	peg-hammer	reiden-peg-hammer			
-pending	peg-hammer	freell-peg-hammer			
+set	outdoor-wagon	coleman-wagon	B07V7Y9CFG	2026-08-24	
+set	outdoor-wagon	waq-wagon-w1	B07PGCZPK6	2026-08-24	
+no-amazon	outdoor-wagon	lysin-wagon-e230		2026-08-24	Amazonのライシン Eシリーズ最大230L(B0DP7K6LPY等)はブラック/グリーン/ブラウン/グレー/ベージュの5色別ASIN。楽天ls-yx-z02b側にカラー記載が無く実売色を確定できず
+no-amazon	outdoor-wagon	fieldoor-wagon		2026-08-24	AmazonにFIELDOOR製アウトドアワゴン(126L・耐荷重150kg・8,910円)の出品が無く、検索上位はWAQ/MR.NOMADS等の他社品のみ
+no-amazon	outdoor-wagon	tansu-renew-wagon		2026-08-24	Amazonにタンスのゲン RENEWノーパンクワイドタイヤ キャリーワゴン(100L・耐荷重100kg・約11kg・7,999円)の出品が無い。同社のAmazon出品はショッピングカート/防災リュック等
+no-amazon	peg-hammer	ellisse-ultimate-hammer		2026-08-24	楽天yminfo/10040001は「真鍮orステンレスヘッド×カチオンorクローム」の4仕様選択制(実重量570g)で記事側にも仕様指定が無く、Amazonの各仕様ASIN(6,600〜7,480円)を一意に特定できず
+set	peg-hammer	snowpeak-pro-s-n002	B000AR2OBQ	2026-08-24	
+no-amazon	peg-hammer	reiden-peg-hammer		2026-08-24	Amazonに「REIDEN」ブランドのペグハンマー(1,690円/現役キャンパー監修)の出品が無く、検索上位はYOGOTO/HUNDRUP等の別ブランド
+set	peg-hammer	freell-peg-hammer	B07V7XLC2L	2026-08-24	
 pending	peg-hammer	dfresh-peg-hammer-360g			
 pending	portable-cooler-aircon	irisohyama-spot-cooler			
 pending	portable-cooler-aircon	tansu-spot-cooler			
@@ -760,11 +760,11 @@ set	snowpeak-bonfire	snowpeak-s	B00FR6CFIM
 set	snowpeak-bonfire	snowpeak-l	B08HMPH45X		
 set	snowpeak-bonfire	snowpeak-set111	B00JYCRZ80		
 set	snowpeak-bonfire	snowpeak-set112	B08HMPC73K		
-pending	snowpeak-tent	snowpeak-entrypack-tt			
-pending	snowpeak-tent	snowpeak-landnest-dome-s			
-pending	snowpeak-tent	snowpeak-landnest-m-set			
-pending	snowpeak-tent	snowpeak-amenity-dome-m-set			
-pending	snowpeak-tent	snowpeak-landnest-shelter			
+set	snowpeak-tent	snowpeak-entrypack-tt	B095K1TYDQ	2026-08-24	
+set	snowpeak-tent	snowpeak-landnest-dome-s	B0BXSTCF5T	2026-08-24	
+set	snowpeak-tent	snowpeak-landnest-m-set	B0BXSTPB59	2026-08-24	
+no-amazon	snowpeak-tent	snowpeak-amenity-dome-m-set		2026-08-24	Amazonの統合リスティング(B0BMQ1VDVD)の子は「テント単品」「テント+シェルターセット」のみで、マット・シート付スターターセット(SET-020/75,240円)構成の子ASINが存在しない
+set	snowpeak-tent	snowpeak-landnest-shelter	B0DQWPNB3Q	2026-08-24	
 pending	solar-panel-folding	jackery-solarsaga100			
 pending	solar-panel-folding	powerarq-solar120			
 pending	solar-panel-folding	togopower-120			
@@ -828,16 +828,16 @@ pending	thermal-bottle	tb-tiger-sahara
 pending	thermal-bottle	tb-zojirushi-seamless			
 pending	thermal-bottle	tb-atlas-tempeak			
 pending	thermal-bottle	tb-stanley-classic			
-pending	titanium-mug	tm-waq-450			
-pending	titanium-mug	tm-snowpeak-450			
-pending	titanium-mug	tm-hikinglife-300			
-pending	titanium-mug	tm-fielddoor-450			
-pending	titanium-mug	tm-pykespeak-junchitan			
-pending	torch-burner	soto-microtorch-active			
-pending	torch-burner	iwatani-torch-2			
-pending	torch-burner	soto-fieldchucker-760			
+set	titanium-mug	tm-waq-450	B07L6H367Y	2026-08-24	
+set	titanium-mug	tm-snowpeak-450	B06XX4G5XT	2026-08-24	
+set	titanium-mug	tm-hikinglife-300	B0D1GJ2Y7T	2026-08-24	
+set	titanium-mug	tm-fielddoor-450	B08C9SJY91	2026-08-24	
+no-amazon	titanium-mug	tm-pykespeak-junchitan		2026-08-24	楽天p0135tm301は210/300/450mlの多サイズ選択制で記事側にも容量指定が無く実売仕様を確定できず。Amazon側の子ASINも300ml本体単品が存在しない(300mlはフタ1個のみ)
+no-amazon	torch-burner	soto-microtorch-active		2026-08-24	楽天plantz/sinfuji-rz521-522はRZ-522横型とRZ-521縦型の同一ページ販売かつ色指定なし。Amazon側RZ-522はBK/GL等の色別ASINに分かれており実売仕様を確定できず
+no-amazon	torch-burner	iwatani-torch-2		2026-08-24	AmazonのCB-TC-ODORP出品はB0F28HN8S8「カセットボンベ1本付き」(2,661円)のみで、本体単体(2,750円)と構成が異なる。旧型CB-TC-ODORは型番不一致
+no-amazon	torch-burner	soto-fieldchucker-760		2026-08-24	楽天e-kurashi/q4x77の実商品は「ST-451 パワートーチ(ST-700ガス付属)」で、記事の型番ST-760と不一致。同定根拠が取れないため付与せず(記事側の型番要確認)
 pending	torch-burner	soto-slidetorch-487			
-pending	torch-burner	iwatani-aburi-2			
+set	torch-burner	iwatani-aburi-2	B0F28JL356	2026-08-24	
 set	two-room-tent-guide	fielddoor-620	(amazonUrl)		
 set	two-room-tent-guide	quickcamp-kurve	(amazonUrl)		
 set	two-room-tent-guide	naturehike-the-hills-1ldk	(amazonUrl)		
@@ -851,16 +851,16 @@ set	uniflame-fire-grill	uniflame-solo	B085Y1KHLC
 pending	uniflame-fire-grill	uniflame-set			
 set	uniflame-fire-grill	uniflame-rostle	B000SXPWL6		
 set	uniflame-fire-grill	uniflame-case	B003DSUODY		
-pending	vastland-tent	vastland-tunnel-m			
-pending	vastland-tent	vastland-2room-dome			
-pending	vastland-tent	vastland-tunnel-s			
-pending	vastland-tent	vastland-tc-teepee			
-pending	vastland-tent	vastland-groundsheet			
-pending	waq-chair	waq-rlc1			
-pending	waq-chair	waq-fwc1			
-pending	waq-chair	waq-rlc1hb			
-pending	waq-chair	waq-rcc1			
-pending	waq-chair	waq-rlc2			
+set	vastland-tent	vastland-tunnel-m	B0CCX96HHR	2026-08-24	
+set	vastland-tent	vastland-2room-dome	B0C9P7V9YX	2026-08-24	
+set	vastland-tent	vastland-tunnel-s	B0CCXP96LS	2026-08-24	
+set	vastland-tent	vastland-tc-teepee	B0CFX7DX48	2026-08-24	
+no-amazon	vastland-tent	vastland-groundsheet		2026-08-24	Amazonにヴァストランド製グランドシート(耐水圧5,000mm・無段階調節コード付/2,480円)の出品が無く、検索上位はZEN Camps等の他社汎用品のみ
+set	waq-chair	waq-rlc1	B0CGVN1DVG	2026-08-24	
+set	waq-chair	waq-fwc1	B0B6BK85DZ	2026-08-24	
+no-amazon	waq-chair	waq-rlc1hb		2026-08-24	楽天waq-rlc1hbは3色まとめ売り(cart画像rlc1hb-cart-3color)で色指定が無く、Amazon子ASIN(OLIVE/BLACK/TAN各9,980円)を一意に特定できず
+no-amazon	waq-chair	waq-rcc1		2026-08-24	AmazonにWAQ リラクシングコンフォートチェア(WAQ-RCC1/12,800円)の出品が無い。WAQの出品はRLC1系とFWC1系のみ
+no-amazon	waq-chair	waq-rlc2		2026-08-24	AmazonのWAQ 2脚セット出品はFolding Wood Chair 2脚(21,600円)のみで、Reclining Low Chair 2脚セット(WAQ-RLC2/17,460円)が存在しない
 set	water-jug	wj-fieldoor-15l	B08TQLQKHX		
 pending	water-jug	wj-allegia			
 pending	water-jug	wj-vastland			
@@ -876,3 +876,13 @@ pending	winter-camp-gloves	temres-01winter
 pending	winter-camp-gloves	boukan-uragebana			
 pending	winter-camp-gloves	silvabond-leather			
 pending	winter-camp-gloves	lad-weather-alt
+set	spice-box	oregonian-pepperbox	B07MX6K5Q2	2026-08-24	source=amazon記事。affiliateUrl=ASINでdp?tag=生成
+set	spice-box	coleman-spicebox	B0BJP6SBQ2	2026-08-24	source=amazon記事。affiliateUrl=ASINでdp?tag=生成
+set	spice-box	yajin-mini	B0C1PBZVYJ	2026-08-24	source=amazon記事。affiliateUrl=ASINでdp?tag=生成
+set	spice-box	yoshiki-bamboo	B086PTNDMW	2026-08-24	source=amazon記事。affiliateUrl=ASINでdp?tag=生成
+set	spice-box	yogoto-gen3-black	B099NJ82YB	2026-08-24	source=amazon記事。affiliateUrl=ASINでdp?tag=生成
+set	captain-stag-bonfire	cs-hexa-l	B001VEJ3O8	2026-08-24	型番一致で確認(M-6500/UG-42/M-6498/UG-43/UG-93)
+set	captain-stag-bonfire	cs-kamado-b5	B0787TR5VY	2026-08-24	型番一致で確認(M-6500/UG-42/M-6498/UG-43/UG-93)
+set	captain-stag-bonfire	cs-hexa-m	B003AKZ7BE	2026-08-24	型番一致で確認(M-6500/UG-42/M-6498/UG-43/UG-93)
+set	captain-stag-bonfire	cs-kamado-b6	B0788RWCKD	2026-08-24	型番一致で確認(M-6500/UG-42/M-6498/UG-43/UG-93)
+set	captain-stag-bonfire	cs-solo-light	B0B123BT82	2026-08-24	型番一致で確認(M-6500/UG-42/M-6498/UG-43/UG-93)
