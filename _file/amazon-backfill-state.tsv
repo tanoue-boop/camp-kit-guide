@@ -264,11 +264,11 @@ set	coleman-tent	coleman-bc-crossdome	(amazonUrl)
 set	coleman-tent	coleman-touring-dome-st	(amazonUrl)		
 set	coleman-tent	coleman-popup-shade	(amazonUrl)		
 set	coleman-tent	coleman-quickup-shade	(amazonUrl)		
-pending	coleman-two-burner	cb-coleman-set-table			
-pending	coleman-two-burner	cb-coleman-powerhouse-gasset			
+no-amazon	coleman-two-burner	cb-coleman-set-table		2026-08-24	本体2000006707+キッチンテーブル2000031294+LPガス5103A470T×2の3点セット。Amazonに同一構成のセットASINなし(本体単体B004IWR3Z6は構成が異なるためリンク不可)
+no-amazon	coleman-two-burner	cb-coleman-powerhouse-gasset		2026-08-24	本体2000006707+純正LPガス470g×2の2点セット。Amazonに同一構成のセットASINなし
 set	coleman-two-burner	cb-coleman-powerhouse2-red	B00SLOACVE		
-pending	coleman-two-burner	cb-coleman-red-gasset			
-pending	coleman-two-burner	cb-coleman-powerhouse2			
+no-amazon	coleman-two-burner	cb-coleman-red-gasset		2026-08-24	本体2000021950(レッド)+純正LPガス470g×2の2点セット。Amazonに同一構成のセットASINなし
+set	coleman-two-burner	cb-coleman-powerhouse2	B004IWR3Z6	2026-08-24	
 set	compact-portable-power	jackery-240new	B0C4DY1C3H		
 set	compact-portable-power	anker-c300	B0D5XGP6CW		
 pending	compact-portable-power	bluetti-eb3a			
@@ -313,11 +313,11 @@ pending	day-camp-tent	tent-rank-1
 pending	day-camp-tent	tent-rank-2			
 pending	day-camp-tent	tent-rank-3			
 pending	day-camp-tent	tent-rank-4			
-pending	deuter-backpack	deuter-orcha		2026-08-19	[再照合待ち] 楽天ページで実売の色/サイズを確認して子ASINを特定する。旧理由: オルチャ25はカラー統合(ブラック/カーキ/マリン)。記事側に色指定が無く子ASIN特定不可
-pending	deuter-backpack	deuter-race-air		2026-08-19	[再照合待ち] 楽天ページで実売の色/サイズを確認して子ASINを特定する。旧理由: レースエアー14+3は色別ASIN(D3204423-7000/1374)。記事側に色指定なし
-pending	deuter-backpack	deuter-lugano		2026-08-19	[再照合待ち] 楽天ページで実売の色/サイズを確認して子ASINを特定する。旧理由: ルガーノ20はカラー統合(ブラック/ジェード/レッドウッド)。色指定なし
-pending	deuter-backpack	deuter-futura-pro		2026-08-19	[再照合待ち] 楽天ページで実売の色/サイズを確認して子ASINを特定する。旧理由: 型番D3401121-7403に一致するASINなし(Amazonは別カラーコードのみ)
-pending	deuter-backpack	deuter-aircontact-core		2026-08-19	[再照合待ち] 楽天ページで実売の色/サイズを確認して子ASINを特定する。旧理由: エアコンタクトコア60+10はカラー統合(ブルー/ブラック/サバンナ)。色指定なし
+no-amazon	deuter-backpack	deuter-orcha		2026-08-24	楽天(yugakujin/d6810124)はH48×W30×D18cm/725gの3色統合(7000ブラック/2022アイビー/3067インク)で全色同価9,949円。価格・説明・選択肢のいずれでも実売カラーを確定できず
+no-amazon	deuter-backpack	deuter-race-air		2026-08-24	楽天(yugakujin/d3204423)は14+3L/940gの5色統合(7000/1374/8403/3531/1213)で全色同価。実売カラーを確定できず
+no-amazon	deuter-backpack	deuter-lugano		2026-08-24	楽天(yugakujin/d6810024)は680gの3色統合(7000ブラック/5579レッドウッド/3074アトランティック)で全色同価9,900円。実売カラーを確定できず
+set	deuter-backpack	deuter-futura-pro	B08JQYGMGX	2026-08-24	
+no-amazon	deuter-backpack	deuter-aircontact-core		2026-08-24	楽天(move/d3350524)にカラー明記がなく60+10Lのカラー統合ページ。実売カラーを確定できず
 set	dod-chair	dod-good-rack-sofa	(amazonUrl)		
 set	dod-chair	dod-sugoiss	(amazonUrl)		
 pending	dod-table	dod-tequila			
@@ -448,11 +448,11 @@ set	gentos-light	gentos-ex366d	(amazonUrl)
 set	gentos-light	gentos-ex334d	(amazonUrl)		
 set	gentos-light	gentos-ex700f	(amazonUrl)		
 set	gentos-light	gentos-ex400f	(amazonUrl)		
-pending	gregory-backpack	gregory-daypack		2026-08-19	[再照合待ち] 楽天ページで実売の色/サイズを確認して子ASINを特定する。旧理由: DAY PACKクラシックは6色統合。色指定なく子ASIN特定不可
+no-amazon	gregory-backpack	gregory-daypack		2026-08-24	楽天(gregory-japan/09j-024)のブラックJPは29,700円。Amazonの26L DAY PACKは並行輸入のBLACK BALLISTIC(17,980円)等のみで国内正規ブラックJPに一致するASINなし
 no-amazon	gregory-backpack	gregory-easypeasy		2026-08-19	記事18Lに対しAmazon候補は16L(103868-1041)。容量不一致
-pending	gregory-backpack	gregory-campusday		2026-08-19	[再照合待ち] 楽天ページで実売の色/サイズを確認して子ASINを特定する。旧理由: キャンパスデイMは色統合(ブラック/ガーデンタペストリー/スノーレオパード)。色指定なし
+set	gregory-backpack	gregory-campusday	B081DRHG3J	2026-08-24	
 set	gregory-backpack	gregory-rhune	B09VS9CSQL	2026-08-19	型番/仕様一致で採用
-pending	gregory-backpack	gregory-casualday		2026-08-19	[再照合待ち] 楽天ページで実売の仕様を確認して子ASINを特定する。旧理由: カジュアルデイV2は素材違い2種(09J*29348/09J*09348)。記事側に指定なし
+no-amazon	gregory-backpack	gregory-casualday		2026-08-24	楽天(alpen)実売はブラック1444331041/600Dポリエステル/29×15×41cm/370g/21L。AmazonのB0B58K14CJはモデル名・色は一致するが素材・容量・寸法が非開示で3点一致を確認できず
 set	ground-sheet	geertop-groundsheet	(source=amazon)		
 set	ground-sheet	triwonder-groundsheet	(source=amazon)		
 set	ground-sheet	zencamps-groundsheet	(source=amazon)		
@@ -488,9 +488,9 @@ set	helinox-chair	helinox-chair-one-home	(amazonUrl)
 set	helinox-chair	helinox-ground-chair	(amazonUrl)		
 set	helinox-chair	helinox-chair-two	(amazonUrl)		
 set	hexa-tarp	dod-itsukano-tarp	B07VF37G57	2026-08-19	型番/仕様一致で採用
-pending	hexa-tarp	fieldoor-hexa-m		2026-08-19	[再照合待ち] 楽天ページで実売の色/サイズを確認して子ASINを特定する。旧理由: FIELDOORヘキサMは4色統合(5100円)。色指定なく子ASIN特定不可
+no-amazon	hexa-tarp	fieldoor-hexa-m		2026-08-24	楽天(maxshare/a12038)は440×470cmの7色統合(標準5色+遮光2色)。実売カラーを確定できず、AmazonのB09TSSD8MLもカラー別ASINが並存
 no-amazon	hexa-tarp	vastland-tc-hexa		2026-08-19	AmazonのVASTLANDはTCレクタタープのみ。TCヘキサタープ420x420の取扱いなし
-pending	hexa-tarp	fieldoor-hexa-l		2026-08-19	[再照合待ち] 楽天ページで実売の色/サイズを確認して子ASINを特定する。旧理由: FIELDOORヘキサLは3色統合(7880円)。色指定なし
+no-amazon	hexa-tarp	fieldoor-hexa-l		2026-08-24	楽天(smile88/a12040)は530×570cmの7色統合(標準5色+遮光2色)。実売カラーを確定できず
 no-amazon	hexa-tarp	polycotton-takibi-tarp		2026-08-19	ノーブランド汎用ポリコットンタープ。同一品を特定不可
 set	hot-sandwich-maker	vastland-hsm-ih	B09Z2JCM6Q	2026-08-19	型番/仕様一致で採用
 set	hot-sandwich-maker	chums-hot-sandwich	B00WSHHWC2	2026-08-19	型番/仕様一致で採用
@@ -612,17 +612,17 @@ pending	mummy-sleeping-bag	hawkgear-3852
 pending	mummy-sleeping-bag	hawkgear-2500			
 pending	mummy-sleeping-bag	hawkgear-4280			
 pending	mummy-sleeping-bag	onetigris-3season			
-pending	mysteryranch-backpack	mr-coulee-30			
-pending	mysteryranch-backpack	mr-gallagator			
-pending	mysteryranch-backpack	mr-coulee-40			
-pending	mysteryranch-backpack	mr-blitz-35			
+no-amazon	mysteryranch-backpack	mr-coulee-30		2026-08-24	楽天(glv/mrn-30)のカラー欄はブラック(112814-001-25 / 112814-001-45)でS/MとL/XLを併記、価格22,999円は単一。AmazonはB0C23C3BRP(-45 L/XL)等サイズ別ASINで実売サイズを確定できず
+no-amazon	mysteryranch-backpack	mr-gallagator		2026-08-24	楽天(onestep/ju1903)は価格11,970円=HUMMUSDOBBY(BLACK/GRAVELは12,980円)と特定できたが、AmazonにはブラックS/M(112981-001-25)・パシフィックS/Mのみで該当カラーのASINなし
+no-amazon	mysteryranch-backpack	mr-coulee-40		2026-08-24	楽天(greenzone)は66×29×24cm/40L/1.7kgの国内正規品39,600円だがカラー・サイズ記載なし。AmazonはCoulee40のカラー/サイズ別ASIN(49,000〜79,860円)が並存し特定できず
+no-amazon	mysteryranch-backpack	mr-blitz-35		2026-08-24	楽天(greenzone)は53×32×37cm/35L/2.0kg/500D CORDURAの国内正規品53,900円だがカラー・サイズ記載なし。AmazonはBlitz35のカラー/サイズ別ASINが並存し特定できず
 set	nanga-sleeping-bag	ns-aurora-light-450dx	(amazonUrl)		
 set	nanga-sleeping-bag	ns-auroratex-750dx	(amazonUrl)		
 set	nanga-sleeping-bag	ns-aurora-light-800dx-sq	(amazonUrl)		
 set	nanga-sleeping-bag	ns-auroratex-600dx	(amazonUrl)		
 set	nanga-sleeping-bag	ns-original-schlaf-460	(amazonUrl)		
-pending	naturehike-mat	naturehike-highr-air		2026-08-19	[再照合待ち] 楽天ページで実売の仕様を確認して子ASINを特定する。旧理由: R4.6/R5.8/R8.8・8cm/12cmの多段バリエーション。記事側に指定なく子ASIN特定不可
-pending	naturehike-mat	naturehike-inflatable		2026-08-19	[再照合待ち] 楽天ページで実売の仕様を確認して子ASINを特定する。旧理由: 5cm/10cm選択式。記事側に指定なく子ASIN特定不可
+no-amazon	naturehike-mat	naturehike-highr-air		2026-08-24	楽天(naturehike-direct/cnh22dz016-ty58y)はR4.6/R5.8/R8.8×厚さ8cm/12cmの多段選択式で単一仕様が存在せず、記事側にも指定なし
+no-amazon	naturehike-mat	naturehike-inflatable		2026-08-24	楽天(naturehike-direct/nh20dz03)は厚さ5cm/10cmの選択式で単一仕様が存在せず、記事側にも指定なし
 no-amazon	naturehike-mat	naturehike-r65		2026-08-19	R6.5サイドウォール厚手10cmに一致する商品なし(AmazonはTuye R3.2~8.8)
 no-amazon	naturehike-mat	naturehike-airbed-electric		2026-08-19	Naturehikeの電動エアーベッドに該当なし(汎用品のみヒット)
 no-amazon	naturehike-mat	naturehike-airbed-25cm		2026-08-19	厚さ25cm枕付きは楽天10990円に対しAmazon該当品19990円。価格・仕様が一致せず
@@ -636,11 +636,11 @@ no-amazon	naturehike-tent	nh-light-1-2p		2026-08-19	20D/耐水圧4000/グラン�
 no-amazon	naturehike-tent	nh-dune76		2026-08-19	Dune7.6はメーカー型番がsand-sheet表記で本体同定に疑義。誤リンク回避のため保留
 no-amazon	naturehike-tent	nh-lodge-13		2026-08-19	Ti black 13平米56993円に一致する子ASINなし(39990/52990/66990のみ)
 set	naturehike-tent	nh-village13	B0DR43CC43	2026-08-19	型番/仕様一致で採用
-pending	northface-backpack	nf-fusebox			
-pending	northface-backpack	nf-vault			
-pending	northface-backpack	nf-bigshot			
-pending	northface-backpack	nf-hotshot			
-pending	northface-backpack	nf-borealis			
+set	northface-backpack	nf-fusebox	B09MY9XS7F	2026-08-24	
+no-amazon	northface-backpack	nf-vault		2026-08-24	楽天(mb/nf0a3vy2)は15色統合(BLACK/TNFBLACK-NPF/SPACE×TNFBLACK 他)で実売カラーを確定できず。AmazonもNF0A3VY2の色別ASINが並存
+set	northface-backpack	nf-bigshot	B0B3JGXSJH	2026-08-24	
+set	northface-backpack	nf-hotshot	B0B3JD2FM2	2026-08-24	
+no-amazon	northface-backpack	nf-borealis		2026-08-24	楽天(yeppuda)は韓国正規品/韓国限定ラインで品番・カラー記載なし。AmazonはNM2DM06A/NM2DR04C/NM2DN03B等の別品番ASINのみで同一SKUを特定できず
 pending	oil-lantern	vastland-oil			
 set	oil-lantern	feuerhand-276	B01B8F0MTY		
 pending	oil-lantern	thouswinds-twilight			
@@ -656,10 +656,10 @@ pending	one-touch-tarp	tarp-fieldoor25
 pending	one-touch-tarp	tarp-modeco3			
 pending	one-touch-tarp	tarp-quickcamp			
 pending	one-touch-tarp	tarp-modeco25			
-pending	osprey-backpack	osprey-daylite-plus			
-pending	osprey-backpack	osprey-stratos-36			
-pending	osprey-backpack	osprey-sirrus-24			
-pending	osprey-backpack	osprey-fairview-40			
+no-amazon	osprey-backpack	osprey-daylite-plus		2026-08-24	楽天(canpanera/o09039)はOS57176の5色統合(013/018/020/001/012)。Amazonに型番OS57176の掲載自体がなく特定不可
+no-amazon	osprey-backpack	osprey-stratos-36		2026-08-24	楽天(glv/opy-96)はカラー記載なし。AmazonはOS50306の並行輸入色違い2ASIN(B09JXK4YSD/B09JXJVNMH)が同価22,999円で並存し特定できず
+no-amazon	osprey-backpack	osprey-sirrus-24		2026-08-24	楽天(canpanera/o09036)はOS50374の3色統合(001パープルダスク/002セーブルスブルー/003ミディアムグレー)。AmazonはOS50318のみで型番不一致
+no-amazon	osprey-backpack	osprey-fairview-40		2026-08-24	楽天(canpanera/o09145)はOS55345の2色統合(001ブラック/003ソーダストタン)。Amazonに型番OS55345の掲載なし(Osprey Europe版41,334円のみ)
 set	osprey-daily-backpack	osprey-daylite-plus	(source=amazon)		
 set	osprey-daily-backpack	osprey-daylite	(source=amazon)		
 set	osprey-daily-backpack	osprey-arcane-largeday	(source=amazon)		
@@ -875,7 +875,7 @@ pending	winter-camp-gloves	lad-weather-main
 pending	winter-camp-gloves	temres-01winter			
 pending	winter-camp-gloves	boukan-uragebana			
 pending	winter-camp-gloves	silvabond-leather			
-pending	winter-camp-gloves	lad-weather-alt
+pending	winter-camp-gloves	lad-weather-alt			
 set	spice-box	oregonian-pepperbox	B07MX6K5Q2	2026-08-24	source=amazon記事。affiliateUrl=ASINでdp?tag=生成
 set	spice-box	coleman-spicebox	B0BJP6SBQ2	2026-08-24	source=amazon記事。affiliateUrl=ASINでdp?tag=生成
 set	spice-box	yajin-mini	B0C1PBZVYJ	2026-08-24	source=amazon記事。affiliateUrl=ASINでdp?tag=生成
