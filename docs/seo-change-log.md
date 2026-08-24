@@ -3,6 +3,21 @@
 数値の推移はGAS「SEOレポート」の履歴で追う。本ファイルは「いつ・どの記事を・なぜ・どう変えたか」を記録し、次回レポートで効果を評価するための施策台帳。新しい施策は上に追記する。
 
 ---
+## 2026-08-24：commit `e02a4b4` の実内容補正メモ（コミットメッセージとのズレ）
+
+`e02a4b4` は**コミットメッセージが実際の変更内容を反映していない**。deploy.cjs を `--` でのスコープ指定なしで実行した結果、従来動作（`content/posts` 全体を対象）にフォールバックし、実行時点で作業ツリーにあった**並行作業の未コミット変更を巻き込んで**21ファイル（+992 / -102）を1コミットにまとめてしまったため。**履歴の書き換え（`--amend` + force push）は、push 済みかつ並行作業と衝突するリスクがあるため実行していない**。本セクションが `e02a4b4` の実内容の正となる。
+
+- **メッセージが示している分（意図どおり）**
+  - `CLAUDE.md`：バリエーション商品は ProductCard の `name` にカラー/サイズを明記するルールを追加
+  - `_file/amazon-backfill-state.tsv`：色サイズ未特定で `no-amazon` にしていた17件を `pending` へ差し戻し（deuter-backpack 5／gregory-backpack 3／hexa-tarp 2／naturehike-mat 2／family-camp-cot・fire-extinguish-pot・kids-sleeping-bag・low-style-table・mountain-tent-cheap 各1）
+- **メッセージに書かれていないが含まれている分**
+  - **Amazonリンク穴埋め（既存記事10本）**：snowpeak-tent 4件／vastland-tent 4件／titanium-mug 4件／waq-chair 2件／peg-hammer 2件／outdoor-wagon 2件／torch-burner 1件（計19 ASIN、いずれも `amazonAsin` 追加のみ・削除0行）＋ solo-tent-lightweight／soto-burner／tent-size-beginner-guide（並行作業のリライト分）
+  - **新規記事3本**：`camp-rental-trouble.mdx`／`captain-stag-bonfire.mdx`／`spice-box.mdx`
+  - `docs/operation-snapshot.md`、`_file/keyword-backlog.tsv`、`_file/rewrite-backlog.tsv`、`_file/git-lock-events.log`、`_file/amazon-link-worksheet.tsv`
+- **検証**: 本番検証は13記事すべて PASS。空タグ・プレースホルダ0、記事内ASIN重複なし、PR表記あり、og:image取得OK。上記7記事のAmazonリンク数も指定どおり一致。
+- **再発防止**: deploy.cjs は必ず `--` で対象ファイルをスコープ指定する。スコープ未指定は `content/posts` 全体へのフォールバックとなり、並行作業を巻き込む。
+
+---
 ## 2026-08-24：日次記事作成（campkit-new-article-draft）— 商品5選2本＋ASP専用1本＋既存リライト1本
 
 - **枠の内訳**: `article-fix-backlog` に pending なし＝手順Fは発動せず。既定どおり「商品5選2本＋ASP専用1本＋リライト1本」の4枠で実行した。
