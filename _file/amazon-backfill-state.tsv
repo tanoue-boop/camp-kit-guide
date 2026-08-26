@@ -242,13 +242,13 @@ pending	co-checker	co-checker-wake-alarm
 pending	co-checker	co-checker-ptkey-cert			
 set	co-checker	co-checker-camg-mini	B0CBJS3G3J		
 set	coleman-bonfire	coleman-firedisk	B01LT5ES1Q		
-pending	coleman-bonfire	coleman-firedisk-solo			
-pending	coleman-bonfire	coleman-firedisk-sheet			
-pending	coleman-bonfire	coleman-firedisk-table			
-pending	coleman-chair	coleman-infinity-beige			
-pending	coleman-chair	coleman-infinity-grey			
+set	coleman-bonfire	coleman-firedisk-solo	B08P58X27Z	2026-08-26	
+no-amazon	coleman-bonfire	coleman-firedisk-sheet		2026-08-26	ファイアーディスク2000031235+ファイアープレイスシート2000037303の2点セット(9,690円)。Amazonに同一構成のセット品が存在せず、本体単体をリンクすると構成不一致
+no-amazon	coleman-bonfire	coleman-firedisk-table		2026-08-26	ファイアーディスク2000031235+マルチファイアプレイステーブルVP160401J01の2点セット(14,077円)。Amazonに同一構成のセット品なし
+set	coleman-chair	coleman-infinity-beige	B079C1K6DH	2026-08-26	
+no-amazon	coleman-chair	coleman-infinity-grey		2026-08-26	楽天(store-megasports/58968520)のカラー欄が「.」で実売色を確定できず。Amazonの色別ASINはベージュB079C1K6DH(同記事beigeカードで使用)とオリーブB09MS61HDW(同記事oliveカードで使用済)のみで、割当可能な子ASINが残らない
 set	coleman-chair	coleman-deck-chair	B07H38HX1G		
-pending	coleman-chair	coleman-chair-set			
+no-amazon	coleman-chair	coleman-chair-set		2026-08-26	デッキチェア2脚のセット品(2000033809)。Amazonのサイドテーブル付デッキチェアB07H38HX1Gは1脚単品で構成が異なる(かつ同記事coleman-deck-chairで使用済)
 set	coleman-chair	coleman-infinity-olive	B09MS61HDW		
 set	coleman-lantern	coleman-northstar	(amazonUrl)		
 set	coleman-lantern	coleman-hanging-elight	(amazonUrl)		
@@ -320,10 +320,10 @@ set	deuter-backpack	deuter-futura-pro	B08JQYGMGX	2026-08-24
 no-amazon	deuter-backpack	deuter-aircontact-core		2026-08-24	楽天(move/d3350524)にカラー明記がなく60+10Lのカラー統合ページ。実売カラーを確定できず
 set	dod-chair	dod-good-rack-sofa	(amazonUrl)		
 set	dod-chair	dod-sugoiss	(amazonUrl)		
-pending	dod-table	dod-tequila			
-pending	dod-table	dod-stealthx-mini			
-pending	dod-table	dod-multi-kitchen			
-pending	dod-table	dod-goodluck			
+set	dod-table	dod-tequila	B08VJ12DNW	2026-08-26	
+no-amazon	dod-table	dod-stealthx-mini		2026-08-26	楽天商品ページ(a-price/4589946140415)が削除済でショップTOPへリダイレクト。AmazonのDOD正規リスティングはステルスエックス(B07B8TT8N7/GM1-597相当)のみで、ステルスエックスミニGM1-598は並行輸入品の無名出品しかなく本体同定不可
+set	dod-table	dod-multi-kitchen	B07R5T6VV1	2026-08-26	
+no-amazon	dod-table	dod-goodluck		2026-08-26	楽天がタン(TN)/カーキ(KH)/ブラック(BK)の3色選択式で記事も色指定なし。Amazon側もB0881PHFS7(60x100x44cm表記)/B0881Q4T9W(60x100x80.5cm表記)に分かれ実売仕様を確定できず
 set	dod-tarp	dod-okla-tarp	(amazonUrl)		
 set	dod-tarp	dod-itsukano-tarp	(amazonUrl)		
 set	dod-tarp	dod-beetle-tarp	(amazonUrl)		
@@ -512,9 +512,9 @@ pending	inflatable-mat	electric-inflatable-10cm
 pending	inflatable-mat	onetigris-dreamstar			
 pending	inflatable-mat	pykespeak-r893			
 pending	inflatable-mat	bearsrock-3cm			
-pending	iwatani-stove	iwatani-cb-jcb			
-pending	iwatani-stove	iwatani-primus-p153			
-pending	iwatani-stove	iwatani-torch-ii			
+set	iwatani-stove	iwatani-cb-jcb	B01J59SGCK	2026-08-26	
+set	iwatani-stove	iwatani-primus-p153	B000AQXZME	2026-08-26	
+set	iwatani-stove	iwatani-torch-ii	B0F28HN8S8	2026-08-26	
 set	jackery-power-station	jackery-1000-new	(amazonUrl)		
 set	jackery-power-station	jackery-solar-1000	(amazonUrl)		
 set	jackery-power-station	jackery-2000-new	(amazonUrl)		
@@ -651,11 +651,11 @@ set	one-pole-tent	onetigris-conifer	B0BGN77RT8	2026-08-19	型番/仕様一致で
 no-amazon	one-pole-tent	waq-alpha-tc		2026-08-19	AmazonのWAQ Alpha TCはファミリー4-5人用(WAQ-TCTF1)のみ。ソロテント版の取扱いなし
 set	one-pole-tent	dod-onepole-s	B084QLFL81	2026-08-19	型番/仕様一致で採用
 no-amazon	one-pole-tent	onepole-family-4p		2026-08-19	ノーブランド汎用ワンポールテント。同一品を特定不可
-pending	one-touch-tarp	tarp-fieldoor3			
-pending	one-touch-tarp	tarp-fieldoor25			
-pending	one-touch-tarp	tarp-modeco3			
-pending	one-touch-tarp	tarp-quickcamp			
-pending	one-touch-tarp	tarp-modeco25			
+no-amazon	one-touch-tarp	tarp-fieldoor3		2026-08-26	FIELDOORワンタッチタープテント3m×3m本体単体(8,800円)。AmazonのFIELDOORワンタッチタープはG03専用サイドシート付属のセット品(B0BKP6D5GS等/12,900-16,700円)のみで構成が異なる
+no-amazon	one-touch-tarp	tarp-fieldoor25		2026-08-26	FIELDOORワンタッチタープテント2.5m×2.5m本体単体(8,800円)。Amazon側はサイドシート付属のG03セット品のみで本体単体の同一構成品なし
+no-amazon	one-touch-tarp	tarp-modeco3		2026-08-26	楽天(dondon/sjt30)がベーシック17kg/ベーシックBC16.3kg/オーニング18kg/オーニングBC18.8kgの4仕様×多色の選択式。記事に仕様・色の指定がなく、Amazon B088R3B8YF(サンドベージュ/シルバーコーティング)等のどれに当たるか確定できず
+no-amazon	one-touch-tarp	tarp-quickcamp		2026-08-26	クイックキャンプ ワンタッチタープ2.5m。楽天(esports/9501310090022)はカラー選択式で記事も色指定なし。Amazon側で同一色・同一構成の子ASINを確定できず
+no-amazon	one-touch-tarp	tarp-modeco25		2026-08-26	楽天(dondon/sjt25)がベーシック15kg/ベーシックBC14.6kg他の多仕様×多色選択式。記事に仕様・色指定がなくAmazonの色別ASINと対応付けできず
 no-amazon	osprey-backpack	osprey-daylite-plus		2026-08-24	楽天(canpanera/o09039)はOS57176の5色統合(013/018/020/001/012)。Amazonに型番OS57176の掲載自体がなく特定不可
 no-amazon	osprey-backpack	osprey-stratos-36		2026-08-24	楽天(glv/opy-96)はカラー記載なし。AmazonはOS50306の並行輸入色違い2ASIN(B09JXK4YSD/B09JXJVNMH)が同価22,999円で並存し特定できず
 no-amazon	osprey-backpack	osprey-sirrus-24		2026-08-24	楽天(canpanera/o09036)はOS50374の3色統合(001パープルダスク/002セーブルスブルー/003ミディアムグレー)。AmazonはOS50318のみで型番不一致
@@ -670,11 +670,11 @@ pending	outdoor-coffee-mill	mill-captainstag
 pending	outdoor-coffee-mill	mill-campingmoon			
 pending	outdoor-coffee-mill	mill-sukizuki			
 pending	outdoor-coffee-mill	mill-atlas			
-pending	outdoor-kitchen-table	kt-coleman			
-pending	outdoor-kitchen-table	kt-dod			
-pending	outdoor-kitchen-table	kt-visionpeaks			
-pending	outdoor-kitchen-table	kt-fieldoor-wood			
-pending	outdoor-kitchen-table	kt-fieldoor-alu			
+set	outdoor-kitchen-table	kt-coleman	B01N9SLIIE	2026-08-26	
+set	outdoor-kitchen-table	kt-dod	B07R5T6VV1	2026-08-26	
+no-amazon	outdoor-kitchen-table	kt-visionpeaks		2026-08-26	アカシアキッチンラック+オプションテーブルの2点セット(13,980円)。AmazonはキッチンラックVP160404I01単体のみでオプションテーブル同梱品なし
+no-amazon	outdoor-kitchen-table	kt-fieldoor-wood		2026-08-26	幅約150cmの天然木バーナースタンド。AmazonのFIELDOOR木製ラックはクーラースタンドB07YMSPXV7(耐荷重150kg/用途違い)のみで幅150cmのバーナースタンドが存在しない
+no-amazon	outdoor-kitchen-table	kt-fieldoor-alu		2026-08-26	幅75cmのアルミ調理台。AmazonのFIELDOORアルミ調理台B07M6V5Z82は幅138cm(48x138x86cm/5.86kg)で幅が63cm相違
 set	outdoor-wagon	coleman-wagon	B07V7Y9CFG	2026-08-24	
 set	outdoor-wagon	waq-wagon-w1	B07PGCZPK6	2026-08-24	
 no-amazon	outdoor-wagon	lysin-wagon-e230		2026-08-24	Amazonのライシン Eシリーズ最大230L(B0DP7K6LPY等)はブラック/グリーン/ブラウン/グレー/ベージュの5色別ASIN。楽天ls-yx-z02b側にカラー記載が無く実売色を確定できず
@@ -813,11 +813,11 @@ pending	takibi-table	pykespeak-rack
 pending	takibi-table	campingmoon-table			
 pending	takibi-table	yoler-mesh			
 pending	takibi-table	bundok-bd274			
-pending	tarp-pole	vastland-pole-33			
-pending	tarp-pole	fielddoor-pole-28			
-pending	tarp-pole	soomloom-pole-28			
-pending	tarp-pole	fielddoor-pole-32			
-pending	tarp-pole	futurefox-pole			
+no-amazon	tarp-pole	vastland-pole-33		2026-08-26	直径33mm/280cm/8段階調節/アルミ。AmazonのVASTLANDポールはスチール製直径16mm/最長174cm(B0B2DGG285)のみで径・素材・長さの3点が不一致
+no-amazon	tarp-pole	fielddoor-pole-28		2026-08-26	楽天(smile88/a18851)がレッド/ブラック/シルバーの3色選択式で記事も色指定なし。Amazonは同スペック(直径28mm/89-230cm/3継無段階/1kg)が色別にB08QHWM6HB/B0F1F4VMFB/B091JWVMRKへ分かれ実売色を確定できず
+no-amazon	tarp-pole	soomloom-pole-28		2026-08-26	直径28mm/60-240cm/4段階伸縮。AmazonのSoomloomアルミポールB083SDHHFXは3節/4節の連結式(分割式)でスライド伸縮式ではなく、調整方式が不一致
+no-amazon	tarp-pole	fielddoor-pole-32		2026-08-26	楽天(smile88/a13774)がレッド/ブラックの2色選択式で記事も色指定なし。Amazon B097SYVN7M(直径32mm/79-250cm/4継)の該当色を確定できず
+set	tarp-pole	futurefox-pole	B0F59BPR3C	2026-08-26	
 pending	tent-wood-stove	honma-rs41-cooking			
 pending	tent-wood-stove	honma-clock1-glass			
 pending	tent-wood-stove	honma-stainless-clock1-set			
@@ -843,9 +843,9 @@ set	two-room-tent-guide	quickcamp-kurve	(amazonUrl)
 set	two-room-tent-guide	naturehike-the-hills-1ldk	(amazonUrl)		
 set	two-room-tent-guide	tomount-triarc-v4	(amazonUrl)		
 set	two-room-tent-guide	tansu-2room-340	(amazonUrl)		
-pending	uniflame-burner	uniflame-us1900			
-pending	uniflame-burner	uniflame-usd2			
-pending	uniflame-burner	uniflame-uss			
+set	uniflame-burner	uniflame-us1900	B017973NPK	2026-08-26	
+set	uniflame-burner	uniflame-usd2	B085Y1CY5H	2026-08-26	
+set	uniflame-burner	uniflame-uss	B01D58468K	2026-08-26	
 set	uniflame-fire-grill	uniflame-firegrill	B000AR5Y90		
 set	uniflame-fire-grill	uniflame-solo	B085Y1KHLC		
 pending	uniflame-fire-grill	uniflame-set			
@@ -896,3 +896,18 @@ set	wooden-tableware	fuji-acacia-salad-bowl-20	B00ENA16HE	2026-08-24	Amazon源�
 set	wooden-tableware	captainstag-wood-curry-plate-17	B09BJFL6B7	2026-08-24	Amazon源記事のためaffiliateUrl=ASINでdp?tag=生成
 set	wooden-tableware	kuning-wood-tray-small	B07JHGW3HN	2026-08-24	Amazon源記事のためaffiliateUrl=ASINでdp?tag=生成
 set	wooden-tableware	fuji-acacia-7pcs-set	B009SIX3HM	2026-08-24	Amazon源記事のためaffiliateUrl=ASINでdp?tag=生成
+no-amazon	camp-air-pump	flextail-tiny-pump-x	-	2026-08-25	AmazonはTiny Pump/2X等で「タイニーポンプX」の同型番listingが見つからず
+no-amazon	camp-air-pump	fielddoor-air-pump	-	2026-08-25	Amazonに同型番の出品を確認できず
+set	camp-air-pump	waq-high-power-air-pump	B0D9N7BPFZ	2026-08-25	dimensionValuesDisplayDataでTAN(タン)子ASINを特定
+no-amazon	camp-air-pump	flextail-max-pump-2-pro	-	2026-08-25	AmazonはMax Pump 3/Plus/2020のみでMax Pump 2 Pro不在
+no-amazon	camp-air-pump	onetigris-ecoark-pump	-	2026-08-25	Amazonに同型番の出品を確認できず
+set	trekking-pole	dabada-carbon-pole	B006DFKW9K	2026-08-25	dimensionValuesDisplayDataでカーボン:シルバー子ASINを特定
+no-amazon	trekking-pole	hikinglife-carbon-pole	-	2026-08-25	Hiking Life B0F8Q74ZBB(195g/202g・ロング)は楽天hl-c-009と同型番と断定できず保守側で見送り
+set	trekking-pole	dabada-folding-pole	B0H6W6JDRF	2026-08-25	dimensionValuesDisplayDataでカーキ子ASINを特定
+no-amazon	trekking-pole	thebestday-alumi-pole	-	2026-08-25	Amazonに同型番の出品を確認できず(楽天専売と判断)
+no-amazon	trekking-pole	blackdiamond-trail	-	2026-08-25	AmazonのBD82505は並行輸入品のみ・色違い子ASINで楽天出品の色を特定できず
+set	winter-camp-tent	onetigris-solo-homestead-tc	B0963BHF7M	2026-08-26	ブラウン子ASIN一致(dimensionValuesDisplayDataで確認)
+set	winter-camp-tent	tentmark-circustc-dxplus	B09ZH9W52Z	2026-08-26	サンド/テント単品でサイズ442×420×H280・13.1kgまで一致
+set	winter-camp-tent	tomount-bell-tent-m	B09GFK52HD	2026-08-26	「はだいろ 4M」子ASIN=楽天Mサイズ(4×4×2.5m)と一致
+set	winter-camp-tent	onetigris-raven-nest	B0FRFXL116	2026-08-26	ナイロン製・煙突穴・耐水圧3000mm・2人用で一致(色展開なし)
+no-amazon	winter-camp-tent	goglamping-gg-pup2	-	2026-08-26	Amazonはブラック/アーミーグリーン/サンドの3子ASIN・楽天側に色指定が無く特定不可
