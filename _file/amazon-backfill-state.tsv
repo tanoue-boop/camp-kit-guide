@@ -118,11 +118,11 @@ pending	camp-headlight-beginner	headlight-sr01l-sensor
 set	camp-headlight-beginner	headlight-sc300r-400r	(amazonUrl)		
 pending	camp-headlight-beginner	headlight-6200lm			
 set	camp-headlight-beginner	ladweather-headlight-42g	B096B3XDH3		
-pending	camp-kettle-recommend	campingmoon-kettle-alu			
+set	camp-kettle-recommend	campingmoon-kettle-alu	B09W67C7XK	2026-08-26	
 set	camp-kettle-recommend	vastland-kettle-13l	B0B1PVD4SL		
-pending	camp-kettle-recommend	campingmoon-kettle-flat			
+set	camp-kettle-recommend	campingmoon-kettle-flat	B09W65V1VC	2026-08-26	
 set	camp-kettle-recommend	fielddoor-titanium-kettle	B09JG6FCF5		
-pending	camp-kettle-recommend	campingmoon-kettle-steel			
+set	camp-kettle-recommend	campingmoon-kettle-steel	B0CZDLNXC2	2026-08-26	
 set	camp-knife-beginner	mora-companion	(amazonUrl)		
 set	camp-knife-beginner	opinel-no8	(amazonUrl)		
 set	camp-knife-beginner	victorinox-hunter	(amazonUrl)		
@@ -299,11 +299,11 @@ set	day-camp-led-lantern	lantern2-rank-2	B0CCHS8K8S
 pending	day-camp-led-lantern	lantern2-rank-3			
 pending	day-camp-led-lantern	lantern2-rank-4			
 pending	day-camp-led-lantern	lantern2-rank-5			
-pending	day-camp-starter-set	starter-rank-1			
-pending	day-camp-starter-set	starter-rank-2			
+no-amazon	day-camp-starter-set	starter-rank-1		2026-08-26	FIELDOOR キャンプ4点セット(テント+タープ+シート+ポール)はAmazonに同一セット構成の掲載なし(タープテント単品のみ)
+no-amazon	day-camp-starter-set	starter-rank-2		2026-08-26	FIELDOOR キャンプ4点セット(同上・別ショップ)。Amazonに同一セット構成の掲載なし
 set	day-camp-starter-set	starter-rank-3	B01H4OPQ76		
 set	day-camp-starter-set	starter-rank-4	B01GCNW3LM		
-pending	day-camp-starter-set	starter-rank-5			
+set	day-camp-starter-set	starter-rank-5	B0BXSTPB59	2026-08-26	
 set	day-camp-tarp-cheap	tarp-rank-1	B0DNSGC9MG		
 set	day-camp-tarp-cheap	tarp-rank-2	B07VF37G57		
 pending	day-camp-tarp-cheap	tarp-rank-3			
@@ -534,11 +534,11 @@ pending	lantern-stand	vastland-stand
 pending	lantern-stand	futurefox-stand			
 pending	lantern-stand	multitool-stand			
 pending	lantern-stand	tabletop-2way			
-pending	large-tarp-recommend	tansu-tarp-3x6			
-pending	large-tarp-recommend	fielddoor-onetouch-3x3			
-pending	large-tarp-recommend	coleman-13x13-shelter			
-pending	large-tarp-recommend	fielddoor-hexa-l			
-pending	large-tarp-recommend	moderndeco-onetouch-3m			
+no-amazon	large-tarp-recommend	tansu-tarp-3x6		2026-08-26	タンスのゲン3×6mワンタッチタープ(¥25,999/サイドシート+収納ケース)。Amazon同ブランド(ENDLESS BASE)は本体+サイドシート3枚+おもり6個の別構成(¥35,800〜)で構成不一致
+no-amazon	large-tarp-recommend	fielddoor-onetouch-3x3		2026-08-26	楽天ページが40品番超の統合ページ(スチール/アルミ・標準/遮光・多色)で実売仕様を確定できず
+set	large-tarp-recommend	coleman-13x13-shelter	B0D6C3W7C6	2026-08-26	
+no-amazon	large-tarp-recommend	fielddoor-hexa-l		2026-08-26	楽天ページが7色×3セット構成の統合ページ(品番21種)で実売仕様(色・ポール有無)を確定できず
+no-amazon	large-tarp-recommend	moderndeco-onetouch-3m		2026-08-26	モダンデコ3mタープの楽天ページが色×コーティング(シルバー/ブラック)の統合ページで、Amazon側は子ASINが色・コーティング別。実売仕様を確定できず
 set	large-tent-guide	tent-endlessbase	(amazonUrl)		
 set	large-tent-guide	tent-tansu	(amazonUrl)		
 set	large-tent-guide	tent-fieldoor-dome	(amazonUrl)		
@@ -700,16 +700,16 @@ pending	portable-fridge	lifeidea-18l-2way
 pending	portable-fridge	thn-compressor-fridge			
 pending	portable-fridge	powerarq-iceberg			
 pending	portable-fridge	regear-9l			
-pending	portable-power-large	jackery-2000-new			
-pending	portable-power-large	ecoflow-delta3-max			
-pending	portable-power-large	dabbsson-2000l			
-pending	portable-power-large	eenour-p2001plus			
-pending	portable-power-large	solar-panel-set			
-pending	portable-power-vehicle-camp	power-rank-1			
-pending	portable-power-vehicle-camp	power-rank-2			
-pending	portable-power-vehicle-camp	power-rank-3			
-pending	portable-power-vehicle-camp	power-rank-4			
-pending	portable-power-vehicle-camp	power-rank-5			
+set	portable-power-large	jackery-2000-new	B0DBHS1S3V	2026-08-26	
+set	portable-power-large	ecoflow-delta3-max	B0FPCD866Z	2026-08-26	
+set	portable-power-large	dabbsson-2000l	B0F3JMHLGG	2026-08-26	
+set	portable-power-large	eenour-p2001plus	B0D1TYQ7XH	2026-08-26	
+no-amazon	portable-power-large	solar-panel-set		2026-08-26	ノーブランド2048Wh/2400W＋200Wソーラー3点セット。型番なし、Amazonに同一構成のセット掲載なし
+set	portable-power-vehicle-camp	power-rank-1	B0DS1ZYPB2	2026-08-26	
+set	portable-power-vehicle-camp	power-rank-2	B0FBRK8GSP	2026-08-26	
+no-amazon	portable-power-vehicle-camp	power-rank-3		2026-08-26	EcoFlow RIVER 2 Pro 768Wh本体＋160Wソーラーのセット品。Amazon.co.jpにRIVER 2 Pro本体もこのセット構成も掲載なし（DELTA 3系のみ）
+set	portable-power-vehicle-camp	power-rank-4	B0CHHKHHY4	2026-08-26	
+set	portable-power-vehicle-camp	power-rank-5	B0DB5Y5JZR	2026-08-26	
 pending	pup-tent	onetigris-solo-homestead			
 pending	pup-tent	tomount-pup-tc			
 pending	pup-tent	soomloom-pup-tc			
@@ -730,11 +730,11 @@ pending	secondary-combustion-bonfire	ftos-flamestove-mini
 pending	secondary-combustion-bonfire	glass-window-stove			
 pending	secondary-combustion-bonfire	soomloom-sparkjarr			
 pending	secondary-combustion-bonfire	octagon-black			
-pending	sierra-cup	snowpeak-titanium-e104			
-pending	sierra-cup	sierra-3set			
-pending	sierra-cup	campingmoon-seiro			
-pending	sierra-cup	campingmoon-lid			
-pending	sierra-cup	uniflame-coffee-bannet			
+set	sierra-cup	snowpeak-titanium-e104	B000AR2P1A	2026-08-26	
+no-amazon	sierra-cup	sierra-3set		2026-08-26	無ブランドのシェラカップ3個セット(¥1,029)。Amazon側は並行輸入の類似品のみで型番・寸法が公開されず同一OEMと確認できない
+set	sierra-cup	campingmoon-seiro	B0CG4GLZKB	2026-08-26	
+set	sierra-cup	campingmoon-lid	B0F2T1PC2C	2026-08-26	
+set	sierra-cup	uniflame-coffee-bannet	B007FFSVAO	2026-08-26	
 pending	sleeping-bag-liner	liner-rank-1			
 pending	sleeping-bag-liner	liner-rank-2			
 pending	sleeping-bag-liner	liner-rank-3			
@@ -780,9 +780,9 @@ pending	solo-camp-beginners-guide	solo-camp-sleeping-bag
 pending	solo-camp-beginners-guide	solo-camp-mat			
 pending	solo-camp-beginners-guide	solo-camp-burner			
 pending	solo-camp-beginners-guide	solo-camp-cooker			
-pending	solo-camp-cot	cot-rank-1			
-pending	solo-camp-cot	cot-rank-2			
-pending	solo-camp-cot	cot-rank-3			
+set	solo-camp-cot	cot-rank-1	B07NBHCBHT	2026-08-26	
+no-amazon	solo-camp-cot	cot-rank-2		2026-08-26	楽天はColeman コンバータコット2(メーカー型番2249234・並行輸入)。Amazonの同名品B00363PS3Wは型番2000020282で別モデルのため不採用
+set	solo-camp-cot	cot-rank-3	B0791VGXB1	2026-08-26	
 set	solo-tent-beginner	bundok-solo-tipi-bdk75	(amazonUrl)		
 set	solo-tent-beginner	bearsrock-hayabusa-ts201h	(amazonUrl)		
 set	solo-tent-beginner	bundok-solo-base-tc-bdk79	(amazonUrl)		
@@ -862,10 +862,10 @@ no-amazon	waq-chair	waq-rlc1hb		2026-08-24	楽天waq-rlc1hbは3色まとめ売�
 no-amazon	waq-chair	waq-rcc1		2026-08-24	AmazonにWAQ リラクシングコンフォートチェア(WAQ-RCC1/12,800円)の出品が無い。WAQの出品はRLC1系とFWC1系のみ
 no-amazon	waq-chair	waq-rlc2		2026-08-24	AmazonのWAQ 2脚セット出品はFolding Wood Chair 2脚(21,600円)のみで、Reclining Low Chair 2脚セット(WAQ-RLC2/17,460円)が存在しない
 set	water-jug	wj-fieldoor-15l	B08TQLQKHX		
-pending	water-jug	wj-allegia			
-pending	water-jug	wj-vastland			
-pending	water-jug	wj-fieldoor-38			
-pending	water-jug	wj-livingut			
+no-amazon	water-jug	wj-allegia		2026-08-26	ALLEGiA AR-VICB アイスコンテナはAmazon.co.jpに掲載なし(ZEN Camps/Springhill/VENTLAXの別ブランド品のみ)
+no-amazon	water-jug	wj-vastland		2026-08-26	楽天が1.9L/3.8L×4色(シルバー/ブラック/タン/オリーブ)の統合ページ。価格3,980円で1.9Lまでは特定できるが色が確定できず(カード画像はブランドロゴ画像)
+set	water-jug	wj-fieldoor-38	B0C9BXFFMH	2026-08-26	
+no-amazon	water-jug	wj-livingut		2026-08-26	岩谷マテリアル ウォッシャブルタンクの10L/12L/20L統合ページ。カード価格2,180円がAmazon側の10L(¥1,036)・20Lキャスター付(¥4,876)いずれとも対応せずサイズを確定できず
 pending	waterproof-backpack	zettai-nurenai			
 pending	waterproof-backpack	tousen-daiyouryou			
 pending	waterproof-backpack	taotech-drybag			

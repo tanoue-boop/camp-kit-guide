@@ -164,6 +164,28 @@ if (hasDangerousPath(status)) {
   abort('.env / node_modules が変更に含まれています。手動で確認してください。');
 }
 
+// 1.5 太字破綻チェック（lint-bold.cjs）
+// 日本語記事では `**A（B）**C` の形が CommonMark の right-flanking 条件を満たせず、
+// 太字にならずに ** が本文に生表示される。ビルドは通ってしまうためここで止める。
+console.log('\n■ 1.5 太字破綻チェック (lint-bold.cjs)');
+{
+  // scoped 指定があればその記事だけ、無ければ content/posts 全体を検査
+  const lintTargets = scoped
+    ? scopedFiles.filter((f) => f.endsWith('.mdx')).map((f) => JSON.stringify(f)).join(' ')
+    : '';
+  try {
+    run(`node scripts/lint-bold.cjs ${lintTargets}`.trim());
+  } catch {
+    abort(
+      '太字破綻を検出しました。push せず停止します。\n' +
+        '  修正方針: 太字の境界を約物（全角括弧・鉤括弧など）の外へ出す。\n' +
+        '    NG: **スカート（裾のフラップ）**で地面との隙間を塞ぐ\n' +
+        '    OK: **スカート**（裾のフラップ）で地面との隙間を塞ぐ\n' +
+        '  機械的に安全なものは `node scripts/fix-bold.cjs --apply` で一括修正できます。'
+    );
+  }
+}
+
 // 2. ビルド（必須・EXIT 0 を確認）
 console.log('\n■ 2. ビルド (npm run build)');
 try {
