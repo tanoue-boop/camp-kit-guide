@@ -911,3 +911,9 @@ set	winter-camp-tent	tentmark-circustc-dxplus	B09ZH9W52Z	2026-08-26	サンド/�
 set	winter-camp-tent	tomount-bell-tent-m	B09GFK52HD	2026-08-26	「はだいろ 4M」子ASIN=楽天Mサイズ(4×4×2.5m)と一致
 set	winter-camp-tent	onetigris-raven-nest	B0FRFXL116	2026-08-26	ナイロン製・煙突穴・耐水圧3000mm・2人用で一致(色展開なし)
 no-amazon	winter-camp-tent	goglamping-gg-pup2	-	2026-08-26	Amazonはブラック/アーミーグリーン/サンドの3子ASIN・楽天側に色指定が無く特定不可
+set	camp-blanket	blanket-rank-1	B093BJS888	2026-08-27	色グリーンの子ASINを dimensionValuesDisplayData で特定
+set	camp-blanket	blanket-rank-2	B0DJLL7V2N	2026-08-27	Sサイズ×ブラックの子ASINを特定
+set	camp-blanket	blanket-rank-3	B0FX92N95X	2026-08-27	セージ×Mediumの子ASINを特定
+no-amazon	camp-blanket	blanket-rank-4		2026-08-27	Hilander難燃ブランケットはAmazonに取扱いなし(チェアカバーのみヒット)
+no-amazon	camp-blanket	blanket-rank-5		2026-08-27	CAMPLUS独自の南米産アルパカ品でAmazonに同等品なし
+no-amazon	kids-sleeping-bag	kids-sb-rank-3		2026-08-27	手順Fで差替。型番なしノーブランド封筒型のためAmazon同定不可
