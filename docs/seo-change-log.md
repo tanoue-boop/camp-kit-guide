@@ -53,7 +53,10 @@
 - article-fix-backlog: 残 pending 2件（solo-tent-lightweight の price_unconfirmed／portable-fridge の product_swap）。
 - 商品KW在庫: `source≠asp` の pending は7件。
 - 検証: `node scripts/lint-bold.cjs` PASS（215ファイル走査）。ビルド検証は deploy.cjs 側に委ねる。
-- 記事数 213→215、sleeping-bag 20→21・tent 53→54。
+- 記事数 **210→212**（本番 commit a45a1e5 実測）、sleeping-bag 20→21・tent 53→54。
+  - ★訂正: 実行時は作業ツリーのファイル数から「213→215」と記録したが、これは**未コミットのまま残っている記事3本**（camp-air-pump／disaster-camp-gear／trekking-pole）を数えた誤り。カテゴリ内訳も power 19（21ではない）・backpack 12（13ではない）が本番の実数。
+  - ★要対応: 上記3本と `camp-backpack-capacity-guide.mdx` のリライト差分（いずれも2026-08-25の日次タスク成果物）が**2日間コミットされずローカルに滞留**している。原因は deploy.cjs の `--` スコープ指定が当日の成果物だけを対象にする運用で、別タスクが同じ作業ツリーに置いた未コミット分が毎回取り残されるため。次回デプロイ時にスコープへ含めるか、単独で1コミットに切り出すこと。
+  - ★リポジトリ直下に `.fixbold.tmp.cjs`（2026-08-26の太字一括修正の作業ゴミ）が未追跡のまま残存。削除するか .gitignore へ追加する。
 
 ---
 ## 2026-08-26：全記事の太字破綻を一括修正（92ファイル137箇所）＋ lint を deploy.cjs に組み込み

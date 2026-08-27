@@ -103,11 +103,11 @@ set	camp-fan-summer	fan-hagoogi	B0BYYTZHNL
 pending	camp-fan-summer	fan-icarry			
 pending	camp-fan-summer	fan-pse			
 pending	camp-fan-summer	fan-marz			
-pending	camp-grill-plate	grill-zeoor			
-pending	camp-grill-plate	grill-captainstag			
+no-amazon	camp-grill-plate	grill-zeoor		2026-08-27	ZEOOR LO20-51は受注生産の専用スタンド(335x25x1.6mm/0.3kg/電気亜鉛メッキ鋼板)。Amazonは同ピラミッドTAKIBI M用でも板厚4.5mm/9mmのグリルプレート本体のみで同一品なし
+set	camp-grill-plate	grill-captainstag	B0CTS4KL6N	2026-08-27	
 set	camp-grill-plate	grill-shos-a4	B07P2L1DH2		
 set	camp-grill-plate	grill-bushcraft	B09GKQ7MXY		
-pending	camp-grill-plate	grill-shos-bgo			
+set	camp-grill-plate	grill-shos-bgo	B07D5FM7MC	2026-08-27	
 pending	camp-hammock	adepeche-3way-set			
 set	camp-hammock	groovy-3way	B07BYHSY8D		
 set	camp-hammock	osoto-normal	B01ANFAAFG		
@@ -173,11 +173,11 @@ set	camp-sleeping-mat	bears-rock-inflatable-5cm	(amazonUrl)
 set	camp-sleeping-mat	coleman-camper-inflater-highpeak	(amazonUrl)		
 set	camp-sleeping-mat	fieldoor-folding-cushion-mat	(amazonUrl)		
 pending	camp-sleeping-mat	r893-inflater-mat			
-pending	camp-smoker	sm-honma-f240s			
-pending	camp-smoker	sm-soto-smokehouse			
-pending	camp-smoker	sm-camerons-mini			
-pending	camp-smoker	sm-easy-smoker			
-pending	camp-smoker	sm-cocktail-smoker			
+set	camp-smoker	sm-honma-f240s	B08XVXVC28	2026-08-27	
+set	camp-smoker	sm-soto-smokehouse	B000AR1KGQ	2026-08-27	
+set	camp-smoker	sm-camerons-mini	B000231AXG	2026-08-27	
+set	camp-smoker	sm-easy-smoker	B07HGPML44	2026-08-27	
+no-amazon	camp-smoker	sm-cocktail-smoker		2026-08-27	楽天側にブランド名・型番・寸法の記載が一切なく(ブランド"-"/型番"-")、Amazonの類似カクテルスモーカー多数と同定不可
 set	camp-table-folding	mermont-alumi-table	(amazonUrl)		
 pending	camp-table-folding	mesh-table-135x60			
 set	camp-table-folding	yamazen-wood-alumi-table	(amazonUrl)		
@@ -223,9 +223,9 @@ pending	car-shade	autorder-front-shade
 pending	car-shade	hobbyman-mesh-magnet-curtain			
 set	car-side-tarp	fielddoor-carside-230	B0DNQ2NF9F		
 set	car-side-tarp	sharestyle-shelter-330	B0BH8MXKSR		
-pending	car-side-tarp	fielddoor-shelter-blackout			
+no-amazon	car-side-tarp	fielddoor-shelter-blackout		2026-08-27	楽天a18755は標準3色+遮光2色の計5仕様を1ページで販売、Amazonの遮光単品はライトベージュB0G1S4PBRK/グレーB0G1S3Y5FPの2色で色を特定不可
 set	car-side-tarp	sharestyle-onetouch-280	B0CWGM5F4F		
-pending	car-side-tarp	ogawa-carside-al2			
+set	car-side-tarp	ogawa-carside-al2	B08SJ24L6Q	2026-08-27	
 set	cassette-gas-heater	iwatani-dekadan3	B0FN821Y16		
 set	cassette-gas-heater	iwatani-kazedan-gfh5	B0B7BDQWCY		
 set	cassette-gas-heater	iwatani-dekadan2	B0B7B6559B		
@@ -258,8 +258,8 @@ set	coleman-lantern	coleman-rugged-packaway	(amazonUrl)
 set	coleman-sleeping-bag	coleman-sb-multilayer	B07M7D4Y5D		
 set	coleman-sleeping-bag	coleman-sb-performer3-c5	B07HRQMV4M		
 set	coleman-sleeping-bag	coleman-sb-cozy2-c5	B07HRKNWWT		
-pending	coleman-sleeping-bag	coleman-sb-cozy2-set			
-pending	coleman-sleeping-bag	coleman-sb-northrim			
+no-amazon	coleman-sleeping-bag	coleman-sb-cozy2-set		2026-08-27	楽天000846756set1はコージーII/C5の2個セット販売。Amazonは単品バリエーション(B07HRKNWWT)のみで同一構成の2個セットが存在しない
+no-amazon	coleman-sleeping-bag	coleman-sb-northrim		2026-08-27	楽天はノースリムのグレー/ブラック/オレンジ/グリーンの4色を1ページで販売、AmazonはB0FQHM8G1W(ブラック／グレー・並行輸入)のみで記事の色を特定できず
 set	coleman-tent	coleman-bc-crossdome	(amazonUrl)		
 set	coleman-tent	coleman-touring-dome-st	(amazonUrl)		
 set	coleman-tent	coleman-popup-shade	(amazonUrl)		
@@ -641,11 +641,11 @@ no-amazon	northface-backpack	nf-vault		2026-08-24	楽天(mb/nf0a3vy2)は15色統
 set	northface-backpack	nf-bigshot	B0B3JGXSJH	2026-08-24	
 set	northface-backpack	nf-hotshot	B0B3JD2FM2	2026-08-24	
 no-amazon	northface-backpack	nf-borealis		2026-08-24	楽天(yeppuda)は韓国正規品/韓国限定ラインで品番・カラー記載なし。AmazonはNM2DM06A/NM2DR04C/NM2DN03B等の別品番ASINのみで同一SKUを特定できず
-pending	oil-lantern	vastland-oil			
+no-amazon	oil-lantern	vastland-oil		2026-08-27	楽天vl0246-1は1ページでS/M/L×オリーブ/タン/シルバー/ブロンズの計12仕様を販売、記事に仕様指定がなく子ASIN特定不可
 set	oil-lantern	feuerhand-276	B01B8F0MTY		
-pending	oil-lantern	thouswinds-twilight			
-pending	oil-lantern	dietz-30			
-pending	oil-lantern	captainstag-uk506			
+set	oil-lantern	thouswinds-twilight	B0C2PQSPZG	2026-08-27	
+set	oil-lantern	dietz-30	B07W18J2D8	2026-08-27	
+set	oil-lantern	captainstag-uk506	B0B3J1KNXB	2026-08-27	
 set	one-pole-tent	tentmark-circus-tcdx	B09ZH9W52Z	2026-08-19	型番/仕様一致で採用
 set	one-pole-tent	onetigris-conifer	B0BGN77RT8	2026-08-19	型番/仕様一致で採用
 no-amazon	one-pole-tent	waq-alpha-tc		2026-08-19	AmazonのWAQ Alpha TCはファミリー4-5人用(WAQ-TCTF1)のみ。ソロテント版の取扱いなし
@@ -710,11 +710,11 @@ set	portable-power-vehicle-camp	power-rank-2	B0FBRK8GSP	2026-08-26
 no-amazon	portable-power-vehicle-camp	power-rank-3		2026-08-26	EcoFlow RIVER 2 Pro 768Wh本体＋160Wソーラーのセット品。Amazon.co.jpにRIVER 2 Pro本体もこのセット構成も掲載なし（DELTA 3系のみ）
 set	portable-power-vehicle-camp	power-rank-4	B0CHHKHHY4	2026-08-26	
 set	portable-power-vehicle-camp	power-rank-5	B0DB5Y5JZR	2026-08-26	
-pending	pup-tent	onetigris-solo-homestead			
-pending	pup-tent	tomount-pup-tc			
-pending	pup-tent	soomloom-pup-tc			
-pending	pup-tent	onetigris-roc-shield			
-pending	pup-tent	goglamping-gg-pup			
+set	pup-tent	onetigris-solo-homestead	B0CRH9L939	2026-08-27	
+no-amazon	pup-tent	tomount-pup-tc		2026-08-27	楽天ページ(tomount/10000076)が404。Amazon側は同名同価格の色違い2ASIN(B0FH6NVK1P/B0G11VV9KW)で実売仕様を確定できず
+no-amazon	pup-tent	soomloom-pup-tc		2026-08-27	楽天ページ(yiprefer/outdoor-0640102)が消失しショップトップへ転送、実スペック照合不可
+set	pup-tent	onetigris-roc-shield	B0B2W946JV	2026-08-27	
+no-amazon	pup-tent	goglamping-gg-pup		2026-08-27	楽天NMT1-341は1ページでアーミーグリーン/ブラック/サンドの3色を販売、Amazon側も3子ASIN(B0C5X9CTJS/B0C5XBL5J7/B0C5XJT8VF)で色を特定不可
 pending	rectangle-sleeping-bag	bearsrock-mx604			
 pending	rectangle-sleeping-bag	nuuca-sleep			
 pending	rectangle-sleeping-bag	nebukuron			
@@ -808,11 +808,11 @@ pending	stylish-camp-tent	tent-s-rank-2
 pending	stylish-camp-tent	tent-s-rank-3			
 pending	stylish-camp-tent	tent-s-rank-4			
 pending	stylish-camp-tent	tent-s-rank-5			
-pending	takibi-table	uniflame-682104			
-pending	takibi-table	pykespeak-rack			
-pending	takibi-table	campingmoon-table			
-pending	takibi-table	yoler-mesh			
-pending	takibi-table	bundok-bd274			
+set	takibi-table	uniflame-682104	B000B5WLVU	2026-08-27	
+set	takibi-table	pykespeak-rack	B0F48HBYBQ	2026-08-27	
+set	takibi-table	campingmoon-table	B019IGM2DO	2026-08-27	
+no-amazon	takibi-table	yoler-mesh		2026-08-27	楽天YR-MT307(55x30x18cm/1.5kg/耐荷重20kg)に対しAmazon候補B09KGQZ2MZは1.4kg・耐荷重15kg、丸脚B07TWF7KV6との脚形状も特定不可
+set	takibi-table	bundok-bd274	B0DR2VHZZL	2026-08-27	
 no-amazon	tarp-pole	vastland-pole-33		2026-08-26	直径33mm/280cm/8段階調節/アルミ。AmazonのVASTLANDポールはスチール製直径16mm/最長174cm(B0B2DGG285)のみで径・素材・長さの3点が不一致
 no-amazon	tarp-pole	fielddoor-pole-28		2026-08-26	楽天(smile88/a18851)がレッド/ブラック/シルバーの3色選択式で記事も色指定なし。Amazonは同スペック(直径28mm/89-230cm/3継無段階/1kg)が色別にB08QHWM6HB/B0F1F4VMFB/B091JWVMRKへ分かれ実売色を確定できず
 no-amazon	tarp-pole	soomloom-pole-28		2026-08-26	直径28mm/60-240cm/4段階伸縮。AmazonのSoomloomアルミポールB083SDHHFXは3節/4節の連結式(分割式)でスライド伸縮式ではなく、調整方式が不一致
@@ -823,11 +823,11 @@ pending	tent-wood-stove	honma-clock1-glass
 pending	tent-wood-stove	honma-stainless-clock1-set			
 pending	tent-wood-stove	honma-arata-ar360			
 pending	tent-wood-stove	honma-rm410-leisure			
-pending	thermal-bottle	tb-thermos-2way			
-pending	thermal-bottle	tb-tiger-sahara			
-pending	thermal-bottle	tb-zojirushi-seamless			
-pending	thermal-bottle	tb-atlas-tempeak			
-pending	thermal-bottle	tb-stanley-classic			
+no-amazon	thermal-bottle	tb-thermos-2way		2026-08-27	楽天4580244681396は600ml/800ml×計8カラー(FJJ-602WF/802WF系)を1ページで販売、記事に色指定がなく子ASIN特定不可
+no-amazon	thermal-bottle	tb-tiger-sahara		2026-08-27	楽天mmj-a602はMMJ-A602→MMJ-A060→MMJ-S036/S048/S060とリニューアルで型番差し替え済み、記事表記480/600mlに対応する型番・4カラーを確定できず
+no-amazon	thermal-bottle	tb-zojirushi-seamless		2026-08-27	楽天7259117は600/720/950ml×6カラーの計18仕様を1ページで販売、記事に仕様指定がなく特定不可
+no-amazon	thermal-bottle	tb-atlas-tempeak		2026-08-27	楽天atpb-1200bkはATPB-530/750/900/1200×ブラック/シルバーグリーン/ターコイズの計12仕様を1ページで販売、記事表記も「500〜1200ml」で仕様未確定
+no-amazon	thermal-bottle	tb-stanley-classic		2026-08-27	楽天JJ4531は1.9Lのハンマートーングリーン/マットブラック/ロイヤルブルー/ハンマートーンレイクの4色を1ページで販売、記事に色指定がなく特定不可
 set	titanium-mug	tm-waq-450	B07L6H367Y	2026-08-24	
 set	titanium-mug	tm-snowpeak-450	B06XX4G5XT	2026-08-24	
 set	titanium-mug	tm-hikinglife-300	B0D1GJ2Y7T	2026-08-24	
