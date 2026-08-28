@@ -49,7 +49,8 @@
 
 ## 記事数（2026-08-28 時点）
 
-- **総記事数: 215記事**（本番commit反映ベース。★ローカル作業ツリーには他タスクの未コミット記事3本〔camp-air-pump／disaster-camp-gear／trekking-pole〕が残っているため `ls content/posts/*.mdx | wc -l` は218を返す）
+- **総記事数: 218記事**（本番commit `7f9b41f` 反映ベース。`git ls-files content/posts/*.mdx | wc -l` の実測値と一致）
+- 内訳の推移: `a45a1e5`=212 → `6ebde0f`=215（前バッチ3本＝camp-air-pump／disaster-camp-gear／trekking-pole）→ `7f9b41f`=218（本日3本＝solar-lantern／disaster-radio／solo-gear-rental）
 
 ### カテゴリ別内訳（frontmatter `category` を集計）
 
@@ -60,13 +61,13 @@
 | cookware | 調理器具 | 35 |
 | chair-table | チェア・テーブル | 26 |
 | lighting | 照明・ランタン | 16 |
-| power | 電源・バッテリー | 20 |
+| power | 電源・バッテリー | 22 |
 | bonfire | 焚き火台 | 28 |
-| backpack | バックパック | 12 |
+| backpack | バックパック | 13 |
 | clothing | ウェア・装備 | 2 |
-| **合計** | | **215** |
+| **合計** | | **218** |
 
-> 直近: 2026-08-28（日次タスク＝既存記事修正1本＋商品5選2本＋ASP専用1本／リライト枠は在庫切れで新規商品記事へ振替：手順F solo-tent-lightweight＝TOMOUNT NY TENTのSKU別価格を実確認し第1位を1人用SKU（¥16,999）に確定／solar-lantern＝ソーラーランタン5選（lighting・防災の日需要）／disaster-radio＝防災ラジオ5選（power・防災の日需要）／solo-gear-rental＝ソロキャンプ道具のレンタル（hinataレンタル）。記事数212→215、tent 54→55・lighting 15→16・power 19→20）
+> 直近: 2026-08-28（日次タスク＝既存記事修正1本＋商品5選2本＋ASP専用1本／リライト枠は在庫切れで新規商品記事へ振替：手順F solo-tent-lightweight＝TOMOUNT NY TENTのSKU別価格を実確認し第1位を1人用SKU（¥16,999）に確定／solar-lantern＝ソーラーランタン5選（lighting・防災の日需要）／disaster-radio＝防災ラジオ5選（power・防災の日需要）／solo-gear-rental＝ソロキャンプ道具のレンタル（hinataレンタル）。★commit `7f9b41f` で本番反映済み（verify-deploy 4記事PASS／Amazonリンクは disaster-radio 3件・solar-lantern 2件で期待値と一致）。記事数215→218、tent 54→55・lighting 15→16・power 21→22。★当初この行に「212→215」と書いたのは、本日の記録更新の直後に**前バッチ（camp-air-pump／disaster-camp-gear／trekking-pole）のデプロイ `6ebde0f` が先に走り、記録ドキュメント2本もそちらへ同梱された**ため、基準となる本番記事数が3本ずれたもの。実測に合わせて訂正した）
 > 前回: 2026-08-24（日次タスク＝商品5選2本＋ASP専用1本＋既存記事リライト1本：spice-box＝キャンプ用スパイスボックス（楽天供給NG→Amazon源へ切替）／captain-stag-bonfire＝キャプテンスタッグの焚き火台（ブランド軸・Amazon型番一致5/5）／camp-rental-trouble＝レンタルの破損・汚れ・延滞（hinataレンタル）／tent-size-beginner-guide リライト（一人用・二人用のサイズ節を独立H2化）。記事数201→204、cookware 32→33・bonfire 27→28・tent 49→50）
 > 前回: 2026-08-20（日次タスク＝既存記事修正1本＋商品5選1本＋ASP専用1本＋既存記事リライト1本：手順F family-camp-summer-tent＝TOMOUNT TriArcの複数SKU注記（karrimor-backpackは通常価格¥11,000を実確認し記事変更なしでdone）／camp-dust-stand＝キャンプ用ゴミ箱（fire-starter skipの振替）／camp-gear-sale-timing＝キャンプ用品の買い時・セール時期（hinataストア）＋ solo-tent-lightweight のカニバリ調査（統合は未実行・needs-human）。記事数199→201、chair-table 25→26・tent 48→49）
 
