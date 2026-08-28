@@ -177,7 +177,7 @@ set	camp-smoker	sm-honma-f240s	B08XVXVC28	2026-08-27
 set	camp-smoker	sm-soto-smokehouse	B000AR1KGQ	2026-08-27	
 set	camp-smoker	sm-camerons-mini	B000231AXG	2026-08-27	
 set	camp-smoker	sm-easy-smoker	B07HGPML44	2026-08-27	
-no-amazon	camp-smoker	sm-cocktail-smoker		2026-08-27	楽天側にブランド名・型番・寸法の記載が一切なく(ブランド"-"/型番"-")、Amazonの類似カクテルスモーカー多数と同定不可
+no-amazon	camp-smoker	sm-cocktail-smoker		2026-08-27	"楽天側にブランド名・型番・寸法の記載が一切なく(ブランド""-""/型番""-"")、Amazonの類似カクテルスモーカー多数と同定不可"
 set	camp-table-folding	mermont-alumi-table	(amazonUrl)		
 pending	camp-table-folding	mesh-table-135x60			
 set	camp-table-folding	yamazen-wood-alumi-table	(amazonUrl)		
@@ -393,21 +393,21 @@ pending	family-summer-large-tent	tent-rank-2
 pending	family-summer-large-tent	tent-rank-3			
 pending	family-summer-large-tent	tent-rank-4			
 pending	family-summer-large-tent	tent-rank-5			
-pending	field-rack	hibari-fieldrack			
-pending	field-rack	chillcamping-lockrack			
-pending	field-rack	uniflame-fieldrack			
-pending	field-rack	campingmoon-3tier			
-pending	field-rack	pykespeak-camprack			
+set	field-rack	hibari-fieldrack	B08119B656	2026-08-28	
+no-amazon	field-rack	chillcamping-lockrack		2026-08-28	Amazonはブラック(B0BRS5ZD21)/木目(B08LG8KX2Q)の色バリエーション。楽天は同一価格4,980円で色指定がなく実売色を確定できず
+set	field-rack	uniflame-fieldrack	B06W9FQF9L	2026-08-28	
+no-amazon	field-rack	campingmoon-3tier		2026-08-28	楽天はT-233系3段(天板3枚)セット。AmazonのB0C4YYJBYZは本体T-230×3点＋アルミ天板T-2308×1枚でセット内容が一致しない
+no-amazon	field-rack	pykespeak-camprack		2026-08-28	Amazonは奥行25cm(2,108円)/奥行35cm(3,790円/5,480円)の別ASIN。楽天(2,480円)の奥行寸法が記載されておらず該当ASINを確定できない
 set	fieldoor-tent	fieldoor-tarp-25-side	(amazonUrl)		
 set	fieldoor-tent	fieldoor-tarp-30	(amazonUrl)		
 set	fieldoor-tent	fieldoor-popup-200	(amazonUrl)		
 set	fieldoor-tent	fieldoor-tarp-25	(amazonUrl)		
 set	fieldoor-tent	fieldoor-hexa-dome	(amazonUrl)		
-pending	fire-blower	sanroku-fire-blow			
-pending	fire-blower	vastland-fuigo			
-pending	fire-blower	zencamps-blaster			
-pending	fire-blower	dotwest-wood			
-pending	fire-blower	campingmoon-ms43			
+no-amazon	fire-blower	sanroku-fire-blow		2026-08-28	楽天は7色展開(シルバー/ブラック=1,880円、木製ハンドル系5色=2,680円)。記事価格2,680円で木製系5色までは絞れるが1色を確定できず
+no-amazon	fire-blower	vastland-fuigo		2026-08-28	楽天はキャメルブラウン/グリーン/ベージュ/ヘザーブラック/オレンジの5色すべて799円。Amazon側も同名3ASINあり実売色を確定できず
+set	fire-blower	zencamps-blaster	B0D9NDFVMQ	2026-08-28	
+no-amazon	fire-blower	dotwest-wood		2026-08-28	Amazonにドットウエストブランドの火吹き棒出品なし。天然木ハンドル・長さ調節式の同型品も見つからず
+no-amazon	fire-blower	campingmoon-ms43		2026-08-28	Amazon側はMS-43がシルバー(B0BRPSHV81)/別色(B0CSJWZVNN)に分かれる。楽天もシルバー/ブラックの2色を同一価格2,980円で販売しており実売色を確定できず
 set	fire-extinguish-pot	zencamps-ashcarry	B09K65JX3G	2026-08-19	型番/仕様一致で採用
 pending	fire-extinguish-pot	byousoku-tsubo		2026-08-19	[再照合待ち] 楽天ページで実売の色/サイズを確認して子ASINを特定する。旧理由: OUTBEAR秒速消火はS/Mのサイズ統合。記事側にサイズ記載がなく子ASIN特定不可
 set	fire-extinguish-pot	captainstag-alster	B0065UYDAW	2026-08-19	型番/仕様一致で採用
@@ -428,11 +428,11 @@ set	folding-cutting-board	snowpeak-cs-207	B001UGID3E
 set	folding-cutting-board	htag-dh-010-s	B08BTR3CPV		
 pending	folding-cutting-board	yoshiki-bamboo-set-l			
 set	folding-cutting-board	htag-dh-010-ss	B08TC2WD93		
-pending	forged-peg	elliise-28-8			
-pending	forged-peg	iwano-30-8			
-pending	forged-peg	elliise-28-5			
-pending	forged-peg	reiden-set			
-pending	forged-peg	peg-hammer-set			
+set	forged-peg	elliise-28-8	B00EE073O8	2026-08-28	
+no-amazon	forged-peg	iwano-30-8		2026-08-28	楽天は30cm8本で990円だがAmazonのIWANO鍛造ペグ30cm最安は3,990円と約4倍乖離。本数構成も一致せず同一品と確定できない
+set	forged-peg	elliise-28-5	B00CJ2Y4ZY	2026-08-28	
+no-amazon	forged-peg	reiden-set		2026-08-28	AmazonにREIDENブランドの鍛造ペグ出品なし。類似の無名ペグセット(20-40cm/10-16本)はいずれも本数・長さ構成が楽天の4〜16本可変仕様と一致しない
+no-amazon	forged-peg	peg-hammer-set		2026-08-28	鍛造ペグ30cm8本＋木製ハンマー＋発光ロープ＋収納袋という同一セット構成の商品がAmazonに存在しない
 no-amazon	gas-lantern	gaslantern-rank-1		2026-08-19	記事は本体+ガス+マントルの3点セット。Amazonは本体単体(B00I03IDXA)のみで構成不一致
 set	gas-lantern	gaslantern-rank-2	B001ADUDIU	2026-08-19	型番/仕様一致で採用
 set	gas-lantern	gaslantern-rank-3	B018XJXP7O	2026-08-19	型番/仕様一致で採用
@@ -497,11 +497,11 @@ set	hot-sandwich-maker	chums-hot-sandwich	B00WSHHWC2	2026-08-19	型番/仕様一
 no-amazon	hot-sandwich-maker	vastland-hsm-tsubame		2026-08-19	VASTLAND燕三条製シングルに該当するASINなし(他社燕三条品のみ)
 set	hot-sandwich-maker	campingmoon-hsm	B0DDK4TWZJ	2026-08-19	型番/仕様一致で採用
 no-amazon	hot-sandwich-maker	grill-hotpan-single		2026-08-19	ノーブランド汎用グリルホットパン。同一品を特定不可
-pending	hot-water-bottle	maruka-ace-25			
-pending	hot-water-bottle	hagoogi-lxe01			
-pending	hot-water-bottle	maruka-ace-35			
-pending	hot-water-bottle	mottole-mtlw001			
-pending	hot-water-bottle	sleepplus-danloop			
+set	hot-water-bottle	maruka-ace-25	B005SKARC8	2026-08-28	
+no-amazon	hot-water-bottle	hagoogi-lxe01		2026-08-28	AmazonにHagoogiブランドの湯たんぽ出品なし(検索結果はYUSIDO等の別ブランドのみ)。型番LXE-01でも該当なし
+set	hot-water-bottle	maruka-ace-35	B00IPNJ24Y	2026-08-28	
+no-amazon	hot-water-bottle	mottole-mtlw001		2026-08-28	AmazonはMTL-W001がホワイト(B09HXHCVC2)/ピンク(B0CJLHSRTW)の色別ASIN。楽天も2色を同一価格2,763円で販売しており実売色を確定できず
+no-amazon	hot-water-bottle	sleepplus-danloop		2026-08-28	Amazonにスリーププラス「暖ループ」の出品なし。充電式ソフト湯たんぽの同型品も特定できず
 set	infinity-chair	coleman-infinity	B079C1K6DH		
 pending	infinity-chair	sidetable-recliner			
 set	infinity-chair	timberridge-recliner	B08SLKMGLB		
@@ -529,11 +529,11 @@ set	kids-sleeping-bag	kids-sb-rank-2	B0GHG3CKWR	2026-08-19	型番/仕様一致�
 no-amazon	kids-sleeping-bag	kids-sb-rank-3		2026-08-19	ノーブランド汎用寝袋(在庫処分品)。同一品を特定不可
 no-amazon	kids-sleeping-bag	kids-sb-rank-4		2026-08-19	ノーブランド汎用2人用寝袋。同一品を特定不可
 no-amazon	kids-sleeping-bag	kids-sb-rank-5		2026-08-19	ノーブランド汎用インナーシュラフ。同一品を特定不可
-pending	lantern-stand	yamazaki-tower			
-pending	lantern-stand	vastland-stand			
-pending	lantern-stand	futurefox-stand			
-pending	lantern-stand	multitool-stand			
-pending	lantern-stand	tabletop-2way			
+no-amazon	lantern-stand	yamazaki-tower		2026-08-28	楽天はブラック(4515)/ホワイト(4514)を同一ページ・同一価格4,950円で販売。Amazonは色別ASIN(B0C9G1W2K6/B0C9GCTLJ9)のため実売色を確定できず
+no-amazon	lantern-stand	vastland-stand		2026-08-28	楽天実スペックは使用75〜215cm/重量1.8kg/螺旋ペグ3本＋収納バッグ。AmazonのVASTLANDランタンスタンドは75-230cm・ペグ付きで高さ仕様が一致せず別モデル
+set	lantern-stand	futurefox-stand	B0CP8VLCGX	2026-08-28	
+no-amazon	lantern-stand	multitool-stand		2026-08-28	ノーブランドの多機能スタンド。型番なし、楽天側に寸法・重量記載がなくスペック3点照合ができない
+no-amazon	lantern-stand	tabletop-2way		2026-08-28	ノーブランドの卓上2WAYスタンド。型番なし、同一構成(クランプ式/打ち込み式両対応・4段階調節)の商品がAmazonに見つからない
 no-amazon	large-tarp-recommend	tansu-tarp-3x6		2026-08-26	タンスのゲン3×6mワンタッチタープ(¥25,999/サイドシート+収納ケース)。Amazon同ブランド(ENDLESS BASE)は本体+サイドシート3枚+おもり6個の別構成(¥35,800〜)で構成不一致
 no-amazon	large-tarp-recommend	fielddoor-onetouch-3x3		2026-08-26	楽天ページが40品番超の統合ページ(スチール/アルミ・標準/遮光・多色)で実売仕様を確定できず
 set	large-tarp-recommend	coleman-13x13-shelter	B0D6C3W7C6	2026-08-26	
@@ -549,11 +549,11 @@ set	lightweight-mountain-tent	ul-tent-rank-2	(amazonUrl)
 set	lightweight-mountain-tent	ul-tent-rank-3	(amazonUrl)		
 set	lightweight-mountain-tent	ul-tent-rank-4	(amazonUrl)		
 set	lightweight-mountain-tent	ul-tent-rank-5	(amazonUrl)		
-pending	log-carrier	canvas-log-tote			
-pending	log-carrier	bundok-bd904			
-pending	log-carrier	value-log-tote			
-pending	log-carrier	yoler-waterproof			
-pending	log-carrier	zukk-leather			
+no-amazon	log-carrier	canvas-log-tote		2026-08-28	ノーブランドの帆布薪トート。型番なし、楽天側に寸法・容量の記載がなくスペック3点照合ができない
+set	log-carrier	bundok-bd904	B083KL3X2N	2026-08-28	
+no-amazon	log-carrier	value-log-tote		2026-08-28	ノーブランドの薪トート(2,000円)。型番・寸法の記載がなく同一品を特定できない
+no-amazon	log-carrier	yoler-waterproof		2026-08-28	AmazonにYOLERブランドの薪バッグ出品なし。防水帆布の同型品も容量記載がなく照合できず
+no-amazon	log-carrier	zukk-leather		2026-08-28	Amazonは容量50Lのコヨーテブラウン/オールブラック/オリーブブラウンの3色別ASIN(各5,220円)。楽天は色指定なしで実売色を確定できず
 set	logos-bonfire	logos-takibi-l-fire	(amazonUrl)		
 set	logos-bonfire	logos-takibi-m-bbq	(amazonUrl)		
 set	logos-bonfire	logos-takibi-l-bbq	(amazonUrl)		
@@ -665,11 +665,11 @@ set	osprey-daily-backpack	osprey-daylite	(source=amazon)
 set	osprey-daily-backpack	osprey-arcane-largeday	(source=amazon)		
 set	osprey-daily-backpack	osprey-hikelite-26	(source=amazon)		
 set	osprey-daily-backpack	osprey-ul-stuffpack	(source=amazon)		
-pending	outdoor-coffee-mill	mill-porlex			
-pending	outdoor-coffee-mill	mill-captainstag			
-pending	outdoor-coffee-mill	mill-campingmoon			
-pending	outdoor-coffee-mill	mill-sukizuki			
-pending	outdoor-coffee-mill	mill-atlas			
+set	outdoor-coffee-mill	mill-porlex	B082L26FLX	2026-08-28	
+set	outdoor-coffee-mill	mill-captainstag	B01KWSX8BW	2026-08-28	
+set	outdoor-coffee-mill	mill-campingmoon	B0CBFGBGSV	2026-08-28	
+no-amazon	outdoor-coffee-mill	mill-sukizuki		2026-08-28	ノーブランドのミニ手挽きミル。型番なし、楽天側にも寸法・重量の記載がなくスペック3点照合ができない
+no-amazon	outdoor-coffee-mill	mill-atlas		2026-08-28	Amazonはブラウン(B0F2DXNJ74)/ブラック(B0DJVCV1N8)の色別ASIN。楽天は2色を同一ページ・同一価格1,998円で販売しており実売色を確定できず
 set	outdoor-kitchen-table	kt-coleman	B01N9SLIIE	2026-08-26	
 set	outdoor-kitchen-table	kt-dod	B07R5T6VV1	2026-08-26	
 no-amazon	outdoor-kitchen-table	kt-visionpeaks		2026-08-26	アカシアキッチンラック+オプションテーブルの2点セット(13,980円)。AmazonはキッチンラックVP160404I01単体のみでオプションテーブル同梱品なし
@@ -765,11 +765,11 @@ set	snowpeak-tent	snowpeak-landnest-dome-s	B0BXSTCF5T	2026-08-24
 set	snowpeak-tent	snowpeak-landnest-m-set	B0BXSTPB59	2026-08-24	
 no-amazon	snowpeak-tent	snowpeak-amenity-dome-m-set		2026-08-24	Amazonの統合リスティング(B0BMQ1VDVD)の子は「テント単品」「テント+シェルターセット」のみで、マット・シート付スターターセット(SET-020/75,240円)構成の子ASINが存在しない
 set	snowpeak-tent	snowpeak-landnest-shelter	B0DQWPNB3Q	2026-08-24	
-pending	solar-panel-folding	jackery-solarsaga100			
-pending	solar-panel-folding	powerarq-solar120			
-pending	solar-panel-folding	togopower-120			
-pending	solar-panel-folding	lacita-81w			
-pending	solar-panel-folding	motteru-24w			
+set	solar-panel-folding	jackery-solarsaga100	B07WDMXLHM	2026-08-28	
+set	solar-panel-folding	powerarq-solar120	B0BSN6GHFJ	2026-08-28	
+no-amazon	solar-panel-folding	togopower-120		2026-08-28	AmazonのTogo Power 120W(B0DCVRJW4D)は型番PC4120・4枚折り・4kg。楽天側(TPS-120)に重量・枚数の記載がなく同一品と確定できない
+set	solar-panel-folding	lacita-81w	B08Q7JTHTF	2026-08-28	
+no-amazon	solar-panel-folding	motteru-24w		2026-08-28	AmazonにMOTTERU MOT-SOLAR24(24W USB2ポート)の出品なし。24W級のMOTTERU製ソーラーパネル自体が見つからない
 set	solar-portable-power	sp-jackery-2000	(amazonUrl)		
 set	solar-portable-power	sp-jackery-1000	(amazonUrl)		
 set	solar-portable-power	sp-ecoflow-delta3plus	(amazonUrl)		
