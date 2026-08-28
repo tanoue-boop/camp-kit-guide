@@ -917,3 +917,13 @@ set	camp-blanket	blanket-rank-3	B0FX92N95X	2026-08-27	セージ×Mediumの子ASI
 no-amazon	camp-blanket	blanket-rank-4		2026-08-27	Hilander難燃ブランケットはAmazonに取扱いなし(チェアカバーのみヒット)
 no-amazon	camp-blanket	blanket-rank-5		2026-08-27	CAMPLUS独自の南米産アルパカ品でAmazonに同等品なし
 no-amazon	kids-sleeping-bag	kids-sb-rank-3		2026-08-27	手順Fで差替。型番なしノーブランド封筒型のためAmazon同定不可
+no-amazon	solar-lantern	aideall-solar-1800		2026-08-28	ノーブランド・型番なしのためAmazon同定不可
+no-amazon	solar-lantern	solar-lantern-6000mah		2026-08-28	ノーブランド・型番なしのためAmazon同定不可
+set	solar-lantern	carry-the-sun-small	B00005OHH3	2026-08-28	ホワイトベルト(スモール)×ウォームライトの子ASIN一致
+no-amazon	solar-lantern	solar-lantern-12led		2026-08-28	ノーブランド・型番なしのためAmazon同定不可
+set	solar-lantern	sonnenglas-1000	B00BDPTNB8	2026-08-28	ソネングラス1000ml・価格6180円一致
+no-amazon	disaster-radio	bosaishi-radio-5800		2026-08-28	Amazon側は同スペックだがブランド表記がGeumで不一致・保守側で未設置
+set	disaster-radio	fielddoor-radio-5in1	B07P1732GM	2026-08-28	FIELDOOR防災マルチラジオ 1台5役 グリーン一致
+set	disaster-radio	ladweather-radio	B09DCH4562	2026-08-28	ラドウェザー防災ラジオ ブラック子ASIN一致
+no-amazon	disaster-radio	greeshow-radio		2026-08-28	Amazon側にXLN-383の型番表記なし・別モデルのみのため未設置
+set	disaster-radio	relax-retro-radio	B09LHFQ67Y	2026-08-28	RELAXマルチレトロラジオ ブラック子ASIN一致
