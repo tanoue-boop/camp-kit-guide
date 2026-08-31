@@ -438,11 +438,11 @@ set	gas-lantern	gaslantern-rank-2	B001ADUDIU	2026-08-19	型番/仕様一致で�
 set	gas-lantern	gaslantern-rank-3	B018XJXP7O	2026-08-19	型番/仕様一致で採用
 no-amazon	gas-lantern	gaslantern-rank-4		2026-08-19	記事は205588+5103A230Tのセット。Amazon本体単体と構成不一致
 no-amazon	gas-lantern	gaslantern-rank-5		2026-08-19	候補B0C73SYJPNはランタン本体でなく専用アタッチメント(TC-15)。商品性が異なる
-pending	gear-storage-box	risu-tc70			
-pending	gear-storage-box	chill-camping-container-l			
-pending	gear-storage-box	risu-tc-stacking			
-pending	gear-storage-box	muranokajiya-container			
-pending	gear-storage-box	irisohyama-rvbox-1000			
+set	gear-storage-box	risu-tc70	B0DYD7R9V2	2026-08-31	
+no-amazon	gear-storage-box	chill-camping-container-l		2026-08-31	楽天は高耐久素材+防水PVC+底鋲+ワッペンベース追加の改良版。Amazon B09H279VTG(ブラックL)は厚手コットンキャンバス生地の旧版で素材・付属構成が違う
+no-amazon	gear-storage-box	risu-tc-stacking		2026-08-31	楽天ページが20L/30L/50L/70Lの4サイズ+複数色を1ページで販売(3480円〜)、記事nameも「20〜30L」の範囲表記で実売仕様を確定できず。AmazonはTC-30S/TC-30S LOW等サイズ色ごとに子ASIN分岐
+set	gear-storage-box	muranokajiya-container	B00KVTQDX8	2026-08-31	
+set	gear-storage-box	irisohyama-rvbox-1000	B0D6N8C2RQ	2026-08-31	
 set	gentos-light	gentos-ex450h	(amazonUrl)		
 set	gentos-light	gentos-ex366d	(amazonUrl)		
 set	gentos-light	gentos-ex334d	(amazonUrl)		
@@ -607,11 +607,11 @@ pending	mountain-tent-cheap	geertop-tent		2026-08-19	[再照合待ち] 楽天ペ
 no-amazon	mountain-tent-cheap	naturehike-solo-tent		2026-08-19	Naturehike 1人用20D耐水圧3000/4000に価格・仕様が一致する商品なし
 set	mountain-tent-cheap	onetigris-hillridge	B0CDWXN38R	2026-08-19	型番/仕様一致で採用
 set	mountain-tent-cheap	onetigris-tetra	B0BJ63G2SJ	2026-08-19	型番/仕様一致で採用
-pending	mummy-sleeping-bag	bearsrock-15			
+no-amazon	mummy-sleeping-bag	bearsrock-15		2026-08-31	楽天FX-451Gの購入オプションが「シルキーブラウン 10,350円 / スターリーネイビー 10,350円」の2色同価格。記事に色指定がなく、AmazonのFX-451G出品(B0DDXJMLCZ/B098RKVH74)のどちらに対応するか確定できず
 pending	mummy-sleeping-bag	hawkgear-3852			
 pending	mummy-sleeping-bag	hawkgear-2500			
 pending	mummy-sleeping-bag	hawkgear-4280			
-pending	mummy-sleeping-bag	onetigris-3season			
+set	mummy-sleeping-bag	onetigris-3season	B0CLP6NWD3	2026-08-31	
 no-amazon	mysteryranch-backpack	mr-coulee-30		2026-08-24	楽天(glv/mrn-30)のカラー欄はブラック(112814-001-25 / 112814-001-45)でS/MとL/XLを併記、価格22,999円は単一。AmazonはB0C23C3BRP(-45 L/XL)等サイズ別ASINで実売サイズを確定できず
 no-amazon	mysteryranch-backpack	mr-gallagator		2026-08-24	楽天(onestep/ju1903)は価格11,970円=HUMMUSDOBBY(BLACK/GRAVELは12,980円)と特定できたが、AmazonにはブラックS/M(112981-001-25)・パシフィックS/Mのみで該当カラーのASINなし
 no-amazon	mysteryranch-backpack	mr-coulee-40		2026-08-24	楽天(greenzone)は66×29×24cm/40L/1.7kgの国内正規品39,600円だがカラー・サイズ記載なし。AmazonはCoulee40のカラー/サイズ別ASIN(49,000〜79,860円)が並存し特定できず
@@ -725,11 +725,11 @@ pending	screen-tarp	st-fieldoor-ot
 pending	screen-tarp	st-yoca-3m			
 pending	screen-tarp	st-yoca-wide			
 pending	screen-tarp	st-yoca-25			
-pending	secondary-combustion-bonfire	ftos-flamestove-max			
-pending	secondary-combustion-bonfire	ftos-flamestove-mini			
+set	secondary-combustion-bonfire	ftos-flamestove-max	B08W8YCNQW	2026-08-31	
+set	secondary-combustion-bonfire	ftos-flamestove-mini	B09RYSH3J2	2026-08-31	
 pending	secondary-combustion-bonfire	glass-window-stove			
-pending	secondary-combustion-bonfire	soomloom-sparkjarr			
-pending	secondary-combustion-bonfire	octagon-black			
+set	secondary-combustion-bonfire	soomloom-sparkjarr	B0CS9ZQ2BJ	2026-08-31	
+set	secondary-combustion-bonfire	octagon-black	B0CWGWPPVK	2026-08-31	
 set	sierra-cup	snowpeak-titanium-e104	B000AR2P1A	2026-08-26	
 no-amazon	sierra-cup	sierra-3set		2026-08-26	無ブランドのシェラカップ3個セット(¥1,029)。Amazon側は並行輸入の類似品のみで型番・寸法が公開されず同一OEMと確認できない
 set	sierra-cup	campingmoon-seiro	B0CG4GLZKB	2026-08-26	
@@ -818,11 +818,11 @@ no-amazon	tarp-pole	fielddoor-pole-28		2026-08-26	楽天(smile88/a18851)がレ�
 no-amazon	tarp-pole	soomloom-pole-28		2026-08-26	直径28mm/60-240cm/4段階伸縮。AmazonのSoomloomアルミポールB083SDHHFXは3節/4節の連結式(分割式)でスライド伸縮式ではなく、調整方式が不一致
 no-amazon	tarp-pole	fielddoor-pole-32		2026-08-26	楽天(smile88/a13774)がレッド/ブラックの2色選択式で記事も色指定なし。Amazon B097SYVN7M(直径32mm/79-250cm/4継)の該当色を確定できず
 set	tarp-pole	futurefox-pole	B0F59BPR3C	2026-08-26	
-pending	tent-wood-stove	honma-rs41-cooking			
-pending	tent-wood-stove	honma-clock1-glass			
-pending	tent-wood-stove	honma-stainless-clock1-set			
-pending	tent-wood-stove	honma-arata-ar360			
-pending	tent-wood-stove	honma-rm410-leisure			
+set	tent-wood-stove	honma-rs41-cooking	B001GLYE6I	2026-08-31	
+no-amazon	tent-wood-stove	honma-clock1-glass		2026-08-31	楽天はヤマキシPB「AF-60本体+ガラス窓」のオリジナル構成(W400xD600xH345/5.9kg/φ106)。AmazonのAF-60(B00111H1YK)は同寸法だがガラス窓扉なしの本体単体で構成が違う。AF-60GK相当の統合品はAmazonに無い
+set	tent-wood-stove	honma-stainless-clock1-set	B0012OP8IW	2026-08-31	
+set	tent-wood-stove	honma-arata-ar360	B0049E1T2Q	2026-08-31	
+set	tent-wood-stove	honma-rm410-leisure	B001GLWMSU	2026-08-31	
 no-amazon	thermal-bottle	tb-thermos-2way		2026-08-27	楽天4580244681396は600ml/800ml×計8カラー(FJJ-602WF/802WF系)を1ページで販売、記事に色指定がなく子ASIN特定不可
 no-amazon	thermal-bottle	tb-tiger-sahara		2026-08-27	楽天mmj-a602はMMJ-A602→MMJ-A060→MMJ-S036/S048/S060とリニューアルで型番差し替え済み、記事表記480/600mlに対応する型番・4カラーを確定できず
 no-amazon	thermal-bottle	tb-zojirushi-seamless		2026-08-27	楽天7259117は600/720/950ml×6カラーの計18仕様を1ページで販売、記事に仕様指定がなく特定不可
@@ -866,16 +866,16 @@ no-amazon	water-jug	wj-allegia		2026-08-26	ALLEGiA AR-VICB アイスコンテナ
 no-amazon	water-jug	wj-vastland		2026-08-26	楽天が1.9L/3.8L×4色(シルバー/ブラック/タン/オリーブ)の統合ページ。価格3,980円で1.9Lまでは特定できるが色が確定できず(カード画像はブランドロゴ画像)
 set	water-jug	wj-fieldoor-38	B0C9BXFFMH	2026-08-26	
 no-amazon	water-jug	wj-livingut		2026-08-26	岩谷マテリアル ウォッシャブルタンクの10L/12L/20L統合ページ。カード価格2,180円がAmazon側の10L(¥1,036)・20Lキャスター付(¥4,876)いずれとも対応せずサイズを確定できず
-pending	waterproof-backpack	zettai-nurenai			
-pending	waterproof-backpack	tousen-daiyouryou			
-pending	waterproof-backpack	taotech-drybag			
-pending	waterproof-backpack	coleman-shield30			
-pending	waterproof-backpack	mthappy-25l			
-pending	winter-camp-gloves	lad-weather-main			
-pending	winter-camp-gloves	temres-01winter			
+no-amazon	waterproof-backpack	zettai-nurenai		2026-08-31	楽天は vanilla-vague/ladbag001。Amazonのラドウェザー防水リュックは製造元リファレンス ladbag002-blwh-1 / 25L / 13x30x43cm(B07PX8SH28)で別型番。ladbag001に一致する出品が無い
+no-amazon	waterproof-backpack	tousen-daiyouryou		2026-08-31	tousenは楽天ショップ名(tousenmizumoto)でメーカー名ではない。容量も40〜60Lの範囲表記で型番なし、Amazonに同一品を同定できず
+no-amazon	waterproof-backpack	taotech-drybag		2026-08-31	Amazon親B0D49PM5ZLは30Lでイエロー/ピンク/ブラック/ホワイト/グレー/グリーンの6色に子ASIN分岐。楽天ページに色の購入オプションが無く記事にも色指定がないため子ASINを確定できず
+set	waterproof-backpack	coleman-shield30	B08KH1J62F	2026-08-31	
+no-amazon	waterproof-backpack	mthappy-25l		2026-08-31	Mt.happyは楽天ショップ(mthappy)独自ブランドで全8色展開。Amazonに同ブランド・同一構造の25L防水リュックの出品が無い
+set	winter-camp-gloves	lad-weather-main	B09MQ8PWMJ	2026-08-31	
+set	winter-camp-gloves	temres-01winter	B07YM1MWFL	2026-08-31	
 pending	winter-camp-gloves	boukan-uragebana			
-pending	winter-camp-gloves	silvabond-leather			
-pending	winter-camp-gloves	lad-weather-alt			
+no-amazon	winter-camp-gloves	silvabond-leather		2026-08-31	楽天の購入オプションが「ベージュ、カラビナ 2,680円 / ダークグレー、カラビナ 2,680円」の2色同価格で、記事に色指定がなく実売仕様を確定できず。Amazon側もB0BH26ZJBQ=ベージュ / B0BH27GF25=ダークグレーに子ASIN分岐
+no-amazon	winter-camp-gloves	lad-weather-alt		2026-08-31	第1位 lad-weather-main と同一商品(いずれも楽天 ladgloves009 / 1,480円)。同一記事内で同じASINを2枠に割り当てられないため第1位側のみ設置
 set	spice-box	oregonian-pepperbox	B07MX6K5Q2	2026-08-24	source=amazon記事。affiliateUrl=ASINでdp?tag=生成
 set	spice-box	coleman-spicebox	B0BJP6SBQ2	2026-08-24	source=amazon記事。affiliateUrl=ASINでdp?tag=生成
 set	spice-box	yajin-mini	B0C1PBZVYJ	2026-08-24	source=amazon記事。affiliateUrl=ASINでdp?tag=生成
