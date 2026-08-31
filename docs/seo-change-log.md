@@ -3,6 +3,42 @@
 数値の推移はGAS「SEOレポート」の履歴で追う。本ファイルは「いつ・どの記事を・なぜ・どう変えたか」を記録し、次回レポートで効果を評価するための施策台帳。新しい施策は上に追記する。
 
 ---
+## 2026-08-31：日次タスク（既存記事修正1本＋商品5選2本＋隣接ASP専用1本／リライト枠は在庫切れで振替）
+
+### ⓪ 手順F：portable-fridge 第2位を BougeRV CR Pro 20 へ差し替え（article-fix-backlog priority B）
+
+- **issue_type**: product_swap。掲載していた「車載冷蔵冷凍庫 18L 2WAY」（lifeideakan/k3）が同URLのまま『【本体+充電器】』の充電器同梱セットへ構成変更され、価格も¥17,081→¥20,980（+22.8%）に。本体単体18Lという記事の説明と実売内容が乖離していた案件。
+- **対応**: 楽天APIで本体単体・レビュー実績のある代替を再選定し、**BougeRV ポータブル冷蔵庫 CR Pro 20 20L ブラック（¥24,980／評価4.54／レビュー357件）** へ差し替え。3WAY電源（AC100-240V＋DC12V/24V）・コンプレッサー式・-20℃、省エネ45W／急速60W、11.5kg、保証24か月を商品ページで実確認。
+- **変更範囲**: 第2位の見出し・ProductCardMdx・本文2段落・比較表の該当行・まとめ表の該当行（アンカーを `#lifeidea-18l-2way` → `#bougerv-crpro-20` に変更）・`updatedAt` のみ。他の4商品と構成は非変更。
+- **Amazon**: ASIN `B0B9GP5LMQ`（CR Pro 20L ブラック）を設置。
+- **記事の価格レンジ**: 13,980〜27,500円のままで frontmatter の description（実勢1.3〜2.7万円台）は変更不要。
+
+### ① 新規：camp-hot-carpet（キャンプ用ホットカーペット・商品5選）
+
+- **狙うKW**: 「キャンプ ホットカーペット」「電気カーペット キャンプ」「ホットカーペット ポータブル電源」。keyword-backlog priority B（source=product-scan）。
+- **差別化**: powerカテゴリの既存 electric-blanket-camp（掛ける・体を暖める）に対し、本記事は**敷き＝床面を面で暖める**用途に限定。さらに「実消費電力量（Wh/h）× 電源容量」の逆算式（稼働時間 ＝ 容量Wh × 0.85 ÷ 実消費Wh/h）を主軸に据え、電源選びの記事（portable-power-large）へ内部リンク。
+- **採用5点**: 山善SUT-102 1畳（¥6,980／実消費約100Wh）／山善YZD-101FL 1畳 防水フローリング調（¥12,800）／ワタナベ工業WHC-105 1畳 日本製（¥5,480）／日立HHLU-S2020 2畳 半面運転（¥14,980）／椙山紡織NA-171TM 60×110cm（¥6,580／約70Wh）。価格レンジ2.7倍・同一ブランド最大2点。
+
+### ② 新規：fireproof-chair（焚き火に強い難燃チェア・商品5選）
+
+- **狙うKW**: 「難燃 チェア 焚き火」「TC チェア キャンプ」「焚き火チェア 穴が開かない」。keyword-backlog priority B（source=product-scan）。
+- **差別化**: 既存チェア記事9本（camp-chair-highback／camp-chair-lightweight／infinity-chair／helinox-chair／coleman-chair／dod-chair／waq-chair／captain-stag-chair／family-camp-chair）はいずれも**生地の難燃性**を主題にしていないため非カニバリ。「ポリエステルは溶けて穴が開く／コットン混は炭化して止まる」という素材差を軸に、混率・座面高・重量で比較。
+- **採用5点**: ビジョンピークスVP1645002 コヨーテ（¥6,990／4.69・155件）／FIELDOOR ローバックT/C カーキ（¥3,850／約1kg）／FIELDOOR ミドルバックT/C カーキ ロータイプ（¥4,510／耐荷重150kg）／BUNDOK BD-111 カーキ 綿100％（¥4,980／座面高11cm）／CAMPING MOON F-1002C コヨーテ 帆布（¥8,712）。価格レンジ2.26倍。
+- **注意点**: Moon Lence のキャンバスチェア（rc127・4.75）は素材表記が「キャンバス」のみでコットン混を確認できなかったため、難燃を主題にする本記事では**採用を見送り**。
+
+### ③ 新規：winter-camp-rental（秋冬キャンプの防寒装備レンタル・隣接ASP専用）
+
+- **案件**: hinataレンタル（A8.net／レンタル申込8%）。asp-programs.tsv上は提携済だが**最終確認日が空欄のため台帳ベース（未再確認）**。CLAUDE.mdの「実績のある確実な提携済4案件」に含まれるため使用可と判断。variant=rental、CalloutCtaMdxは1箇所のみ・PR表記あり。
+- **角度**: 意図型＝シーン・季節。既存ASP記事（camp-gear-rental＝総論／family-gear-rental＝ファミリー／camp-rental-price＝相場／camp-rental-trouble＝トラブル／camp-rental-flow＝流れ／tebura-camp＝手ぶら／solo-gear-rental＝ソロ）はいずれも季節軸を扱っておらず非カニバリ。
+- **構成**: 向き不向き→借りるべき装備の優先順位（断熱＞暖房＞こたつ幕）→料金と損益分岐の表→予約〜返却の流れと冬固有の注意4点→FAQ5問→3列まとめ表。料金は幅・目安で記載し公式確認へ誘導。
+
+### 在庫状況（次タスクへの申し送り）
+
+- **rewrite-backlog は pending ゼロ**。リライト枠を新規商品記事1本に振り替えた。campkit-keyword-selection（月）と campkit-seo-competitor-scan（金）での補充が必要。
+- keyword-backlog の車中泊マット（car-camp-mat）は status=pending のままだが、notes のとおり既存6本とのカニバリ精査が未了のため**本日は着手せず**次点を繰り上げた。
+- ロゴスの寝袋（logos-sleeping-bag）は coleman-sleeping-bag（2026-08-18公開）から13日しか経っておらず、notes の「2週間以上あける」条件を満たさないため見送り。
+
+---
 ## 2026-08-28：日次タスク（既存記事修正1本＋商品5選2本＋隣接ASP専用1本／リライト枠は在庫切れで振替）
 
 ### ⓪ 手順F：solo-tent-lightweight 第1位の価格未確定を解消（article-fix-backlog priority B）

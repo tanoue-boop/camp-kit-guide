@@ -927,3 +927,14 @@ set	disaster-radio	fielddoor-radio-5in1	B07P1732GM	2026-08-28	FIELDOOR防災マ�
 set	disaster-radio	ladweather-radio	B09DCH4562	2026-08-28	ラドウェザー防災ラジオ ブラック子ASIN一致
 no-amazon	disaster-radio	greeshow-radio		2026-08-28	Amazon側にXLN-383の型番表記なし・別モデルのみのため未設置
 set	disaster-radio	relax-retro-radio	B09LHFQ67Y	2026-08-28	RELAXマルチレトロラジオ ブラック子ASIN一致
+set	camp-hot-carpet	yamazen-sut-102	B0FHVRNHCT	2026-08-31	山善SUT-102 1畳(170×85cm)で型番・サイズ一致
+no-amazon	camp-hot-carpet	yamazen-yzd-101fl		2026-08-31	AmazonはYZC-108FL/109FL(176×88cm)のみでYZD-101FLの取扱なし・型番とサイズが不一致
+set	camp-hot-carpet	watanabe-whc-105	B0B4ZS2SHR	2026-08-31	ワタナベ工業WHC-105 1畳で型番一致
+no-amazon	camp-hot-carpet	hitachi-hhlu-s2020		2026-08-31	日立HHLU-S2020はAmazon検索で該当なし(2畳は他社のみ)
+set	camp-hot-carpet	sugiyama-na-171tm	B001D5O8HM	2026-08-31	椙山紡織(Sugiyama)NA-171TMで型番一致
+set	fireproof-chair	visionpeaks-vp1645002	B08BYH5ZQK	2026-08-31	VP1645002・色コヨーテの子ASIN一致(dimensionValuesで確認)
+set	fireproof-chair	fieldoor-lowback-tc	B07RW6ND2D	2026-08-31	FIELDOORローバック T/Cカーキ・耐荷重100kg一致
+set	fireproof-chair	fieldoor-midback-tc	B08T5Q1MGW	2026-08-31	FIELDOORミドルバック ロータイプ T/Cカーキの子ASIN一致・耐荷重150kg一致
+set	fireproof-chair	bundok-bd-111	B08Z6WVTL8	2026-08-31	BUNDOK BD-111 カーキで型番一致
+set	fireproof-chair	campingmoon-f-1002c	B08DHM8V4G	2026-08-31	F-1002C コヨーテの子ASIN一致・寸法/重量一致
+set	portable-fridge	bougerv-crpro-20	B0B9GP5LMQ	2026-08-31	CR Pro 20L ブラックで型番・容量・色一致(article-fix差し替えに同梱)
