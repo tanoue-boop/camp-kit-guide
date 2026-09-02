@@ -3,6 +3,38 @@
 数値の推移はGAS「SEOレポート」の履歴で追う。本ファイルは「いつ・どの記事を・なぜ・どう変えたか」を記録し、次回レポートで効果を評価するための施策台帳。新しい施策は上に追記する。
 
 ---
+## 2026-09-02：価格チェック（campkit-price-check／週次）
+
+GSC（過去28日・URLプレフィックスプロパティ）の流入上位から8記事を選定し、楽天の商品ページを直接読んで現在価格・在庫を照合した。対象＝osprey-backpack／osprey-daily-backpack／camp-backpack-capacity-guide／fieldoor-tent／inflatable-mat／mysteryranch-backpack／karrimor-backpack／mountain-camp-lantern。うち family-camp-summer-tent は流入4位だが同日の別タスクが編集中だったため対象外にした。
+
+### 価格更新（karrimor-backpack）
+
+| 位置 | 商品 | 旧価格 | 新価格 | 変動 |
+|---|---|---|---|---|
+| 第1位 | karrimor イクリプス27（27L） | ¥13,900 | ¥17,600 | +26.6% |
+| 第2位 | karrimor トリビュート40（40L） | ¥20,890 | ¥26,400 | +26.4% |
+
+いずれも楽天ページ（canpanera/k03034・k03514）で在庫あり・単一価格を確認済み。8/27の記事更新時にセール価格を拾っていた可能性が高く、通常価格へ戻ったものとみられる。ProductCard の price、比較表の price、まとめ表の価格帯、FAQ「価格の安いモデルと高いモデルの違いは？」内の金額、frontmatter の description の価格レンジ（実勢11,000〜20,890円→11,000〜26,400円）を整合させ、updatedAt を 2026-09-02 に更新。レビュー数・評価・アフィリリンク・thumbnail・掲載順位は変更していない。
+
+### 提案に回した案件（article-fix-backlog へ pending 追加）
+
+価格更新では解決しないため記事は未変更。いずれも issue_type と根拠を backlog に記載済み。
+
+- **osprey-backpack 第4位 フェアビュー40**（out_of_stock・priority A）：楽天ページが「売り切れ」。価格31,900円は変化なし。GSC28日でクリック60/表示779＝サイト最大流入記事のため優先。
+- **mysteryranch-backpack 第1位 クーリー30**（out_of_stock・priority A）：楽天ページが「売り切れ」。
+- **mysteryranch-backpack 第3位 クーリー40**（discontinued_404・priority A）：楽天ページがHTTP404。旧掲載価格39,600円。
+- **mysteryranch-backpack 第4位 ブリッツ35**（out_of_stock・priority B）：「売り切れ」かつ表示が「43,120円〜」のレンジ表記で通常価格を確定できず。
+
+mysteryranch-backpack は4商品中3商品が同時に問題化しており、1件ずつ手順Fで消化する想定。
+
+### 閾値（±15%）未満で据え置いた差分（次回再確認）
+
+- osprey-backpack 第1位 デイライトプラス：¥11,484→¥12,760（+11.1%）
+- inflatable-mat 第2位 電動インフレーターマット：¥9,480→¥9,980（+5.3%）
+- mountain-camp-lantern 第1位 キャリーザサン M：¥4,400→¥4,800（+9.1%）／第4位 ソーラーランタン：¥1,980→¥1,780（-10.1%）
+- fieldoor-tent 第3位・第5位：9/11まで期間限定セール中（7,920円／8,910円）だが通常価格は掲載どおり（8,910円／9,790円）のため変更なし
+
+---
 ## 2026-09-02：日次記事タスク（既存修正1件＋新規2本＋リライト1本）
 
 ### リライト：family-camp-summer-tent（rewrite-backlog priority A／lever=structure）
