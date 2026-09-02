@@ -165,7 +165,7 @@ pending	camp-rainwear	rw-makku-as7100
 pending	camp-rainwear	rw-makku-as900			
 set	camp-skillet	cs-skillet-20	B099KC98R6		
 set	camp-skillet	cs-skillet-25	B06XW4ZDCG		
-pending	camp-skillet	cs-skillet-frypan25			
+no-amazon	camp-skillet	cs-skillet-frypan25		2026-09-01	楽天型番UG-3029。ただし同記事の別カードcs-skillet-25が同一型番UG-3029でB06XW4ZDCG設置済みのため、記事内ASIN重複禁止ルールにより見送り(記事側の商品重複はarticle-fix案件)
 set	camp-skillet	cs-skillet-mini	B01CRVT43S		
 set	camp-skillet	barebones-skillet	B01M2BTDCD		
 set	camp-sleeping-mat	thick-inflater-mat-75cm	(amazonUrl)		
@@ -271,13 +271,13 @@ no-amazon	coleman-two-burner	cb-coleman-red-gasset		2026-08-24	本体2000021950(
 set	coleman-two-burner	cb-coleman-powerhouse2	B004IWR3Z6	2026-08-24	
 set	compact-portable-power	jackery-240new	B0C4DY1C3H		
 set	compact-portable-power	anker-c300	B0D5XGP6CW		
-pending	compact-portable-power	bluetti-eb3a			
+no-amazon	compact-portable-power	bluetti-eb3a		2026-09-01	楽天実売はEB3A本体＋130Wソーラーパネルの2点セット(32,900円)。AmazonはEB3A単体(B09XWNYZFG/22,980円)のみで、同構成のパネル付きセットが無い(構成違いセットのため除外)
 set	compact-portable-power	bluetti-aora30	B0FB3Y46SB		
 set	compact-portable-power	jackery-100plus	B0D9NM8YGQ		
 set	cooler-box-day-camp	cool-rank-1	B0D69W361V		
 set	cooler-box-day-camp	cool-rank-2	B0G7K6Z93R		
 set	cooler-box-day-camp	cool-rank-3	B0GP9JKSKF		
-pending	cooler-box-day-camp	cool-rank-4			
+no-amazon	cooler-box-day-camp	cool-rank-4		2026-09-01	楽天実売はLOGOS 37411001 スタンダードトートリュッククーラーXL(41L/750g/高43×幅65-48×マチ20cm・2WAY)。Amazonは「スタンダードトートクーラー」(容量5L/250g等のトートのみ・リュック機能なし)しか無く、41L/2WAYの同一品が存在しない
 set	cooler-box-day-camp	cool-rank-5	B08CXDQ667		
 pending	cooler-ice-pack	ip-atone-stainless			
 pending	cooler-ice-pack	ip-covell-stainless			
@@ -309,10 +309,10 @@ set	day-camp-tarp-cheap	tarp-rank-2	B07VF37G57
 pending	day-camp-tarp-cheap	tarp-rank-3			
 pending	day-camp-tarp-cheap	tarp-rank-4			
 pending	day-camp-tarp-cheap	tarp-rank-5			
-pending	day-camp-tent	tent-rank-1			
-pending	day-camp-tent	tent-rank-2			
-pending	day-camp-tent	tent-rank-3			
-pending	day-camp-tent	tent-rank-4			
+no-amazon	day-camp-tent	tent-rank-1		2026-09-01	楽天noone の200×320cmノーブランド ワンタッチテント(3,980円)。「フルクローズ 200×320cm 4人用」検索でもAmazon側に同寸法の同一品が無い(LUCK/Asobimonster/山善等はいずれも別寸法)
+no-amazon	day-camp-tent	tent-rank-2		2026-09-01	楽天esportsの遮光100%ブラックコーティング ポップアップテント3人用(6,990円)。型番なし。Amazon側の該当はPYKES PEAK/WAQ/山善など別ブランド品のみで同一品が無い
+no-amazon	day-camp-tent	tent-rank-3		2026-09-01	and wander×AIRBUGGYコラボのポップアップテント(16,940円)。Amazonに and wander のポップアップテントの取り扱いが無い
+set	day-camp-tent	tent-rank-4	B0DG4Y7RR4	2026-09-01	Amazon商品名に型番T2-073-TNを明記。DODマエバーン・色タンで完全一致
 no-amazon	deuter-backpack	deuter-orcha		2026-08-24	楽天(yugakujin/d6810124)はH48×W30×D18cm/725gの3色統合(7000ブラック/2022アイビー/3067インク)で全色同価9,949円。価格・説明・選択肢のいずれでも実売カラーを確定できず
 no-amazon	deuter-backpack	deuter-race-air		2026-08-24	楽天(yugakujin/d3204423)は14+3L/940gの5色統合(7000/1374/8403/3531/1213)で全色同価。実売カラーを確定できず
 no-amazon	deuter-backpack	deuter-lugano		2026-08-24	楽天(yugakujin/d6810024)は680gの3色統合(7000ブラック/5579レッドウッド/3074アトランティック)で全色同価9,900円。実売カラーを確定できず
@@ -334,7 +334,7 @@ set	dod-tent	dod-ei-tent	B07ZTDP7S6	2026-08-19	型番/仕様一致で採用
 set	dod-tent	dod-yadokari	B09W5JXYCP	2026-08-19	型番/仕様一致で採用
 set	dod-tent	dod-onetouch-t2	B07QS8DRHK	2026-08-19	型番/仕様一致で採用
 set	duo-tent	dt-coleman-st	B08P5811G7		
-pending	duo-tent	dt-dod-onetouch			
+set	duo-tent	dt-dod-onetouch	B07QS8DRHK	2026-09-01	DOD T2-629の子ASIN「タン」＝T2-629-TNと色一致(親のdimensionValuesでブラック/タンを確認)
 set	duo-tent	dt-naturehike-light	B0D75V13BG		
 set	duo-tent	dt-coleman-lx	B08P589XPT		
 set	duo-tent	dt-dod-riders	B01FHMR0DA		
@@ -358,11 +358,11 @@ pending	family-camp-bbq	onway-seika-more
 pending	family-camp-bbq	yumeka-bbq-firepot			
 pending	family-camp-bbq	musouka-firepot			
 pending	family-camp-bbq	gyokuhou-takibi			
-pending	family-camp-chair	chair-f-rank-1			
-pending	family-camp-chair	chair-f-rank-2			
-pending	family-camp-chair	chair-f-rank-3			
-pending	family-camp-chair	chair-f-rank-4			
-pending	family-camp-chair	chair-f-rank-5			
+no-amazon	family-camp-chair	chair-f-rank-1		2026-09-01	楽天ショップvisionshopのノーブランド木目ローチェア(2脚/4脚セット・5,980円)。型番なし。「木目 ローチェア 2脚セット」等で検索してもAmazon側に同一構造・同価格帯の商品が無い
+no-amazon	family-camp-chair	chair-f-rank-2		2026-09-01	BUNDOK BD-187。楽天は1ページで3色(ウォームグレー/オリーブ/ブラック)を全て1,980円の選択式で販売しており実売色が確定不能。Amazonは色別に子ASIN分割(BD-187WG=B0FZS14VJ7/OL=B0FZS3KVLB/BLK=B0FZS2B1XN)のため特定不可
+no-amazon	family-camp-chair	chair-f-rank-3		2026-09-01	楽天ga-livingの型番CC-HIGH(ハイタイプ2脚セット・4,480円)。Amazonで「CC-HIGH 2脚セット」検索の該当はアイリスオーヤマCC-シリーズ等の別商品のみで、同一品が無い
+set	family-camp-chair	chair-f-rank-4	B07D6NTYKL	2026-09-01	コールマン リゾートチェア2000033560。親のdimensionValuesでオリーブ子ASIN=B07D6NTYKLを特定
+no-amazon	family-camp-chair	chair-f-rank-5		2026-09-01	楽天NOVA産業のノーブランド フォールディングローチェア(6,920円)。型番なし・スペック表記なしでAmazon側に同定可能な商品が無い
 set	family-camp-cot	coleman-converta-cot2	B00363PS3W	2026-08-19	型番/仕様一致で採用
 no-amazon	family-camp-cot	logos-comfort-bed		2026-08-19	ロゴス73173089に一致せず(候補B07NBHCBHTは型番73188034のテーブル系)
 pending	family-camp-cot	gussuri-air-cot		2026-08-19	[再照合待ち] 楽天ページで実売の色/サイズを確認して子ASINを特定する。旧理由: DOEARTH Gussuriはブラック/ブラウンのカラー統合。色指定なく子ASIN特定不可
@@ -507,11 +507,11 @@ pending	infinity-chair	sidetable-recliner
 set	infinity-chair	timberridge-recliner	B08SLKMGLB		
 pending	infinity-chair	headrest-infinity			
 set	infinity-chair	regear-infinity	B0CCP4L4YV		
-pending	inflatable-mat	aiflycy-inflatable			
-pending	inflatable-mat	electric-inflatable-10cm			
-pending	inflatable-mat	onetigris-dreamstar			
-pending	inflatable-mat	pykespeak-r893			
-pending	inflatable-mat	bearsrock-3cm			
+no-amazon	inflatable-mat	aiflycy-inflatable		2026-09-01	Aiflycy インフレーターマット(厚手8/10cm・枕付き・幅75cm/6,680円)。Amazonに Aiflycy ブランドの同商品が無く、スペック検索でもHIKENTURE/Naturehike等の別商品しかヒットしない
+set	inflatable-mat	electric-inflatable-10cm	B0GQ9V75GN	2026-09-01	楽天PZ-DIFM01の最安構成=シングル(幅75cm)+通常モデル(価格帯9,980〜29,700円/カード9,480円)。Amazonは同一文言の「電動シングルインフレーターマット 電動ポンプ内蔵 厚手10CM トリプルバルブ構造」で電動ポンプ内蔵/10cm厚/トリプルバルブ/自動膨張/ロールウレタンの5点一致(同一OEM)
+no-amazon	inflatable-mat	onetigris-dreamstar		2026-09-01	楽天CE-CQD04はグレー18,590円/ベージュ15,900円の選択式で、カード価格15,900円＝ベージュが実売仕様。AmazonのDREAMSTAR統合リスティングの子ASINは1人用グレー/2人用グレー/2人用ブラックのみでベージュが存在しない
+no-amazon	inflatable-mat	pykespeak-r893		2026-09-01	楽天p0207ifmstはサイズ2種(スタンダード190×67×8cm/キング190×75×8cm)×カラー3色(ブラック/オリーブグリーン/サンドカーキ)の計6SKU選択式。カードにサイズ・色の記載が無く、同価格のため価格でも特定できない。Amazonは色サイズ別に子ASIN分割
+no-amazon	inflatable-mat	bearsrock-3cm		2026-09-01	楽天camping_mat3(型番MT-103F)は6バリエーション(グレージュ/エスニックオリーブ/ブラック×杢グレー/まくらなし3色)が全て3,450円の選択式で実売仕様が確定不能。Amazonは色・枕有無ごとに子ASIN分割(B085TBSTW4等)のため特定不可
 set	iwatani-stove	iwatani-cb-jcb	B01J59SGCK	2026-08-26	
 set	iwatani-stove	iwatani-primus-p153	B000AQXZME	2026-08-26	
 set	iwatani-stove	iwatani-torch-ii	B0F28HN8S8	2026-08-26	
@@ -836,7 +836,7 @@ no-amazon	titanium-mug	tm-pykespeak-junchitan		2026-08-24	楽天p0135tm301は210
 no-amazon	torch-burner	soto-microtorch-active		2026-08-24	楽天plantz/sinfuji-rz521-522はRZ-522横型とRZ-521縦型の同一ページ販売かつ色指定なし。Amazon側RZ-522はBK/GL等の色別ASINに分かれており実売仕様を確定できず
 no-amazon	torch-burner	iwatani-torch-2		2026-08-24	AmazonのCB-TC-ODORP出品はB0F28HN8S8「カセットボンベ1本付き」(2,661円)のみで、本体単体(2,750円)と構成が異なる。旧型CB-TC-ODORは型番不一致
 no-amazon	torch-burner	soto-fieldchucker-760		2026-08-24	楽天e-kurashi/q4x77の実商品は「ST-451 パワートーチ(ST-700ガス付属)」で、記事の型番ST-760と不一致。同定根拠が取れないため付与せず(記事側の型番要確認)
-pending	torch-burner	soto-slidetorch-487			
+set	torch-burner	soto-slidetorch-487	B0C2C5NNCH	2026-09-01	型番ST-487完全一致(Amazon子ASIN=ブラック/ST-487)。価格も2,750円で一致
 set	torch-burner	iwatani-aburi-2	B0F28JL356	2026-08-24	
 set	two-room-tent-guide	fielddoor-620	(amazonUrl)		
 set	two-room-tent-guide	quickcamp-kurve	(amazonUrl)		
@@ -938,3 +938,19 @@ set	fireproof-chair	fieldoor-midback-tc	B08T5Q1MGW	2026-08-31	FIELDOORミドル�
 set	fireproof-chair	bundok-bd-111	B08Z6WVTL8	2026-08-31	BUNDOK BD-111 カーキで型番一致
 set	fireproof-chair	campingmoon-f-1002c	B08DHM8V4G	2026-08-31	F-1002C コヨーテの子ASIN一致・寸法/重量一致
 set	portable-fridge	bougerv-crpro-20	B0B9GP5LMQ	2026-08-31	CR Pro 20L ブラックで型番・容量・色一致(article-fix差し替えに同梱)
+set	sleeping-bag-cover	nanga-waterproof-cover	B09RZMF2J8	2026-09-01	Amazon源記事(source=amazon/affiliateUrl=ASIN)
+set	sleeping-bag-cover	isuka-weathertec-superlight	B00IT4F9C8	2026-09-01	Amazon源記事(source=amazon/affiliateUrl=ASIN)
+set	sleeping-bag-cover	outbear-ul-bivy	B0FPFLL6RG	2026-09-01	Amazon源記事(source=amazon/affiliateUrl=ASIN)
+set	sleeping-bag-cover	miltec-sleeping-bag-cover	B005MYCLHE	2026-09-01	Amazon源記事(source=amazon/affiliateUrl=ASIN)
+set	sleeping-bag-cover	isuka-gore-infinium-ul-wide	B08M3ZKMW3	2026-09-01	Amazon源記事(source=amazon/affiliateUrl=ASIN)
+set	tc-tarp-takibi	soomloom-adranus-recta	B08GC7FVT4	2026-09-01	dimensionValuesDisplayDataで3.0mX3.85mの子ASINを特定
+no-amazon	tc-tarp-takibi	vastland-tc-recta-l		2026-09-01	Amazonは色別子ASIN(L/タン・L/オリーブ・L/ブラック)。楽天ページに色表記が無く仕様特定不可のため保守側で未設置
+set	tc-tarp-takibi	dod-okura-tarp-tn	B07NNSF1D7	2026-09-01	TT8-583-TN(タン)を子ASINで特定
+no-amazon	tc-tarp-takibi	goglamping-hengen-tc		2026-09-01	Amazonは色/サイズで複数ASINに分岐。楽天ページに仕様表記が無く特定不可のため未設置
+no-amazon	tc-tarp-takibi	unigear-hexa-tc		2026-09-01	楽天ショップ独自の複数SKU構成。Amazonに同一仕様のイコール品を確認できず未設置
+set	camp-electric-heater	yamazen-dsd086	B0145YNPDA	2026-09-02	型番DS-D086(W)ホワイトで一致
+set	camp-electric-heater	plusminuszero-xhsh210	B0CG8T33F8	2026-09-02	型番XHS-H210ホワイトの子ASINで一致
+no-amazon	camp-electric-heater	yamazen-dsf041		2026-09-02	Amazonは後継型番DS-F045(W)のみ。DS-F041のイコール品が無いため未設置
+no-amazon	camp-electric-heater	atrise-panel-heater		2026-09-02	型番のないショップ独自品。Amazonにイコール品を特定できず
+no-amazon	camp-electric-heater	moderndeco-ceramic		2026-09-02	Amazon側listingに型番表記が無く同一機種と確認できないため保守側で未設置
+set	camp-skillet	cs-skillet-frypan25	B07PJTDL7N	2026-09-02	手順Fの商品差し替えに伴い再照合。LODGE L3SK3で一致
