@@ -954,3 +954,13 @@ no-amazon	camp-electric-heater	yamazen-dsf041		2026-09-02	Amazonは後継型番D
 no-amazon	camp-electric-heater	atrise-panel-heater		2026-09-02	型番のないショップ独自品。Amazonにイコール品を特定できず
 no-amazon	camp-electric-heater	moderndeco-ceramic		2026-09-02	Amazon側listingに型番表記が無く同一機種と確認できないため保守側で未設置
 set	camp-skillet	cs-skillet-frypan25	B07PJTDL7N	2026-09-02	手順Fの商品差し替えに伴い再照合。LODGE L3SK3で一致
+no-amazon	one-touch-tent	fielddoor-onetouch-200		2026-09-03	色/仕様が特定できず子ASIN未確定
+no-amazon	one-touch-tent	moderndeco-onetouch-fullclose		2026-09-03	Amazon掲載品は遮光表記なし＝別世代の疑い
+no-amazon	one-touch-tent	fielddoor-onetouch-hexagon		2026-09-03	色違い子ASIN複数・楽天側の色が特定できず
+set	one-touch-tent	dod-onetouch-t2629tn	B07QS8DRHK	2026-09-03	T2-629-TN タンで型番・色一致(duo-tentで既確認のASINを再利用)
+set	one-touch-tent	bearsrock-hayabusa-ts201h	B0CZCXDYG7	2026-09-03	TS-201H 1〜2人用で型番一致
+no-amazon	attack-pack	karrimor-tatra20		2026-09-03	色違い子ASIN複数・楽天側の色が特定できず
+set	attack-pack	tnf-singleshot-20l	B0B3JD9RGJ	2026-09-03	NM72303のdimensionValuesDisplayDataでブラック子ASINを特定
+no-amazon	attack-pack	osprey-daylite-plus		2026-09-03	色が特定できず親ASIN流用を回避
+no-amazon	attack-pack	gregory-daypack-26l		2026-09-03	Amazonは品番65169/並行輸入で型番一致せず
+no-amazon	attack-pack	karrimor-cadet20		2026-09-03	色違い子ASIN複数・楽天側の色が特定できず
