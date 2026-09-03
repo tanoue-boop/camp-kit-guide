@@ -93,11 +93,11 @@ pending	camp-cooler-soft	soft-cooler-30l
 set	camp-cooler-soft	albatre-18l	B0BS5Q5CC4		
 pending	camp-cooler-soft	soft-cooler-40l			
 pending	camp-cooler-soft	square-soft-9l			
-pending	camp-cutlery	cl-cesabeams-set			
+no-amazon	camp-cutlery	cl-cesabeams-set		2026-09-02	楽天は「プレミアシリーズ5本」品番RC-M5（2,998円）。Amazonのcesa beamsは「プラチナシリーズ5点」(2,958/3,513円)系のみで型番系列が異なる
 pending	camp-cutlery	cl-stainless-set			
-pending	camp-cutlery	cl-muranokajiya			
+set	camp-cutlery	cl-muranokajiya	B08975LSRJ	2026-09-02	
 pending	camp-cutlery	cl-tritan-fork			
-pending	camp-cutlery	cl-titanmania-chopsticks			
+set	camp-cutlery	cl-titanmania-chopsticks	B08XNFK5CR	2026-09-02	
 pending	camp-fan-summer	fan-soppy			
 set	camp-fan-summer	fan-hagoogi	B0BYYTZHNL		
 pending	camp-fan-summer	fan-icarry			
@@ -138,15 +138,15 @@ set	camp-lighting-guide	mol-l400	(amazonUrl)
 set	camp-lighting-guide	balmuda-the-lantern-l02a	(amazonUrl)		
 set	camp-lighting-guide	kzm-gilbert-lantern	B09QM8KYZ3		
 pending	camp-lighting-guide	solar-lantern-1800lm			
-pending	camp-nata	nata-takibi-110			
-pending	camp-nata	nata-daishin-tetsuhiro-180			
-pending	camp-nata	nata-daishin-dgn001			
-pending	camp-nata	nata-senkichi-ebinata			
+set	camp-nata	nata-takibi-110	B08F9MX477	2026-09-02	
+set	camp-nata	nata-daishin-tetsuhiro-180	B00BMGCDNS	2026-09-02	
+set	camp-nata	nata-daishin-dgn001	B081N3X8X1	2026-09-02	
+set	camp-nata	nata-senkichi-ebinata	B003VUV3A2	2026-09-02	
 set	camp-nata	nata-bohken-ns180	B000FFL0X6		
 set	camp-oil-stove	alpaca-plus-ts77	B0G1YDBHCD		
 set	camp-oil-stove	toyotomi-rainbow-rl2524	B0C5DDYDSL		
 set	camp-oil-stove	toyotomi-ks67h	B01AU4Z8F2		
-pending	camp-oil-stove	corona-sz-f32a			
+no-amazon	camp-oil-stove	corona-sz-f32a		2026-09-02	AmazonのCORONA対流型はSL-6624(W)/SL-5125(W)/17畳7Lモデル等SLシリーズのみで、SZ-F32A(CF)の型番が無い
 pending	camp-oil-stove	generic-convection-8800			
 pending	camp-pillow	komkom-air-pillow			
 set	camp-pillow	waq-relaxing-pillow	B0BCFL5CB4		
@@ -158,11 +158,11 @@ set	camp-portable-power-beginner	ecoflow-delta2	B07FPVTFYC
 set	camp-portable-power-beginner	bluetti-ac180	B0FWJJLDYN		
 pending	camp-portable-power-beginner	anker-solix-c800			
 pending	camp-portable-power-beginner	jackery-explorer-300plus			
-pending	camp-rainwear	rw-ocstyle-nasr100			
+no-amazon	camp-rainwear	rw-ocstyle-nasr100		2026-09-02	サイズ・カラーで子ASINが分かれるアパレル。楽天ページが複数型番併記の選択式（AS-7100/AS-6700・AS-900/AS-950等）で実売の色・サイズを1つに確定できず子ASINを割り当て不可
 set	camp-rainwear	rw-mizuno-a2mg8a01	B0784B94T2		
-pending	camp-rainwear	rw-workerbee-7572			
-pending	camp-rainwear	rw-makku-as7100			
-pending	camp-rainwear	rw-makku-as900			
+no-amazon	camp-rainwear	rw-workerbee-7572		2026-09-02	サイズ・カラーで子ASINが分かれるアパレル。楽天ページが複数型番併記の選択式（AS-7100/AS-6700・AS-900/AS-950等）で実売の色・サイズを1つに確定できず子ASINを割り当て不可
+no-amazon	camp-rainwear	rw-makku-as7100		2026-09-02	サイズ・カラーで子ASINが分かれるアパレル。楽天ページが複数型番併記の選択式（AS-7100/AS-6700・AS-900/AS-950等）で実売の色・サイズを1つに確定できず子ASINを割り当て不可
+no-amazon	camp-rainwear	rw-makku-as900		2026-09-02	サイズ・カラーで子ASINが分かれるアパレル。楽天ページが複数型番併記の選択式（AS-7100/AS-6700・AS-900/AS-950等）で実売の色・サイズを1つに確定できず子ASINを割り当て不可
 set	camp-skillet	cs-skillet-20	B099KC98R6		
 set	camp-skillet	cs-skillet-25	B06XW4ZDCG		
 no-amazon	camp-skillet	cs-skillet-frypan25		2026-09-01	楽天型番UG-3029。ただし同記事の別カードcs-skillet-25が同一型番UG-3029でB06XW4ZDCG設置済みのため、記事内ASIN重複禁止ルールにより見送り(記事側の商品重複はarticle-fix案件)
@@ -478,11 +478,11 @@ set	hand-axe	ax-husqvarna-38	B00HC077GQ
 pending	hand-axe	ax-plow			
 set	hand-axe	ax-astro	B07QGJZF4R		
 set	hand-axe	ax-husqvarna-yankee	B08TGQFV1N		
-pending	headlight-rechargeable	nforce-sr01l			
-pending	headlight-rechargeable	relief10-3led			
+no-amazon	headlight-rechargeable	nforce-sr01l		2026-09-02	AmazonのN-FORCE取扱はSR-02/SC-200B/SC-300R/SP-20Aのみで、楽天2,880円のSR-01L（センサー点灯・充電式）の型番が存在しない
+set	headlight-rechargeable	relief10-3led	B0D5B1YSL1	2026-09-02	
 pending	headlight-rechargeable	5200lm-headlight			
-pending	headlight-rechargeable	nforce-sc300r			
-pending	headlight-rechargeable	lepro-usbc-300lm			
+set	headlight-rechargeable	nforce-sc300r	B0C8T7FK1L	2026-09-02	
+set	headlight-rechargeable	lepro-usbc-300lm	B01DNDMSLY	2026-09-02	
 set	helinox-chair	helinox-chair-one	(amazonUrl)		
 set	helinox-chair	helinox-chair-one-home	(amazonUrl)		
 set	helinox-chair	helinox-ground-chair	(amazonUrl)		
@@ -591,7 +591,7 @@ set	mountain-camp-lantern	lantern-carry-small	(amazonUrl)
 set	mountain-camp-lantern	lantern-bruno	(amazonUrl)		
 set	mountain-camp-lantern	lantern-solar-fold	(amazonUrl)		
 set	mountain-camp-lantern	lantern-lepro-4set	(amazonUrl)		
-pending	mountain-camp-lantern	lantern-goalzero			
+set	mountain-camp-lantern	lantern-goalzero	B01IQXDTGY	2026-09-02	
 pending	mountain-camp-mat	mat-rank-1			
 pending	mountain-camp-mat	mat-rank-2			
 pending	mountain-camp-mat	mat-rank-3			
@@ -608,9 +608,9 @@ no-amazon	mountain-tent-cheap	naturehike-solo-tent		2026-08-19	Naturehike 1人�
 set	mountain-tent-cheap	onetigris-hillridge	B0CDWXN38R	2026-08-19	型番/仕様一致で採用
 set	mountain-tent-cheap	onetigris-tetra	B0BJ63G2SJ	2026-08-19	型番/仕様一致で採用
 no-amazon	mummy-sleeping-bag	bearsrock-15		2026-08-31	楽天FX-451Gの購入オプションが「シルキーブラウン 10,350円 / スターリーネイビー 10,350円」の2色同価格。記事に色指定がなく、AmazonのFX-451G出品(B0DDXJMLCZ/B098RKVH74)のどちらに対応するか確定できず
-pending	mummy-sleeping-bag	hawkgear-3852			
-pending	mummy-sleeping-bag	hawkgear-2500			
-pending	mummy-sleeping-bag	hawkgear-4280			
+no-amazon	mummy-sleeping-bag	hawkgear-3852		2026-09-02	記事の3カードは同一商品（HAWK GEAR -15度耐寒マミー型シュラフ）を別ショップが出品したもの。Amazonは親B00QQYABW6の8色バリエーション（ブラック/ネイビー/コヨーテ/カーキ/グレー/オレンジ/ブルー/レッド、いずれも4,241円）で、楽天3ページとも色選択式のため実売カラーを確定できず、同一ASINの重複割当も不可
+no-amazon	mummy-sleeping-bag	hawkgear-2500		2026-09-02	記事の3カードは同一商品（HAWK GEAR -15度耐寒マミー型シュラフ）を別ショップが出品したもの。Amazonは親B00QQYABW6の8色バリエーション（ブラック/ネイビー/コヨーテ/カーキ/グレー/オレンジ/ブルー/レッド、いずれも4,241円）で、楽天3ページとも色選択式のため実売カラーを確定できず、同一ASINの重複割当も不可
+no-amazon	mummy-sleeping-bag	hawkgear-4280		2026-09-02	記事の3カードは同一商品（HAWK GEAR -15度耐寒マミー型シュラフ）を別ショップが出品したもの。Amazonは親B00QQYABW6の8色バリエーション（ブラック/ネイビー/コヨーテ/カーキ/グレー/オレンジ/ブルー/レッド、いずれも4,241円）で、楽天3ページとも色選択式のため実売カラーを確定できず、同一ASINの重複割当も不可
 set	mummy-sleeping-bag	onetigris-3season	B0CLP6NWD3	2026-08-31	
 no-amazon	mysteryranch-backpack	mr-coulee-30		2026-08-24	楽天(glv/mrn-30)のカラー欄はブラック(112814-001-25 / 112814-001-45)でS/MとL/XLを併記、価格22,999円は単一。AmazonはB0C23C3BRP(-45 L/XL)等サイズ別ASINで実売サイズを確定できず
 no-amazon	mysteryranch-backpack	mr-gallagator		2026-08-24	楽天(onestep/ju1903)は価格11,970円=HUMMUSDOBBY(BLACK/GRAVELは12,980円)と特定できたが、AmazonにはブラックS/M(112981-001-25)・パシフィックS/Mのみで該当カラーのASINなし
@@ -695,11 +695,11 @@ pending	portable-electric-kettle	silicone-folding-kettle-600
 pending	portable-electric-kettle	portable-travel-kettle-300w			
 pending	portable-electric-kettle	ac100-240v-kettle-400			
 pending	portable-electric-kettle	car-kettle-keepwarm-450			
-pending	portable-fridge	eenour-db01			
+no-amazon	portable-fridge	eenour-db01		2026-09-02	楽天set-D1018はD10/D18/D23PLUS/D18PLUS/DB01バッテリーを1ページに統合した選択式。Amazonは本体(D18=B0CSSJRWCT)とDB01バッテリー(B0C3H2DVC3)が別ASINで、19,800円の構成に一致する単一商品が無い
 pending	portable-fridge	lifeidea-18l-2way			
-pending	portable-fridge	thn-compressor-fridge			
-pending	portable-fridge	powerarq-iceberg			
-pending	portable-fridge	regear-9l			
+no-amazon	portable-fridge	thn-compressor-fridge		2026-09-02	楽天が複数容量を1ページに統合した選択式（10/18/23L・12/18/25/30L・29L/12L・9L/12L）。Amazonは容量別ASINのため単一仕様を確定できない
+no-amazon	portable-fridge	powerarq-iceberg		2026-09-02	楽天が複数容量を1ページに統合した選択式（10/18/23L・12/18/25/30L・29L/12L・9L/12L）。Amazonは容量別ASINのため単一仕様を確定できない（Amazon: 12L=23,700円/29L=35,819円で楽天27,500円と一致しない）
+no-amazon	portable-fridge	regear-9l		2026-09-02	楽天が複数容量を1ページに統合した選択式（10/18/23L・12/18/25/30L・29L/12L・9L/12L）。Amazonは容量別ASINのため単一仕様を確定できない
 set	portable-power-large	jackery-2000-new	B0DBHS1S3V	2026-08-26	
 set	portable-power-large	ecoflow-delta3-max	B0FPCD866Z	2026-08-26	
 set	portable-power-large	dabbsson-2000l	B0F3JMHLGG	2026-08-26	
