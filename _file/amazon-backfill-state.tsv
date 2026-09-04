@@ -87,7 +87,7 @@ set	camp-cooler-box-overall	cooler-rank-1	B003KTSCQW
 set	camp-cooler-box-overall	cooler-rank-2	B004MX6O5G		
 set	camp-cooler-box-overall	cooler-rank-3	B001ADVZ0U		
 set	camp-cooler-box-overall	cooler-rank-4	B0B7S1MQ3L		
-pending	camp-cooler-box-overall	cooler-rank-5			
+no-amazon	camp-cooler-box-overall	cooler-rank-5		2026-09-03	アイリスオーヤマ VITC-40 + 保冷剤HHC-L の2点セット。Amazonは本体単体(B0GR5JLYB4 チャコールグレー等)のみで構成が一致せず、セット品リンク不可
 set	camp-cooler-soft	waq-soft-42l	B0B6PXXDTZ		
 pending	camp-cooler-soft	soft-cooler-30l			
 set	camp-cooler-soft	albatre-18l	B0BS5Q5CC4		
@@ -153,11 +153,11 @@ set	camp-pillow	waq-relaxing-pillow	B0BCFL5CB4
 set	camp-pillow	zencamps-air-pillow	B0DBHCCSKS		
 pending	camp-pillow	grandoor-urethane-pillow			
 pending	camp-pillow	origintree-air-pillow			
-pending	camp-portable-power-beginner	jackery-explorer-1000pro			
+set	camp-portable-power-beginner	jackery-explorer-1000pro	B07YLDSB3P	2026-09-03	SmartTap PowerArQ2 レッド。型番AC50・500Wh/135,000mAh一致、カード画像が赤で色確定
 set	camp-portable-power-beginner	ecoflow-delta2	B07FPVTFYC		
 set	camp-portable-power-beginner	bluetti-ac180	B0FWJJLDYN		
-pending	camp-portable-power-beginner	anker-solix-c800			
-pending	camp-portable-power-beginner	jackery-explorer-300plus			
+no-amazon	camp-portable-power-beginner	anker-solix-c800		2026-09-03	EcoFlow RIVER 2 256Wh。AmazonのEcoFlow小型機はRIVER 3(230Wh)へ移行済みでRIVER 2 256Wh本体の出品が無い(対応品は収納バッグのみ)
+no-amazon	camp-portable-power-beginner	jackery-explorer-300plus		2026-09-03	BLUETTI AC50B 448Wh/700W。AmazonのBLUETTIはAC70(768Wh)/AORAシリーズのみでAC50Bの出品が無い
 no-amazon	camp-rainwear	rw-ocstyle-nasr100		2026-09-02	サイズ・カラーで子ASINが分かれるアパレル。楽天ページが複数型番併記の選択式（AS-7100/AS-6700・AS-900/AS-950等）で実売の色・サイズを1つに確定できず子ASINを割り当て不可
 set	camp-rainwear	rw-mizuno-a2mg8a01	B0784B94T2		
 no-amazon	camp-rainwear	rw-workerbee-7572		2026-09-02	サイズ・カラーで子ASINが分かれるアパレル。楽天ページが複数型番併記の選択式（AS-7100/AS-6700・AS-900/AS-950等）で実売の色・サイズを1つに確定できず子ASINを割り当て不可
@@ -285,8 +285,8 @@ set	cooler-ice-pack	ip-logos-hyoutenka	B001USYFWU
 pending	cooler-ice-pack	ip-sanyouki-16			
 pending	cooler-ice-pack	ip-yunide-hard			
 set	day-camp-cooler-box	cooler-rank-1	B0D69W361V		
-pending	day-camp-cooler-box	cooler-rank-2			
-pending	day-camp-cooler-box	cooler-rank-3			
+no-amazon	day-camp-cooler-box	cooler-rank-2		2026-09-03	ROGUE Ice Cooler 18L(楽天716select)。Amazonに ROGUE/ローグ ブランドの18Lハードクーラーの出品が無い
+set	day-camp-cooler-box	cooler-rank-3	B0BSH3CJ97	2026-09-03	LOGOS 81448054=アウトドアクーラーS。9L/31×25×29cm/1.2kg の4点一致
 set	day-camp-cooler-box	cooler-rank-4	B0G7K6Z93R		
 set	day-camp-cooler-box	cooler-rank-5	B08CXDQ667		
 pending	day-camp-grill	grill-rank-1			
@@ -524,7 +524,7 @@ set	karrimor-backpack	karrimor-eclipse27	(amazonUrl)
 set	karrimor-backpack	karrimor-tribute40	(amazonUrl)		
 set	karrimor-backpack	karrimor-vt-daypack	(amazonUrl)		
 set	karrimor-backpack	karrimor-tatra20	(amazonUrl)		
-pending	kids-sleeping-bag	kids-sb-rank-1		2026-08-19	[再照合待ち] 楽天ページで実売の色/サイズを確認して子ASINを特定する。旧理由: Bears Rock MX-604Jはモカライン/スモーキーネイビーの色統合。色指定なし
+no-amazon	kids-sleeping-bag	kids-sb-rank-1		2026-09-03	Bears Rock MX-604J。楽天は4色(モカライン/スモーキーネイビー/すいすい子供/リトルラビット)が全て4,580円同一、記事nameに色指定なし、画像は2色併載バナー。Amazon側は2色のみで対応が取れず実売仕様を確定できず(記事nameに色を追記すれば設置可能)
 set	kids-sleeping-bag	kids-sb-rank-2	B0GHG3CKWR	2026-08-19	型番/仕様一致で採用
 no-amazon	kids-sleeping-bag	kids-sb-rank-3		2026-08-19	ノーブランド汎用寝袋(在庫処分品)。同一品を特定不可
 no-amazon	kids-sleeping-bag	kids-sb-rank-4		2026-08-19	ノーブランド汎用2人用寝袋。同一品を特定不可
@@ -685,11 +685,11 @@ set	peg-hammer	snowpeak-pro-s-n002	B000AR2OBQ	2026-08-24
 no-amazon	peg-hammer	reiden-peg-hammer		2026-08-24	Amazonに「REIDEN」ブランドのペグハンマー(1,690円/現役キャンパー監修)の出品が無く、検索上位はYOGOTO/HUNDRUP等の別ブランド
 set	peg-hammer	freell-peg-hammer	B07V7XLC2L	2026-08-24	
 pending	peg-hammer	dfresh-peg-hammer-360g			
-pending	portable-cooler-aircon	irisohyama-spot-cooler			
-pending	portable-cooler-aircon	tansu-spot-cooler			
-pending	portable-cooler-aircon	eenour-spot-cooler			
-pending	portable-cooler-aircon	threeup-spot-cooler			
-pending	portable-cooler-aircon	quads-spot-cooler			
+no-amazon	portable-cooler-aircon	irisohyama-spot-cooler		2026-09-03	楽天535804はIPP-2226UとIPP-2226Sの2型番×グレー/ホワイトを1ページに統合。全色32,800円同一・記事画像は両色併載のブランドバナーで、AmazonのIPP-2226U-W/U-H/S-Wのどれか確定できず
+no-amazon	portable-cooler-aircon	tansu-spot-cooler		2026-09-03	楽天79800000は 2.3kW25L日/2.6kW30L日 × ファブリックブラック/ホワイト の4SKU統合ページ。記事のname(容量色とも記載なし)/price 29,999(どのSKU価格とも不一致)/画像(2色2容量を併載)いずれでも実売SKUを確定できず
+set	portable-cooler-aircon	eenour-spot-cooler	B0CYZY9D8Q	2026-09-03	EENOUR PA600 グリーン。型番PA600・1.758kW/6000BTU・単色グリーン一致
+set	portable-cooler-aircon	threeup-spot-cooler	B0GWMN5Z7Z	2026-09-03	型番EC-S0814GW一致(販売ブランド表記はブリュクスだが同一OEM)。2.2kW/35L日/6-9畳/R32一致、楽天ダークウッドは売切で実売=グレージュウッド
+set	portable-cooler-aircon	quads-spot-cooler	B0GWZL3P5C	2026-09-03	QUADS QSR518 ホワイト。29×29.5×69.5cm/19kg/2.0-2.3kW/19L日/430mL/R410A300g/6-9畳が一致、画像照合で白確定
 pending	portable-electric-kettle	dc12v-car-kettle-450			
 pending	portable-electric-kettle	silicone-folding-kettle-600			
 pending	portable-electric-kettle	portable-travel-kettle-300w			
@@ -735,11 +735,11 @@ no-amazon	sierra-cup	sierra-3set		2026-08-26	無ブランドのシェラカッ�
 set	sierra-cup	campingmoon-seiro	B0CG4GLZKB	2026-08-26	
 set	sierra-cup	campingmoon-lid	B0F2T1PC2C	2026-08-26	
 set	sierra-cup	uniflame-coffee-bannet	B007FFSVAO	2026-08-26	
-pending	sleeping-bag-liner	liner-rank-1			
-pending	sleeping-bag-liner	liner-rank-2			
-pending	sleeping-bag-liner	liner-rank-3			
-pending	sleeping-bag-liner	liner-rank-4			
-pending	sleeping-bag-liner	liner-rank-5			
+no-amazon	sleeping-bag-liner	liner-rank-1		2026-09-03	Bears Rock IF-201K。楽天3色(チョコブラウン/ミルクティー/ダークネイビー)が全て1,980円同一に対しAmazonは4色(ネイビー/ベージュ/ブラウン/オレンジ)で色名も1:1対応せず、実売仕様を確定できず(記事nameに色を追記すれば設置可能)
+no-amazon	sleeping-bag-liner	liner-rank-2		2026-09-03	楽天k-innershruff01は210×75cm/450g/ポリエステルのノーブランドOEMで全32色展開。ブランド名も型番も無く実売仕様を確定できない
+no-amazon	sleeping-bag-liner	liner-rank-3		2026-09-03	楽天ad196は180×75cm/600g/フリースのノーブランドOEM6色展開。型番がショップ独自コードのみでAmazonの同型品と一意に同定できない
+set	sleeping-bag-liner	liner-rank-4	B0845RPYDM	2026-09-03	Bears Rock IB-301L グレー。楽天も単色グレーで一致
+no-amazon	sleeping-bag-liner	liner-rank-5		2026-09-03	楽天ODSBFLは175×75cm/500g/フリースのノーブランドOEM6色展開。型番がショップ独自コードのみでAmazonの同型品と一意に同定できない
 set	sleeping-bag-summer-cospa	washable-envelope-allseason	(amazonUrl)		
 set	sleeping-bag-summer-cospa	bearsrock-mx604	(amazonUrl)		
 set	sleeping-bag-summer-cospa	inner-sheet-envelope	(amazonUrl)		
@@ -775,11 +775,11 @@ set	solar-portable-power	sp-jackery-1000	(amazonUrl)
 set	solar-portable-power	sp-ecoflow-delta3plus	(amazonUrl)		
 set	solar-portable-power	sp-fossibot-f2400	(amazonUrl)		
 set	solar-portable-power	sp-ecoflow-delta3classic	(amazonUrl)		
-pending	solo-camp-beginners-guide	solo-camp-tent			
-pending	solo-camp-beginners-guide	solo-camp-sleeping-bag			
-pending	solo-camp-beginners-guide	solo-camp-mat			
-pending	solo-camp-beginners-guide	solo-camp-burner			
-pending	solo-camp-beginners-guide	solo-camp-cooker			
+set	solo-camp-beginners-guide	solo-camp-tent	B09HQZ2NHD	2026-09-03	POLeR 1 MAN TENT 213EQU5202-SM13。楽天は色HAL/BLACKHOLE(売切)で実売=HAL、Amazon同色・価格22,946円一致
+no-amazon	solo-camp-beginners-guide	solo-camp-sleeping-bag		2026-09-03	MSR エリクサー1 タン 37072。Amazonのエリクサー1は37310グレーのみ、タンは3人用(B09WJ1WNP6)しか無く1人用タンが存在しない
+no-amazon	solo-camp-beginners-guide	solo-camp-mat		2026-09-03	楽天SH-SH-21-DMTはノーブランドOEM。楽天ページの素材/サイズ/重量欄が全て空欄でスペック3点照合が不可能
+no-amazon	solo-camp-beginners-guide	solo-camp-burner		2026-09-03	楽天mbs0034は28×11cm・高炭素鋼ヘッド+アルミの汎用OEMペグハンマー。ブランド名/型番が無く多色展開のためAmazonの同形状品と一意に同定できない
+set	solo-camp-beginners-guide	solo-camp-cooker	B08SJF98TR	2026-09-03	ogawa タッソT/C サンドベージュ 2727 型番完全一致
 set	solo-camp-cot	cot-rank-1	B07NBHCBHT	2026-08-26	
 no-amazon	solo-camp-cot	cot-rank-2		2026-08-26	楽天はColeman コンバータコット2(メーカー型番2249234・並行輸入)。Amazonの同名品B00363PS3Wは型番2000020282で別モデルのため不採用
 set	solo-camp-cot	cot-rank-3	B0791VGXB1	2026-08-26	
@@ -848,7 +848,7 @@ set	uniflame-burner	uniflame-usd2	B085Y1CY5H	2026-08-26
 set	uniflame-burner	uniflame-uss	B01D58468K	2026-08-26	
 set	uniflame-fire-grill	uniflame-firegrill	B000AR5Y90		
 set	uniflame-fire-grill	uniflame-solo	B085Y1KHLC		
-pending	uniflame-fire-grill	uniflame-set			
+set	uniflame-fire-grill	uniflame-set	B00CXKVK0Y	2026-09-03	ユニフレーム ファイアグリル&ケース2点セット 683040&683187 型番・構成完全一致
 set	uniflame-fire-grill	uniflame-rostle	B000SXPWL6		
 set	uniflame-fire-grill	uniflame-case	B003DSUODY		
 set	vastland-tent	vastland-tunnel-m	B0CCX96HHR	2026-08-24	
@@ -964,3 +964,8 @@ set	attack-pack	tnf-singleshot-20l	B0B3JD9RGJ	2026-09-03	NM72303のdimensionValu
 no-amazon	attack-pack	osprey-daylite-plus		2026-09-03	色が特定できず親ASIN流用を回避
 no-amazon	attack-pack	gregory-daypack-26l		2026-09-03	Amazonは品番65169/並行輸入で型番一致せず
 no-amazon	attack-pack	karrimor-cadet20		2026-09-03	色違い子ASIN複数・楽天側の色が特定できず
+set	closed-cell-mat	thermarest-zlite-sol-r	B005I6R0WC	2026-09-04	Amazon親ASINのdimensionで「レギュラー(米国製)」=B005I6R0WC、商品名にR(51×183cm) R値2.6 30670の明記あり型番一致
+set	closed-cell-mat	cs-eva-foam-m3318	B00131UMUI	2026-09-04	統合リスティングのdimensionで「EVAシングル」=B00131UMUI、ページタイトルもEVA フォームマット 56×182cm M-3318で一致
+set	closed-cell-mat	ground8-long-set	B0995JZZQZ	2026-09-04	グランドエイトロングセット(95×285cm×3枚/厚さ8mm/300×300cmテント用)で仕様完全一致・バリエーションなし
+set	closed-cell-mat	cs-eva-foam-ub3001	B00AQY332C	2026-09-04	統合リスティングのdimensionで「EVAダブル」=B00AQY332C、楽天採用品UB-3001(ダブル)と一致
+no-amazon	closed-cell-mat	soomloom-alumi-mat		2026-09-04	Amazon側はカラー展開のみでシングル/ダブルのサイズ選択が無く、楽天採用のシングルと同一寸法か確認できないため保守側で未設置
