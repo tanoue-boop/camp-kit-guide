@@ -969,3 +969,13 @@ set	closed-cell-mat	cs-eva-foam-m3318	B00131UMUI	2026-09-04	統合リスティ�
 set	closed-cell-mat	ground8-long-set	B0995JZZQZ	2026-09-04	グランドエイトロングセット(95×285cm×3枚/厚さ8mm/300×300cmテント用)で仕様完全一致・バリエーションなし
 set	closed-cell-mat	cs-eva-foam-ub3001	B00AQY332C	2026-09-04	統合リスティングのdimensionで「EVAダブル」=B00AQY332C、楽天採用品UB-3001(ダブル)と一致
 no-amazon	closed-cell-mat	soomloom-alumi-mat		2026-09-04	Amazon側はカラー展開のみでシングル/ダブルのサイズ選択が無く、楽天採用のシングルと同一寸法か確認できないため保守側で未設置
+set	logos-sleeping-bag	logos-rosy-fleece	B0CYSWQZVN	2026-09-07	楽天ライトグリーン品とAmazon「コストコ ロゴスROSYフリースシュラフライトグリーン」で色・型が一致
+set	logos-sleeping-bag	logos-kids-slumber	B0GHG3CKWR	2026-09-07	品名「収納楽らく！丸洗いキッズスランバー・10 72602002」で型番完全一致
+no-amazon	logos-sleeping-bag	logos-deep-sleeper-sc		2026-09-07	Amazon側に同名「シュラフコンフォーター」表記の類似ASINが3件あり色/型番の一致に確信が持てず保守側で未設置
+no-amazon	logos-sleeping-bag	logos-slumber-72602010		2026-09-07	Amazon側は温度バリエーション(・0/・2/・-2等)の表記が無く、楽天の72602010(・2)との一致確認不可のため未設置
+no-amazon	logos-sleeping-bag	logos-soft-warm		2026-09-07	Amazon側はSNOOPYコラボ柄のみで、楽天採用のプレーン柄と意匠が異なるため未設置
+no-amazon	titanium-cooker	snowpeak-trek900		2026-09-07	Amazon検索でSCS-008T型番一致の出品を確認できず（SCS-020T/SCS-009T等の近縁モデルのみヒット）
+set	titanium-cooker	snowpeak-personal-cooker-020t	B000AR2N4O	2026-09-07	品名「スノーピーク チタンパーソナルクッカーセット SCS-020T」で型番完全一致
+set	titanium-cooker	titanmania-750-pot	B08XMDC7RF	2026-09-07	品名「TITAN MANIA クッカー チタン製 750ml 蓋付き」で仕様完全一致
+set	titanium-cooker	evernew-solo-set-750	B09VK4FXSK	2026-09-07	品名「エバニュー Ti U.L. Solo set 750 ECA540」で型番完全一致
+set	titanium-cooker	evernew-mugpot-900	B09TNTZV8S	2026-09-07	品名「エバニュー Ti マグポット 900 ECA539」で型番完全一致

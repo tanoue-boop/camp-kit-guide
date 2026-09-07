@@ -52,27 +52,29 @@
 
 ---
 
-## 記事数（2026-09-04 時点）
+## 記事数（2026-09-07 時点）
 
-- **総記事数: 231記事**（本日の新規2本＝closed-cell-mat／yamadougu-rental-flow を content/posts に配置した時点の実測値。ほかに camp-table-set をリライト、mysteryranch-backpack を手順Fで商品差し替え。デプロイは人間レビュー後に deploy.cjs で実施）
-- 内訳の推移: `a45a1e5`=212 → `6ebde0f`=215（前バッチ3本＝camp-air-pump／disaster-camp-gear／trekking-pole）→ `7f9b41f`=218（本日3本＝solar-lantern／disaster-radio／solo-gear-rental）
+- **総記事数: 234記事**（本日の新規3本＝logos-sleeping-bag／titanium-cooker／furusato-year-end を content/posts に配置した時点の実測値。ほかに bluetti-power をリライト。デプロイは人間レビュー後に deploy.cjs で実施）
+- 内訳の推移: `a45a1e5`=212 → `6ebde0f`=215（前バッチ3本＝camp-air-pump／disaster-camp-gear／trekking-pole）→ `7f9b41f`=218（3本＝solar-lantern／disaster-radio／solo-gear-rental）→ 2026-09-04時点=231
 
 ### カテゴリ別内訳（frontmatter `category` を集計）
 
 | slug | 表示名 | 記事数 |
 |------|--------|-------:|
-| tent | テント | 60 |
-| sleeping-bag | 寝袋・シュラフ | 23 |
-| cookware | 調理器具 | 35 |
+| tent | テント | 61 |
+| sleeping-bag | 寝袋・シュラフ | 24 |
+| cookware | 調理器具 | 36 |
 | chair-table | チェア・テーブル | 27 |
 | lighting | 照明・ランタン | 16 |
 | power | 電源・バッテリー | 24 |
 | bonfire | 焚き火台 | 28 |
 | backpack | バックパック | 16 |
 | clothing | ウェア・装備 | 2 |
-| **合計** | | **231** |
+| **合計** | | **234** |
 
-> 直近: 2026-09-02（日次タスク＝既存記事修正1件＋商品5選1本＋ASP専用1本＋既存記事リライト1本の4枠：camp-skillet 第3位の商品差し替え（手順F・UG-3029重複解消→LODGE L3SK3）／camp-electric-heater＝キャンプ用電気ヒーター5選（power・楽天API実データ・消費電力軸）／camp-rainy-day-plan＝雨天プランB（tent・アソビュー variant=leisure／サイト初のleisure案件）／family-camp-summer-tent リライト（structure＝涼しさの判断軸4項目を新設＋title/descriptionに「真夏」「最強」を収録）。記事数224→226、tent 58→59・power 23→24）
+> 直近: 2026-09-07（日次タスク＝商品5選2本＋ASP専用1本＋既存記事リライト1本の4枠。既存記事修正キューpendingなしのため商品5選は2本のまま：logos-sleeping-bag＝ロゴスの寝袋5選（sleeping-bag・楽天API実データ・ROSYフリースシュラフ〜やわらかあったかシュラフ）／titanium-cooker＝チタンクッカー5選（cookware・楽天API実データ・スノーピーク2/TITAN MANIA1/エバニュー2、camp-cooker-beginnerとのTITAN MANIA重複は回避）／furusato-year-end＝ふるさと納税の年末駆け込み・ワンストップ特例締切（tent・楽天ふるさと納税・variant=furusato）／bluetti-power リライト（synonym-coverage＝「BLUETTI（ブルーティ）」表記を本文に補強、Jackery/EcoFlow/Ankerとの選び分けセクションを新設、updatedAt更新）。記事数231→234、tent 60→61・sleeping-bag 23→24・cookware 35→36。Amazonリンクは10カード中6件set／4件no-amazon（詳細はamazon-backfill-state.tsv）)
+
+> 前回: 2026-09-02（日次タスク＝既存記事修正1件＋商品5選1本＋ASP専用1本＋既存記事リライト1本の4枠：camp-skillet 第3位の商品差し替え（手順F・UG-3029重複解消→LODGE L3SK3）／camp-electric-heater＝キャンプ用電気ヒーター5選（power・楽天API実データ・消費電力軸）／camp-rainy-day-plan＝雨天プランB（tent・アソビュー variant=leisure／サイト初のleisure案件）／family-camp-summer-tent リライト（structure＝涼しさの判断軸4項目を新設＋title/descriptionに「真夏」「最強」を収録）。記事数224→226、tent 58→59・power 23→24）
 
 > 前回: 2026-09-01（日次タスク＝商品5選2本＋ASP専用1本＋既存記事リライト1本の4枠：sleeping-bag-cover＝シュラフカバー5選（sleeping-bag・楽天供給薄でAmazon源へ切替）／tc-tarp-takibi＝焚き火に強いTCタープ5選（tent・楽天API実データ）／camp-gear-initial-cost＝キャンプ用品一式の初期費用（hinataストア・variant=default）／sleeping-bag-temperature-guide リライト（synonym-coverage＝快適温度・限界温度・最低使用温度・適正温度の表記整理＋外気温からの温度別早見表を追記）。記事数221→224、tent 56→58・sleeping-bag 21→22）
 > 前回: 2026-08-31（日次タスク＝既存記事修正1本〔手順F portable-fridge〕＋商品5選2本〔camp-hot-carpet＝power／fireproof-chair＝chair-table〕＋ASP専用1本〔winter-camp-rental＝tent〕。リライト枠は在庫切れで新規商品記事へ振替）
