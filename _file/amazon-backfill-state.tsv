@@ -193,11 +193,11 @@ set	camp-tarp-beginner	fieldoor-onetouch-tarp-3x3	(amazonUrl)
 set	camp-tarp-beginner	bearsrock-shirokuma-square-tarp	(amazonUrl)		
 set	camp-tarp-beginner	hexa-tarp-500x480	(amazonUrl)		
 set	camp-tarp-beginner	fieldoor-hexa-tarp-m440	(amazonUrl)		
-pending	camp-windscreen	windscreen-pineagle-reflector			
+set	camp-windscreen	windscreen-pineagle-reflector	B076B85VWP	2026-09-07	
 set	camp-windscreen	windscreen-wakufimac-large	B09K7K8D4Q		
-pending	camp-windscreen	windscreen-dreambrother-compact			
-pending	camp-windscreen	windscreen-onetigris-tc			
-pending	camp-windscreen	windscreen-dreambrother-2set			
+no-amazon	camp-windscreen	windscreen-dreambrother-compact		2026-09-07	楽天は3色(グリーン/ブラック/カーキー)展開でカード画像はグリーンだが、Amazon同型品(B093278JKX/B0931SNT3S、寸法205×81×72cm・1.1kg・キャンバス地で完全一致)はブラック/カーキーの2色のみでグリーンが無く色を確定できず
+no-amazon	camp-windscreen	windscreen-onetigris-tc		2026-09-07	OneTigris公式楽天(ce-qzm01-rg、アーミーグリーン/ブラウン)と同一のポリコットンTC陣幕/前幕単体商品がAmazonに見当たらず(OneTigrisのAmazon出品はパップテント本体等のみ)
+no-amazon	camp-windscreen	windscreen-dreambrother-2set		2026-09-07	陣幕+焚き火シートの2点セット構成で、単体陣幕(screen-01)とは構成が異なるため対象外
 set	captain-stag-chair	cs-charmant	(amazonUrl)		
 set	captain-stag-chair	cs-joule	(amazonUrl)		
 set	captain-stag-chair	cs-lounge-green	(amazonUrl)		
@@ -365,7 +365,7 @@ set	family-camp-chair	chair-f-rank-4	B07D6NTYKL	2026-09-01	コールマン リ�
 no-amazon	family-camp-chair	chair-f-rank-5		2026-09-01	楽天NOVA産業のノーブランド フォールディングローチェア(6,920円)。型番なし・スペック表記なしでAmazon側に同定可能な商品が無い
 set	family-camp-cot	coleman-converta-cot2	B00363PS3W	2026-08-19	型番/仕様一致で採用
 no-amazon	family-camp-cot	logos-comfort-bed		2026-08-19	ロゴス73173089に一致せず(候補B07NBHCBHTは型番73188034のテーブル系)
-pending	family-camp-cot	gussuri-air-cot		2026-08-19	[再照合待ち] 楽天ページで実売の色/サイズを確認して子ASINを特定する。旧理由: DOEARTH Gussuriはブラック/ブラウンのカラー統合。色指定なく子ASIN特定不可
+no-amazon	family-camp-cot	gussuri-air-cot		2026-09-07	[再照合実施] ブラック(B0C69XSY59)/ブラウン相当(B0C69VS9L1)とも24,800円同額。楽天メイン画像もブラック/ブラウン両色を並記しており実売の単一仕様を確定できず
 set	family-camp-cot	bundok-low-cot	B09ZXGVH9M	2026-08-19	型番/仕様一致で採用
 no-amazon	family-camp-cot	yurafuwa-hammock		2026-08-19	楽天19000円に対しAmazonはノーマル8980/ロング10800。該当モデル特定不可
 pending	family-camp-lantern	lantern-rank-1			
@@ -409,7 +409,7 @@ set	fire-blower	zencamps-blaster	B0D9NDFVMQ	2026-08-28
 no-amazon	fire-blower	dotwest-wood		2026-08-28	Amazonにドットウエストブランドの火吹き棒出品なし。天然木ハンドル・長さ調節式の同型品も見つからず
 no-amazon	fire-blower	campingmoon-ms43		2026-08-28	Amazon側はMS-43がシルバー(B0BRPSHV81)/別色(B0CSJWZVNN)に分かれる。楽天もシルバー/ブラックの2色を同一価格2,980円で販売しており実売色を確定できず
 set	fire-extinguish-pot	zencamps-ashcarry	B09K65JX3G	2026-08-19	型番/仕様一致で採用
-pending	fire-extinguish-pot	byousoku-tsubo		2026-08-19	[再照合待ち] 楽天ページで実売の色/サイズを確認して子ASINを特定する。旧理由: OUTBEAR秒速消火はS/Mのサイズ統合。記事側にサイズ記載がなく子ASIN特定不可
+no-amazon	fire-extinguish-pot	byousoku-tsubo		2026-09-07	[再照合実施] 楽天はSサイズ3,132円/Mサイズ3,582円の2サイズ展開で、記事記載価格3,480円はいずれとも一致せず、記事にサイズ記載もないため子ASIN特定不可
 set	fire-extinguish-pot	captainstag-alster	B0065UYDAW	2026-08-19	型番/仕様一致で採用
 set	fire-extinguish-pot	greenlife-hot150	B00BG57XOE	2026-08-19	型番/仕様一致で採用
 set	fire-extinguish-pot	fielddoor-4l	B09FJLPYGP	2026-08-19	型番/仕様一致で採用
@@ -463,11 +463,11 @@ set	group-camp-table	fieldoor-outdoor-table-180-240	(amazonUrl)
 set	group-camp-table	wakufimac-rolltop-120x70	(amazonUrl)		
 pending	group-camp-table	folding-table-180x70			
 set	group-camp-table	captainstag-hexa-center-table-96	(amazonUrl)		
-pending	group-camp-tent	tent-rank-1			
-pending	group-camp-tent	tent-rank-2			
-pending	group-camp-tent	tent-rank-3			
-pending	group-camp-tent	tent-rank-4			
-pending	group-camp-tent	tent-rank-5			
+set	group-camp-tent	tent-rank-1	B071GY95MQ	2026-09-07	
+set	group-camp-tent	tent-rank-2	B0C6T66WW2	2026-09-07	
+no-amazon	group-camp-tent	tent-rank-3		2026-09-07	Free-Rise HEXAGONシリーズはAmazonに3m×3m(B087R882RY等)と3m×4.5m(B0D4DJX542等)のみ出品されており、記事の3m×6mサイズが存在せず
+set	group-camp-tent	tent-rank-4	B09C1W43RL	2026-09-07	
+no-amazon	group-camp-tent	tent-rank-5		2026-09-07	FIELDOOR「フィールドキャンプドーム300」(楽天:ポール組立式・7.5kg・耐水圧1500mm)に対し、Amazon「ワンタッチテント300」(B081RKMZM4等)は同サイズ(300×500×180cm)だが跳ね上げ式構造で重量10.5kgと異なり別製品と判断
 pending	guy-rope-recommend	dailycompass-tentrope-8			
 set	guy-rope-recommend	soomloom-guyrope-50m	B07WX7S936		
 pending	guy-rope-recommend	muranokajiya-tgr-4jset			
@@ -558,7 +558,7 @@ set	logos-bonfire	logos-takibi-l-fire	(amazonUrl)
 set	logos-bonfire	logos-takibi-m-bbq	(amazonUrl)		
 set	logos-bonfire	logos-takibi-l-bbq	(amazonUrl)		
 set	low-style-table	quickcamp-3fold	B0F3P4MZCN	2026-08-19	型番/仕様一致で採用
-pending	low-style-table	ladweather-alu-table		2026-08-19	[再照合待ち] 楽天ページで実売の色/サイズを確認して子ASINを特定する。旧理由: ラドウェザーは楽天1780円に対しAmazon2980円の3色統合。価格・色とも特定不可
+no-amazon	low-style-table	ladweather-alu-table		2026-09-07	[再照合実施] 楽天は8色展開(ブラック/カーキ/ブラウン=2,230円、ライトブルー/ピンク/ラベンダー=1,780円)。記事価格1,780円はライトブルー/ピンクが同額該当するが、メイン画像の色(オリーブ)はどちらとも一致せず単一色を特定できず
 set	low-style-table	fielddoor-wood-roll	B0832CJ39Z	2026-08-19	型番/仕様一致で採用
 no-amazon	low-style-table	fielddoor-bamboo-roll		2026-08-19	FIELDOORバンブー60x100に該当なし(Amazonは木製120x70等)
 no-amazon	low-style-table	alu-roll-60		2026-08-19	ノーブランド汎用アルミロールテーブル。同一品を特定不可
@@ -592,11 +592,11 @@ set	mountain-camp-lantern	lantern-bruno	(amazonUrl)
 set	mountain-camp-lantern	lantern-solar-fold	(amazonUrl)		
 set	mountain-camp-lantern	lantern-lepro-4set	(amazonUrl)		
 set	mountain-camp-lantern	lantern-goalzero	B01IQXDTGY	2026-09-02	
-pending	mountain-camp-mat	mat-rank-1			
-pending	mountain-camp-mat	mat-rank-2			
-pending	mountain-camp-mat	mat-rank-3			
-pending	mountain-camp-mat	mat-rank-4			
-pending	mountain-camp-mat	mat-rank-5			
+no-amazon	mountain-camp-mat	mat-rank-1		2026-09-07	「樅」ブランドの56×177cmインフレーターマット(累計20000個販売)と一致する商品がAmazonに見当たらず
+no-amazon	mountain-camp-mat	mat-rank-2		2026-09-07	LAD WEATHERのリバーシブルアルミコーティングマット(ladsheet006)と一致する商品がAmazonに見当たらず
+set	mountain-camp-mat	mat-rank-3	B09F2ZNC93	2026-09-07	
+set	mountain-camp-mat	mat-rank-4	B0BWX6DWMK	2026-09-07	
+set	mountain-camp-mat	mat-rank-5	B0GWPWG823	2026-09-07	
 pending	mountain-camp-tent	mountain-tent-rank-1			
 pending	mountain-camp-tent	mountain-tent-rank-2			
 pending	mountain-camp-tent	mountain-tent-rank-3			
@@ -696,7 +696,6 @@ pending	portable-electric-kettle	portable-travel-kettle-300w
 pending	portable-electric-kettle	ac100-240v-kettle-400			
 pending	portable-electric-kettle	car-kettle-keepwarm-450			
 no-amazon	portable-fridge	eenour-db01		2026-09-02	楽天set-D1018はD10/D18/D23PLUS/D18PLUS/DB01バッテリーを1ページに統合した選択式。Amazonは本体(D18=B0CSSJRWCT)とDB01バッテリー(B0C3H2DVC3)が別ASINで、19,800円の構成に一致する単一商品が無い
-pending	portable-fridge	lifeidea-18l-2way			
 no-amazon	portable-fridge	thn-compressor-fridge		2026-09-02	楽天が複数容量を1ページに統合した選択式（10/18/23L・12/18/25/30L・29L/12L・9L/12L）。Amazonは容量別ASINのため単一仕様を確定できない
 no-amazon	portable-fridge	powerarq-iceberg		2026-09-02	楽天が複数容量を1ページに統合した選択式（10/18/23L・12/18/25/30L・29L/12L・9L/12L）。Amazonは容量別ASINのため単一仕様を確定できない（Amazon: 12L=23,700円/29L=35,819円で楽天27,500円と一致しない）
 no-amazon	portable-fridge	regear-9l		2026-09-02	楽天が複数容量を1ページに統合した選択式（10/18/23L・12/18/25/30L・29L/12L・9L/12L）。Amazonは容量別ASINのため単一仕様を確定できない
@@ -720,11 +719,11 @@ pending	rectangle-sleeping-bag	nuuca-sleep
 pending	rectangle-sleeping-bag	nebukuron			
 pending	rectangle-sleeping-bag	aiflycy-2nin			
 pending	rectangle-sleeping-bag	erabu-4type			
-pending	screen-tarp	st-fieldoor-285			
-pending	screen-tarp	st-fieldoor-ot			
-pending	screen-tarp	st-yoca-3m			
-pending	screen-tarp	st-yoca-wide			
-pending	screen-tarp	st-yoca-25			
+set	screen-tarp	st-fieldoor-285	B07SNQ6C1Y	2026-09-07	
+no-amazon	screen-tarp	st-fieldoor-ot		2026-09-07	Amazonの「FIELDOORワンタッチスクリーンテント」(B0861XRCWS)は寸法285×285×208cmで一致するが日よけシート2枚付きセット構成(¥17,200)のみで、記事の単体本体(¥13,860)に一致する構成が見当たらず
+no-amazon	screen-tarp	st-yoca-3m		2026-09-07	YOCABITOブランドはAmazonで取り扱いが見当たらず(楽天ショップesportsの取扱ブランド)
+no-amazon	screen-tarp	st-yoca-wide		2026-09-07	YOCABITOブランドはAmazonで取り扱いが見当たらず(楽天ショップesportsの取扱ブランド)
+no-amazon	screen-tarp	st-yoca-25		2026-09-07	YOCABITOブランドはAmazonで取り扱いが見当たらず(楽天ショップesportsの取扱ブランド)
 set	secondary-combustion-bonfire	ftos-flamestove-max	B08W8YCNQW	2026-08-31	
 set	secondary-combustion-bonfire	ftos-flamestove-mini	B09RYSH3J2	2026-08-31	
 pending	secondary-combustion-bonfire	glass-window-stove			
@@ -803,11 +802,11 @@ set	soto-burner	soto-st310	(amazonUrl)
 set	soto-burner	soto-microtorch	(amazonUrl)		
 set	soto-burner	soto-slidetorch	(amazonUrl)		
 set	soto-burner	soto-fieldchucker	(amazonUrl)		
-pending	stylish-camp-tent	tent-s-rank-1			
-pending	stylish-camp-tent	tent-s-rank-2			
-pending	stylish-camp-tent	tent-s-rank-3			
-pending	stylish-camp-tent	tent-s-rank-4			
-pending	stylish-camp-tent	tent-s-rank-5			
+no-amazon	stylish-camp-tent	tent-s-rank-1		2026-09-07	GIMMICKブランドのパップテントm8(GM-TT3000)と一致する商品がAmazonに見当たらず
+set	stylish-camp-tent	tent-s-rank-2	B088NSN12G	2026-09-07	
+set	stylish-camp-tent	tent-s-rank-3	B0BS5FL3XN	2026-09-07	
+set	stylish-camp-tent	tent-s-rank-4	B0CDGTQ9FW	2026-09-07	
+no-amazon	stylish-camp-tent	tent-s-rank-5		2026-09-07	KAGULABOブランドのワンタッチドームテント(lxt02-1)と一致する商品がAmazonに見当たらず
 set	takibi-table	uniflame-682104	B000B5WLVU	2026-08-27	
 set	takibi-table	pykespeak-rack	B0F48HBYBQ	2026-08-27	
 set	takibi-table	campingmoon-table	B019IGM2DO	2026-08-27	
