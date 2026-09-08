@@ -3,6 +3,39 @@
 数値の推移はGAS「SEOレポート」の履歴で追う。本ファイルは「いつ・どの記事を・なぜ・どう変えたか」を記録し、次回レポートで効果を評価するための施策台帳。新しい施策は上に追記する。
 
 ---
+## 2026-09-08：日次記事タスク（campkit-new-article-draft／4枠）
+
+内訳＝**商品5選2本（ガイド型2本）＋隣接ASP専用1本＋既存記事リライト1本**。article-fix-backlog に pending なし（手順F見送り）。rewrite-backlog は pending 3件（すべて priority C）のうち上から1件＝stylish-camp-tent（lever=structure）を消化。
+
+### ① 新規：winter-camp-guide（冬キャンプ装備完全ガイド｜必要な道具・予算・始め方）
+
+- **狙ったKW**: 冬キャンプの装備一式ガイド（keyword-backlog priority A・keyword-selection）。「冬キャンプ 装備」「冬キャンプ 初心者」「冬キャンプ 必要なもの」等のビッグKWの受け皿として、秋冬系46記事を束ねるハブ記事。既存 solo-camp-beginners-guide（季節不問のソロ入門）とは季節軸で棲み分け、相互に内部リンク。
+- **構成**: backlog notes の指示どおり5選テンプレではなくガイド型。「地面・空気・体」の3層フレームで13カテゴリ（マット／テント／石油ストーブ／カセットガスストーブ／薪ストーブ／電気毛布／ホットカーペット／寝袋／湯たんぽ／防寒グローブ／ブランケット／保温ボトル／一酸化炭素チェッカー）を整理し、各カテゴリ代表1点＋既存専門記事への内部リンクに留めた。
+- **商品データ**: 13点すべて、対応する既存5選記事（closed-cell-mat/winter-camp-tent/camp-oil-stove/cassette-gas-heater/tent-wood-stove/electric-blanket-camp/camp-hot-carpet/sleeping-bag-winter-beginner/hot-water-bottle/winter-camp-gloves/camp-blanket/thermal-bottle/co-checker）の直近実データ（楽天API取得・実在レビュー実績あり）をそのまま再利用。新規のRakuten APIコールは実施していない（データは既存記事公開時点で確認済みの実在商品）。
+- **安全面の訴求**: 燃焼系暖房（石油/ガス/薪ストーブ）使用時の一酸化炭素中毒リスクと結露対策を独立セクションで明記し、一酸化炭素チェッカーを「必須の安全装備」と位置付け。
+- **Amazon連携**: 13点中10点でamazonAsin/amazonUrlを既存記事から引き継ぎ設置。electric-blanket-camp／thermal-bottle／co-checkerの3点は元記事の時点でAmazon未設置（no-amazon）のためそのまま。
+
+### ② 新規：camp-gift（キャンプ好きへのプレゼント｜予算別で外さない定番ギフト）
+
+- **狙ったKW**: キャンプ用品のプレゼント・ギフト（予算別）（keyword-backlog priority A）。11〜12月に向け需要が立ち上がる高CVR層。既存 furusato-year-end（自分で寄付）とは意図が別で非カニバリ、camp-gear-where-to-buy／camp-gear-sale-timing と同じ買い方クラスタとして相互リンク。
+- **構成**: 「サイズ・好みに左右されない小物・消耗品」を軸に、予算3,000円台〜2万円超の4帯で7点を紹介（backlog notes の指定どおりシェラカップ／チタンマグ／ランタン／保温ボトル／グローブを主役にし、1万円台にダウンブランケット、2万円超にポータブル電源を追加して4帯を構成）。「相手が既に持っている可能性」への配慮セクションも設置。
+- **商品データ**: sierra-cup／winter-camp-gloves／titanium-mug／thermal-bottle／camp-lantern-led／camp-blanket／compact-portable-power の各記事から代表商品の実データ（価格・レビュー・画像・アフィリURL）を再利用。新規のRakuten APIコールは実施していない。ブランド重複なし（snowpeak/LAD WEATHER/WAQ/Thermos/Soomloom/OneTigris/Jackeryで各1点）。
+- **Amazon連携**: 7点中6点でamazonAsin/amazonUrlを既存記事から引き継ぎ設置。thermal-bottleの1点のみ元記事の時点でAmazon未設置（no-amazon）。
+
+### ③ 新規：furusato-camp-ticket（ふるさと納税でキャンプ場・グランピング利用券）※隣接ASP専用記事
+
+- **案件**: 楽天ふるさと納税（契約不要・提携済相当で運用可）。variant=furusato。keyword-backlog source=asp・priority B。
+- **カニバリ確認**: 既存の物販系ふるさと納税8記事（camp-furusato/tent-furusato/bonfire-furusato/chair-table-furusato/cookware-furusato/cooler-furusato/lantern-furusato/power-furusato/sleeping-bag-furusato、いずれも「モノ」の返礼品）とは、本件が「体験・利用券」という軸のため非カニバリ。furusato-camp-guide（制度解説）・furusato-year-end（年末締切）とも役割が異なることを本文中の内部リンクで明示。
+- **内容**: モノの返礼品との違い、実質2,000円負担の考え方、申し込み〜利用までの流れ、有効期限・繁忙期の注意点を整理。価格・在庫は「幅・目安」表記に留め、断定的な具体額は書いていない。CalloutCtaMdxは1箇所（損益分岐セクション直後）、PR表記あり。
+
+### ④ リライト：stylish-camp-tent（lever=structure）
+
+- **対象クエリ**: 「おしゃれ テント」。GSC28日で表示16・平均順位10.0＝ページ1最下段（rewrite-backlog priority C、2026-06-23差別化リライト〔グループB＝判断軸の体系化型〕の未実施記事として残っていた案件）。
+- **変更した見出し**: 「選び方の4ポイント」と「おすすめテント5選」の間に、新規セクション「テントが『おしゃれに見える』かを決める4つの条件」を追記。既存記事内で個別に触れられていた形状・カラー・素材の3軸を判断軸として整理し直し、これまで本文中に体系立てて存在しなかった「サイトレイアウト（背景選び・色数3色以内・小物の素材統一）」を新規に書き起こした。
+- **変更前後の狙い**: 検索意図「おしゃれ テント」に対し、単品の製品スペック比較だけでなく「サイトとしてのおしゃれさをどう作るか」という体系だった判断軸を提示することで、情報の網羅性と滞在時間の向上を狙う。既存の5製品・順位・比較表・アフィリリンクは一切変更していない（順位10位以内のため商品順序の入れ替えも実施せず）。
+- **その他**: description をやや具体化（4条件への言及を追加）、updatedAt を2026-09-08に更新。効果測定は2〜3週間後の campkit-seo-competitor-scan（金）で実施予定。
+
+---
 ## 2026-09-07：日次記事タスク（campkit-new-article-draft／4枠）
 
 内訳＝**商品5選2本＋隣接ASP専用1本＋既存記事リライト1本**。article-fix-backlog に pending なし（手順F見送り）、rewrite-backlog は priority B の bluetti-power を消化。
