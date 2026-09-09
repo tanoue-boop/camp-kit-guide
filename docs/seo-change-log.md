@@ -3,6 +3,61 @@
 数値の推移はGAS「SEOレポート」の履歴で追う。本ファイルは「いつ・どの記事を・なぜ・どう変えたか」を記録し、次回レポートで効果を評価するための施策台帳。新しい施策は上に追記する。
 
 ---
+## 2026-09-09：新規記事作成＋リライト（campkit-new-article-draft／日次）
+
+日次4枠（商品5選2本＋隣接ASP専用1本＋既存記事リライト1本）を実施。既存記事修正キュー（article-fix-backlog）はpendingなしのため商品5選は既定の2本で実施。
+
+### 新規記事：car-camp-mat（車中泊マットのおすすめ5選、sleeping-bag）
+
+keyword-backlogのnotesに「既存6記事（car-camp-bed-kit／camp-sleeping-mat／inflatable-mat／family-camp-mat／mountain-camp-mat／naturehike-mat）とカニバリ懸念」の着手保留フラグがあったため、「車中泊専用・厚み/R値・車種別サイズ」に角度を絞って差別化（テント泊全般のマット記事とは意図が分かれる設計）。楽天API実データでBears Rock MT-108F（¥7,350/rc2,641）・オンリースタイル標準サイズ（¥17,600/rc2,669）・OneTigris DREAMSTAR R値6.3（¥13,013/rc338）・FIELDOOR Sサイズ（¥5,940/rc871）・QUICKCAMP QC-CM5（¥5,480/rc875）の5点を採用。価格比3.21倍。Amazon一致2件（オンリースタイル=B0052SR9JK、OneTigris=B0DH2GKQFD）、残り3点は色・型番一致に確信が持てず保守側でno-amazon。
+
+### 新規記事：inner-tent-kangaroo（カンガルースタイル用インナーテント5選、tent）
+
+keyword-backlogに記載の供給リスクどおり、楽天では「カンガルーテント」名称一致商品が実質1商品（2ショップ重複）＋レビュー閾値未達のVASTLAND1点のみで、5点の実績データが揃わなかった。手順（楽天供給NG時のAmazon切替）に従いAmazon.co.jpを確認したところ、tent-Mark DESIGNS（rc1,063）・DOD ワラビーテント（rc232）・GOGlamping SKY EYE（rc316）・FIELDOOR カンガルーテント100（rc273）・VASTLAND（rc30）の5点が実在・レビュー確認でき、source=amazonで作成（affiliateUrl=ASIN）。
+
+### 新規記事：camp-rental-hygiene（レンタル用品は清潔？寝袋・テントの衛生事情、sleeping-bag／ASP）
+
+keyword-backlogのsource=aspからhinataレンタル（asp-programs.tsv記載の提携済・2026-08-31確認）をvariant=rentalで採用。既存のcamp-rental-troubleは「自分が汚した・壊した側」の弁償・規約を扱うのに対し、本記事は「前の利用者の使用感」という逆向きの不安（クリーニング・除菌工程、インナーシーツ併用等）を扱う非カニバリ角度。sleeping-bag-linerへ内部リンクを設置し物販も回収。ProductCard・楽天/Amazon商品リンクは使用せずCalloutCtaMdxのみ。
+
+### リライト調査：electric-blanket-camp（lever=cannibal-check）
+
+rewrite-backlogのpending最上位（優先度Cのみ）を実施。2026-08-31公開のcamp-hot-carpetと商品名レベルで表記が重なっていた件を調査した結果、商材レベルでは非カニバリと結論：電気毛布＝身体に掛ける/巻く低消費電力（30〜60Wh/h）、ホットカーペット＝テント床に敷くAC家電（70〜350Wh/h）で用途・電力帯とも別軸。統合・リダイレクトは不要と判断し実行しなかった。ただし①electric-blanket-camp第2位「USBホットマット」の商品名に紛らわしい「ホットカーペット」の語が残存、②camp-hot-carpet→electric-blanket-campの内部リンクは既存だが逆方向のリンクが無く片方向のみ、の2点は本文編集が必要なためcannibal-checkレバーの範囲外（調査のみ・編集不可）と判断し、論点をrewrite-backlog（status=needs-human）に残した。本文・ProductCard・価格・アフィリリンクは一切変更していない。
+
+---
+## 2026-09-09：価格チェック（campkit-price-check／週次）
+
+Search Console（camp-kit-guide.com・URLプレフィックスプロパティ）にログイン済みでアクセスでき、検索パフォーマンスの流入上位ページから対象記事を選定した（フォールバックは不要）。表示期間はGSCデフォルト表示（2026-06-07〜09-06・約3か月）。上位10ページのうち、camp-backpack-capacity-guide はProductCardのないガイド記事、osprey-daily-backpackはAmazon商品のみ（楽天リンクなし）のため対象外とし、実際に価格照合したのは **osprey-backpack／family-camp-summer-tent／fieldoor-tent／mountain-camp-lantern／inflatable-mat／karrimor-backpack の6記事・29商品**。全商品を item.rakuten.co.jp の商品ページへ直接アクセスし、`itemprop="price"` を同一オリジンfetchで抽出（6〜10件ずつ逐次実行）。
+
+### 価格更新（family-camp-summer-tent）
+
+| 位置 | 商品 | 旧価格 | 新価格 | 変動 |
+|---|---|---|---|---|
+| 第1位 | TOMOUNT TriArc Tunnel Tent V4 | ¥39,999 | ¥33,999 | -15.0% |
+
+当該ページは複数SKU構成（テント本体／専用レインフライ）のため、`itemprop="price"` の値だけでなく商品ページのオプション選択欄で「テント：33,999円」（本体SKU）を個別に確認したうえで更新した（2026-08-20の前回チェックでは本体SKUが39,999円で確定していたため、今回が本体SKU自体の実価格変動と判断）。ProductCardのprice・description内の金額表記、比較表の価格帯、まとめ表の価格帯、frontmatterのupdatedAt（2026-09-02→2026-09-09）を整合させた。レビュー数・評価・アフィリリンク・thumbnail・掲載順位は変更していない。
+
+### 提案に回した案件（article-fix-backlog へ pending 追加）
+
+- **inflatable-mat 第3位 OneTigris DREAMSTAR インフレータブルマット 8cm**（price_unconfirmed・priority B）：`itemprop="price"` は12,720円（掲載15,900円から-20.0%）だったが、商品ページタイトルに「楽天スーパーSALE★18,590円→13,013円」と明記があり、2026-09-11(金)01:59までの期間限定セール中と直接確認。セール後の通常価格はむしろ現行掲載より高い可能性があるため、今回は記事を更新せず、セール終了後の再測定をbacklogに記載した。
+
+### 楽天スーパーSALE（〜2026-09-11 01:59）による誤検知に注意
+
+今回のチェック期間は楽天市場の全店的なスーパーSALE開催中で、`itemprop="price"` がセール価格をそのまま返すケースを2件直接確認した。
+
+- **family-camp-summer-tent 第5位 WAQ Alpha TC**：`itemprop="price"`は35,040円（掲載43,800円から-20.0%）だったが、商品ページに「43,800円→35,040円」のセール表記を確認。通常価格43,800円は現行掲載と一致するため**据え置き**（backlog起票不要）。
+- **inflatable-mat 第3位 OneTigris DREAMSTAR**：上記のとおり同型のセール表記を確認し、backlogへpending。
+
+この2件はどちらも「`itemprop="price"`だけを見ると-15%超の値下げに見えるが、実際はタイムセールで通常価格は変化なし（またはむしろ値上がり）」という誤検知パターン。次回以降、セール期間中の価格チェックでは商品ページ内に「元価格→セール価格」の表記やSALEバッジがないか必ず確認すること。
+
+### 閾値（±15%）未満で据え置いた差分（変更なし）
+
+- osprey-backpack：第1位デイライトプラス ¥11,484→¥12,760（+11.1%、前回2026-09-02時点と同水準で安定）／第2〜4位は価格変化なし。第4位フェアビュー40の在庫切れは既存のneeds-human案件（2026-09-02起票）を継続監視、今回は追加の変更なし。
+- fieldoor-tent：第3位ワンタッチテント200cm ¥8,910→¥7,920（-11.1%、9/11までの期間限定セール中とみられる）／第5位ヘキサゴンドーム ¥9,790→¥8,910（-9.0%）／他3点は変化なし。前回（2026-09-02）と同じ据え置き判定。
+- mountain-camp-lantern：第1位キャリーザサンM ¥4,400→¥4,800（+9.1%）／第4位ソーラー折りたたみ ¥1,980→¥1,780（-10.1%）／第5位Lepro4個入り ¥1,614→¥1,599（-0.9%）／第2・3位とゴールゼロは変化なし。
+- inflatable-mat：第2位電動インフレーターマット10cm ¥9,480→¥9,780（+3.2%）／第1位Aiflycy・第4位PYKES PEAK・第5位Bears Rockは変化なし。第3位OneTigrisは上記backlog参照。
+- karrimor-backpack：4点すべて価格一致（前回2026-08-19のセール誤検知確認・据え置き判定から変化なし）。
+
+---
 ## 2026-09-08：日次記事タスク（campkit-new-article-draft／4枠）
 
 内訳＝**商品5選2本（ガイド型2本）＋隣接ASP専用1本＋既存記事リライト1本**。article-fix-backlog に pending なし（手順F見送り）。rewrite-backlog は pending 3件（すべて priority C）のうち上から1件＝stylish-camp-tent（lever=structure）を消化。

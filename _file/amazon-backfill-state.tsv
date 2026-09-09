@@ -383,11 +383,11 @@ set	family-camp-summer-tent	fieldoor-4set-family-tent	(amazonUrl)
 pending	family-camp-summer-tent	ratelworks-boden-rws0111			
 pending	family-camp-summer-tent	onetouch-family-tent-300			
 set	family-camp-summer-tent	waq-alpha-tc-ft	(amazonUrl)		
-pending	family-camp-tent	tent-f-rank-1			
-pending	family-camp-tent	tent-f-rank-2			
-pending	family-camp-tent	tent-f-rank-3			
-pending	family-camp-tent	tent-f-rank-4			
-pending	family-camp-tent	tent-f-rank-5			
+set	family-camp-tent	tent-f-rank-1	B0BS2M6T4W	2026-09-08	
+no-amazon	family-camp-tent	tent-f-rank-2		2026-09-08	RATELWORKS BODEN RWS0111はAmazonに同一品確認できず(ブランド自体が未出品)
+set	family-camp-tent	tent-f-rank-3	B0FYNV7ZJC	2026-09-08	
+no-amazon	family-camp-tent	tent-f-rank-4		2026-09-08	320x250x220cm/3-5人用の同型番ASIN(B0H6ZPQ7GC)はあるが素材が純オックスフォードのみで記事の言うTC(ポリコットン)×オックスフォード混合構成と矛盾
+set	family-camp-tent	tent-f-rank-5	B09S5KWBP3	2026-09-08	
 pending	family-summer-large-tent	tent-rank-1			
 pending	family-summer-large-tent	tent-rank-2			
 pending	family-summer-large-tent	tent-rank-3			
@@ -581,11 +581,11 @@ set	moraknife	companion-hd-stainless	B07M7LQFZR
 set	moraknife	companion-carbon	B004TNWD40		
 set	moraknife	companion-spark	B07RP4C84N		
 set	moraknife	eldris-stainless	B0GVSZYL4W		
-pending	mountain-backpack-30l	bp-rank-1			
-pending	mountain-backpack-30l	bp-rank-2			
-pending	mountain-backpack-30l	bp-rank-3			
-pending	mountain-backpack-30l	bp-rank-4			
-pending	mountain-backpack-30l	bp-rank-5			
+set	mountain-backpack-30l	bp-rank-1	B08XHRXQ1Y	2026-09-08	
+set	mountain-backpack-30l	bp-rank-2	B0D6MC92SJ	2026-09-08	
+set	mountain-backpack-30l	bp-rank-3	B09M7DHJ1P	2026-09-08	
+set	mountain-backpack-30l	bp-rank-4	B09YCQ6WBK	2026-09-08	
+no-amazon	mountain-backpack-30l	bp-rank-5		2026-09-08	49x31x17cm/0.5kg/ナイロンの無名OEM品(MARLE TOKYO)、一致するAmazon商品を確認できず
 set	mountain-camp-lantern	lantern-carry-medium	(amazonUrl)		
 set	mountain-camp-lantern	lantern-carry-small	(amazonUrl)		
 set	mountain-camp-lantern	lantern-bruno	(amazonUrl)		
@@ -978,3 +978,13 @@ set	titanium-cooker	snowpeak-personal-cooker-020t	B000AR2N4O	2026-09-07	品名�
 set	titanium-cooker	titanmania-750-pot	B08XMDC7RF	2026-09-07	品名「TITAN MANIA クッカー チタン製 750ml 蓋付き」で仕様完全一致
 set	titanium-cooker	evernew-solo-set-750	B09VK4FXSK	2026-09-07	品名「エバニュー Ti U.L. Solo set 750 ECA540」で型番完全一致
 set	titanium-cooker	evernew-mugpot-900	B09TNTZV8S	2026-09-07	品名「エバニュー Ti マグポット 900 ECA539」で型番完全一致
+no-amazon	car-camp-mat	bears-rock-mt108f		2026-09-09	色バリエーション複数(ベーシックモカスエード等)で一致するASINを確信持てず保守側で見送り
+set	car-camp-mat	onlystyle-shachu-mat	B0052SR9JK	2026-09-09	
+set	car-camp-mat	onetigris-dreamstar	B0DH2GKQFD	2026-09-09	
+no-amazon	car-camp-mat	fieldoor-shachu-s		2026-09-09	同型番Sサイズ/二重バルブはAmazonにブラウン色のみ確認、ベージュ一致品なし
+no-amazon	car-camp-mat	quickcamp-qc-cm5		2026-09-09	類似品はあるが厚さ・価格が不一致で型番一致に確信持てず
+set	inner-tent-kangaroo	tentmark-monopole-inner	B08M93LL4B	2026-09-09	source=amazon(記事全体がAmazon源のためamazonAsin不要、affiliateUrl=ASINで生成)
+set	inner-tent-kangaroo	dod-warabi-tent	B07WTNTJSR	2026-09-09	source=amazon
+set	inner-tent-kangaroo	goglamping-skyeye	B0C6TJ1S7Z	2026-09-09	source=amazon
+set	inner-tent-kangaroo	fieldoor-kangaroo100	B0861X67H7	2026-09-09	source=amazon
+set	inner-tent-kangaroo	vastland-kangaroo	B0D4XZM8J1	2026-09-09	source=amazon
