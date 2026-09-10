@@ -3,6 +3,27 @@
 数値の推移はGAS「SEOレポート」の履歴で追う。本ファイルは「いつ・どの記事を・なぜ・どう変えたか」を記録し、次回レポートで効果を評価するための施策台帳。新しい施策は上に追記する。
 
 ---
+## 2026-09-10：新規記事作成＋リライト（campkit-new-article-draft／日次）
+
+日次4枠（商品5選2本＋隣接ASP専用1本＋既存記事リライト1本）を実施。既存記事修正キュー（article-fix-backlog）はpending 1件（inflatable-mat／price_unconfirmed）を確認したが、対象商品（OneTigris DREAMSTAR）が楽天スーパーSALE期間中（〜9/11 01:59）で通常価格が確定できないため楽天APIで再確認のうえ今回も記事は更新せず、商品5選の減枠は行わなかった。
+
+### 新規記事：backpack-rain-cover（ザックカバー・レインカバーおすすめ5選、backpack）
+
+keyword-backlogのmountain-backpack-50l（登山ザック50L・優先度B）に着手したが、Osprey/Gregory/Deuter/Karrimor/MysteryRanchの5ブランド横断比較を予定していたところ、Karrimor（CougarApex60+はレビュー0件・CougarApex-Gはrc8）とMysteryRanch（Coulee50はrc0〜2件、レビュー付き並行輸入品は¥19万円超で価格比5倍超）が楽天・Amazonともにレビュー実績を満たせず、2026-08-11のbackpack-50l skipと同一の供給問題を再確認したためskip。次点のbackpack-rain-coverへ差し替えた。容量別（20〜30L／30〜50L／50L以上）に対応する5製品を楽天API実データで採用：LAMA Store 2枚セット・耐水圧3500mm（¥1,380/rc1,971）、八八爽快 S/M/Lサイズ（¥1,080/rc808）、リバーブセレクト ビッグサイズ・1年保証（¥1,580/rc168）、雑貨ストアDAICHU 15L〜100L対応（¥1,000/rc256）、Mt.happy 無地カバーS・20〜30L対応（¥690/rc148）。価格比2.29倍。既存waterproof-backpack（防水バッグ本体）とは「後付けカバー vs 本体防水」で非カニバリ。5製品はいずれも汎用OEM品のためAmazon側に対応品がなくno-amazon（保守側）。
+
+### 新規記事：insulated-tumbler（保冷缶ホルダー・真空断熱タンブラーおすすめ5選、cookware）
+
+楽天API実データで350ml/500ml対応の5製品を採用：サーモス JDU-351・350ml（¥2,678/rc61）、サーモス JDU-501・500ml（¥2,980/rc54）、ハイドロフラスク Cooler Cup 12oz（¥3,520/rc24）、アトラス AWCH-350/500・両対応（¥1,280/rc30）、エントリーモデル（¥880/rc31）。価格比4.0倍。既存titanium-mug（直火・軽量マグ）／thermal-bottle（保温ボトル）とは「缶をそのまま保冷」という用途で非カニバリ。Amazonはサーモス2点（型番・色一致）・ハイドロフラスク（容量・色一致）・アトラス（型番・色一致）の4/5でamazonAsin設置、エントリーモデルのみノーブランドでno-amazon。
+
+### 新規記事：fuji-climb-rental-vs-buy（富士登山の装備はレンタルと購入どちらが得か、backpack／ASP）
+
+keyword-backlogのnotesに「【ASP】案件=やまどうぐレンタル屋」と明記されているにもかかわらず、source列が「keyword-selection」のまま（本来の規約はsource=asp）だったため、CLAUDE.mdの「ASP用KWはsource=aspでタグ」規約に沿ってsource列をasp へ補正したうえで採用（優先度Bの中で最も早くbacklogに追加された行）。やまどうぐレンタル屋の提携状況をasp-programs.tsvで実確認（2026-08-31時点提携済・最終確認日60日以内）。既存yamadougu-rental（そもそも借りるべきかの総論）・yamadougu-rental-price（登山版の日数別総額試算）に対し、本記事は「一生に一度の富士登山」という前提で装備を品目ごとに買うか借りるかを判断する軸に特化し、非カニバリ。CalloutCtaMdx1本（variant=rental）。金額は既存記事の目安（購入合計7〜10万円超・レンタル一式1万円台前後）を踏襲し、新規の断定的な金額は創作していない。
+
+### リライト：inflatable-mat（lever=internal-link）
+
+rewrite-backlogの唯一のpending行（優先度C）を実施。2026-09-04に公開したclosed-cell-mat（クローズドセルマットおすすめ5選）からinflatable-matへは既にリンクがあったが、逆方向のリンクが無かったため、「インフレーター式とエアー式（エアマット）の違い」セクション末尾にclosed-cell-matへの1行リンクを追加し、「パンクしない代わりにかさばる」というトレードオフを明示。updatedAt 2026-08-19→2026-09-10。ProductCardの商品・価格・レビュー数・アフィリリンク・amazonAsin・掲載順位・比較表・thumbnailは一切変更していない（追加は本文1段落のみ）。
+
+---
 ## 2026-09-09：新規記事作成＋リライト（campkit-new-article-draft／日次）
 
 日次4枠（商品5選2本＋隣接ASP専用1本＋既存記事リライト1本）を実施。既存記事修正キュー（article-fix-backlog）はpendingなしのため商品5選は既定の2本で実施。
