@@ -8,3 +8,20 @@ set	insulated-tumbler	thermos-jdu-501-black	B0GL5TZZBC	2026-09-10	source=rakuten
 set	insulated-tumbler	hydroflask-coolercup-12oz-white	B091PN2633	2026-09-10	source=rakuten・容量/色一致
 set	insulated-tumbler	atlas-awch-350-500-navy	B08747KL4Y	2026-09-10	source=rakuten・型番/色一致
 no-amazon	insulated-tumbler	zakkanet-cancooler-350		2026-09-10	ノーブランド品・型番なしで同定不可
+no-amazon	deuter-backpack	deuter-orcha		2026-09-10	色3色(ブラック/アイビー/インク)が同価格で実売色を確定できず
+no-amazon	deuter-backpack	deuter-race-air		2026-09-10	色5色が同価格で実売色を確定できず
+no-amazon	deuter-backpack	deuter-lugano		2026-09-10	色3色(ブラック/レッドウッド/アトランティック)が同価格で実売色を確定できず
+no-amazon	deuter-backpack	deuter-aircontact-core		2026-09-10	楽天商品ページが削除済み(404)で実売仕様を確認不可
+no-amazon	gregory-backpack	gregory-daypack		2026-09-10	カラー7色が同価格(¥29,700等)で実売色を確定できず、品番09J-024はブランド直営店の管理番号でAmazon側型番との対応も確認不可
+set	gregory-backpack	gregory-easypeasy	B0H98SWLBS	2026-09-10	型番103868 1041完全一致・ブラック・重量550g一致
+set	gregory-backpack	gregory-casualday	B0FRS95WJQ	2026-09-10	型番1444331041完全一致・ブラック・寸法(41.5x29x15cm)一致
+no-amazon	naturehike-mat	naturehike-highr-air		2026-09-10	R値/色/サイズの3軸バリエーションで記事nameが単一仕様(R4.6/R5.8/R8.8併記)に確定できず、価格帯(¥9,368〜16,118)からも一意の組み合わせを特定できない
+no-amazon	naturehike-mat	naturehike-inflatable		2026-09-10	厚さ5cm/10cm・カラー4種(グリーン/ベージュ/枕付き2種)のバリエーションで記事nameが単一仕様に確定できず
+no-amazon	naturehike-mat	naturehike-r65		2026-09-10	楽天側はサイズM(¥19,990一致・460g)に確定できたが、Amazon類似品(B0DKSTJL29)はブランド表記が「windhike」でNaturehike正規品と確認できず、該当サイズの出品構成も一致しないため不採用
+no-amazon	naturehike-mat	naturehike-airbed-electric		2026-09-10	厚さ25/38/45cm×1/2/3人用の9通りバリエーションで記事nameが単一仕様に確定できず
+no-amazon	naturehike-mat	naturehike-airbed-25cm		2026-09-10	記事価格¥10,990が現在の楽天価格(一人用¥8,243/二人用¥9,743)のいずれとも一致せず、サイズを一意に確定できない
+no-amazon	coleman-two-burner	cb-coleman-set-table		2026-09-10	本体+キッチンテーブル+純正LPガス2本のフルセット品でAmazonに同一構成の出品なし(本体単体のみ流通)
+no-amazon	coleman-two-burner	cb-coleman-powerhouse-gasset		2026-09-10	本体+純正LPガス2本セット品でAmazonに同一構成の出品なし(本体単体のみ流通)
+no-amazon	coleman-two-burner	cb-coleman-red-gasset		2026-09-10	本体(レッド)+純正LPガス2本セット品でAmazonに同一構成の出品なし(本体単体のみ流通)
+no-amazon	coleman-sleeping-bag	coleman-sb-cozy2-set		2026-09-10	コージーII/C5の2個セット品で単体構成と異なり、Amazonに同一の2個セット出品を確認できず
+no-amazon	coleman-sleeping-bag	coleman-sb-northrim		2026-09-10	カラー4系統(グレー/ブラック/オレンジ/グリーン、うちアウトレット違いも含め6選択肢)が同価格で実売色を確定できず、コストコ経由の並行輸入品とみられAmazon出品も未確認
