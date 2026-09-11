@@ -3,6 +3,27 @@
 数値の推移はGAS「SEOレポート」の履歴で追う。本ファイルは「いつ・どの記事を・なぜ・どう変えたか」を記録し、次回レポートで効果を評価するための施策台帳。新しい施策は上に追記する。
 
 ---
+## 2026-09-11：新規記事作成（campkit-new-article-draft／日次）
+
+日次4枠を実施。内訳は商品5選3本＋隣接ASP専用1本＝商品記事3本・ASP記事1本（rewrite-backlogのpendingが0件のため、リライト枠は商品5選1本に振り替え。リライト在庫補充が必要）。既存記事修正キュー（article-fix-backlog）のpending 1件（inflatable-mat／OneTigris DREAMSTAR／price_unconfirmed）は楽天APIで再確認したが、本日も「楽天スーパーSALE★18,590円→13,013円」の表示が継続しており（9/9・9/10と同一状態）、通常価格がまだ確定できないため記事は更新せずpending継続。商品記事の減枠は行わなかった。
+
+### 新規記事：soup-jar-camp（スープジャー・保温フードコンテナおすすめ5選、cookware）
+
+keyword-backlogのlog-splitting-block（薪割り台・キンドリングクラッカー、優先度B）から着手したが、楽天API実データで供給を確認したところ実在ブランドはFireside社のキンドリングクラッカー72000/72010の2モデルのみで、FIELDOOR・ハスクバーナ・DOD・ジュニアモデルは実在確認できず、安価な汎用クサビ型薪割り台（¥2,000前後）を混ぜると価格比5倍を超えKW整合性ルールに抵触するため5点がそろわずskip。次点candidateのcamp-frypan（フライパン、cookware）も、既存camp-skillet／camp-grill-plateと差別化できる「取っ手が外れる／折りたたみ式」フライパンの楽天供給がreviewCount15件未満に偏っておりskip。3番目のsoup-jar-camp（優先度B）に差し替え、300〜400ml帯の5製品を楽天API実データで採用：アイリスオーヤマ SFJ-300・300ml（¥1,980/rc235）、象印 SW-LA40・400ml（¥3,480/rc164）、サーモス JED-400・0.4L（¥3,188/rc125）、アトラス AFP-301・310ml（¥1,380/rc122）、DEAN&DELUCA スープポット・300ml（¥2,970/rc99）。価格比2.52倍。既存thermal-bottle（保温ボトル＝飲み物用）とは「広口・具材を食べる」用途で非カニバリ。Amazonはアイリスオーヤマ・象印の2/5でamazonAsin設置（サーモスは型番違いのJED-401のみ確認・アトラスは350ml品しか確認できず容量不一致・DEAN&DELUCAは該当品なしのため、いずれも保守側でno-amazon）。
+
+### 新規記事：low-style-chair（キャンプ用ローチェアおすすめ5選、chair-table）
+
+keyword-backlogのlow-style-chair（優先度B）に着手。座面高25〜35cm帯に限定し、snowpeak-chairの過去skip事例を踏まえモデル別レビューが実在する5製品を楽天API実データで採用：WAQ Reclining Low Chair WAQ-RLC1（¥8,980/rc221）、YOCABITOウッドローチェア テーブル付・難燃加工（¥9,980/rc93）、スノーピーク ローチェア30 LV-091（¥17,600/rc43）、BUNDOK BD-111（¥5,480/rc19）、キャンピングムーン F-1003C・帆布生地（¥8,680/rc17）。価格比3.21倍。既存camp-chair-lightweight（携行性重視のハイチェア寄り）とは座面高と用途（焚き火密着 vs 携行性）で非カニバリ。Amazonは4/5でamazonAsin設置（WAQ・スノーピーク・BUNDOK・キャンピングムーンは型番・カラー一致、YOCABITOは該当品なしのためno-amazon）。
+
+### 新規記事：cooler-stand（クーラーボックススタンドおすすめ5選、chair-table）
+
+keyword-backlogのcooler-stand（優先度B）に着手。既存クーラーボックス記事群（beginner／overall／soft／day-camp／ice-pack）からの内部リンク先として機能する周辺アクセサリ記事。楽天API実データで5製品を採用：FIELDOORクーラースタンド アルミ製・3段階調節（¥4,400/rc207）、FIELDOORクーラースタンド 木製（¥4,950/rc134）、ユニフレーム フィールドラック611616（¥4,950/rc271）、SWAG GEARクーラースタンド 折りたたみ（¥2,480/rc41）、I-SAIクーラースタンド 折りたたみ（¥2,384/rc32）。価格比2.08倍。ユニフレーム611616は既存field-rack（汎用ギアラック）にも掲載済みだが、本記事は「クーラー専用スタンド」という検索意図のため非カニバリと判断し採用継続。Amazonは4/5でamazonAsin設置（FIELDOORアルミ・木製・ユニフレーム・SWAG GEARは型番一致、I-SAIは該当品なしのためno-amazon）。
+
+### 新規記事：camp-activity-booking（キャンプ場周辺のアクティビティ予約ガイド、tent／ASP・leisure）
+
+keyword-backlogのcamp-activity-booking（優先度B・source=asp）に着手。asp-programs.tsvでアソビュー（2026-08-31実確認・提携済、最終確認から11日で60日以内）を使用しCalloutCtaMdx（variant="leisure"）を1箇所設置。既存camp-rainy-day-plan（雨天時の代替プラン）とは「晴天前提でキャンプ本体に体験を追加する」という逆の意図軸のため非カニバリ。料金・催行条件は変動値のため具体的な確定金額は書かず、目安レンジと「公式最新情報を確認」への誘導で構成。
+
+---
 ## 2026-09-10：新規記事作成＋リライト（campkit-new-article-draft／日次）
 
 日次4枠（商品5選2本＋隣接ASP専用1本＋既存記事リライト1本）を実施。既存記事修正キュー（article-fix-backlog）はpending 1件（inflatable-mat／price_unconfirmed）を確認したが、対象商品（OneTigris DREAMSTAR）が楽天スーパーSALE期間中（〜9/11 01:59）で通常価格が確定できないため楽天APIで再確認のうえ今回も記事は更新せず、商品5選の減枠は行わなかった。

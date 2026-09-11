@@ -25,3 +25,18 @@ no-amazon	coleman-two-burner	cb-coleman-powerhouse-gasset		2026-09-10	本体+純
 no-amazon	coleman-two-burner	cb-coleman-red-gasset		2026-09-10	本体(レッド)+純正LPガス2本セット品でAmazonに同一構成の出品なし(本体単体のみ流通)
 no-amazon	coleman-sleeping-bag	coleman-sb-cozy2-set		2026-09-10	コージーII/C5の2個セット品で単体構成と異なり、Amazonに同一の2個セット出品を確認できず
 no-amazon	coleman-sleeping-bag	coleman-sb-northrim		2026-09-10	カラー4系統(グレー/ブラック/オレンジ/グリーン、うちアウトレット違いも含め6選択肢)が同価格で実売色を確定できず、コストコ経由の並行輸入品とみられAmazon出品も未確認
+set	soup-jar-camp	sj-iris-sfj300	B07RLCX6JS	2026-09-11	型番(SFJ-300)・色(ネイビー)一致
+set	soup-jar-camp	sj-zojirushi-swla40	B0FJXMKF34	2026-09-11	型番(SW-LA40)・容量(400ml)・色(クラウドグレー)一致
+no-amazon	soup-jar-camp	sj-thermos-jed400		2026-09-11	Amazon側は型番違いのJED-401(後継色)のみ確認、JED-400の同一型番出品なしのため保守側で見送り
+no-amazon	soup-jar-camp	sj-atlas-afp301		2026-09-11	Amazon側はARFP-351(350ml)のみ確認、容量(310ml)が一致せず保守側で見送り
+no-amazon	soup-jar-camp	sj-deandeluca-300		2026-09-11	Amazon検索で該当品を確認できず
+set	low-style-chair	lc-waq-rlc1	B0FDGBVQ8N	2026-09-11	型番(WAQ-RLC1)・色(CHARCOAL)一致
+no-amazon	low-style-chair	lc-yocabito-wood		2026-09-11	Amazon検索で該当品を確認できず(楽天専売の可能性)
+set	low-style-chair	lc-snowpeak-lv091	B018XJXPHE	2026-09-11	型番(LV-091)・色(ブラウン)一致
+set	low-style-chair	lc-bundok-bd111	B08Z6WVTL8	2026-09-11	型番(BD-111)・色(カーキ)一致
+set	low-style-chair	lc-campingmoon-f1003c	B06Y3WWX2S	2026-09-11	品名(焚き火チェア ローチェア ロースタイルチェア 帆布生地)・価格近似(¥8,680/¥8,689)で一致と判断
+set	cooler-stand	cs-fieldoor-alu	B0BXKW8DFF	2026-09-11	ブランド(FIELDOOR)・スペック(耐荷重150kg・3段階調整・アルミ)一致
+set	cooler-stand	cs-fieldoor-wood	B07YMSPXV7	2026-09-11	ブランド(FIELDOOR)・スペック(耐荷重150kg・木製)一致
+set	cooler-stand	cs-uniflame-611616	B06W9FQF9L	2026-09-11	型番(611616)・色(ブラック)一致
+set	cooler-stand	cs-swaggear-fold	B0DXZ1X3X9	2026-09-11	ブランド(SWAG GEAR)・スペック(耐荷重100kg・折りたたみ式)一致
+no-amazon	cooler-stand	cs-isai-fold		2026-09-11	Amazon検索で該当品を確認できず
