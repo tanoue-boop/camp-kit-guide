@@ -40,3 +40,35 @@ set	cooler-stand	cs-fieldoor-wood	B07YMSPXV7	2026-09-11	ブランド(FIELDOOR)�
 set	cooler-stand	cs-uniflame-611616	B06W9FQF9L	2026-09-11	型番(611616)・色(ブラック)一致
 set	cooler-stand	cs-swaggear-fold	B0DXZ1X3X9	2026-09-11	ブランド(SWAG GEAR)・スペック(耐荷重100kg・折りたたみ式)一致
 no-amazon	cooler-stand	cs-isai-fold		2026-09-11	Amazon検索で該当品を確認できず
+set	coleman-lantern	coleman-northstar	B08CZRB714	2026-09-11	型番(2000015521)・色(レッド)一致
+set	coleman-lantern	coleman-hanging-elight	B08P57HNCJ	2026-09-11	型番(2000037352)一致・商品画像でレッド確認
+no-amazon	coleman-lantern	coleman-lumiere		2026-09-11	記事は純正LPガス燃料セット同梱(205588)だが、Amazon該当品(B004IWR45A)はガス別売り単体のみで構成不一致
+set	coleman-lantern	coleman-rechargeable	B09HGQW8RM	2026-09-11	型番(2000038857)完全一致
+set	coleman-lantern	coleman-rugged-packaway	B08P577J2W	2026-09-11	型番(2000036871)一致・商品画像でレッド確認
+set	coleman-tent	coleman-bc-crossdome	B08QS2P24F	2026-09-11	型番(2000038429)完全一致・グリーン
+set	coleman-tent	coleman-touring-dome-st	B08P5811G7	2026-09-11	ST(1~2人用)バリエーション一致・型番2000038141
+set	coleman-tent	coleman-popup-shade	B0DKNHT235	2026-09-11	型番(2218354)・サイズ260x190x110cm・定員3-4人・重量4.5kg一致
+set	coleman-tent	coleman-quickup-shade	B0DKN6KFBQ	2026-09-11	型番(2218703)・サイズ200x150x125cm・定員2-3人・重量2.7kg一致・画像でシルバー確認
+no-amazon	coleman-bonfire	coleman-firedisk-sheet		2026-09-11	本体+ファイアープレイスシートのセット品でAmazonに同一構成の出品なし(本体単体のみ流通)
+no-amazon	coleman-bonfire	coleman-firedisk-table		2026-09-11	本体+マルチファイアプレイステーブルのセット品でAmazonに同一構成の出品なし(本体単体のみ流通)
+no-amazon	coleman-chair	coleman-infinity-grey		2026-09-11	型番2000033139は複数色展開だが楽天の色選択UIが同期取得できず実売色を確認できず
+no-amazon	coleman-chair	coleman-chair-set		2026-09-11	デッキチェア+ベンチの2点セット品でAmazonに同一構成の出品なし(単品のみ流通)
+set	dod-chair	dod-good-rack-sofa	B078S61SMD	2026-09-11	型番(CS2-500-BK)完全一致・ブラック
+set	dod-chair	dod-sugoiss	B08K2GG9CS	2026-09-11	型番(C1-774-TN)完全一致・タン
+no-amazon	dod-table	dod-stealthx-mini		2026-09-11	Amazon検索で正規品を確認できず、並行輸入品のみ該当のため不採用
+no-amazon	dod-table	dod-goodluck		2026-09-11	楽天側はブラック(BK)¥13,200で確定したが、Amazon出品はカーキ(KH)のみでブラックの出品を確認できず
+set	dod-tarp	dod-okla-tarp	B07NNSF1D7	2026-09-11	型番(TT8-583-TN)一致・サイズ510x510cm・重量4.2kg一致・タン
+set	dod-tarp	dod-itsukano-tarp	B07VF37G57	2026-09-11	型番(TT5-631-TN)完全一致・タン
+set	dod-tarp	dod-beetle-tarp	B07YB46ZLK	2026-09-11	型番(TT5-655-TN)完全一致
+set	dod-tarp	dod-big-tarp-pole	B01N8XAGUC	2026-09-11	楽天価格(¥4,180=レッド)一致・型番XP5-507
+no-amazon	dod-tent	dod-onetouch-m		2026-09-11	Amazon側はテント単体(T3-673-KH)の型番一致品を確認できず、タープ/ポール同梱セット品のみ流通のため不採用
+no-amazon	nanga-down-jacket	nanga-hinoc-limhood		2026-09-14	別注2026年モデル(日本製)でAmazon側に該当出品なし
+set	nanga-down-jacket	nanga-aurora-mens	B0CK9NHXYZ	2026-09-14	型番(ND2341-1A301)・色(モカグレー)・価格一致
+no-amazon	nanga-down-jacket	nanga-whitelabel-cardigan		2026-09-14	MOONLOID別注品(NWL2615)でAmazon側に該当出品なし
+no-amazon	nanga-down-jacket	nanga-whitelabel-type1		2026-09-14	MOONLOID別注品(NWL2601)でAmazon側に該当出品なし
+set	nanga-down-jacket	nanga-aurora-ladies	B0DJNTY9WD	2026-09-14	型番(2442-1A005-A)・価格一致
+no-amazon	tent-waterproof-spray	saphir-super-water-repellent		2026-09-14	消耗品スプレーで型番なし・一致出品を確定できず
+set	tent-waterproof-spray	logos-power-waterproof-spray	B0CNX4HCPX	2026-09-14	型番(84960001)完全一致
+set	tent-waterproof-spray	yazawa-waterproof-spray	B00KBNUSI0	2026-09-14	ブランド・容量(420ml)・単品構成一致
+set	tent-waterproof-spray	evoon-neotect	B0B38QLNP1	2026-09-14	商品名(NEOTECT 300ml)完全一致
+no-amazon	tent-waterproof-spray	kaminaga-waterproof-spray-2set		2026-09-14	Amazon側は1本入りのみでパック数・世代不一致

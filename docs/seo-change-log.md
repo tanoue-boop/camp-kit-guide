@@ -3,6 +3,41 @@
 数値の推移はGAS「SEOレポート」の履歴で追う。本ファイルは「いつ・どの記事を・なぜ・どう変えたか」を記録し、次回レポートで効果を評価するための施策台帳。新しい施策は上に追記する。
 
 ---
+## 2026-09-14：新規記事作成＋既存記事修正（campkit-new-article-draft／日次）
+
+日次4枠を実施。内訳は既存記事修正1（手順F）＋商品5選2本＋隣接ASP専用1本。rewrite-backlogのpendingが0件のため、リライト枠は商品5選1本に振り替え（リライト在庫補充が必要）。
+
+### 既存記事修正（article-fix-backlog／手順F）：inflatable-mat 第3位 OneTigris DREAMSTAR の価格確定
+
+2026-09-09〜09-11の3回にわたり「楽天スーパーSALE★18,590円→13,013円」の一時セール表示が継続し価格を確定できずpendingだった案件（issue_type=price_unconfirmed）。本日楽天APIで再取得したところセール表示が終了し、価格はグレー想定どおり18,590円（itemPrice）で安定表示（レビュー340件・評価4.77）。9/9時点で予測していた通常価格と一致したため確定と判断。
+
+- 旧→新：price 15,900円→18,590円／rakutenRating 4.78→4.77／rakutenReviewCount 304件→340件
+- 整合させた箇所：第3位ProductCardのdescription、本文の評価表記、比較表(ComparisonTableMdx)のprice/rating、まとめ表の価格帯（15,000円台→18,000円台）、frontmatter descriptionの価格レンジ（〜15,000円台→〜18,000円台）、updatedAt（2026-09-10→2026-09-14）
+- 変更していないもの：商品名・アフィリリンク・画像・掲載順位・他4商品
+
+### 新規記事：nanga-down-jacket（ナンガのダウンジャケットおすすめ5選、clothing）
+
+keyword-backlogのブランド型KW（優先度B）。CLAUDE.mdのウェア類フィルタ（ブランド指定KWのみ狙う）に適合し、NANGAは楽天に公式・別注取扱い店が多く供給が潤沢（採用5点でレビュー105〜1,077件）。楽天API実データ5選：別注HINOCリムフードカーキ¥64,900/1,077件、オーロラメンズモカグレー¥49,500/765件、WHITE LABELダウンカーディガンJET BLACK¥47,300/477件、WHITE LABEL最強タイプ1 JET BLACK¥137,500/249件、オーロラレディースブラック¥46,200/105件。価格比2.98倍。ブランド軸記事のためブランド占有ルールを緩和適用（全5点NANGA）。Amazon照合はオーロラメンズ（B0CK9NHXYZ）・オーロラレディース（B0DJNTY9WD）の2点で型番・価格が一致し設置、WHITE LABEL2点と別注HINOCはAmazon側に該当出品なくno-amazon（保守側）。既存nanga-sleeping-bagとブランドクラスタを形成。
+
+### 新規記事：tent-waterproof-spray（テント用防水スプレー・撥水剤おすすめ5選、tent）
+
+keyword-backlogの情報型＋購入型KW（優先度C・供給確認済み）。楽天API実データ5選：SAPHIR超撥水スプレー300ml¥2,970/71件、LOGOS強力防水スプレー420ml¥1,375/40件、YAZAWA420ml¥2,200/18件、Evoon NEOTECT300ml¥2,200/46件、カミナガ2本セット¥2,530/14件。価格比2.16倍、全て汎用テント兼用の防水スプレー本体で用途一貫。Amazon照合はLOGOS（B0CNX4HCPX・型番84960001完全一致）、YAZAWA（B00KBNUSI0）、Evoon（B0B38QLNP1・商品名完全一致）の3点を設置、SAPHIR・カミナガは型番不確実のためno-amazon（保守側）。
+
+### 新規記事：furusato-shipping-timing（ふるさと納税キャンプ返礼品はいつ届く？、tent・ASP）
+
+keyword-backlogのASP枠KW（優先度C・不安解消型）。案件=楽天ふるさと納税（既存契約で運用可・提携不要）、variant=furusato。サービス構造＋CalloutCtaMdx1本で作成。既存furusato-camp-guide（制度・限度額）／furusato-camp-ticket（体験・宿泊券）とは異なり、【寄付後の発送リードタイム＝人気ブランド返礼品の数か月待ち・年末寄付が翌春着になる例・在庫切れ時の代替探し】という受け取り側の不安に特化した角度で非カニバリ。tent-furusato／bonfire-furusato／cooler-furusatoへ内部リンクを設置。具体的な自治体名・寄付額・到着日数は創作せず、幅・目安の表現に統一。
+
+### 見送り・在庫調整（keyword-backlog）
+
+- **hammock-stand（ハンモックスタンド）→ skip**：楽天供給を実確認したところ「ハンモックスタンド」検索結果は既存camp-hammock掲載の自立式ハンモック本体（OSOTO・marz等）と同一商品が占有しカニバリ。スタンド単体（ハンモック本体を別売りしフレームのみ販売する商材）で絞り込んだ検索は0件またはペット用品等の完全off-intentのみでヒットせず、5点不成立と判断。
+- **group-camp-rental（グループキャンプ道具レンタル）**：backlog上はsource=keyword-selectionだが、detailはhinataレンタル（ASP・variant=rental）を前提としたサービス構造の記事企画。商品5選（source=asp以外の枠）で機械的に選ぶと実際の記事企画と食い違うため、今回は選定対象から除外。次回以降にASP記事枠（またはsource列の補正）での起票を推奨。
+- **winter-mountain-rental**：backlog備考で「旬は11月以降、着手は10月下旬まで寝かせてよい」と明記されているため、今回は見送り継続。
+
+### Amazonリンク設置数（本日ぶん）
+
+set: 5件（nanga-aurora-mens／nanga-aurora-ladies／logos-power-waterproof-spray／yazawa-waterproof-spray／evoon-neotect）、no-amazon: 5件（nanga-hinoc-limhood／nanga-whitelabel-cardigan／nanga-whitelabel-type1／saphir-super-water-repellent／kaminaga-waterproof-spray-2set）。products.tsv・amazon-link-worksheet.tsv・amazon-backfill-state.tsvに各10行追記。
+
+---
 ## 2026-09-11：新規記事作成（campkit-new-article-draft／日次）
 
 日次4枠を実施。内訳は商品5選3本＋隣接ASP専用1本＝商品記事3本・ASP記事1本（rewrite-backlogのpendingが0件のため、リライト枠は商品5選1本に振り替え。リライト在庫補充が必要）。既存記事修正キュー（article-fix-backlog）のpending 1件（inflatable-mat／OneTigris DREAMSTAR／price_unconfirmed）は楽天APIで再確認したが、本日も「楽天スーパーSALE★18,590円→13,013円」の表示が継続しており（9/9・9/10と同一状態）、通常価格がまだ確定できないため記事は更新せずpending継続。商品記事の減枠は行わなかった。
