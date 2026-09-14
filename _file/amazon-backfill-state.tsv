@@ -72,3 +72,11 @@ set	tent-waterproof-spray	logos-power-waterproof-spray	B0CNX4HCPX	2026-09-14	型
 set	tent-waterproof-spray	yazawa-waterproof-spray	B00KBNUSI0	2026-09-14	ブランド・容量(420ml)・単品構成一致
 set	tent-waterproof-spray	evoon-neotect	B0B38QLNP1	2026-09-14	商品名(NEOTECT 300ml)完全一致
 no-amazon	tent-waterproof-spray	kaminaga-waterproof-spray-2set		2026-09-14	Amazon側は1本入りのみでパック数・世代不一致
+no-amazon	bluetti-power	bluetti-eb3a		2026-09-14	楽天は130Wソーラーパネルセット(選択式・価格32900〜70100円)だが、Amazon該当品はEB3A単体(¥22,980)または100Wパネルセット(¥45,565)のみで130Wセット構成の出品なし。価格32900円は「パネルなし」相当の可能性が高く記事nameとの整合性が取れないため不採用
+no-amazon	compact-portable-power	bluetti-eb3a		2026-09-14	楽天は130Wソーラーパネルセット(選択式・価格32900〜70100円)だが、Amazon該当品はEB3A単体(¥22,980)または100Wパネルセット(¥45,565)のみで130Wセット構成の出品なし。価格32900円は「パネルなし」相当の可能性が高く記事nameとの整合性が取れないため不採用
+no-amazon	snowpeak-tent	snowpeak-amenity-dome-m-set		2026-09-14	楽天は販売店独自のセット品(アメニティドームM本体SDE-001RH+マットシートセットSET-021Hの店舗オリジナル組み合わせ・価格75240円)。Amazonに同一構成の出品なし(本体単体・マットセット単体・別内容の野遊びセット・高額並行輸入品のみ流通)
+no-amazon	titanium-cooker	snowpeak-trek900		2026-09-14	型番SCS-008T(チタントレック900)の完全一致品なし。価格5940円一致のB000AR2N3Kは実際は焚き火台スタンド類(3.5kg・350x350x248mm)で仕様が全く異なる別商品、近似型番SCS-005T(トレック700)は容量違いのため不採用
+set	uniflame-fire-grill	uniflame-set	B00CXKVK0Y	2026-09-14	型番(683040+683187)完全一致・ファイアグリル+収納ケース2点セット
+set	oil-lantern	vastland-oil	B09SH943YZ	2026-09-14	寸法(高さ186×幅120×奥行95mm)・燃焼時間(約7時間)・適正容量(約110ml)完全一致・Sサイズ・価格(¥1,780)一致
+set	solo-camp-cot	cot-rank-2	B00363PS3W	2026-09-14	ブランド・製品ライン(Converta Cot)一致、耐荷重102.1kg完全一致(楽天:耐荷重102.1kg/Amazon:耐加重102.1kg)
+no-amazon	car-side-tarp	fielddoor-shelter-blackout		2026-09-14	楽天は遮光PU生地(耐水圧16000mm)・330x350cm・タープ本体のみで価格14850円。Amazon類似品は同型番ラインの別サイズ(250x350cm・¥8300)か、サイズ/色不明の同名タイトル品(¥17100〜19400)のみで価格とサイズを一意に一致させる出品を確認できず
