@@ -3,6 +3,39 @@
 数値の推移はGAS「SEOレポート」の履歴で追う。本ファイルは「いつ・どの記事を・なぜ・どう変えたか」を記録し、次回レポートで効果を評価するための施策台帳。新しい施策は上に追記する。
 
 ---
+## 2026-09-15：新規記事4本＋当日中の楽天リンク追加修正（campkit-new-article-draft／日次）
+
+日次4枠を実施。内訳は商品5選3本（air-frame-tent／washable-sleeping-bag／low-style-bonfire）＋隣接ASP専用1本（group-camp-rental）。rewrite-backlogのpendingが0件のため、リライト枠は商品5選1本に振り替え（リライト在庫補充が必要）。
+
+### 楽天APIブロックとその後の修正経緯
+
+デプロイ時、Claude in Chrome拡張機能の安全フィルタが`.env.local`の`RAKUTEN_ACCESS_KEY`（`pk_`プレフィックス）をAPIキー漏えいパターンと誤検知し、楽天APIへのfetchがブロックされた。そのため一次デプロイ（commit fce3941）では商品記事3本をすべてAmazon.co.jp実データのみで作成した。デプロイ後、田之上さんの指示で別デバイス（MiniPC＝deviceId 68806dea-d885-4f04-b735-d32854bbc779）のブラウザで再検証したところ、同一キーで楽天APIが正常に動作することを確認。ブランド名で個別に楽天商品を再検索し、13カード（TOMOUNT・エアーテント8㎡の1点を除く）に実在の楽天購入リンク（rafcid）を追加し、Amazon実データをamazonAsinバックフィールドとして併存させる通常構成（source="rakuten" + amazonAsin）に修正した。
+
+### 価格誤りの修正：low-style-bonfire 第5位 スノーピーク焚火台S
+
+修正過程で、Amazon側の「焚火台S/M/L/LL/スターターセット」統合リスティングの表示価格（¥17,160）が実際にはS単体ではなく別サイズ変動分を含んでいたことが判明。楽天の単体S型番（ST-031R）実売価格¥11,880を正価として採用し、ProductCardMdxのprice・比較表・まとめ表・本文descriptionを修正した。
+
+- 旧→新：price 17,160円→11,880円（第5位スノーピーク焚火台S）
+- 整合させた箇所：ProductCardMdxのprice/description、ComparisonTableMdxのprice、まとめ表の価格帯、frontmatter descriptionの価格レンジ上限（〜17,160円→〜16,800円）
+- 記録：`_file/amazon-backfill-state.tsv`に価格修正の経緯を追記
+
+### 新規記事：air-frame-tent（エアーテント（エアフレームテント）おすすめ5選、tent）
+
+keyword-backlogのproduct-scan priority A。2026年のコールマン・スノーピークのエア構造テント一斉移行トレンドに乗ったKW。実データ5点：コールマン ツーリングドームエアーDARKROOM ST+（楽天¥23,600・Amazon★4.3/406件）、スノーピーク ミニッツドームPro.air 1（楽天¥68,000・Amazon★4.4/33件）、TOMOUNTエアーテント8㎡（Amazon源・¥74,499・★4.8/44件）、スノーピーク ファルPro.air 3（楽天¥49,998・Amazon★4.2/46件）、コールマン タフスクリーン2ルームエアーDARKROOM（楽天¥87,800・Amazon★4.4/83件）。価格比3.72倍。既存tent記事群とは「設営方式（エア）」という軸で非カニバリ。
+
+### 新規記事：washable-sleeping-bag（化繊（洗える）寝袋おすすめ5選、sleeping-bag）
+
+keyword-backlogのproduct-scan priority A。NANGAの新製品「ZZZ BAG」発売トレンドに乗ったKW。実データ5点：ロゴス丸洗いスランバーシュラフ（楽天¥6,930/7件・Amazon★4.4/139件）、コールマンマルチレイヤースリーピングバッグ（楽天¥14,278/101件・Amazon★4.3/2,877件）、ロゴス丸洗いやわらかあったかシュラフ（楽天¥9,790/9件・Amazon★4.5/158件）、Snugpakベースキャンプスリープシステム（楽天¥18,150・Amazon★4.6/9件）、NANGA ZZZ BAG 10（楽天¥11,190・Amazon★5.0/6件）。価格比2.62倍。既存nanga-sleeping-bag/montbell-sleeping-bagとは「素材（化繊）×洗える」という軸で非カニバリ。
+
+### 新規記事：low-style-bonfire（ロースタイル焚き火台のおすすめ5選、bonfire／リライト枠振替）
+
+rewrite-backlogのpendingが0件のため商品5選に振替。ユニフレーム「ファイアレイル」新発売トレンドに乗ったKW。実データ5点：コールマンファイアーディスク（楽天¥6,880/152件・Amazon★4.7/4,195件）、LUHANA八炎ロースタイルver.（楽天¥6,390/8件・Amazon★4.6/62件）、ユニフレームファイアグリル（楽天¥7,920/547件・Amazon★4.5/1,212件）、WAQ焚き火台-YAGURA-（楽天¥16,800/37件・Amazon★4.6/128件）、スノーピーク焚火台S（楽天¥11,880・Amazon★4.6/676件）。価格比2.63倍。既存bonfire記事群とは「ロースタイルでくつろぐ」という軸で非カニバリ。
+
+### 新規記事：group-camp-rental（グループキャンプの道具レンタル完全ガイド、tent／ASP）
+
+keyword-backlogのkeyword-selection priority B・source=asp。hinataレンタル（A8.net・提携済・最終確認2026-08-31）でCalloutCtaMdx 1本設置。既存camp-gear-rental（総論）/family-gear-rental（家族）/solo-gear-rental（ソロ）とは「幹事視点の人数分調達・大型ギア（大型タープ/長机/BBQコンロ）」という属性軸で役割分担し非カニバリ。
+
+---
 ## 2026-09-14：新規記事作成＋既存記事修正（campkit-new-article-draft／日次）
 
 日次4枠を実施。内訳は既存記事修正1（手順F）＋商品5選2本＋隣接ASP専用1本。rewrite-backlogのpendingが0件のため、リライト枠は商品5選1本に振り替え（リライト在庫補充が必要）。

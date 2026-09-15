@@ -80,3 +80,17 @@ set	uniflame-fire-grill	uniflame-set	B00CXKVK0Y	2026-09-14	型番(683040+683187)
 set	oil-lantern	vastland-oil	B09SH943YZ	2026-09-14	寸法(高さ186×幅120×奥行95mm)・燃焼時間(約7時間)・適正容量(約110ml)完全一致・Sサイズ・価格(¥1,780)一致
 set	solo-camp-cot	cot-rank-2	B00363PS3W	2026-09-14	ブランド・製品ライン(Converta Cot)一致、耐荷重102.1kg完全一致(楽天:耐荷重102.1kg/Amazon:耐加重102.1kg)
 no-amazon	car-side-tarp	fielddoor-shelter-blackout		2026-09-14	楽天は遮光PU生地(耐水圧16000mm)・330x350cm・タープ本体のみで価格14850円。Amazon類似品は同型番ラインの別サイズ(250x350cm・¥8300)か、サイズ/色不明の同名タイトル品(¥17100〜19400)のみで価格とサイズを一意に一致させる出品を確認できず
+set	air-frame-tent	coleman-touring-air	B0BHHBZTN8	2026-09-15	楽天は自社チャネル中心でレビュー0件のためAmazon実績(406件)を主レビューとして併記。ST+/LX+サイズ一致
+set	air-frame-tent	snowpeak-minit-proair	B084C9J51D	2026-09-15	楽天は0件のためAmazon実績(33件)を主レビューとして併記。型番SSD-712一致
+set	air-frame-tent	snowpeak-falle-proair	B01N1RE1QO	2026-09-15	楽天3人用モデル(Pro.air 3・SSD-703)と価格完全一致(¥49,998)。レビュー1件のみのためAmazon実績(46件)を主表示
+set	air-frame-tent	coleman-tuffscreen-air	B09W5262RF	2026-09-15	楽天は0件のためAmazon実績(83件)を主レビューとして併記。LDX+/MDX+サイズ一致
+set	washable-sleeping-bag	logos-slumber-washable	B07956Y179	2026-09-15	型番・型式完全一致、楽天7件/Amazon139件を両論併記
+set	washable-sleeping-bag	coleman-multilayer-washable	B07M7D4Y5D	2026-09-15	型番2000034777完全一致、楽天101件/Amazon2877件を両論併記
+set	washable-sleeping-bag	logos-fluffy-washable	B08BX7K3HY	2026-09-15	型番完全一致、楽天9件/Amazon158件を両論併記
+set	washable-sleeping-bag	snugpak-basecamp-washable	B0DGBMK8M4	2026-09-15	楽天は1件のためAmazon実績(9件)を主レビューとして併記。スクエアライトジップ一致
+set	washable-sleeping-bag	nanga-zzz-bag-10	B0FGCW43KW	2026-09-15	楽天は発売間もなく0件のためAmazon実績(6件)を主レビューとして併記。REGULAR FGY型番一致
+set	low-style-bonfire	coleman-fire-disc	B01LT5ES1Q	2026-09-15	型番2000031235完全一致、楽天152件/Amazon4195件を両論併記
+set	low-style-bonfire	luhana-hachien-low	B0HJ27QN3K	2026-09-15	ブランド公式楽天店舗と価格完全一致(¥6,390)、楽天8件/Amazon62件を両論併記
+set	low-style-bonfire	uniflame-fire-grill	B000AR5Y90	2026-09-15	型番683040・価格完全一致(¥7,920)、楽天547件/Amazon1212件を両論併記
+set	low-style-bonfire	waq-yagura-low	B0C9QRZRZN	2026-09-15	WAQ公式楽天店舗と価格完全一致(¥16,800)、楽天37件/Amazon128件を両論併記
+set	low-style-bonfire	snowpeak-takibidai-s	B00FXFFST0	2026-09-15	★価格修正あり: Amazon側はS/M/L/LL複数バリエーションの統合リスティングで表示価格(¥17,160)がS単体と不一致だったため、楽天の単体S型番(ST-031R・¥11,880)を正価として採用しprice修正
