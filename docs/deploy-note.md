@@ -93,7 +93,7 @@ node scripts/verify-deploy.cjs snowpeak-tent montbell-sleeping-bag
 
 1. 本番URLが 200 を返す
 2. `<title>` がローカル frontmatter の `title` と一致
-3. アフィリリンク数がローカルの `ProductCardMdx` 数以上（楽天 rafcid / Amazon `dp?tag=` / `amzn.to` を合算）
+3. アフィリリンク数がローカルの `ProductCardMdx` 数以上（楽天 rafcid / Amazon `dp?tag=` / `amzn.to` を合算）。Amazon・楽天それぞれの実リンク数も個別に期待数（`amazonAsin=`/`amazonUrl=`/`source="amazon"` の数、`source="rakuten"` の数）以上であることをチェックし、未達の間は反映待ちとしてリトライする（2026-09-15追記：合算チェックのみだと「楽天リンクだけを追加したデプロイ」で旧HTMLの合計がたまたま一致し誤PASSする穴があったため）
 4. PR表記（景表法対応）が本文に含まれる
 5. `og:image`（サムネイル）が `/images/outdoor-0X.png` 形式で、その画像URLが 200 を返す
 

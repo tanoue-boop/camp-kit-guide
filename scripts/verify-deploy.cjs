@@ -10,7 +10,12 @@
  *   1. 本番URLが 200 を返す
  *   2. <title> がローカル frontmatter の title と一致
  *   3. アフィリリンク数がローカルの ProductCardMdx 数以上
- *      （楽天 rafcid付き / Amazon dp?tag= / amzn.to を合算）
+ *      （楽天 rafcid付き / Amazon dp?tag= / amzn.to を合算）。
+ *      Amazon・楽天それぞれの実リンク数も、ローカルの期待数
+ *      （amazonAsin=/amazonUrl=/source="amazon" の数 、source="rakuten" の数）
+ *      以上であることを個別にチェックする（2026-09-15追記：合算チェックだけだと
+ *      「楽天リンクだけを追加したデプロイ」で旧HTMLの合計がたまたま一致し誤PASSする
+ *      穴があったため。反映待ちの間はリトライする）
  *   4. PR表記（景表法対応）が本文に含まれる
  *   5. og:image がサムネイル規約（/images/outdoor-0X.png）に一致し、
  *      その画像URLが実際に 200 を返す
@@ -52,13 +57,16 @@ function readLocal(slug) {
   const cardCount = (src.match(/<ProductCardMdx/g) || []).length;
   // Amazonボタンが出るはずのカードの目安（amazonAsin / amazonUrl / source="amazon"）
   const amazonHints = (src.match(/amazonAsin="|amazonUrl="|source="amazon"/g) || []).length;
+  // 楽天の実リンク（hb.afl/rafcid）が出るはずのカードの目安（source="rakuten"）。
+  // source="amazon" カードは楽天ボタンが出てもキーワード検索フォールバックのため対象外。
+  const rakutenHints = (src.match(/source="rakuten"/g) || []).length;
   // 同一記事内での amazonAsin 重複検出（別商品に同じASIN＝誤リンク。例: ST/LX に同じ親ASIN）
   const asins = [...src.matchAll(/amazonAsin="([A-Z0-9]{10})"/g)].map((m) => m[1]);
   const dupAsins = [...new Set(asins.filter((a, i) => asins.indexOf(a) !== i))];
-  return { title: titleMatch ? titleMatch[1] : null, cardCount, amazonHints, dupAsins };
+  return { title: titleMatch ? titleMatch[1] : null, cardCount, amazonHints, rakutenHints, dupAsins };
 }
 
-async function fetchWithRetry(url, expectedTitle = null, expectAmazon = 0) {
+async function fetchWithRetry(url, expectedTitle = null, expectAmazon = 0, expectRakuten = 0) {
   let last = null;
   for (let i = 0; i < RETRY; i++) {
     try {
@@ -93,6 +101,23 @@ async function fetchWithRetry(url, expectedTitle = null, expectAmazon = 0) {
             if (i < RETRY - 1) {
               console.log(
                 `   …本番のAmazonリンクが${l.amazonTag + l.amznTo}本で期待${expectAmazon}本に未達です（Vercel反映待ち）。${RETRY_WAIT_MS / 1000}秒待って再試行 (${i + 2}/${RETRY})`
+              );
+              await sleep(RETRY_WAIT_MS);
+            }
+            continue;
+          }
+        }
+        // 楽天リンクだけを追加/変更したデプロイ（title・Amazonリンク数は不変）は、上の2条件では
+        // 「反映待ち」を検出できず、旧HTMLをそのままPASSさせてしまう既知の穴だった
+        // （2026-09-15 low-style-bonfire等で発生）。楽天の実リンク（hb.afl/rafcid）件数も
+        // 期待数を満たすまでリトライ対象に含める。
+        if (expectRakuten > 0) {
+          const l = countAffiliateLinks(html);
+          if (l.rakuten < expectRakuten) {
+            last = { status: 200, html };
+            if (i < RETRY - 1) {
+              console.log(
+                `   …本番の楽天リンクが${l.rakuten}本で期待${expectRakuten}本に未達です（Vercel反映待ち）。${RETRY_WAIT_MS / 1000}秒待って再試行 (${i + 2}/${RETRY})`
               );
               await sleep(RETRY_WAIT_MS);
             }
@@ -166,7 +191,7 @@ async function verify(slug) {
   }
 
   const url = `${BASE}/posts/${slug}`;
-  const res = await fetchWithRetry(url, local.title, local.amazonHints);
+  const res = await fetchWithRetry(url, local.title, local.amazonHints, local.rakutenHints);
 
   // 1. HTTP 200
   const ok200 = res.status === 200;
@@ -184,18 +209,25 @@ async function verify(slug) {
   results.push(titleOk);
   console.log(`  ${titleOk ? 'PASS' : 'FAIL'}  title  期待:「${local.title}」 実際:「${liveTitle}」`);
 
-  // 3. アフィリリンク数（＋Amazonを持つはずの記事は本番でAmazon検出>0を必須）
+  // 3. アフィリリンク数（＋Amazon/楽天それぞれを持つはずの記事は本番で実数が期待数以上であることを必須）
+  // ★2026-09-15追記: 従来は「total >= cardCount」の合算チェックのみだったため、
+  // 楽天リンクだけを追加したデプロイ（例: Amazon源→楽天+Amazon併用への切替）で
+  // 旧HTMLの合計が既にcardCount以上（旧Amazon実装のみで一致）だと誤PASSする穴があった。
+  // Amazon・楽天それぞれの実数を個別にチェックすることでこれを防ぐ。
   const links = countAffiliateLinks(html);
   const amazonLive = links.amazonTag + links.amznTo;
+  const rakutenLive = links.rakuten;
   const linkOk =
     (local.cardCount === 0 ? true : links.total >= local.cardCount) &&
-    (local.amazonHints === 0 || amazonLive > 0);
+    (local.amazonHints === 0 || amazonLive >= local.amazonHints) &&
+    (local.rakutenHints === 0 || rakutenLive >= local.rakutenHints);
   results.push(linkOk);
   console.log(
     `  ${linkOk ? 'PASS' : 'FAIL'}  アフィリリンク ${links.total}件` +
       ` (楽天${links.rakuten} / Amazon-tag${links.amazonTag} / amzn.to${links.amznTo})` +
       `  ProductCard ${local.cardCount}件` +
-      (local.amazonHints > 0 ? ` / Amazon期待${local.amazonHints}→実${amazonLive}` : '')
+      (local.amazonHints > 0 ? ` / Amazon期待${local.amazonHints}→実${amazonLive}` : '') +
+      (local.rakutenHints > 0 ? ` / 楽天期待${local.rakutenHints}→実${rakutenLive}` : '')
   );
 
   // 3b. Amazonタグ健全性: 空タグ / プレースホルダは成果が計上されないため FAIL
