@@ -94,3 +94,18 @@ set	low-style-bonfire	luhana-hachien-low	B0HJ27QN3K	2026-09-15	ブランド公�
 set	low-style-bonfire	uniflame-fire-grill	B000AR5Y90	2026-09-15	型番683040・価格完全一致(¥7,920)、楽天547件/Amazon1212件を両論併記
 set	low-style-bonfire	waq-yagura-low	B0C9QRZRZN	2026-09-15	WAQ公式楽天店舗と価格完全一致(¥16,800)、楽天37件/Amazon128件を両論併記
 set	low-style-bonfire	snowpeak-takibidai-s	B00FXFFST0	2026-09-15	★価格修正あり: Amazon側はS/M/L/LL複数バリエーションの統合リスティングで表示価格(¥17,160)がS単体と不一致だったため、楽天の単体S型番(ST-031R・¥11,880)を正価として採用しprice修正
+set	snowpeak-lantern	snowpeak-gl140	B018XJXP7O	2026-09-16	型番GL-140完全一致(リトルランプ ノクターン)、楽天47件/Amazonタイトル一致
+set	snowpeak-lantern	snowpeak-es101	B0D3HRP3L9	2026-09-16	型番ES-101完全一致(セレス)、Amazonタイトル一致
+set	snowpeak-lantern	snowpeak-gl100ar	B01N6FXJHC	2026-09-16	型番GL-100AR完全一致(ギガパワーランタン天オート)、Amazonタイトル一致
+set	snowpeak-lantern	snowpeak-es141	B0CWGV8CQP	2026-09-16	型番ES-141・カラー「ひぐれ」(ES-141-OR オレンジ)で子ASIN一致確認
+set	snowpeak-lantern	snowpeak-es080	B08XZ42CQV	2026-09-16	型番ES-080・色スウォッチでブラック(ES-080-BK)を確認し一致
+set	petzl-headlight	petzl-actik	B0FHKTNR6T	2026-09-16	型番E065AB完全一致、カラー未選択のため最多レビューのブラックを採用・一致
+set	petzl-headlight	petzl-tikka	B0FDLSGR92	2026-09-16	型番E061AB完全一致、カラー未選択のためブラックを採用・一致
+set	petzl-headlight	petzl-tikkacore	B09ZN6T83N	2026-09-16	型番E067AA00・グレーで楽天タイトルと完全一致
+set	petzl-headlight	petzl-elite	B07STZRFWL	2026-09-16	型番E02 P4完全一致(国内正規品)、単一スペックのため一致
+set	petzl-headlight	petzl-pixa3	B00Q78WQF6	2026-09-16	型番E78CHB2完全一致(ピクサ3)、単一スペックのため一致
+set	isuka-sleeping-bag	isuka-patrol	B0015XFQF0	2026-09-16	型番117212・ロイヤルブルーでAmazonタイトルと完全一致
+set	isuka-sleeping-bag	isuka-alphalite700	B07DL5L6R2	2026-09-16	型番111803・タブタイトルでインディゴ確認、色一致
+set	isuka-sleeping-bag	isuka-alphalite1300	B07HH2BH27	2026-09-16	型番125809・インディゴでAmazonタイトルと完全一致
+set	isuka-sleeping-bag	isuka-airdryght140	B08ZVC2YDV	2026-09-16	型番138331(エアドライト140)・Amazon側タイトルでダークネイビーを確認し採用
+set	isuka-sleeping-bag	isuka-nilgiriex	B015VZVWUA	2026-09-16	型番158421(ニルギリEX)・Amazon側タイトルでネイビーブルーを確認し採用
