@@ -73,6 +73,24 @@ const hb = (itemUrl) =>
 
 ---
 
+### サムネイル生成（ChatGPT連携・2026-09-16〜）
+対象: `campkit-new-article-draft` の新規記事（商品5選・隣接ASP記事）のみ。既存記事・リライトは対象外（thumbnailには触れない）。
+
+**背景**: 当初OpenAI APIでの自動生成を検討したが、(1) Coworkのクラウド作業環境からは組織のネットワークポリシーで `api.openai.com` が403拒否、(2) ブラウザからの直接fetchもOpenAI側のCORSでブロック、の2点を2026-09-16に実機確認済み（再テスト不要）。個人プランではCowork側にネットワークアクセスを緩和する管理機能（Team/Enterprise向けのCapabilities設定）も存在しないため、API経路は現状使えない。そのため **ChatGPTのWeb UI（chatgpt.com）をブラウザ操作で使う**方式を採用する。
+
+**手順**:
+1. select_browserで指定デバイスのブラウザを使い、新しいタブで `https://chatgpt.com/` を開く。ログイン済み前提（田之上さんの既存ログインセッションを使う。新規ログイン・認証情報の入力はしない）。
+2. 記事テーマに応じてプロンプトを組み立てて新規チャットで送信する。テンプレート:
+   > キャンプ用品サイトのブログ記事サムネイル用の写真風画像を1枚生成してください。テーマ:「〈記事の主題〉」。〈記事内容に合う情景を1〜2文で具体化〉。温かみのある夕暮れ〜昼間の光、被写界深度の浅い写真、ドキュメンタリー風のキャンプ写真スタイル。人の顔がはっきり写らないように。文字・ロゴ・透かしは一切入れない。横長（ブログのサムネイル用）。
+3. 生成完了を待ち（目安30秒、最大90秒）、javascript_toolで生成画像をfetchしてBlob化、download属性付きaタグでブラウザの既定Downloadsフォルダへダウンロードする。
+4. Downloadsフォルダへの `device_request_folder_access` は初回のみ必要（以後のセッションは許可済みのことが多いので、まず `device_list_dir` で試す）。`device_stage_files` でファイルをステージし、`device_commit_files` でプロジェクトの `public/images/thumbnails/<slug>.png` としてコミットする。frontmatterの `thumbnail` に `/images/thumbnails/<slug>.png` を設定。
+5. **フォールバック**: ログイン不可・生成失敗・タイムアウト・ダウンロード失敗など、どこかでつまずいたら無理に再試行せず、`/images/outdoor-01〜09.png` から選んで報告書に「⚠️サムネイル生成失敗のためフォールバック使用」と明記する。
+6. 報告末尾に「サムネイル生成結果（ChatGPT生成◯件／フォールバック◯件）」を1行添える。
+
+`.env.local` の `OPENAI_API_KEY` は将来API経路が使えるようになった場合の予備として残置。現状の生成フローでは使用しない。
+
+---
+
 ## 2. 準備/分析タスク（deployするファイル変更を生まない）
 
 対象: `campkit-keyword-selection` / `campkit-new-product-scan` / `campkit-integrated-revenue-report`

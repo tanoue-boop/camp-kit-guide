@@ -102,8 +102,11 @@ thumbnail: ""
 - `date` は初回公開日（未来日付は禁止）
 - `updatedAt` は最終更新日。新規公開時は `date` と同じ値を入れる（コードがJSON-LD `dateModified` で参照）
 - `description` は120〜150字（メタディスクリプション最適長）
-- `thumbnail` は **`/images/outdoor-01〜09.png` のローカル画像プールから記事内容に合うものを指定する**（サイト内の既存記事はすべてこの方式で統一。同じ画像をカテゴリをまたいで再利用してよい）。空文字にするとプレースホルダー /og-default.png にフォールバックする
-- ⚠️ **`thumbnail` に楽天など商品画像のURLを使わない**：小サイズ・URL変動・既存規約との不統一のため。商品画像（楽天画像URL）は各 `ProductCardMdx` の `image=` にのみ使う。frontmatter の `thumbnail` はローカル画像限定
+- `thumbnail`（新規記事・2026-09-16〜）は **ChatGPT（chatgpt.com、ログイン済みブラウザ）で記事テーマに応じて生成した写真風画像**を `public/images/thumbnails/<slug>.png` として保存し、そのパスを指定する。生成手順・プロンプトテンプレートは `docs/scheduled-task-spec.md` の「サムネイル生成（ChatGPT連携）」を参照。
+  - ★背景: OpenAI APIはCoworkのクラウド作業環境から到達不可（組織ネットワークポリシーで403）、ブラウザからの直接fetchもOpenAI側のCORSでブロックされるため（2026-09-16に実機確認済み）、APIキーではなくChatGPTのWeb UIをブラウザ操作で使う。`.env.local` の `OPENAI_API_KEY` は将来API経路が使えるようになった場合の予備で、現状は未使用。
+  - **生成に失敗した場合のみ**、フォールバックとして従来通り `/images/outdoor-01〜09.png` のローカル画像プールから記事内容に合うものを指定する（既存記事と偏らないよう番号を分散）。空文字にするとプレースホルダー /og-default.png にフォールバックする。
+  - 既存記事のthumbnailは変更しない（リライトでも thumbnail には触れない：既存ルールのまま）。既存の `/images/outdoor-01〜09.png` はフォールバック専用として引き続き残す。
+- ⚠️ **`thumbnail` に楽天など商品画像のURLを使わない**：小サイズ・URL変動・既存規約との不統一のため。商品画像（楽天画像URL）は各 `ProductCardMdx` の `image=` にのみ使う。frontmatter の `thumbnail` はローカル画像（生成サムネイル or フォールバック画像プール）限定
 - ⚠️ **`keywords` / `eyecatch` は使用禁止**：コードから一切参照されない死んだキー（commit `fb3c3d6` で全記事を修正済）。使っても thumbnail が表示されず tags も機能しない。**必ず `tags` / `thumbnail` を使うこと**
 
 ### 記事構成テンプレート

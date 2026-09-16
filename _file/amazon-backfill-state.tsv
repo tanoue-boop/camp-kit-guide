@@ -79,7 +79,6 @@ no-amazon	titanium-cooker	snowpeak-trek900		2026-09-14	型番SCS-008T(チタン�
 set	uniflame-fire-grill	uniflame-set	B00CXKVK0Y	2026-09-14	型番(683040+683187)完全一致・ファイアグリル+収納ケース2点セット
 set	oil-lantern	vastland-oil	B09SH943YZ	2026-09-14	寸法(高さ186×幅120×奥行95mm)・燃焼時間(約7時間)・適正容量(約110ml)完全一致・Sサイズ・価格(¥1,780)一致
 set	solo-camp-cot	cot-rank-2	B00363PS3W	2026-09-14	ブランド・製品ライン(Converta Cot)一致、耐荷重102.1kg完全一致(楽天:耐荷重102.1kg/Amazon:耐加重102.1kg)
-no-amazon	car-side-tarp	fielddoor-shelter-blackout		2026-09-14	楽天は遮光PU生地(耐水圧16000mm)・330x350cm・タープ本体のみで価格14850円。Amazon類似品は同型番ラインの別サイズ(250x350cm・¥8300)か、サイズ/色不明の同名タイトル品(¥17100〜19400)のみで価格とサイズを一意に一致させる出品を確認できず
 set	air-frame-tent	coleman-touring-air	B0BHHBZTN8	2026-09-15	楽天は自社チャネル中心でレビュー0件のためAmazon実績(406件)を主レビューとして併記。ST+/LX+サイズ一致
 set	air-frame-tent	snowpeak-minit-proair	B084C9J51D	2026-09-15	楽天は0件のためAmazon実績(33件)を主レビューとして併記。型番SSD-712一致
 set	air-frame-tent	snowpeak-falle-proair	B01N1RE1QO	2026-09-15	楽天3人用モデル(Pro.air 3・SSD-703)と価格完全一致(¥49,998)。レビュー1件のみのためAmazon実績(46件)を主表示
@@ -109,3 +108,9 @@ set	isuka-sleeping-bag	isuka-alphalite700	B07DL5L6R2	2026-09-16	型番111803・�
 set	isuka-sleeping-bag	isuka-alphalite1300	B07HH2BH27	2026-09-16	型番125809・インディゴでAmazonタイトルと完全一致
 set	isuka-sleeping-bag	isuka-airdryght140	B08ZVC2YDV	2026-09-16	型番138331(エアドライト140)・Amazon側タイトルでダークネイビーを確認し採用
 set	isuka-sleeping-bag	isuka-nilgiriex	B015VZVWUA	2026-09-16	型番158421(ニルギリEX)・Amazon側タイトルでネイビーブルーを確認し採用
+set	inflatable-mat	onetigris-dreamstar	B0DH2GKQFD	2026-09-16	同一楽天リンク(onetigris/ce-cqd04)の姉妹記事(car-camp-mat)で確認済みのASINを適用
+set	vastland-tent	vastland-groundsheet	B0CLJ9516Y	2026-09-16	Amazon商品説明で実スペック5点(耐水圧5000mm/重量360g/展開200x110cm/収納31x17cm/210Dポリエステル)と価格2480円が完全一致
+no-amazon	northface-backpack	nf-vault		2026-09-16	並行輸入品(NF0A3VY2)でカラー15色展開・記事側もカラー未指定のため実売カラーを確定できず
+no-amazon	northface-backpack	nf-borealis		2026-09-16	韓国正規品・関税込み扱いの並行輸入品(BOREALIS II)でAmazon.co.jpに同一品番の取り扱いを確認できず
+set	car-side-tarp	fielddoor-shelter-blackout	B0G1S4PBRK	2026-09-16	ブランド(FIELDOOR)・スペック5点一致(完全遮光/耐水圧16000mm/UVカット/フルクローズ/メッシュ)かつ画像でライトベージュ(遮光)色・単品構成を確認
+no-amazon	cooler-box-day-camp	cool-rank-4		2026-09-16	型番37411001(XLサイズ・リュック兼用)に一致する出品が見当たらず、容量5L/250gの別型番小型トートのみ確認

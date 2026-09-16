@@ -3,6 +3,18 @@
 数値の推移はGAS「SEOレポート」の履歴で追う。本ファイルは「いつ・どの記事を・なぜ・どう変えたか」を記録し、次回レポートで効果を評価するための施策台帳。新しい施策は上に追記する。
 
 ---
+## 2026-09-16：価格チェック・楽天実勢価格の反映（campkit-price-check／週次）
+
+GSC（Search Console）が本アカウント（tanoue@mjo-style.com）のURLプレフィックスプロパティのみアクセス可、Chrome拡張のレンダラーが「ページ」タブ切替後に応答なしとなり流入上位ページの取得に失敗したためフォールバック。収益貢献既知の記事（osprey-backpack／jackery-power-station／anker-power／ecoflow-power／montbell-sleeping-bag／coleman-sleeping-bag、いずれもupdatedAt最古＝新規作成後未更新）を対象に選定した。楽天リンクのある22商品（osprey4・jackery5・anker5・ecoflow5・coleman5の全楽天商品）を楽天API（IchibaItem/Search）＋item.rakuten.co.jp直接fetchのitemprop="price"で現在の実勢価格と照合し、乖離目安±15%超の3点を修正した。montbell-sleeping-bag（全商品Amazon実データのみ・楽天リンクなし）は本手法で確定できないため対象外（据え置き）。
+
+- anker-power 第1位 Anker Solix C1000 Gen 2：price 99,990円→129,900円（+29.9%）
+- anker-power 第4位 Anker Solix C1000＋ソーラーセット：price 130,900円→159,900円（+22.2%）
+- coleman-sleeping-bag 第1位 マルチレイヤースリーピングバッグ 2000034777：price 11,790円→14,278円（+21.1%。2026-09-15付washable-sleeping-bag記事の実測¥14,278と一致し裏付けあり）
+- 整合させた箇所：各ProductCardMdxのprice、ComparisonTableMdxのprice、まとめ表の価格帯（coleman-sleeping-bagは本文中「1万円台前半」→「1万円台半ば」も修正）、frontmatterのupdatedAtを2026-09-16に更新
+- 据え置き（乖離±15%以内または一致）：osprey-backpack全4点、jackery-power-station全5点、anker-power残り3点（C800／F1200／C1000＋PS100 Compact）、ecoflow-power全5点、coleman-sleeping-bag残り4点
+- 提案（_file/article-fix-backlog.tsv登録）：なし。今回の対象記事に廃番・404・商品入れ替えの兆候は確認されなかった
+
+---
 ## 2026-09-15：新規記事4本＋当日中の楽天リンク追加修正（campkit-new-article-draft／日次）
 
 日次4枠を実施。内訳は商品5選3本（air-frame-tent／washable-sleeping-bag／low-style-bonfire）＋隣接ASP専用1本（group-camp-rental）。rewrite-backlogのpendingが0件のため、リライト枠は商品5選1本に振り替え（リライト在庫補充が必要）。
