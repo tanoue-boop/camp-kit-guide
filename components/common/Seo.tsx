@@ -27,7 +27,9 @@ export default function Seo({
 }: SeoProps) {
   const fullTitle = title.includes(SITE_NAME) ? title : `${title} | ${SITE_NAME}`;
   const canonicalUrl = canonical ? `${BASE_URL}${canonical}` : undefined;
-  const imageUrl = ogImage || DEFAULT_OG_IMAGE;
+  const imageUrl = ogImage
+    ? (ogImage.startsWith("http") ? ogImage : BASE_URL + ogImage)
+    : DEFAULT_OG_IMAGE;
 
   return (
     <Head>
