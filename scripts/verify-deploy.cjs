@@ -17,7 +17,7 @@
  *      「楽天リンクだけを追加したデプロイ」で旧HTMLの合計がたまたま一致し誤PASSする
  *      穴があったため。反映待ちの間はリトライする）
  *   4. PR表記（景表法対応）が本文に含まれる
- *   5. og:image がサムネイル規約（/images/outdoor-0X.png）に一致し、
+ *   5. og:image がサムネイル規約（/images/thumbnails/<slug>.png または /images/outdoor-0X.png）に一致し、
  *      その画像URLが実際に 200 を返す
  *
  * 1件でも FAIL があれば exit code 1 で終了する。
@@ -32,8 +32,11 @@ const POSTS_DIR = path.join(__dirname, '..', 'content', 'posts');
 const PR_TEXT = 'アフィリエイト広告';
 const RETRY = 20;
 const RETRY_WAIT_MS = 15000;
-// サムネイル規約: /images/outdoor-01.png 〜 outdoor-09.png のみ許可
-const THUMB_RE = /\/images\/outdoor-0[1-9]\.png/;
+// サムネイル規約: 生成サムネイル /images/thumbnails/<slug>.png（2026-09-16〜の新方式）と、
+// フォールバック画像プール /images/outdoor-01.png 〜 outdoor-09.png の両方を許可する。
+// 2026-09-17 追記: 旧正規表現が outdoor-0X.png しか通さず、生成サムネイルを設定した記事が
+// 形式NGで FAIL していたため thumbnails/ を追加した。
+const THUMB_RE = /\/images\/(?:outdoor-0[1-9]|thumbnails\/[a-z0-9-]+)\.png/;
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 

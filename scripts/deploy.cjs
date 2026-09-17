@@ -197,7 +197,10 @@ try {
 // 3. add（対象を限定）
 // 記事(content/posts)以外の共有ディレクトリ/ルート直下ファイル（データ・コード・docs等）。
 // ここは共有なので常に最新化してよい（.env/node_modules は hasDangerousPath と .gitignore で二重防止）。
-const NON_ARTICLE_PATHS = '_file docs pages components styles scripts lib types CLAUDE.md .gitignore next.config.ts';
+// 2026-09-17 追加: public（記事サムネイル public/images/thumbnails/<slug>.png を含める）。
+//   CLAUDE.md が 2026-09-16 に定めた生成サムネイル運用で必要。自動生成される
+//   public/sitemap.xml / sitemap-0.xml / robots.txt は .gitignore 済みのため混入しない。
+const NON_ARTICLE_PATHS = 'public _file docs pages components styles scripts lib types CLAUDE.md .gitignore next.config.ts';
 waitGitIndexLock();
 if (scoped) {
   // スコープ指定あり（-- を付けた）: 記事は明示ファイルだけ + 非記事は従来どおり全体。

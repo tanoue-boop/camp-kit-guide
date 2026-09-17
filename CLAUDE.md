@@ -106,6 +106,10 @@ thumbnail: ""
   - ★背景: OpenAI APIはCoworkのクラウド作業環境から到達不可（組織ネットワークポリシーで403）、ブラウザからの直接fetchもOpenAI側のCORSでブロックされるため（2026-09-16に実機確認済み）、APIキーではなくChatGPTのWeb UIをブラウザ操作で使う。`.env.local` の `OPENAI_API_KEY` は将来API経路が使えるようになった場合の予備で、現状は未使用。
   - **生成に失敗した場合のみ**、フォールバックとして従来通り `/images/outdoor-01〜09.png` のローカル画像プールから記事内容に合うものを指定する（既存記事と偏らないよう番号を分散）。空文字にするとプレースホルダー /og-default.png にフォールバックする。
   - 既存記事のthumbnailは変更しない（リライトでも thumbnail には触れない：既存ルールのまま）。既存の `/images/outdoor-01〜09.png` はフォールバック専用として引き続き残す。
+  - ⚙️ **デプロイ側の対応**（2026-09-17 修正済み・重要）: 生成サムネイルを本番へ出すには次の2点が必要で、両方とも対応済み。
+    1. `scripts/deploy.cjs` の `NON_ARTICLE_PATHS` に `public` を含める（含めないと `public/images/thumbnails/*.png` が未追跡のままコミットされず、本番で404になる）。
+    2. `scripts/verify-deploy.cjs` の `THUMB_RE` が `/images/thumbnails/<slug>.png` を許可する（旧正規表現は `outdoor-0X.png` のみ許可で、生成サムネイルを設定すると og:image 検証が形式NGで FAIL する）。
+  - 📌 2026-09-17 の経緯: 9/16に本ルールを追加した時点では上記2点が未対応で、9/16・9/17の新規記事は「画像は生成・配置できているのに frontmatter はフォールバックのまま」という状態だった。9/17に2点を修正し、9/17分の4記事の thumbnail を生成サムネイルへ差し替え済み（9/16分の4記事は未差し替え＝フォールバックのまま）。
 - ⚠️ **`thumbnail` に楽天など商品画像のURLを使わない**：小サイズ・URL変動・既存規約との不統一のため。商品画像（楽天画像URL）は各 `ProductCardMdx` の `image=` にのみ使う。frontmatter の `thumbnail` はローカル画像（生成サムネイル or フォールバック画像プール）限定
 - ⚠️ **`keywords` / `eyecatch` は使用禁止**：コードから一切参照されない死んだキー（commit `fb3c3d6` で全記事を修正済）。使っても thumbnail が表示されず tags も機能しない。**必ず `tags` / `thumbnail` を使うこと**
 
