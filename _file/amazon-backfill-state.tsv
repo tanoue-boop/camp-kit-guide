@@ -114,3 +114,18 @@ no-amazon	northface-backpack	nf-vault		2026-09-16	並行輸入品(NF0A3VY2)で�
 no-amazon	northface-backpack	nf-borealis		2026-09-16	韓国正規品・関税込み扱いの並行輸入品(BOREALIS II)でAmazon.co.jpに同一品番の取り扱いを確認できず
 set	car-side-tarp	fielddoor-shelter-blackout	B0G1S4PBRK	2026-09-16	ブランド(FIELDOOR)・スペック5点一致(完全遮光/耐水圧16000mm/UVカット/フルクローズ/メッシュ)かつ画像でライトベージュ(遮光)色・単品構成を確認
 no-amazon	cooler-box-day-camp	cool-rank-4		2026-09-16	型番37411001(XLサイズ・リュック兼用)に一致する出品が見当たらず、容量5L/250gの別型番小型トートのみ確認
+set	camp-electric-grill	camp-electric-grill-1	B00TRQSURS	2026-09-17	型番一致で確認・amazonAsin設置
+no-amazon	camp-electric-grill	camp-electric-grill-2		2026-09-17	Amazon側に型番一致する商品が見当たらずno-amazon
+set	camp-electric-grill	camp-electric-grill-3	B0DX15GB4T	2026-09-17	型番一致で確認・amazonAsin設置
+set	camp-electric-grill	camp-electric-grill-4	B0CKV6SBK7	2026-09-17	型番一致で確認・amazonAsin設置
+set	camp-electric-grill	camp-electric-grill-5	B0C2SLQFCY	2026-09-17	型番一致で確認・amazonAsin設置
+set	camp-rice-cooker	camp-rice-cooker-1	B07MRDHV4B	2026-09-17	型番一致で確認・amazonAsin設置
+set	camp-rice-cooker	camp-rice-cooker-2	B0BV6BXDHW	2026-09-17	型番一致で確認・amazonAsin設置
+set	camp-rice-cooker	camp-rice-cooker-3	B00D65QFZU	2026-09-17	型番一致で確認・amazonAsin設置
+no-amazon	camp-rice-cooker	camp-rice-cooker-4		2026-09-17	Amazon側に型番一致する商品が見当たらずno-amazon
+set	camp-rice-cooker	camp-rice-cooker-5	B0BSPTPPPJ	2026-09-17	型番一致で確認・amazonAsin設置
+set	stove-guard	stove-guard-1	B0045EPJW6	2026-09-17	型番一致で確認・amazonAsin設置
+set	stove-guard	stove-guard-2	B008ZX5KGI	2026-09-17	型番一致で確認・amazonAsin設置
+set	stove-guard	stove-guard-3	B00426MLUA	2026-09-17	型番一致で確認・amazonAsin設置
+set	stove-guard	stove-guard-4	B00426FAFI	2026-09-17	型番一致で確認・amazonAsin設置
+set	stove-guard	stove-guard-5	B00FXHJHLI	2026-09-17	型番一致で確認・amazonAsin設置
