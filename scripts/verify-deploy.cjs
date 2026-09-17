@@ -18,7 +18,10 @@
  *      穴があったため。反映待ちの間はリトライする）
  *   4. PR表記（景表法対応）が本文に含まれる
  *   5. og:image がサムネイル規約（/images/thumbnails/<slug>.png または /images/outdoor-0X.png）に一致し、
- *      その画像URLが実際に 200 を返す
+ *      【ローカル frontmatter の thumbnail と同じ画像】であり、その画像URLが実際に 200 を返す
+ *      （2026-09-17追記：形式と200しか見ていなかったため、サムネイルだけを差し替えたデプロイで
+ *      Vercelビルド完了前の旧HTMLを取得し、旧 og:image のまま即PASSする穴があった。
+ *      期待値と一致するまでリトライする扱いに変更）
  *
  * 1件でも FAIL があれば exit code 1 で終了する。
  */
@@ -57,6 +60,8 @@ function readLocal(slug) {
   if (!fs.existsSync(file)) return null;
   const src = fs.readFileSync(file, 'utf8');
   const titleMatch = src.match(/^title:\s*"([\s\S]*?)"\s*$/m);
+  // frontmatter の thumbnail（og:image の期待値）。空文字は /og-default.png へフォールバックするので照合対象外。
+  const thumbMatch = src.match(/^thumbnail:\s*"([^"]*)"\s*$/m);
   const cardCount = (src.match(/<ProductCardMdx/g) || []).length;
   // Amazonボタンが出るはずのカードの目安（amazonAsin / amazonUrl / source="amazon"）
   const amazonHints = (src.match(/amazonAsin="|amazonUrl="|source="amazon"/g) || []).length;
@@ -66,10 +71,11 @@ function readLocal(slug) {
   // 同一記事内での amazonAsin 重複検出（別商品に同じASIN＝誤リンク。例: ST/LX に同じ親ASIN）
   const asins = [...src.matchAll(/amazonAsin="([A-Z0-9]{10})"/g)].map((m) => m[1]);
   const dupAsins = [...new Set(asins.filter((a, i) => asins.indexOf(a) !== i))];
-  return { title: titleMatch ? titleMatch[1] : null, cardCount, amazonHints, rakutenHints, dupAsins };
+  const thumbnail = thumbMatch && thumbMatch[1] ? thumbMatch[1] : null;
+  return { title: titleMatch ? titleMatch[1] : null, thumbnail, cardCount, amazonHints, rakutenHints, dupAsins };
 }
 
-async function fetchWithRetry(url, expectedTitle = null, expectAmazon = 0, expectRakuten = 0) {
+async function fetchWithRetry(url, expectedTitle = null, expectAmazon = 0, expectRakuten = 0, expectThumb = null) {
   let last = null;
   for (let i = 0; i < RETRY; i++) {
     try {
@@ -121,6 +127,25 @@ async function fetchWithRetry(url, expectedTitle = null, expectAmazon = 0, expec
             if (i < RETRY - 1) {
               console.log(
                 `   …本番の楽天リンクが${l.rakuten}本で期待${expectRakuten}本に未達です（Vercel反映待ち）。${RETRY_WAIT_MS / 1000}秒待って再試行 (${i + 2}/${RETRY})`
+              );
+              await sleep(RETRY_WAIT_MS);
+            }
+            continue;
+          }
+        }
+        // サムネイルだけを差し替えたデプロイ（title・リンク数は不変）も、上の3条件では
+        // 「反映待ち」を検出できず旧HTMLをPASSさせてしまう（2026-09-17 に実際に発生：
+        // frontmatter は /images/thumbnails/<slug>.png に差し替え済みなのに、本番検証は
+        // ビルド完了前の旧HTMLを取得し og:image=/images/outdoor-0X.png のまま即PASSした）。
+        // 旧実装の og:image チェックは「形式が規約に合う＋画像が200」しか見ておらず、
+        // frontmatter の期待値と一致しているかを照合していなかったことが原因。
+        if (expectThumb) {
+          const liveOg = extractOgImage(html) || '';
+          if (!liveOg.endsWith(expectThumb)) {
+            last = { status: 200, html };
+            if (i < RETRY - 1) {
+              console.log(
+                `   …本番の og:image が「${liveOg || '(なし)'}」で期待「${expectThumb}」と不一致です（Vercel反映待ち）。${RETRY_WAIT_MS / 1000}秒待って再試行 (${i + 2}/${RETRY})`
               );
               await sleep(RETRY_WAIT_MS);
             }
@@ -194,7 +219,7 @@ async function verify(slug) {
   }
 
   const url = `${BASE}/posts/${slug}`;
-  const res = await fetchWithRetry(url, local.title, local.amazonHints, local.rakutenHints);
+  const res = await fetchWithRetry(url, local.title, local.amazonHints, local.rakutenHints, local.thumbnail);
 
   // 1. HTTP 200
   const ok200 = res.status === 200;
@@ -255,18 +280,22 @@ async function verify(slug) {
   console.log(`  ${prOk ? 'PASS' : 'FAIL'}  PR表記（景表法対応）`);
 
   // 5. og:image（サムネイル）検証
+  // 形式・画像取得に加えて【ローカル frontmatter の thumbnail と一致するか】も照合する
+  // （2026-09-17 追加。形式＋200だけでは旧HTMLでもPASSしてしまうため。Amazon/楽天リンク数と同じ扱い）。
   const ogImage = extractOgImage(html);
   const formatOk = THUMB_RE.test(ogImage);
+  const matchOk = local.thumbnail ? (ogImage || '').endsWith(local.thumbnail) : true;
   let imgOk = false;
   if (formatOk) {
     const imgUrl = ogImage.startsWith('http') ? ogImage : `${BASE}${ogImage}`;
     imgOk = await imageReturns200(imgUrl);
   }
-  const thumbOk = formatOk && imgOk;
+  const thumbOk = formatOk && matchOk && imgOk;
   results.push(thumbOk);
   console.log(
     `  ${thumbOk ? 'PASS' : 'FAIL'}  og:image「${ogImage || '(なし)'}」` +
-      `  形式${formatOk ? 'OK' : 'NG(outdoor-0X.png以外)'}` +
+      `  形式${formatOk ? 'OK' : 'NG(thumbnails/<slug>.png・outdoor-0X.png以外)'}` +
+      (local.thumbnail ? ` / frontmatter一致${matchOk ? 'OK' : `NG(期待「${local.thumbnail}」)`}` : '') +
       (formatOk ? ` / 画像取得${imgOk ? 'OK(200)' : 'NG'}` : '')
   );
 
