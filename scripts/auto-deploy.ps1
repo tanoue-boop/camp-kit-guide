@@ -83,7 +83,10 @@ function Invoke-Git {
     finally {
         $ErrorActionPreference = $previous
     }
-    return [pscustomobject]@{ Output = ($output | Out-String).Trim(); ExitCode = $code }
+    # TrimEnd only: git status --porcelain lines start with two status characters
+    # that may be spaces (" M path"). Trim() would eat the leading space of the
+    # FIRST line and shift that path by one character.
+    return [pscustomobject]@{ Output = ($output | Out-String).TrimEnd(); ExitCode = $code }
 }
 
 # --- log rotation ------------------------------------------------------------

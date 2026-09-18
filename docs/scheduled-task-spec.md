@@ -30,21 +30,33 @@
 
 - **a. レポートで終わらせず、実際に `content/posts` 等のファイルへ反映する**（草稿をoutputsに置くだけにしない）。
 - **b. 記録を同じ変更に含める**: 記事追加→`docs/operation-snapshot.md`、SEO施策→`docs/seo-change-log.md`（CLAUDE.mdの記録更新ルール）。
-- **c. `git commit`/`push` はしない**（人間レビューのゲートを残す。pushしない限り本番反映されないので安全）。
-- **d. Codeへ渡すのは deploy.cjs の1行ブロックだけ**。長いレポートや草稿を渡さない（Codeがファイルを自分で読む）。`present_files` と `git diff --stat` の要点3〜5行でレビュー提示する。
+- **c. `git commit`/`push`・`deploy.cjs` の実行はしない**（2026-09-18 変更）。公開は Windows タスクスケジューラの **auto-deploy タスク**（`scripts/auto-deploy.ps1`・30分間隔）が自動で行う。**「pushしない限り本番に出ないから安全」という前提はもう成立しない**ので、公開されて困る中間状態で実行を終えないこと。1回の実行の終わりには記事・台帳・ログが互いに整合した状態にする。
+- **d. Codeへの受け渡しブロックは出力しない**（2026-09-18 変更）。代わりに、実行の最後に**コミットメッセージにしたい1行を `_file/next-commit-message.txt` に書く**。auto-deploy がこれを読んで公開し、ファイルは自動で削除される（書かなければ変更内容から自動生成される）。
 
   ```
-  camp-kit-guide のリポジトリで deploy-note.md の「一括デプロイ」に従い、次を実行:
-  node scripts/deploy.cjs "<種別>: <対象と内容を簡潔に>"
-  ※個別の git / curl コマンドや待機ループは書かないこと（build→commit→push→本番検証まで deploy.cjs が実施）。
+  例: _file/next-commit-message.txt の中身
+  Amazonリンク穴埋め: 3記事7件（SOTOバーナー/Naturehike寝袋/Naturehikeテント）
   ```
+
+  変更ファイルは従来どおり `present_files` と `git diff --stat` の要点3〜5行で提示する（人間が後から確認するため）。
 
 - **d-2. deploy は直列化される（同時実行対策・2026-07-29 追記）**: `campkit-new-article-draft` は日次、他の実装タスク（price-check=水／seo-competitor-scan=金／technical-seo-audit=月初 等）は朝ほぼ同時刻に発火するため、以前は `deploy.cjs` の多重実行で **`.git/index.lock` 衝突** と **main への多重 push→Vercel が最新コミットを未反映**（新規ページだけ404）という事故が起きていた（2026-07-29 水曜に price-check と 0.4 秒差で同時実行して発生）。対策として `deploy.cjs` にリポジトリ単位の排他ロック `.deploy.lock`（gitignore 済／15分で stale 回収／最大20分待機）と、残存 `.git/index.lock` の待機・stale 除去（2分）を実装済み。**Code は従来どおり `node scripts/deploy.cjs "..."` を1回実行するだけでよい**（同時に別 deploy が走っていれば自動で順番待ちし、`rm -f .git/index.lock` 等の手当ては不要）。（2026-09-18追記: このロックは複数タスクが同時に deploy.cjs を実行する衝突を防ぐものであり、「編集はしたが deploy まで到達せずセッションが終了したタスクの残留差分」は防げない。この種の残留差分を見つけた場合の扱いは 0-2 を参照（タスク全体は停止しない）。）
 - **e. 破壊的操作は自動実行しない＝提案のみ**: カニバリ統合・301リダイレクト・本文の大量削除・記事削除・一括 `sed`/正規表現置換。これらはレポートに構成案として書くだけにし、人間の判断を待つ。
 - **f. 編集は対象の1〜数ファイルのみをファイル単位で**。他記事や既存の正しい商品データを壊さない。**実データを確認できない商品の数値（価格・レビュー）は作らない**（必要時は楽天API/Amazon実データで確認、確認不可なら触らず「要確認」と提案に回す）。
-- **g. Codeへ作業を委譲しない（＝往復多発の最大原因を断つ）**: 記事の執筆・楽天/Amazon実データ取得・`products.tsv`更新・MDX編集・FAQ調整・`sed`等の下ごしらえは【このタスクが最後まで自分で終わらせる】。Codeに「タスク1/タスク2…」のような作業指示や長いデータ（キー・商品リスト・草稿）を渡さない。**Codeの仕事は `node scripts/deploy.cjs "..."` を1回実行するだけ**。Codeに手動の `git`/`npm run build`/`fetch`/`sed`/heredocコミットをさせない（それらは静的解析不能で毎回パーミッションプロンプトになり、往復が爆発する）。build・commit・push・本番検証はすべて deploy.cjs の内部で回る。
-- **h. 小さな判断はユーザーに投げず自律的に決める**: 例）タイトルの「N選」は実際にカード化した商品数に必ず一致させる（数が合わなければ自分でタイトルを直してから納品）。FAQは5問、title字数超過は規定内に自分で調整。コミットメッセージの語句修正等の些末な判断も自己完結する。**ユーザーへの確認は「公開してよい状態になったこと」の1点に集約**し、「5選か7選か」のような選択を尋ねない。
-- **i. 唯一の人間ゲートは公開(push)だけ**: push＝Vercel本番公開は不可逆なので、ユーザーの「公開OK」を待つ。ただしそれ以外（build/commit/検証）で確認往復を作らない。ユーザーが「公開OK」と言ったらCodeは `node scripts/deploy.cjs "..."` を1回実行して完了（build→commit→push→検証まで一括）。
+- **g. Codeへ作業を委譲しない（＝往復多発の最大原因を断つ）**: 記事の執筆・楽天/Amazon実データ取得・`products.tsv`更新・MDX編集・FAQ調整・`sed`等の下ごしらえは【このタスクが最後まで自分で終わらせる】。Codeに「タスク1/タスク2…」のような作業指示や長いデータ（キー・商品リスト・草稿）を渡さない。**公開は auto-deploy タスクが自動で行うので、Codeに渡す作業自体が無くなった**（2026-09-18 変更）。Codeに手動の `git`/`npm run build`/`fetch`/`sed`/heredocコミットをさせない（それらは静的解析不能で毎回パーミッションプロンプトになり、往復が爆発する）。build・commit・push・本番検証はすべて deploy.cjs の内部で回る。
+- **h. 小さな判断はユーザーに投げず自律的に決める**: 例）タイトルの「N選」は実際にカード化した商品数に必ず一致させる（数が合わなければ自分でタイトルを直してから納品）。FAQは5問、title字数超過は規定内に自分で調整。コミットメッセージの語句修正等の些末な判断も自己完結する。**公開の可否をユーザーに尋ねる必要もなくなった**（auto-deploy が自動公開する）。「5選か7選か」のような選択も尋ねない。
+- **i. 人間ゲートは撤廃した（2026-09-18 変更）**: 以前は push＝Vercel本番公開が不可逆なため、ユーザーの「公開OK」を待っていた。現在は auto-deploy タスクが自動公開するため、**公開許可を待たない／尋ねない**。人間レビューの代わりに次の機械的ガードが公開前に働く。
+
+  | ガード | 内容 |
+  | --- | --- |
+  | 静止期間 | 変更ファイルの最終更新が10分以内ならその回はスキップ（書きかけを公開しない） |
+  | ビルド | `npm run build` 成功が公開の条件（deploy.cjs 内） |
+  | 太字破綻チェック | `lint-bold.cjs`（deploy.cjs 内） |
+  | 危険ファイル | `.env` / `node_modules` 混入で中止（deploy.cjs 内） |
+  | 排他ロック | `.deploy.lock` と auto-deploy 側のロックで直列化 |
+  | 本番検証 | `verify-deploy.cjs`（deploy.cjs 内） |
+
+  **実行の最後に `logs/auto-deploy-status.json` を読み、result が `deploy-failed` / `error` のときは原因を調べて報告する**（`deployed` / `no-changes` / `skipped-recent-activity` は正常）。
 
 ### 実データ取得（商品差し替え/価格更新で使う）
 Chromeで `https://www.camp-kit-guide.com/?ckbot=1` を開き、`.env.local` の `RAKUTEN_APP_ID`/`RAKUTEN_ACCESS_KEY` で
@@ -108,6 +120,8 @@ const hb = (itemUrl) =>
 ---
 
 ## 参考
-- デプロイ手順: `docs/deploy-note.md`（一括: `node scripts/deploy.cjs "msg"`）
+- 公開（自動）: `scripts/auto-deploy.ps1` → `scripts/deploy.cjs`。タスク名 `campkit-auto-deploy`（30分間隔）。登録・間隔変更・削除は `scripts/setup-auto-deploy-task.ps1`（`-ListOnly` / `-IntervalMinutes N` / `-Remove`）
+- 実行結果: `logs/auto-deploy-status.json`（deployed／no-changes／skipped-recent-activity／deploy-failed／error）・`logs/auto-deploy.log`・`logs/auto-deploy-deploy.log`。`logs/` は gitignore 済
+- デプロイ手順（手動で回す場合）: `docs/deploy-note.md`（一括: `node scripts/deploy.cjs "msg"`）
 - 検証: `scripts/verify-deploy.cjs`（200/title/アフィリリンク/PR表記/og:image、20回×15秒リトライ）
 - 記事・商品・KWのルール: `CLAUDE.md`

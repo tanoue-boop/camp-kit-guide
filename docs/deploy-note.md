@@ -5,6 +5,26 @@
 
 ---
 
+## 自動公開（2026-09-18〜・通常はこれで回る）
+
+**定期タスクの成果は、人手を介さず自動で公開される。**Windows タスクスケジューラの `campkit-auto-deploy`（30分間隔）が `scripts/auto-deploy.ps1` を実行し、公開すべき変更があれば下の「一括デプロイ」と同じ `deploy.cjs` を起動する。
+
+```
+定期タスク（ファイルを更新＋_file/next-commit-message.txt に1行書く）
+   ↓ 最大30分
+auto-deploy.ps1  … 変更検知 → 静止期間10分チェック → コミットメッセージ決定
+   ↓
+deploy.cjs       … 排他ロック → 太字チェック → build → add → commit → push → 本番検証
+```
+
+- **コミットメッセージ**: `_file/next-commit-message.txt` の1行目が使われ、ファイルは自動削除される。無ければ変更内容から自動生成
+- **公開されないケース**（いずれも正常動作）: 変更なし／変更ファイルが10分以内に書かれた（書きかけ保護）／ビルドや太字チェックの失敗／`.env`・node_modules の混入
+- **結果の確認**: `logs/auto-deploy-status.json`（`deployed` / `no-changes` / `skipped-recent-activity` / `deploy-failed` / `error`）、詳細は `logs/auto-deploy.log` と `logs/auto-deploy-deploy.log`
+- **止めたいとき**: `scripts\unregister-auto-deploy-task.bat`（タスク削除）。間隔変更や状態確認は `scripts\setup-auto-deploy-task.ps1 -ListOnly` / `-IntervalMinutes N`
+- **公開した内容を戻す**: `git revert <commit>` → push（`git reset --hard` は使わない）
+
+以下の手動手順は、**自動公開を待たずに今すぐ出したいとき**や、auto-deploy が失敗して原因を切り分けるときに使う。
+
 ## 前提
 
 - 対象リポジトリ: `C:\claude-workspace\projects\camp-kit-guide`
