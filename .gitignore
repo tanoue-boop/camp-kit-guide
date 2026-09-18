@@ -44,6 +44,10 @@ yarn-error.log*
 # deploy serialization lock (scripts/deploy.cjs)
 .deploy.lock
 
+# auto-deploy (scripts/auto-deploy.ps1): run logs and the commit-message handoff
+/logs/
+_file/next-commit-message.txt
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
