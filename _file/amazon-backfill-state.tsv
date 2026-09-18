@@ -238,3 +238,8 @@ no-amazon	fieldoor-tent	fieldoor-tarp-30		2026-09-17	20色以上のカラーバ�
 set	fieldoor-tent	fieldoor-popup-200	B0DNQ11CMZ	2026-09-17	
 no-amazon	fieldoor-tent	fieldoor-tarp-25		2026-09-17	20色以上のカラーバリエーションで記事側に色指定なし・画像もデフォルト汎用サムネイルのため実売色を特定できず。既存amazonUrlはSOLO UP製（別ブランド）への誤リンクだったため不採用
 no-amazon	fieldoor-tent	fieldoor-hexa-dome		2026-09-17	Rakuten実売カラーはライトベージュ/ダークブラウン/カーキの3色のみだが、Amazon側は同型番(305x260cm)でグレーの1色しか存在せず色が一致しないため不採用
+set	stove-fan	fieldoor-normal-4blade	B09JNP1QC3	2026-09-18	
+no-amazon	stove-fan	fieldoor-5blade-16cm		2026-09-18	Amazon側は4枚羽根/6枚羽根のバリエーションのみで5枚羽根モデルの出品自体が存在しないため不採用
+set	stove-fan	fieldoor-swing-19cm	B0FN3GLN2K	2026-09-18	
+set	stove-fan	fieldoor-mini-11cm	B0F9D6KLMC	2026-09-18	
+set	stove-fan	regear-heatwavy2	B0BPPBKQWK	2026-09-18	

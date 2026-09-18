@@ -19,13 +19,22 @@ GSC取得は成功（tanoue@mjo-style.com、URLプレフィックスプロパテ
   - `osprey-backpack`: title 37.5字／description 128字／canonical正／h1×1／JSON-LD同様に正常／画像alt欠落0件／og:image相対パス（`/images/outdoor-06.png`）／商品画像4点が外部直リンク（同上・想定どおり）／SNSシェアurlパラメータ52字で正常／PR表記正常。
   - トップページ: title 24.5字／description 60字／canonical正／h1×1／og:imageは**絶対URL**（`https://www.camp-kit-guide.com/og-default.png`＝正しい）／JSON-LD（WebSite＋Organization）／画像23点中**20点**（ヘッダー・カテゴリ一覧のSVGアイコン、ranking/tent/sleeping-bag等）がalt欠落——前月指摘の既知課題（コンポーネント修正のため未実行）が継続。記事本文画像のalt欠落は引き続き0件。
 
-### 実行した是正：0件
+### 実行した是正（サンプル点検時点）：0件
 
 上記3記事の点検では、是正対象6カテゴリ（外部thumbnail置換／PR表記欠落／画像alt欠落／SNSシェアurl空／title・description超過）のいずれにも該当する「機械的に確実で安全」な欠陥がなかった。title超過は前月同様サフィックス起因（構造的課題、個別記事の是正対象外）。descriptionは2記事とも規定90字に対し120〜128字と**超過方向**にずれていたが（前月の是正は逆に不足側=66〜73字だった）、3記事のみのサンプルで母集団全体の傾向か判断できず、文意を変えずに30字超圧縮するのはリスクがあるため、今回は是正せず下記の提案に回した。
 
-### 未解決の提案（重大度順・人間判断待ち、変更なし＝前月から継続）
+### 追記：og:image絶対URL化を実行（同日、田之上さんの明示指示により）
 
-1. **【重大・継続16日】og:image / twitter:image の相対パス**: `components/common/Seo.tsx` の `imageUrl` が `BASE_URL` を付与していない。修正案（前月提示のまま）: `const imageUrl = ogImage ? (ogImage.startsWith("http") ? ogImage : BASE_URL + ogImage) : DEFAULT_OG_IMAGE;`
+上記レポート提示後、田之上さんから「実行して」と明示指示があったため、下記①のみコンポーネント修正を実施（他の未解決提案②〜は引き続き提案のまま・未実行）。
+
+- **対象**: `components/common/Seo.tsx`（1ファイル）
+- **変更**: `const imageUrl = ogImage || DEFAULT_OG_IMAGE;` → `ogImage`が絶対URL（`http`始まり）でなければ`BASE_URL`を前置するよう変更。トップページの`og-default.png`（既に絶対URL）や外部URLを渡すケースは非破壊、記事221本超の相対パス（`/images/outdoor-0X.png`等）がすべて絶対URL化される見込み。
+- **範囲**: 全記事に影響するコンポーネント変更のため、`git diff`スコープは本ファイル1点のみ（content/postsの変更なし）。
+- **未実施のまま**: ②クロール済み-未登録62件の増加、③PageSpeed Insightsクォータ超過、④ComparisonTable.tsxの防御、⑤SVGアイコンalt欠落20件、⑥sitemap lastmod同一値、⑦description超過傾向、⑧updatedAt欠落4本——いずれも人間判断待ちの提案のまま。
+
+### 未解決の提案（重大度順・人間判断待ち）
+
+1. ~~og:image / twitter:image の相対パス~~ → **本日実行済み**（上記参照、`components/common/Seo.tsx`）。反映確認（本番でog:imageが絶対URLになっているか）は次回監査で確認予定。
 2. **クロール済み-未登録 62件**（前月43件から+19）: 最大の未登録要因。技術的欠陥ではなく品質・重複シグナルの問題のため `campkit-seo-competitor-scan` / rewrite-backlog 側での対処が適切。
 3. **PageSpeed Insights APIクォータ超過が2ヶ月連続**（新規提案）: 現状キー無し/共有クォータのため`project_number:583797351490`が日次上限に達している可能性。Google Cloud ConsoleでAPIキーを発行しcrediting/クォータ引き上げを行うことを推奨。
 4. **ComparisonTable.tsx の防御**: `href={product.affiliateUrl ?? "#"}` が非URL値をそのまま出す問題。ガード追加は未実施のまま継続。
