@@ -1,0 +1,7 @@
+{
+  "status": "no-credentials",
+  "error": "GSC認証情報がありません。次のいずれかを .env.local に設定してください: GSC_ACCESS_TOKEN / GSC_SA_KEY_FILE(またはGOOGLE_APPLICATION_CREDENTIALS) / GSC_CLIENT_ID+GSC_CLIENT_SECRET+GSC_REFRESH_TOKEN",
+  "startDate": "2026-06-20",
+  "endDate": "2026-09-17",
+  "attemptedAt": "2026-09-20T03:37:21.997Z"
+}

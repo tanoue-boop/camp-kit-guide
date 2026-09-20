@@ -78,3 +78,7 @@ components/_deita/
 # build logs
 build.log
 kidsbuild.log
+
+# Google Search Console API credentials (scripts/diagnose-gsc.mjs). Never commit.
+_file/gsc-sa-key*.json
+*-sa-key*.json
