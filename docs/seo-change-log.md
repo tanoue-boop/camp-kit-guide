@@ -3,6 +3,17 @@
 数値の推移はGAS「SEOレポート」の履歴で追う。本ファイルは「いつ・どの記事を・なぜ・どう変えたか」を記録し、次回レポートで効果を評価するための施策台帳。新しい施策は上に追記する。
 
 ---
+## 2026-09-21：リライト常設化 3サイクル目 — portable-fridge title 表記拡張＋内部リンク／camp-gear-sale-timing 内部リンク（campkit-20260921-02）
+
+- **位置づけ**: `docs/rewrite-log.md` Tier1 11位以下の着手可7本のうち、前サイクル §8 で指名された2本（portable-fridge＝type CTR／camp-gear-sale-timing＝type 内部リンク不足）を最小差分で施策。ProductCard・比較表・価格・レビュー数・ASIN・アフィリエイトリンク・thumbnail・slug・商品の掲載順序は2本とも不変更。**検証予定日 2026-10-18**（施策日から27日だが、1〜2サイクル目の4本と同じ28日窓＝2026-09-21〜10-18 に揃えて検証タスクを1本にまとめる）。**判定は impressions ではなく CTR・position で行う**
+- **① portable-fridge title（type=CTR・frontmatter のみ）**: baseline 順位7.7・CTR 0.48%（Tier1 11位以下で最低）。着手前に実測し、本文「車載」11回・判明クエリの先頭が「車載冷蔵庫＋おすすめ」意図（順位3.1）なのに title に「車載冷蔵庫」表記が無かった。title を「ポータブル冷蔵庫おすすめ5選【2026年版】容量・電源方式で比較」（全角32字）→「**ポータブル冷蔵庫・車載冷蔵庫おすすめ5選【2026年版】容量・電源で比較**」（全角36字・「車載冷蔵庫」は先頭10〜14字目）に変更。末尾「電源方式で比較」→「電源で比較」で36字に収めた。description は先頭1文が既に「車載・キャンプ向け…」で始まるため**不変更**（前サイクル §8 の「description にも追加」提案は実測で不要と判断）。updatedAt 08-31→09-21
+- **② portable-fridge 内部リンク（type=内部リンク不足・リンク元のみ編集）**: 本文内部リンク0本（`grep -rn "/posts/portable-fridge" content/posts` で実測）だったため、リンク元3本の締めパラグラフ直後に各1行を既存記法 `[ポータブル冷蔵庫・車載冷蔵庫おすすめ5選](/posts/portable-fridge)` で追加: camp-cooler-box-overall（まとめ末尾・「保冷剤に頼らず電源で冷やし続けたい連泊・車中泊派」）／portable-power-vehicle-camp（まとめ末尾・「ポータブル電源と組み合わせて車中泊で食材や飲み物を冷やしたい」）／cooler-ice-pack（選び方末尾の関連記事行の直後・「保冷剤の凍結や入れ替えそのものをなくしたい」）
+- **③ camp-gear-sale-timing 内部リンク（type=内部リンク不足・リンク元のみ編集）**: 本文内部リンク0本（同上で実測）。判明クエリ（テント／クーラーボックスの安い時期）に対応する記事から `[キャンプ用品の買い時はいつ？セール時期カレンダー【2026年版】](/posts/camp-gear-sale-timing)` を各1行: snowpeak-tent（まとめ末尾・「価格が高めのぶん購入時期でも差が出やすい」）／camp-cooler-box-overall（まとめ末尾・②と同じ段落内に「オフシーズンに値下がりしやすい」の1文として同居）。**camp-gear-sale-timing 本体は本文・title・updatedAt とも不変更**（本文を変えずに日付だけ更新しない方針。1サイクル目の mysteryranch-backpack と同じ扱い）
+- **リンク元の選定根拠**: 4本とも Tier1 台帳外（着手可在庫を消費しない）で、09-20〜21 の変更は d26d056 の楽天リンク形式変換のみ（本文・title 不変のため待機対象外）。1記事あたりの追加は最大2本（camp-cooler-box-overall のみ2本）。リンク元4本の updatedAt を 09-21 に更新（camp-cooler-box-overall 04-27→／portable-power-vehicle-camp 04-24→／cooler-ice-pack 07-27→／snowpeak-tent 07-22→）
+- **効果測定**: 10/18 前後に GSC（page＋query）で2記事の 2026-09-21〜10-18 を取得し、baseline（portable-fridge CTR 0.48%／pos 7.7／表示210、camp-gear-sale-timing CTR 4.49%／pos 6.2／表示156）と並べて `結果` 列に記入。見るポイントは (a) portable-fridge の「車載冷蔵庫」表記クエリの CTR（順位3.1 で表示があるのにクリックされていなかった）と記事全体の CTR、(b) camp-gear-sale-timing の position（6.2→page1 上位へ）。1〜2サイクル目の4本と同じ検証タスクで処理（合計6本）
+- **本番確認の注意**: `?ckbot=1&v=<unixtime>` を付けて取得し、`article:modified_time` ではなく**変更した文字列（新 title の「車載冷蔵庫」・追加したリンク行）の有無**で反映を判定する
+
+---
 ## 2026-09-21：リライト常設化 2サイクル目 — osprey-backpack 表記ゆれ併記＋日帰りデイパック H2／Tier1 11位以下の台帳化（campkit-20260921-01）
 
 - **位置づけ**: `docs/rewrite-log.md` Tier1 上位10本のうち着手可能な最後の1本 osprey-backpack（baseline: 表示1,726・CTR 3.48%・順位8.1＝Tier1最大）を最小差分で施策。ProductCard・比較表・価格・レビュー数・ASIN・アフィリエイトリンク・thumbnail・slug・商品の掲載順序は不変更（順位8.1 で10位以内のため商品順序も動かさない）。**検証予定日 2026-10-18**（施策日から27日だが、1サイクル目の3本と同じ28日窓＝2026-09-21〜10-18 に揃えて検証タスクを1本にまとめる）。**判定は impressions ではなく CTR・position で行う**
