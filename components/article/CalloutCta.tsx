@@ -15,13 +15,44 @@ type CalloutCtaProps = {
   note?: string;
   /** 色バリエーション（任意・既定=default） */
   variant?: CalloutCtaVariant;
+  /**
+   * A8 インプレッション計測用 1px 画像の URL（任意）。
+   * 未指定なら href の a8mat 値から A8_IMPRESSION_PIXELS を引いて自動で出す。
+   * 対応表に無い新規プログラムを追加するとき用。
+   */
+  impressionSrc?: string;
 };
+
+/**
+ * A8 の正規コードに付属する表示計測ピクセル（a8mat → 画像URL）。
+ * サブドメイン（www15 / www18）はプログラムごとに異なり href からは導出できないため、
+ * A8 管理画面で発行された素材コードの値をそのまま転記する（推測で書かない）。
+ */
+const A8_IMPRESSION_PIXELS: Record<string, string> = {
+  // hinataストア（素材ID 002「【hinataストア】」）
+  "4B8BWS+G9UK1E+4U5Q+BX3J6": "https://www18.a8.net/0.gif?a8mat=4B8BWS+G9UK1E+4U5Q+BX3J6",
+  // hinataレンタル
+  "4B8B4S+5AIQCY+4U5Q+5YJRM": "https://www15.a8.net/0.gif?a8mat=4B8B4S+5AIQCY+4U5Q+5YJRM",
+};
+
+/** href が px.a8.net のときだけ a8mat 値を返す（楽天ふるさと納税CTA等は undefined） */
+function extractA8mat(href: string): string | undefined {
+  const m = href.match(/^https?:\/\/px\.a8\.net\/[^?]*\?(?:[^&]*&)*a8mat=([^&#]+)/i);
+  return m ? decodeURIComponent(m[1]) : undefined;
+}
+
+function resolveImpressionSrc(href: string, explicit?: string): string | undefined {
+  if (explicit) return explicit;
+  const a8mat = extractA8mat(href);
+  return a8mat ? A8_IMPRESSION_PIXELS[a8mat] : undefined;
+}
 
 /**
  * 記事内に差し込む汎用CTAブロック。
  * ProductCard（Amazon/楽天の商品）とは別に、A8のサービス系案件
  * （hinataレンタル / ふるさと納税 / アソビュー等）の成約導線に使う。
  * 外部リンクは rel="sponsored nofollow" 固定でPR表記を内包する。
+ * A8 案件では正規コード付属のインプレッション計測ピクセルを併せて描画する。
  */
 export default function CalloutCta({
   title,
@@ -30,10 +61,13 @@ export default function CalloutCta({
   href,
   note,
   variant = "default",
+  impressionSrc,
 }: CalloutCtaProps) {
   const variantClass = styles[variant] ?? "";
+  const pixelSrc = resolveImpressionSrc(href, impressionSrc);
   return (
-    <aside className={`${styles.cta} ${variantClass}`}>
+    // data-product-name: AffiliateClickTracker が affiliate_click の product_name に使う（ボタン文言）
+    <aside className={`${styles.cta} ${variantClass}`} data-product-name={linkText}>
       <span className={styles.prTag}>PR</span>
       <p className={styles.title}>{title}</p>
       {body && <p className={styles.body}>{body}</p>}
@@ -47,6 +81,11 @@ export default function CalloutCta({
         <span className={styles.arrow} aria-hidden="true">›</span>
       </a>
       {note && <p className={styles.note}>{note}</p>}
+      {pixelSrc && (
+        // 外部1pxトラッカーのため next/image は使わない
+        // eslint-disable-next-line @next/next/no-img-element
+        <img src={pixelSrc} width={1} height={1} alt="" loading="eager" decoding="async" style={{ border: 0 }} />
+      )}
     </aside>
   );
 }

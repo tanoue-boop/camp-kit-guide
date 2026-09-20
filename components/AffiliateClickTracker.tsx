@@ -3,23 +3,27 @@
 // GA4 送客クリック計測（affiliate_click イベント）
 //
 // 記事MDX・ProductCard を個別に書き換えず、document レベルのクリック委譲で
-// 楽天／Amazon へ向かう <a> を捕捉して gtag('event','affiliate_click', …) を送る。
+// 楽天／Amazon／A8 へ向かう <a> を捕捉して gtag('event','affiliate_click', …) を送る。
 // pages/_app.tsx に1回だけ配置する。gtag 未ロード（GA無効・ckbot=1 等）でも
 // エラーにはしない。
 
 import { useEffect } from "react";
 
-const PLATFORM_HOST_PATTERNS: Array<{ platform: "rakuten" | "amazon"; re: RegExp }> = [
+type Platform = "rakuten" | "amazon" | "a8";
+
+const PLATFORM_HOST_PATTERNS: Array<{ platform: Platform; re: RegExp }> = [
   // 楽天: hb.afl.rakuten.co.jp / item.rakuten.co.jp / search.rakuten.co.jp など rakuten.co.jp 全般
   { platform: "rakuten", re: /(^|\.)rakuten\.co\.jp$/i },
   // Amazon: amazon.co.jp / amzn.to
   { platform: "amazon", re: /(^|\.)amazon\.co\.jp$|^amzn\.to$/i },
+  // A8.net: px.a8.net（CalloutCta のサービス系案件 hinataレンタル／hinataストア 等）
+  { platform: "a8", re: /^px\.a8\.net$/i },
 ];
 
 const LINK_URL_MAX = 200;
 const PRODUCT_NAME_MAX = 100;
 
-function detectPlatform(href: string): "rakuten" | "amazon" | null {
+function detectPlatform(href: string): Platform | null {
   let host = "";
   try {
     host = new URL(href, window.location.href).hostname;
@@ -49,7 +53,8 @@ function cleanText(text: string | null | undefined): string | undefined {
 }
 
 // 祖先要素から商品名を拾う。
-//  1. ProductCard: 親カードの data-product-name 属性（ProductCard.tsx で付与）
+//  1. ProductCard / CalloutCta: 親要素の data-product-name 属性
+//     （ProductCard.tsx は商品名、CalloutCta.tsx はボタン文言 linkText を付与）
 //  2. ProductCard(フォールバック): CSS Modules のクラス名 ProductCard_card / ProductCard_name
 //  3. ComparisonTable: 同じ行(tr)の第1セル（商品名列）
 function extractProductName(a: HTMLAnchorElement): string | undefined {
@@ -74,6 +79,7 @@ function extractProductName(a: HTMLAnchorElement): string | undefined {
 }
 
 // ページ内のアフィリエイトリンク（DOM順）の中で何番目か（0始まり）
+// ※ A8 リンクも母集団に含む（CalloutCta を持つ記事では楽天/Amazon の位置番号がずれる）
 function linkPosition(a: HTMLAnchorElement): number {
   const anchors = Array.from(document.querySelectorAll<HTMLAnchorElement>("a[href]")).filter(isAffiliateAnchor);
   return anchors.indexOf(a);
