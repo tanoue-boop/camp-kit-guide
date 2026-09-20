@@ -3,6 +3,23 @@
 数値の推移はGAS「SEOレポート」の履歴で追う。本ファイルは「いつ・どの記事を・なぜ・どう変えたか」を記録し、次回レポートで効果を評価するための施策台帳。新しい施策は上に追記する。
 
 ---
+## 2026-09-20：campkit-01 で見つかった既存Amazonリンクの不整合3件を修正（campkit-20260920-08）
+
+- **背景**: 9/20-01 のAmazonリンク欠落修復で「付随して見つけた既存の不整合（未修正・要判断）」として残していた3件（本ログ 9/20-01 エントリ末尾）を、本タスクで最後に解消した。ProductCard の商品・価格・レビュー数・楽天リンク・本文構成は不変更で、**Amazon導線（`amazonUrl`／`amazonAsin`）と型番表記のみ**を直した
+- **確認手段の制約**: 本セッションは外部HTTP取得（curl／WebFetch）が許可されず、`amzn.to` のリダイレクト先とAmazon商品ページの再取得はできなかった。判定は 9/17（fieldoor-tent 穴埋め時＝`amazon-backfill-state.tsv` 237・239行）と 9/20-01（one-touch-tarp の B00I0Q8VVG／B00I0Q9XRW 実在確認・`amazon-link-worksheet.tsv` 192・193行）の記録、および楽天商品URLの同一性照合に基づく
+
+| 記事 / カード | 旧 | 新 | 根拠 |
+|---|---|---|---|
+| `fieldoor-tent` 第2位 `fieldoor-tarp-30`（3m×3m） | `amazonUrl="https://amzn.to/4gyUCBR"`（9/17確認時 SOLO UP製タープ B0GL87G3XH＝スポンサー枠経由の別ブランド） | `amazonAsin="B00I0Q8VVG"` | 楽天リンク先が `one-touch-tarp` 第1位と同一商品（maxshare/a04309_sale）で、同記事で 9/20-01 に実在確認済みの同ASINを流用 |
+| `fieldoor-tent` 第4位 `fieldoor-tarp-25`（2.5m×2.5m） | `amazonUrl="https://amzn.to/4vsxtWq"`（同 SOLO UP B0GL85CNBK） | `amazonAsin="B00I0Q9XRW"` | 楽天リンク先が `one-touch-tarp` 第2位と同一商品（smile88/a03626） |
+| `day-camp-tarp-cheap` 第1位 `tarp-rank-1`（FIELDOOR 3m×3m ¥8,800） | `amazonAsin="B0DNSGC9MG"`（9/20-01確認時 2.5m 遮光ライトベージュ・サイドシート2枚付 ¥18,900＝仕様違い） | `amazonAsin="B00I0Q8VVG"` | 楽天リンク先が maxshare/a04309_sale で上と同一商品。3m×3m・標準（非遮光）の記事仕様と一致するため保留にせず差し替え |
+| `camp-gift` `gift-portable-power`／`compact-portable-power` `jackery-240new`（Jackery 240 New 256Wh） | `amazonAsin="B0C4DY1C3H"`（旧型「Jackery 240」256Wh・三元系） | `amazonAsin="B0CZ7145K1"` | `disaster-portable-power` 第5位で 9/2 に型番一致・設置済みの 240 New ASIN。カード name／description は既に「240 New 256Wh・約60分急速充電」で本文とも整合。`camp-gift` の比較表の商品名のみ「Jackery ポータブル電源240」→「Jackery ポータブル電源 240 New」に表記統一 |
+
+- **台帳**: `_file/amazon-backfill-state.tsv` の fieldoor-tent 2行を no-amazon→set に更新し、day-camp-tarp-cheap／camp-gift／compact-portable-power の3行を set で追加。`_file/amazon-link-worksheet.tsv` の fieldoor-tent 2行を「ASIN取得済」に更新（誤リンクの amzn.to は撤去）
+- **updatedAt**: Amazon導線の修正のみで本文の内容は変わらないため据え置き（`freshness` 禁止則に準拠）
+- **効果測定**: 修正した4記事の Amazon ボタン経由CV（Amazonアソシエイト レポート）が、誤商品／旧型番への遷移から正しい商品へ変わることで改善するかを次回レポートで確認
+
+---
 ## 2026-09-20：mysteryranch-backpack の売り切れ3枠を解決ルールで決着（campkit-20260920-07）
 
 - **背景**: `article-fix-backlog.tsv` #11（第1位 クーリー30・売り切れ）・#12（第3位 クーリー40・売り切れ）は 9/4・9/20-04・9/20-05 で「国内正規価格帯＋レビュー実績の同一モデル代替なし」として needs-human 据え置きが続いていた。task-06 で「代替候補が見つからない商品枠の解決ルール（①同ブランド近容量・近用途 → ②他ブランド同価格帯 → ③枠削除）」が導入され needs-human 運用が廃止されたため、本タスクでルール①により決着させた。あわせて 9/4 に差し替え済みだった第4位 ブリッツ35（seabees）も本日時点で全SKU売り切れ（`'soldout':[1]`）となっていたため同ルールで決着。第2位 ギャラゲーター20L は在庫あり・未変更
@@ -93,7 +110,7 @@
   - 3本とも `updatedAt` を 2026-09-20 に更新（内容追加を伴うため）。商品カードはいずれも既存記事で楽天リンク＋検証済みASINが揃っているものを再利用
 - **B. Amazonリンク0本の23本**: 内訳は「商品5選型10本」＋「ふるさと納税CTA記事13本」。後者の楽天リンクは `CalloutCtaMdx` の楽天ふるさと納税検索リンクで商品ではなく、Amazonに対応商品が存在しないため**構造的に対象外**（変更なし）。前者10本のうち9本で計27カードに `amazonAsin` を追加（Amazon.co.jp の商品ページ／検索を node fetch で実取得し、型番・サイズ・価格の一致を確認したASINのみ）。`backpack-rain-cover`（無名OEM×5）は 9/10 の no-amazon 判定を維持。詳細と保留理由は `G:\マイドライブ\_claude\_reference\camp-kit-guide\tasks\result-campkit-20260920-01.md`
 - **効果測定**: 記事属性ベースで「リンクなし 26→23（残りはASP専用記事）」「Amazon二重掲載の穴 23→14（残り13本はふるさと納税CTA記事＋rain-cover）」。GSC接続後、`camp-backpack-capacity-guide`（クリック58/28日）と `osprey-backpack`（同62）のクリック→CVの変化を次回レポートで確認する
-- **付随して見つけた既存の不整合（未修正・要判断）**: (1) `fieldoor-tent` の `amzn.to/4gyUCBR`（3m）と `amzn.to/4vsxtWq`（2.5m）は SOLO UP 製タープ（B0GL87G3XH／B0GL85CNBK＝検索結果のスポンサー枠）へ飛ぶ誤リンク (2) `day-camp-tarp-cheap` の FIELDOOR 3m×3m に付いた `B0DNSGC9MG` は 2.5m 遮光ライトベージュ・サイドシート2枚付（¥18,900）で仕様違い (3) `camp-gift`／`compact-portable-power` の Jackery 240 New に付いた `B0C4DY1C3H` は旧型「240」（`disaster-portable-power` は正しく 240 New の `B0CZ7145K1`）
+- **付随して見つけた既存の不整合（→ 同日 campkit-20260920-08 で3件とも修正済み・上記エントリ参照）**: (1) `fieldoor-tent` の `amzn.to/4gyUCBR`（3m）と `amzn.to/4vsxtWq`（2.5m）は SOLO UP 製タープ（B0GL87G3XH／B0GL85CNBK＝検索結果のスポンサー枠）へ飛ぶ誤リンク (2) `day-camp-tarp-cheap` の FIELDOOR 3m×3m に付いた `B0DNSGC9MG` は 2.5m 遮光ライトベージュ・サイドシート2枚付（¥18,900）で仕様違い (3) `camp-gift`／`compact-portable-power` の Jackery 240 New に付いた `B0C4DY1C3H` は旧型「240」（`disaster-portable-power` は正しく 240 New の `B0CZ7145K1`）
 
 ---
 ## 2026-09-18：公開を全自動化（人間レビューのゲートを撤廃）

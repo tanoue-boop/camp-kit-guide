@@ -234,9 +234,9 @@ no-amazon	naturehike-tent	nh-light-1-2p		2026-09-18	楽天商品ページが削�
 set	naturehike-tent	nh-dune76	B0CP3FSK4B	2026-09-18	
 no-amazon	naturehike-tent	nh-lodge-13		2026-09-18	楽天が現行Village13.0 Pro(75990円~/耐水圧10000mm)にアップグレードされ記事記載の56993円・耐水圧2000mmと一致せず旧仕様を確認できない
 set	fieldoor-tent	fieldoor-tarp-25-side	B07ZQWL272	2026-09-17	
-no-amazon	fieldoor-tent	fieldoor-tarp-30		2026-09-17	20色以上のカラーバリエーションで記事側に色指定なし・画像もデフォルト汎用サムネイルのため実売色を特定できず。既存amazonUrlはSOLO UP製（別ブランド）への誤リンクだったため不採用
+set	fieldoor-tent	fieldoor-tarp-30	B00I0Q8VVG	2026-09-20	SOLO UP誤リンク(amzn.to/4gyUCBR)を撤去し、one-touch-tarp と同一楽天商品(maxshare/a04309_sale)の確認済ASINへ統一(campkit-20260920-08)
 set	fieldoor-tent	fieldoor-popup-200	B0DNQ11CMZ	2026-09-17	
-no-amazon	fieldoor-tent	fieldoor-tarp-25		2026-09-17	20色以上のカラーバリエーションで記事側に色指定なし・画像もデフォルト汎用サムネイルのため実売色を特定できず。既存amazonUrlはSOLO UP製（別ブランド）への誤リンクだったため不採用
+set	fieldoor-tent	fieldoor-tarp-25	B00I0Q9XRW	2026-09-20	SOLO UP誤リンク(amzn.to/4vsxtWq)を撤去し、one-touch-tarp と同一楽天商品(smile88/a03626)の確認済ASINへ統一(campkit-20260920-08)
 no-amazon	fieldoor-tent	fieldoor-hexa-dome		2026-09-17	Rakuten実売カラーはライトベージュ/ダークブラウン/カーキの3色のみだが、Amazon側は同型番(305x260cm)でグレーの1色しか存在せず色が一致しないため不採用
 set	stove-fan	fieldoor-normal-4blade	B09JNP1QC3	2026-09-18	
 no-amazon	stove-fan	fieldoor-5blade-16cm		2026-09-18	Amazon側は4枚羽根/6枚羽根のバリエーションのみで5枚羽根モデルの出品自体が存在しないため不採用
@@ -279,3 +279,6 @@ no-amazon	sleeping-bag-liner	liner-rank-5		2026-09-20	汎用OEM品・ブラン�
 no-amazon	portable-cooler-aircon	tansu-spot-cooler		2026-09-20	楽天限定モデル・型番なしでAmazon側の一致商品を特定不可
 no-amazon	portable-cooler-aircon	eenour-spot-cooler		2026-09-20	AmazonはPA800(2026新型)のみでPA600の出品なし
 no-amazon	portable-cooler-aircon	quads-spot-cooler		2026-09-20	楽天公式ストア限定モデル・型番なし
+set	day-camp-tarp-cheap	tarp-rank-1	B00I0Q8VVG	2026-09-20	旧B0DNSGC9MG(2.5m遮光ライトベージュ・サイドシート2枚付¥18,900)は仕様不一致のため撤去。one-touch-tarp と同一楽天商品(maxshare/a04309_sale)の3m×3m確認済ASINへ差替(campkit-20260920-08)
+set	camp-gift	gift-portable-power	B0CZ7145K1	2026-09-20	旧B0C4DY1C3H(旧型Jackery 240・三元系)は型番不一致のため撤去。disaster-portable-power と同一の240 New確認済ASINへ差替(campkit-20260920-08)
+set	compact-portable-power	jackery-240new	B0CZ7145K1	2026-09-20	旧B0C4DY1C3H(旧型Jackery 240・三元系)は型番不一致のため撤去。disaster-portable-power と同一の240 New確認済ASINへ差替(campkit-20260920-08)
