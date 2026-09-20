@@ -3,6 +3,16 @@
 数値の推移はGAS「SEOレポート」の履歴で追う。本ファイルは「いつ・どの記事を・なぜ・どう変えたか」を記録し、次回レポートで効果を評価するための施策台帳。新しい施策は上に追記する。
 
 ---
+## 2026-09-21：リライト常設化 5サイクル目・施策②③ — duo-tent／fire-extinguish-pot 内部リンク各4本（campkit-20260921-05）
+
+- **位置づけ**: `docs/rewrite-log.md` Tier2＋Tier3 上位台帳で内部リンク0本だった2本（duo-tent＝Tier2・順位10.1・CTR 4.55%／fire-extinguish-pot＝Tier3・順位8.0・CTR 0%）に、リンク元だけを編集して内部リンクを送った。**2本の本体は本文・title・updatedAt とも不変更**（本文を変えずに日付だけ更新しない方針。3サイクル目の camp-gear-sale-timing／4サイクル目の camp-table-set と同じ扱い）。ProductCard・比較表・価格・レビュー数・ASIN・アフィリエイトリンク・thumbnail・slug はリンク元を含めて不変更（diff の追加行で hb.afl／amazon／rakuten の混入0件を確認）。**検証予定日 2026-10-18**（1〜5サイクル目の9本と同じ28日窓＝2026-09-21〜10-18）。**判定は CTR・position が主、impressions は参考**
+- **② duo-tent 内部リンク（type=内部リンク不足）**: 着手前に `grep -rln "/posts/duo-tent" content/posts` で0本を実測。候補6本（solo-tent-overall／solo-tent-beginner／family-camp-tent／coleman-tent／dod-tent／one-touch-tent）から、duo-tent の掲載商品（第1・4位コールマン ツーリングドーム／第2・5位 DOD）と文脈が直結する4本を選び、各まとめ H2 の締め段落直後に既存記法 `[2人用テントおすすめ5選](/posts/duo-tent)`（アンカーは duo-tent の実 title 先頭から）で1行ずつ追加（→4本）: solo-tent-overall（「ソロでも荷物を広げてゆったり／デュオも視野」）／solo-tent-beginner（本文に既にある「たまにデュオで使いたい」ニーズを受けて2人用サイズの選択肢を提示）／coleman-tent（ツーリングドームSTのソロ〜デュオ向け2人用サイズを他ブランドと比較）／dod-tent（ワンタッチテントT2の2人用サイズをコールマンと並べて比較）。family-camp-tent（4〜10人用で文脈が遠い）と one-touch-tent は未使用
+- **③ fire-extinguish-pot 内部リンク（type=内部リンク不足）**: 着手前に `grep -rln "/posts/fire-extinguish-pot" content/posts` で0本を実測。候補11本を「後始末／消火／片付け／火消し／灰」の言及数で grep し、該当箇所がある4本を選んで、その段落の直後に既存記法 `[火消し壺・火消し袋のおすすめ5選](/posts/fire-extinguish-pot)`（アンカーは fire-extinguish-pot の実 title 先頭から）で1行ずつ追加（→4本）: secondary-combustion-bonfire（Tips「使用後は冷ましてから灰を捨てる」直後・本文に「火消し袋」の語が既にある）／charcoal-starter（Tips「使用後はしっかり冷ましてから片付ける」直後・「火消し壺がない場合は…」の文を受けて単体の火消し壺へ）／bonfire-sheet（Tips「使用後は冷めてから片付ける」直後・回収した灰・炭の持ち帰り）／bonfire-stand-beginner（`### 使用後のケア` の灰の処理段落直後）。fire-tongs（言及1件）／fire-blower／coleman-bonfire／snowpeak-bonfire／captain-stag-bonfire／low-style-bonfire／bonfire-stand-solo は文脈が薄いか灰の手入れ止まりのため未使用。logos-bonfire（Tier1 着手可在庫）は候補外
+- **リンク元の選定根拠**: 8本とも Tier1／Tier2／Tier3 台帳の待機・着手可在庫に含まれない記事。09-20〜21 の変更は charcoal-starter の 79fd160（楽天リンク追加のみ・本文不変）だけで待機対象外。1記事あたりの追加は1本。リンク元8本の updatedAt を 09-21 に更新（solo-tent-overall 06-23→／solo-tent-beginner 06-29→／coleman-tent 06-08→／dod-tent 06-02→／secondary-combustion-bonfire 06-08→／charcoal-starter 08-06→／bonfire-sheet 06-08→／bonfire-stand-beginner 06-29→）。8本とも `docs/rewrite-log.md` 補足欄で 2026-10-18 まで待機扱い
+- **効果測定**: 10/18 前後に GSC（page＋query）で2記事の 2026-09-21〜10-18 を取得し、baseline（duo-tent CTR 4.55%／pos 10.1／表示66、fire-extinguish-pot CTR 0%／pos 8.0／表示35）と並べて `結果` 列に記入。見るポイントは (a) duo-tent の position 10.1 が page1 に定着するか（08-11 公開以降の上昇トレンドの継続）、(b) fire-extinguish-pot の CTR 0% からの脱却と position 8.0 の維持（表示35 で分母が小さいため参考値扱い）。1〜5サイクル目の9本と同じ検証タスクで処理（合計11本）
+- **本番確認の注意**: `?ckbot=1&v=<unixtime>` を付けてリンク元を取得し、`article:modified_time` ではなく**追加したリンク行の文字列の有無**で反映を判定する
+
+---
 ## 2026-09-21：リライト常設化 5サイクル目・施策① — sleeping-bag-temperature-guide 逆引き早見表 H2 追加（campkit-20260921-05）
 
 - **位置づけ**: `docs/rewrite-log.md` Tier2＋Tier3 上位台帳の着手可3本のうち、Tier2 で唯一リライト枠で動かせる sleeping-bag-temperature-guide（baseline: 表示1,272・CTR 0.63%・順位22.2＝Tier2/3 で最大の表示）を最小差分で施策。title／description／slug・ProductCard・比較表・価格・レビュー数・ASIN・アフィリエイトリンク・thumbnail・商品の掲載順序はすべて不変更。**検証予定日 2026-10-18**（1〜4サイクル目の8本と同じ28日窓＝2026-09-21〜10-18 に揃えて検証タスクを1本にまとめる）。**判定は CTR・position で行い impressions は参考**
