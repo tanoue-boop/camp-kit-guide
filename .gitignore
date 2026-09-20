@@ -94,3 +94,5 @@ _file/gsc-pages.tsv
 _file/gsc-queries.tsv
 _file/asp-product-article-map.tsv
 _file/amazon-shortlink-asin.tsv
+# 導線ゼロ記事の判定テーブル（GSC記事別数値を含む。2026-09-20 campkit-20260920-14）
+_file/zero-monetization-articles.tsv
