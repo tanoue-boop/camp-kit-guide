@@ -75,6 +75,8 @@ fetch(url, {
 
 **レート制限**: 連続リクエストは 429 になる。**8秒以上の間隔**を空けること。
 
+**Node から叩く既製スクリプト（2026-09-20 追加）**: `node scripts/rakuten-search.mjs "キーワード"`（1件）／`--file queries.tsv --out x.json`（`key<TAB>keyword` を8秒間隔で順に検索し JSON 保存・既定は在庫ありのみ・`-reviewCount` 順）。上記のヘッダ・認証・間隔を内蔵し、`affiliateUrl` は hb.afl 形式で出力するので、そのままカードへ貼れる。キーワードに `~` などの記号が入ると `keyword is not valid`（400）になるため型番・ブランド名だけにする。
+
 **記事に載せるアフィリURLは `hb.afl.rakuten.co.jp` 形式に統一する**。APIの `affiliateUrl` は `item.rakuten.co.jp/...?rafcid=` 形式で返ることがあるため、その場合は次の形に変換する（`AFF_ID` = `.env.local` の `NEXT_PUBLIC_RAKUTEN_AFFILIATE_ID`）。
 
 ```js

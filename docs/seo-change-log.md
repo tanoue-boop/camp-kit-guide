@@ -3,6 +3,18 @@
 数値の推移はGAS「SEOレポート」の履歴で追う。本ファイルは「いつ・どの記事を・なぜ・どう変えたか」を記録し、次回レポートで効果を評価するための施策台帳。新しい施策は上に追記する。
 
 ---
+## 2026-09-20：Amazon一本足10記事に楽天リンクを追加（42カード／campkit-20260920-10）
+
+- **背景**: 9/20-01（楽天あり・Amazon 0本の修復）の裏側にあたる「Amazonリンクはあるが楽天リンクが0本」の購入型10記事（charcoal-starter／ground-sheet／inner-tent-kangaroo／logos-tent／montbell-sleeping-bag／ogawa-tent／osprey-daily-backpack／sleeping-bag-cover／spice-box／wooden-tableware＝計49カード）を、楽天併記のダブル導線に補強した。`node scripts/diagnose-articles.mjs` で着手前に再抽出し、9/20 07:00 時点のリストと件数・内訳が一致することを確認
+- **取得手段**: 楽天市場API（`IchibaItem/Search/20260701`・Referer/Origin付き・在庫ありのみ・`-reviewCount` 順）を `scripts/rakuten-search.mjs`（本タスクで追加）から叩き、ブランド＋型番一致（ASIN→型番は Amazon 商品ページの「メーカー型番」で照合。例: B09QPZKT94＝ROSY ドゥーブルXL-BB 71301000 色グレー）または主要スペック一致で採用。楽天商品ページ（EUC-JP）を Node で取得して仕様を確認したものもある（良木工房 YK-SR1＝キッチンペーパーホルダー付き／GOGlamping SKY EYE 210×90×112cm）
+- **採用基準**: 実績のある店舗（公式・ナチュラム・ヒマラヤ・サンデーマウンテン等）を優先。レビュー0件の転売・ドロップシップ系出品（商品コードがASINやランダム文字列）は「型番・商品名が完全一致 かつ 価格がカード表示（Amazon価格）の1.3倍以内」の場合のみ採用し、中古・レンタル・並行輸入・仕様違い（本数・サイズ）は不採用
+- **書き方**: 既存の通常構成（`source="rakuten"` ＋ `affiliateUrl`=hb.afl ＋ `amazonAsin`）へ揃えた。`ProductCard` に楽天URL専用 prop が無く、コンポーネントは変更しない方針のため。Amazon側の `amazonRating`／`amazonReviewCount`／`price`／`image`／`badge`／比較表のAmazonリンクは不変更。楽天レビューがある出品は `rakutenRating`／`rakutenReviewCount` を追加。本文・見出し・updatedAt は不変更（「Amazonでレビュー実績のあるモデルを選定」という記述は選定根拠として引き続き正しい）
+- **結果（楽天リンク数 Before→After）**: charcoal-starter 0→5／ground-sheet 0→5／inner-tent-kangaroo 0→5／logos-tent 0→5／montbell-sleeping-bag 0→3／ogawa-tent 0→4／osprey-daily-backpack 0→5／sleeping-bag-cover 0→3／spice-box 0→3／wooden-tableware 0→4（Amazon本数は全記事で不変）。`count-rakuten-links.mjs`: hb_afl 1,449→1,491・raw 0
+- **保留7件（理由）**: montbell シームレスダウンハガー800 #3（楽天は Amazon 転売系のみで価格1.64倍）／ogawa ティエラ5-EX 2（在庫あり出品なし）／OUTBEAR シュラフカバー（OUTBEAR 楽天公式店にシュラフカバーの出品なし）／MIL-TEC スリーピングバッグカバー（中古出品のみ）／YAJIN CRAFT 超ミニ5本（転売系のみ・価格1.34倍・4本容器と混在）／YOGOTO 第三世代-黒（転売系のみ・価格1.49倍）／不二貿易 アカシア ランチプレート 2つ仕切り（楽天には4つ仕切り 30150/30151 のみ）。`backpack-rain-cover`（楽天5・Amazon0）は 9/20-01 で恒久保留済み・対象外
+- **要注意（価格差の大きい採用）**: ロゴス ROSY ドゥーブルXL-BB（Amazon ¥17,900 ↔ ナフコ ¥30,800）／リバイバルSOLO DOME-BA（¥10,970 ↔ WHATNOT ¥21,599）／ogawa タッソ（¥36,333 ↔ TOPPIN ¥50,900）／エーコンリビングドーム M-BE（¥29,500 ↔ ぎおん ¥39,800）は、型番一致の実店舗出品だが Amazon 側がセール価格のため差が大きい。カードの `price` は Amazon 側のまま（次回価格チェックで要見直し）
+- **効果測定**: 楽天アフィリエイト管理画面で10記事分のクリック・成果が新規計上されるかを 2〜3週間後に確認する
+
+---
 ## 2026-09-20：楽天「素URL」407件を hb.afl アフィリ形式へ一括変換（campkit-20260920-09）
 
 - **背景**: 7月以降の自動記事タスクが楽天APIの `itemUrl` をそのまま `affiliateUrl` に貼っており、`?rafcid=wsc_i_is_ea4b84f0-…` の値は `.env.local` の **`RAKUTEN_APP_ID`（アプリケーションID）でアフィリエイトIDではない**ため、クリックしても成果が付かない状態だった（別セッションの「素URL 360件」診断と `scripts/fix-rakuten-affiliate.mjs` 作成の記録はあったが、実行 commit も成果物も無く、スクリプト自体も本リポジトリに存在しなかった）。本タスクで実数を再カウントし、修復を実行・公開した
