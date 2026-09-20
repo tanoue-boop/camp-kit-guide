@@ -96,3 +96,12 @@ _file/asp-product-article-map.tsv
 _file/amazon-shortlink-asin.tsv
 # 導線ゼロ記事の判定テーブル（GSC記事別数値を含む。2026-09-20 campkit-20260920-14）
 _file/zero-monetization-articles.tsv
+# リライト候補台帳（検索クエリ生値を含む。公開版は docs/rewrite-log.md。2026-09-20 campkit-20260920-16）
+_file/rewrite-candidates.tsv
+_file/gsc-page-query.tsv
+_file/gsc-page-query-28d.tsv
+_file/gsc-pages-28d.tsv
+_file/gsc-pages-daily.tsv
+_file/gsc-extra-meta.json
+# 一時作業スクリプト置き場（commit 対象外）
+_file/_work/
