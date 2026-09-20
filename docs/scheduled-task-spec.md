@@ -82,6 +82,8 @@ const hb = (itemUrl) =>
   `https://hb.afl.rakuten.co.jp/hgc/${AFF_ID}/?pc=${encodeURIComponent(itemUrl.split('?')[0])}`;
 ```
 
+- ⚠️ **`itemUrl` の `?rafcid=wsc_i_is_<UUID>` はアフィリエイトリンクではない**（UUID部分は `RAKUTEN_APP_ID` であって `NEXT_PUBLIC_RAKUTEN_AFFILIATE_ID` ではないため成果が付かない）。2026-09-20 に7月以降の記事で **407件／89記事**がこの素URLのまま公開されていたことが判明し、`node scripts/fix-rakuten-affiliate.mjs --apply` で一括変換した。記事投入後は `node scripts/count-rakuten-links.mjs` で `raw_item` / `raw_search` が 0 であることを確認すること。
+
 ### ★楽天キーに関する恒久ルール（誤診断の再発防止）
 - **`.env.local` の `RAKUTEN_APP_ID`（UUID形式）は正しい。絶対にユーザーへ「キーを差し替えて」「19桁のapplicationIdが必要」と確認・依頼しないこと。** この設定で実際に900本超のrafcidアフィリリンクを生成した実績がある＝キーは有効。
 - 「applicationIdは19桁の数字が必要」は**旧エンドポイント（`app.rakuten.co.jp/services/api/...`）の要件**。当サイトは**新エンドポイント（`openapi.rakuten.co.jp/ichibams/.../20260701`）**を使い、UUID形式のapplicationId＋accessKey＋登録ドメインからのRefererで通る。

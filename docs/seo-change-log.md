@@ -3,6 +3,17 @@
 数値の推移はGAS「SEOレポート」の履歴で追う。本ファイルは「いつ・どの記事を・なぜ・どう変えたか」を記録し、次回レポートで効果を評価するための施策台帳。新しい施策は上に追記する。
 
 ---
+## 2026-09-20：楽天「素URL」407件を hb.afl アフィリ形式へ一括変換（campkit-20260920-09）
+
+- **背景**: 7月以降の自動記事タスクが楽天APIの `itemUrl` をそのまま `affiliateUrl` に貼っており、`?rafcid=wsc_i_is_ea4b84f0-…` の値は `.env.local` の **`RAKUTEN_APP_ID`（アプリケーションID）でアフィリエイトIDではない**ため、クリックしても成果が付かない状態だった（別セッションの「素URL 360件」診断と `scripts/fix-rakuten-affiliate.mjs` 作成の記録はあったが、実行 commit も成果物も無く、スクリプト自体も本リポジトリに存在しなかった）。本タスクで実数を再カウントし、修復を実行・公開した
+- **着手前の実数**（`node scripts/count-rakuten-links.mjs`）: 素URL **407件／89記事**。内訳＝ProductCard `affiliateUrl` 362件（`item.rakuten.co.jp/…?rafcid=<APP_ID>`）／ComparisonTable `rows` JSON内 `affiliateUrl` 32件（同形式）／ふるさと納税 CalloutCta `href` 13件（`search.rakuten.co.jp/…?rafcid=wsc_i_is_<AFF_ID>`）。hb.afl 形式は 1,042件（API返却の shop別 `g00…` ID 948件＋手動 `5318aefd…` 94件）。商品画像URL 1,070件は対象外
+- **変換方針**: shop→hgc 対応表や楽天API補完は使わず、`docs/scheduled-task-spec.md` に明文化済みの現行規約 `https://hb.afl.rakuten.co.jp/hgc/<AFF_ID>/?pc=<encodeURIComponent(url.split('?')[0])>`（`lib/rakuten.ts` の `buildRakutenUrl` と同形・既存の手動94本と同一形式）へ機械的に変換した。AFF_ID は `.env.local` の `NEXT_PUBLIC_RAKUTEN_AFFILIATE_ID` を読む（値の捏造なし）。商品・価格・レビュー数・Amazon導線・本文・thumbnail・updatedAt は不変更。差分は 89ファイル 383行の置換のみ（行数不変）
+- **結果**: 素URL 407 → **0件**（item 394＋search 13）。hb.afl 形式 1,042 → 1,449件（＋407）。`lint-bold` PASS・`npm run build` 成功
+- **13件の search リンクについて**: `buildRakutenSearchUrl`（ProductCard の `affiliateUrl="#"` 時のフォールバック）と同形式で、rafcid にはアフィリエイトIDが入っていたが、成果計上の確実性を優先して同じ hb.afl ラッパーへ寄せた。`lib/rakuten.ts` の関数自体は本タスクでは触っていない（要否は別途判断）
+- **再発防止の論点（未対応）**: 生成側（Cowork の日次タスク）が `affiliateUrl` ではなく `itemUrl` を採用する経路が残っている。`scripts/count-rakuten-links.mjs` を残したので、次回以降は `raw_item` / `raw_search` が 0 であることを確認できる。`scripts/fix-rakuten-affiliate.mjs`（dry-run 既定・`--apply` で実行）は再発時にそのまま使える
+- **効果測定**: 楽天アフィリエイト管理画面のクリック数・成果件数が、これまで計上されていなかった89記事分だけ増えるかを 2〜3週間後に確認する
+
+---
 ## 2026-09-20：campkit-01 で見つかった既存Amazonリンクの不整合3件を修正（campkit-20260920-08）
 
 - **背景**: 9/20-01 のAmazonリンク欠落修復で「付随して見つけた既存の不整合（未修正・要判断）」として残していた3件（本ログ 9/20-01 エントリ末尾）を、本タスクで最後に解消した。ProductCard の商品・価格・レビュー数・楽天リンク・本文構成は不変更で、**Amazon導線（`amazonUrl`／`amazonAsin`）と型番表記のみ**を直した
