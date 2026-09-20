@@ -3,6 +3,16 @@
 数値の推移はGAS「SEOレポート」の履歴で追う。本ファイルは「いつ・どの記事を・なぜ・どう変えたか」を記録し、次回レポートで効果を評価するための施策台帳。新しい施策は上に追記する。
 
 ---
+## 2026-09-21：リライト常設化 4サイクル目 — camp-table-set 内部リンク3本／camp-table-folding title 変更は保留（campkit-20260921-03）
+
+- **位置づけ**: `docs/rewrite-log.md` Tier1 11位以下の着手可5本のうち、前サイクル §8-3 で指名された2本（camp-table-set＝type 内部リンク不足／camp-table-folding＝type CTR）に着手。実施したのは camp-table-set のみで、camp-table-folding は下記の理由で**保留**。ProductCard・比較表・価格・レビュー数・ASIN・アフィリエイトリンク・thumbnail・slug・商品の掲載順序はすべて不変更。**検証予定日 2026-10-18**（1〜3サイクル目の6本と同じ28日窓＝2026-09-21〜10-18 に揃えて検証タスクを1本にまとめる）。**判定は impressions ではなく CTR・position で行う**
+- **① camp-table-set 内部リンク（type=内部リンク不足・リンク元のみ編集）**: baseline 順位11.9・CTR 2.84%（主要クエリ5種が順位14前後の page2 に揃う＝順位の問題）。着手前に `grep -rn "/posts/camp-table-set" content/posts` で本文内部リンク3本（captain-stag-table／solo-camp-cot／takibi-table）を実測。同じテーブル系で camp-table-folding にはリンクしていた3本から、既存記法 `[アウトドアテーブルセットおすすめ5選【2026年版】椅子付きで人数別](/posts/camp-table-set)`（現 H1 と同一）で各1行追加（→6本）: dod-table（選び方末尾の既存関連記事行の直後・「テーブルとチェアを別々に選ぶのが面倒／初めての一式を割安に」）／low-style-table（選び方ポイント4末尾・「ローチェアとテーブルの高さ合わせに迷う方」）／outdoor-kitchen-table（まとめ締め段落の直後・「調理台とは別に食事用のテーブルとチェアもまとめて揃えたい」）。候補5本のうち hanging-rack／water-jug は「椅子付きセット」文脈が遠いため未使用。**camp-table-set 本体は本文・title・updatedAt とも不変更**（3サイクル目の camp-gear-sale-timing と同じ扱い）
+- **リンク元の選定根拠**: 3本とも Tier1 台帳外（着手可在庫を消費しない）で、09-20〜21 の変更は outdoor-kitchen-table の d26d056 楽天リンク形式変換のみ（dod-table／low-style-table は 08-26 が最終・本文不変のため待機対象外）。1記事あたりの追加は1本。リンク元3本の updatedAt を 09-21 に更新（dod-table 06-15→／low-style-table 06-02→／outdoor-kitchen-table 08-12→）。3本とも `docs/rewrite-log.md` 補足欄で 2026-10-18 まで待機扱い
+- **② camp-table-folding title/description（type=CTR）は未実施・保留**: タスク定義の条件「新 title に入れる語は `_file/rewrite-candidates.tsv` の実測クエリ意図から決め、『折りたたみテーブル』系の意図が実在しない場合は実行せず QUESTION で停止」に該当。実測した判明クエリは28日で2件（「アウトドアテーブル×比較」3表示・順位19／「キャンプテーブル×サイズ」1表示・順位21＝合計4表示。90日でも同じ2件・6表示）で「折りたたみ」を含まず、記事の表示70回の9割超は匿名クエリ。現 title「キャンプ用折りたたみテーブル5選【2026年版】サイズ・重量で比較」（全角33字）は既に「折りたたみテーブル」を6字目から含む。判明クエリの意図（アウトドアテーブル／キャンプテーブル＋比較・サイズ）に寄せるか、匿名分を「折りたたみ」意図と仮定して指示どおり先頭に置くかは監督判断が必要なため据え置き（updatedAt も不変更）
+- **効果測定**: 10/18 前後に GSC（page＋query）で camp-table-set の 2026-09-21〜10-18 を取得し、baseline（CTR 2.84%／pos 11.9／表示282）と並べて `結果` 列に記入。見るポイントは (a) 主要クエリ5種（テーブルセット表記ゆれ）の順位が14前後から page1 に入るか、(b) 記事全体の position（11.9→10 以内）。1〜3サイクル目の6本と同じ検証タスクで処理（合計7本）
+- **本番確認の注意**: `?ckbot=1&v=<unixtime>` を付けて取得し、`article:modified_time` ではなく**追加したリンク行の文字列の有無**で反映を判定する
+
+---
 ## 2026-09-21：リライト常設化 3サイクル目 — portable-fridge title 表記拡張＋内部リンク／camp-gear-sale-timing 内部リンク（campkit-20260921-02）
 
 - **位置づけ**: `docs/rewrite-log.md` Tier1 11位以下の着手可7本のうち、前サイクル §8 で指名された2本（portable-fridge＝type CTR／camp-gear-sale-timing＝type 内部リンク不足）を最小差分で施策。ProductCard・比較表・価格・レビュー数・ASIN・アフィリエイトリンク・thumbnail・slug・商品の掲載順序は2本とも不変更。**検証予定日 2026-10-18**（施策日から27日だが、1〜2サイクル目の4本と同じ28日窓＝2026-09-21〜10-18 に揃えて検証タスクを1本にまとめる）。**判定は impressions ではなく CTR・position で行う**
