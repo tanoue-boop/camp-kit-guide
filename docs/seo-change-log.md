@@ -11,6 +11,7 @@
 - **③ updatedAt**: 06-29→09-21（本文は不変更だが主要KWを含む frontmatter の実質的な変更のため例外として更新）
 - **効果測定**: 10/18 前後に GSC（page＋query）で camp-table-folding の 2026-09-21〜10-18 を取得し、baseline（CTR 1.43%／pos 9.2／表示70）と並べて `docs/rewrite-log.md` の `結果` 列に記入。見るポイントは (a) 記事全体の CTR がサイト平均 4.16% にどこまで近づくか、(b) position 9.2 を維持しているか（title 変更で順位を落としていないか）、(c)「折りたたみ」系クエリが判明クエリに現れるか。1〜4サイクル目の7本と同じ検証タスクで処理（合計8本）
 - **本番確認の注意**: `?ckbot=1&v=<unixtime>` を付けて取得し、`article:modified_time` ではなく**新 title 文字列の有無**で反映を判定する
+- **Tier2＋Tier3 上位の台帳化（パートB・docs のみ・本文変更なし）**: `docs/rewrite-log.md` に Tier2 5本＋Tier3 上位4本（28日表示30以上）の計9本を Tier1 11位以下と同じ列構成で追加（クエリ生値なし・内部リンク本数は実測）。リライト枠で着手可は sleeping-bag-temperature-guide（不足トピック＝快適温度の逆引き早見表 H2）／duo-tent（内部リンク0本）／fire-extinguish-pot（内部リンク0本）の3本で、Tier1 残3本と合わせて着手可在庫6本。商品構成の問題は `_file/article-fix-backlog.tsv` へ: camp-backpack-beginner（H3・本文がオスプレー等のブランド定番モデルなのに ProductCard は無名OEM品で全5枠不一致・product_swap・A）／kids-sleeping-bag（子供専用が5枠中2枠・product_swap・B）／solo-tent-lightweight（超軽量意図に対し1.8kg〜の構成。1kg級へ寄せるか lightweight-mountain-tent との役割分担かは本人判断・needs-human）
 
 ---
 ## 2026-09-21：リライト常設化 4サイクル目 — camp-table-set 内部リンク3本／camp-table-folding title 変更は保留（campkit-20260921-03）
