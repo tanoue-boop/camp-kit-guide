@@ -98,7 +98,8 @@ export default function ProductCard({ product, rank }: ProductCardProps) {
   return (
     <>
       <JsonLd data={productSchema} />
-      <div className={styles.card}>
+      {/* data-product-name: AffiliateClickTracker が affiliate_click の product_name に使う */}
+      <div className={styles.card} data-product-name={product.name}>
         {rankInfo && (
           <span className={`${styles.rankBadge} ${rankInfo.className}`}>{rankInfo.label}</span>
         )}

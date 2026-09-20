@@ -3,6 +3,16 @@
 数値の推移はGAS「SEOレポート」の履歴で追う。本ファイルは「いつ・どの記事を・なぜ・どう変えたか」を記録し、次回レポートで効果を評価するための施策台帳。新しい施策は上に追記する。
 
 ---
+## 2026-09-20：GA4 送客クリックイベント（affiliate_click）を実装（campkit-20260920-13）
+
+- **背景**: 売上＝表示×CTR×送客率×CVR×単価 のうち、GSCで「表示・CTR」は取れるようになったが「送客率（記事→楽天/Amazonへのクリック）」だけ計測手段が無かった。ASPレポートは商品単位で記事別内訳が無い（campkit-20260920-12で実測）ため、記事別の送客はGA4のクリックイベントでしか取れない
+- **現状確認**: GA4 基盤タグは `pages/_document.tsx` に既存（`NEXT_PUBLIC_GA_ID` を参照・`ckbot=1` で自己アクセス除外）、本番HTML（/posts/osprey-backpack/）にも `gtag/js?id=G-…` と `gtag('config',…)` が出力されていることを確認（判定A）
+- **実装**: `components/AffiliateClickTracker.tsx`（新規）を `pages/_app.tsx` に1回だけ配置。document レベルのクリック委譲（capture／click＋中クリックの auxclick）で、href のホストが `*.rakuten.co.jp`／`*.amazon.co.jp`／`amzn.to` の `<a>` だけを捕捉し、`window.gtag` が存在する場合のみ `gtag('event','affiliate_click',{platform, article_slug, link_url(≤200字), product_name(取れた時のみ), link_position(DOM順index), transport_type:'beacon'})` を送る。記事MDX 264本は不変更。`ProductCard.tsx` のカード div に `data-product-name` を1属性だけ追加（product_name の取得元。フォールバックは CSS Modules クラス名 `ProductCard_card`/`ProductCard_name`、比較表は同一 tr の第1セル）
+- **GA4管理画面側の残作業（本人/Cowork）**: カスタムディメンション（イベントスコープ）`platform`／`article_slug`／`product_name`／`link_position` の登録 → `affiliate_click` をキーイベントに指定 → DebugView で疎通確認（`?ckbot=1` を付けると自己アクセス除外で送信されないので付けずに確認する）
+- **付随（公開リポ対策）**: GSC/ASP 生データ（`_file/gsc-pages.tsv`／`gsc-queries.tsv`／`asp-product-article-map.tsv`／`amazon-shortlink-asin.tsv`）は 20:55 の auto-deploy（c1d0c99）で既に公開リポへ push 済みだったため、`.gitignore` に追加のうえ `git rm --cached` で以後の追跡を停止（履歴の書き換えはしていない・履歴からの除去は本人判断）
+- **効果測定**: GA4 の探索レポートで `affiliate_click` を `article_slug` × `platform` で集計し、GSC のクリック数（記事流入）で割った値を記事別「送客率」として、リライト優先順位の根拠に使う。データが溜まる 2〜3週間後に初回集計
+
+---
 ## 2026-09-20：Amazon一本足10記事に楽天リンクを追加（42カード／campkit-20260920-10）
 
 - **背景**: 9/20-01（楽天あり・Amazon 0本の修復）の裏側にあたる「Amazonリンクはあるが楽天リンクが0本」の購入型10記事（charcoal-starter／ground-sheet／inner-tent-kangaroo／logos-tent／montbell-sleeping-bag／ogawa-tent／osprey-daily-backpack／sleeping-bag-cover／spice-box／wooden-tableware＝計49カード）を、楽天併記のダブル導線に補強した。`node scripts/diagnose-articles.mjs` で着手前に再抽出し、9/20 07:00 時点のリストと件数・内訳が一致することを確認

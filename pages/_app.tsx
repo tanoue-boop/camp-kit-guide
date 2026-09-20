@@ -2,6 +2,7 @@ import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import Layout from "../components/layout/Layout";
+import AffiliateClickTracker from "../components/AffiliateClickTracker";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { pageview, GA_TRACKING_ID } from "../lib/gtag";
@@ -66,6 +67,8 @@ export default function App({ Component, pageProps }: AppProps) {
         />
       </Head>
       <div className={`${notoSansJp.variable} ${jost.variable}`}>
+        {/* GA4 送客クリック計測（affiliate_click）。Pages Router なので app/layout.tsx ではなく _app に1回だけ配置 */}
+        <AffiliateClickTracker />
         <Layout>
           <Component {...pageProps} />
         </Layout>

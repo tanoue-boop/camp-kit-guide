@@ -86,3 +86,11 @@ kidsbuild.log
 # Google Search Console API credentials (scripts/diagnose-gsc.mjs). Never commit.
 _file/gsc-sa-key*.json
 *-sa-key*.json
+
+# GSC/ASP の生データ（検索クエリ・表示回数・商品↔記事対応・短縮リンク↔ASIN）。
+# リポジトリは公開設定なので commit しない（2026-09-20 campkit-20260920-13）。
+# ※ /logs/ は上の auto-deploy 節で既に除外済み。
+_file/gsc-pages.tsv
+_file/gsc-queries.tsv
+_file/asp-product-article-map.tsv
+_file/amazon-shortlink-asin.tsv
