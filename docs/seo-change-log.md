@@ -3,6 +3,17 @@
 数値の推移はGAS「SEOレポート」の履歴で追う。本ファイルは「いつ・どの記事を・なぜ・どう変えたか」を記録し、次回レポートで効果を評価するための施策台帳。新しい施策は上に追記する。
 
 ---
+## 2026-09-21：リライト常設化 6サイクル目・施策① — car-camp-lighting 内部リンク4本＋まとめH2語順修正（campkit-20260921-06）
+
+- **位置づけ**: `docs/rewrite-log.md` Tier1 11位以下の着手可在庫3本のうち、表示が最も多い car-camp-lighting（baseline: 表示174・CTR 5.17%・順位8.8・被リンク2本）を最小差分で施策。title／description／slug・ProductCard・比較表・価格・レビュー数・ASIN・アフィリエイトリンク・thumbnail・商品の掲載順序はすべて不変更（diff の追加行で hb.afl／amazon／rakuten の混入0件を確認）。**検証予定日 2026-10-18**（1〜5サイクル目の11本と同じ28日窓＝2026-09-21〜10-18）。**判定は CTR・position が主、impressions は参考**
+- **⚠ 混合施策の注記**: 本記事は「本体のまとめ H2 の語順修正」と「被リンク4本の追加」を同日に行った混合施策のため、**10-18 の判定で position／CTR が動いてもどちらの要因かは分離できない**。見出し1行の変更はページ単位の順位への影響が限定的と見込み、動いた場合は主に内部リンク側の効果として読むが、断定はしない
+- **① まとめ H2 の語順修正（type=見出しの語順・本体1行のみ）**: 最終 H2 `まとめ：ライト 車中泊の用途別おすすめ一覧`（KW 倒置）→ `まとめ：車中泊ライトの用途別おすすめ一覧`。記事内の先頭 H2「車中泊ライトの選び方」と同じ語順に揃えた。本文の他の行は不変更
+- **② 内部リンク4本（type=内部リンク不足・リンク元のみ編集）**: 着手前に `grep -rln "/posts/car-camp-lighting" content/posts` で2本（car-side-tarp／car-shade）を実測。照明カテゴリ18本＋車中泊系（slug に car- を含む）記事と「車中泊」の本文言及数を照合し、待機中・Tier1在庫でない4本を選んで既存記法 `[車中泊向け照明おすすめ5選](/posts/car-camp-lighting)`（アンカーは car-camp-lighting の実 title 先頭から）で1行ずつ追加（→6本）: car-camp-bed-kit（まとめ締め段落直後・「車中泊」21回・寝床→夜の明かりの流れ。car-camp-lighting からの発リンク先だが往復は選び方 H2 の早見表前段落⇔まとめ末尾で別セクション）／car-camp-mat（まとめ締め段落直後・「車中泊」31回で最多・マット→消灯後の明かり）／camp-lantern-led（「用途別おすすめランタン」H2 の最終 H3「初めてのキャンプ向け」段落直後・car-camp-lighting からの発リンク先だが往復は選び方 H2 冒頭⇔用途別 H2 末尾で別セクション。用途別の並びに「車内で使う前提」を1行足す形）／electric-blanket-camp（まとめ締め段落直後・「車中泊」19回・冬の車中泊は日没が早い→明かりの準備）。使用不可の car-side-tarp（既存リンク元かつ Tier1在庫）／car-shade（既存リンク元）／portable-power-vehicle-camp（3サイクル目リンク元・待機）は未使用。mountain-camp-lantern（article-fix-backlog 登録済み）・camp-lighting-guide（「車中泊」言及0回）・portable-cooler-aircon（夏季向けで季節が逆）は候補から外した
+- **③ updatedAt**: car-camp-lighting 06-29→09-21（H2 1行を変更したため）。リンク元4本も 09-21 に更新（car-camp-bed-kit 05-26→／car-camp-mat 09-09→／camp-lantern-led 06-29→／electric-blanket-camp 06-08→）。リンク元4本は `docs/rewrite-log.md` 補足欄で 2026-10-18 まで待機扱い（施策②③の commit で補足欄を更新）
+- **効果測定**: 10/18 前後に GSC（page＋query）で car-camp-lighting の 2026-09-21〜10-18 を取得し、baseline（CTR 5.17%／pos 8.8／表示174）と並べて `docs/rewrite-log.md` の `結果` 列に記入。見るポイントは (a) 主要クエリ（照明・ライト・ランタン×車中泊・順位8〜15）が page1 に寄るか（position 8.8 からの上昇幅）、(b) CTR 5.17% の維持。1〜5サイクル目の11本と同じ検証タスクで処理（合計12本、施策②③を含めれば14本）
+- **本番確認の注意**: `?ckbot=1&v=<unixtime>` を付けて取得し、`article:modified_time` ではなく**修正後の H2 文字列とリンク元の追加行文字列の有無**で反映を判定する
+
+---
 ## 2026-09-21：リライト常設化 5サイクル目・施策②③ — duo-tent／fire-extinguish-pot 内部リンク各4本（campkit-20260921-05）
 
 - **位置づけ**: `docs/rewrite-log.md` Tier2＋Tier3 上位台帳で内部リンク0本だった2本（duo-tent＝Tier2・順位10.1・CTR 4.55%／fire-extinguish-pot＝Tier3・順位8.0・CTR 0%）に、リンク元だけを編集して内部リンクを送った。**2本の本体は本文・title・updatedAt とも不変更**（本文を変えずに日付だけ更新しない方針。3サイクル目の camp-gear-sale-timing／4サイクル目の camp-table-set と同じ扱い）。ProductCard・比較表・価格・レビュー数・ASIN・アフィリエイトリンク・thumbnail・slug はリンク元を含めて不変更（diff の追加行で hb.afl／amazon／rakuten の混入0件を確認）。**検証予定日 2026-10-18**（1〜5サイクル目の9本と同じ28日窓＝2026-09-21〜10-18）。**判定は CTR・position が主、impressions は参考**
