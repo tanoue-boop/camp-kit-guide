@@ -16,10 +16,10 @@ no-amazon	gregory-backpack	gregory-daypack		2026-09-10	カラー7色が同価格
 set	gregory-backpack	gregory-easypeasy	B0H98SWLBS	2026-09-10	型番103868 1041完全一致・ブラック・重量550g一致
 set	gregory-backpack	gregory-casualday	B0FRS95WJQ	2026-09-10	型番1444331041完全一致・ブラック・寸法(41.5x29x15cm)一致
 no-amazon	naturehike-mat	naturehike-highr-air		2026-09-10	R値/色/サイズの3軸バリエーションで記事nameが単一仕様(R4.6/R5.8/R8.8併記)に確定できず、価格帯(¥9,368〜16,118)からも一意の組み合わせを特定できない
-no-amazon	naturehike-mat	naturehike-inflatable		2026-09-10	厚さ5cm/10cm・カラー4種(グリーン/ベージュ/枕付き2種)のバリエーションで記事nameが単一仕様に確定できず
+set	naturehike-mat	naturehike-inflatable	B09K4ZPQJ3	2026-09-20	5cm ベージュ1個 ¥5,990で記事価格と一致(9/10のno-amazonを取消)
 no-amazon	naturehike-mat	naturehike-r65		2026-09-10	楽天側はサイズM(¥19,990一致・460g)に確定できたが、Amazon類似品(B0DKSTJL29)はブランド表記が「windhike」でNaturehike正規品と確認できず、該当サイズの出品構成も一致しないため不採用
 no-amazon	naturehike-mat	naturehike-airbed-electric		2026-09-10	厚さ25/38/45cm×1/2/3人用の9通りバリエーションで記事nameが単一仕様に確定できず
-no-amazon	naturehike-mat	naturehike-airbed-25cm		2026-09-10	記事価格¥10,990が現在の楽天価格(一人用¥8,243/二人用¥9,743)のいずれとも一致せず、サイズを一意に確定できない
+set	naturehike-mat	naturehike-airbed-25cm	B0DLSR2KDN	2026-09-20	公式 1人用 25cm ¥10,990で記事価格と一致(9/10のno-amazonを取消)
 no-amazon	coleman-two-burner	cb-coleman-set-table		2026-09-10	本体+キッチンテーブル+純正LPガス2本のフルセット品でAmazonに同一構成の出品なし(本体単体のみ流通)
 no-amazon	coleman-two-burner	cb-coleman-powerhouse-gasset		2026-09-10	本体+純正LPガス2本セット品でAmazonに同一構成の出品なし(本体単体のみ流通)
 no-amazon	coleman-two-burner	cb-coleman-red-gasset		2026-09-10	本体(レッド)+純正LPガス2本セット品でAmazonに同一構成の出品なし(本体単体のみ流通)
@@ -243,3 +243,39 @@ no-amazon	stove-fan	fieldoor-5blade-16cm		2026-09-18	Amazon側は4枚羽根/6枚
 set	stove-fan	fieldoor-swing-19cm	B0FN3GLN2K	2026-09-18	
 set	stove-fan	fieldoor-mini-11cm	B0F9D6KLMC	2026-09-18	
 set	stove-fan	regear-heatwavy2	B0BPPBKQWK	2026-09-18	
+set	osprey-backpack	osprey-daylite-plus	B08LP1WWPT	2026-09-20	ブラック(osprey-daily-backpackと同一ASIN)
+set	osprey-backpack	osprey-stratos-36	B09JXK4YSD	2026-09-20	OS50306 シュテイシャンブルー・¥22,999で楽天と一致
+set	osprey-backpack	osprey-sirrus-24	B09JY35BHR	2026-09-20	OS50318 並行輸入品(国内正規の出品なし)・24L ミューテッドスペースブルー
+set	osprey-backpack	osprey-fairview-40	B09KQ1TH49	2026-09-20	Osprey Europe 40L ブラック ★4.7(719)
+set	mysteryranch-backpack	mr-coulee-30	B0BNYPZPK9	2026-09-20	19761535 S/M ブラック(112814-001=ブラック)
+set	mysteryranch-backpack	mr-gallagator	B0CQ75SFDT	2026-09-20	19761600 S-M ブラック
+set	one-touch-tarp	tarp-fieldoor3	B00I0Q8VVG	2026-09-20	4点ロック/スチール 通常 グリーン 3.0m（楽天既定=4点脚ロック・標準グリーン）
+set	one-touch-tarp	tarp-fieldoor25	B00I0Q9XRW	2026-09-20	4点ロック/スチール 通常 グリーン 2.5m
+set	one-touch-tarp	tarp-modeco3	B08YNB5WZJ	2026-09-20	3m オリーブグリーン/シルバーコーティング ★4.0(399)
+set	one-touch-tarp	tarp-quickcamp	B07P5HZTH5	2026-09-20	2.5m サンド/シルバーコーティング ★4.4(468)
+set	one-touch-tarp	tarp-modeco25	B088R5SQRG	2026-09-20	2.5m サンドベージュ/シルバーコーティング
+set	solo-camp-beginners-guide	solo-camp-tent	B09HQZ2NHD	2026-09-20	サニーレーベル(正規取扱) 213EQU5202-SM13・¥22,946で楽天と一致
+set	solo-camp-beginners-guide	solo-camp-sleeping-bag	B07B8SF11M	2026-09-20	日本正規品 1人用(グレー)。タンの出品なし→同モデル色違いで設置(要判断)
+set	solo-camp-beginners-guide	solo-camp-cooker	B08SJF98TR	2026-09-20	ogawa-tentと同一ASIN(タッソT/C 単品)
+set	thermal-bottle	tb-thermos-2way	B0DTYDK7JM	2026-09-20	FJJ-802WF BKY(800ml)=楽天既定SKU
+set	thermal-bottle	tb-tiger-sahara	B013OKS0M2	2026-09-20	MMJ-A048KA(480ml)。楽天のMMJ-A602(600ml)はAmazonに出品なく同シリーズ480mlで設置(要判断)
+set	thermal-bottle	tb-zojirushi-seamless	B0CQTMQS61	2026-09-20	SM-VB60-BM(600ml ソフトブラック) ★4.5(1328)
+set	thermal-bottle	tb-atlas-tempeak	B09QM4DSPP	2026-09-20	ATPB-1200BK(1200ml ブラック)=楽天SKUと一致
+set	thermal-bottle	tb-stanley-classic	B000FZX93U	2026-09-20	10-01289-005 グリーン 国内正規 ★4.7(8579)
+set	car-camp-bed-kit	car-rank-1	B0BWX6DWMK	2026-09-20	mountain-camp-matと同一ASIN
+set	sleeping-bag-liner	liner-rank-1	B0845XGKYX	2026-09-20	IF-201K ブラウン ★4.3(351)
+set	sleeping-bag-liner	liner-rank-2	B0DFW2BH1Y	2026-09-20	sleeping-bag-summer-cospa(amzn.to/3R9l3E2)と同一商品名・同価格¥1,298
+set	sleeping-bag-liner	liner-rank-4	B0845RPYDM	2026-09-20	IB-301L グレー ★4.4(137)
+set	portable-cooler-aircon	irisohyama-spot-cooler	B0GZZGLCGB	2026-09-20	IPP-2226U-H(2026年モデル)・楽天ページ現行型番と一致
+set	portable-cooler-aircon	threeup-spot-cooler	B0GWMN5Z7Z	2026-09-20	EC-S0814GW ¥25,800で楽天と一致
+no-amazon	mysteryranch-backpack	mr-coulee-40		2026-09-20	Amazon出品はサイズL・転売価格(¥70,400〜)のみで楽天¥39,600と乖離・レビュー0
+no-amazon	mysteryranch-backpack	mr-blitz-35		2026-09-20	AmazonはCOYOTE/FORESTとL-XLのみでブラックS/Mの出品なし
+no-amazon	solo-camp-beginners-guide	solo-camp-mat		2026-09-20	汎用OEM品・ブランド不明
+no-amazon	solo-camp-beginners-guide	solo-camp-burner		2026-09-20	汎用OEM品・ブランド不明
+no-amazon	car-camp-bed-kit	car-rank-2		2026-09-20	汎用OEM品・ブランド不明
+no-amazon	car-camp-bed-kit	car-rank-3		2026-09-20	汎用OEM品・ブランド不明
+no-amazon	sleeping-bag-liner	liner-rank-3		2026-09-20	汎用OEM品・ブランド不明
+no-amazon	sleeping-bag-liner	liner-rank-5		2026-09-20	汎用OEM品・ブランド不明
+no-amazon	portable-cooler-aircon	tansu-spot-cooler		2026-09-20	楽天限定モデル・型番なしでAmazon側の一致商品を特定不可
+no-amazon	portable-cooler-aircon	eenour-spot-cooler		2026-09-20	AmazonはPA800(2026新型)のみでPA600の出品なし
+no-amazon	portable-cooler-aircon	quads-spot-cooler		2026-09-20	楽天公式ストア限定モデル・型番なし
