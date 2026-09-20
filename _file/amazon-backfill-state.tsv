@@ -255,10 +255,10 @@ set	one-touch-tarp	tarp-modeco3	B08YNB5WZJ	2026-09-20	3m オリーブグリー�
 set	one-touch-tarp	tarp-quickcamp	B07P5HZTH5	2026-09-20	2.5m サンド/シルバーコーティング ★4.4(468)
 set	one-touch-tarp	tarp-modeco25	B088R5SQRG	2026-09-20	2.5m サンドベージュ/シルバーコーティング
 set	solo-camp-beginners-guide	solo-camp-tent	B09HQZ2NHD	2026-09-20	サニーレーベル(正規取扱) 213EQU5202-SM13・¥22,946で楽天と一致
-set	solo-camp-beginners-guide	solo-camp-sleeping-bag	B07B8SF11M	2026-09-20	日本正規品 1人用(グレー)。タンの出品なし→同モデル色違いで設置(要判断)
+no-amazon	solo-camp-beginners-guide	solo-camp-sleeping-bag		2026-09-20	記事name「エリクサー1 タン 37072」に対しAmazon日本正規品(B07B8SF11M)は1人用がグレー(37310)のみでタンは2人用/3人用にしか存在せず、並行輸入品(B0DN44GNLY ¥54,538等)も色不明・価格乖離。色不一致はfieldoor-hexa-domeの前例どおり不採用とし、9/20-01で仮設置したB07B8SF11Mを9/20-02で撤去
 set	solo-camp-beginners-guide	solo-camp-cooker	B08SJF98TR	2026-09-20	ogawa-tentと同一ASIN(タッソT/C 単品)
 set	thermal-bottle	tb-thermos-2way	B0DTYDK7JM	2026-09-20	FJJ-802WF BKY(800ml)=楽天既定SKU
-set	thermal-bottle	tb-tiger-sahara	B013OKS0M2	2026-09-20	MMJ-A048KA(480ml)。楽天のMMJ-A602(600ml)はAmazonに出品なく同シリーズ480mlで設置(要判断)
+set	thermal-bottle	tb-tiger-sahara	B013OKS0M2	2026-09-20	MMJ-A048KA(480ml)。楽天のMMJ-A602(600ml)はAmazonに出品なく同シリーズ480mlで設置。9/20-02で確定: 記事nameが「480/600ml」と両容量を併記し本文も両容量を案内しているため480mlは記事仕様の範囲内。Amazon側の600ml(MMJ-A602KJ=B08D92DTHR)は¥40,000の転売価格のみで不採用
 set	thermal-bottle	tb-zojirushi-seamless	B0CQTMQS61	2026-09-20	SM-VB60-BM(600ml ソフトブラック) ★4.5(1328)
 set	thermal-bottle	tb-atlas-tempeak	B09QM4DSPP	2026-09-20	ATPB-1200BK(1200ml ブラック)=楽天SKUと一致
 set	thermal-bottle	tb-stanley-classic	B000FZX93U	2026-09-20	10-01289-005 グリーン 国内正規 ★4.7(8579)
@@ -268,8 +268,8 @@ set	sleeping-bag-liner	liner-rank-2	B0DFW2BH1Y	2026-09-20	sleeping-bag-summer-co
 set	sleeping-bag-liner	liner-rank-4	B0845RPYDM	2026-09-20	IB-301L グレー ★4.4(137)
 set	portable-cooler-aircon	irisohyama-spot-cooler	B0GZZGLCGB	2026-09-20	IPP-2226U-H(2026年モデル)・楽天ページ現行型番と一致
 set	portable-cooler-aircon	threeup-spot-cooler	B0GWMN5Z7Z	2026-09-20	EC-S0814GW ¥25,800で楽天と一致
-no-amazon	mysteryranch-backpack	mr-coulee-40		2026-09-20	Amazon出品はサイズL・転売価格(¥70,400〜)のみで楽天¥39,600と乖離・レビュー0
-no-amazon	mysteryranch-backpack	mr-blitz-35		2026-09-20	AmazonはCOYOTE/FORESTとL-XLのみでブラックS/Mの出品なし
+no-amazon	mysteryranch-backpack	mr-coulee-40		2026-09-20	Amazon出品はサイズL・転売価格(¥70,400〜)のみで楽天¥39,600と乖離・レビュー0。9/20-02再確認: 並行輸入品ミネラルグレー S/L/XL(B0C23C6ZT3等 ¥58,957・レビュー2)と女性用オーラS(B0BNYQDY2B ¥32,000)のみで、色・価格とも楽天掲載(¥39,600)と一致せず保留維持。楽天側も404(article-fix-backlog needs-human)
+no-amazon	mysteryranch-backpack	mr-blitz-35		2026-09-20	AmazonはCOYOTE/FORESTとL-XLのみでブラックS/Mの出品なし。9/20-02再確認: B0B7WTS2MH(COYOTE S/M 112772-215-25)/B0B7WRJY4J(FOREST S-M 112772-311-25)/B0B7WSKRH9(L-XL)/B0GF9SHHVM(¥84,113)で変わらず、001ブラックS/Mなし→保留維持
 no-amazon	solo-camp-beginners-guide	solo-camp-mat		2026-09-20	汎用OEM品・ブランド不明
 no-amazon	solo-camp-beginners-guide	solo-camp-burner		2026-09-20	汎用OEM品・ブランド不明
 no-amazon	car-camp-bed-kit	car-rank-2		2026-09-20	汎用OEM品・ブランド不明

@@ -3,6 +3,18 @@
 数値の推移はGAS「SEOレポート」の履歴で追う。本ファイルは「いつ・どの記事を・なぜ・どう変えたか」を記録し、次回レポートで効果を評価するための施策台帳。新しい施策は上に追記する。
 
 ---
+## 2026-09-20：9/20-01 の本番反映確認と保留項目の確定（campkit-20260920-02）
+
+- **本番未反映の原因**: 不具合ではなくタイミング。9/20-01 の変更は auto-deploy の 13:25 回で「10分以内に書かれたファイルあり」として見送られ、13:55 回で commit `ec19fc5` → push → 本番検証 PASS（13:57）。本タスクの検品はその前に行われていた。14:00 時点で `tent-size-beginner-guide`／`camp-backpack-capacity-guide`（modified_time 2026-09-20・新節あり）、`portable-power-guide`（Jackery 500 New／1000 New／DELTA 3 Max）、`osprey-backpack`（Amazonリンク4件）とも本番で確認済み
+- **auto-deploy の付随修正**: `.claude/settings.json`（9/20 11:46 に Claude Code が自動生成した権限許可リスト）が追跡外のまま残り、12:25 回で「変更あり→build→ステージ空で中止(exit 1)」が発生していた。`deploy.cjs` の add 対象外のため今後も変更が無い回に同じ空振りを繰り返すので `.gitignore` に追加
+- **保留項目の確定**（Amazon実ページで再確認・詳細は `_file/amazon-backfill-state.tsv`）
+  - `solo-camp-beginners-guide` 第2位 MSR エリクサー1 タン: 9/20-01 で仮設置した `B07B8SF11M`（グレー1人用）を**撤去**。日本正規品のタンは2/3人用のみ・並行輸入品は¥54,538〜で価格乖離。色不一致は `fieldoor-hexa-dome` の前例どおり不採用（記事 name「タン 37072」との不一致を残さない）
+  - `thermal-bottle` 第2位 タイガー SAHARA: `B013OKS0M2`（480ml）を**維持で確定**。記事 name が「480/600ml」併記・本文も両容量を案内しており仕様範囲内。Amazon の600ml（MMJ-A602KJ）は¥40,000の転売出品のみ
+  - `mysteryranch-backpack` 第3位 クーリー40／第4位 ブリッツ35: **保留維持**。クーリー40は並行輸入ミネラルグレー（¥58,957）と女性用オーラのみ、ブリッツ35は COYOTE/FOREST/L-XL のみで 001ブラック S/M なし
+  - `solo-camp-beginners-guide` 第3・4位／`car-camp-bed-kit` 第2・3位／`backpack-rain-cover` 5件: 無名OEM（ブランド名なし）のため CLAUDE.md の「該当なしを許容」に従い**保留維持**
+- **新規発見（要人間判断・`_file/article-fix-backlog.tsv` に needs-human A で登録）**: `solo-camp-beginners-guide` は見出し「寝袋／マット／バーナー／クッカー」に対し実商品が MSRテント／無名OEMテント／ペグハンマー／OGAWAテントで全てズレている（description も「3,000円台の寝袋」のまま）。手順Fの範囲を超えるため記事構成の作り直しが必要
+
+---
 ## 2026-09-20：収益導線の穴を修復（campkit-20260920-01／diagnosis-phase1の後続）
 
 - **背景**: `result-diagnosis-phase1.md`（2026-09-20）で「収益リンク0本の記事3本」「楽天リンクはあるがAmazonリンク0本の記事23本」が判明。GSC取得は認証待ちだが、記事属性ベースの穴は確定事項として先に着手した

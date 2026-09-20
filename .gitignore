@@ -40,6 +40,10 @@ yarn-error.log*
 # NOT the whole .claude/ dir — .claude/skills/ は共有資産なので追跡を維持する
 # （ディレクトリ丸ごと ignore にすると新規スキルが取りこぼされるため）。
 .claude/settings.local.json
+# .claude/settings.json は Claude Code が 2026-09-20 に自動生成した権限許可リスト（この端末固有）。
+# deploy.cjs の add 対象外なので、追跡外のまま残すと auto-deploy が30分ごとに
+# 「変更あり→build→ステージ空で中止(exit 1)」を繰り返す（2026-09-20 12:25 に実発生）。
+.claude/settings.json
 
 # deploy serialization lock (scripts/deploy.cjs)
 .deploy.lock
