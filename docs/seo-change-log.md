@@ -6,6 +6,7 @@
 ## 2026-09-20：9/20-01 の本番反映確認と保留項目の確定（campkit-20260920-02）
 
 - **本番未反映の原因**: 不具合ではなくタイミング。9/20-01 の変更は auto-deploy の 13:25 回で「10分以内に書かれたファイルあり」として見送られ、13:55 回で commit `ec19fc5` → push → 本番検証 PASS（13:57）。本タスクの検品はその前に行われていた。14:00 時点で `tent-size-beginner-guide`／`camp-backpack-capacity-guide`（modified_time 2026-09-20・新節あり）、`portable-power-guide`（Jackery 500 New／1000 New／DELTA 3 Max）、`osprey-backpack`（Amazonリンク4件）とも本番で確認済み
+- **Vercel が push を拾わない事象（本タスク中に発生）**: 上記の確定作業を commit `67fad68` として 14:07 に push したが、Vercel 側の Production デプロイが 20分以上作成されなかった（GitHub の PushEvent は 05:07:42Z に記録済・Vercel ステータスは All Systems Operational・直前の `ec19fc5` は push 後50秒でデプロイ完了）。GitHub→Vercel の webhook 取りこぼしとみられるため、本ログ追記を含む再 push で再トリガーした。`verify-deploy.cjs` は「期待2→実3」のように**実リンク数が期待より多くても PASS を返す**ため、リンク撤去の反映は本番HTMLで別途確認が必要
 - **auto-deploy の付随修正**: `.claude/settings.json`（9/20 11:46 に Claude Code が自動生成した権限許可リスト）が追跡外のまま残り、12:25 回で「変更あり→build→ステージ空で中止(exit 1)」が発生していた。`deploy.cjs` の add 対象外のため今後も変更が無い回に同じ空振りを繰り返すので `.gitignore` に追加
 - **保留項目の確定**（Amazon実ページで再確認・詳細は `_file/amazon-backfill-state.tsv`）
   - `solo-camp-beginners-guide` 第2位 MSR エリクサー1 タン: 9/20-01 で仮設置した `B07B8SF11M`（グレー1人用）を**撤去**。日本正規品のタンは2/3人用のみ・並行輸入品は¥54,538〜で価格乖離。色不一致は `fieldoor-hexa-dome` の前例どおり不採用（記事 name「タン 37072」との不一致を残さない）
