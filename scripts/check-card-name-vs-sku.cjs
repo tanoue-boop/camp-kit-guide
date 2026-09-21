@@ -12,6 +12,8 @@
  *   node scripts/check-card-name-vs-sku.cjs --dry                 # fetch せず mdx パースと件数だけ
  *   node scripts/check-card-name-vs-sku.cjs --test                # 判定関数の単体テスト
  *   node scripts/check-card-name-vs-sku.cjs --only inflatable-mat#1,attack-pack#5   # 名指し（既存行があっても再取得）
+ *   node scripts/check-card-name-vs-sku.cjs --only dod-tarp#dod-okla-tarp          # id で名指し（rank が重複する記事向け）
+ *     ※ `slug#rank` で同じ rank のカードが複数あるときは該当する全枚が対象（rank は記事内で一意ではない）
  *   node scripts/check-card-name-vs-sku.cjs --limit 100           # 未チェックを slug昇順・rank昇順で N 枚
  *   node scripts/check-card-name-vs-sku.cjs --limit 100 --max-minutes 20   # 経過時間で打ち切り（TSV には処理済み分を保存）
  *   node scripts/check-card-name-vs-sku.cjs --recheck --limit 50  # 既存行も再取得
@@ -45,11 +47,14 @@
  *   url_unparsable    affiliateUrl から実リンク先URLを取り出せない（fetch しない）
  *
  * 選択SKU（価格・スペック判定の根拠。TSV 末尾列 sku_selected）: URL の variantId 指定 > 各軸で「カード name が名指しした値」
- *   （無ければ先頭値。セット/単品を選ぶ軸は常に先頭値＝着地時の既定）との一致度が最大の SKU。
+ *   （無ければ先頭値。セット/単品を選ぶ軸は常に先頭値＝着地時の既定）との一致度が最大の SKU。name が同じ軸の値を複数並記して
+ *   いる（「5cm/10cm」「3mx3m 2m×2m」）ときは、同点の中から 価格がカード price と一致する変種 > name で先に出る値 の順。
  *
  * 楽天へのアクセス: UA 付き・各URL 1回だけ・リクエスト間隔 INTERVAL_MS 以上・同一ホストへ並列 GET しない。
  *   429 / 503 が返ったらその時点で走査を止めて処理済み分を保存し exit 2（リトライで押し切らない）。
- *   取得 HTML は `_file/_work/html-24/<slug>__<rank>.html` に保存（.gitignore 下）。
+ *   取得 HTML は `_file/_work/html-24/<slug>__<rank>__<id>.html`（id が空なら `<slug>__<rank>__i<記事内通し番号>.html`）に保存（.gitignore 下）。
+ *   ※ 第3弾（campkit-20260921-26）まで `<slug>__<rank>.html` だったが、rank は記事内で一意ではなく（dod-tarp は rank="1" が2枚）
+ *     後から書いたカードの HTML で前のカードを再判定してしまう取り違えが起きたため、id 単位に変更した。
  */
 'use strict';
 
@@ -60,7 +65,7 @@ const ROOT = path.join(__dirname, '..');
 const POSTS_DIR = path.join(ROOT, 'content', 'posts');
 const OUT = path.join(ROOT, '_file', 'card-name-check.tsv');
 const HTML_DIR = path.join(ROOT, '_file', '_work', 'html-24');
-const TASK_ID = 'campkit-20260921-25'; // 走査・再判定を行ったタスク（TSV の judged_task 列に入る）
+const TASK_ID = 'campkit-20260921-26'; // 走査・再判定を行ったタスク（TSV の judged_task 列に入る）
 
 // ---------------------------------------------------------------------------
 // 閾値・定数（A-4 の回帰検証で調整する。slug / id を条件に埋め込まない）
@@ -140,7 +145,8 @@ const PURE_DIGIT_MODEL_MIN = 7; // 純数字の型番（コールマン 20000155
 // `+`/`＋` は語と語の間にあり、かつ片側が数字でないときだけ（"40+5"（容量）・"DARKROOM ST+("（型番末尾）は除く。
 // "Gen 2 ＋ PS100"／"268Wh ＋ 130W" は片側が英字なのでセット）
 //   `+` の判定は plusJoin() に分離（第2バッチ: "usb led+ランタン" の複合語・括弧内の "ソーラー＋手回し＋乾電池" の仕様並記を除く）
-const SET_WORD_RE = /(?<!カ)セット|(?<![A-Za-z])set(?![A-Za-z])|[0-9０-９]+\s*点/i;
+//   「4点脚ロック」（脚の固定方式）の 点 は数量ではない（第3バッチ fieldoor-tent #5）
+const SET_WORD_RE = /(?<!カ)セット|(?<![A-Za-z])set(?![A-Za-z])|[0-9０-９]+\s*点(?!脚)/i;
 // セレクタ値のセット/単品判定（"MDX+" のような末尾 + は除く）
 const SET_VAL_RE = /(?<!カ)セット|(?<![A-Za-z])set(?![A-Za-z])|付き|付属|同梱|\S\s*[+＋]\s*\S|入り|付$/i;
 // 「カラーなし」「サイズなし」は色/サイズ軸のプレースホルダであってセット/単品の軸ではない（第2バッチ camp-knife-beginner #5）
@@ -162,11 +168,16 @@ const DESC_MODEL_LABEL = '(?:型番|品番|型式|型名|モデル|model(?:\\s*n
 const RANGE_RE = /(\d+(?:\.\d+)?)\s*(L|cm|mm|人用)?\s*[~〜～\-ー–]\s*(\d+(?:\.\d+)?)\s*(L|cm|mm|人用)/g;
 const BOUND_RE = /(\d+(?:\.\d+)?)\s*(L|cm|mm|人用)\s*(?:以上|以下|以内|まで|未満|対応|クラス)/g;
 const SALE_URL_RE = /sale|outlet|wakeari|bargain/i;
+// 「あり/なし」だけの2値軸（通気口 あり/なし 等）。価格差が PRICE_TOL 未満なら仕様オプションであって同梱セットの軸ではない（第3バッチ low-style-bonfire #2）
+const TOGGLE_VAL_RE = /^(?:あり|有り|有|なし|無し|無)$/;
+// 注文者の区分（個人/法人・会員）を選ぶ軸は商品を束ねる軸ではない（第3バッチ group-camp-tent #1・large-tent-guide #1「個人のお客様/法人のお客様」）
+const BUYER_AXIS_RE = /お客様|個人|法人|会員|事業者/;
 
 // 数値スペック（spec_mismatch）: [正規表現, 種別]。値は m[1]、単位は m[2]（あれば）
 const SPEC_PATTERNS = [
   [/幅\s*(\d+(?:\.\d+)?)\s*(cm|mm|m)?/g, 'width'],
-  [/厚\s*(?:さ|み|手)?\s*(\d+(?:\.\d+)?)(?:\s*[／/]\s*(\d+(?:\.\d+)?))?\s*(cm|mm)/g, 'thick'],
+  //   「厚手8cm/12cm」（前の数値にも単位が付く並記）も1つの thick 並記として取る（第3バッチ naturehike-mat #1・#2）
+  [/厚\s*(?:さ|み|手)?\s*(\d+(?:\.\d+)?)(?:\s*(?:cm|mm))?(?:\s*[／/]\s*(\d+(?:\.\d+)?))?\s*(cm|mm)/g, 'thick'],
   [/(\d+(?:\.\d+)?)\s*(Wh)(?![A-Za-z])/g, 'wh'],
   [/(\d+(?:\.\d+)?)\s*(W)(?![A-Za-z])/g, 'w'],
   [/(\d+(?:\.\d+)?)\s*(mAh|Ah)(?![A-Za-z])/g, 'ah'],
@@ -261,6 +272,11 @@ function loadAllCards() {
   return { cards: out, files: files.length };
 }
 
+// 楽天商品ページ URL の商品コード部分（https://item.rakuten.co.jp/<shop>/<itemcode>/ の itemcode）。取れなければ ''
+function itemCodeOf(url) {
+  const m = /item\.rakuten\.co\.jp\/[^/]+\/([^/?#]+)/.exec(String(url || ''));
+  return m ? m[1] : '';
+}
 // affiliateUrl → 実リンク先（楽天商品ページ）。pc= → m= → 自身が item.rakuten.co.jp の順。取れなければ ''
 function rakutenUrl(affiliateUrl) {
   if (!affiliateUrl) return '';
@@ -330,40 +346,52 @@ function isSetAxis(a) {
   return a.values.filter((v) => QTY_VAL_RE.test(toHalfWidth(v).trim())).length * 2 >= a.values.length;
 }
 function firstValue(a) { return a.values.find((v) => !NOTICE_VAL_RE.test(v)) ?? a.values[0]; }
-function chosenValues(axes, cardName) {
-  return axes.map((a) => (isSetAxis(a) ? '' : nameSpecifiedValue(a, cardName)) || firstValue(a));
+// 各軸の候補値（name の出現順）。名指しが無い軸・セット軸は [先頭値]
+function chosenValueLists(axes, cardName) {
+  return axes.map((a) => {
+    const named = isSetAxis(a) ? [] : nameSpecifiedValues(a, cardName).map((x) => x.v);
+    return named.length ? named : [firstValue(a)];
+  });
 }
 // カード name が名指ししている軸の値（無ければ ''）
 //   値の括弧は外しても照合する（car-camp-bed-kit #1: 軸の値「極厚（10cm）」↔ name「極厚 10cm」）
-function nameSpecifiedValue(a, cardName) {
+//   複数の値が name に現れるときは name の中で先に出るものを採る（同じ位置なら長いもの）。「厚手5cm/10cm」のように並記された
+//   name では先頭が採用仕様（カード price は 5cm の価格）であって、長い方（10cm）ではない（第3バッチ naturehike-mat #2）
+//   並記のときは選択SKUの決定（parseRakutenHtml）で「価格がカード price と一致する変種」を優先する（group-camp-tent #2: name「3mx3m 2m×2m」・
+//   カード ¥8,999 は 2m×2m の価格）。並記の name は size_unspecified で別途拾うので、恣意的な選択で price_mismatch を立てない
+function nameSpecifiedValues(a, cardName) {
   const nk = norm(cardName || '').replace(/\s+/g, '');
-  {
-    let best = '';
-    for (const v of a.values) {
-      const vk0 = norm(v).replace(/\s+/g, '');
-      if (vk0.length < 2 || NONE_VAL_RE.test(v) || NOTICE_VAL_RE.test(v)) continue;
-      for (const vk of [vk0, vk0.replace(/[()\[\]「」]/g, '')]) {
-        if (vk.length < 2) continue;
-        const i = nk.indexOf(vk);
-        if (i < 0) continue;
-        if (i > 0 && /[0-9.]/.test(nk[i - 1]) && /^[0-9]/.test(vk)) continue;
-        if (vk.length > best.length) best = v;
-        break;
-      }
+  const out = [];
+  for (const v of a.values) {
+    const vk0 = norm(v).replace(/\s+/g, '');
+    if (vk0.length < 2 || NONE_VAL_RE.test(v) || NOTICE_VAL_RE.test(v)) continue;
+    for (const vk of [vk0, vk0.replace(/[()\[\]「」]/g, '')]) {
+      if (vk.length < 2) continue;
+      const i = nk.indexOf(vk);
+      if (i < 0) continue;
+      if (i > 0 && /[0-9.]/.test(nk[i - 1]) && /^[0-9]/.test(vk)) continue;
+      out.push({ v, pos: i, len: vk.length });
+      break;
     }
-    return best;
   }
+  return out.sort((x, y) => x.pos - y.pos || y.len - x.len);
+}
+function nameSpecifiedValue(a, cardName) {
+  const l = nameSpecifiedValues(a, cardName);
+  return l.length ? l[0].v : '';
 }
 // 「A+B」「A＋B」の結合がセット（同梱）を表すか。
 //   除く: 数字同士（容量 40+5）／右が括弧（型番末尾 ST+(）／末尾の +（MDX+）／
 //         英字語に直結して右がカタカナ（"usb led+ランタン"＝複合語）／括弧内（"（ソーラー＋手回し＋乾電池）"＝仕様の並記）
+//         左に密着し右に空白がある +（"UPF50+ 耐水圧"＝等級の接尾辞。第3バッチ naturehike-tent #3）
 function plusJoin(s) {
   const t = toHalfWidth(s).replace(/\([^)]*\)/g, ' ');
-  for (const m of t.matchAll(/(\S)\s*[+＋]\s*(\S)/g)) {
-    const [, l, r] = m;
+  for (const m of t.matchAll(/(\S)(\s*)[+＋](\s*)(\S)/g)) {
+    const [, l, ls, rs, r] = m;
     if (/\d/.test(l) && /\d/.test(r)) continue;
     if (/[()/／、,・]/.test(r)) continue;
     if (/[A-Za-z]/.test(l) && !/\s/.test(m[0]) && /^[ァ-ヶー]/.test(r)) continue;
+    if (!ls && rs) continue;
     return true;
   }
   return false;
@@ -371,8 +399,25 @@ function plusJoin(s) {
 function cardHasSet(name) { return SET_WORD_RE.test(name) || plusJoin(name); }
 // セレクタ値の数量（"4台（レイアウト自在！）" → 4、数量表記でなければ null）
 function qtyOf(v) { const m = /^(\d+)\s*(?:個|枚|本|脚|点|袋|組|台|セット|set)(?:$|[\s(（/／・、,☆★]|セット|単品|入り|set)/i.exec(toHalfWidth(v).trim()); return m ? Number(m[1]) : null; }
+// カード name がセレクタ値の文字列をそのまま含むか（空白・全角半角の差は無視。「なし/のみ」の値も対象にする点が nameSpecifiedValue と違う）
+function nameContainsValue(cardName, v) {
+  const vk = norm(v || '').replace(/\s+/g, '');
+  if (vk.length < 2) return false;
+  return norm(cardName || '').replace(/\s+/g, '').includes(vk);
+}
+// 「あり/なし」だけの2値軸で、選択SKUと その軸だけ違う SKU の価格差が PRICE_TOL 未満なら仕様オプション（セット軸ではない）
+function toggleAxisIsSpec(page, idx) {
+  const a = page.axes[idx];
+  if (!a || a.values.length !== 2 || !a.values.every((v) => TOGGLE_VAL_RE.test(String(v).trim()))) return false;
+  const fs0 = page.firstSku;
+  if (!fs0 || !Array.isArray(page.skus) || !page.skus.length) return false;
+  const other = page.skus.find((s) => s !== fs0 && s.selectorValues.length === fs0.selectorValues.length &&
+    s.selectorValues.every((v, i) => (i === idx ? v !== fs0.selectorValues[i] : v === fs0.selectorValues[i])));
+  if (!other || fs0.price == null || other.price == null) return false;
+  return Math.abs(fs0.price - other.price) / Math.min(fs0.price, other.price) < PRICE_TOL;
+}
 
-function parseRakutenHtml(html, url, cardName = '') {
+function parseRakutenHtml(html, url, cardName = '', cardPrice = '') {
   const page = {
     itemName: '', makerModel: '', brand: '', color: '', size: '', series: '', manageNumber: '', variantId: '',
     axes: [], skus: [], skuCount: 0, firstSku: null, currentPrice: null, stock: '', attrsText: '', descText: '',
@@ -415,12 +460,18 @@ function parseRakutenHtml(html, url, cardName = '') {
     //   が最大の SKU（同点なら非hidden→安値）
     //   ※ 全軸の先頭値の組み合わせが SKU として存在しないページがある（inflatable-mat #1: 幅70×8cm×ベージュ が無い）ため
     //     完全一致を要求せず、先頭軸から順に一致数で選ぶ
+    //   name が同じ軸の値を複数並記している（「3mx3m 2m×2m」「5cm/10cm」）ときは、一致数が同点の SKU のうち
+    //   価格がカード price と一致するもの → name で先に出る値のもの の順で選ぶ
     let pinned = '';
     try { pinned = new URL(url).searchParams.get('variantId') || ''; } catch { /* ignore */ }
-    const firstVals = chosenValues(page.axes, cardName);
-    const scoreOf = (s) => firstVals.reduce((acc, v, i) => acc + (s.selectorValues[i] === v ? 2 ** (firstVals.length - 1 - i) : 0), 0);
+    const lists = chosenValueLists(page.axes, cardName);
+    const n = lists.length;
+    const scoreOf = (s) => lists.reduce((acc, list, i) => acc + (list.includes(s.selectorValues[i]) ? 2 ** (n - 1 - i) : 0), 0);
+    const orderOf = (s) => lists.reduce((acc, list, i) => { const k = list.indexOf(s.selectorValues[i]); return acc + (k < 0 ? list.length : k) * 2 ** (n - 1 - i); }, 0);
+    const cp = Number(String(cardPrice).replace(/[^0-9.]/g, ''));
+    const priceHit = (s) => (cp > 0 && s.price === cp ? 1 : 0);
     const ranked = [...page.skus].sort((a, b) =>
-      scoreOf(b) - scoreOf(a) || Number(a.hidden) - Number(b.hidden) || (a.price ?? Infinity) - (b.price ?? Infinity));
+      scoreOf(b) - scoreOf(a) || priceHit(b) - priceHit(a) || orderOf(a) - orderOf(b) || Number(a.hidden) - Number(b.hidden) || (a.price ?? Infinity) - (b.price ?? Infinity));
     page.firstSku = (pinned && page.skus.find((s) => s.variantId === pinned)) || ranked[0];
   } else {
     // 単一SKU
@@ -537,9 +588,13 @@ function typeWords(name, brand) {
   const firstTok = tokens(toHalfWidth(stripDecor(name)))[0];
   const all = tokens(head);
   if (all.length > 1 && all[0] === firstTok) all.shift();
-  return all.filter((t) => {
+  // 「ファミリー封筒型寝袋」のようにカタカナ語と漢字語が連結した複合語は、カタカナ↔漢字/かな の境界で分けて個別に照合する
+  //   （第3バッチ naturehike-sleeping-bag #4: 実リンク先は「寝袋 シュラフ 封筒型 家族用」で、複合語のままだと 2-gram 被覆率が 0.33）
+  const split = all.flatMap((t) => t.split(/(?<=[ァ-ヶー])(?=[一-龠ぁ-ん])|(?<=[一-龠ぁ-ん])(?=[ァ-ヶー])/).filter((x) => x.length >= 2));
+  return split.filter((t) => {
     if (t.length < 2) return false;
-    if (/^[a-z0-9-]+$/.test(t)) return false;          // 英数字だけ（ブランド・型番・単位）は除く
+    if (/^[a-z]{4,}$/.test(t)) return !brandKeys.includes(t); // 英字だけの語（catalyst／scree／darkroom）は型語として照合してよい（型番・単位は含まない）
+    if (/^[a-z0-9-]+$/.test(t)) return false;          // 英数字混じり・短い英字（ブランド・型番・単位）は除く
     if (/^\d/.test(t)) return false;                    // 数値始まり（200cm / 2~4人用）。「ズール35」のような語末の数字は型語のまま
     if (STORE_COPY_WORDS.test(t)) return false;         // 販促文言（送料無料・通常価格より2000円OFF 等）は型語ではない
     if (hasColorWord(t) && t.length <= 6) return false; // 色語
@@ -665,14 +720,6 @@ function judge(card, page, http) {
   const skuText = [keyText, page.attrsText, page.manageNumber, page.variantId, first.selectorValues.join(' ')].join(' ');
   const allText = [skuText, page.descText].join(' ');
 
-  // type_mismatch
-  const tw = typeWords(name, page.brand);
-  if (tw.length) {
-    const hay = norm(keyText);
-    const found = tw.filter((w) => typeWordFound(w, hay));
-    if (found.length < TYPE_MIN_COMMON) { flags.push('type_mismatch'); notes.push(`type:${tw.join('|')}`); }
-  }
-
   // model_mismatch（カード → 実リンク先の向きのみ）
   //   逆向き（実SKUのメーカー型番がカードに無い）は第1バッチで 3/3 がノイズ（Anker のバンドル管理番号 B1763/B1761、
   //   メーカー型番欄に JAN 4976790764001 が入っている例）だったため付与しない。カード側の型番が実リンク先のどこにも無い場合だけ
@@ -683,6 +730,19 @@ function judge(card, page, http) {
   const hayModel = modelKey([keyText, page.attrsText].join(' '));
   const missing = cm.filter((t) => !hayModel.includes(modelKey(t)) && !descHasLabeledModel(page.descText, t));
   if (missing.length) { flags.push('model_mismatch'); notes.push(`model:${missing.join('|')}`); }
+
+  // type_mismatch
+  //   カードの型番が itemName／メーカー型番に全部見つかっている（model_mismatch なし）なら型語の照合は省く。型番一致は型語より強い根拠で、
+  //   店が商品名に別の呼び方（「リラックスローチェア F-1002C」↔「ハイバックチェア」）を使っているだけの誤検知を避ける（第3バッチ fireproof-chair #5）
+  //   英字だけの型語（catalyst／scree）は「見つかった」側の根拠にだけ使う。英字語しか無い name（「キャンピングムーン CAMPINGMOON ガスランタン」の
+  //   先頭20字＝英字ブランド名だけ）で照合を始めると、店が英字名を書いていないだけで type_mismatch になる（gas-lantern #5）
+  const tw = typeWords(name, page.brand);
+  const twJp = tw.filter((w) => !/^[a-z]+$/.test(w));
+  if (twJp.length && !(cm.length && !missing.length)) {
+    const hay = norm(keyText);
+    const found = tw.filter((w) => typeWordFound(w, hay));
+    if (found.length < TYPE_MIN_COMMON) { flags.push('type_mismatch'); notes.push(`type:${tw.join('|')}`); }
+  }
 
   // spec_mismatch
   //   バリエーション軸にその数値＋単位が値として並ぶページ（幅70cm/75cm・8cm/10cm・40L/50L/60L 等）では itemName・仕様欄が
@@ -696,7 +756,8 @@ function judge(card, page, http) {
   const multi = new Set();
   {
     const groups = {};
-    for (const sp of sps) if (['liter', 'len', 'thick', 'width'].includes(sp.kind)) (groups[sp.kind + sp.unit] ||= new Set()).add(sp.value);
+    //   容量（5000mAh/10000mAh）の並記も同様（第3バッチ mobile-battery-camp #5）。W／Wh は「600W（サージ1200W）」のように同一商品の2値があるので含めない
+    for (const sp of sps) if (['liter', 'len', 'thick', 'width', 'ah'].includes(sp.kind)) (groups[sp.kind + sp.unit] ||= new Set()).add(sp.value);
     for (const [k, vals] of Object.entries(groups)) if (vals.size >= 2) multi.add(k);
   }
   const missSpec = sps.filter((sp) => {
@@ -711,14 +772,19 @@ function judge(card, page, http) {
   //   セット/単品を選ぶ軸（値に セット/付き/入り、または なし/本体のみ を含む軸）があればその選択SKUの値で判定。
   //   無ければ itemName／メーカー型番のセット語で判定（逆向きは itemName のセット語が SEO ノイズになりやすいので軸がある時だけ）
   //   itemName の「A+B」（coleman-lantern #3: ルミエールランタン+純正LPガス燃料）もセット語として扱う
+  //   「あり/なし」だけの2値軸は、あり↔なし の SKU の価格差が PRICE_TOL 未満なら仕様オプション（通気口 あり/なし）でセット軸ではない
+  //   （low-style-bonfire #2: 6,490↔6,390）。差が大きければ同梱品（logos-sleeping-bag #3: シュラフコンフォーター あり 9,610↔なし 4,980）
   const cardSet = cardHasSet(toHalfWidth(stripDecor(name)));
-  const setAxisIdx = page.axes.findIndex(isSetAxis);
+  const setAxisIdx = page.axes.findIndex((a, i) => isSetAxis(a) && !toggleAxisIsSpec(page, i));
   if (setAxisIdx >= 0) {
     const sel = first.selectorValues[setAxisIdx] || '';
     const axisHasNone = page.axes[setAxisIdx].values.some((v) => NONE_VAL_RE.test(v));
-    const qn = qtyOf(sel); // 数量軸: 2以上ならセット扱い（camp-table-folding #5: 既定「4台」）
-    const skuIsSet = !NONE_VAL_RE.test(sel) && (SET_VAL_RE.test(sel) || axisHasNone || (qn != null && qn >= 2));
-    if (cardSet && !skuIsSet) { flags.push('set_mismatch'); notes.push(`set:card=set,sku=single(${sel})`); }
+    const qn = qtyOf(sel); // 数量軸: 2以上ならセット扱い（camp-table-folding #5: 既定「4台」）。1個入り／1枚 は単品（第3バッチ field-rack #5・headlight-rechargeable #5）
+    const skuIsSet = qn === 1 ? false : !NONE_VAL_RE.test(sel) && (SET_VAL_RE.test(sel) || axisHasNone || (qn != null && qn >= 2));
+    // カード name が選択値そのもの（「テント本体セットのみ」）を名指ししていれば、セット語の有無に関わらず整合（第3バッチ fieldoor-tent #2）
+    const named = nameContainsValue(name, sel);
+    if (named) { /* 整合 */ }
+    else if (cardSet && !skuIsSet) { flags.push('set_mismatch'); notes.push(`set:card=set,sku=single(${sel})`); }
     else if (!cardSet && skuIsSet) { flags.push('set_mismatch'); notes.push(`set:card=single,sku=set(${sel})`); }
   } else if (cardSet && !PAGE_SET_RE.test([itemName, page.makerModel].join(' ')) && !plusJoin([itemName, page.makerModel].join(' '))) {
     flags.push('set_mismatch'); notes.push('set:card=set,sku=single');
@@ -744,10 +810,13 @@ function judge(card, page, http) {
   //   URL/管理番号のセール語、または SKU 数が多く かつ 色・サイズ以外の軸（タイプ/シリーズ/本数 等＝別商品を束ねる軸）があること
   const itemModels = modelTokens(itemName);
   const totalVals = page.axes.reduce((s, a) => s + a.values.length, 0);
-  const saleUrl = SALE_URL_RE.test(page.manageNumber || '') || SALE_URL_RE.test(card.url || '');
+  //   セール語は店舗の管理番号（URL の商品コード）だけで見る。店名（futon-outlet 等）に含まれるものは根拠にしない（第3バッチ hot-water-bottle #5）
+  const saleUrl = SALE_URL_RE.test(page.manageNumber || '') || SALE_URL_RE.test(itemCodeOf(card.url));
   //   セット/数量の軸はオプションであって別商品を束ねる軸ではない。カード name が値を名指ししている軸も、そのカードにとっては曖昧でない
   //   （第2バッチ car-camp-mat #4: サイズ×タイプ×色×セットの 70 SKU だが name が S／大型二重バルブ／ベージュ を名指し）
-  const bundlingAxis = page.axes.some((a) => a.values.length >= 2 && !isColorAxis(a) && !isSizeAxis(a) && !isSetAxis(a) && !nameSpecifiedValue(a, name));
+  //   注文者区分（個人/法人）の軸も商品を束ねる軸ではない
+  const bundlingAxis = page.axes.some((a) => a.values.length >= 2 && !isColorAxis(a) && !isSizeAxis(a) && !isSetAxis(a) && !nameSpecifiedValue(a, name)
+    && !(BUYER_AXIS_RE.test(a.key) || a.values.every((v) => BUYER_AXIS_RE.test(v))));
   if (itemModels.length === 0 && ((saleUrl && totalVals >= SALE_VALUES_MIN) || (page.skuCount >= SALE_SKU_MIN && bundlingAxis))) flags.push('sale_page');
 
   // price_mismatch
@@ -818,11 +887,17 @@ function baseRow(card) {
     card_price: card.price, current_price: '', stock: '', flags: '', checked_at: nowIso(), judged_task: TASK_ID, sku_selected: '',
   };
 }
+// 保存 HTML のパス。rank は記事内で一意ではない（dod-tarp は rank="1" が2枚）ので id まで含める。
+// id が空のカードは記事内の通し番号（parseCards の index）で区別する
+function cacheFileOf(card) {
+  const idPart = card.id ? card.id : `i${card.index}`;
+  return path.join(HTML_DIR, `${card.slug}__${card.rank}__${idPart}.html`);
+}
 async function checkCard(card, opts = {}) {
   const row = baseRow(card);
   if (!card.url) { row.flags = 'url_unparsable'; return { row, page: null }; }
   let res;
-  const cacheFile = path.join(HTML_DIR, `${card.slug}__${card.rank}.html`);
+  const cacheFile = cacheFileOf(card);
   if (opts.cached && !fs.existsSync(cacheFile)) throw new Error(`--cached: 保存 HTML がありません: ${cacheFile}`);
   try {
     if (opts.cached) {
@@ -842,10 +917,10 @@ async function checkCard(card, opts = {}) {
   row.http = String(res.status);
   if (opts.saveHtml !== false && !res.cached) {
     fs.mkdirSync(HTML_DIR, { recursive: true });
-    fs.writeFileSync(path.join(HTML_DIR, `${card.slug}__${card.rank}.html`), res.html, 'utf8');
+    fs.writeFileSync(cacheFile, res.html, 'utf8');
   }
   if (res.status === 429 || res.status === 503) { row.flags = `http_${res.status}`; return { row, page: null, throttled: true }; }
-  const page = res.status === 404 ? null : parseRakutenHtml(res.html, card.url, card.name);
+  const page = res.status === 404 ? null : parseRakutenHtml(res.html, card.url, card.name, card.price);
   if (page) {
     row.rakuten_item_name = page.itemName;
     row.maker_model = page.makerModel;
@@ -867,10 +942,13 @@ async function checkCard(card, opts = {}) {
 function mkPage(o) {
   const attrs = (o.attrs || []).map(([title, value]) => ({ title, value: String(value), unit: '' }));
   const first = { variantId: o.variantId || 'v1', selectorValues: o.selectorValues || [], price: o.price ?? null, qty: o.qty, hidden: false, attrs };
+  // o.skus: [[selectorValues[], price], …]（先頭を選択SKUにする）
+  const skus = (o.skus || []).map(([selectorValues, price], i) => ({ variantId: `s${i}`, selectorValues, price, qty: 1, hidden: false, attrs: [] }));
+  if (skus.length) { first.selectorValues = skus[0].selectorValues; first.price = skus[0].price; skus[0] = first; }
   return {
     itemName: o.itemName || '', makerModel: o.makerModel || '', brand: o.brand || '', series: o.series || '',
-    manageNumber: o.manageNumber || '', variantId: o.variantId || '', axes: o.axes || [], skus: [], skuCount: o.skuCount ?? 1,
-    firstSku: first, currentPrice: o.price ?? null, stock: '', attrsText: attrs.map((a) => `${a.title}=${a.value}`).join('; '),
+    manageNumber: o.manageNumber || '', variantId: o.variantId || '', axes: o.axes || [], skus, skuCount: o.skuCount ?? 1,
+    firstSku: first, currentPrice: first.price, stock: '', attrsText: attrs.map((a) => `${a.title}=${a.value}`).join('; '),
     descText: o.desc || '', gone: !!o.gone, title: '',
   };
 }
@@ -1031,6 +1109,49 @@ function runTests() {
   t('OK: 全部一致', { name: 'DOD ワンポールテントS T3-44-TN タン 3人用', price: '20000' },
     mkPage({ itemName: 'DOD ワンポールテントS T3-44-TN タン', makerModel: 'T3-44-TN', brand: 'DOD', price: 20000, attrs: [['最大収容人数', '3']], axes: [{ key: 'カラー', values: ['タン', 'ブラック'] }] }), 200, []);
 
+  // ── 第3バッチ（campkit-20260921-26）で潰した誤検知 ──
+  t('set_mismatch なし: 数量軸の「1個入り」は単品（field-rack #5）', { name: 'PYKES PEAK キャンプラック（2〜4段対応）', price: '2480' },
+    mkPage({ itemName: 'キャンプラック 大きい 2枚 3枚 収納 セット', makerModel: 'P0324SRCK1-BLK', brand: 'PYKES PEAK', price: 2480, selectorValues: ['1個入り'], axes: [{ key: '入り数', values: ['1個入り', '2個入り', '3個入り'] }] }), 200, [], ['set_mismatch']);
+  t('set_mismatch なし: name が選択値「テント本体セットのみ」を名指し（fieldoor-tent #2）', { name: 'FIELDOOR トンネルテント480 3〜4人用 2ルーム カーキ 標準タイプ（テント本体セットのみ）耐水圧1,500mm', price: '19800' },
+    mkPage({ itemName: '【楽天1位】FIELDOOR テント 大型 ドームテント トンネルテント 480', makerModel: 'トンネルテント480', brand: 'FIELDOOR', price: 19800, selectorValues: ['ライトベージュ：標準タイプ', 'テント本体セットのみ'],
+      axes: [{ key: 'カラー/生地', values: ['ライトベージュ：標準タイプ', 'カーキ：標準タイプ'] }, { key: 'セット', values: ['テント本体セットのみ', 'グランドシート付', 'インナーマット付', 'フルセット'] }] }), 200, [], ['set_mismatch']);
+  t('set_mismatch なし: 「4点脚ロック」の 点 は数量ではない（fieldoor-tent #5）', { name: 'FIELDOOR ワンタッチタープテント 2.5m×2.5m サイドシート1枚付 4点脚ロック 標準生地 ホワイト', price: '11990' },
+    mkPage({ itemName: 'FIELDOOR ワンタッチタープテント 2.5m×2.5m サイドシート1枚付 横幕セット', makerModel: 'ワンタッチタープテント', brand: 'FIELDOOR', price: 11990, selectorValues: ['4点脚ロックタイプ', '標準：グリーン', 'タープ本体/シート1枚のみ'],
+      axes: [{ key: 'ロックタイプ', values: ['4点脚ロックタイプ', 'センターロックタイプ'] }, { key: 'トップカバー', values: ['標準：グリーン', '標準：ホワイト'] }, { key: 'オプション', values: ['タープ本体/シート1枚のみ', 'Ａ：フレーム強化サポートセット'] }] }), 200, [], ['set_mismatch']);
+  t('set_mismatch なし: 「UPF50+ 耐水圧」の + は等級の接尾辞（naturehike-tent #3）', { name: 'Naturehike Dune7.6 2ルーム ドーム型テント UVカット UPF50+ 耐水圧2000mm 2人用', price: '49990' },
+    mkPage({ itemName: 'テント 2ルーム ドーム型テント Dune7.6 Naturehike', makerModel: 'CNH22ZP028', brand: 'Naturehike', price: 49990, selectorValues: ['テント'], axes: [{ key: 'バリエーション', values: ['テント', 'テント+インナーテント', 'テント+薪ストーブ', 'テント+グランドシート'] }], desc: '2000mm 2人用' }), 200, [], ['set_mismatch']);
+  t('set_mismatch なし: 「通気口 あり/なし」は価格差 1.6% の仕様オプション（low-style-bonfire #2）', { name: 'LUHANA 焚き火台 八炎 ロースタイルver.', price: '6390' },
+    mkPage({ itemName: '焚き火台 大型 【LUHANA 八炎 YAEN】直径45cm', makerModel: 'TD-YEN-001', brand: 'LUHANA', axes: [{ key: 'サイズ', values: ['直径45cm'] }, { key: '通気口', values: ['あり', 'なし'] }],
+      skus: [[['直径45cm', 'あり'], 6490], [['直径45cm', 'なし'], 6390]] }), 200, [], ['set_mismatch']);
+  t('set_mismatch: 「シュラフコンフォーター あり/なし」は価格差 93% の同梱品（logos-sleeping-bag #3）', { name: 'LOGOS ロゴス 抗菌防臭 丸洗いディープスリーパーSC 封筒型', price: '4980' },
+    mkPage({ itemName: '【ロゴス公式】抗菌防臭 丸洗いディープスリーパーSC LOGOS ロゴス 寝袋 封筒型', makerModel: '72602055', brand: 'LOGOS', axes: [{ key: '商品をお選びください。', values: ['ディープスリーパーSC・5', 'ディープスリーパーSC・0'] }, { key: 'シュラフコンフォーター・体感6℃', values: ['あり', 'なし'] }],
+      skus: [[['ディープスリーパーSC・5', 'あり'], 9610], [['ディープスリーパーSC・5', 'なし'], 4980]] }), 200, ['set_mismatch', 'price_mismatch']);
+  t('type_mismatch なし: 型番 F-1002C が一致していれば店の呼び方（ハイバックチェア）が違ってもよい（fireproof-chair #5）', { name: 'CAMPING MOON リラックスローチェア F-1002C コヨーテ 帆布', price: '8712' },
+    mkPage({ itemName: 'キャンピングムーン アウトドアチェア ハイバック 折りたたみチェア', makerModel: 'F-1002C', brand: 'CAMPINGMOON', price: 9680, selectorValues: ['コヨーテ'], axes: [{ key: 'カラー', values: ['ブラック', 'コヨーテ', 'カーキ'] }] }), 200, ['price_mismatch'], ['type_mismatch']);
+  t('type_mismatch: 型番が一致しなければ型語の照合はする（dod-tarp のポール取り違え）', { name: 'DOD オクラタープ TT8-583-TN ポリコットン 難燃 オクタタープ', price: '18900' },
+    mkPage({ itemName: 'DOD ポール ビッグタープポール XP5-507 dod アウトドア キャンプ テント タープ ポール', makerModel: 'XP5-507R', brand: 'DOD（ディーオーディー）', price: 4180 }), 200, ['type_mismatch', 'model_mismatch', 'price_mismatch']);
+  t('type_mismatch なし: 複合語「ファミリー封筒型寝袋」を カタカナ/漢字 で分けて照合（naturehike-sleeping-bag #4）', { name: 'Naturehike ファミリー封筒型寝袋 1〜4人使用可能 200×115cm 幅広 ワイド 連結可能 丸洗い', price: '7990' },
+    mkPage({ itemName: 'ポイント15倍 寝袋 シュラフ 封筒型 家族用 200x115cm 幅広 ワイド オールシーズン 洗える Naturehike 連結可', makerModel: 'cnk2300019', brand: 'Naturehike', price: 7990, axes: [{ key: 'カラー', values: ['ブラウン', 'グリーン'] }] }), 200, ['color_unspecified'], ['type_mismatch']);
+  t('type_mismatch なし: 英字の型語「catalyst」が itemName の「CATALYST 22」に一致（mysteryranch-backpack #1）', { name: 'ミステリーランチ カタリスト22 CATALYST 22 ブラック 21L', price: '25300' },
+    mkPage({ itemName: '【日本正規品】 ミステリーランチ リュック メンズ レディース 大容量 MYSTERY RANCH 21L A4 B4 CATALYST 22', makerModel: 'MTR00117', brand: 'MYSTERY RANCH / ミステリーランチ', price: 25300, attrs: [['バッグの容量', '21L']], selectorValues: ['BLACK'], axes: [{ key: 'カラー', values: ['BLACK', 'PONDEROSA'] }] }), 200, [], ['type_mismatch']);
+  t('type_mismatch なし: 先頭20字が英字ブランド名（CAMPINGMOON）だけの name は英字語だけで照合しない（gas-lantern #5）', { name: 'キャンピングムーン CAMPINGMOON ガスランタン ガスキャンドル ランタン ガスランプ キャンプ', price: '4260' },
+    mkPage({ itemName: 'キャンピングムーン ガスランタン ガスキャンドル ランタン ガスランプ キャンプ', makerModel: 'BKT-1D15', brand: 'キャンピングムーン', price: 4260 }), 200, [], ['type_mismatch']);
+  t('sale_page なし: 店名（futon-outlet）のセール語は根拠にしない（hot-water-bottle #5）', { name: 'スリーププラス 充電式ソフト湯たんぽ 暖ループ（カバー付き）', price: '2300', url: 'https://item.rakuten.co.jp/futon-outlet/10002239/' },
+    mkPage({ itemName: '充電式 湯たんぽ あったかカバー付き ゆたんぽ 暖ループ ECO', price: 2300, skuCount: 8, manageNumber: '10002239', selectorValues: ['ノーマル', 'ブラウン／シープ'],
+      axes: [{ key: 'タイプ', values: ['ノーマル'] }, { key: 'カラー', values: ['ネイビー／サンゴ', 'ベージュ／サンゴ', 'ブラウン／シープ', '杢グレー', '杢ベージュ'] }] }), 200, ['color_unspecified'], ['sale_page']);
+  t('sale_page: 商品コード（a04309_sale）のセール語は従来どおり根拠にする', { name: 'FIELDOOR ワンタッチタープテント 3m×3m', price: '8800', url: 'https://item.rakuten.co.jp/smile88/a04309_sale/' },
+    mkPage({ itemName: 'FIELDOOR ワンタッチタープテント 3m×3m', makerModel: 'ワンタッチタープテント', brand: 'FIELDOOR', price: 10780, skuCount: 20, manageNumber: 'a04309_sale',
+      axes: [{ key: 'タイプ', values: ['4点脚ロック', 'センターロック'] }, { key: 'カラー', values: ['グリーン', 'ブルー', 'オレンジ', 'ブラック'] }] }), 200, ['sale_page']);
+  t('sale_page なし: 注文者区分（個人/法人）の軸は束ね軸ではない（group-camp-tent #1）', { name: '特大 3×6m ワンタッチ タープテント 大型 6人', price: '24999' },
+    mkPage({ itemName: '楽天1位 法人価格有 特大 3×6m ワンタッチ タープテント 3m 6m 大型テント 6人用', brand: 'タンスのゲン', price: 32800, skuCount: 36, manageNumber: '1900002000', selectorValues: ['オリーブ', '本体のみ', '有り', '個人のお客様'],
+      axes: [{ key: 'カラー', values: ['オリーブ', 'オフホワイト', 'ネイビー'] }, { key: 'オプション', values: ['本体のみ', 'サイドシート2枚付', 'サイドシート3枚付'] }, { key: 'おもり', values: ['有り', '無し'] }, { key: 'ご注文者様', values: ['個人のお客様', '法人のお客様'] }] }), 200, ['price_mismatch'], ['sale_page']);
+  t('spec_mismatch なし: 「厚手8cm/12cm」は厚さの並記（naturehike-mat #1）', { name: 'Naturehike 高R値 エアーマット R4.6/R5.8/R8.8 厚手8cm/12cm 超軽量 連接可能 インフレーターマット', price: '12490' },
+    mkPage({ itemName: 'エアーマット シングル 高R値 厚手 8cm/12cm Naturehike', makerModel: 'CNK2450WS014', brand: 'Naturehike', price: 12490, selectorValues: ['R4.6（厚さ8CM）', 'グリーン', 'レクタ型M（186x58cm）'],
+      axes: [{ key: 'R値', values: ['R4.6（厚さ8CM）', 'R5.8（厚さ8CM）', 'R8.8（厚さ12CM）'] }, { key: 'カラー', values: ['グリーン', 'シルバー'] }, { key: 'サイズ', values: ['マミー型S（168x58cm）', 'レクタ型M（186x58cm）'] }] }), 200, ['size_unspecified'], ['spec_mismatch']);
+  t('spec_mismatch なし: 「5000mAh/10000mAh」は容量の並記（mobile-battery-camp #5）', { name: 'モバイルバッテリー 5000mAh/10000mAh 小型 軽量 ケーブル内蔵', price: '1760' },
+    mkPage({ itemName: 'モバイルバッテリー 超マット加工 大容量 小型 5000/10000mAh', makerModel: '100-1', brand: 'inklink', price: 2660, selectorValues: ['LCタイプ', '10000mAh', 'さくらピンク'],
+      axes: [{ key: 'コネクタタイプ', values: ['LCタイプ', 'CCタイプ'] }, { key: '容量・表示タイプ', values: ['5000mAh　ベーシック', '5000mAh　デジタル', '10000mAh'] }, { key: 'カラー', values: ['さくらピンク', 'ブラック'] }] }), 200, ['size_unspecified', 'price_mismatch'], ['spec_mismatch']);
+
   // url_unparsable は rakutenUrl() の単体テストで担保
   const urlCases = [
     ['https://hb.afl.rakuten.co.jp/hgc/x/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fluxim647%2F3sp02%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fluxim647%2Fi%2F10000005%2F', 'https://item.rakuten.co.jp/luxim647/3sp02/'],
@@ -1054,13 +1175,76 @@ function runTests() {
     if (ok) pass++; else fail++;
     console.log(`${ok ? 'PASS' : 'FAIL'}  rakutenUrl(${JSON.stringify(inp).slice(0, 60)}) → ${JSON.stringify(got)}${ok ? '' : ` 期待=${JSON.stringify(exp)}`}`);
   }
-  console.log(`\n${pass} passed / ${fail} failed（判定 ${T.length} ケース＋URL ${urlCases.length} ケース）`);
+  // ── 第3弾（campkit-20260921-26）: rank 重複記事での保存HTML取り違え／--only の解決 ──
+  //   dod-tarp は rank="1" が2枚（dod-okla-tarp／dod-big-tarp-pole）。旧命名 <slug>__<rank>.html では同じファイルを共有し、
+  //   後から書いたポールの HTML でタープ本体を再判定してしまった。
+  const dupMdx = [
+    '<ProductCardMdx rank="1" id="dod-okla-tarp" name="DOD オクラタープ TT8-583-TN" price="18900" affiliateUrl="https://item.rakuten.co.jp/a-price/4589946139280/" />',
+    '<ProductCardMdx rank="1" id="dod-big-tarp-pole" name="DOD ビッグタープポール XP5-507" price="4180" affiliateUrl="https://item.rakuten.co.jp/a-price/4589946135053/" />',
+    '<ProductCardMdx rank="2" id="dod-itsukano-tarp" name="DOD いつかのタープ TT5-631-TN" price="10157" affiliateUrl="#" />',
+    '<ProductCardMdx rank="3" name="id なしのカード" price="100" affiliateUrl="#" />',
+  ].join('\n');
+  const dupCards = parseCards(dupMdx).map((c) => ({ slug: 'dod-tarp', ...c }));
+  const cacheCases = [];
+  const ct = (label, ok, got) => { cacheCases.push({ label, ok, got }); };
+  {
+    const files = dupCards.map((c) => path.basename(cacheFileOf(c)));
+    ct('cache: rank 重複（dod-tarp rank1 ×2）でも保存HTMLのパスが衝突しない', new Set(files).size === files.length, files.join(' '));
+    ct('cache: ファイル名が <slug>__<rank>__<id>.html', files[0] === 'dod-tarp__1__dod-okla-tarp.html' && files[1] === 'dod-tarp__1__dod-big-tarp-pole.html', files.slice(0, 2).join(' '));
+    ct('cache: id が空なら <slug>__<rank>__i<index>.html', files[3] === 'dod-tarp__3__i4.html', files[3]);
+    const byRank = resolveOnly(dupCards, 'dod-tarp#1');
+    ct('--only slug#rank: rank 重複なら該当する全枚（2枚）', !!byRank && byRank.length === 2 && byRank.map((c) => c.id).join(',') === 'dod-okla-tarp,dod-big-tarp-pole', byRank && byRank.map((c) => c.id).join(','));
+    const byId = resolveOnly(dupCards, 'dod-tarp#dod-big-tarp-pole');
+    ct('--only slug#id: id 指定で1枚に解決', !!byId && byId.length === 1 && byId[0].id === 'dod-big-tarp-pole', byId && byId.map((c) => c.id).join(','));
+    ct('--only: 該当なしは []', Array.isArray(resolveOnly(dupCards, 'dod-tarp#9')) && resolveOnly(dupCards, 'dod-tarp#9').length === 0, JSON.stringify(resolveOnly(dupCards, 'dod-tarp#9')));
+    ct('--only: 書式不正（# なし）は null', resolveOnly(dupCards, 'dod-tarp') === null, String(resolveOnly(dupCards, 'dod-tarp')));
+    const keys = dupCards.map(rowKey);
+    ct('rowKey: rank 重複でも行キーは id 込みで一意', new Set(keys).size === keys.length, keys.join(' | '));
+    // 選択値: 「厚手5cm/10cm」は先頭の 5cm を採用仕様とみなす（naturehike-mat #2: カード ¥5,990 は 5cm の価格）
+    const got = nameSpecifiedValue({ key: '厚さ', values: ['5cm', '10cm'] }, 'Naturehike キャンプマット 厚手5cm/10cm 自動膨張');
+    ct('nameSpecifiedValue: 並記「5cm/10cm」は name で先に出る 5cm を採る', got === '5cm', got);
+    const got2 = nameSpecifiedValue({ key: '厚み', values: ['中厚（8cm）', '極厚（10cm）'] }, 'キャンプ マット [ 極厚 10cm 撥水 ]');
+    ct('nameSpecifiedValue: 括弧を外した照合は維持（極厚（10cm））', got2 === '極厚（10cm）', got2);
+    const got3 = nameSpecifiedValue({ key: 'style', values: ['MDX+', 'LDX+'] }, 'Coleman タフスクリーン2ルームエアー DARKROOM LDX+');
+    ct('nameSpecifiedValue: 名指しが1つだけなら従来どおり（LDX+）', got3 === 'LDX+', got3);
+    // 選択SKU: 並記 name では価格がカード price と一致する変種を優先、無ければ name で先に出る値
+    const html = '<title>t</title>{"itemInfoSku":{"title":"タープテント 2m 3m","manageNumber":"x"},"variantSelectors":[{"label":"サイズ","values":[{"label":"2m×2m"},{"label":"3m×3m"}]}],"sku":[{"variantId":"a","selectorValues":["2m×2m"],"taxIncludedPrice":8999},{"variantId":"b","selectorValues":["3m×3m"],"taxIncludedPrice":9999}]}';
+    const nm = '楽天1位 2m / 3m タープテント ワンタッチ 3mx3m 2m×2m';
+    const s1 = parseRakutenHtml(html, '', nm, '8999').firstSku.selectorValues[0];
+    ct('選択SKU: 並記「3mx3m 2m×2m」でカード ¥8,999 と一致する 2m×2m を選ぶ（group-camp-tent #2）', s1 === '2m×2m', s1);
+    const s2 = parseRakutenHtml(html, '', nm, '9999').firstSku.selectorValues[0];
+    ct('選択SKU: カード ¥9,999 なら 3m×3m', s2 === '3m×3m', s2);
+    const s3 = parseRakutenHtml(html, '', nm, '').firstSku.selectorValues[0];
+    ct('選択SKU: 価格が無ければ name で先に出る 3m×3m', s3 === '3m×3m', s3);
+    const s4 = parseRakutenHtml(html, '', 'タープテント 2m×2m', '9999').firstSku.selectorValues[0];
+    ct('選択SKU: 名指しが1値なら価格に関わらずその値（2m×2m）', s4 === '2m×2m', s4);
+    ct('itemCodeOf: 店名を除いた商品コード', itemCodeOf('https://item.rakuten.co.jp/futon-outlet/10002239/') === '10002239' && itemCodeOf('https://item.rakuten.co.jp/smile88/a04309_sale/?variantId=1') === 'a04309_sale', itemCodeOf('https://item.rakuten.co.jp/futon-outlet/10002239/'));
+  }
+  for (const c of cacheCases) {
+    if (c.ok) pass++; else fail++;
+    console.log(`${c.ok ? 'PASS' : 'FAIL'}  ${c.label}  → ${c.got}`);
+  }
+
+  console.log(`\n${pass} passed / ${fail} failed（判定 ${T.length} ケース＋URL ${urlCases.length} ケース＋キャッシュ/--only ${cacheCases.length} ケース）`);
   return fail === 0;
 }
 
 // ---------------------------------------------------------------------------
 // CLI
 // ---------------------------------------------------------------------------
+// --only の1指定を解決する。`slug#rank`（数字）→ その rank の全カード（rank は記事内で一意ではない）、
+// `slug#id` → id が一致するカード。書式不正なら null、該当なしなら []
+function resolveOnly(cards, spec) {
+  const m = /^(.+?)#(.+)$/.exec(spec);
+  if (!m) return null;
+  const [, slug, key] = m;
+  if (/^\d+$/.test(key)) {
+    const byRank = cards.filter((c) => c.slug === slug && c.rank === Number(key));
+    if (byRank.length) return byRank;
+  }
+  return cards.filter((c) => c.slug === slug && c.id === key);
+}
+
 function parseArgs(argv) {
   const o = { limit: 0, only: [], recheck: false, dry: false, test: false, cached: false, maxMinutes: 0, url: '', name: '', price: '' };
   for (let i = 0; i < argv.length; i++) {
@@ -1104,16 +1288,15 @@ async function main() {
   if (opt.only.length) {
     targets = [];
     for (const spec of opt.only) {
-      const m = /^(.+?)#(\d+)$/.exec(spec);
-      if (!m) { console.error(`--only の書式は slug#rank: ${spec}`); process.exit(1); }
-      const hit = cards.find((c) => c.slug === m[1] && c.rank === Number(m[2]));
-      if (!hit) { console.error(`見つかりません: ${spec}`); process.exit(1); }
-      targets.push(hit);
+      const hits = resolveOnly(cards, spec);
+      if (!hits) { console.error(`--only の書式は slug#rank または slug#id: ${spec}`); process.exit(1); }
+      if (!hits.length) { console.error(`見つかりません: ${spec}`); process.exit(1); }
+      for (const h of hits) if (!targets.includes(h)) targets.push(h);
     }
   } else {
     targets = cards.filter((c) => opt.recheck || !byKey.has(rowKey(c)));
     // --cached は「楽天へ行かない」モード。保存 HTML が無いカードは対象から外す（--recheck と組んでも fetch しない）
-    if (opt.cached) targets = targets.filter((c) => fs.existsSync(path.join(HTML_DIR, `${c.slug}__${c.rank}.html`)));
+    if (opt.cached) targets = targets.filter((c) => fs.existsSync(cacheFileOf(c)));
     if (opt.limit > 0) targets = targets.slice(0, opt.limit);
   }
   console.log(`既存行 ${existing.length} / 今回の対象 ${targets.length} 枚${opt.dry ? '（--dry: fetch しない）' : ''}`);
@@ -1135,8 +1318,8 @@ async function main() {
     byKey.set(rowKey(r.row), r.row);
     done++;
     for (const f of r.row.flags.split(',')) dist[f] = (dist[f] || 0) + 1;
-    console.log(`[${done}/${targets.length}] ${card.slug}#${card.rank} http=${r.row.http} flags=${r.row.flags}${r.notes && r.notes.length ? '  (' + r.notes.join(' ') + ')' : ''}`);
-    if (r.throttled) { stopped = `HTTP ${r.row.http}（${done} 枚目 ${card.slug}#${card.rank}）で停止`; break; }
+    console.log(`[${done}/${targets.length}] ${card.slug}#${card.rank} ${card.id} http=${r.row.http} flags=${r.row.flags}${r.notes && r.notes.length ? '  (' + r.notes.join(' ') + ')' : ''}`);
+    if (r.throttled) { stopped = `HTTP ${r.row.http}（${done} 枚目 ${card.slug}#${card.rank} ${card.id}）で停止`; break; }
     if (card.url && !r.cached) await sleep(INTERVAL_MS);
   }
   // 既存順を保ちつつ追記
@@ -1157,4 +1340,4 @@ if (require.main === module) {
   main().catch((e) => { console.error(e); process.exit(1); });
 }
 
-module.exports = { parseCards, rakutenUrl, parseRakutenHtml, judge, specs, modelTokens, typeWords, FROZEN_SLUGS };
+module.exports = { parseCards, loadAllCards, rakutenUrl, parseRakutenHtml, judge, specs, modelTokens, typeWords, cacheFileOf, resolveOnly, rowKey, FROZEN_SLUGS, HTML_DIR };

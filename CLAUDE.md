@@ -375,6 +375,7 @@ ASP枠は日次で1本ずつ消費される一方、長らく**補給タスク�
 - **2026-09-21 追加（campkit-20260921-25）**: `scripts/check-card-name-vs-sku.cjs`（ProductCard の name/price と楽天実SKUの整合検出）の結果から一括起票した。追加語彙は次の2つ。
   - `issue_type=name_fix`: 商品は合っているが name の書き方だけ直す案件（複数型番の並記／楽天商品名の全選択肢列挙）。商品差し替え不要で、name を採用した1仕様に固定するだけ。
   - `status=blocked`: 変更禁止リスト（task-16・**2026-10-18 まで**）の記事に対する起票。日次タスクは `pending` だけを消費するので拾われない。2026-10-19 以降に `pending` へ昇格させる（keyword-backlog の `blocked` と同じ運用）。
+  - ⚠️ **ProductCard の `rank` は記事内で一意ではない**（dod-tarp／mountain-camp-lantern／sierra-cup／vastland-tent は本体と関連アイテムが同じ rank）。カードを特定するキーは必ず `slug＋rank＋id` にする。2026-09-21（campkit-20260921-26）に、保存HTMLを rank だけで管理していたことによる取り違え（dod-tarp のオクラタープをポールのHTMLで判定→誤起票）を修正し、誤起票行は削除した。起票の `position` には `（id: …）` を必ず含める。
 
 ---
 
