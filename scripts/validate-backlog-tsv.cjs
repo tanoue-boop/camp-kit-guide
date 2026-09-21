@@ -32,7 +32,8 @@ const SPECS = {
     domains: {
       status: ['pending', 'blocked', 'needs-human', 'done'],
       priority: ['A', 'B', 'C'],
-      issue_type: ['discontinued_404', 'product_swap', 'price_unconfirmed', 'out_of_stock', 'name_fix'],
+      //   asin_mismatch: 既設置 Amazon ASIN が別変種／別商品を指している（campkit-20260921-36 §B・キュー#16 で新設）
+      issue_type: ['discontinued_404', 'product_swap', 'price_unconfirmed', 'out_of_stock', 'name_fix', 'asin_mismatch'],
     },
     patterns: {
       target_slug: /^[a-z0-9-]+$/,
@@ -55,6 +56,17 @@ const SPECS = {
     patterns: { slug: /^[a-z0-9-]+$/, rank: /^\d+$/, flags: /^\S+$/ },
     uniqueKey: ['slug', 'rank', 'id'],
     summarize: ['frozen', 'http'],
+  },
+  // 既設置 Amazon リンクの棚卸し（check-amazon-asin.cjs の COLUMNS と同じ 19 列。campkit-20260921-36 §B）
+  '_file/amazon-asin-check.tsv': {
+    header: ['slug', 'rank', 'id', 'frozen', 'link_form', 'asin', 'amazon_url', 'card_name', 'brand', 'maker_model', 'card_price',
+      'static_flags', 'amazon_title', 'amazon_price', 'amazon_stock', 'verdict', 'checked_at', 'judged_task', 'note'],
+    domains: { frozen: ['0', '1'], link_form: ['amazonAsin', 'amazonUrl', 'legacy_source_amazon', 'none'] },
+    //   verdict は未照合なら空
+    //   asin の書式は検査しない（不正な ASIN を bad_format として検出するのが同スクリプトの役目）
+    patterns: { slug: /^[a-z0-9-]+$/, rank: /^\d+$/, static_flags: /^\S+$/, verdict: /^(?:|ok|model_mismatch|different_product|out_of_stock|404|unverifiable|blocked_by_amazon)$/ },
+    uniqueKey: ['slug', 'rank', 'id'],
+    summarize: ['link_form', 'verdict'],
   },
 };
 

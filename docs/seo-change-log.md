@@ -3,6 +3,17 @@
 数値の推移はGAS「SEOレポート」の履歴で追う。本ファイルは「いつ・どの記事を・なぜ・どう変えたか」を記録し、次回レポートで効果を評価するための施策台帳。新しい施策は上に追記する。
 
 ---
+## 2026-09-22：#15-b の後始末（1枚）— low-style-chair #1 の色トークンを軸値どおりに修正（campkit-20260921-36 §A）
+
+- **対象**: `content/posts/low-style-chair.mdx` の第1位 `lc-waq-rlc1`（WAQ リクライニングローチェア WAQ-RLC1）。第7弾（campkit-20260921-35）QUESTION 1 の対処案 (a) を採用。name「… WAQ-RLC1 **チャコール**」→「… WAQ-RLC1 **CHARCOAL(チャコール)**」。触ったのは `name` 属性のみ（見出し・本文・比較表・まとめ表・price・affiliateUrl・image・title/description/updatedAt は不変更）
+- **理由**: 楽天のカラー軸は `BLACK(ブラック) | OLIVE(オリーブ) | TAN(タン) | COYOTE(コヨーテ) | CHARCOAL(チャコール)` の `ENGLISH(和名)` 形式で、「チャコール」だけでは検出器が色語として認識（flags=OK）する一方で軸値と一致せず、選択SKUが既定の `waq-rlc1-black/BLACK(ブラック)` に着地していた（読者から見ると「チャコール」と書かれたカードのリンク先が黒を既定表示する）。記事の見出し・本文が「チャコール」と書いているのは記事側が正しいので、基準 (e)「記事の記述が正しいときはカードを記事に合わせる」に当たる。再判定（`--cached --only`）で選択SKUは **`waq-rlc1-charcoal/CHARCOAL(チャコール)`・¥8,980（カード price と一致）・qty=94**・flags=OK のまま（新規フラグ0）。`--cached --recheck` 全1113枚でこの1枚以外の差分0（フラグ分布 OK=636 不変）。楽天への新規アクセス0回
+- **同一商品 `waq-chair#1`（waq-rlc1）は `BLACK(ブラック)` のまま据え置き＝基準 (f) の例外**: `low-style-chair` は記事が色を名指ししている（チャコール）が、`waq-chair` は見出し・本文・比較表とも色を名指ししていないので既定色でよい
+- **基準の追加（CLAUDE.md (g)）**: 軸の値が `ENGLISH(和名)` 形式のときは、和名だけを書くと `color_unspecified` は消えるが選択SKUは既定のまま動かない。必ず軸値の形（`CHARCOAL(チャコール)`）で書く。検出器側の改修（和名だけの名指しも一致とみなす）は #15-b の frozen バッチが終わるまで凍結（改修候補 (5)）
+- **台帳**: `lc-waq-rlc1` の open 行なし・起票なし（flags OK・価格一致・在庫あり）
+- **同 commit の §B（キュー#16 第1弾・既設置 Amazon ASIN の棚卸し）**: 新スクリプト `scripts/check-amazon-asin.cjs` と `_file/amazon-asin-check.tsv`（全1121カード）を追加。静的検査は dup_in_article／bad_format／no_amazon_conflict／inconsistent_shared すべて 0、legacy_form 8枚／6記事（キュー#17）・short_url 208本／50記事（キュー#18）。Amazon dp 照合 20枚のうち **誤 ASIN 6枚**（naturehike-tent #5＝village6.0 Plus・air-frame-tent #1/#4/#5＝サイズ変種違い・air-frame-tent #2＝グランドシート・anker-power #2＝C800 Plus）を `asin_mismatch`（pending／B）で台帳に起票（403→409行）。**mdx の Amazon リンクは1本も差し替えていない**（差し替えは日次タスクの手順Fで）
+- **効果測定**: 検索順位の直接施策ではないため計測対象外
+
+---
 ## 2026-09-22：ProductCard `name` の一括修正 第7弾（35枚／13記事・非 frozen 最終バッチ）— キュー#15-b（campkit-20260921-35 §1）
 
 - **位置づけ**: 第6弾（campkit-20260921-34・下記）の続きで、**非 frozen（変更禁止リスト外）の対象はこれで 0 枚**になった。同じ抽出条件の **残り全部＝35枚／13記事** を書き換えた。**触ったのは `ProductCardMdx` の `name` 属性のみ**（title／description／updatedAt／本文・比較表・まとめ表・リンク・price は不変更）。**検出器（`scripts/check-card-name-vs-sku.cjs`）のロジックは変更していない**（`TASK_ID` の更新のみ・`--test` 173 passed 不変）。残るのは frozen=1 の **82枚／36記事** で、SEO 据え置き期間明け（2026-10-19 以降）に処理する
