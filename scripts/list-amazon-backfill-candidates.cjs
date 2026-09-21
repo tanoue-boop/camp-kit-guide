@@ -22,6 +22,10 @@
  *          ※ 楽天店が組んだ「本体＋ガス」等のセット品で Amazon は単品売りのみになる型。
  *            「セット」の語だけで型番連結が無いもの（BLUETTI EB3A（…セット）等）は対象外
  *            （2026-09-21 campkit-20260921-18）／
+ *        店舗管理番号 `###…###` を含む −3（型番トークンからも除外）／
+ *        JIS アルミ合金番号（A5052/A6061/A7075）は型番とみなさない／
+ *        「◯◯専用」「◯◯対応」の適合機種として書かれたブランド名はブランド加点の対象外
+ *            （2026-09-21 campkit-20260921-20）／
  *        「ふるさと納税・並行輸入・訳あり・アウトレット」は除外
  *   4. 変更禁止リスト（FROZEN_SLUGS）の記事は候補から除外する。
  *   4.5 `_file/amazon-backfill-no-amazon.tsv`（slug / rank / id / judged_task / reason）があれば、
@@ -128,8 +132,24 @@ const EXCLUDE_RE = /ふるさと納税|並行輸入|訳あり|訳アリ|アウ�
 
 // 型番らしいトークン: 英大文字＋数字を含み、数字が2桁以上、4文字以上、ハイフン区切り可（例: AS-7100 / QC-CS180 / T2-073-TN / A2MG8A01 / OS57176）
 const MODEL_TOKEN_RE = /(?<![A-Za-z0-9])[A-Z0-9]+(?:-[A-Z0-9]+)*(?![A-Za-z0-9])/g;
-// 型番と誤認しやすい規格・仕様表記（300D / 210T / 1000WH / UV99 / IPX4 / USB3 / 2WAY など）
-const NOT_MODEL_RE = /^(?:\d+[A-Z]{1,2}|(?:UV|UPF|SPF|PU|IPX?|USB|R|T|D|SS|SH|L|M|S|XL|XXL|LL|3L|4L|5L)\d+|(?:DC|AC)\d+V?|\d+X\d+|\d+-\d+|\d+(?:-\d+)*[A-Z]{0,2})$/;
+// 型番と誤認しやすい規格・仕様表記（300D / 210T / 1000WH / UV99 / IPX4 / USB3 / 2WAY など）。
+// `A\d{4}` は JIS アルミ合金番号（A5052 / A6061 / A7075）で型番ではない（campkit-20260921-19 の trekking-pole #4 で
+// 「型番+3(A7075)」の誤検知。実型番は SENUN-955）。完全一致トークンのみ対象で、A7075T6 のように後続がある場合は従来どおり型番扱い
+const NOT_MODEL_RE = /^(?:\d+[A-Z]{1,2}|(?:UV|UPF|SPF|PU|IPX?|USB|R|T|D|SS|SH|L|M|S|XL|XXL|LL|3L|4L|5L)\d+|(?:DC|AC)\d+V?|\d+X\d+|\d+-\d+|\d+(?:-\d+)*[A-Z]{0,2}|A\d{4})$/;
+// 楽天店舗の管理番号（例: ###ラタン机F002R### / ###机KM-F002###）。メーカー型番ではないので型番トークンから除外し、
+// 無名OEM品の目印として −3 する（campkit-20260921-18 の group-camp-table #1/#4 が「型番+3」で誤って上位に来た件）
+const STORE_CODE_RE = /###[^#]*###/g;
+// 「◯◯専用」「◯◯対応」「◯◯用」として書かれたブランド名は適合機種であって商品のブランドではない（campkit-20260921-19 の
+// camp-grill-plate #1: ZEOOR 製品の name に「ロゴス 焚き火台 LOGOS the ピラミッドTAKIBI M 専用」とあり logos で +2 が付いた件）。
+// ブランド名の直後（空白のみ挟む）に 専用/対応/用 が続く、または後方 COMPAT_WINDOW 文字以内に単独語の「専用」「対応」
+// （直前が空白＝前の語に付いていない）が現れる出現は適合機種扱い。「スマートフォン対応」「IH対応」「あす楽対応」のように
+// 別の語に付いた 対応 は対象外。name 先頭（【…】等の飾りを除く）に立つブランド名は常に実ブランドとみなす
+const COMPAT_ADJ_RE = /^\s*(?:専用|対応|用)/;
+const COMPAT_NEAR_RE = /(?:^|\s)(?:専用|対応)/;
+// ※ 指示（campkit-20260921-20）は「後方10文字以内」だが、実例の「ロゴス 焚き火台 LOGOS the ピラミッドTAKIBI M 専用」は
+//    ロゴス→専用 が 31文字・LOGOS→専用 が 20文字あるため 10 では拾えない。単独語の 専用/対応 に限定したうえで 40 文字にしている
+const COMPAT_WINDOW = 40;
+const NAME_DECOR_RE = /^(?:\s|【[^】]*】|＼[^／]*／|\[[^\]]*\]|★|■|●)+/;
 
 function isModelToken(tok) {
   if (tok.length < 4) return false;
@@ -171,6 +191,26 @@ function compoundModels(name) {
     if (sides.length >= 2 && sides.every(isCompoundSide)) found.push(m[0]);
   }
   return found;
+}
+
+// name 中の実ブランド（適合機種として書かれただけのブランドを除く）を BRANDS の順で返す
+function realBrands(name) {
+  const decor = (NAME_DECOR_RE.exec(name) || [''])[0].length;
+  const out = [];
+  for (const b of BRANDS) {
+    const re = new RegExp(b[0].source, b[0].flags.includes('g') ? b[0].flags : b[0].flags + 'g');
+    let real = false;
+    for (const m of name.matchAll(re)) {
+      const end = m.index + m[0].length;
+      if (m.index === decor) { real = true; break; }
+      const after = name.slice(end, end + COMPAT_WINDOW);
+      if (COMPAT_ADJ_RE.test(after) || COMPAT_NEAR_RE.test(after)) continue;
+      real = true;
+      break;
+    }
+    if (real) out.push(b);
+  }
+  return out;
 }
 
 // ---------------------------------------------------------------------------
@@ -254,6 +294,13 @@ function score(name, url) {
   if (EXCLUDE_RE.test(name)) return { score: null, reason: '除外(ふるさと納税/並行輸入/訳あり/アウトレット)' };
 
   let s = 0;
+  // 店舗管理番号（###…###）は型番・ブランド判定の前に取り除く（campkit-20260921-20 A-2）
+  const storeCodes = name.match(STORE_CODE_RE) || [];
+  if (storeCodes.length) {
+    name = name.replace(STORE_CODE_RE, ' ');
+    s -= 3;
+    reasons.push(`店舗管理番号-3(${storeCodes[0]})`);
+  }
   const tokens = modelTokens(name);
   if (tokens.length >= 1) {
     s += 3;
@@ -273,10 +320,14 @@ function score(name, url) {
     s -= 3;
     reasons.push(`複合型番セット-3(${compounds[0]})`);
   }
-  const brands = BRANDS.filter(([re]) => re.test(name));
+  // 「◯◯専用」「◯◯対応」として書かれた適合機種のブランドは加点しない（campkit-20260921-20 A-3）
+  const brands = realBrands(name);
   if (brands.length) {
     s += 2;
     reasons.push(`ブランド+2(${brands[0][1]})`);
+  } else {
+    const compat = BRANDS.filter(([re]) => re.test(name));
+    if (compat.length) reasons.push(`適合機種ブランド除外(${compat[0][1]})`);
   }
 
   const shop = rakutenShop(url).toLowerCase().replace(/[-_]/g, '');

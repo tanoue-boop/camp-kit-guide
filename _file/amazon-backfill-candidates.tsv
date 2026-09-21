@@ -1,15 +1,4 @@
 slug	rank	id	score	name	rakuten_url	price	score_reason
-waq-chair	5	waq-rlc2	3	WAQ リクライニングローチェア 2脚セット WAQ-RLC2 アイアン ドリンクホルダー付き	https://item.rakuten.co.jp/waqoutdoor/waq-rlc2/	17460	ブランド+2(waq) 公式店+1(waqoutdoor)
-water-jug	3	wj-vastland	3	VASTLAND アイスコンテナ 1.9L 3.8L キャンプ用 氷入れ 水筒 保冷 真空断熱	https://item.rakuten.co.jp/vastland/vl0453-1/	3980	ブランド+2(vastland) 公式店+1(vastland)
-attack-pack	1	karrimor-tatra20	2	カリマー タトラ20 KARRIMOR tatra20 501212 20L 腰ベルト付き ユニセックス	https://item.rakuten.co.jp/canpanera/k03014/	14850	ブランド+2(karrimor)
-attack-pack	4	gregory-daypack-26l	2	グレゴリー デイパック DAY PACK 26L ブラック 12601 ユニセックス	https://item.rakuten.co.jp/glv/gre-0007-000/	15299	ブランド+2(gregory)
-attack-pack	5	karrimor-cadet20	2	カリマー カデット20 KARRIMOR cadet20 501213 20L レディース・ジュニア向け	https://item.rakuten.co.jp/canpanera/k03199/	8800	ブランド+2(karrimor)
-camp-air-pump	2	fielddoor-air-pump	2	FIELDOOR USB充電 携帯エアーポンプ 超小型 1400mAh	https://item.rakuten.co.jp/maxshare/a12403/	2970	ブランド+2(fieldoor)
-camp-blanket	4	blanket-rank-4	2	Hilander(ハイランダー) 難燃ブランケット ハーフ グレー	https://item.rakuten.co.jp/naturum/7000394/	3580	ブランド+2(hilander)
-camp-gift	4	gift-thermal-bottle	2	サーモス 水筒 2wayコップ付き 600/800ml	https://item.rakuten.co.jp/livingut/4580244681396/	4700	ブランド+2(thermos)
-camp-grill-plate	1	grill-zeoor	2	【レビューを書いて500円OFFクーポン】 ZEOOR ゼオール グリルプレートスタンドM キャンプ バーベキュー アウトドア用品 ロゴス 焚き火台 LOGOS the ピラミッドTAKIBI M 専用 鉄板 五徳 焚火台 焚火 焚き火 ロストル 焼肉 炭火コンロ バーベキューグリル 焼き網	https://item.rakuten.co.jp/auc-teppan-hiroba/lo20-51/	4070	ブランド+2(logos)
-coleman-sleeping-bag	4	coleman-sb-cozy2-set	2	コールマン 封筒型シュラフ コージーII/C5 オレンジ セット 2000034772 Coleman	https://item.rakuten.co.jp/himaraya/000846756set1/	12884	ブランド+2(coleman)
-coleman-sleeping-bag	5	coleman-sb-northrim	2	【Coleman】コールマン ノースリム 寝袋 マミー型 シュラフ 大人用（グレー／ブラック／オレンジ／グリーン）	https://item.rakuten.co.jp/caramelcafe/cot1103goods032f-/	10780	ブランド+2(coleman)
 cooler-box-day-camp	4	cool-rank-4	2	スプリングセール LOGOS/ロゴス 37411001 スタンダード トートリュック クーラー XL ブラック アウトドア キャンプ ピクニック ショッピング レジャー 保冷バッグ クーラーリュック ファミリー 保冷力抜群 デイキャンプ あす楽対応 お買い物マラソン 開催	https://item.rakuten.co.jp/auc-ainetshop/92442/	4092	ブランド+2(logos)
 day-camp-cooler-box	3	cooler-rank-3	2	LOGOS ロゴス クーラーボックス 9L 小型 ハード 保冷 ミニクーラー アウトドア キャンプ バーベキュー ピクニック 釣り 運動会 ソロキャンプ デイキャンプ 軽量 コンパクト 81448054	https://item.rakuten.co.jp/baronessod/81448054/	4800	ブランド+2(logos)
 family-camp-cot	2	logos-comfort-bed	2	ロゴス Tradcanvas コンフォートベッド 73173089 フォールディングコット	https://item.rakuten.co.jp/auc-ainetshop/71297/	13365	ブランド+2(logos)
@@ -75,6 +64,7 @@ camp-fan-summer	1	fan-soppy	-3	充電式扇風機 卓上 吊り下げ サーキ�
 camp-fan-summer	3	fan-icarry	-3	i.Carry コードレス扇風機 直径30cm DCモーター 強力 首振り 充電式 リモコン 折りたたみファン タイマー 風量8段階 コンパクト収納 10800mAhバッテリー内蔵 アウトドア キャンプ	https://item.rakuten.co.jp/japaemo/17-fan8/	12800	汎用語のみ-3
 camp-fan-summer	4	fan-pse	-3	アウトドア 扇風機 自動首振り 充電式 DCモーター 軽量 低騒音 リモコン付き タイマー 風量4段階調節 LEDライト 卓上 スタンド式 壁掛け 吊り下げ 20000mAh PSE認証済み	https://item.rakuten.co.jp/variety-world/electric-fan/	7780	汎用語のみ-3
 camp-fan-summer	5	fan-marz	-3	扇風機 DCモーター サーキュレーター コードレス 折りたたみ扇風機 首振り リモコン付き キャンプ 充電式 自動首振り 10800mAh 静音 コンパクト ポータブル 熱中症対策 防災	https://item.rakuten.co.jp/marz-shop/independencefan001/	6480	汎用語のみ-3
+camp-grill-plate	1	grill-zeoor	-3	【レビューを書いて500円OFFクーポン】 ZEOOR ゼオール グリルプレートスタンドM キャンプ バーベキュー アウトドア用品 ロゴス 焚き火台 LOGOS the ピラミッドTAKIBI M 専用 鉄板 五徳 焚火台 焚火 焚き火 ロストル 焼肉 炭火コンロ バーベキューグリル 焼き網	https://item.rakuten.co.jp/auc-teppan-hiroba/lo20-51/	4070	適合機種ブランド除外(logos) 汎用語のみ-3
 camp-hammock	1	adepeche-3way-set	-3	a.depeche 自立式ハンモック 3way 5点セット SHP-3WHMK ハンモックチェア スタンド 折りたたみ	https://item.rakuten.co.jp/a-depeche/020-shp-3whmk/	20790	汎用語のみ-3
 camp-hammock	4	marz-3way-long	-3	marz 自立式ハンモック 3way ロング ハンモックチェア スタンド 折りたたみ	https://item.rakuten.co.jp/marz-shop/hammock-001/	8980	汎用語のみ-3
 camp-headlight-beginner	4	headlight-6200lm	-3	【楽天1位・コスパ最強】 ヘッドライト 6200ルーメン 最新型 高輝度 充電式 LED ヘッドランプ 軽量 防水 防塵 停電対策 登山 釣り キャンプ アウトドア用 ランニング 夜間 明るい コンパクト 長時間点灯 地震 地震対策 防災 災害対策 LEDヘッド	https://item.rakuten.co.jp/hrktonya/yj-t105/	2799	汎用語のみ-3
