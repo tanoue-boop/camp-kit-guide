@@ -3,6 +3,15 @@
 数値の推移はGAS「SEOレポート」の履歴で追う。本ファイルは「いつ・どの記事を・なぜ・どう変えたか」を記録し、次回レポートで効果を評価するための施策台帳。新しい施策は上に追記する。
 
 ---
+## 2026-09-22：キュー#16 第2弾 — 既設置 Amazon ASIN の照合 30枚＋棚卸し TSV に price_gap／seller_type 列を追加（campkit-20260921-37）
+
+- **対象**: `_file/amazon-asin-check.tsv`・`_file/article-fix-backlog.tsv`・`scripts/check-amazon-asin.cjs`・`scripts/validate-backlog-tsv.cjs` のみ。**`content/posts/` は 1 文字も変更していない**（Amazon リンクの差し替えは台帳 `asin_mismatch` 行として起票するだけ）
+- **§A（36 §D-10 判断1 への回答）**: verdict の値域は増やさず、`verdict` の直後に `price_gap`（(Amazon価格−カードprice)÷カードprice の整数%・書き出し時に自動再計算）と `seller_type`（official／amazon／marketplace／reseller／unknown）を追加（19→21列）。36 の既存 20 行も保存 HTML から遡って埋めた（Amazon 再アクセス 0）。`--test` 55→82 ケース、validate の仕様も 21 列に更新
+- **§B（照合 30 枚・distinct ASIN 29・Amazon アクセス 29 回・429/503/CAPTCHA 0）**: 36 で誤 ASIN が出た記事の残り（naturehike-tent #1/#3/#4）→ 変種語を含むカード → TSV 順。結果 **ok 27／model_mismatch 2／different_product 1**。誤り 3 枚＝naturehike-tent #3（Dune7.6 本体の ASIN がファミリーから消え、dp が TPU ドア ¥5,990 へ着地）・camp-cooler-soft #3（ALBATRE 18L がコヨーテではなくダークオリーブ）・camp-dust-stand #2（オレゴニアンキャンパー R2 がコヨーテではなくブラックカモ）。3 件を `asin_mismatch`（pending／B）で起票（409→412行）。naturehike-tent #5（36 起票）の候補 ASIN は #4 の照合結果から B0DYF5RNY2 に絞れたので既存行の detail を更新（同記事 #4 と同一 ASIN になる点は要判断として明記）
+- **傾向**: 第1弾（air-frame-tent 等「Amazon実データ5選」経路）は 20 枚中 6 枚誤りだったが、第2弾は 30 枚中 3 枚（10%）で、いずれも**色違い変種**か**ASIN 消滅による兄弟への着地**。価格乖離 ±15% 超は 15 枚あるが多くはカード側の価格が古いだけ（楽天の現在価格と Amazon が一致する例＝naturehike-tent #1）
+- **効果測定**: 検索順位の直接施策ではないため計測対象外
+
+---
 ## 2026-09-22：#15-b の後始末（1枚）— low-style-chair #1 の色トークンを軸値どおりに修正（campkit-20260921-36 §A）
 
 - **対象**: `content/posts/low-style-chair.mdx` の第1位 `lc-waq-rlc1`（WAQ リクライニングローチェア WAQ-RLC1）。第7弾（campkit-20260921-35）QUESTION 1 の対処案 (a) を採用。name「… WAQ-RLC1 **チャコール**」→「… WAQ-RLC1 **CHARCOAL(チャコール)**」。触ったのは `name` 属性のみ（見出し・本文・比較表・まとめ表・price・affiliateUrl・image・title/description/updatedAt は不変更）

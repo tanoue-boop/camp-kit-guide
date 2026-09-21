@@ -19,10 +19,20 @@
  *   node scripts/check-amazon-asin.cjs --only naturehike-tent#5 --cached     # 保存 HTML から再判定（fetch しない。無ければスキップ）
  *   node scripts/check-amazon-asin.cjs --verify 12 --recheck                 # verdict 済みも再取得
  *   node scripts/check-amazon-asin.cjs --judge naturehike-tent#5#nh-village13=different_product --note "…"   # 人手判定を記録（fetch しない）
+ *   node scripts/check-amazon-asin.cjs --judge … --seller official                                           # 人手判定と同時に seller_type を記録
+ *   node scripts/check-amazon-asin.cjs --set-seller ogawa-tent#5#ogawa-tierra5ex2=marketplace               # seller_type だけ書く（verdict/judged_task は触らない）
  *   node scripts/check-amazon-asin.cjs --list legacy_form       # static_flags に該当する行を一覧（TSV から）
  *
  * 出力 `_file/amazon-asin-check.tsv`（タブ区切り・BOM無し・CR無し・末尾改行1つ）: キー = slug + rank + id。全カード（Amazon リンクの無いカードも
- *   link_form=none で）1 行。静的検査は毎回全行を再計算し、照合結果（amazon_* / verdict / checked_at / judged_task / note）は既存行から引き継ぐ。
+ *   link_form=none で）1 行。静的検査は毎回全行を再計算し、照合結果（amazon_* / verdict / price_gap / seller_type / checked_at / judged_task / note）は既存行から引き継ぐ。
+ *
+ * price_gap（campkit-20260921-37 §A・36 §D-10 判断1 への回答＝verdict の値域は増やさず列を分ける）:
+ *   (amazon_price − card_price) ÷ card_price を整数パーセントで四捨五入（`+24%`／`-4%`／`0%`）。verdict が空の行と、Amazon 価格が取れない行
+ *   （out_of_stock／404／blocked_by_amazon、amazon_price が数値でない）は空。**書き出しのたびに amazon_price と card_price から再計算する**（手で書かない）。
+ * seller_type: official（ブランド公式ストア＝「◯◯公式」「Official Store」「AnkerDirect」等）／amazon（Amazon.co.jp が販売）／marketplace（素性の分かる通常の小売店）／
+ *   reseller（転売型＝店名が商材と無関係・詳細欄が空）／unknown（販売元を特定できない）。照合していない行は空。
+ *   fetch 直後は機械判定（Amazon.co.jp → amazon、公式/Official/Direct を含む → official、それ以外・販売元不明 → unknown）を入れ、
+ *   marketplace／reseller の区別は人手（`--judge … --seller` または `--set-seller`）で上書きする。
  *
  * link_form: amazonAsin / amazonUrl（amzn.to 短縮。amazonAsin と同居していれば描画上は amazonUrl が優先されるのでこちら）/
  *            legacy_source_amazon（source="amazon" かつ affiliateUrl が ASIN のみ）/ none
@@ -44,7 +54,8 @@
  *
  * Amazon へのアクセス（--verify / --only 時のみ）: UA 付き・各 ASIN 1 回だけ・間隔 INTERVAL_MS 以上・並列なし・タイムアウト FETCH_TIMEOUT_MS。
  *   429 / 503 / CAPTCHA を検知したらその時点で止めて処理済み分を保存し exit 2。
- *   取得 HTML は `_file/_work/html-asin-36/<slug>__<rank>__<asin>.html` に保存（.gitignore 下・コミットしない）。
+ *   取得 HTML は `_file/_work/html-asin-<回>/<slug>__<rank>__<asin>.html` に保存（.gitignore 下・コミットしない）。保存先は HTML_DIRS[0]（今回の回）、
+ *   `--cached` の読み取りは HTML_DIRS を先頭から探す（36 の保存分 `html-asin-36/` も読める）。
  */
 'use strict';
 
@@ -56,17 +67,22 @@ const POSTS_DIR = path.join(ROOT, 'content', 'posts');
 const OUT = path.join(ROOT, '_file', 'amazon-asin-check.tsv');
 const NO_AMAZON_TSV = path.join(ROOT, '_file', 'amazon-backfill-no-amazon.tsv');
 const CARD_NAME_TSV = path.join(ROOT, '_file', 'card-name-check.tsv');
-const HTML_DIR = path.join(ROOT, '_file', '_work', 'html-asin-36');
-const TASK_ID = 'campkit-20260921-36';
+const HTML_DIRS = ['html-asin-37', 'html-asin-36'].map((d) => path.join(ROOT, '_file', '_work', d));
+const HTML_DIR = HTML_DIRS[0];
+const TASK_ID = 'campkit-20260921-37';
 
 const INTERVAL_MS = 2000;
 const FETCH_TIMEOUT_MS = 25000;
 const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0 Safari/537.36';
 
 const COLUMNS = ['slug', 'rank', 'id', 'frozen', 'link_form', 'asin', 'amazon_url', 'card_name', 'brand', 'maker_model', 'card_price',
-  'static_flags', 'amazon_title', 'amazon_price', 'amazon_stock', 'verdict', 'checked_at', 'judged_task', 'note'];
+  'static_flags', 'amazon_title', 'amazon_price', 'amazon_stock', 'verdict', 'price_gap', 'seller_type', 'checked_at', 'judged_task', 'note'];
 const LINK_FORMS = ['amazonAsin', 'amazonUrl', 'legacy_source_amazon', 'none'];
 const VERDICTS = ['ok', 'model_mismatch', 'different_product', 'out_of_stock', '404', 'unverifiable', 'blocked_by_amazon'];
+const SELLER_TYPES = ['official', 'amazon', 'marketplace', 'reseller', 'unknown'];
+//   price_gap を空にする verdict（Amazon 価格が「買える価格」として取れていない）
+const NO_PRICE_VERDICTS = new Set(['out_of_stock', '404', 'blocked_by_amazon']);
+const PRICE_GAP_RE = /^(?:|0%|[+-][1-9]\d*%)$/;
 const ASIN_NEW_RE = /^B0[A-Z0-9]{8}$/;
 const ASIN_OLD_RE = /^[A-Z0-9]{10}$/;
 
@@ -252,12 +268,38 @@ function toRow(c, prev) {
     slug: c.slug, rank: String(c.rank), id: c.id, frozen: String(c.frozen), link_form: c.link_form, asin: c.asin, amazon_url: c.amazon_url,
     card_name: c.card_name, brand: c.brand, maker_model: c.maker_model, card_price: c.card_price, static_flags: c.static_flags,
     amazon_title: keep('amazon_title'), amazon_price: keep('amazon_price'), amazon_stock: keep('amazon_stock'),
-    verdict: keep('verdict'), checked_at: keep('checked_at'), judged_task: keep('judged_task'), note: keep('note'),
+    verdict: keep('verdict'), price_gap: keep('price_gap'), seller_type: keep('seller_type'),
+    checked_at: keep('checked_at'), judged_task: keep('judged_task'), note: keep('note'),
   };
+}
+// (amazon_price − card_price) ÷ card_price を整数 % で四捨五入。どちらかが数値でなければ空。0 は "0%"、符号は必ず付ける
+function priceGap(amazonPrice, cardPrice) {
+  const a = Number(String(amazonPrice ?? '').replace(/[^\d.]/g, ''));
+  const c = Number(String(cardPrice ?? '').replace(/[^\d.]/g, ''));
+  if (!(a > 0) || !(c > 0)) return '';
+  const pct = Math.round(((a - c) / c) * 100);
+  if (pct === 0) return '0%';
+  return `${pct > 0 ? '+' : '-'}${Math.abs(pct)}%`;
+}
+// verdict が付いていて Amazon 価格が「買える価格」として取れている行だけ price_gap を持つ
+function priceGapOfRow(r) {
+  if (!r.verdict || NO_PRICE_VERDICTS.has(r.verdict)) return '';
+  return priceGap(r.amazon_price, r.card_price);
+}
+// 販売元表示からの機械分類。marketplace／reseller は人手でしか区別できないので機械では unknown に留める
+function sellerTypeOf(seller) {
+  const s = clean(seller);
+  if (!s) return 'unknown';
+  if (/^Amazon(?:\.co\.jp|\.com)?$|Amazon\.co\.jp\s*(?:が販売|$)/i.test(s)) return 'amazon';
+  if (/公式|official|direct/i.test(s)) return 'official';
+  return 'unknown';
 }
 function writeTsv(rows) {
   const lines = [COLUMNS.join('\t')];
-  for (const r of rows) lines.push(COLUMNS.map((k) => clean(r[k])).join('\t'));
+  for (const r of rows) {
+    r.price_gap = priceGapOfRow(r);
+    lines.push(COLUMNS.map((k) => clean(r[k])).join('\t'));
+  }
   fs.writeFileSync(OUT, lines.join('\n') + '\n', 'utf8');
 }
 
@@ -289,7 +331,8 @@ function parseDp(html) {
   const oosBlock = stripTags((html.match(/id="outOfStock"[^>]*>([\s\S]*?)<\/div>/) || [])[1]);
   for (const src of [out.availability, oosBlock]) { const m = src.match(/在庫切れ|現在お取り扱いできません|入荷時期は未定|この商品は現在[^。]{0,30}/); if (m) oos.push(m[0]); }
   out.oos = [...new Set(oos)];
-  out.seller = stripTags((html.match(/id="sellerProfileTriggerId"[^>]*>([\s\S]*?)<\/a>/) || html.match(/id="merchantInfoFeature_feature_div"[\s\S]{0,2000}?<span[^>]*offer-display-feature-text-message[^>]*>([\s\S]*?)<\/span>/) || [])[1]).slice(0, 60);
+  //   merchantInfo の探索幅は 3000（2000 だと anker-power#2/#3 の「販売元」を取り逃した＝37 §A で拡張）
+  out.seller = stripTags((html.match(/id="sellerProfileTriggerId"[^>]*>([\s\S]*?)<\/a>/) || html.match(/id="merchantInfoFeature_feature_div"[\s\S]{0,3000}?<span[^>]*offer-display-feature-text-message[^>]*>([\s\S]*?)<\/span>/) || [])[1]).slice(0, 60);
   out.brand = stripTags((html.match(/id="bylineInfo"[^>]*>([\s\S]*?)<\/a>/) || [])[1]).replace(/^(ブランド|Visit the|のストアを表示|ストアを表示)[:：]?\s*/g, '').replace(/のストアを表示$/, '').trim();
   const details = {};
   for (const m of html.matchAll(/class="a-section a-spacing-small po-([a-z_]+)"[\s\S]{0,1500}?<td[^>]*>[\s\S]*?<\/td>\s*<td[^>]*>([\s\S]*?)<\/td>/g)) details['po-' + m[1]] = stripTags(m[2]).slice(0, 80);
@@ -331,7 +374,9 @@ async function verify(cards, rows, opts) {
   const byKey = new Map(rows.map((r) => [`${r.slug}\t${r.rank}\t${r.id}`, r]));
   let targets = cards.filter((c) => c.asin);
   if (opts.only.length) {
-    targets = targets.filter((c) => opts.only.some((o) => matchOnly(c, o)));
+    //   --only の並び順で処理する（タスク指定の順。同じ順位のものは TSV 順）
+    const pos = (c) => opts.only.findIndex((o) => matchOnly(c, o));
+    targets = targets.map((c, i) => ({ c, i, p: pos(c) })).filter((x) => x.p >= 0).sort((a, b) => a.p - b.p || a.i - b.i).map((x) => x.c);
   } else {
     targets = targets.filter((c) => !byKey.get(keyOf(c)).verdict || opts.recheck);
     targets = targets.map((c, i) => ({ c, i, p: verifyPriority(c) })).sort((a, b) => a.p - b.p || a.i - b.i).map((x) => x.c);
@@ -346,11 +391,15 @@ async function verify(cards, rows, opts) {
     if (opts.maxMinutes && (Date.now() - t0) / 60000 > opts.maxMinutes) { console.log(`--max-minutes ${opts.maxMinutes} に達したため打ち切り`); break; }
     const r = byKey.get(keyOf(c));
     // 同じ ASIN は 1 回だけ取得（同一バッチ内）
-    const cacheFile = path.join(HTML_DIR, `${c.slug}__${c.rank}__${c.asin}.html`);
+    const cacheName = `${c.slug}__${c.rank}__${c.asin}.html`;
+    const cacheFile = path.join(HTML_DIR, cacheName);
+    //   --cached の読み取りは今回の保存先→過去の回の順で探す（同じ ASIN を別カードで取得済みならそれも使う）
+    const cachedHit = opts.cached ? HTML_DIRS.map((d) => path.join(d, cacheName)).find((f) => fs.existsSync(f))
+      || HTML_DIRS.flatMap((d) => (fs.existsSync(d) ? fs.readdirSync(d).filter((f) => f.endsWith(`__${c.asin}.html`)).map((f) => path.join(d, f)) : []))[0] : null;
     let html; let status;
     const same = [...seen].find((s) => s.asin === c.asin);
     if (same) { html = same.html; status = same.status; }
-    else if (opts.cached && fs.existsSync(cacheFile)) { html = fs.readFileSync(cacheFile, 'utf8'); status = 200; }
+    else if (cachedHit) { html = fs.readFileSync(cachedHit, 'utf8'); status = 200; }
     else if (opts.cached) { console.log(`[${c.slug}#${c.rank} ${c.asin}] --cached: 保存 HTML なし→スキップ`); continue; }
     else {
       if (n > 0) await sleep(INTERVAL_MS);
@@ -379,10 +428,12 @@ async function verify(cards, rows, opts) {
     r.amazon_price = dp.price;
     r.amazon_stock = stockLabel(dp, status);
     r.verdict = av.verdict;
+    r.price_gap = priceGapOfRow(r);
+    r.seller_type = (av.verdict === '404') ? '' : sellerTypeOf(dp.seller);
     r.note = `${av.note}${dp.model ? `｜model=${dp.model}` : ''}${dp.brand ? `｜brand=${dp.brand}` : ''}${dp.seller ? `｜seller=${dp.seller}` : ''}`.slice(0, 300);
     r.checked_at = new Date().toISOString().replace(/\.\d+Z$/, 'Z');
     r.judged_task = TASK_ID;
-    console.log(`[${c.slug}#${c.rank} ${c.asin}] http=${status} verdict=${av.verdict} price=${dp.price || '-'} stock=${r.amazon_stock} title=${(dp.title || '').slice(0, 60)}`);
+    console.log(`[${c.slug}#${c.rank} ${c.asin}] http=${status} verdict=${av.verdict} price=${dp.price || '-'} gap=${r.price_gap || '-'} seller=${r.seller_type}(${dp.seller || '-'}) stock=${r.amazon_stock} title=${(dp.title || '').slice(0, 60)}`);
   }
   console.log(`Amazon アクセス ${n} 回 / ${((Date.now() - t0) / 1000).toFixed(1)} 秒`);
   return stop;
@@ -467,6 +518,30 @@ function runTests() {
   t('matchOnly slug#rank', matchOnly({ slug: 'a', rank: 5, id: 'x' }, 'a#5'), true);
   t('matchOnly slug#id', matchOnly({ slug: 'a', rank: 5, id: 'x' }, 'a#x'), true);
   t('matchOnly slug#rank#id', matchOnly({ slug: 'a', rank: 5, id: 'x' }, 'a#5#y'), false);
+  // price_gap（campkit-20260921-37 §A）
+  t('priceGap +（154000 vs 124260 → +24%）', priceGap('154000', '124260'), '+24%');
+  t('priceGap -（12300 vs 12800 → -4%）', priceGap('12300', '12800'), '-4%');
+  t('priceGap 0（同額）', priceGap('2980', '2980'), '0%');
+  t('priceGap 四捨五入で 0 になるときも "0%"（-0% を出さない）', priceGap('9990', '10000'), '0%');
+  t('priceGap 四捨五入（+10.5% → +11%）', priceGap('4980', '4482'), '+11%');
+  t('priceGap Amazon 価格なし → 空', priceGap('', '12800'), '');
+  t('priceGap カード価格なし → 空', priceGap('12300', ''), '');
+  t('priceGap 数値でない → 空', priceGap('参考', '12800'), '');
+  t('priceGapOfRow verdict 空 → 空', priceGapOfRow({ verdict: '', amazon_price: '100', card_price: '100' }), '');
+  t('priceGapOfRow out_of_stock → 空（参考価格があっても）', priceGapOfRow({ verdict: 'out_of_stock', amazon_price: '10891', card_price: '26631' }), '');
+  t('priceGapOfRow 404 → 空', priceGapOfRow({ verdict: '404', amazon_price: '100', card_price: '100' }), '');
+  t('priceGapOfRow ok → 計算', priceGapOfRow({ verdict: 'ok', amazon_price: '3250', card_price: '2660' }), '+22%');
+  t('priceGapOfRow model_mismatch も計算（別変種の価格差を読めるように）', priceGapOfRow({ verdict: 'model_mismatch', amazon_price: '21998', card_price: '23600' }), '-7%');
+  t('PRICE_GAP_RE 値域', ['', '0%', '+24%', '-4%', '+0%', '-0%', '24%', '+5', 'x'].map((v) => PRICE_GAP_RE.test(v)), [true, true, true, true, false, false, false, false, false]);
+  // seller_type（機械分類）
+  t('sellerTypeOf Amazon.co.jp', sellerTypeOf('Amazon.co.jp'), 'amazon');
+  t('sellerTypeOf 公式', sellerTypeOf('Naturehike公式ショップ'), 'official');
+  t('sellerTypeOf Official Store', sellerTypeOf('Travelcool Official Store'), 'official');
+  t('sellerTypeOf AnkerDirect', sellerTypeOf('AnkerDirect'), 'official');
+  t('sellerTypeOf 一般店は unknown（人手で marketplace/reseller）', sellerTypeOf('上河商会'), 'unknown');
+  t('sellerTypeOf 空 → unknown', sellerTypeOf(''), 'unknown');
+  t('SELLER_TYPES 値域', SELLER_TYPES, ['official', 'amazon', 'marketplace', 'reseller', 'unknown']);
+  t('COLUMNS は 21 列・verdict の直後に price_gap / seller_type', [COLUMNS.length, COLUMNS.indexOf('price_gap') - COLUMNS.indexOf('verdict'), COLUMNS.indexOf('seller_type') - COLUMNS.indexOf('verdict')], [21, 1, 2]);
   // 実データ: frozen 列が card-name-check.tsv と全行一致
   const { cards } = loadAllCards();
   const cn = readTsv(CARD_NAME_TSV).rows;
@@ -487,9 +562,14 @@ function runTests() {
     t('TSV: ヘッダ', lines[0], COLUMNS.join('\t'));
     t('TSV: 空行なし', lines.some((l) => l === ''), false);
     t('TSV: 全行の列数がヘッダと同じ', lines.every((l) => l.split('\t').length === COLUMNS.length), true);
+    t('TSV: 全行が 21 列（行数）', lines.slice(1).filter((l) => l.split('\t').length === 21).length, lines.length - 1);
     const { rows } = readTsv(OUT);
     t('TSV: link_form 値域', rows.every((r) => LINK_FORMS.includes(r.link_form)), true);
     t('TSV: verdict 値域（空 or 許可値）', rows.every((r) => r.verdict === '' || VERDICTS.includes(r.verdict)), true);
+    t('TSV: price_gap 値域（空 / 0% / ±NN%）', rows.every((r) => PRICE_GAP_RE.test(r.price_gap)), true);
+    t('TSV: seller_type 値域（空 or 許可値）', rows.every((r) => r.seller_type === '' || SELLER_TYPES.includes(r.seller_type)), true);
+    t('TSV: verdict 空の行は price_gap / seller_type も空', rows.filter((r) => !r.verdict).every((r) => r.price_gap === '' && r.seller_type === ''), true);
+    t('TSV: price_gap は amazon_price / card_price から再計算した値と一致', rows.every((r) => r.price_gap === priceGapOfRow(r)), true);
     t('TSV: 行数 = カード数', rows.length, cards.length);
     t('TSV: キー一意', new Set(rows.map((r) => `${r.slug}\t${r.rank}\t${r.id}`)).size, rows.length);
   }
@@ -501,7 +581,7 @@ function runTests() {
 // main
 // ---------------------------------------------------------------------------
 function parseArgs(argv) {
-  const o = { static: false, dry: false, test: false, verify: 0, only: [], maxMinutes: 0, recheck: false, judge: [], note: '', list: '' };
+  const o = { static: false, dry: false, test: false, verify: 0, only: [], maxMinutes: 0, recheck: false, judge: [], note: '', seller: '', setSeller: [], list: '' };
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i];
     if (a === '--static') o.static = true;
@@ -514,10 +594,19 @@ function parseArgs(argv) {
     else if (a === '--max-minutes') o.maxMinutes = Number(argv[++i]) || 0;
     else if (a === '--judge') o.judge.push(String(argv[++i] || ''));
     else if (a === '--note') o.note = String(argv[++i] || '');
+    else if (a === '--seller') o.seller = String(argv[++i] || '');
+    else if (a === '--set-seller') o.setSeller.push(String(argv[++i] || ''));
     else if (a === '--list') o.list = String(argv[++i] || '');
     else throw new Error(`不明な引数: ${a}`);
   }
+  if (o.seller && !SELLER_TYPES.includes(o.seller)) throw new Error(`--seller は ${SELLER_TYPES.join('|')} のいずれか: ${o.seller}`);
   return o;
+}
+// --judge / --set-seller の対象行を 1 件に特定する
+function pickRow(rows, key) {
+  const target = rows.filter((r) => matchOnly({ slug: r.slug, rank: r.rank, id: r.id }, key));
+  if (target.length !== 1) throw new Error(`対象が ${target.length} 件: ${key}`);
+  return target[0];
 }
 
 async function main() {
@@ -545,18 +634,26 @@ async function main() {
     console.log(`${opts.list}: ${hit.length} 枚 / ${new Set(hit.map((r) => r.slug)).size} 記事`);
     return;
   }
-  if (opts.judge.length) {
+  if (opts.judge.length || opts.setSeller.length) {
     for (const j of opts.judge) {
       const m = /^(.+?)=([a-z_0-9]+)$/.exec(j);
       if (!m || !VERDICTS.includes(m[2])) throw new Error(`--judge の書式: slug#rank#id=verdict（verdict は ${VERDICTS.join('|')}）: ${j}`);
-      const target = rows.filter((r) => matchOnly({ slug: r.slug, rank: r.rank, id: r.id }, m[1]));
-      if (target.length !== 1) throw new Error(`--judge の対象が ${target.length} 件: ${m[1]}`);
-      const r = target[0];
+      const r = pickRow(rows, m[1]);
       r.verdict = m[2];
       if (opts.note) r.note = clean(opts.note);
+      if (opts.seller) r.seller_type = opts.seller;
       r.checked_at = r.checked_at || new Date().toISOString().replace(/\.\d+Z$/, 'Z');
       r.judged_task = TASK_ID;
-      console.log(`judge: ${r.slug}#${r.rank}#${r.id} → ${r.verdict}`);
+      console.log(`judge: ${r.slug}#${r.rank}#${r.id} → ${r.verdict}${opts.seller ? ` seller_type=${opts.seller}` : ''}`);
+    }
+    //   --set-seller は seller_type だけを書く（verdict／note／checked_at／judged_task は触らない＝過去の回の判定行に後から列を埋める用）
+    for (const j of opts.setSeller) {
+      const m = /^(.+?)=([a-z_]+)$/.exec(j);
+      if (!m || !SELLER_TYPES.includes(m[2])) throw new Error(`--set-seller の書式: slug#rank#id=seller_type（${SELLER_TYPES.join('|')}）: ${j}`);
+      const r = pickRow(rows, m[1]);
+      if (!r.verdict) throw new Error(`--set-seller: verdict が空の行には書けない: ${m[1]}`);
+      r.seller_type = m[2];
+      console.log(`set-seller: ${r.slug}#${r.rank}#${r.id} → ${r.seller_type}`);
     }
     writeTsv(rows);
     console.log(`→ ${path.relative(ROOT, OUT)}（計 ${rows.length} 行）`);
@@ -575,4 +672,4 @@ async function main() {
 }
 
 if (require.main === module) main().catch((e) => { console.error(e); process.exit(1); });
-module.exports = { parseCards, linkFormOf, modelTokens, brandOf, staticCheck, autoVerdict, parseDp, FROZEN_SLUGS, COLUMNS };
+module.exports = { parseCards, linkFormOf, modelTokens, brandOf, staticCheck, autoVerdict, parseDp, priceGap, priceGapOfRow, sellerTypeOf, FROZEN_SLUGS, COLUMNS, SELLER_TYPES, PRICE_GAP_RE };

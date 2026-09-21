@@ -57,16 +57,22 @@ const SPECS = {
     uniqueKey: ['slug', 'rank', 'id'],
     summarize: ['frozen', 'http'],
   },
-  // 既設置 Amazon リンクの棚卸し（check-amazon-asin.cjs の COLUMNS と同じ 19 列。campkit-20260921-36 §B）
+  // 既設置 Amazon リンクの棚卸し（check-amazon-asin.cjs の COLUMNS と同じ 21 列。campkit-20260921-36 §B で 19 列、37 §A で verdict の直後に
+  //   price_gap（(Amazon価格−カードprice)÷カードprice の整数%・空/0%/±NN%）と seller_type（official/amazon/marketplace/reseller/unknown）を追加）
   '_file/amazon-asin-check.tsv': {
     header: ['slug', 'rank', 'id', 'frozen', 'link_form', 'asin', 'amazon_url', 'card_name', 'brand', 'maker_model', 'card_price',
-      'static_flags', 'amazon_title', 'amazon_price', 'amazon_stock', 'verdict', 'checked_at', 'judged_task', 'note'],
+      'static_flags', 'amazon_title', 'amazon_price', 'amazon_stock', 'verdict', 'price_gap', 'seller_type', 'checked_at', 'judged_task', 'note'],
     domains: { frozen: ['0', '1'], link_form: ['amazonAsin', 'amazonUrl', 'legacy_source_amazon', 'none'] },
-    //   verdict は未照合なら空
+    //   verdict / price_gap / seller_type は未照合なら空（seller_type の空は domains でなく patterns で許す）
     //   asin の書式は検査しない（不正な ASIN を bad_format として検出するのが同スクリプトの役目）
-    patterns: { slug: /^[a-z0-9-]+$/, rank: /^\d+$/, static_flags: /^\S+$/, verdict: /^(?:|ok|model_mismatch|different_product|out_of_stock|404|unverifiable|blocked_by_amazon)$/ },
+    patterns: {
+      slug: /^[a-z0-9-]+$/, rank: /^\d+$/, static_flags: /^\S+$/,
+      verdict: /^(?:|ok|model_mismatch|different_product|out_of_stock|404|unverifiable|blocked_by_amazon)$/,
+      price_gap: /^(?:|0%|[+-][1-9]\d*%)$/,
+      seller_type: /^(?:|official|amazon|marketplace|reseller|unknown)$/,
+    },
     uniqueKey: ['slug', 'rank', 'id'],
-    summarize: ['link_form', 'verdict'],
+    summarize: ['link_form', 'verdict', 'seller_type'],
   },
 };
 
