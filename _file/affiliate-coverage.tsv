@@ -76,7 +76,7 @@ car-side-tarp	2026-06-02	2026-06-29	5	10	0	5	0	0	0	15	ok
 cassette-gas-heater	2026-08-10	2026-08-10	5	5	0	5	0	0	0	10	ok	
 chair-table-furusato	2026-08-03	2026-08-03	0	1	0	0	0	0	0	1	ok	
 charcoal-starter	2026-08-06	2026-09-21	5	5	0	5	0	0	0	10	ok	
-closed-cell-mat	2026-09-04	2026-09-04	5	5	0	4	0	0	0	9	ok	Amazon未設定カード 1/5 (#5)
+closed-cell-mat	2026-09-04	2026-09-21	5	5	0	5	0	0	0	10	ok	Amazon未設定カード 0/5 ｜2026-09-21 backfill(campkit-20260921-14): #5=B07YBY4GKZ(Soomloom IXPEアルミマット ブルー 183×55×1.8cm・410g・楽天SKU outdoor-028-a0102 シングル/ブルー 55×183cm・18mm・410gと一致。楽天型番は「-」のためブランド＋寸法＋重量＋色で照合)
 co-checker	2026-08-10	2026-08-10	5	5	0	1	0	0	0	6	ok	Amazon未設定カード 4/5 (#1,#2,#3,#4)
 coleman-bonfire	2026-06-15	2026-06-15	4	8	0	2	0	0	0	10	ok	Amazon未設定カード 2/4 (#3,#4)
 coleman-chair	2026-06-15	2026-09-20	5	10	0	3	0	0	0	13	ok	Amazon未設定カード 2/5 (#2,#4)
@@ -125,7 +125,7 @@ fire-tongs	2026-06-08	2026-06-08	5	10	0	4	0	0	0	14	ok	Amazon未設定カード 1
 fireproof-chair	2026-08-31	2026-08-31	5	5	0	5	0	0	0	10	ok	
 fireproof-gloves	2026-07-27	2026-07-27	5	5	0	1	0	0	0	6	ok	Amazon未設定カード 4/5 (#1,#2,#3,#5)
 folding-cutting-board	2026-08-14	2026-08-14	5	5	0	4	0	0	0	9	ok	Amazon未設定カード 1/5 (#4)
-forged-peg	2026-06-02	2026-06-02	5	10	0	2	0	0	0	12	ok	Amazon未設定カード 3/5 (#2,#4,#5)
+forged-peg	2026-06-02	2026-09-21	5	10	0	3	0	0	0	13	ok	Amazon未設定カード 2/5 (#4,#5) ｜2026-09-21 backfill(campkit-20260921-14): #2=B08H1Q3M86(IWANO 鍛造ペグ 30cm/8本 ¥3,990・楽天SKU pegu30cm-8p 型番AWRFP8 ¥3,990と同額・同仕様。※カード価格990は楽天の1本SKU(AWRFP1P)の価格で name「8本」と不整合→別タスク)。#4 REIDEN は no-amazon: 楽天SKU属性 ブランド=Reiden/型番lbw-11001(レーベンウッド自社ブランド)、Amazon検索「REIDEN 鍛造ペグ」はHUNDRUP/MOON LENCE等の別OEMのみ。#5 ペグ+ハンマーセット は no-amazon: 楽天SKU属性 ブランド=nda-style/型番288965(店舗独自)の無名OEMでAmazonに同ブランド出品なし
 fuji-climb-rental-vs-buy	2026-09-10	2026-09-10	0	0	0	0	0	0	1	1	ok	
 furusato-camp-guide	2026-08-04	2026-08-04	0	1	0	0	0	0	0	1	ok	
 furusato-camp-ticket	2026-09-08	2026-09-08	0	1	0	0	0	0	0	1	ok	
@@ -138,7 +138,7 @@ gregory-backpack	2026-06-15	2026-09-21	5	10	0	4	0	0	0	14	ok	Amazon未設定カ�
 ground-sheet	2026-07-31	2026-07-31	5	5	0	5	0	0	0	10	ok	
 group-camp-rental	2026-09-15	2026-09-15	0	0	0	0	0	0	1	1	ok	
 group-camp-table	2026-04-23	2026-06-29	5	5	0	0	3	3	0	8	ok	Amazon未設定カード 2/5 (#1,#4)
-group-camp-tent	2026-04-29	2026-04-29	5	5	0	3	0	0	0	8	ok	Amazon未設定カード 2/5 (#3,#5)
+group-camp-tent	2026-04-29	2026-04-29	5	5	0	3	0	0	0	8	ok	Amazon未設定カード 2/5 (#3,#5) ｜2026-09-21 backfill(campkit-20260921-14): 設置0・記事無変更(updatedAt据え置き)。#3 Free-Rise HEXAGON 3×6m は no-amazon: 楽天SKU型番FR-STD36、Amazon検索「Free-Rise HEXAGON 3m×6m」に同ブランド出品なし(CROWN SHADES等の別商品のみ)。#5 FIELDOOR フィールドキャンプドーム300 は no-amazon: Amazonの同一商品B089D5L5QF(4〜6人用 フライシート付)は「在庫切れ・再入荷予定なし」で現行出品なし。ワンタッチテント300(B081RKMZM4等)は別商品のため不採用
 guy-rope-recommend	2026-08-17	2026-08-17	5	5	0	2	0	0	0	7	ok	Amazon未設定カード 3/5 (#1,#3,#5)
 hand-axe	2026-07-27	2026-09-21	5	5	0	3	0	0	0	8	ok	Amazon未設定カード 2/5 (#1,#3)
 hanging-rack	2026-08-19	2026-08-19	5	5	0	2	0	0	0	7	ok	Amazon未設定カード 3/5 (#1,#2,#5)
@@ -148,7 +148,7 @@ hexa-tarp	2026-06-02	2026-06-02	5	10	0	1	0	0	0	11	ok	Amazon未設定カード 4/
 hot-sandwich-maker	2026-06-02	2026-06-02	5	10	0	3	0	0	0	13	ok	Amazon未設定カード 2/5 (#3,#5)
 hot-water-bottle	2026-08-05	2026-08-05	5	5	0	2	0	0	0	7	ok	Amazon未設定カード 3/5 (#2,#4,#5)
 infinity-chair	2026-07-28	2026-09-03	5	5	0	3	0	0	0	8	ok	Amazon未設定カード 2/5 (#2,#4)
-inflatable-mat	2026-06-02	2026-09-21	5	10	0	4	0	0	0	14	ok	Amazon未設定カード 1/5 (#1) ｜2026-09-21 backfill(campkit-20260921-13): #4=B0CLV79J6K(PYKES PEAK 型番P0207IFMST-BLK)・#5=B085TBSTW4(Bears Rock MT-103F エスニックオリーブ)を設置。#1 Aiflycy は no-amazon: Amazonに同名ブランド出品なし。楽天SKU属性はブランド=camdoor/型番sp06だが、Amazon CAMDOOR 枕付き75cm(B0GSZY8CY1等)は展開210×75cm・3.7〜4.2kgで楽天仕様(200×75cm・3.2〜3.5kg)と不一致のため同一商品と確認できず
+inflatable-mat	2026-06-02	2026-09-21	5	10	0	5	0	0	0	15	ok	Amazon未設定カード 0/5 ｜2026-09-21 backfill(campkit-20260921-13): #4=B0CLV79J6K(PYKES PEAK 型番P0207IFMST-BLK)・#5=B085TBSTW4(Bears Rock MT-103F エスニックオリーブ)を設置 ｜2026-09-21 backfill(campkit-20260921-14): #1=B0CBTMQJZP(CAMDOOR 幅70cm/8cm/ブラック 単品 メーカー型番14CAMDOOR2 ¥6,450)を設置。表記差あり・人間判断で採用(2026-09-21 田之上さん: Aiflycy=CAMDOOR同一OEMとみなす)。実リンク先 luxim647/3sp02 の既定SKUは sp0208hei=プレミアムサイズ幅70cm/8cm/ブラック/枕なし(型番sp02・¥7,480)で、Amazon側も幅70cm・8cm・ブラック・200cm・単品で一致。※カード名「枕付き 幅75cm」は同ページの別SKU(sp06・10cmのみ・¥8,880)の仕様で実リンク先と不一致→商品名修正は別タスク
 inner-tent-kangaroo	2026-09-09	2026-09-09	5	5	0	5	0	0	0	10	ok	
 insulated-tumbler	2026-09-10	2026-09-10	5	5	0	4	0	0	0	9	ok	Amazon未設定カード 1/5 (#5)
 isuka-sleeping-bag	2026-09-16	2026-09-16	5	5	0	5	0	0	0	10	ok	
@@ -183,7 +183,7 @@ nanga-down-jacket	2026-09-14	2026-09-14	5	10	0	2	0	0	0	12	ok	Amazon未設定カ�
 nanga-sleeping-bag	2026-06-01	2026-06-29	5	5	0	5	5	5	0	15	ok	
 naturehike-mat	2026-06-08	2026-06-08	5	10	0	2	0	0	0	12	ok	Amazon未設定カード 3/5 (#1,#3,#4)
 naturehike-sleeping-bag	2026-06-15	2026-06-15	5	10	0	2	5	5	0	17	ok	
-naturehike-tent	2026-06-02	2026-06-02	5	10	0	2	0	0	0	12	ok	Amazon未設定カード 3/5 (#1,#2,#4)
+naturehike-tent	2026-06-02	2026-09-21	5	10	0	4	0	0	0	14	ok	Amazon未設定カード 1/5 (#2) ｜2026-09-21 backfill(campkit-20260921-14): #1=B0D478VBQC(Naturehike公式ショップ Clould up2 Pro 20Dダークベージュ/PRO2人用 ¥23,990・楽天公式 cloud up pro 2人用 ベージュ ¥23,990と同額。楽天型番CNK2350WS020 vs Amazon型番Clouldup2-Proで文字列不一致、公式店同士の商品名・サイズ・価格で照合)。#4=B0DYF5RNY2(Naturehike公式ショップ village13 Ti Black素材 メーカー型番CNH22ZP004TB ¥66,990・楽天型番CNH22ZP004の前方一致。※楽天ページは「Village 13.0 Pro」ベーシック版¥75,990/19kgへ更新済みでカード価格56,993と乖離→price_unconfirmed候補)。#2 nh17t140-j は no-amazon: 楽天ページ404(廃番の疑い・discontinued_404候補)、Amazon検索「Naturehike NH17T140-J」ヒットなし
 northface-backpack	2026-07-24	2026-07-24	5	5	0	3	0	0	0	8	ok	Amazon未設定カード 2/5 (#2,#5)
 ogawa-tent	2026-08-26	2026-08-26	5	4	0	4	0	0	0	8	card-without-link	cards NG: #5=別形式(B0843M38FP)
 oil-lantern	2026-07-27	2026-07-27	5	5	0	5	0	0	0	10	ok	
