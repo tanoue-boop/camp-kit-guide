@@ -67,7 +67,7 @@ const ROOT = path.join(__dirname, '..');
 const POSTS_DIR = path.join(ROOT, 'content', 'posts');
 const OUT = path.join(ROOT, '_file', 'card-name-check.tsv');
 const HTML_DIR = path.join(ROOT, '_file', '_work', 'html-24');
-const TASK_ID = 'campkit-20260921-30'; // 走査・再判定を行ったタスク（TSV の judged_task 列に入る）
+const TASK_ID = 'campkit-20260921-31'; // 走査・再判定を行ったタスク（TSV の judged_task 列に入る）
 
 // ---------------------------------------------------------------------------
 // 閾値・定数（A-4 の回帰検証で調整する。slug / id を条件に埋め込まない）
@@ -377,15 +377,54 @@ function expandSlashUnits(nk) {
   return nk.replace(/((?:\d+(?:\.\d+)?\/)+)(\d+(?:\.\d+)?)([a-zℓ]+|人用|合|度|℃)/g, (m, list, last, unit) =>
     list.split('/').filter(Boolean).map((n) => n + unit).join('/') + '/' + last + unit);
 }
+// ── 1 文字のサイズ値（S／M／L／F）の名指し（campkit-20260921-31 §A） ──
+//   ウェア・グローブ類はサイズ軸の値が「S｜M｜L｜LL」のように 1 文字で、従来の照合（2 文字未満は不使用）では name を「M ドレスネイビー」に
+//   固定しても既定の S で判定されていた（camp-rainwear #2）。1 文字の照合は誤爆しやすいので次の条件を全部満たすときだけ名指しと認める。
+//   1. サイズ軸に限る: 軸の値（注意書きを除く）がすべて既知のサイズラベル（XS S M L XL XXL LL 3L 4L F FREE フリー）か
+//      「M(胸囲88-96)」のような 1〜3 文字の英大文字/数字＋括弧補足 で構成されている。色軸・タイプ軸・数量軸には適用しない（軸名は見ない）
+//      ※ 既知ラベルは task-31 の列挙をそのまま含む同一体系の族として持つ: XXS〜XXXL／LL・LLL／2L〜9L／2XL〜9XL と、アパレルの B体
+//        （SB／MB／LB／LLB／MBB）。発端の camp-rainwear #2（ミズノ）のサイズ軸が「S|M|L|XL|2XL|SB|MB|MBB」で、列挙どおりだと軸自体が
+//        サイズ軸と認められず緩和が 1 枚も効かないため。列挙に戻すなら SIZE_LABEL_RE を差し替えるだけでよい
+//   2. 完全一致のみ: 前方一致（skuValueMatches）は使わない。skuValueMatches 側の「2 文字未満は不使用」もそのまま
+//   3. name 側では独立トークンのときだけ: 前後が 空白／全角空白／`/`／`｜`／括弧／【】／行頭行末 のいずれか（直後が「サイズ」でも可）。
+//      直前直後が英数字・ハイフンなら拾わない（M-STYLE の M／SUS6A の S／AS-7100 の S）。英大文字のみ・小文字（3×3m の m）は拾わない
+const SIZE_LABEL_RE = /^(?:X{0,3}S|M|X{0,3}L|L{2,3}|[2-9]L|[2-9]XL|F|FREE|フリー)(?:B{1,2})?$/;
+function sizeLabelCore(v) {
+  const m = /^([^\s()]{1,4})\s*(\([^()]*\))?$/.exec(toHalfWidth(v).trim());
+  if (!m) return '';
+  if (SIZE_LABEL_RE.test(m[1])) return m[1];
+  if (m[2] && /^[A-Z0-9]{1,3}$/.test(m[1]) && /[A-Z]/.test(m[1])) return m[1];
+  return '';
+}
+function isSizeLabelAxis(a) {
+  const vals = (a.values || []).filter((v) => !NOTICE_VAL_RE.test(v));
+  return vals.length >= 1 && vals.every((v) => sizeLabelCore(v) !== '');
+}
+// name（大文字小文字を保ったまま全角→半角・空白→`/`）の中で、1 文字サイズ値 `core` が独立トークンとして現れる位置（無ければ -1）
+function singleLetterSizeTokenIndex(nkCase, core) {
+  if (!/^[A-Z]$/.test(core)) return -1;
+  const re = new RegExp('(?<=^|[/|｜()【】\\[\\]])' + core + '(?=$|[/|｜()【】\\[\\]]|サイズ)');
+  const m = re.exec(nkCase);
+  return m ? m.index : -1;
+}
 function nameSpecifiedValues(a, cardName) {
   //   照合先は「空白を / に置換した name」を優先し、「空白を除いた name」はフォールバック。空白を除くと「DB01 10L」が「0110l」になり
   //   数字隣接ガード（175cm に 75cm を含めない）で 10L を落としてしまう（第4バッチ portable-fridge #1）
   const nkSep = expandSlashUnits(norm(cardName || '').trim().replace(/\s+/g, '/'));
   const nkRaw = expandSlashUnits(norm(cardName || '').replace(/\s+/g, ''));
+  const nkCase = toHalfWidth(cardName || '').trim().replace(/\s+/g, '/');
+  const sizeLabelAxis = isSizeLabelAxis(a);
   const out = [];
   for (const v of a.values) {
     const vkRaw = norm(v).replace(/\s+/g, '');
-    if (vkRaw.length < 2 || NONE_VAL_RE.test(v) || NOTICE_VAL_RE.test(v)) continue;
+    if (NONE_VAL_RE.test(v) || NOTICE_VAL_RE.test(v)) continue;
+    if (vkRaw.length < 2) {
+      // 1 文字値はサイズ軸（上記 1）の英大文字に限り、name の独立トークンとの完全一致（上記 2・3）だけを名指しと認める
+      if (!sizeLabelAxis) continue;
+      const i = singleLetterSizeTokenIndex(nkCase, toHalfWidth(v).trim());
+      if (i >= 0) out.push({ v, pos: i, len: 1 });
+      continue;
+    }
     const vkSep = norm(v).trim().replace(/\s+/g, '/');
     const cands = [[nkSep, vkSep], [nkSep, vkSep.replace(/[()\[\]「」]/g, '')], [nkRaw, vkRaw], [nkRaw, vkRaw.replace(/[()\[\]「」]/g, '')]];
     for (const [nk, vk] of cands) {
@@ -1365,6 +1404,18 @@ function runTests() {
     mkPage({ itemName: 'キャンプ ケトル キャンピングムーン', brand: 'キャンピングムーン', axes: [{ key: 'サイズ', values: ['0.8L', '1.0L', '1.5L', '0.8L│ソロ・軽量', '1.0L│1～2人・定番', '1.5L│2～3人・調理'] }],
       skus: [[['1.0L│1～2人・定番'], 1980], [['0.8L│ソロ・軽量'], 1800]] }), 200, [], ['spec_mismatch', 'size_unspecified', 'price_mismatch', 'variant_unavailable']);
 
+  // ── campkit-20260921-31 §A: 1 文字サイズ値（S/M/L）の名指し（判定側）──
+  //   ミズノ #2: サイズ軸 S|M|L|LL|3L、name「… A2MG8A01 M ドレスネイビー …」。M/ドレスネイビー ¥15,840 がカード price と一致するのに
+  //   既定 S/ブルー ¥13,750 で判定して price_mismatch が残っていた
+  const mizunoAxes = [{ key: 'サイズ', values: ['S', 'M', 'L', 'LL', '3L'] }, { key: 'カラー', values: ['25：ブルー', '62：レッド', '71：ドレスネイビー'] }];
+  //   （mkPage は skus[0] を選択SKUに固定するので、選択そのものは下の parseRakutenHtml ケース s12/s13 で検証）
+  t('price_mismatch なし: 1 文字サイズ「M」の名指しで選択SKUが M/ドレスネイビー（¥15,840＝カード price）なら整合（camp-rainwear #2）', { name: 'ミズノ mizuno ベルグテックEX ストームセイバーVI レインスーツ メンズ A2MG8A01 M ドレスネイビー 上下', price: '15840' },
+    mkPage({ itemName: 'ミズノ ベルグテックEX ストームセイバーVI レインスーツ A2MG8A01', makerModel: 'A2MG8A01', brand: 'ミズノ', axes: mizunoAxes,
+      skus: [[['M', '71：ドレスネイビー'], 15840], [['S', '25：ブルー'], 13750], [['L', '71：ドレスネイビー'], 15840]] }), 200, [], ['price_mismatch', 'size_unspecified', 'color_unspecified', 'variant_unavailable']);
+  t('price_mismatch: 「M」が無ければ従来どおり既定 S/ブルー ¥13,750 で判定', { name: 'ミズノ mizuno ベルグテックEX ストームセイバーVI レインスーツ メンズ A2MG8A01 ドレスネイビー 上下', price: '15840' },
+    mkPage({ itemName: 'ミズノ ベルグテックEX ストームセイバーVI レインスーツ A2MG8A01', makerModel: 'A2MG8A01', brand: 'ミズノ', axes: mizunoAxes,
+      skus: [[['S', '25：ブルー'], 13750], [['M', '71：ドレスネイビー'], 15840]] }), 200, ['price_mismatch', 'size_unspecified']);
+
   // url_unparsable は rakutenUrl() の単体テストで担保
   const urlCases = [
     ['https://hb.afl.rakuten.co.jp/hgc/x/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fluxim647%2F3sp02%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fluxim647%2Fi%2F10000005%2F', 'https://item.rakuten.co.jp/luxim647/3sp02/'],
@@ -1461,6 +1512,47 @@ function runTests() {
     ct('選択SKU: 名指しが無い場合も先頭値「ブラック」の完全一致 SKU', s11 === '1692', s11);
     ct('skuValueMatches: 「10L」は「100L」に当たらない（直後が数字）', !skuValueMatches('100L', '10L') && skuValueMatches('10L│小', '10L'), String(skuValueMatches('100L', '10L')));
     ct('skuValueMatches: 1 文字の「S」は「SB」に当たらない', !skuValueMatches('SB', 'S'), String(skuValueMatches('SB', 'S')));
+    // campkit-20260921-31 §A: 1 文字サイズ値の名指し（nameSpecifiedValues 側だけ緩める。skuValueMatches は上のとおり不変）
+    const sizeAxis = { key: 'サイズ', values: ['S', 'M', 'L', 'LL', '3L'] };
+    const nsv = (axis, name) => nameSpecifiedValues(axis, name).map((x) => x.v).join(',');
+    const a1 = nsv(sizeAxis, 'ミズノ mizuno ベルグテックEX ストームセイバーVI レインスーツ メンズ A2MG8A01 M ドレスネイビー 上下');
+    ct('1文字サイズ: 「… A2MG8A01 M ドレスネイビー …」はサイズ軸 S|M|L|LL|3L の M を名指し（A2MG8A01 の M は拾わない）', a1 === 'M', a1 || '(なし)');
+    const a2 = nsv(sizeAxis, 'ZEN Camps 耐熱グローブ Mサイズ ブラウン');
+    ct('1文字サイズ: 「Mサイズ」（直後が サイズ）も独立トークン', a2 === 'M', a2 || '(なし)');
+    const a3 = nsv(sizeAxis, 'Makku マック レインウェア 上下セット AS-7100 ブルー S 耐水圧10000mm');
+    ct('1文字サイズ: 「AS-7100 … S」は末尾の S だけ（AS-7100 の S は拾わない）', a3 === 'S', a3 || '(なし)');
+    const a4 = nsv(sizeAxis, 'Makku マック レインウェア 上下セット AS-7100 ブルー 耐水圧10000mm');
+    ct('1文字サイズ（効かない）: 「AS-7100」の周辺だけでは名指しにならない', a4 === '', a4 || '(なし)');
+    const a5 = nsv(sizeAxis, 'M-STYLE ミリタリーバッグ ブラック');
+    ct('1文字サイズ（効かない）: 「M-STYLE」の M（直後がハイフン）', a5 === '', a5 || '(なし)');
+    const a6 = nsv(sizeAxis, 'belmont BM-164 フィールドナイフ SUS6A フルタング');
+    ct('1文字サイズ（効かない）: 「SUS6A」の S（直後が英字）', a6 === '', a6 || '(なし)');
+    const a7 = nsv(sizeAxis, 'Bears Rock しろくまスクエアタープ 3×3m カーキ m ドレスネイビー');
+    ct('1文字サイズ（効かない）: 小文字の m（3×3m／m ドレスネイビー）', a7 === '', a7 || '(なし)');
+    const a8 = nsv({ key: 'カラー', values: ['赤', '青', 'M'] }, 'レインウェア M 青');
+    ct('1文字サイズ（効かない）: 色軸に 1 文字値があっても値の集合がサイズラベルでなければ適用しない', a8 === '', a8 || '(なし)');
+    const a9 = nsv({ key: 'タイプ', values: ['A', 'B', 'C'] }, 'コンテナ タイプ B ブラック');
+    ct('1文字サイズ（効かない）: タイプ軸 A|B|C の B', a9 === '', a9 || '(なし)');
+    const a10 = nsv({ key: '本数', values: ['1', '2', '4'] }, 'ペグ 4 本');
+    ct('1文字サイズ（効かない）: 数量軸 1|2|4 の 4', a10 === '', a10 || '(なし)');
+    const a11 = nsv({ key: 'サイズ', values: ['S(胸囲80-88)', 'M(胸囲88-96)', 'L(胸囲96-104)'] }, 'レインウェア M(胸囲88-96) ネイビー');
+    ct('1文字サイズ: 「M(胸囲88-96)」型の軸はサイズ軸とみなす（値は従来どおり全文で名指し）', a11 === 'M(胸囲88-96)', a11 || '(なし)');
+    const a12 = nsv({ key: 'サイズ', values: ['S', 'M', 'L', '選択してください'] }, 'レインウェア M ネイビー');
+    ct('1文字サイズ: 注意書き「選択してください」が混ざっていてもサイズ軸', a12 === 'M', a12 || '(なし)');
+    const a13 = nsv(sizeAxis, 'レインウェア Ｍ ネイビー');
+    ct('1文字サイズ: 全角「Ｍ」も M として名指し', a13 === 'M', a13 || '(なし)');
+    const a14 = nsv({ key: 'サイズ', values: ['S', 'M', 'L', 'XL', '2XL', 'SB', 'MB', 'MBB'] }, 'ミズノ レインスーツ A2MG8A01 M ドレスネイビー 上下');
+    ct('1文字サイズ: 2XL／B体（SB/MB/MBB）を含むミズノのサイズ軸もサイズ軸（camp-rainwear #2 の実軸）', a14 === 'M', a14 || '(なし)');
+    const a15 = nsv({ key: 'サイズ', values: ['S', 'M', 'L', 'XL', '2XL', 'SB', 'MB', 'MBB'] }, 'ミズノ レインスーツ A2MG8A01 MB ドレスネイビー');
+    ct('1文字サイズ: 2 文字以上の値（MB）は従来の照合のまま', a15 === 'MB', a15 || '(なし)');
+    const a16 = nsv({ key: 'サイズ', values: ['S', 'M', 'L', 'XL', 'ワイド'] }, 'レインウェア M ネイビー');
+    ct('1文字サイズ（効かない）: サイズラベル以外の値（ワイド）が混ざる軸は対象外', a16 === '', a16 || '(なし)');
+    const html5 = '<title>t</title>{"itemInfoSku":{"title":"レインスーツ","manageNumber":"x"},"variantSelectors":[{"label":"サイズ","values":[{"label":"S"},{"label":"M"},{"label":"L"}]},{"label":"カラー","values":[{"label":"25：ブルー"},{"label":"71：ドレスネイビー"}]}],"sku":[{"variantId":"s-blue","selectorValues":["S","25：ブルー"],"taxIncludedPrice":13750},{"variantId":"m-blue","selectorValues":["M","25：ブルー"],"taxIncludedPrice":15840},{"variantId":"m-navy","selectorValues":["M","71：ドレスネイビー"],"taxIncludedPrice":15840}]}';
+    const s12 = parseRakutenHtml(html5, '', 'ミズノ レインスーツ A2MG8A01 M ドレスネイビー', '15840').firstSku.variantId;
+    ct('選択SKU: 「M」の名指しで M の SKU を選ぶ（S/ブルー の既定ではない）', s12 === 'm-blue' || s12 === 'm-navy', s12);
+    const s13 = parseRakutenHtml(html5, '', 'ミズノ レインスーツ A2MG8A01 ドレスネイビー', '15840').firstSku.variantId;
+    ct('選択SKU: 「M」が無ければ従来どおり既定 S/ブルー', s13 === 's-blue', s13);
+    ct('skuValueMatches: §A の後も 1 文字の前方一致は不使用（"M" は "MD" に当たらない・完全一致だけ）', !skuValueMatches('MD', 'M') && skuValueMatches('M', 'M'), String(skuValueMatches('MD', 'M')));
     ct('itemCodeOf: 店名を除いた商品コード',itemCodeOf('https://item.rakuten.co.jp/futon-outlet/10002239/') === '10002239' && itemCodeOf('https://item.rakuten.co.jp/smile88/a04309_sale/?variantId=1') === 'a04309_sale', itemCodeOf('https://item.rakuten.co.jp/futon-outlet/10002239/'));
   }
   for (const c of cacheCases) {
