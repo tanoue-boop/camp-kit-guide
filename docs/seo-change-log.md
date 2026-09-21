@@ -3,6 +3,25 @@
 数値の推移はGAS「SEOレポート」の履歴で追う。本ファイルは「いつ・どの記事を・なぜ・どう変えたか」を記録し、次回レポートで効果を評価するための施策台帳。新しい施策は上に追記する。
 
 ---
+## 2026-09-21：商品構成の是正（product_swap）— camp-portable-power-beginner 全5枠（campkit-20260921-09）
+
+- **位置づけ**: **リライト施策ではなく `_file/article-fix-backlog.tsv` の product_swap（priority B）の消化**。campkit-20260921-06 で検出した「H3 見出し5本（Jackery Explorer 1000 Pro／EcoFlow DELTA 2／BLUETTI AC180／Anker SOLIX C800／Jackery Explorer 300 Plus）と ProductCardMdx の実商品（無名500Wh／LACITA エナーボックス444Wh／EcoFlow DELTA 3 1000 Air／EcoFlow RIVER 2→同URLで RIVER 3 に差し替わり／BLUETTI AC50B＝公式出品消滅）が全5枠で不一致」を、見出し側ブランドの定番モデルへカードを差し替えて解消した。**2026-10-18 の効果検証対象（14本）には加えない**（検証対象14本・リンク元27本には触れていない）。GSC 28日で表示0の記事だが、電源カテゴリの初心者ハブとして内部リンク7本を受けているため優先した
+- **内部リンク元（2026-09-21 実測・7本）**: camp-fan-summer／electric-blanket-camp／jackery-power-station／mobile-battery-camp／portable-power-guide／portable-power-large／solar-panel-folding（いずれも本文は不変更）
+- **方針**: 角度は「初心者向け・入門価格帯・256〜858Wh」に置き、ブランド軸記事4本の第1位（jackery-power-station＝1000 New／ecoflow-power＝DELTA 3 1000 Air／bluetti-power＝AC70／anker-power＝Solix C1000 Gen 2）とは別モデルを選定。見出し側の5モデルのうち **1000 Pro・DELTA 2・300 Plus は楽天に新品レビュー付き在庫あり出品が無く（付属品・中古・0件出品のみ＝廃番相当）、AC180（¥109,800・1152Wh）と C800 Plus（¥109,900）は入門価格帯と〜1,000Wh 帯を外れる**ため、5枠とも同ブランド内で帯に合う定番へ変更した。5商品の価格は ¥32,800〜¥69,700（最高÷最低＝2.13倍）、Jackery 2・EcoFlow 1・BLUETTI 1・Anker 1
+- **取得元・取得日**: 楽天商品検索API（`scripts/rakuten-search.mjs`・在庫あり・reviewCount 順）を **2026-09-21** に実行し、価格・レビュー数・画像URL・アフィリエイトURL（hb.afl 形式）はその実値。本文スペック（容量・定格出力・重量・充電時間・ポート構成・保証）は採用した楽天商品ページの記載値のみ（タイトル・キーワード欄の数値は不使用）。Amazon は各 dp ページで型番一致を実確認して `amazonAsin` を設置（5枠とも設置。旧カードの `B07FPVTFYC`／`B0FWJJLDYN` は削除）
+- **枠ごとの差し替え**:
+  - 第1位: 見出し「Jackery ポータブル電源 Explorer 1000 Pro」→ **「Jackery ポータブル電源 500 New 512Wh」**。理由: 1000 Pro は楽天上位10件が全て付属品で本体出品なし。1000 New は jackery-power-station の第1位のため回避し、同ブランドの500Wh帯定番へ。カード 無名 500Wh ¥69,300 → **Jackery ポータブル電源 500 New 512Wh（JE-500A）** ¥59,800・★4.69/1,369件（Jackery Japan 楽天市場店）・ASIN B0FBRK8GSP。`id` jackery-explorer-1000pro → jackery-500-new
+  - 第2位: 見出し「EcoFlow DELTA 2」→ **「EcoFlow RIVER 3 Max Plus 858Wh」**。理由: DELTA 2 は公式出品が走行充電器セット（¥224,070）のみで、単体はレビュー4件の転送不可ショップと0件出品しか無い。DELTA 3 1000 Air は ecoflow-power の第1位のため回避し、同ブランドの中容量定番へ。カード LACITA エナーボックス 444Wh ¥69,800 → **EcoFlow ポータブル電源 RIVER 3 Max Plus 858Wh** ¥69,700・★4.25/8件（EcoFlow公式楽天市場店）・ASIN B0DJ1183KJ。楽天ページは RIVER 3 Max（572Wh）との選択式のため name に「Max Plus 858Wh」を固定し、本文にも選択の注意を明記。AC充電時間は仕様表記載の約2.3時間を採用（タイトルの「1hフル充電」は不使用）。`id` ecoflow-delta2 → ecoflow-river3-maxplus
+  - 第3位: 見出し「BLUETTI AC180」→ **「BLUETTI AORA 30 V2 288Wh」**。理由: AC180 は在庫あり（¥109,800・98件）だが 1152Wh・11万円で入門帯を外れる。AC70 は bluetti-power の第1位、AC50B（旧第5位カード）は公式出品消滅（中古のみ）のため、同ブランドの小型高出力定番へ。カード EcoFlow DELTA 3 1000 Air ¥87,700 → **BLUETTI ポータブル電源 AORA 30 V2 288Wh** ¥39,800・★4.43/44件（BLUETTI JAPAN 楽天市場店）・ASIN B0FB3Y46SB。`id` bluetti-ac180 → bluetti-aora30-v2
+  - 第4位: 見出し「Anker SOLIX C800」→ **「Anker Solix C300 Portable Power Station 288Wh」**。理由: C800 は Plus 版（¥109,900・16件）とレビュー0件の取寄出品しか無く入門帯を外れる。カード EcoFlow RIVER 2 256Wh ¥29,900（同URLは現在 RIVER 3 230Wh に差し替わっていた）→ **Anker Solix C300 Portable Power Station 288Wh ダークグレー** ¥49,990・★4.57/122件（アンカー・ダイレクト楽天市場店）・ASIN B0D5XGP6CW。`id` anker-solix-c800 → anker-solix-c300
+  - 第5位: 見出し「Jackery ポータブル電源 Explorer 300 Plus」→ **「Jackery ポータブル電源 240 New 256Wh」**。理由: 300 Plus は未使用品リセラー（0件）とソーラーセット（0件）のみ。カード BLUETTI AC50B 448Wh ¥53,800（公式出品消滅）→ **Jackery ポータブル電源 240 New 256Wh（JE-240A）** ¥32,800・★4.66/1,791件（Jackery Japan 楽天市場店）・ASIN B0CZ7145K1。`id` jackery-explorer-300plus → jackery-240-new
+- **重複の注記**: 240 New／C300／AORA 30 V2 の3点は compact-portable-power（小型5選）にも掲載あり。本記事は 512Wh／858Wh の中容量2点を軸に「初めての1台を容量帯で選ぶ」角度で役割分担する。500 New は portable-power-vehicle-camp 第2位、RIVER 3 Max Plus は disaster-portable-power 第2位、240 New は同第5位にも掲載（いずれもブランド軸記事ではなく、第1位モデルとも別）
+- **frontmatter**: `updatedAt: "2026-09-21"` を新設（従来なし）。`description` を旧カード群（RIVER 2／DELTA 3・256〜1000Wh）前提の文から新5製品（256〜858Wh・約3.3万〜7万円）に合わせて書き換え（149字）。`title`・slug・thumbnail・tags は不変更。比較表の列ラベル「最大出力」→「定格出力」。FAQ Q5 の軽量モデル例とまとめ締め段落の推奨モデル名を新商品に更新（1000Wh以上が要る読者向けの portable-power-large への既存リンクは維持）
+- **楽天リンク**: 5枠とも hb.afl 形式（`grep -c` で5件・素の item.rakuten 直リンク0件）
+- **commit**: 第1位＋第2位＝`49362ab`、第3位〜第5位＋docs＝本エントリの commit
+- **効果測定**: 10-18 の検証対象には含めない。GSC 28日で表示0（baseline なし）のため、次回以降の `campkit-seo-competitor-scan` で表示回数の発生有無を参考に見る
+
+---
 ## 2026-09-21：商品構成の是正（product_swap）— camp-backpack-beginner 全5枠（campkit-20260921-07）
 
 - **位置づけ**: **リライト施策ではなく `_file/article-fix-backlog.tsv` の product_swap（priority A）の消化**。リライトの着手可在庫が 0本（10-18 まで待機）になった期間の代替作業。監督側・実行側とも本番HTMLで **H3 見出し5本（ブランド定番モデル名）と ProductCardMdx の実商品（無名OEM品）が全5枠で不一致**であることを実測したうえで、見出しどおりのブランド定番モデルへカードを差し替えた。**2026-10-18 の効果検証対象（14本）には加えない**（検証対象14本・リンク元27本には触れていない）
