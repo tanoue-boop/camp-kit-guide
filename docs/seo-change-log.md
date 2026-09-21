@@ -3,6 +3,16 @@
 数値の推移はGAS「SEOレポート」の履歴で追う。本ファイルは「いつ・どの記事を・なぜ・どう変えたか」を記録し、次回レポートで効果を評価するための施策台帳。新しい施策は上に追記する。
 
 ---
+## 2026-09-22：ProductCard `name` の一括修正 第1弾（44枚／17記事）— キュー#15-b（campkit-20260921-29）
+
+- **位置づけ**: SEO施策ではなく、`scripts/check-card-name-vs-sku.cjs`（キュー#15）の検出結果にもとづく**カード名の仕様固定**。`color_unspecified`／`size_unspecified`／`store_copy` が立っていて、404・sale_page・set_mismatch・model_mismatch・variant_unavailable を併発せず、台帳に open な差し替え系案件（discontinued_404／out_of_stock／product_swap／sale_page）が無い **frozen=0 のカード先頭44枚**（母数450枚／165記事）。**触ったのは `ProductCardMdx` の `name` 属性のみ**（title／description／updatedAt／本文・比較表・まとめ表・リンク・price は不変更。SEO計測中のため監督側で据え置き）
+- **対象記事（17本）**: attack-pack（2）／camp-gift（1）／inflatable-mat（3）／one-touch-tent（2）／outdoor-coffee-mill（3）／water-jug（5）／alcohol-stove（1）／backpack-large（5）／backpack-rain-cover（4）／bonfire-tripod（2）／camp-air-pump（2）／camp-burner-beginner（2）／camp-chair-highback（3）／camp-chair-lightweight（3）／camp-coffee-dripper（1）／camp-cooker-beginner（1）／camp-cooler-box-beginner（4）。変更禁止リスト（2026-10-18 まで）の記事は含まない
+- **書き換えの基準**: ① `store_copy`＝【楽天1位】／送料無料／＼…／／「お買い物マラソン」／【公式】等の販促文言を落とし「ブランド＋商品名＋型番＋主要スペック」に整える。② `color_unspecified`＝着地時既定SKU（各軸の先頭値。URL に variantId 指定は44枚とも無し）の色を1色に固定。カード price と一致する変種があればそちらを優先（outdoor-coffee-mill #3 は S／シルバー ¥7,280 ではなく カード ¥7,780 と一致する S／ブラック に固定＝カード画像も黒）。既定の色に SKU が無いカード（backpack-large #1・#2／inflatable-mat #5／camp-chair-lightweight #5）は台帳 `sku_selected` と同じ「SKU が実在する先頭の値」に固定。③ `size_unspecified`＝「1.9L 3.8L」「10L 12L 20L」「8/10cm」「40〜60L」「600/800ml」のような並記・範囲を1仕様に絞る。判断材料は保存HTML（`_file/_work/html-24/`）と `card-name-check.tsv` のみで、**楽天への新規アクセスは0回**
+- **再判定（`--cached`）**: 対象フラグは 44枚中43枚で消滅。残1枚＝backpack-rain-cover #4（DAICHU）は「XSサイズ（15〜25L）」の範囲表記を検出器が size_unspecified と見なすため（軸の値そのものが `XS(15-25L)` という範囲表記。容量帯はレインカバー選びの必須情報なので name に残した）。**name 固定によって新たに立った price_mismatch は0枚**（10枚は変更前から立っていた既存分。outdoor-coffee-mill #3 は逆に解消）。inflatable-mat #1 の spec_mismatch（幅75cm）は、店の軸ラベル「枕付きバーション(幅75cm)」（店側の誤字）を name が名指しできず既定の 幅70cm SKU で判定されるため残存（記事見出し・説明文が「枕付き・幅75cm」で固定されているので name も揃えた）。`--cached --recheck` 全1113枚で対象44枚以外の差分0、`--test` 137 passed / 0 failed
+- **台帳（article-fix-backlog.tsv）**: 401行のまま（pending 284／blocked 96／needs-human 1／done 20）。name を変えたカードの open 行8件の `position` を新 name に更新（one-touch-tent #1／inflatable-mat #1／backpack-large #1・#5／camp-chair-highback #3・#4／camp-cooker-beginner #1／camp-cooler-box-beginner #2）。新規起票・削除は無し
+- **効果測定**: 検索順位への直接施策ではないため計測対象外。Amazon穴埋め（`campkit-amazon-backfill`）で「色・サイズ未指定」を理由に該当なしになっていたカードが減るかを次回の穴埋め実績で見る
+
+---
 ## 2026-09-21：商品構成の是正（product_swap）— fieldoor-tent 全5枠（campkit-20260921-11）
 
 - **位置づけ**: **リライト施策ではなく `_file/article-fix-backlog.tsv` の product_swap（priority B）の消化**。campkit-20260920-16 の Tier1 候補抽出（第8位）で「『FIELDOOR テント』意図に対し採用5製品のうち3製品が日除け用タープテント」と判定され、rewrite-log ではなく backlog に回っていた案件。**2026-10-18 の効果検証対象（14本）には加えない**（検証対象14本・リンク元27本には触れていない。fieldoor-tent 自身は rewrite-log のベースライン表に行があるが施策日は空欄＝待機対象外であることを §0 で確認）
