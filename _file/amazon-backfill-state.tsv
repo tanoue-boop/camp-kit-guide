@@ -282,3 +282,21 @@ no-amazon	portable-cooler-aircon	quads-spot-cooler		2026-09-20	楽天公式ス�
 set	day-camp-tarp-cheap	tarp-rank-1	B00I0Q8VVG	2026-09-20	旧B0DNSGC9MG(2.5m遮光ライトベージュ・サイドシート2枚付¥18,900)は仕様不一致のため撤去。one-touch-tarp と同一楽天商品(maxshare/a04309_sale)の3m×3m確認済ASINへ差替(campkit-20260920-08)
 set	camp-gift	gift-portable-power	B0CZ7145K1	2026-09-20	旧B0C4DY1C3H(旧型Jackery 240・三元系)は型番不一致のため撤去。disaster-portable-power と同一の240 New確認済ASINへ差替(campkit-20260920-08)
 set	compact-portable-power	jackery-240new	B0CZ7145K1	2026-09-20	旧B0C4DY1C3H(旧型Jackery 240・三元系)は型番不一致のため撤去。disaster-portable-power と同一の240 New確認済ASINへ差替(campkit-20260920-08)
+set	waq-chair	waq-rlc1hb	B0GHVZVHQ3	2026-09-21	型番完全一致(WAQ-RLC1ハイバックVer=RLC1HB)・価格9980円完全一致
+no-amazon	waq-chair	waq-rcc1		2026-09-21	楽天商品ページ削除済み(ショップ一覧にも掲載なし)で実売仕様を確認できず、Amazon型番一致も確認不能
+no-amazon	waq-chair	waq-rlc2		2026-09-21	2個セット品(WAQ-RLC2)と一致するAmazon商品なし。単品(RLC1)のみでは構成が異なり非採用
+set	lantern-stand	yamazaki-tower	B0C9G1W2K6	2026-09-21	型番一致(towerランタンスタンド4515)・価格4950円完全一致。色違い(4514/4515)は同価格のためBLACKを採用
+set	lantern-stand	vastland-stand	B07PD2CGMH	2026-09-21	仕様完全一致(使用サイズ75-215cm/重量1.8kg/アルミ+スチール/螺旋ペグ3本+収納バッグ)・価格3780円完全一致
+no-amazon	lantern-stand	multitool-stand		2026-09-21	汎用OEM品(ichifujiec)でブランド不明、一致するAmazon商品なし
+no-amazon	lantern-stand	tabletop-2way		2026-09-21	汎用OEM品(mitomi8)でブランド不明、一致するAmazon商品なし
+set	peg-hammer	ellisse-ultimate-hammer	B014CLRHD0	2026-09-21	型番一致(MK-ELUH・真鍮ヘッド×カチオン黒塗装の組み合わせ)・価格6600円完全一致
+no-amazon	peg-hammer	reiden-peg-hammer		2026-09-21	REIDENブランドの一致商品がAmazonになし
+no-amazon	peg-hammer	dfresh-peg-hammer-360g		2026-09-21	汎用OEM品(d-fresh)でブランド不明、一致するAmazon商品なし
+set	log-carrier	zukk-leather	B0D8VHYH1K	2026-09-21	型番一致(本革×極厚帆布・容量50L)・価格5800円完全一致
+no-amazon	log-carrier	canvas-log-tote		2026-09-21	汎用OEM品(mystic-r)でブランド不明、一致するAmazon商品なし
+no-amazon	log-carrier	value-log-tote		2026-09-21	汎用OEM品(farson)でブランド不明、一致するAmazon商品なし
+no-amazon	log-carrier	yoler-waterproof		2026-09-21	YOLERブランドの薪バッグと一致するAmazon商品なし(同ブランドの別商品のみ検出)
+set	large-tarp-recommend	tansu-tarp-3x6	B071GY95MQ	2026-09-21	型番完全一致(19000020)・価格25999円完全一致(本体のみオプション)
+no-amazon	large-tarp-recommend	fielddoor-onetouch-3x3		2026-09-21	Amazon側は4点ロック/センターロック遮光等の別グレード品(13600円〜)のみで、楽天の基本モデル(3m×3m/8800円)と一致せず
+no-amazon	large-tarp-recommend	fielddoor-hexa-l		2026-09-21	Amazon側は完全遮光上位モデル(530×570cm時13800円〜)のみで、楽天の基本UVカットモデル(5940円)と価格・仕様が乖離し同一品と確認できず
+set	large-tarp-recommend	moderndeco-onetouch-3m	B088R3B8YF	2026-09-21	仕様一致(展開300×300cm/ベーシックタイプ/シルバーコーティング)・型番sj130のベーシックオプションと対応

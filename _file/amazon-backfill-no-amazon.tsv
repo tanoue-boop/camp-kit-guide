@@ -1,0 +1,16 @@
+slug	rank	id	judged_task	reason
+camp-hot-carpet	2	yamazen-yzd-101fl	campkit-20260921-16	2026-08に型番変更 YZC-109FL→YZD-101FL。新型番はAmazon未追従、旧型は取扱不可
+headlight-rechargeable	1	nforce-sr01l	campkit-20260921-16	AmazonのN-FORCEはSR-02（充電池非同梱）のみ。SR-01Lの出品なし
+camp-headlight-beginner	2	headlight-sr01l-sensor	campkit-20260921-16	headlight-rechargeable #1 と同一商品（SR-01L・同一楽天ページ）
+camp-windscreen	4	windscreen-onetigris-tc	campkit-20260921-16	同一品 B0BWDLF3F3 が在庫切れ・再入荷予定なし
+naturehike-mat	1	naturehike-highr-air	campkit-20260921-16	既定SKU不定（R値×色×サイズの多軸）。価格一致するR4.6はAmazon在庫切れ
+camp-rainwear	5	rw-makku-as900	campkit-20260921-15	構成違い（同一商品を特定できず）
+mountain-tent-cheap	1	fieldoor-dome100	campkit-20260921-15	FIELDOOR ライト版なし／在庫切れ
+mountain-tent-cheap	3	naturehike-solo-tent	campkit-20260921-15	楽天SKU nh18t010-t-3 が404（廃番疑い）
+camp-oil-stove	4	corona-sz-f32a	campkit-20260921-17	コロナストア限定モデル SZ-F32A(CF) は Amazon 出品なし（Amazon はキャプテンスタッグ×コロナのコラボ別型番 SZ-32CS のみ）。※カードの楽天URL 0134509000 は桁落ちで404（正: 01345090000）→ article-fix-backlog に積んだ
+gas-lantern	4	gaslantern-rank-4	campkit-20260921-17	楽天はルミエールランタン+LPガス230T のセット（205588+5103A230T）。Amazon はランタン単品 205588（B004IWR45A・LPガス別売り）のみで構成違い
+camp-electric-grill	2	iris-piha-a20b	campkit-20260921-17	同型番 PIHA-A20B は B0H2YRT3QR にあるが購入ボックス無し（カート不可・「すべての出品を見る」のみ）。3枚版 PIHA-A30B(B0H2YVFRXC)・通常モデル IHA-A20-B は別型番。再入荷したら B0H2YRT3QR を再検討
+camp-hot-carpet	4	hitachi-hhlu-s2020	campkit-20260921-17	日立 HHLU-S2020 は Amazon 出品なし（日立製ホットカーペット自体が検索でヒットせず）
+coleman-bonfire	4	coleman-firedisk-table	campkit-20260921-17	楽天はファイアーディスク+マルチファイアプレイステーブルのセット（2000031235+VP160401J01）。Amazon はファイアーディスク単品 B01LT5ES1Q のみで構成違い
+coleman-two-burner	1	cb-coleman-set-table	campkit-20260921-17	楽天はツーバーナー+キッチンテーブル+LPガス470T×2 のセット（2000006707+2000031294+5103A470T）。Amazon は各単品（B004IWR3Z6／B01N9SLIIE／B00I78H1UE 等）のみで構成違い
+coleman-two-burner	2	cb-coleman-powerhouse-gasset	campkit-20260921-17	楽天はツーバーナー+LPガス470T×2 のセット（2000006707+5103A470T）。Amazon はツーバーナー単品 B004IWR3Z6（LPガス別売り）のみで構成違い

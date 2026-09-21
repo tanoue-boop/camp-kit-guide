@@ -15,7 +15,7 @@ bonfire-stand-solo	2026-06-02	2026-06-02	5	10	0	4	0	0	0	14	ok	Amazon未設定カ
 bonfire-tripod	2026-08-17	2026-08-17	5	5	0	2	0	0	0	7	ok	Amazon未設定カード 3/5 (#1,#3,#5)
 camp-activity-booking-flow	2026-09-16	2026-09-16	0	0	0	0	0	0	1	1	ok	
 camp-activity-booking	2026-09-11	2026-09-11	0	0	0	0	0	0	1	1	ok	
-camp-air-pump	2026-08-25	2026-08-25	5	5	0	1	0	0	0	6	ok	Amazon未設定カード 4/5 (#1,#2,#4,#5)
+camp-air-pump	2026-08-25	2026-09-21	5	5	0	2	0	0	0	7	ok	Amazon未設定カード 3/5 (#1,#2,#4) ｜2026-09-21 backfill(campkit-20260921-17): #5=B0DXZXQ2Z4(OneTigris ECOARK 電動エアーポンプ・楽天SKU属性 ブランド名=OneTigris Camping/メーカー型番=CE-CQB02-RG グリーン 4.6×4.6×5.1cm 100g ¥3,608 ↔ Amazon dp メーカー型番「CE-CQB02-T-JP-RG」(CE-CQB02＋色記号RGが一致・-T-JP は地域接尾)・Green・46×46×51mm・0.1kg・2400mAh・販売元OTG Camping Gear(OneTigris公式)・¥3,608同額・在庫あり・★3.9(42)・変種なし)
 camp-backpack-beginner	2026-04-14	2026-09-21	5	5	0	5	0	0	0	10	ok	
 camp-backpack-capacity-guide	2026-05-25	2026-09-21	3	3	0	2	1	1	0	6	ok	
 camp-bbq-grill	2026-04-25	2026-09-21	5	5	0	3	0	0	0	8	ok	Amazon未設定カード 2/5 (#1,#2)
@@ -30,8 +30,8 @@ camp-cooler-box-overall	2026-04-27	2026-09-21	5	5	0	4	0	0	0	9	ok	Amazon未設定
 camp-cooler-soft	2026-06-02	2026-06-02	5	10	0	2	0	0	0	12	ok	Amazon未設定カード 3/5 (#2,#4,#5)
 camp-cutlery	2026-08-14	2026-08-14	5	5	0	2	0	0	0	7	ok	Amazon未設定カード 3/5 (#1,#2,#4)
 camp-dust-stand	2026-08-20	2026-08-20	5	5	0	2	0	0	0	7	ok	Amazon未設定カード 3/5 (#3,#4,#5)
-camp-electric-grill	2026-09-17	2026-09-17	5	5	0	4	0	0	0	9	ok	Amazon未設定カード 1/5 (#2)
-camp-electric-heater	2026-09-02	2026-09-02	5	10	0	2	0	0	0	12	ok	Amazon未設定カード 3/5 (#3,#4,#5)
+camp-electric-grill	2026-09-17	2026-09-17	5	5	0	4	0	0	0	9	ok	Amazon未設定カード 1/5 (#2) ｜2026-09-21 backfill(campkit-20260921-17): #2 アイリス PIHA-A20B は no-amazon: 楽天SKU 3件=ネット限定2枚 PIHA-A20B ¥7,980(既定・カード価格一致)/ネット限定3枚 PIHA-A30B ¥9,980/通常3枚 APA-139-B ¥15,800。Amazon検索「PIHA-A20B」→ B0H2YRT3QR(アイリスプラザ 網焼き風ホットプレート 2枚プレート PIHA-A20B・親B0H6HZ3MGP)を確認したが購入ボックス無し(カート不可・「すべての出品を見る」のみ)。3枚版 PIHA-A30B=B0H2YVFRXC ¥9,990 在庫ありだが別型番、通常モデル IHA-A20-B=B0C6LY26BH も別型番のため不採用。再入荷したら B0H2YRT3QR を再検討
+camp-electric-heater	2026-09-02	2026-09-21	5	10	0	3	0	0	0	13	ok	Amazon未設定カード 2/5 (#4,#5) ｜2026-09-21 backfill(campkit-20260921-17): #3=B07X1JMFMJ(山善 あしもとあったかストーブ DS-F041(W)・楽天SKU属性 ブランド名=山善/メーカー型番=DS-F041(W) 400W 高さ19.5cm ¥4,280 ↔ Amazon dp メーカー型番「DS-F041(W)」文字列一致・変種「ホワイト/足元」・1.1kg・販売元Amazon.co.jp・¥3,780・在庫あり・★4.3(691)。楽天本文「2026年4月より型番変更・仕様変更なし」の注記あり。DS-F045(W)=B0G6YMSG65 は2025年モデルの別型番で不採用)
 camp-fan-summer	2026-06-02	2026-06-29	5	5	0	1	0	0	0	6	ok	Amazon未設定カード 4/5 (#1,#3,#4,#5)
 camp-furusato	2026-08-12	2026-08-12	0	1	0	0	0	0	0	1	ok	
 camp-gear-initial-cost	2026-09-01	2026-09-01	0	0	0	0	0	0	1	1	ok	
@@ -42,13 +42,13 @@ camp-gift	2026-09-08	2026-09-08	7	7	0	5	1	1	0	13	ok	Amazon未設定カード 1/7
 camp-grill-plate	2026-05-26	2026-05-26	5	5	0	4	0	0	0	9	ok	Amazon未設定カード 1/5 (#1)
 camp-hammock	2026-06-02	2026-06-02	5	10	0	3	0	0	0	13	ok	Amazon未設定カード 2/5 (#1,#4)
 camp-headlight-beginner	2026-04-26	2026-06-29	5	5	0	1	2	2	0	8	ok	Amazon未設定カード 2/5 (#2,#4)
-camp-hot-carpet	2026-08-31	2026-08-31	5	5	0	3	0	0	0	8	ok	Amazon未設定カード 2/5 (#2,#4) ｜2026-09-21 backfill(campkit-20260921-16): #2 山善 YZD-101FL は no-amazon: 楽天既定SKU=1畳/ライトブラウン メーカー型番YZD-101FL(LBR) 170×85cm ¥12,800(2026年8月にYZC-109FL→YZD-101FLへ型番変更・サイズ176×88→170×85に変更と楽天本文に明記)。Amazon検索「山善 ホットカーペット YZD-101FL」「YZD-101FL」「YZD-101FL OR YZD-151FL OR YZD-201FL 山善」は該当なし、「山善 ホットカーペット フローリング調 1畳 YZC-109FL」で出るのは旧型 B0DDKWVYLG(YZC-109FL(LBR) 176×88cm・現在お取り扱いできません)の変種11件のみ→別モデルかつ在庫なしで不採用。SUC-102系(B0G6YLT7P5)はフローリング調でない別シリーズ
+camp-hot-carpet	2026-08-31	2026-08-31	5	5	0	3	0	0	0	8	ok	Amazon未設定カード 2/5 (#2,#4) ｜2026-09-21 backfill(campkit-20260921-16): #2 山善 YZD-101FL は no-amazon: 楽天既定SKU=1畳/ライトブラウン メーカー型番YZD-101FL(LBR) 170×85cm ¥12,800(2026年8月にYZC-109FL→YZD-101FLへ型番変更・サイズ176×88→170×85に変更と楽天本文に明記)。Amazon検索「山善 ホットカーペット YZD-101FL」「YZD-101FL」「YZD-101FL OR YZD-151FL OR YZD-201FL 山善」は該当なし、「山善 ホットカーペット フローリング調 1畳 YZC-109FL」で出るのは旧型 B0DDKWVYLG(YZC-109FL(LBR) 176×88cm・現在お取り扱いできません)の変種11件のみ→別モデルかつ在庫なしで不採用。SUC-102系(B0G6YLT7P5)はフローリング調でない別シリーズ ｜2026-09-21 backfill(campkit-20260921-17): #4 日立 HHLU-S2020 は no-amazon: 楽天本文スペック表 型番=HHLU-S2020・JAN 4526044016167・176×176cm ¥14,980(SKU属性のメーカー型番は「-」)。Amazon検索「日立 ホットカーペット HHLU-S2020」「HHLU-S2020」「日立 電気カーペット HHLU」「HITACHI ホットカーペット 2畳 176×176」→ 日立製ホットカーペットは1件もヒットせず(出るのはライフジョイ/パナソニック/山善/広電等)。Amazon 出品なしと判断
 camp-kettle-recommend	2026-06-02	2026-06-02	5	10	0	5	0	0	0	15	ok	
 camp-knife-beginner	2026-04-20		5	5	0	0	5	5	0	10	ok	
 camp-lantern-led	2024-06-15	2026-09-21	5	5	0	0	5	5	0	10	ok	
 camp-lighting-guide	2026-04-23	2026-06-29	5	5	0	1	3	3	0	9	ok	Amazon未設定カード 1/5 (#5)
 camp-nata	2026-08-18	2026-08-18	5	5	0	5	0	0	0	10	ok	
-camp-oil-stove	2026-08-03	2026-08-03	5	5	0	3	0	0	0	8	ok	Amazon未設定カード 2/5 (#4,#5)
+camp-oil-stove	2026-08-03	2026-08-03	5	5	0	3	0	0	0	8	ok	Amazon未設定カード 2/5 (#4,#5) ｜2026-09-21 backfill(campkit-20260921-17): #4 コロナ SZ-F32A(CF) は no-amazon: カードの楽天URL corona-official/0134509000 はHTTP404(桁落ち・正しくは 01345090000=SZ-F32A(CF) ¥34,800 SKU1件・型式「【2024年モデル】SZ-F32A(CF)」)→article-fix-backlog に pending 追加。Amazon検索「SZ-F32A コロナ」「CORONA SZ-F32A」「コロナ 石油ストーブ 対流形 SZ-F32A(CF)」→ 該当なし。出るのはキャプテンスタッグ×コロナ コラボ SZ-32CS(B0CJ4L42CK/B0FXWBGY2B・別型番)と SL-66D2/SL-5125 のみ。コロナストア限定モデルのため Amazon 出品なしと判断
 camp-pillow	2026-06-02	2026-06-29	5	10	0	2	0	0	0	12	ok	Amazon未設定カード 3/5 (#1,#4,#5)
 camp-portable-power-beginner	2026-04-23	2026-09-21	5	5	0	5	0	0	0	10	ok	
 camp-rainwear	2026-06-01	2026-09-21	5	5	0	4	0	0	0	9	ok	Amazon未設定カード 1/5 (#5) ｜2026-09-21 backfill(campkit-20260921-15): #1=B08VNM2FVQ(namelessage NASR-100 上下セット・楽天SKU属性 ブランド=ネームレスエイジ/型番NASR-100 ↔ Amazonタイトル「NASR-100」一致・販売元OC(=OC STYLE)。楽天既定SKU=上下セット(ポケット無PT)/XS/[01]テラコッタ ¥8,980だがAmazon変種にXSが無くテラコッタ/XL ¥8,990を採用。※カード価格3500は現行楽天価格8,980(単品でも3,990〜)と乖離→price_unconfirmed候補)。#3=B09FXG2ZQ6(DOQMENT/カジメイク 4WAYストレッチシールドEX・楽天SKU型番7572 ↔ Amazonメーカー型番7572 一致・色サイズ18変種も一致・既定SKU ベージュ/S を採用・販売元Amazon.co.jp ¥4,442)。#4=B08ZS99S9Q(Makku アジャストマックライト AS-7100・楽天SKU型番AS-7100 ↔ Amazon製造元リファレンスAS7100/メーカー型番AS7100BLM 一致・耐水圧10000/透湿5000も一致。販売元ハンドルキング(アレグレット)¥5,480で楽天¥3,490より高い。楽天既定SKU=AS-7100/ブルー/S だがAmazon変種にブルー/Sが無くブルー/Mを採用。Makku公式出品B0C32HTGCZ系は130/140のキッズ用で不採用)。#5 MAKKU レイントラック AS-900/AS-950 は no-amazon: 楽天は「ジャケットAS-900＋パンツAS-950の上下セット¥5,050(単一SKU rain300・色サイズは項目選択)」だがAmazonはジャケット単体(B003XNMWXY系・型番AS-900-LL ¥2,962)とパンツ単体(B00GRT4CQQ系 AS-950)のみでセット出品なし(構成違い)
@@ -78,12 +78,12 @@ chair-table-furusato	2026-08-03	2026-08-03	0	1	0	0	0	0	0	1	ok
 charcoal-starter	2026-08-06	2026-09-21	5	5	0	5	0	0	0	10	ok	
 closed-cell-mat	2026-09-04	2026-09-21	5	5	0	5	0	0	0	10	ok	Amazon未設定カード 0/5 ｜2026-09-21 backfill(campkit-20260921-14): #5=B07YBY4GKZ(Soomloom IXPEアルミマット ブルー 183×55×1.8cm・410g・楽天SKU outdoor-028-a0102 シングル/ブルー 55×183cm・18mm・410gと一致。楽天型番は「-」のためブランド＋寸法＋重量＋色で照合)
 co-checker	2026-08-10	2026-08-10	5	5	0	1	0	0	0	6	ok	Amazon未設定カード 4/5 (#1,#2,#3,#4)
-coleman-bonfire	2026-06-15	2026-06-15	4	8	0	2	0	0	0	10	ok	Amazon未設定カード 2/4 (#3,#4)
+coleman-bonfire	2026-06-15	2026-06-15	4	8	0	2	0	0	0	10	ok	Amazon未設定カード 2/4 (#3,#4) ｜2026-09-21 backfill(campkit-20260921-17): #4 ファイアーディスク+テーブル セットは no-amazon: 楽天SKU属性 メーカー型番=2000031235+VP160401J01(himaraya のセット品 ¥14,077)。Amazon検索「コールマン ファイアーディスク マルチファイアプレイステーブル セット」「コールマン 焚き火台 セット 2000031235」→ ファイアーディスク単品 B01LT5ES1Q(メーカー型番2000031235・変種 40cm/ソロ30cm)のみで構成違い
 coleman-chair	2026-06-15	2026-09-20	5	10	0	3	0	0	0	13	ok	Amazon未設定カード 2/5 (#2,#4)
 coleman-lantern	2026-06-15	2026-06-15	5	10	0	4	5	5	0	19	ok	
 coleman-sleeping-bag	2026-08-18	2026-09-16	5	5	0	3	0	0	0	8	ok	Amazon未設定カード 2/5 (#4,#5)
 coleman-tent	2026-06-08	2026-09-21	4	8	0	4	4	4	0	16	ok	
-coleman-two-burner	2026-06-01	2026-06-01	5	5	0	2	0	0	0	7	ok	Amazon未設定カード 3/5 (#1,#2,#4)
+coleman-two-burner	2026-06-01	2026-06-01	5	5	0	2	0	0	0	7	ok	Amazon未設定カード 3/5 (#1,#2,#4) ｜2026-09-21 backfill(campkit-20260921-17): #1・#2 とも no-amazon(構成違い): #1 楽天SKU属性 メーカー型番=2000006707+2000031294+5103A470T(ツーバーナー+キッチンテーブル+LPガス470T×2・現在¥27,307)、#2 =2000006707 + 5103A470TJAN(ツーバーナー+LPガス470T×2・現在¥15,038)。Amazon検索「コールマン パワーハウス LPツーバーナーストーブ2 2000006707」「コールマン パワーハウスLPツーバーナーストーブ2 ガス燃料×2個 セット」「コールマン 2000006707 5103A470T」→ ツーバーナー単品 B004IWR3Z6(メーカー型番2000006707・LPガス別売り・変種なし・¥12,872)、キッチンテーブル単品 B01N9SLIIE(2000031294)、470Tガスの6本/8本/12本セット(B00I78H1UE 等)のみ。バーナー+ガスのセット出品なし
 compact-portable-power	2026-07-28	2026-07-28	5	5	0	4	0	0	0	9	ok	Amazon未設定カード 1/5 (#3)
 cookware-furusato	2026-08-26	2026-08-26	0	1	0	0	0	0	0	1	ok	
 cooler-box-day-camp	2026-05-26	2026-05-26	5	5	0	4	0	0	0	9	ok	Amazon未設定カード 1/5 (#4)
@@ -131,7 +131,7 @@ furusato-camp-guide	2026-08-04	2026-08-04	0	1	0	0	0	0	0	1	ok
 furusato-camp-ticket	2026-09-08	2026-09-08	0	1	0	0	0	0	0	1	ok	
 furusato-shipping-timing	2026-09-14	2026-09-14	0	1	0	0	0	0	0	1	ok	
 furusato-year-end	2026-09-07	2026-09-07	0	1	0	0	0	0	0	1	ok	
-gas-lantern	2026-08-13	2026-08-13	5	5	0	2	0	0	0	7	ok	Amazon未設定カード 3/5 (#1,#4,#5)
+gas-lantern	2026-08-13	2026-08-13	5	5	0	2	0	0	0	7	ok	Amazon未設定カード 3/5 (#1,#4,#5) ｜2026-09-21 backfill(campkit-20260921-17): #4 ルミエールランタン+LPガス セットは no-amazon: 楽天SKU属性 メーカー型番=205588+5103A230T(naturum のセット品・現在¥5,445)。Amazon検索「コールマン ルミエールランタン 205588 ガス セット」「コールマン ルミエールランタン 5103A230T」→ ランタン単品 B004IWR45A(メーカー型番205588・変種「ランタン 単品」のみ・LPガス別売り・購入ボックス無し)と 230T ガス単品/まとめ売りのみで構成違い
 gear-storage-box	2026-08-06	2026-08-06	5	10	0	3	0	0	0	13	ok	Amazon未設定カード 2/5 (#2,#3)
 gentos-light	2026-06-15	2026-06-15	5	10	0	0	5	5	0	15	ok	
 gregory-backpack	2026-06-15	2026-09-21	5	10	0	4	0	0	0	14	ok	Amazon未設定カード 1/5 (#1)
@@ -228,7 +228,7 @@ solo-tent-beginner	2025-04-21	2026-09-21	5	10	0	0	5	5	0	15	ok
 solo-tent-lightweight	2026-04-28	2026-08-28	5	5	0	0	5	5	0	10	ok	
 solo-tent-overall	2026-04-29	2026-09-21	5	5	0	0	5	5	0	10	ok	
 soto-burner	2026-06-15	2026-09-21	5	10	0	4	5	5	0	19	ok	
-soup-jar-camp	2026-09-11	2026-09-21	5	5	0	3	0	0	0	8	ok	Amazon未設定カード 2/5 (#3,#5) ｜2026-09-21 backfill(campkit-20260921-16): #4=B0CDL2G2DZ(アトラス フードポット AFP-301MBK マットブラック 310ml・楽天SKU属性 ブランド=アトラス/メーカー型番AFP-301MBK ↔ Amazonページtitle「…マットブラック AFP-301MBK」一致・楽天既定SKU マットブラック(セレクタ先頭・カードnameと同色)を採用(マットシルバー=B0CDL8DS78)・販売元アトラスオンラインショップ=楽天atlas-onlineと同一(メーカー直販)・¥1,380同額・在庫あり・★3.5(72))
+soup-jar-camp	2026-09-11	2026-09-21	5	5	0	4	0	0	0	9	ok	Amazon未設定カード 1/5 (#5) ｜2026-09-21 backfill(campkit-20260921-16): #4=B0CDL2G2DZ(アトラス フードポット AFP-301MBK マットブラック 310ml・楽天SKU属性 ブランド=アトラス/メーカー型番AFP-301MBK ↔ Amazonページtitle「…マットブラック AFP-301MBK」一致・楽天既定SKU マットブラック(セレクタ先頭・カードnameと同色)を採用(マットシルバー=B0CDL8DS78)・販売元アトラスオンラインショップ=楽天atlas-onlineと同一(メーカー直販)・¥1,380同額・在庫あり・★3.5(72)) ｜2026-09-21 backfill(campkit-20260921-17): #3=B0D9XSW2FB(サーモス 真空断熱スープジャー JED-400 GYG グレーグリーン 400ml・楽天SKU 3件=ブラックJED-400BK ¥3,206/アイボリーJED-400IV ¥3,207/グレーグリーンJED-400GYG ¥3,188。カード価格¥3,188に一致するグレーグリーンを採用 ↔ Amazon dp title「…スタンダードモデル JED-400 GYG」一致・変種「単品/グレーグリーン/400ml」・販売元Amazon.co.jp・¥2,773・在庫あり・★4.4(1,145)。他色: ブラック=B0D9XYGJZJ ¥2,600／アイボリー=B0D9XSXK9J ¥2,600)
 spice-box	2026-08-24	2026-08-24	5	3	0	3	0	0	0	6	card-without-link	cards NG: #3=別形式(B0C1PBZVYJ); #5=別形式(B099NJ82YB)
 stove-fan	2026-09-18	2026-09-18	5	5	0	4	0	0	0	9	ok	Amazon未設定カード 1/5 (#2)
 stove-guard	2026-09-17	2026-09-17	5	5	0	5	0	0	0	10	ok	

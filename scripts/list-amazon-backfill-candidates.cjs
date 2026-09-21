@@ -20,6 +20,10 @@
  *        複数型番が並ぶ −2 ／ 汎用語のみ（ブランドも型番も無い） −3 ／
  *        「ふるさと納税・並行輸入・訳あり・アウトレット」は除外
  *   4. 変更禁止リスト（FROZEN_SLUGS）の記事は候補から除外する。
+ *   4.5 `_file/amazon-backfill-no-amazon.tsv`（slug / rank / id / judged_task / reason）があれば、
+ *      slug + rank が一致するカード（過去タスクで no-amazon と判定済み）を候補から除外する。
+ *      ファイルが無ければ従来どおり全件出力する。除外件数は stderr に
+ *      `[excluded] N cards by amazon-backfill-no-amazon.tsv` で出す（2026-09-21 campkit-20260921-17）。
  *   5. `_file/amazon-backfill-candidates.tsv`
  *      （slug / rank / id / score / name / rakuten_url / price / score_reason）をスコア降順で出力。
  *
@@ -34,6 +38,8 @@ const ROOT = path.join(__dirname, '..');
 const LEDGER = path.join(ROOT, '_file', 'affiliate-coverage.tsv');
 const POSTS_DIR = path.join(ROOT, 'content', 'posts');
 const OUT = path.join(ROOT, '_file', 'amazon-backfill-candidates.tsv');
+// 判定済み（no-amazon）カードの除外リスト。無ければ除外しない
+const NO_AMAZON = path.join(ROOT, '_file', 'amazon-backfill-no-amazon.tsv');
 
 // ---------------------------------------------------------------------------
 // 変更禁止リスト（2026-10-18 まで本文・frontmatter とも変更禁止。task-campkit-20260921-16 より）
@@ -167,6 +173,16 @@ function parseNotes(notes) {
   return { unset: Number(m[1]), total: Number(m[2]), positions };
 }
 
+// no-amazon 除外リストを `slug\trank` の Set で返す。ファイルが無ければ空 Set（従来動作）
+function readNoAmazon() {
+  if (!fs.existsSync(NO_AMAZON)) return new Set();
+  const keys = new Set();
+  for (const row of readTsv(NO_AMAZON)) {
+    if (row.slug && row.rank) keys.add(`${row.slug}\t${Number(row.rank)}`);
+  }
+  return keys;
+}
+
 function parseCards(mdx) {
   const cards = [];
   const re = /<ProductCardMdx\b([\s\S]*?)\/>/g;
@@ -254,10 +270,11 @@ function main() {
   const MIN = minIdx >= 0 ? Number(argv[minIdx + 1]) : 2;
 
   const rows = readTsv(LEDGER);
+  const noAmazon = readNoAmazon();
   const out = [];
   const stats = {
     ledgerRows: rows.length, parsed: 0, zero: 0, positive: 0, frozen: 0, frozenCards: 0,
-    articles: 0, cards: 0, excluded: 0, mismatch: 0,
+    articles: 0, cards: 0, excluded: 0, mismatch: 0, noAmazon: 0,
   };
   const articlesAtMin = new Set();
 
@@ -294,6 +311,10 @@ function main() {
 
     stats.articles += 1;
     for (const c of unset) {
+      if (noAmazon.has(`${row.slug}\t${c.rank}`)) {
+        stats.noAmazon += 1;
+        continue;
+      }
       const a = c.attrs;
       const url = rakutenUrl(a.affiliateUrl);
       const sc = score(a.name || '', url);
@@ -319,6 +340,7 @@ function main() {
   fs.writeFileSync(OUT, tsv, 'utf8');
 
   const atMin = out.filter((r) => r.score >= MIN).length;
+  console.error(`[excluded] ${stats.noAmazon} cards by amazon-backfill-no-amazon.tsv`);
   console.log(`台帳行数: ${stats.ledgerRows}（notes が「Amazon未設定カード N/M」形式: ${stats.parsed} ／ N=0: ${stats.zero} ／ N>0: ${stats.positive}）`);
   console.log(`変更禁止リストで除外: ${stats.frozen}記事 ${stats.frozenCards}枚`);
   console.log(`対象記事数: ${stats.articles} ／ 未設定カード総数: ${stats.cards}（除外語で落としたカード: ${stats.excluded} ／ notes と実測の食い違い: ${stats.mismatch}記事）`);

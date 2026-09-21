@@ -1,19 +1,4 @@
 slug	rank	id	score	name	rakuten_url	price	score_reason
-camp-oil-stove	4	corona-sz-f32a	6	コロナ 対流形石油ストーブ SZ-F32A(CF)	https://item.rakuten.co.jp/corona-official/0134509000/	34800	型番+3(SZ-F32A) ブランド+2(corona) 公式店+1(corona-official)
-camp-electric-heater	3	yamazen-dsf041	5	山善 あしもとあったかストーブ DS-F041(W) ホワイト 400W	https://item.rakuten.co.jp/e-kurashi/32802/	4280	型番+3(DS-F041) ブランド+2(yamazen)
-camp-hot-carpet	2	yamazen-yzd-101fl	5	山善 ホットカーペット フローリング調 YZD-101FL 1畳 170×85cm 本体	https://item.rakuten.co.jp/e-kurashi/1440626/	12800	型番+3(YZD-101FL) ブランド+2(yamazen)
-gas-lantern	4	gaslantern-rank-4	5	Coleman(コールマン) ルミエールランタン+純正LPガス燃料[Tタイプ] 205588+5103A230T	https://item.rakuten.co.jp/naturum/9904256/	5247	型番+3(5103A230T) ブランド+2(coleman)
-headlight-rechargeable	1	nforce-sr01l	5	N-FORCE SR-01L 充電式ヘッドライト センサー点灯 LED 軽量 長時間	https://item.rakuten.co.jp/k-power/sq04_d/	2880	型番+3(SR-01L) ブランド+2(nforce)
-soup-jar-camp	3	sj-thermos-jed400	5	サーモス 真空断熱スープジャー JED-400(0.4L)	https://item.rakuten.co.jp/rakuten24/405668/	3188	型番+3(JED-400) ブランド+2(thermos)
-camp-air-pump	5	onetigris-ecoark-pump	3	OneTigris ECOARK 電動エアーポンプ 2400mAh	https://item.rakuten.co.jp/onetigris/ce-cqb02/	3608	ブランド+2(onetigris) 公式店+1(onetigris)
-camp-electric-grill	2	iris-piha-a20b	3	アイリスオーヤマ ホットプレート 焼肉プレート2枚・たこ焼きプレート3枚・網焼き風プレート付き PIHA-A20B/PIHA-A30B/APA-139-B	https://item.rakuten.co.jp/kadenrand/560595/	7980	型番+3(PIHA-A20B) 複数型番-2(PIHA-A20B/PIHA-A30B/APA-139-B) ブランド+2(irisohyama)
-camp-headlight-beginner	2	headlight-sr01l-sensor	3	【圧倒的な高評価レビュー1500件超】ヘッドライト 充電式ヘッドライト センサー点灯 ヘッドランプ LED 釣り 登山 アウトドア用 作業灯 軽量 長時間 SR-01L	https://item.rakuten.co.jp/k-power/sq04_d/	2880	型番+3(SR-01L)
-camp-hot-carpet	4	hitachi-hhlu-s2020	3	日立 ホットカーペット HHLU-S2020 2畳 176×176cm 本体	https://item.rakuten.co.jp/shopworld/10139401/	14980	型番+3(HHLU-S2020)
-camp-rainwear	5	rw-makku-as900	3	レインウェア カッパ レインコート 上下セット MAKKUマック レイントラックジャケット＆パンツ AS-900 AS-950 レディースサイズ有り おしゃれ 雨ガッパ 通学 通勤 自転車 バイク 釣り レインスーツ 雨がっぱ 合羽 アウトドア キャンプ 散歩	https://item.rakuten.co.jp/kanamono-no1/rain300/	5050	型番+3(AS-900) 複数型番-2(AS-900/AS-950) ブランド+2(makku)
-camp-windscreen	4	windscreen-onetigris-tc	3	OneTigris ポリコットンTC 陣幕 前幕	https://item.rakuten.co.jp/onetigris/ce-qzm01-rg/	8390	ブランド+2(onetigris) 公式店+1(onetigris)
-coleman-bonfire	4	coleman-firedisk-table	3	コールマン 焚き火台 セット ファイアーディスク+マルチファイアプレイステーブル 2000031235+VP160401J01	https://item.rakuten.co.jp/himaraya/000669346set5/	14077	型番+3(VP160401J01) セット品-2 ブランド+2(coleman)
-coleman-two-burner	1	cb-coleman-set-table	3	コールマン ツーバーナーセット ツーバーナーストーブ 2+キッチンテーブル+純正LPガス燃料×2点 2000006707+2000031294+5103A470T Coleman	https://item.rakuten.co.jp/himaraya/000322553set1/	27848	型番+3(5103A470T) セット品-2 ブランド+2(coleman)
-coleman-two-burner	2	cb-coleman-powerhouse-gasset	3	コールマン ツーバーナーセット パワーハウス LP ツーバーナーストーブ 2 + 純正LPガス燃料[Tタイプ]470g×2個 2000006707 + 5103A470TJAN Coleman	https://item.rakuten.co.jp/himaraya/0000322553set/	15707	型番+3(5103A470TJAN) セット品-2 ブランド+2(coleman)
 coleman-two-burner	4	cb-coleman-red-gasset	3	コールマン ツーバーナーセット LPツーバーナーストーブレッド 純正LPガス燃料[Tタイプ]470g×2個 2000021950+5103A470T Coleman	https://item.rakuten.co.jp/himaraya/0000563892set/	14460	型番+3(5103A470T) セット品-2 ブランド+2(coleman)
 compact-portable-power	3	bluetti-eb3a	3	BLUETTI EB3A 268Wh（130Wソーラーパネルセット）	https://item.rakuten.co.jp/bluettijapan/copybluettijapan_eb3a_b/	32900	ブランド+2(bluetti) 公式店+1(bluettijapan)
 disaster-radio	4	greeshow-radio	3	Greeshow 防災ラジオ XLN-383（手回し＋ソーラー＋USB・生活防水）	https://item.rakuten.co.jp/keynice/xln-383/	3980	型番+3(XLN-383)
@@ -25,9 +10,6 @@ hexa-tarp	3	vastland-tc-hexa	3	VASTLAND TCヘキサタープ 420cm×420cm ポリ
 hot-sandwich-maker	3	vastland-hsm-tsubame	3	VASTLAND ホットサンドメーカー シングル 直火式 燕三条製	https://item.rakuten.co.jp/vastland/vl0112-1/	2980	ブランド+2(vastland) 公式店+1(vastland)
 hot-water-bottle	2	hagoogi-lxe01	3	Hagoogi 充電式湯たんぽ LXE-01（蓄熱式・4〜12H保温）	https://item.rakuten.co.jp/hagoogi/lxe-01/	2980	型番+3(LXE-01)
 hot-water-bottle	4	mottole-mtlw001	3	mottole 充電式湯たんぽ MTL-W001（やわらかカバー付き）	https://item.rakuten.co.jp/mottole-shop/mtl-w001/	3070	型番+3(MTL-W001)
-lantern-stand	2	vastland-stand	3	VASTLAND ランタンスタンド ランタンハンガー 高さ75cm〜215cm アルミ製 収納バッグ付き	https://item.rakuten.co.jp/vastland/2019-0202-1/	3780	ブランド+2(vastland) 公式店+1(vastland)
-mountain-tent-cheap	3	naturehike-solo-tent	3	【SS先行セール！いち早くゲット！】 Naturehike テント ハイキング 1人用 20D ソロキャンプ 耐水圧3000/4000mm 超軽量 二重層 ダブルウォール 前室 プロフェッショナルテント コンパクト 自立式 アウトドア 登山 キャンピング 防災 設営簡単	https://item.rakuten.co.jp/naturehike-direct/nh18t010-t-3/	16990	ブランド+2(naturehike) 公式店+1(naturehike-direct)
-naturehike-mat	1	naturehike-highr-air	3	Naturehike 高R値 エアーマット R4.6/R5.8/R8.8 厚手8cm/12cm 超軽量 連接可能 インフレーターマット	https://item.rakuten.co.jp/naturehike-direct/cnh22dz016-ty58y/	12490	ブランド+2(naturehike) 公式店+1(naturehike-direct)
 naturehike-mat	3	naturehike-r65	3	Naturehike 高R値 エアーマット R6.5 サイドウォール 厚手10cm -25℃使用可能 空気入れ袋付き	https://item.rakuten.co.jp/naturehike-direct/cnk2450ws038/	19990	ブランド+2(naturehike) 公式店+1(naturehike-direct)
 naturehike-mat	4	naturehike-airbed-electric	3	Naturehike 電動エアーベッド エアーマット 自動膨張 1/2/3人用 電動ポンプ USB充電式 折り畳み	https://item.rakuten.co.jp/naturehike-direct/cnh23dz10001/	7990	ブランド+2(naturehike) 公式店+1(naturehike-direct)
 naturehike-tent	2	nh-light-1-2p	3	Naturehike 軽量テント 1〜2人用 20D ナイロン 耐水圧4000mm 前室あり 専用グランドシート付 アルミポール	https://item.rakuten.co.jp/naturehike-direct/nh17t140-j/	11992	ブランド+2(naturehike) 公式店+1(naturehike-direct)
@@ -37,7 +19,6 @@ stylish-camp-tent	1	tent-s-rank-1	3	5/6まで延長63%0FF！＼アレンジ自�
 tarp-pole	1	vastland-pole-33	3	VASTLAND タープポール テントポール アルミ 2本セット 280cm 直径33mm 8段階調節 収納バッグ付き	https://item.rakuten.co.jp/vastland/vl0025-1/	6480	ブランド+2(vastland) 公式店+1(vastland)
 tc-tarp-takibi	2	vastland-tc-recta-l	3	VASTLAND TCレクタタープ スクエア型 Lサイズ 500cm×500cm	https://item.rakuten.co.jp/vastland/vl0300-1/	19980	ブランド+2(vastland) 公式店+1(vastland)
 trekking-pole	4	thebestday-alumi-pole	3	TheBestDay A7075アルミ トレッキングポール 260g 2本セット	https://item.rakuten.co.jp/bestday/tbd-035955/	4980	型番+3(A7075)
-waq-chair	3	waq-rlc1hb	3	WAQ リクライニングローチェア ハイバック WAQ-RLC1HB アイアン ドリンクホルダー付き	https://item.rakuten.co.jp/waqoutdoor/waq-rlc1hb/	9980	ブランド+2(waq) 公式店+1(waqoutdoor)
 waq-chair	4	waq-rcc1	3	WAQ リラクシング コンフォートチェア リクライニングチェア 無段階調整 ハイタイプ ハイバック	https://item.rakuten.co.jp/waqoutdoor/waq-rcc1/	12800	ブランド+2(waq) 公式店+1(waqoutdoor)
 waq-chair	5	waq-rlc2	3	WAQ リクライニングローチェア 2脚セット WAQ-RLC2 アイアン ドリンクホルダー付き	https://item.rakuten.co.jp/waqoutdoor/waq-rlc2/	17460	ブランド+2(waq) 公式店+1(waqoutdoor)
 water-jug	3	wj-vastland	3	VASTLAND アイスコンテナ 1.9L 3.8L キャンプ用 氷入れ 水筒 保冷 真空断熱	https://item.rakuten.co.jp/vastland/vl0453-1/	3980	ブランド+2(vastland) 公式店+1(vastland)
@@ -61,7 +42,6 @@ large-tarp-recommend	2	fielddoor-onetouch-3x3	2	FIELDOOR ワンタッチター�
 large-tarp-recommend	4	fielddoor-hexa-l	2	FIELDOOR ヘキサタープ 大型 Lサイズ 530cm×570cm UVカット 高耐水 6〜8人用 ヘキサゴンタープ	https://item.rakuten.co.jp/smile88/a12040/	5940	ブランド+2(fieldoor)
 logos-sleeping-bag	5	logos-soft-warm	2	LOGOS ロゴス 丸洗いやわらか あったかシュラフ 夏用 冬用 オールシーズン 封筒型 連結可能	https://item.rakuten.co.jp/a-price/4981325534561/	9300	ブランド+2(logos)
 mountain-camp-mat	2	mat-rank-2	2	キャンプ マット キャンプ用品 [ アルミコーティングで熱を逃がさない オールシーズン使えるリバーシブル 凹凸で体圧を分散 ] テント アウトドア マット レジャーマット 寝袋 マット 防災 グッズ アウトドアマット 登山 登山用品 登山グッズ LAD WEATHER ラドウェザー	https://item.rakuten.co.jp/vanilla-vague/ladsheet006/	2280	ブランド+2(ladweather)
-mountain-tent-cheap	1	fieldoor-dome100	2	【楽天1位】テント ソロテント フィールドキャンプドーム 100 1人用 210x105cm 軽量 コンパクト収納 36x16cm 前室 メッシュ フライシート インナーテント ダブルウォール キャノピー ツーリング ドームテント アウトドア FIELDOOR 1年保証 ■[送料無料]	https://item.rakuten.co.jp/smile88/a18495/	8250	ブランド+2(fieldoor)
 mummy-sleeping-bag	1	bearsrock-15	2	Bears Rock -15度 マミー型 洗える寝袋 丸洗い センタージッパー 4シーズン対応 冬用	https://item.rakuten.co.jp/gorilla55/fx-405/	10350	ブランド+2(bearsrock)
 nanga-down-jacket	1	nanga-hinoc-limhood	2	NANGA（ナンガ） 別注HINOC ヒノック リムフード ダウンジャケット カーキ 2026年モデル 日本製	https://item.rakuten.co.jp/rococostore/010900-2-06/	64900	ブランド+2(nanga)
 nanga-down-jacket	3	nanga-whitelabel-cardigan	2	NANGA WHITE LABEL（ナンガ ホワイトレーベル） ダウンカーディガン JET BLACK 別注 900FP グースダウン	https://item.rakuten.co.jp/moonloid/nwl-0005/	47300	ブランド+2(nanga)
@@ -182,15 +162,11 @@ hot-water-bottle	5	sleepplus-danloop	-3	スリーププラス 充電式ソフト
 infinity-chair	2	sidetable-recliner	-3	サイドテーブル付 折りたたみ式リクライニングチェア	https://item.rakuten.co.jp/gl-shopping/reclining-chair/	6780	汎用語のみ-3
 infinity-chair	4	headrest-infinity	-3	インフィニティチェア ヘッドレスト付 1人掛け	https://item.rakuten.co.jp/visionshop/out-yz001/	6980	汎用語のみ-3
 insulated-tumbler	5	zakkanet-cancooler-350	-3	缶ホルダークーラー 350ml 真空断熱二重構造（エントリーモデル）	https://item.rakuten.co.jp/zakkanetonline-trans/ts-1655/	880	汎用語のみ-3
-lantern-stand	1	yamazaki-tower	-3	山崎実業 tower ランタンスタンド 伸縮 高さ調節 ランタンハンガー LEDランタン 北欧 おしゃれ モノトーン	https://item.rakuten.co.jp/roomy/ymz23jul06h07/	4950	汎用語のみ-3
 lantern-stand	4	multitool-stand	-3	ランタンスタンド ランタンハンガー付き マルチツールスタンド テーブル ペグ キャンプ アウトドア	https://item.rakuten.co.jp/ichifujiec/nk047/	2480	汎用語のみ-3
 lantern-stand	5	tabletop-2way	-3	ランタンスタンド 卓上 ペグ付き 折りたたみ 2WAY ランタンハンガー 4段階高さ調節 クランプ式/打ち込み式 収納ケース付き	https://item.rakuten.co.jp/mitomi8/190261-190264/	2250	汎用語のみ-3
-large-tarp-recommend	1	tansu-tarp-3x6	-3	タンスのゲン 特大3×6m ワンタッチタープテント サイドシート付 大型 収納ケース付 アウトドア イベント 運動会 日よけ・日除け	https://item.rakuten.co.jp/tansu/1900002000/	25999	汎用語のみ-3
-large-tarp-recommend	5	moderndeco-onetouch-3m	-3	モダンデコ ワンタッチタープテント 3m 遮熱 遮光 UV99.9%カット 防水 軽量 アウトドア	https://item.rakuten.co.jp/dondon/sjt30/	10499	汎用語のみ-3
 log-carrier	1	canvas-log-tote	-3	薪バッグ ログキャリー 帆布 大容量 焚き火 トート	https://item.rakuten.co.jp/mystic-r/logc2/	2980	汎用語のみ-3
 log-carrier	3	value-log-tote	-3	薪 トートバッグ ログキャリー 大容量 薪運び	https://item.rakuten.co.jp/farson/000000125014/	2000	汎用語のみ-3
 log-carrier	4	yoler-waterproof	-3	YOLER 薪バッグ 防水帆布 大容量 薪ケース	https://item.rakuten.co.jp/yoler/yr-fwbag/	3390	汎用語のみ-3
-log-carrier	5	zukk-leather	-3	ZUKK 薪バッグ 本革×極厚帆布 ログキャリー	https://item.rakuten.co.jp/zukk-camp/pb-log-carrier/	5800	汎用語のみ-3
 low-style-chair	2	lc-yocabito-wood	-3	YOCABITO ウッドローチェア テーブル付(難燃加工)	https://item.rakuten.co.jp/esports/9721310090010/	9980	汎用語のみ-3
 mestin-recommend	2	laughmarket-teflon-mestin	-3	ラフマーケット 純正テフロン加工 ラージメスティン 3合 軽量コンパクト	https://item.rakuten.co.jp/laugh-market/la-tef-mes/	3280	汎用語のみ-3
 mobile-battery-camp	2	hiyori-40000	-3	モバイルバッテリー 大容量 40000mAh 22.5W急速充電 3台同時充電 LCD残量表示 PSE認証	https://item.rakuten.co.jp/japan-hiyori/hiyori-n7/	2380	汎用語のみ-3
@@ -212,7 +188,6 @@ one-touch-tent	2	moderndeco-onetouch-fullclose	-3	モダンデコ ワンタッ�
 outdoor-coffee-mill	4	mill-sukizuki	-3	ミニ手挽きコーヒーミル（掃除ブラシ付き）	https://item.rakuten.co.jp/sukizuki/rkt-kfjmini/	2980	汎用語のみ-3
 outdoor-wagon	3	lysin-wagon-e230	-3	ライシン アウトドアワゴン Eシリーズ（最大230L）	https://item.rakuten.co.jp/lysin/ls-yx-z02b/	13800	汎用語のみ-3
 outdoor-wagon	5	tansu-renew-wagon	-3	タンスのゲン RENEW ノーパンクワイドタイヤ キャリーワゴン	https://item.rakuten.co.jp/tansu/45600000/	7999	汎用語のみ-3
-peg-hammer	1	ellisse-ultimate-hammer	-3	村の鍛冶屋 エリッゼステーク アルティメットハンマー	https://item.rakuten.co.jp/yminfo/10040001/	6600	汎用語のみ-3
 peg-hammer	3	reiden-peg-hammer	-3	REIDEN ペグハンマー（現役キャンパー監修）	https://item.rakuten.co.jp/lebenwood/lbw-11002/	1690	汎用語のみ-3
 peg-hammer	5	dfresh-peg-hammer-360g	-3	ペグハンマー 軽量360g 炭素鋼ヘッド ペグ抜き付き	https://item.rakuten.co.jp/d-fresh/d0022_peg_hammer/	1680	汎用語のみ-3
 portable-cooler-aircon	2	tansu-spot-cooler	-3	タンスのゲン スポットクーラー 断熱ダクトカバー・窓パネル付	https://item.rakuten.co.jp/tansu/7980000000/	29999	汎用語のみ-3
