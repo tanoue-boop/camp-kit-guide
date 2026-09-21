@@ -350,6 +350,14 @@ function isSetAxis(a) {
   return a.values.filter((v) => QTY_VAL_RE.test(toHalfWidth(v).trim())).length * 2 >= a.values.length;
 }
 function firstValue(a) { return a.values.find((v) => !NOTICE_VAL_RE.test(v)) ?? a.values[0]; }
+// SKU の selectorValue が選択値（軸の値）に対応するか: 完全一致、または SKU 値が選択値で始まり直後が英数字・小数点でない
+//   （軸「1.0L」↔ SKU「1.0L│1～2人・定番」）。選択値が 2 文字未満（S/M/L）は前方一致を使わない（"S" が "SB" に当たる）
+function skuValueMatches(skuVal, v) {
+  if (skuVal === v) return true;
+  const a = norm(skuVal).replace(/\s+/g, ''), b = norm(v).replace(/\s+/g, '');
+  if (b.length < 2 || !a.startsWith(b)) return false;
+  return !/[0-9a-z.]/.test(a[b.length] || '');
+}
 // 各軸の候補値（name の出現順）。名指しが無い軸・セット軸は [先頭値]
 function chosenValueLists(axes, cardName) {
   return axes.map((a) => {
@@ -493,12 +501,19 @@ function parseRakutenHtml(html, url, cardName = '', cardPrice = '') {
     //     完全一致を要求せず、先頭軸から順に一致数で選ぶ
     //   name が同じ軸の値を複数並記している（「3mx3m 2m×2m」「5cm/10cm」）ときは、一致数が同点の SKU のうち
     //   価格がカード price と一致するもの → name で先に出る値のもの の順で選ぶ
+    //   軸に「1.0L」と「1.0L│1～2人・定番」のように新旧ラベルが並び、SKU が長い方だけを使うページ（camp-kettle-recommend #1）では、
+    //   name が名指しした短いラベル「1.0L」がどの SKU にも完全一致せず、全 SKU 同点 → 最安の 0.8L が選ばれていた。**その軸の値を使う SKU が
+    //   1 つも無い選択値に限り**、SKU 値が選択値で始まり直後が英数字でない（"1.0l│…"）なら一致とみなす（campkit-20260921-30。
+    //   variantUnavailable の skuHas と同じ考え方）。完全一致の SKU がある値（「ブラック」↔ SKU「ブラック」）には前方一致を使わない
+    //   （使うと「ブラック(軽量タイプ)」「ブラックバリスティック」が同点になり別の変種を選ぶ）
     let pinned = '';
     try { pinned = new URL(url).searchParams.get('variantId') || ''; } catch { /* ignore */ }
     const lists = chosenValueLists(page.axes, cardName);
     const n = lists.length;
-    const scoreOf = (s) => lists.reduce((acc, list, i) => acc + (list.includes(s.selectorValues[i]) ? 2 ** (n - 1 - i) : 0), 0);
-    const orderOf = (s) => lists.reduce((acc, list, i) => { const k = list.indexOf(s.selectorValues[i]); return acc + (k < 0 ? list.length : k) * 2 ** (n - 1 - i); }, 0);
+    const skuValuesAt = lists.map((_, i) => new Set(page.skus.map((s) => s.selectorValues[i])));
+    const matchIdx = (list, sv, i) => { const k = list.indexOf(sv); return k >= 0 ? k : list.findIndex((v) => !skuValuesAt[i].has(v) && skuValueMatches(sv, v)); };
+    const scoreOf = (s) => lists.reduce((acc, list, i) => acc + (matchIdx(list, s.selectorValues[i], i) >= 0 ? 2 ** (n - 1 - i) : 0), 0);
+    const orderOf = (s) => lists.reduce((acc, list, i) => { const k = matchIdx(list, s.selectorValues[i], i); return acc + (k < 0 ? list.length : k) * 2 ** (n - 1 - i); }, 0);
     const cp = Number(String(cardPrice).replace(/[^0-9.]/g, ''));
     const priceHit = (s) => (cp > 0 && s.price === cp ? 1 : 0);
     const ranked = [...page.skus].sort((a, b) =>
@@ -1346,6 +1361,10 @@ function runTests() {
   t('size_unspecified: 「15〜25L」は「115-125L」の値には一致しない（数字隣接ガード）', { name: 'カバー XS（15〜25L）ブラック', price: '1000' },
     mkPage({ itemName: 'カバー', price: 1000, selectorValues: ['XS(115-125L)', 'ブラック'], axes: [{ key: 'サイズ', values: ['XS(115-125L)', 'S(130-140L)'] }, { key: 'カラー', values: ['ブラック', 'ブルー'] }] }), 200, ['size_unspecified']);
 
+  t('spec_mismatch なし: 選択SKUが名指しの「1.0L│1～2人・定番」なら選択SKUの値に 1.0L がある（camp-kettle-recommend #1）', { name: 'キャンピングムーン キャンプケトル 直火 やかん 1.0L アルミ', price: '1980' },
+    mkPage({ itemName: 'キャンプ ケトル キャンピングムーン', brand: 'キャンピングムーン', axes: [{ key: 'サイズ', values: ['0.8L', '1.0L', '1.5L', '0.8L│ソロ・軽量', '1.0L│1～2人・定番', '1.5L│2～3人・調理'] }],
+      skus: [[['1.0L│1～2人・定番'], 1980], [['0.8L│ソロ・軽量'], 1800]] }), 200, [], ['spec_mismatch', 'size_unspecified', 'price_mismatch', 'variant_unavailable']);
+
   // url_unparsable は rakutenUrl() の単体テストで担保
   const urlCases = [
     ['https://hb.afl.rakuten.co.jp/hgc/x/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fluxim647%2F3sp02%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fluxim647%2Fi%2F10000005%2F', 'https://item.rakuten.co.jp/luxim647/3sp02/'],
@@ -1427,6 +1446,21 @@ function runTests() {
     ct('nameSpecifiedValues: 範囲「40〜60L」の上限 60L は名指しではない（waterproof-backpack #2）', got6 === '', got6 || '(なし)');
     const got7 = nameSpecifiedValues({ key: 'サイズ', values: ['40Ｌ', '60Ｌ'] }, 'tousen 登山リュック 60L 大容量 防水').map((x) => x.v).join(',');
     ct('nameSpecifiedValues: 単独の「60L」は従来どおり名指し', got7 === '60Ｌ', got7);
+    // campkit-20260921-30: 軸に新旧ラベル（「1.0L」と「1.0L│1～2人・定番」）が並び SKU が長い方だけを使うページの選択SKU
+    const html3 = '<title>t</title>{"itemInfoSku":{"title":"キャンプケトル","manageNumber":"x"},"variantSelectors":[{"label":"サイズ","values":[{"label":"0.8L"},{"label":"1.0L"},{"label":"1.5L"},{"label":"0.8L│ソロ・軽量"},{"label":"1.0L│1～2人・定番"},{"label":"1.5L│2～3人・調理"}]}],"sku":[{"variantId":"S800","selectorValues":["0.8L│ソロ・軽量"],"taxIncludedPrice":1800},{"variantId":"S1000","selectorValues":["1.0L│1～2人・定番"],"taxIncludedPrice":1980},{"variantId":"S1500","selectorValues":["1.5L│2～3人・調理"],"taxIncludedPrice":2180}]}';
+    const s7 = parseRakutenHtml(html3, '', 'キャンピングムーン キャンプケトル 直火 やかん 1.0L アルミ', '1620').firstSku.variantId;
+    ct('選択SKU: name「1.0L」は SKU「1.0L│1～2人・定番」に対応（camp-kettle-recommend #1）', s7 === 'S1000', s7);
+    const s8 = parseRakutenHtml(html3, '', 'キャンピングムーン キャンプケトル 直火 やかん アルミ', '').firstSku.variantId;
+    ct('選択SKU: 名指しが無ければ先頭値「0.8L」に対応する SKU', s8 === 'S800', s8);
+    const s9 = parseRakutenHtml(html3, '', 'キャンピングムーン キャンプケトル 直火 やかん 1.5L アルミ', '').firstSku.variantId;
+    ct('選択SKU: 「1.5L」は「1.5L│2～3人・調理」（「1.0L」や「0.8L」には当たらない）', s9 === 'S1500', s9);
+    const html4 = '<title>t</title>{"itemInfoSku":{"title":"寝袋","manageNumber":"x"},"variantSelectors":[{"label":"カラー","values":[{"label":"ブラック"},{"label":"ブラック(軽量タイプ)"},{"label":"ネイビー"}]}],"sku":[{"variantId":"1692","selectorValues":["ブラック"],"taxIncludedPrice":4990},{"variantId":"1700","selectorValues":["ブラック(軽量タイプ)"],"taxIncludedPrice":4280},{"variantId":"1701","selectorValues":["ネイビー"],"taxIncludedPrice":4990}]}';
+    const s10 = parseRakutenHtml(html4, '', 'HAWK GEAR 寝袋 ブラック', '4280').firstSku.variantId;
+    ct('選択SKU: 完全一致の SKU「ブラック」があれば前方一致「ブラック(軽量タイプ)」は使わない（価格が一致しても）（mummy-sleeping-bag #2）', s10 === '1692', s10);
+    const s11 = parseRakutenHtml(html4, '', 'HAWK GEAR 寝袋', '4280').firstSku.variantId;
+    ct('選択SKU: 名指しが無い場合も先頭値「ブラック」の完全一致 SKU', s11 === '1692', s11);
+    ct('skuValueMatches: 「10L」は「100L」に当たらない（直後が数字）', !skuValueMatches('100L', '10L') && skuValueMatches('10L│小', '10L'), String(skuValueMatches('100L', '10L')));
+    ct('skuValueMatches: 1 文字の「S」は「SB」に当たらない', !skuValueMatches('SB', 'S'), String(skuValueMatches('SB', 'S')));
     ct('itemCodeOf: 店名を除いた商品コード',itemCodeOf('https://item.rakuten.co.jp/futon-outlet/10002239/') === '10002239' && itemCodeOf('https://item.rakuten.co.jp/smile88/a04309_sale/?variantId=1') === 'a04309_sale', itemCodeOf('https://item.rakuten.co.jp/futon-outlet/10002239/'));
   }
   for (const c of cacheCases) {
