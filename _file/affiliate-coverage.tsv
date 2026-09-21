@@ -148,7 +148,7 @@ hexa-tarp	2026-06-02	2026-06-02	5	10	0	1	0	0	0	11	ok	Amazon未設定カード 4/
 hot-sandwich-maker	2026-06-02	2026-06-02	5	10	0	3	0	0	0	13	ok	Amazon未設定カード 2/5 (#3,#5)
 hot-water-bottle	2026-08-05	2026-08-05	5	5	0	2	0	0	0	7	ok	Amazon未設定カード 3/5 (#2,#4,#5)
 infinity-chair	2026-07-28	2026-09-03	5	5	0	3	0	0	0	8	ok	Amazon未設定カード 2/5 (#2,#4)
-inflatable-mat	2026-06-02	2026-09-18	5	10	0	2	0	0	0	12	ok	Amazon未設定カード 3/5 (#1,#4,#5)
+inflatable-mat	2026-06-02	2026-09-21	5	10	0	4	0	0	0	14	ok	Amazon未設定カード 1/5 (#1) ｜2026-09-21 backfill(campkit-20260921-13): #4=B0CLV79J6K(PYKES PEAK 型番P0207IFMST-BLK)・#5=B085TBSTW4(Bears Rock MT-103F エスニックオリーブ)を設置。#1 Aiflycy は no-amazon: Amazonに同名ブランド出品なし。楽天SKU属性はブランド=camdoor/型番sp06だが、Amazon CAMDOOR 枕付き75cm(B0GSZY8CY1等)は展開210×75cm・3.7〜4.2kgで楽天仕様(200×75cm・3.2〜3.5kg)と不一致のため同一商品と確認できず
 inner-tent-kangaroo	2026-09-09	2026-09-09	5	5	0	5	0	0	0	10	ok	
 insulated-tumbler	2026-09-10	2026-09-10	5	5	0	4	0	0	0	9	ok	Amazon未設定カード 1/5 (#5)
 isuka-sleeping-bag	2026-09-16	2026-09-16	5	5	0	5	0	0	0	10	ok	
@@ -172,7 +172,7 @@ mestin-recommend	2026-06-02	2026-06-02	5	10	0	3	0	0	0	13	ok	Amazon未設定カ�
 mobile-battery-camp	2026-06-02	2026-06-02	5	10	0	2	0	0	0	12	ok	Amazon未設定カード 3/5 (#2,#3,#4)
 montbell-sleeping-bag	2026-07-22	2026-07-22	4	3	0	3	0	0	0	6	card-without-link	cards NG: #1=別形式(B09DBDH7VB)
 moraknife	2026-07-29	2026-07-29	5	5	0	5	0	0	0	10	ok	
-mountain-backpack-30l	2026-04-23	2026-09-11	5	5	0	4	0	0	0	9	ok	Amazon未設定カード 1/5 (#5)
+mountain-backpack-30l	2026-04-23	2026-09-11	5	5	0	4	0	0	0	9	ok	Amazon未設定カード 1/5 (#5) ｜2026-09-21 backfill(campkit-20260921-13)で調査: #5 は無名OEM(楽天ブランド属性=MARLE TOKYO/型番spr01・49×31×17cm・0.5kg)でAmazonに同ブランド出品なし→no-amazon。記事は無変更(updatedAtも据え置き)
 mountain-camp-lantern	2026-05-26	2026-08-26	6	6	0	1	5	5	0	12	ok	
 mountain-camp-mat	2026-04-25	2026-04-25	5	5	0	3	0	0	0	8	ok	Amazon未設定カード 2/5 (#1,#2)
 mountain-camp-tent	2026-04-29	2026-06-29	5	5	0	1	0	0	0	6	ok	Amazon未設定カード 4/5 (#2,#3,#4,#5)
@@ -253,7 +253,7 @@ vastland-tent	2026-06-08	2026-06-08	5	9	0	5	0	0	0	14	ok
 waq-chair	2026-06-08	2026-06-08	5	10	0	2	0	0	0	12	ok	Amazon未設定カード 3/5 (#3,#4,#5)
 washable-sleeping-bag	2026-09-15	2026-09-15	5	5	0	5	0	0	0	10	ok	
 water-jug	2026-07-27	2026-07-27	5	5	0	2	0	0	0	7	ok	Amazon未設定カード 3/5 (#2,#3,#5)
-waterproof-backpack	2026-06-08	2026-06-08	5	10	0	1	0	0	0	11	ok	Amazon未設定カード 4/5 (#1,#2,#3,#5)
+waterproof-backpack	2026-06-08	2026-09-21	5	10	0	3	0	0	0	13	ok	Amazon未設定カード 2/5 (#2,#5) ｜2026-09-21 backfill(campkit-20260921-13): #1=B07PX8SH28(LAD WEATHER 型番ladbag002-bkgy ブラック×グレー 25L)・#3=B07VV1JL9D(TaoTech モデルfsb 30L ブラック)を設置。#2 tousen(楽天ブランド属性=旅行バッグ・型番なし・過去3回も該当なし)・#5 Mt.happy(型番なし・Amazonの同ブランドはサイクリングバッグのみ)は no-amazon
 winter-camp-gloves	2026-06-08	2026-06-08	5	10	0	2	0	0	0	12	ok	Amazon未設定カード 3/5 (#3,#4,#5)
 winter-camp-guide	2026-09-08	2026-09-08	13	13	0	9	1	1	0	23	ok	Amazon未設定カード 3/13 (#6,#12,#13)
 winter-camp-rental	2026-08-31	2026-08-31	0	0	0	0	0	0	1	1	ok	
