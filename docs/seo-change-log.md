@@ -3,6 +3,17 @@
 数値の推移はGAS「SEOレポート」の履歴で追う。本ファイルは「いつ・どの記事を・なぜ・どう変えたか」を記録し、次回レポートで効果を評価するための施策台帳。新しい施策は上に追記する。
 
 ---
+## 2026-09-22：キュー#16 第3弾 — 既設置 Amazon ASIN の照合 30枚＋検出器に「着地先すり替え」の機械検知を追加（campkit-20260921-39）
+
+- **対象**: `_file/amazon-asin-check.tsv`・`_file/article-fix-backlog.tsv`・`scripts/check-amazon-asin.cjs` のみ。**`content/posts/` は 1 文字も変更していない**（Amazon リンクの差し替えは台帳 `asin_mismatch` 行として起票するだけ）
+- **§A（照合 30 枚・distinct ASIN 30・13 記事・Amazon アクセス 30 回＋§C-2 の 1 回・429/503/CAPTCHA 0）**: 監督側で `link_form=amazonAsin`・frozen=0・verdict 空の 469 枚を slug/rank 昇順に並べた先頭 30 枚（bonfire-stand-solo #4/#5 → … → camp-nata #1〜#3）。結果 **ok 27／model_mismatch 2／out_of_stock 1**。誤り 2 枚＝camp-fan-summer #2（HAGOOGI 扇風機の**旧モデル OT-F12** が付いていた。カードは DC モーター＋収納ケース付きの OT-F13＝楽天 404 で discontinued_404 起票済み。dp 自身が「新しいモデルがあります」として B0CY1XSQ77 を案内）・camp-gift #2（LAD WEATHER 防寒手袋の既設置 ASIN が変種一覧から**消え、Amazon が L サイズ B09MQ8Z9XC へ黙って着地**させていた＝新設の `redirected_to` で機械検知。同モデルなので読者が見る商品は合っているが失効 ASIN）。2 件を `asin_mismatch`（pending／B）で起票（415→417行）。camp-grill-plate #4（Bush Craft グリルプレート）は購入ボックスなし＝out_of_stock（起票対象外）
+- **§B（検出器）**: `parseDp` が dp の JSON `landingAsin`／`currentAsin`（JSON が無ければ hidden input#ASIN）を拾い、両者が異なるとき `amazon_stock` に `redirected_to=<currentAsin>` を出す（37 の naturehike-tent #3 を HTML 目視で見つけたのを機械化）。verdict の自動判定・静的フラグは不変更。`--test` 86→93。ファイル先頭に seller_type の人手分類基準（reseller＝「店名が商材と無関係」かつ「詳細欄が空」の両方／ブランド運営会社名義は official）を明文化
+- **§C-2（naturehike-tent #4/#5 の決着）**: 候補 B0DYF6W1C5「village13-Plus」を 1 回照合 → 型番 CNH22ZP004plus・レインフライ Ti black・前幕×1 同梱・¥79,990＝**Ti Black 素材の変種**（37 で「ラベルに Ti Black が無い」として外したのは誤り）。楽天 #4 wuji13 pro（¥75,990）のレビューが「village13.0 plus」「WUJI13PRO プレミアム版」に言及し価格帯も近く、#5 wuji13 Ti black 前幕付き（¥66,990）は B0DYF5RNY2 の ¥66,990 と一致 → **#4 を B0DYF6W1C5、#5 を B0DYF5RNY2 に振り分ける案**を台帳 #5 行の detail に記載（差し替えは行わない。前幕表記が両変種にあるため差し替え時に付属品欄で最終確認）
+- **§0 の監督回答**: 候補 ASIN なしの起票行（naturehike-tent #3・camp-cooler-soft #3）は「再探索 1 回 → 見つからなければ amazonAsin 除去（専用タスクでまとめて実施）」の一文を notes に追記。price_gap ≥ +15% かつ seller_type ∈ {official, amazon}（＝カード price が古いだけの可能性が高い）は 10 枚（水曜 price-check の管轄・起票なし）
+- **傾向**: 第3弾は 30 枚中 2 枚（7%）。第2弾までの「色違い変種」に加えて**旧モデル ASIN**（新モデルが出て dp が案内する型）と**失効 ASIN の同モデル別サイズへの着地**が出た。無名 OEM 品（bonfire-stand-solo #4）は楽天 ZELDNER／Amazon NBS とブランド名義が違っても仕様一致で同一と判定
+- **効果測定**: 検索順位の直接施策ではないため計測対象外
+
+---
 ## 2026-09-22：キュー#17 — 旧形式 Amazon リンク 8枚／6記事を現行形式（amazonAsin）へ統一＋楽天リンク 3枚追加（campkit-20260921-38）
 
 - **対象**: air-frame-tent #3／montbell-sleeping-bag #1／ogawa-tent #5／sleeping-bag-cover #3・#4／spice-box #3・#5／wooden-tableware #1（36 の `--list legacy_form` の 8 枚・全て frozen=0）。触った属性は `source`／`affiliateUrl`／`amazonAsin`／`rakutenRating`／`rakutenReviewCount` のみで、**name／price／image／badge／本文／見出し／比較表／frontmatter は不変更**（`git diff` で name=／price=／image=／badge= の +/- 行 0 を確認）

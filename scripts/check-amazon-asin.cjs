@@ -33,6 +33,17 @@
  *   reseller（転売型＝店名が商材と無関係・詳細欄が空）／unknown（販売元を特定できない）。照合していない行は空。
  *   fetch 直後は機械判定（Amazon.co.jp → amazon、公式/Official/Direct を含む → official、それ以外・販売元不明 → unknown）を入れ、
  *   marketplace／reseller の区別は人手（`--judge … --seller` または `--set-seller`）で上書きする。
+ *   人手分類の線引き（campkit-20260921-37 §D-12 判断 4 ／ 39 §0-4 で監督が追認・判定ロジックは機械分類のまま）:
+ *     - `reseller`  … 「店名が商材と無関係」かつ「販売元の詳細欄が空」の**両方**を満たすものだけ（例: 雑-貨-酒-店・koalaストア【インボイス対応/すり替え対策店】）
+ *     - `marketplace` … 商材が関連する小売店、または詳細欄がある店（例: PC FREAK＝家電小売がホットマット・bonbon lab・Victoria L-Breath・上河商会）
+ *     - `official`  … ブランドの公式ストアに加え、**ブランド運営会社名義**も official（例: Legare＝TITAN MANIA・edge.＝ALBATRE・OTG Camping Gear＝OneTigris）
+ *
+ * amazon_stock の `redirected_to=<ASIN>`（campkit-20260921-39 §B・着地先すり替えの機械検知）:
+ *   dp の HTML 中の JSON `"landingAsin"`（要求した ASIN）と `"currentAsin"`（実際に表示している ASIN。JSON が無ければ hidden input#ASIN）を拾い、
+ *   **両方取れて異なる**ときだけ `amazon_stock` に `redirected_to=<currentAsin>` を出す（在庫文言があれば末尾に `; redirected_to=…`）。
+ *   37 の naturehike-tent#3（B0CP3FSK4B が変種一覧から消え、Amazon が兄弟変種 B0CQ2DDXJN「TPUドア」¥5,990 へ黙って着地させた）を HTML の目視で
+ *   見つけたのを機械化したもの。**verdict の自動判定・静的フラグの規則は変えていない**（人手判定の材料を増やすだけ）。
+ *   landingAsin／currentAsin の JSON は変種のあるページにしか無い（36・37 の保存 HTML 49 本中 36 本）。片方でも欠ければ出さない。
  *
  * link_form: amazonAsin / amazonUrl（amzn.to 短縮。amazonAsin と同居していれば描画上は amazonUrl が優先されるのでこちら）/
  *            legacy_source_amazon（source="amazon" かつ affiliateUrl が ASIN のみ）/ none
@@ -70,9 +81,9 @@ const POSTS_DIR = path.join(ROOT, 'content', 'posts');
 const OUT = path.join(ROOT, '_file', 'amazon-asin-check.tsv');
 const NO_AMAZON_TSV = path.join(ROOT, '_file', 'amazon-backfill-no-amazon.tsv');
 const CARD_NAME_TSV = path.join(ROOT, '_file', 'card-name-check.tsv');
-const HTML_DIRS = ['html-asin-37', 'html-asin-36'].map((d) => path.join(ROOT, '_file', '_work', d));
+const HTML_DIRS = ['html-asin-39', 'html-asin-37', 'html-asin-36'].map((d) => path.join(ROOT, '_file', '_work', d));
 const HTML_DIR = HTML_DIRS[0];
-const TASK_ID = 'campkit-20260921-38';
+const TASK_ID = 'campkit-20260921-39';
 
 const INTERVAL_MS = 2000;
 const FETCH_TIMEOUT_MS = 25000;
@@ -350,7 +361,14 @@ function parseDp(html) {
   out.model = details['po-model_name'] || details['b-メーカー型番'] || details['b-製品型番'] || details['t-メーカー型番'] || details['t-製品型番'] || details['b-型番'] || '';
   out.captcha = /captcha|Robot Check|自動アクセス/i.test(html) && !out.title;
   out.notFound = !out.title && /dogsofamazon|ページが見つかりません|お探しのページ/.test(html);
+  //   着地先すり替えの材料（campkit-20260921-39 §B）: landingAsin は変種ページの JSON にしか無い。currentAsin は JSON → hidden input#ASIN の順
+  out.landingAsin = (html.match(/"landingAsin"\s*:\s*"([A-Z0-9]{10})"/) || [])[1] || '';
+  out.currentAsin = (html.match(/"currentAsin"\s*:\s*"([A-Z0-9]{10})"/) || html.match(/<input[^>]+id="ASIN"[^>]+value="([A-Z0-9]{10})"/) || html.match(/<input[^>]+value="([A-Z0-9]{10})"[^>]+id="ASIN"/) || [])[1] || '';
   return out;
+}
+// landingAsin と currentAsin の両方が取れて異なるときだけ、着地先の ASIN を返す（片方欠落・一致は空）
+function redirectedTo(dp) {
+  return dp.landingAsin && dp.currentAsin && dp.landingAsin !== dp.currentAsin ? dp.currentAsin : '';
 }
 function autoVerdict(card, dp, status) {
   if (status === 404 || dp.notFound) return { verdict: '404', note: 'auto: HTTP 404 / dp ページなし' };
@@ -364,9 +382,14 @@ function autoVerdict(card, dp, status) {
   return { verdict: 'unverifiable', note: 'auto: カードに型番トークン無し→要人手判定（タイトル・仕様で判断）' };
 }
 function stockLabel(dp, status) {
-  if (status === 404 || dp.notFound) return '404';
-  if (dp.oos.length) return `oos:${dp.oos.join('/')}`.slice(0, 60);
-  return `${dp.buybox === 'none' ? 'no_buybox' : 'in_stock(' + dp.buybox + ')'}${dp.availability ? ' ' + dp.availability.slice(0, 40) : ''}`;
+  let base;
+  if (status === 404 || dp.notFound) base = '404';
+  else if (dp.oos.length) base = `oos:${dp.oos.join('/')}`.slice(0, 60);
+  else base = `${dp.buybox === 'none' ? 'no_buybox' : 'in_stock(' + dp.buybox + ')'}${dp.availability ? ' ' + dp.availability.slice(0, 40) : ''}`;
+  //   着地先すり替え（campkit-20260921-39 §B）: 在庫文言が空ならそのまま、あれば末尾に `; ` で足す
+  const rd = redirectedTo(dp);
+  if (!rd) return base;
+  return base ? `${base}; redirected_to=${rd}` : `redirected_to=${rd}`;
 }
 
 // 照合の優先順: --only > 静的検査 (1)(3)(4)(5) > inconsistent_shared > TSV 順
@@ -527,6 +550,15 @@ function runTests() {
   t('autoVerdict oos', autoVerdict({ card_name: 'X' }, { ...dp0, oos: ['在庫切れ'] }, 200).verdict, 'out_of_stock');
   t('autoVerdict no buybox', autoVerdict({ card_name: 'X' }, { ...dp0, buybox: 'none' }, 200).verdict, 'out_of_stock');
   t('autoVerdict 404', autoVerdict({ card_name: 'X' }, { ...dp0, title: '', notFound: true }, 404).verdict, '404');
+  // 着地先すり替え（campkit-20260921-39 §B）: landingAsin / currentAsin の抽出と redirected_to
+  const htmlVar = (landing, current) => `<html><input type="hidden" id="ASIN" name="ASIN" value="${current}"><script>var o = {"currentAsin" : "${current}",\n"landingAsin": "${landing}"};</script><span id="productTitle">X</span></html>`;
+  t('parseDp landingAsin==currentAsin → redirected_to 無し', (() => { const d = parseDp(htmlVar('B0CP3FSK4B', 'B0CP3FSK4B')); return [d.landingAsin, d.currentAsin, redirectedTo(d)]; })(), ['B0CP3FSK4B', 'B0CP3FSK4B', '']);
+  t('parseDp landingAsin≠currentAsin → redirected_to=currentAsin（37 naturehike-tent#3）', (() => { const d = parseDp(htmlVar('B0CP3FSK4B', 'B0CQ2DDXJN')); return [d.landingAsin, d.currentAsin, redirectedTo(d)]; })(), ['B0CP3FSK4B', 'B0CQ2DDXJN', 'B0CQ2DDXJN']);
+  t('parseDp 片方欠落（JSON 無し・hidden#ASIN のみ）→ currentAsin は取れるが redirected_to 無し', (() => { const d = parseDp('<html><input type="hidden" id="ASIN" name="ASIN" value="B08CZWJ7P8"><span id="productTitle">X</span></html>'); return [d.landingAsin, d.currentAsin, redirectedTo(d)]; })(), ['', 'B08CZWJ7P8', '']);
+  t('stockLabel: 在庫文言あり＋すり替え → 末尾に "; redirected_to="', stockLabel({ ...dp0, landingAsin: 'B0CP3FSK4B', currentAsin: 'B0CQ2DDXJN' }, 200), 'in_stock(cart) 在庫あり; redirected_to=B0CQ2DDXJN');
+  t('stockLabel: すり替え無し → 従来どおり', stockLabel({ ...dp0, landingAsin: 'B0CP3FSK4B', currentAsin: 'B0CP3FSK4B' }, 200), 'in_stock(cart) 在庫あり');
+  t('stockLabel: oos＋すり替え', stockLabel({ ...dp0, oos: ['在庫切れ'], landingAsin: 'B0AAAAAAAA', currentAsin: 'B0BBBBBBBB' }, 200), 'oos:在庫切れ; redirected_to=B0BBBBBBBB');
+  t('autoVerdict はすり替えで変わらない（規則不変更）', autoVerdict({ card_name: 'Naturehike CNH22ZP004' }, { ...dp0, landingAsin: 'B0AAAAAAAA', currentAsin: 'B0BBBBBBBB' }, 200).verdict, 'ok');
   // matchOnly
   t('matchOnly slug#rank', matchOnly({ slug: 'a', rank: 5, id: 'x' }, 'a#5'), true);
   t('matchOnly slug#id', matchOnly({ slug: 'a', rank: 5, id: 'x' }, 'a#x'), true);
@@ -685,4 +717,4 @@ async function main() {
 }
 
 if (require.main === module) main().catch((e) => { console.error(e); process.exit(1); });
-module.exports = { parseCards, linkFormOf, modelTokens, brandOf, staticCheck, autoVerdict, parseDp, priceGap, priceGapOfRow, sellerTypeOf, FROZEN_SLUGS, COLUMNS, SELLER_TYPES, PRICE_GAP_RE };
+module.exports = { parseCards, linkFormOf, modelTokens, brandOf, staticCheck, autoVerdict, parseDp, redirectedTo, stockLabel, priceGap, priceGapOfRow, sellerTypeOf, FROZEN_SLUGS, COLUMNS, SELLER_TYPES, PRICE_GAP_RE };
