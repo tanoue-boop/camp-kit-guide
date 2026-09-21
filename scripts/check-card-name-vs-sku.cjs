@@ -1,0 +1,1041 @@
+#!/usr/bin/env node
+/**
+ * check-card-name-vs-sku.cjs — ProductCard の `name`/`price` と実リンク先（楽天）SKU の整合チェック（検出専用）
+ *
+ * 目的（campkit-20260921-24 ／ キュー#15）:
+ *   `content/posts/*.mdx` の全 <ProductCardMdx …/> について、`affiliateUrl` の `pc=` から実リンク先の楽天商品ページを
+ *   1回だけ GET し、itemName / SKU属性（ブランド・メーカー型番・カラー・サイズ）/ セレクタ軸 / 現行価格 / 在庫を取り出して
+ *   カードの `name`・`price` と突き合わせ、ズレの種類をフラグで `_file/card-name-check.tsv` に記録する。
+ *   **mdx は一切変更しない。Amazon にはアクセスしない。**
+ *
+ * 使い方:
+ *   node scripts/check-card-name-vs-sku.cjs --dry                 # fetch せず mdx パースと件数だけ
+ *   node scripts/check-card-name-vs-sku.cjs --test                # 判定関数の単体テスト
+ *   node scripts/check-card-name-vs-sku.cjs --only inflatable-mat#1,attack-pack#5   # 名指し（既存行があっても再取得）
+ *   node scripts/check-card-name-vs-sku.cjs --limit 100           # 未チェックを slug昇順・rank昇順で N 枚
+ *   node scripts/check-card-name-vs-sku.cjs --limit 100 --max-minutes 20   # 経過時間で打ち切り（TSV には処理済み分を保存）
+ *   node scripts/check-card-name-vs-sku.cjs --recheck --limit 50  # 既存行も再取得
+ *   node scripts/check-card-name-vs-sku.cjs --url <楽天URL> --name "<カード名>" --price 1234   # 1件を手で試す
+ *
+ * 出力 `_file/card-name-check.tsv`（タブ区切り・BOM無し）: キー = slug + rank + id。既に行があるカードは
+ *   `--recheck` / `--only` を付けない限り再 fetch しない（次回タスクは続きから走れる）。
+ *
+ * フラグ（複数付与可。1つも付かなければ OK）:
+ *   404               HTTP 404、または商品ページが消えている（itemInfoSku が無い／エラーページ）
+ *   type_mismatch     カード name 先頭 HEAD_LEN 字の「型語」（ブランド・数値・単位を除いた語）が itemName／メーカー型番／
+ *                     シリーズ名のどこにも現れない（共通語数 < TYPE_MIN_COMMON）
+ *   model_mismatch    カード name の型番トークンが itemName／メーカー型番／SKU属性／商品管理番号のどこにも無い
+ *                     （カード→実リンク先の向きのみ。逆向きはバンドル管理番号・JAN で誤検知するため付与しない）
+ *   spec_mismatch     カード name の単独の数値スペック（幅NNcm／NNL／N人用／N合／NNNW／NNNWh／NNcm／Nm 等）が
+ *                     itemName・SKU属性・仕様欄（商品説明）のいずれにも無い。バリエーション軸にその数値が値として並ぶ
+ *                     ページでは選択SKUのセレクタ値＋SKU属性だけで判定。範囲（40〜60L／50L以上）や同単位の並記
+ *                     （8/10cm／1.9L 3.8L）は単独スペックではないので size_unspecified 側で扱う
+ *   set_mismatch      カード name がセット表記なのに実SKUが単品（セット/単品を選ぶ軸があればその既定値、無ければ
+ *                     itemName／メーカー型番にセット語なし）、または逆（カードが単品表記なのに既定SKUがセット）
+ *   color_unspecified カード name に色語が無い（軸の値の名指しも無い）のに色軸のセレクタ値が COLOR_AXIS_MIN 以上、
+ *                     または name に「色A/色B」の並記
+ *   size_unspecified  同様にサイズ軸（S/M/L・cm・L・ノーマル/ビッグ 等）。name の「サイズA/サイズB」並記・範囲・同単位並記も含む
+ *   store_copy        カード name に楽天店の販促文言（【楽天1位】／送料無料／期間限定／P10倍／セール／NN%OFF／＼…／ 等）が残っている
+ *   sale_page         実リンク先が色/型番の異なる商品を束ねたセール統合ページ: itemName に単一型番が無く、かつ
+ *                     URL/管理番号にセール語 かつ セレクタ値合計 >= SALE_VALUES_MIN、または SKU数 >= SALE_SKU_MIN かつ
+ *                     色・サイズ以外の軸（タイプ/シリーズ/本数 等）がある
+ *   price_mismatch    カード price と選択SKUの現行価格の乖離が PRICE_TOL 以上
+ *   url_unparsable    affiliateUrl から実リンク先URLを取り出せない（fetch しない）
+ *
+ * 選択SKU（価格・スペック判定の根拠。TSV 末尾列 sku_selected）: URL の variantId 指定 > 各軸で「カード name が名指しした値」
+ *   （無ければ先頭値。セット/単品を選ぶ軸は常に先頭値＝着地時の既定）との一致度が最大の SKU。
+ *
+ * 楽天へのアクセス: UA 付き・各URL 1回だけ・リクエスト間隔 INTERVAL_MS 以上・同一ホストへ並列 GET しない。
+ *   429 / 503 が返ったらその時点で走査を止めて処理済み分を保存し exit 2（リトライで押し切らない）。
+ *   取得 HTML は `_file/_work/html-24/<slug>__<rank>.html` に保存（.gitignore 下）。
+ */
+'use strict';
+
+const fs = require('fs');
+const path = require('path');
+
+const ROOT = path.join(__dirname, '..');
+const POSTS_DIR = path.join(ROOT, 'content', 'posts');
+const OUT = path.join(ROOT, '_file', 'card-name-check.tsv');
+const HTML_DIR = path.join(ROOT, '_file', '_work', 'html-24');
+const TASK_ID = 'campkit-20260921-24';
+
+// ---------------------------------------------------------------------------
+// 閾値・定数（A-4 の回帰検証で調整する。slug / id を条件に埋め込まない）
+// ---------------------------------------------------------------------------
+const INTERVAL_MS = 1600;        // リクエスト間隔（>= 1.5 秒）
+const FETCH_TIMEOUT_MS = 25000;  // 1リクエストのタイムアウト
+const HEAD_LEN = 20;             // type_mismatch: カード name の先頭何字から型語を取るか
+const TYPE_MIN_COMMON = 1;       // type_mismatch: 型語のうち実リンク先に見つかる語がこの数未満なら付与
+const TYPE_BIGRAM_MIN = 0.6;     // type_mismatch: 完全一致しない型語でも、文字2-gram の被覆率がこれ以上なら「見つかった」扱い
+const COLOR_AXIS_MIN = 2;        // color_unspecified: 色軸の値がこの数以上
+const SIZE_AXIS_MIN = 2;         // size_unspecified: サイズ軸の値がこの数以上
+const SALE_SKU_MIN = 30;         // sale_page: SKU 数がこれ以上（型番なし）
+const SALE_VALUES_MIN = 6;       // sale_page: セール語あり かつ セレクタ値の合計がこれ以上（型番なし）
+const PRICE_TOL = 0.03;          // price_mismatch: ±3%（23 §3-3(3) で採択）
+
+// 変更禁止リスト（2026-10-18 まで本文・frontmatter とも変更禁止。task-campkit-20260921-16 より）。
+// 走査自体は行い（読むだけ）、`frozen` 列に 1 を立てるだけ。
+const FROZEN_SLUGS = new Set([
+  // 施策本体（測定中）
+  'osprey-backpack', 'camp-backpack-capacity-guide', 'soto-burner', 'mysteryranch-backpack',
+  'karrimor-backpack', 'gregory-backpack', 'deuter-backpack', 'portable-fridge',
+  'camp-gear-sale-timing', 'camp-table-set', 'camp-table-folding', 'car-camp-lighting',
+  'torch-burner', 'bluetti-power', 'sleeping-bag-temperature-guide', 'duo-tent',
+  'fire-extinguish-pot',
+  // リンク元として 09-21 に変更済み（計27本）
+  'camp-cooler-box-overall', 'portable-power-vehicle-camp', 'cooler-ice-pack', 'snowpeak-tent',
+  'dod-table', 'low-style-table', 'outdoor-kitchen-table', 'solo-tent-overall',
+  'solo-tent-beginner', 'coleman-tent', 'dod-tent', 'secondary-combustion-bonfire',
+  'charcoal-starter', 'bonfire-sheet', 'bonfire-stand-beginner', 'car-camp-bed-kit',
+  'car-camp-mat', 'camp-lantern-led', 'electric-blanket-camp', 'fire-blower', 'camp-bbq-grill',
+  'family-camp-bbq', 'hand-axe', 'disaster-portable-power', 'jackery-power-station',
+  'ecoflow-power', 'portable-power-large',
+  // 09-20 に title/description を変更し CTR を測定中
+  'family-camp-summer-tent', 'coleman-chair', 'tent-size-beginner-guide',
+  // 別タスクで扱うため触らない
+  'kids-sleeping-bag', 'camp-backpack-beginner', 'solo-tent-lightweight', 'mountain-camp-lantern',
+  'camp-portable-power-beginner',
+]);
+
+// 販促文言（store_copy）。【…】内に含まれる場合と、name 中に裸で現れる場合の両方を見る
+const STORE_COPY_WORDS = /楽天\s*(?:\d+位|ランキング|1位)|ランキング\s*\d*位|送料無料|期間限定|P\s*\d+倍|ポイント\s*\d+倍|スーパーSALE|(?<![A-Za-z])SALE(?![A-Za-z])|セール|クーポン|あす楽|即納|最安値?|激安|在庫限り|数量限定|在庫処分|今だけ|限定価格|レビュー特典|マラソン|\d+\s*[%％]\s*[O0]FF|OFF[!！]|まで延長|値下げ|割引|＼[^／]*／/i;
+const STORE_COPY_BRACKET_RE = /【[^】]*】|＼[^／]*／|\[[^\]]*\]/g;
+
+// 色語（color_unspecified）。カード name とセレクタ値の両方で使う
+const COLOR_WORDS = [
+  'ブラック', '黒', 'ホワイト', '白', 'グレー', 'グレイ', 'ベージュ', 'カーキ', 'オリーブ', 'グリーン', '緑', 'ブルー', '青',
+  'ネイビー', '紺', 'レッド', '赤', 'オレンジ', 'イエロー', '黄', 'ブラウン', '茶', 'タン', 'サンド', 'コヨーテ', 'ピンク',
+  'パープル', '紫', 'ワインレッド', 'ボルドー', 'シルバー', '銀', 'ゴールド', '金', 'チャコール', 'ターコイズ', 'ライム',
+  'カモフラ', 'カモ', '迷彩', 'ネイティブ', 'マルチカム', 'スモーク', 'クリア', 'アイボリー', 'モカ', 'マスタード', 'テラコッタ',
+  'ダークグリーン', 'モスグリーン', 'フォレスト', 'セージ', 'バーガンディ', 'コーラル', 'ラベンダー', 'ミント', 'サックス',
+  'チャコールグレー', 'ガンメタ', 'ブロンズ', 'カッパー', 'ローズ', 'マルーン', 'ウルフ', 'デザート', 'アーミー',
+  'black', 'white', 'gray', 'grey', 'green', 'blue', 'navy', 'red', 'orange', 'yellow', 'brown', 'tan', 'sand', 'khaki',
+  'olive', 'coyote', 'beige', 'pink', 'purple', 'silver', 'gold', 'charcoal', 'camo', 'ivory', 'wolf', 'desert', 'army',
+];
+const COLOR_RE = new RegExp(COLOR_WORDS.map(escapeRe).join('|'), 'i');
+const COLOR_AXIS_KEY_RE = /カラー|色|color|colour/i;
+// サイズ語（size_unspecified）
+const SIZE_AXIS_KEY_RE = /サイズ|size|容量|寸法|人用|人数|長さ|規格/i;
+const SIZE_VALUE_RE = /^(?:[SML]{1,3}|XS|XL|XXL|LL|3L|4L|5L|\d+L|\d+(?:\.\d+)?\s*(?:cm|mm|m|インチ|inch)|\d+\s*人用?|ノーマル|ビッグ|ラージ|レギュラー|ワイド|ロング|ショート|大|中|小|特大|大型|小型|Sサイズ|Mサイズ|Lサイズ|XLサイズ|フリー|F)(?:サイズ)?$/i;
+const SIZE_WORD_IN_NAME_RE = /(?<![A-Za-z])(?:XS|S|M|L|XL|XXL|LL|3L|4L|5L)(?:サイズ|size)?(?![A-Za-z])|サイズ|\d+(?:\.\d+)?\s*(?:cm|mm|m|L|ℓ|リットル)(?![A-Za-z])|\d+\s*人用|ノーマル|ビッグ|ラージ|レギュラー|ワイド|ロング|ショート|大型|小型|特大/;
+// 「A/B」並記（色 or サイズ）
+const SLASH_PAIR_RE = /([^\s／/、,・]{1,12})\s*[／/]\s*([^\s／/、,・]{1,12})/g;
+// 同じ単位の数値が2つ並ぶサイズ並記（"1.9L 3.8L" / "8/10cm"）。× で結ばれた寸法（3m×2.5m）は対象外
+//   前の数値にも同じ単位が付く（1.9L 3.8L）か、単位無しなら区切りが / のとき（8/10cm）だけ。"501212 20L" のような型番＋容量は対象外
+//   「1人用 2人用」は用途の説明であって変種ではないので 人用 は対象外
+const SIZE_PAIR_RE = /(\d+(?:\.\d+)?)\s*(?:(L|cm|mm)\s*[／/・\s]|[／/])\s*(\d+(?:\.\d+)?)\s*(L|cm|mm)(?![A-Za-z])/;
+
+// 型番トークン（list-amazon-backfill-candidates.cjs と同じ判定を自己完結で持つ）
+const MODEL_TOKEN_RE = /(?<![A-Za-z0-9])[A-Z0-9]+(?:-[A-Z0-9]+)*(?![A-Za-z0-9])/g;
+// ※ `(?:DC|AC)\d+V?` は元の候補スクリプトでは電圧表記の除外だが、BLUETTI AC70／AC180 のような型番を落とすため
+//    V 付き（AC100V／DC12V）と代表的な電圧値だけに絞る（第1バッチの bluetti-power #1: name「AC70」↔ 実リンク先「AORA 100 mini」）
+const NOT_MODEL_RE = /^(?:\d+[A-Z]{1,2}|(?:UV|UPF|SPF|PU|IPX?|USB|R|T|D|SS|SH|L|M|S|XL|XXL|LL|3L|4L|5L)\d+|(?:DC|AC)\d+V|(?:DC|AC)(?:12|24|100|110|120|220|230|240)|\d+X\d+|\d+-\d+|\d+(?:-\d+)*[A-Z]{0,2}|A\d{4})$/;
+const UNIT_TOKEN_RE = /^\d+(?:W|WH|V|A|AH|MAH|MM|CM|M|KG|G|L|ML|D|T|H|X|P|K|LM|℃)$/i;
+const PURE_DIGIT_MODEL_MIN = 7; // 純数字の型番（コールマン 2000015521 等）はこの桁数以上
+
+// セット表記（カード name 側）。「カセット（ガス/コンロ）」の セット は除く。
+// `+`/`＋` は語と語の間にあり、かつ片側が数字でないときだけ（"40+5"（容量）・"DARKROOM ST+("（型番末尾）は除く。
+// "Gen 2 ＋ PS100"／"268Wh ＋ 130W" は片側が英字なのでセット）
+const SET_WORD_RE = /(?<!カ)セット|(?<![A-Za-z])set(?![A-Za-z])|[0-9０-９]+\s*点|[^\s\d]\s*[+＋]\s*[^\s()（）]|\d\s*[+＋]\s*[^\s\d()（）]/i;
+// セレクタ値のセット/単品判定（"MDX+" のような末尾 + は除く）
+const SET_VAL_RE = /(?<!カ)セット|(?<![A-Za-z])set(?![A-Za-z])|付き|付属|同梱|\S\s*[+＋]\s*\S|入り|付$/i;
+const NONE_VAL_RE = /^(?:なし|無し|無|-|―|本体のみ|単品|単体|標準)$|本体のみ|のみ$|なし$|無し$/;
+// 実リンク先（itemName／メーカー型番）側のセット語
+const PAGE_SET_RE = /(?<!カ)セット|(?<![A-Za-z])(?:set|with|bundle)(?![A-Za-z])|同梱|バンドル/i;
+// 範囲・下限上限の表記（40〜60L／50L以上／15L〜100L対応）は単一スペックではない
+const RANGE_RE = /(\d+(?:\.\d+)?)\s*(L|cm|mm|人用)?\s*[~〜～\-ー–]\s*(\d+(?:\.\d+)?)\s*(L|cm|mm|人用)/g;
+const BOUND_RE = /(\d+(?:\.\d+)?)\s*(L|cm|mm|人用)\s*(?:以上|以下|以内|まで|未満|対応|クラス)/g;
+const SALE_URL_RE = /sale|outlet|wakeari|bargain/i;
+
+// 数値スペック（spec_mismatch）: [正規表現, 種別]。値は m[1]、単位は m[2]（あれば）
+const SPEC_PATTERNS = [
+  [/幅\s*(\d+(?:\.\d+)?)\s*(cm|mm|m)?/g, 'width'],
+  [/厚\s*(?:さ|み|手)?\s*(\d+(?:\.\d+)?)(?:\s*[／/]\s*(\d+(?:\.\d+)?))?\s*(cm|mm)/g, 'thick'],
+  [/(\d+(?:\.\d+)?)\s*(Wh)(?![A-Za-z])/g, 'wh'],
+  [/(\d+(?:\.\d+)?)\s*(W)(?![A-Za-z])/g, 'w'],
+  [/(\d+(?:\.\d+)?)\s*(mAh|Ah)(?![A-Za-z])/g, 'ah'],
+  [/(\d+(?:\.\d+)?)\s*(L|ℓ|リットル)(?![A-Za-z])/g, 'liter'],
+  [/(\d+)\s*(人用)/g, 'person'],
+  [/(\d+(?:\.\d+)?)\s*(合)(?:炊き|炊)?/g, 'gou'],
+  [/(\d+(?:\.\d+)?)\s*(cm|mm|m)(?![A-Za-z])/g, 'len'],
+  [/(\d+(?:,\d{3})?)\s*(ルーメン|lm)(?![A-Za-z])/gi, 'lm'],
+];
+// 仕様欄・属性側で単位の表記ゆれを吸収する
+const UNIT_ALIASES = {
+  cm: ['cm', '㎝', 'センチ', 'ｃｍ'], mm: ['mm', '㎜', 'ミリ', 'ｍｍ'], m: ['m', 'ｍ', 'メートル'],
+  Wh: ['Wh', 'WH', 'wh', 'ｗｈ'], W: ['W', 'w', 'Ｗ', 'ワット'], mAh: ['mAh', 'mah', 'MAH'], Ah: ['Ah', 'AH', 'ah'],
+  L: ['L', 'l', 'ℓ', 'Ｌ', 'リットル'], ℓ: ['L', 'ℓ', 'リットル'], リットル: ['L', 'ℓ', 'リットル'],
+  人用: ['人用', '人', '名用', '名'], 合: ['合'], ルーメン: ['ルーメン', 'lm', 'LM'], lm: ['ルーメン', 'lm', 'LM'],
+};
+// 属性名 → スペック種別（属性値が単位無しの数値のときに使う）
+const ATTR_SPEC_KEYS = {
+  width: /幅|横/, thick: /厚/, wh: /容量|Wh/i, w: /出力|消費電力|定格/, ah: /容量/, liter: /容量/, person: /収容|人数|人用/,
+  gou: /炊飯|合/, len: /幅|奥行|高さ|長さ|サイズ|直径|径|全長|寸法/, lm: /ルーメン|明るさ|光束/,
+};
+
+function escapeRe(s) { return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
+
+// ---------------------------------------------------------------------------
+// 文字列正規化
+// ---------------------------------------------------------------------------
+function toHalfWidth(s) {
+  return String(s || '')
+    .replace(/[Ａ-Ｚａ-ｚ０-９]/g, (c) => String.fromCharCode(c.charCodeAt(0) - 0xfee0))
+    .replace(/　/g, ' ')
+    .replace(/[（]/g, '(').replace(/[）]/g, ')')
+    .replace(/[〜～]/g, '~')
+    .replace(/／/g, '/')
+    .replace(/[×]/g, 'x');
+}
+function norm(s) { return toHalfWidth(s).toLowerCase(); }
+function stripTags(html) {
+  return String(html || '')
+    .replace(/<script[\s\S]*?<\/script>/gi, ' ')
+    .replace(/<style[\s\S]*?<\/style>/gi, ' ')
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/&nbsp;|&#160;/g, ' ')
+    .replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&times;/g, '×')
+    .replace(/\s+/g, ' ');
+}
+function stripDecor(name) {
+  return String(name || '').replace(STORE_COPY_BRACKET_RE, ' ').replace(/[★■●☆◎◇◆]/g, ' ').replace(/\s+/g, ' ').trim();
+}
+function tokens(s) {
+  return norm(s).split(/[\s／/・,、，【】\[\]()「」『』｜|&＆+＋×x~]+/).filter(Boolean);
+}
+function clean(v) { return String(v ?? '').replace(/[\t\r\n]+/g, ' ').trim(); }
+
+// ---------------------------------------------------------------------------
+// mdx パース
+// ---------------------------------------------------------------------------
+function parseCards(mdx) {
+  const cards = [];
+  const re = /<ProductCardMdx\b([\s\S]*?)\/>/g;
+  let m;
+  let idx = 0;
+  while ((m = re.exec(mdx))) {
+    idx += 1;
+    const attrs = {};
+    for (const a of m[1].matchAll(/(\w+)=(?:"([^"]*)"|\{`([^`]*)`\}|\{'([^']*)'\})/g)) {
+      attrs[a[1]] = a[2] ?? a[3] ?? a[4] ?? '';
+    }
+    cards.push({
+      index: idx,
+      rank: Number(attrs.rank) || idx,
+      id: attrs.id || '',
+      name: attrs.name || '',
+      price: attrs.price || '',
+      affiliateUrl: attrs.affiliateUrl || '',
+      hasAsin: /\bamazonAsin=/.test(m[1]),
+      image: attrs.image || '',
+    });
+  }
+  return cards;
+}
+
+function loadAllCards() {
+  const out = [];
+  const files = fs.readdirSync(POSTS_DIR).filter((f) => f.endsWith('.mdx')).sort();
+  for (const f of files) {
+    const slug = f.replace(/\.mdx$/, '');
+    const mdx = fs.readFileSync(path.join(POSTS_DIR, f), 'utf8');
+    for (const c of parseCards(mdx)) out.push({ slug, ...c, url: rakutenUrl(c.affiliateUrl) });
+  }
+  out.sort((a, b) => (a.slug < b.slug ? -1 : a.slug > b.slug ? 1 : a.rank - b.rank || a.index - b.index));
+  return { cards: out, files: files.length };
+}
+
+// affiliateUrl → 実リンク先（楽天商品ページ）。pc= → m= → 自身が item.rakuten.co.jp の順。取れなければ ''
+function rakutenUrl(affiliateUrl) {
+  if (!affiliateUrl) return '';
+  let u;
+  try { u = new URL(affiliateUrl); } catch { return ''; }
+  const pc = u.searchParams.get('pc');
+  if (pc && /rakuten\.co\.jp/.test(pc)) return pc;
+  const m = u.searchParams.get('m');
+  if (m && /rakuten\.co\.jp/.test(m)) return m;
+  if (/(^|\.)item\.rakuten\.co\.jp$/.test(u.hostname)) return affiliateUrl;
+  return '';
+}
+
+// ---------------------------------------------------------------------------
+// 楽天 HTML 解析（19〜23 の parse-rakuten-22.cjs 相当を関数化）
+// ---------------------------------------------------------------------------
+function sliceJson(html, marker, from = 0) {
+  const i = html.indexOf(marker, from);
+  if (i < 0) return null;
+  const start = i + marker.length - 1; // '[' or '{'
+  const open = html[start];
+  const close = open === '[' ? ']' : '}';
+  let depth = 0;
+  let inStr = false;
+  for (let j = start; j < html.length; j++) {
+    const ch = html[j];
+    if (inStr) {
+      if (ch === '\\') { j++; continue; }
+      if (ch === '"') inStr = false;
+      continue;
+    }
+    if (ch === '"') inStr = true;
+    else if (ch === open) depth++;
+    else if (ch === close) {
+      depth--;
+      if (depth === 0) {
+        try { return JSON.parse(html.slice(start, j + 1)); } catch { return null; }
+      }
+    }
+  }
+  return null;
+}
+
+function jsonString(html, key) {
+  // "key":"..."（JSON エスケープ解除）
+  const re = new RegExp('"' + key + '":"((?:[^"\\\\]|\\\\.)*)"');
+  const m = re.exec(html);
+  if (!m) return '';
+  try { return JSON.parse('"' + m[1] + '"'); } catch { return m[1]; }
+}
+
+// カード name がセレクタ値を名指ししている軸は、その値を「選択値」にする（例: name "… LDX+" ↔ style 軸 [MDX+, LDX+]）。
+// 名指しが無い軸は先頭値。値は正規化して name に含まれるか（直前が数字でない）で判定。複数値が該当したら最長のもの
+// セット/単品を選ぶ軸（値に セット/付き/入り/なし/本体のみ）は名指しに関係なく先頭値＝ページ着地時の既定値を使う。
+// カードが「セット」と書いていても読者が着地するのは既定 SKU なので、その差は set_mismatch として出す
+// （compact-portable-power #3: name「130Wソーラーパネルセット」・price は単体価格・既定 SKU は「なし」）
+function isSetAxis(a) { return a.values.some((v) => SET_VAL_RE.test(v) || NONE_VAL_RE.test(v)); }
+function chosenValues(axes, cardName) {
+  return axes.map((a) => (isSetAxis(a) ? '' : nameSpecifiedValue(a, cardName)) || a.values[0]);
+}
+// カード name が名指ししている軸の値（無ければ ''）
+function nameSpecifiedValue(a, cardName) {
+  const nk = norm(cardName || '').replace(/\s+/g, '');
+  {
+    let best = '';
+    for (const v of a.values) {
+      const vk = norm(v).replace(/\s+/g, '');
+      if (vk.length < 2 || NONE_VAL_RE.test(v)) continue;
+      const i = nk.indexOf(vk);
+      if (i < 0) continue;
+      if (i > 0 && /[0-9.]/.test(nk[i - 1]) && /^[0-9]/.test(vk)) continue;
+      if (vk.length > best.length) best = v;
+    }
+    return best;
+  }
+}
+
+function parseRakutenHtml(html, url, cardName = '') {
+  const page = {
+    itemName: '', makerModel: '', brand: '', color: '', size: '', series: '', manageNumber: '', variantId: '',
+    axes: [], skus: [], skuCount: 0, firstSku: null, currentPrice: null, stock: '', attrsText: '', descText: '',
+    gone: false, title: (/<title>([^<]*)<\/title>/.exec(html) || ['', ''])[1].trim(),
+  };
+  const infoIdx = html.indexOf('"itemInfoSku":{');
+  if (infoIdx < 0) { page.gone = true; return page; }
+  const info = sliceJson(html, '"itemInfoSku":{', 0) || {};
+  page.itemName = stripTags(String(info.title || jsonString(html.slice(infoIdx, infoIdx + 4000), 'title'))).trim();
+  page.manageNumber = info.manageNumber || '';
+  page.variantId = info.variantId || jsonString(html, 'variantId');
+  // セレクタ軸（label があればそれをキー名に）
+  const sel = sliceJson(html, '"variantSelectors":[');
+  if (Array.isArray(sel)) {
+    page.axes = sel.map((s) => ({
+      key: String(s.label || s.key || ''),
+      values: (s.values || []).map((v) => String(v.label ?? v.value ?? '')),
+    }));
+  }
+  const axisSold = sliceJson(html, '"axis":[');
+  const soldOutMap = {};
+  if (Array.isArray(axisSold)) {
+    for (const a of axisSold) for (const v of a.values || []) soldOutMap[String(v.value)] = !!v.isSoldOut;
+  }
+  // SKU 配列
+  const skus = sliceJson(html, '"sku":[');
+  const inv = {};
+  for (const m of html.matchAll(/\{"sku":"([^"]+)","inventoryId":"[^"]*","quantity":(\d+)\}/g)) inv[m[1]] = Number(m[2]);
+  if (Array.isArray(skus) && skus.length) {
+    page.skus = skus.map((s) => ({
+      variantId: String(s.variantId || ''),
+      selectorValues: (s.selectorValues || []).map(String),
+      price: s.taxIncludedPrice != null ? Number(s.taxIncludedPrice) : null,
+      qty: inv[s.variantId],
+      hidden: !!s.hidden,
+      attrs: (s.attributes || []).map((a) => ({ title: String(a.title || ''), value: String(a.value ?? ''), unit: String(a.unit || '') })),
+    }));
+    page.skuCount = page.skus.length;
+    // 選択SKU: URL の variantId 指定 > 各軸の選択値（カード name が名指しした値、無ければ先頭値）との一致度（前の軸ほど重い）
+    //   が最大の SKU（同点なら非hidden→安値）
+    //   ※ 全軸の先頭値の組み合わせが SKU として存在しないページがある（inflatable-mat #1: 幅70×8cm×ベージュ が無い）ため
+    //     完全一致を要求せず、先頭軸から順に一致数で選ぶ
+    let pinned = '';
+    try { pinned = new URL(url).searchParams.get('variantId') || ''; } catch { /* ignore */ }
+    const firstVals = chosenValues(page.axes, cardName);
+    const scoreOf = (s) => firstVals.reduce((acc, v, i) => acc + (s.selectorValues[i] === v ? 2 ** (firstVals.length - 1 - i) : 0), 0);
+    const ranked = [...page.skus].sort((a, b) =>
+      scoreOf(b) - scoreOf(a) || Number(a.hidden) - Number(b.hidden) || (a.price ?? Infinity) - (b.price ?? Infinity));
+    page.firstSku = (pinned && page.skus.find((s) => s.variantId === pinned)) || ranked[0];
+  } else {
+    // 単一SKU
+    const price = /"taxIncludedPrice":([0-9.]+)/.exec(html) || /"minPrice":([0-9.]+)/.exec(html);
+    const qty = /"newPurchaseSku":\{[^}]*"quantity":(\d+)/.exec(html) || /"variantMappedInventories":\[\{"sku":"[^"]*","inventoryId":"[^"]*","quantity":(\d+)/.exec(html);
+    const attrs = sliceJson(html, '"attributes":[');
+    page.firstSku = {
+      variantId: page.variantId, selectorValues: [], price: price ? Number(price[1]) : null,
+      qty: qty ? Number(qty[1]) : undefined, hidden: false,
+      attrs: Array.isArray(attrs) ? attrs.map((a) => ({ title: String(a.title || ''), value: String(a.value ?? ''), unit: String(a.unit || '') })) : [],
+    };
+    page.skuCount = page.firstSku.price != null ? 1 : 0;
+  }
+  const fs0 = page.firstSku;
+  if (fs0) {
+    page.currentPrice = fs0.price;
+    const attr = (re) => (fs0.attrs.find((a) => re.test(a.title)) || {}).value || '';
+    page.brand = attr(/^ブランド名$/) || attr(/ブランド/);
+    page.makerModel = attr(/メーカー型番|型番|品番/);
+    page.color = attr(/^カラー$|代表カラー|色/);
+    page.size = attr(/サイズ/);
+    page.series = attr(/シリーズ名/);
+    page.attrsText = fs0.attrs.map((a) => `${a.title}=${a.value}${a.unit}`).join('; ');
+    const sold = fs0.selectorValues.some((v) => soldOutMap[v]);
+    if (fs0.qty === 0 || sold) {
+      // 選択SKUが売り切れでも他の変種に在庫があれば併記（ページ全体の欠品と区別する）
+      const others = page.skus.filter((s) => s !== fs0 && s.qty > 0).length;
+      page.stock = others ? `soldout(others:${others})` : 'soldout';
+    } else if (fs0.qty != null) page.stock = `qty=${fs0.qty}`;
+    else page.stock = '?';
+  }
+  // 仕様欄: 商品説明（HTML）をテキスト化
+  const descs = [];
+  for (const k of ['productDescription', 'newProductDescription', 'salesDescription']) {
+    const d = jsonString(html, k);
+    if (d) descs.push(stripTags(d));
+  }
+  const meta = /<meta\s+name="description"\s+content="([^"]*)"/.exec(html);
+  if (meta) descs.push(meta[1]);
+  page.descText = descs.join(' ').slice(0, 20000);
+  if (!page.itemName && page.skuCount === 0) page.gone = true;
+  return page;
+}
+
+// ---------------------------------------------------------------------------
+// 判定ヘルパ
+// ---------------------------------------------------------------------------
+function isModelToken(tok) {
+  if (/^\d+$/.test(tok)) return tok.length >= PURE_DIGIT_MODEL_MIN;
+  if (tok.length < 4) return false;
+  if (!/[A-Z]/.test(tok)) return false;
+  if ((tok.match(/\d/g) || []).length < 2) return false;
+  if (NOT_MODEL_RE.test(tok)) return false;
+  if (UNIT_TOKEN_RE.test(tok)) return false;
+  return true;
+}
+function modelTokens(name) {
+  const found = new Set();
+  const s = toHalfWidth(name).replace(/###[^#]*###/g, ' ');
+  for (const m of s.matchAll(MODEL_TOKEN_RE)) if (isModelToken(m[0])) found.add(m[0]);
+  const list = [...found];
+  return list.filter((t) => !list.some((o) => o !== t && o.startsWith(t) && o.length > t.length));
+}
+function modelKey(tok) { return norm(tok).replace(/[-\s_.]/g, ''); }
+
+function hasColorWord(s) { return COLOR_RE.test(toHalfWidth(s)); }
+function isColorAxis(axis) {
+  if (!axis.values.length) return false;
+  const colorVals = axis.values.filter((v) => hasColorWord(v)).length;
+  const sizeVals = axis.values.filter((v) => SIZE_VALUE_RE.test(toHalfWidth(v).trim())).length;
+  if (colorVals * 2 >= axis.values.length && colorVals > 0) return true;
+  return COLOR_AXIS_KEY_RE.test(axis.key) && sizeVals * 2 < axis.values.length && colorVals > 0;
+}
+function isSizeAxis(axis) {
+  if (!axis.values.length) return false;
+  const sizeVals = axis.values.filter((v) => SIZE_VALUE_RE.test(toHalfWidth(v).trim())).length;
+  if (sizeVals * 2 >= axis.values.length && sizeVals > 0) return true;
+  const colorVals = axis.values.filter((v) => hasColorWord(v)).length;
+  return SIZE_AXIS_KEY_RE.test(axis.key) && colorVals * 2 < axis.values.length && !/セット|set/i.test(axis.key);
+}
+
+// 「A/B」並記のうち、両側が色語 or サイズ語のもの
+function slashPairs(name) {
+  const out = { color: false, size: false, sizeText: '' };
+  for (const m of toHalfWidth(name).matchAll(SLASH_PAIR_RE)) {
+    const a = m[1], b = m[2];
+    if (/^\d/.test(a) && /^\d/.test(b)) continue; // 8/10cm のような数値並記は SIZE_PAIR_RE で扱う
+    if (hasColorWord(a) && hasColorWord(b)) out.color = true;
+    const sizeish = (x) => SIZE_VALUE_RE.test(x) || /サイズ$/.test(x) || /^(ノーマル|ビッグ|ラージ|レギュラー|ワイド|ロング|ショート|大|中|小)/.test(x);
+    if (sizeish(a) && sizeish(b)) { out.size = true; out.sizeText = m[0]; }
+  }
+  const sp = SIZE_PAIR_RE.exec(toHalfWidth(name));
+  if (sp && (!sp[2] || sp[2] === sp[4]) && sp[1] !== sp[3]) { out.size = true; out.sizeText = sp[0]; }
+  return out;
+}
+
+function bigrams(s) { const o = []; for (let i = 0; i + 1 < s.length; i++) o.push(s.slice(i, i + 2)); return o; }
+// 型語: name 先頭 HEAD_LEN 字（飾り除去後）のトークンから、ブランドっぽい英字語・数値・単位語・色語を除いたもの
+// name の先頭トークンは CLAUDE.md の規約（"メーカー名 商品名"）上ブランドなので、複数トークンあるときは除く
+function typeWords(name, brand) {
+  const head = toHalfWidth(stripDecor(name)).slice(0, HEAD_LEN);
+  const brandKeys = tokens(brand || '').concat(tokens(brand || '').map((t) => t.replace(/\(.*$/, '')));
+  const firstTok = tokens(toHalfWidth(stripDecor(name)))[0];
+  const all = tokens(head);
+  if (all.length > 1 && all[0] === firstTok) all.shift();
+  return all.filter((t) => {
+    if (t.length < 2) return false;
+    if (/^[a-z0-9-]+$/.test(t)) return false;          // 英数字だけ（ブランド・型番・単位）は除く
+    if (/^\d/.test(t)) return false;                    // 数値始まり（200cm / 2~4人用）
+    if (hasColorWord(t) && t.length <= 6) return false; // 色語
+    if (brandKeys.includes(t)) return false;
+    return true;
+  });
+}
+function typeWordFound(word, hay) {
+  if (hay.includes(word)) return true;
+  const bg = bigrams(word);
+  if (!bg.length) return false;
+  const hit = bg.filter((b) => hay.includes(b)).length;
+  return hit / bg.length >= TYPE_BIGRAM_MIN;
+}
+
+// 数値スペック抽出: [{kind, value, unit, raw}]
+function specs(name) {
+  const s = toHalfWidth(name);
+  const out = [];
+  const used = [];
+  // 範囲（40〜60L）・下限上限（50L以上）は kind='range' として先に取り、単一スペックの対象から外す
+  for (const re of [RANGE_RE, BOUND_RE]) {
+    re.lastIndex = 0;
+    for (const m of s.matchAll(re)) {
+      const unit = re === RANGE_RE ? m[4] : m[2];
+      if (re === RANGE_RE && m[2] && m[2] !== m[4]) continue; // 単位が違う（3m×2.5m 等）は範囲ではない
+      out.push({ kind: 'range', value: m[1], unit, raw: m[0] });
+      used.push([m.index, m.index + m[0].length]);
+    }
+  }
+  for (const [re, kind] of SPEC_PATTERNS) {
+    re.lastIndex = 0;
+    for (const m of s.matchAll(re)) {
+      const start = m.index, end = m.index + m[0].length;
+      if (used.some(([a, b]) => start < b && end > a)) continue; // 既に別パターンが取った範囲
+      if (kind === 'thick') {
+        out.push({ kind, value: m[1], unit: m[3], raw: m[0] });
+        if (m[2]) out.push({ kind, value: m[2], unit: m[3], raw: m[0] });
+      } else {
+        out.push({ kind, value: m[1].replace(/,/g, ''), unit: m[2] || (kind === 'width' ? 'cm' : ''), raw: m[0] });
+      }
+      used.push([start, end]);
+    }
+  }
+  return out;
+}
+// バリエーション軸のどれかが、そのスペックと同じ単位の数値を値に持つか（例: 幅70cm/75cm 軸、8cm/10cm 軸、40L/50L/60L 軸）
+function axesCarryUnit(axes, sp) {
+  const units = UNIT_ALIASES[sp.unit] || (sp.unit ? [sp.unit] : []);
+  if (!units.length) return false;
+  const re = new RegExp('\\d+(?:\\.\\d+)?\\s*(?:' + units.map(escapeRe).join('|') + ')(?![A-Za-z])', 'i');
+  return (axes || []).some((a) => a.values.length >= 2 && a.values.filter((v) => re.test(toHalfWidth(v))).length * 2 >= a.values.length);
+}
+// その軸の値の中に、このスペックと同じ数値＋単位が実際に現れるか（600W が 130W/100W 軸の値に無ければ軸の管轄外＝全文で見る）
+function axesCarryValue(axes, sp) {
+  if (!axesCarryUnit(axes, sp)) return false;
+  const units = UNIT_ALIASES[sp.unit] || [sp.unit];
+  const re = new RegExp('(?<![0-9.])' + escapeRe(sp.value) + '\\s*(?:' + units.map(escapeRe).join('|') + ')(?![A-Za-z])', 'i');
+  return axes.some((a) => a.values.some((v) => re.test(toHalfWidth(v))));
+}
+function specFound(sp, hayText, attrs) {
+  const hay = norm(hayText);
+  const val = sp.value;
+  const units = UNIT_ALIASES[sp.unit] || (sp.unit ? [sp.unit] : ['']);
+  const cands = [];
+  for (const u of units) cands.push(norm(val + u), norm(val + ' ' + u));
+  // 単位換算（m ↔ cm、cm ↔ mm）
+  const n = Number(val);
+  if (sp.unit === 'm' && Number.isFinite(n)) for (const u of UNIT_ALIASES.cm) cands.push(norm((n * 100) + u));
+  if (sp.unit === 'cm' && Number.isFinite(n)) {
+    for (const u of UNIT_ALIASES.mm) cands.push(norm((n * 10) + u));
+    if (n % 100 === 0) for (const u of UNIT_ALIASES.m) cands.push(norm((n / 100) + u));
+  }
+  if (sp.kind === 'width') for (const u of UNIT_ALIASES.cm) cands.push(norm('幅' + val + u), norm('幅 ' + val + u));
+  if (sp.kind === 'person') cands.push(norm(val + '人'), norm(val + '名'));
+  for (const c of cands) {
+    if (!c) continue;
+    const i = hay.indexOf(c);
+    if (i >= 0) {
+      // 直前が数字なら別の数（例: 175cm に 75cm がマッチ）
+      const prev = hay[i - 1];
+      if (prev && /[0-9.]/.test(prev)) continue;
+      return true;
+    }
+  }
+  // 属性（単位無しの数値）: 属性名が種別に合い、値が一致
+  const keyRe = ATTR_SPEC_KEYS[sp.kind];
+  if (keyRe) {
+    for (const a of attrs || []) {
+      if (!keyRe.test(a.title)) continue;
+      const nums = (toHalfWidth(a.value).match(/\d+(?:\.\d+)?/g) || []).map(Number);
+      if (nums.some((x) => x === n)) return true;
+      if (sp.unit === 'cm' && nums.some((x) => x === n * 10 || x === n / 100)) return true;
+      if (sp.unit === 'm' && nums.some((x) => x === n * 100 || x === n * 1000)) return true;
+      if (sp.unit === 'mm' && nums.some((x) => x === n / 10)) return true;
+    }
+  }
+  return false;
+}
+
+// ---------------------------------------------------------------------------
+// 判定本体（純関数）: card={name, price}, page=parseRakutenHtml の結果 or {http:404}
+// ---------------------------------------------------------------------------
+function judge(card, page, http) {
+  const flags = [];
+  const name = card.name || '';
+  const notes = [];
+
+  // name だけで判定できるもの（404 でも出す）
+  if (STORE_COPY_WORDS.test(name) || /^\s*【/.test(name) && STORE_COPY_WORDS.test(name.slice(0, 20))) flags.push('store_copy');
+  const pairs = slashPairs(name);
+
+  if (http === 404 || !page || page.gone) {
+    flags.unshift('404');
+    if (pairs.color) flags.push('color_unspecified');
+    if (pairs.size) flags.push('size_unspecified');
+    return { flags: uniq(flags), notes };
+  }
+
+  const itemName = page.itemName || '';
+  const first = page.firstSku || { attrs: [], selectorValues: [] };
+  const keyText = [itemName, page.makerModel, page.series, page.brand].join(' ');
+  const skuText = [keyText, page.attrsText, page.manageNumber, page.variantId, first.selectorValues.join(' ')].join(' ');
+  const allText = [skuText, page.descText].join(' ');
+
+  // type_mismatch
+  const tw = typeWords(name, page.brand);
+  if (tw.length) {
+    const hay = norm(keyText);
+    const found = tw.filter((w) => typeWordFound(w, hay));
+    if (found.length < TYPE_MIN_COMMON) { flags.push('type_mismatch'); notes.push(`type:${tw.join('|')}`); }
+  }
+
+  // model_mismatch（カード → 実リンク先の向きのみ）
+  //   逆向き（実SKUのメーカー型番がカードに無い）は第1バッチで 3/3 がノイズ（Anker のバンドル管理番号 B1763/B1761、
+  //   メーカー型番欄に JAN 4976790764001 が入っている例）だったため付与しない。カード側の型番が実リンク先のどこにも無い場合だけ
+  //   照合先は itemName／メーカー型番／SKU属性（商品名としての欄）に限り、店舗の管理番号・URL・説明文は含めない。
+  //   含めると bluetti-power #1（name「AC70」↔ itemName「AORA 100 mini」・管理番号 bluettijapan_ac70＝改名後のページ）を見逃す
+  const cm = modelTokens(name);
+  const hayModel = modelKey([keyText, page.attrsText].join(' '));
+  const missing = cm.filter((t) => !hayModel.includes(modelKey(t)));
+  if (missing.length) { flags.push('model_mismatch'); notes.push(`model:${missing.join('|')}`); }
+
+  // spec_mismatch
+  //   バリエーション軸にその数値＋単位が値として並ぶページ（幅70cm/75cm・8cm/10cm・40L/50L/60L 等）では itemName・仕様欄が
+  //   全変種の数値を列挙しているので、選択SKUのセレクタ値＋SKU属性だけを根拠にする（軸の値に無い数値は従来どおり全文で見る）。
+  //   範囲・下限（40〜60L／50L以上）は単一スペックではないので spec_mismatch にせず、軸がその単位を持つなら size_unspecified
+  //   同じ種類・単位の寸法/容量が name に2値以上並ぶ（7L 20L 25L／8/10cm／1.9L 3.8L）のも並記＝size_unspecified 扱いにして
+  //   個別の spec_mismatch には数えない（幅75cm のような単独スペックは従来どおり）
+  const sps = specs(name);
+  const selText = [first.selectorValues.join(' '), page.attrsText].join(' ');
+  let rangeSize = false;
+  const multi = new Set();
+  {
+    const groups = {};
+    for (const sp of sps) if (['liter', 'len', 'thick', 'width'].includes(sp.kind)) (groups[sp.kind + sp.unit] ||= new Set()).add(sp.value);
+    for (const [k, vals] of Object.entries(groups)) if (vals.size >= 2) multi.add(k);
+  }
+  const missSpec = sps.filter((sp) => {
+    if (sp.kind === 'range') { if (axesCarryUnit(page.axes, sp)) rangeSize = true; return false; }
+    if (multi.has(sp.kind + sp.unit)) { rangeSize = true; return false; }
+    const hay = axesCarryValue(page.axes, sp) ? selText : allText;
+    return !specFound(sp, hay, first.attrs);
+  });
+  if (missSpec.length) { flags.push('spec_mismatch'); notes.push(`spec:${missSpec.map((s) => s.raw.trim()).join('|')}`); }
+
+  // set_mismatch
+  //   セット/単品を選ぶ軸（値に セット/付き/入り、または なし/本体のみ を含む軸）があればその選択SKUの値で判定。
+  //   無ければ itemName／メーカー型番のセット語で判定（逆向きは itemName のセット語が SEO ノイズになりやすいので軸がある時だけ）
+  const cardSet = SET_WORD_RE.test(toHalfWidth(stripDecor(name)));
+  const setAxisIdx = page.axes.findIndex((a) => a.values.some((v) => SET_VAL_RE.test(v)) || a.values.some((v) => NONE_VAL_RE.test(v)));
+  if (setAxisIdx >= 0) {
+    const sel = first.selectorValues[setAxisIdx] || '';
+    const axisHasNone = page.axes[setAxisIdx].values.some((v) => NONE_VAL_RE.test(v));
+    const skuIsSet = !NONE_VAL_RE.test(sel) && (SET_VAL_RE.test(sel) || axisHasNone);
+    if (cardSet && !skuIsSet) { flags.push('set_mismatch'); notes.push(`set:card=set,sku=single(${sel})`); }
+    else if (!cardSet && skuIsSet) { flags.push('set_mismatch'); notes.push(`set:card=single,sku=set(${sel})`); }
+  } else if (cardSet && !PAGE_SET_RE.test([itemName, page.makerModel].join(' '))) {
+    flags.push('set_mismatch'); notes.push('set:card=set,sku=single');
+  }
+
+  // color_unspecified / size_unspecified
+  //   name の「A/B」並記は、それ自体が軸の値（例: グレゴリーの "SM/MD"）なら並記ではない
+  const colorAxes = page.axes.filter(isColorAxis);
+  const sizeAxes = page.axes.filter(isSizeAxis);
+  const colorN = Math.max(0, ...colorAxes.map((a) => a.values.length));
+  const sizeN = Math.max(0, ...sizeAxes.map((a) => a.values.length));
+  const axisValueKeys = page.axes.flatMap((a) => a.values.map((v) => norm(v).replace(/\s+/g, '')));
+  const pairIsAxisValue = (pairText) => axisValueKeys.some((k) => k === norm(pairText).replace(/\s+/g, ''));
+  const sizePair = pairs.size && !(pairs.sizeText && pairIsAxisValue(pairs.sizeText));
+  // name が軸の値を名指ししていれば（"SM/MD"・"LDX+"・"ブラック" 等）その軸は指定済み
+  const colorNamed = colorAxes.some((a) => nameSpecifiedValue(a, name));
+  const sizeNamed = sizeAxes.some((a) => nameSpecifiedValue(a, name));
+  if ((colorN >= COLOR_AXIS_MIN && !hasColorWord(name) && !colorNamed) || pairs.color) flags.push('color_unspecified');
+  if ((sizeN >= SIZE_AXIS_MIN && !SIZE_WORD_IN_NAME_RE.test(toHalfWidth(name)) && !sizeNamed) || sizePair || rangeSize) flags.push('size_unspecified');
+
+  // sale_page
+  //   itemName の「セール/SALE」は SEO 常套句で根拠にならない（第1バッチで camp-hammock #3/#5・camp-cooler-soft #4 が誤検知）ので
+  //   URL/管理番号のセール語、または SKU 数が多く かつ 色・サイズ以外の軸（タイプ/シリーズ/本数 等＝別商品を束ねる軸）があること
+  const itemModels = modelTokens(itemName);
+  const totalVals = page.axes.reduce((s, a) => s + a.values.length, 0);
+  const saleUrl = SALE_URL_RE.test(page.manageNumber || '') || SALE_URL_RE.test(card.url || '');
+  const bundlingAxis = page.axes.some((a) => a.values.length >= 2 && !isColorAxis(a) && !isSizeAxis(a));
+  if (itemModels.length === 0 && ((saleUrl && totalVals >= SALE_VALUES_MIN) || (page.skuCount >= SALE_SKU_MIN && bundlingAxis))) flags.push('sale_page');
+
+  // price_mismatch
+  const cp = Number(String(card.price).replace(/[^0-9.]/g, ''));
+  if (Number.isFinite(cp) && cp > 0 && page.currentPrice != null && Number.isFinite(page.currentPrice)) {
+    const diff = Math.abs(page.currentPrice - cp) / cp;
+    if (diff >= PRICE_TOL) { flags.push('price_mismatch'); notes.push(`price:${cp}->${page.currentPrice}(${(diff * 100).toFixed(1)}%)`); }
+  }
+
+  return { flags: uniq(flags), notes };
+}
+function uniq(a) { return [...new Set(a)]; }
+
+// ---------------------------------------------------------------------------
+// TSV 入出力
+// ---------------------------------------------------------------------------
+// 指示の17列 ＋ 末尾に sku_selected（価格・スペック判定の根拠にした選択SKU: variantId/選択値…）
+const COLUMNS = ['slug', 'rank', 'id', 'frozen', 'http', 'card_name', 'rakuten_item_name', 'maker_model', 'brand',
+  'axis_count', 'axis_first', 'card_price', 'current_price', 'stock', 'flags', 'checked_at', 'judged_task', 'sku_selected'];
+function rowKey(r) { return `${r.slug}\t${r.rank}\t${r.id}`; }
+function readTsv() {
+  if (!fs.existsSync(OUT)) return [];
+  const lines = fs.readFileSync(OUT, 'utf8').replace(/^﻿/, '').split(/\r?\n/).filter(Boolean);
+  const header = lines.shift().split('\t');
+  return lines.map((l) => {
+    const cells = l.split('\t');
+    const o = {};
+    header.forEach((h, i) => { o[h] = cells[i] ?? ''; });
+    return o;
+  });
+}
+function writeTsv(rows) {
+  const lines = [COLUMNS.join('\t')];
+  for (const r of rows) lines.push(COLUMNS.map((c) => clean(r[c])).join('\t'));
+  fs.writeFileSync(OUT, lines.join('\n') + '\n', 'utf8');
+}
+function nowIso() { return new Date().toISOString().replace(/\.\d+Z$/, 'Z'); }
+
+// ---------------------------------------------------------------------------
+// fetch
+// ---------------------------------------------------------------------------
+const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0 Safari/537.36';
+async function fetchHtml(url) {
+  const ctl = new AbortController();
+  const timer = setTimeout(() => ctl.abort(), FETCH_TIMEOUT_MS);
+  try {
+    const res = await fetch(url, { headers: { 'user-agent': UA, 'accept-language': 'ja,en;q=0.5', accept: 'text/html' }, redirect: 'follow', signal: ctl.signal });
+    const buf = Buffer.from(await res.arrayBuffer());
+    const ct = res.headers.get('content-type') || '';
+    const head = buf.slice(0, 2000).toString('latin1');
+    const metaCs = /charset=["']?([A-Za-z0-9_-]+)/i.exec(ct) || /charset=["']?([A-Za-z0-9_-]+)/i.exec(head);
+    const cs = (metaCs ? metaCs[1] : 'utf-8').toLowerCase();
+    const enc = /euc/.test(cs) ? 'euc-jp' : /shift|sjis|windows-31j/.test(cs) ? 'shift_jis' : 'utf-8';
+    let html;
+    try { html = new TextDecoder(enc).decode(buf); } catch { html = buf.toString('utf8'); }
+    return { status: res.status, html, finalUrl: res.url };
+  } finally { clearTimeout(timer); }
+}
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
+// ---------------------------------------------------------------------------
+// 1カードの処理
+// ---------------------------------------------------------------------------
+function baseRow(card) {
+  return {
+    slug: card.slug, rank: String(card.rank), id: card.id, frozen: FROZEN_SLUGS.has(card.slug) ? '1' : '0',
+    http: '', card_name: card.name, rakuten_item_name: '', maker_model: '', brand: '', axis_count: '', axis_first: '',
+    card_price: card.price, current_price: '', stock: '', flags: '', checked_at: nowIso(), judged_task: TASK_ID, sku_selected: '',
+  };
+}
+async function checkCard(card, opts = {}) {
+  const row = baseRow(card);
+  if (!card.url) { row.flags = 'url_unparsable'; return { row, page: null }; }
+  let res;
+  const cacheFile = path.join(HTML_DIR, `${card.slug}__${card.rank}.html`);
+  if (opts.cached && !fs.existsSync(cacheFile)) throw new Error(`--cached: 保存 HTML がありません: ${cacheFile}`);
+  try {
+    if (opts.cached) {
+      // 保存済み HTML を再利用（楽天へは行かない）。HTTP は保存時の値が無いのでページ内容から推定
+      const html = fs.readFileSync(cacheFile, 'utf8');
+      const gone = /<title>【楽天市場】エラー<\/title>/.test(html) || !html.includes('"itemInfoSku":{');
+      res = { status: gone ? 404 : 200, html, finalUrl: card.url, cached: true };
+    } else {
+      res = await fetchHtml(card.url);
+    }
+  } catch (e) {
+    row.http = 'ERR';
+    row.flags = 'fetch_error';
+    row.axis_first = clean(e.message).slice(0, 80);
+    return { row, page: null, error: e };
+  }
+  row.http = String(res.status);
+  if (opts.saveHtml !== false && !res.cached) {
+    fs.mkdirSync(HTML_DIR, { recursive: true });
+    fs.writeFileSync(path.join(HTML_DIR, `${card.slug}__${card.rank}.html`), res.html, 'utf8');
+  }
+  if (res.status === 429 || res.status === 503) { row.flags = `http_${res.status}`; return { row, page: null, throttled: true }; }
+  const page = res.status === 404 ? null : parseRakutenHtml(res.html, card.url, card.name);
+  if (page) {
+    row.rakuten_item_name = page.itemName;
+    row.maker_model = page.makerModel;
+    row.brand = page.brand;
+    row.axis_count = page.axes.map((a) => `${a.key}:${a.values.length}`).join('|');
+    row.axis_first = page.axes.map((a) => `${a.key}:${a.values[0] ?? ''}`).join('|');
+    row.current_price = page.currentPrice != null ? String(page.currentPrice) : '';
+    row.stock = page.stock;
+    if (page.firstSku) row.sku_selected = [page.firstSku.variantId, ...page.firstSku.selectorValues].filter(Boolean).join('/');
+  }
+  const j = judge(card, page, res.status);
+  row.flags = j.flags.length ? j.flags.join(',') : 'OK';
+  return { row, page, notes: j.notes, cached: !!res.cached };
+}
+
+// ---------------------------------------------------------------------------
+// 単体テスト（A-3 の各フラグにつき最低1ケース）
+// ---------------------------------------------------------------------------
+function mkPage(o) {
+  const attrs = (o.attrs || []).map(([title, value]) => ({ title, value: String(value), unit: '' }));
+  const first = { variantId: o.variantId || 'v1', selectorValues: o.selectorValues || [], price: o.price ?? null, qty: o.qty, hidden: false, attrs };
+  return {
+    itemName: o.itemName || '', makerModel: o.makerModel || '', brand: o.brand || '', series: o.series || '',
+    manageNumber: o.manageNumber || '', variantId: o.variantId || '', axes: o.axes || [], skus: [], skuCount: o.skuCount ?? 1,
+    firstSku: first, currentPrice: o.price ?? null, stock: '', attrsText: attrs.map((a) => `${a.title}=${a.value}`).join('; '),
+    descText: o.desc || '', gone: !!o.gone, title: '',
+  };
+}
+function runTests() {
+  const T = [];
+  const t = (label, card, page, http, expect, notExpect = []) => T.push({ label, card, page, http, expect, notExpect });
+
+  t('404: HTTP 404', { name: 'Soomloom パップテント TC', price: '15000' }, null, 404, ['404']);
+  t('404: 200 だがエラーページ（itemInfoSku 無し）', { name: 'Soomloom パップテント TC', price: '15000' }, mkPage({ gone: true }), 200, ['404']);
+  t('type_mismatch: ワンタッチテント ↔ サンシェード', { name: 'FIELDOOR ワンタッチテント 200cm', price: '8910' },
+    mkPage({ itemName: 'FIELDOOR サンシェード 200cm 日よけ', makerModel: 'フルクローズ サンシェード 200cm', brand: 'FIELDOOR', price: 8910 }), 200, ['type_mismatch']);
+  t('type_mismatch なし: 型語が itemName にある', { name: 'FIELDOOR ワンタッチテント 200cm', price: '8910' },
+    mkPage({ itemName: 'FIELDOOR テント ワンタッチテント 200cm', brand: 'FIELDOOR', price: 8910 }), 200, [], ['type_mismatch']);
+  t('type_mismatch なし: 表記ゆれ（インフレーターマット ↔ インフレータブルマット）', { name: 'WAQ インフレーターマット 8cm', price: '8910' },
+    mkPage({ itemName: 'WAQ インフレータブルマット 8cm', brand: 'WAQ', price: 8910, attrs: [['厚さ', '8']] }), 200, [], ['type_mismatch']);
+  t('model_mismatch: カード型番が実SKUに無い', { name: 'SOTO レギュレーターストーブ ST-310', price: '6000' },
+    mkPage({ itemName: 'SOTO レギュレーターストーブ ST-340', makerModel: 'ST-340', brand: 'SOTO', price: 6000 }), 200, ['model_mismatch']);
+  t('model_mismatch なし: ハイフン差は同一視', { name: 'SOTO レギュレーターストーブ ST-310', price: '6000' },
+    mkPage({ itemName: 'SOTO レギュレーターストーブ ST310', makerModel: 'ST310', brand: 'SOTO', price: 6000 }), 200, [], ['model_mismatch']);
+  t('model_mismatch: AC70 は型番（電圧表記ではない）', { name: 'BLUETTI ポータブル電源 AC70 768Wh 1000W', price: '88000' },
+    mkPage({ itemName: 'BLUETTI ポータブル電源 AORA 100 mini 768Wh 1000W', makerModel: 'AORA 100 mini', brand: 'BLUETTI', price: 96800 }), 200, ['model_mismatch']);
+  t('model_mismatch なし: AC100V／DC12V は電圧', { name: 'ポータブル電源 AC100V DC12V 出力', price: '30000' },
+    mkPage({ itemName: 'ポータブル電源 家庭用コンセント対応', price: 30000 }), 200, [], ['model_mismatch']);
+  t('model_mismatch: 純数字型番（コールマン）', { name: 'コールマン ノーススター 2000015521', price: '10846' },
+    mkPage({ itemName: 'Coleman ノーススター LPガスランタン', makerModel: '2000015523', brand: 'Coleman', price: 10846 }), 200, ['model_mismatch']);
+  t('spec_mismatch: 幅75cm・10cm が実SKUに無い', { name: 'Aiflycy インフレーターマット 厚手8/10cm 枕付き 幅75cm 自動膨張式', price: '6680' },
+    mkPage({ itemName: 'Aiflycy インフレーターマット 厚手8cm 自動膨張式', brand: 'Aiflycy', price: 6680, attrs: [['本体横幅', '70'], ['厚さ', '8']], desc: '厚さ8cm 幅70cm 長さ190cm' }), 200, ['spec_mismatch']);
+  t('spec_mismatch なし: 属性の単位無し数値で一致', { name: 'FIELDOOR テント 200cm 4人用', price: '8910' },
+    mkPage({ itemName: 'FIELDOOR テント', brand: 'FIELDOOR', price: 8910, attrs: [['本体横幅', '200'], ['最大収容人数', '4']] }), 200, [], ['spec_mismatch']);
+  t('spec_mismatch なし: 3m ↔ 300cm の換算', { name: 'FIELDOOR タープ 3m', price: '8910' },
+    mkPage({ itemName: 'FIELDOOR タープ 300cm', brand: 'FIELDOOR', price: 8910 }), 200, [], ['spec_mismatch']);
+  t('spec_mismatch: 175cm に 75cm は含まれない', { name: 'マット 幅75cm', price: '3000' },
+    mkPage({ itemName: 'マット 175cm', price: 3000 }), 200, ['spec_mismatch']);
+  t('spec_mismatch: 軸に同単位が並ぶページは先頭値SKUの値で判定（itemName に幅75cm があっても）', { name: 'Aiflycy インフレーターマット 厚手8/10cm 枕付き 幅75cm', price: '6680' },
+    mkPage({ itemName: 'キャンプ マット【枕付き史上最大幅75cm追加】インフレーターマット 8/10cm', brand: 'camdoor', price: 7480, selectorValues: ['プレミアムサイズ（幅70cm）', '8cm', 'ブラック'],
+      axes: [{ key: '幅さ', values: ['プレミアムサイズ（幅70cm）', 'ゴージャスサイズ（幅75cm）'] }, { key: '厚さ', values: ['8cm', '10cm'] }, { key: 'カラー', values: ['ベージュ', 'ブラック'] }],
+      attrs: [['本体横幅', '70cm']], desc: '幅75cm 10cm' }), 200, ['spec_mismatch', 'color_unspecified', 'price_mismatch']);
+  t('set_mismatch: カードがセット・実SKUが単体', { name: 'BLUETTI EB3A 130Wソーラーパネルセット', price: '49800' },
+    mkPage({ itemName: 'BLUETTI EB3A ポータブル電源 268Wh', makerModel: 'EB3A', brand: 'BLUETTI', price: 29800 }), 200, ['set_mismatch']);
+  t('set_mismatch: セット軸の先頭値が「なし」', { name: 'BLUETTI EB3A 268Wh（130Wソーラーパネルセット）', price: '32900' },
+    mkPage({ itemName: 'BLUETTI ポータブル電源 268Wh EB3A セット130Wソーラーパネル', makerModel: 'EB3A', brand: 'BLUETTI', price: 32900, selectorValues: ['EB3A 268Wh スチールグレー', 'なし'],
+      axes: [{ key: 'ポータブル電源のカラー', values: ['EB3A 268Wh スチールグレー'] }, { key: 'ソーラーパネル', values: ['なし', '130Wソーラーパネル', '100Wソーラーパネル'] }] }), 200, ['set_mismatch']);
+  t('set_mismatch なし: 型番末尾の + はセット扱いしない', { name: 'Coleman ツーリングドームエアー DARKROOM ST+(スタート)', price: '30000' },
+    mkPage({ itemName: 'コールマン ツーリングドームエアー DARKROOM ST+', brand: 'Coleman', price: 30000 }), 200, [], ['set_mismatch']);
+  t('set_mismatch なし: 容量 "40+5" はセットではない', { name: 'ミレー サースフェー NX 40+5 MIS0754 ブラック Mサイズ', price: '29700' },
+    mkPage({ itemName: 'ミレー サースフェー NX 40+5 MIS0754', makerModel: 'MIS0754', brand: 'ミレー', price: 29700, selectorValues: ['DEEP RED', 'M'], axes: [{ key: 'カラー', values: ['DEEP RED', 'BLACK'] }, { key: 'サイズ', values: ['M', 'L'] }] }), 200, [], ['set_mismatch']);
+  t('set_mismatch なし: 「カセットガス」の セット は除く', { name: 'イワタニ カセットガス ジュニアコンパクトバーナー CB-JCB', price: '4500' },
+    mkPage({ itemName: 'Iwatani カセットガス バーナー CB-JCB', makerModel: 'CB-JCB', brand: 'Iwatani', price: 4500, selectorValues: ['単品'], axes: [{ key: 'セット購入がお得！', values: ['単品', 'カセットガス3本セット'] }] }), 200, [], ['set_mismatch']);
+  t('set_mismatch なし: 軸の値 "MDX+" の末尾 + はセットではない', { name: 'Coleman タフスクリーン2ルームエアー DARKROOM LDX+', price: '87800' },
+    mkPage({ itemName: 'コールマン タフスクリーン2ルームエアー DARKROOM LDX+/MDX+', brand: 'Coleman', price: 87800, selectorValues: ['LDX+'], axes: [{ key: 'style', values: ['MDX+', 'LDX+'] }] }), 200, [], ['set_mismatch']);
+  t('set_mismatch なし: itemName の英語 with はセット語', { name: 'Anker Solix C1000 Gen 2 ＋ PS100 ソーラーパネル セット', price: '159900' },
+    mkPage({ itemName: 'Anker Solix C1000 Gen 2 with Anker Solix PS100', makerModel: 'B1763', brand: 'ANKER', price: 159900 }), 200, [], ['set_mismatch', 'model_mismatch']);
+  t('spec/size: 範囲 "40〜60L" は spec_mismatch にせず、L 軸があれば size_unspecified', { name: 'tousen 登山リュック 40〜60L 大容量', price: '4280' },
+    mkPage({ itemName: '登山リュック 40～60L', price: 4280, selectorValues: ['40L', 'レッド'], axes: [{ key: 'サイズ', values: ['40L', '50L', '60L'] }, { key: 'カラー', values: ['レッド', 'ブラック'] }] }), 200, ['size_unspecified', 'color_unspecified'], ['spec_mismatch']);
+  t('spec: 軸の値に無い数値（600W）は全文で見る', { name: 'BLUETTI EB3A 268Wh 600W出力', price: '32900' },
+    mkPage({ itemName: 'BLUETTI EB3A 268Wh 600W出力', makerModel: 'EB3A', brand: 'BLUETTI', price: 32900, selectorValues: ['なし'], axes: [{ key: 'ソーラーパネル', values: ['なし', '130Wソーラーパネル'] }] }), 200, [], ['spec_mismatch']);
+  t('size_unspecified なし: "SM/MD" が軸の値そのもの', { name: 'グレゴリー ズール35 ボルケニックブラック SM/MD', price: '33000' },
+    mkPage({ itemName: 'グレゴリー ズール35', brand: 'GREGORY', price: 33000, selectorValues: ['SM／MD', 'ボルケニックブラック'], axes: [{ key: 'サイズ', values: ['SM／MD', 'MD／LG'] }, { key: 'カラー', values: ['ボルケニックブラック'] }] }), 200, [], ['size_unspecified']);
+  t('size_unspecified なし: 「1人用 2人用」は用途の説明', { name: 'アイリスオーヤマ たき火台 1人用 2人用 TKB-ST43', price: '9880' },
+    mkPage({ itemName: 'たき火台 1人用 2人用 TKB-ST43', makerModel: 'TKB-ST43', price: 9880 }), 200, [], ['size_unspecified']);
+  t('store_copy: 「5/6まで延長63%0FF！＼…／」', { name: '5/6まで延長63%0FF！＼アレンジ自由自在の秘密基地／ GIMMICK (ギミック) パップテント m8 GM-TT3000', price: '20000' }, null, 404, ['404', 'store_copy']);
+  t('set_mismatch: カードが単品・先頭SKUがセット', { name: 'FIELDOOR ワンタッチテント 200cm', price: '8910' },
+    mkPage({ itemName: 'FIELDOOR ワンタッチテント 200cm', brand: 'FIELDOOR', price: 12320, selectorValues: ['グレー', 'グランドシート付セット'], axes: [{ key: 'カラー', values: ['グレー', 'ベージュ'] }, { key: 'セット', values: ['グランドシート付セット', 'テント本体のみ'] }] }), 200, ['set_mismatch']);
+  t('set_mismatch なし: 両方セット', { name: 'Coleman ガスランタン 3点セット', price: '10846' },
+    mkPage({ itemName: 'Coleman ガスランタン+ガス+マントル【お得な3点セット】', brand: 'Coleman', price: 10846 }), 200, [], ['set_mismatch']);
+  t('color_unspecified: 色軸2値以上・name に色なし', { name: 'カリマー タトラ20 デイパック', price: '9900' },
+    mkPage({ itemName: 'カリマー karrimor タトラ20 tatra 20', brand: 'karrimor', price: 9900, axes: [{ key: 'カラー', values: ['Black', 'Navy', 'Olive'] }] }), 200, ['color_unspecified']);
+  t('color_unspecified なし: name に色あり', { name: 'カリマー タトラ20 ブラック', price: '9900' },
+    mkPage({ itemName: 'カリマー karrimor タトラ20 tatra 20', brand: 'karrimor', price: 9900, axes: [{ key: 'カラー', values: ['Black', 'Navy', 'Olive'] }] }), 200, [], ['color_unspecified']);
+  t('color_unspecified なし: 軸名が「カラー」でも値がサイズ', { name: 'ラドウェザー 防寒グローブ', price: '1480' },
+    mkPage({ itemName: '防寒グローブ', brand: 'ラドウェザー', price: 1480, axes: [{ key: 'カラー', values: ['Sサイズ', 'Mサイズ', 'Lサイズ'] }] }), 200, ['size_unspecified'], ['color_unspecified']);
+  t('color_unspecified: name に「黒/白」並記', { name: 'ZEN Camps アッシュキャリー 黒/白', price: '3000' },
+    mkPage({ itemName: 'アッシュキャリー', price: 3000 }), 200, ['color_unspecified']);
+  t('size_unspecified: サイズ軸2値以上・name にサイズなし', { name: 'モンベル ダウンハガー', price: '30000' },
+    mkPage({ itemName: 'mont-bell ダウンハガー', brand: 'モンベル', price: 30000, axes: [{ key: 'サイズ', values: ['S', 'M', 'L'] }] }), 200, ['size_unspecified']);
+  t('size_unspecified: name に「ノーマル/ビッグサイズ」並記（404 でも出す）', { name: 'Soomloom パップテント TC ノーマル/ビッグサイズ', price: '15000' }, null, 404, ['404', 'size_unspecified']);
+  t('size_unspecified: name に「1.9L 3.8L」の同単位並記', { name: 'VASTLAND アイスコンテナ 1.9L 3.8L', price: '3980' },
+    mkPage({ itemName: 'VASTLAND アイスコンテナ 1.9L 3.8L', brand: 'VASTLAND', price: 3980, selectorValues: ['シルバー', '1.9L'], axes: [{ key: 'カラー', values: ['シルバー', 'ブラック'] }, { key: 'サイズ', values: ['1.9L', '3.8L'] }] }), 200, ['size_unspecified'], ['spec_mismatch']);
+  t('size_unspecified なし: 「3m×2.5m」は寸法であって並記ではない', { name: 'FIELDOOR タープ 3m×2.5m', price: '3980' },
+    mkPage({ itemName: 'FIELDOOR タープ 300×250cm', brand: 'FIELDOOR', price: 3980 }), 200, [], ['size_unspecified']);
+  t('size_unspecified なし: 「501212 20L」（型番＋容量）は並記ではない', { name: 'カリマー タトラ20 KARRIMOR tatra20 501212 20L ブラック', price: '9900' },
+    mkPage({ itemName: 'カリマー タトラ20 karrimor tatra 20 501212 20L', brand: 'karrimor', price: 9900 }), 200, [], ['size_unspecified']);
+  t('size_unspecified なし: name に M サイズ', { name: 'ZEN Camps アッシュキャリー Mサイズ', price: '3000' },
+    mkPage({ itemName: 'アッシュキャリー', price: 3000, axes: [{ key: 'サイズ', values: ['S', 'M', 'L'] }] }), 200, [], ['size_unspecified']);
+  t('store_copy: 【楽天1位】', { name: '【楽天1位】DOD ワンポールテント', price: '20000' },
+    mkPage({ itemName: 'DOD ワンポールテント', brand: 'DOD', price: 20000 }), 200, ['store_copy']);
+  t('store_copy: 送料無料（裸）・404 でも出す', { name: '送料無料 テント ワンタッチ', price: '20000' }, null, 404, ['404', 'store_copy']);
+  t('store_copy なし: 通常の name', { name: 'DOD ワンポールテントS T3-44-TN', price: '20000' },
+    mkPage({ itemName: 'DOD ワンポールテントS T3-44-TN', makerModel: 'T3-44-TN', brand: 'DOD', price: 20000 }), 200, [], ['store_copy']);
+  t('sale_page: SKU 151・型番なし', { name: 'FIELDOOR ワンタッチタープテント 3m×3m', price: '8800' },
+    mkPage({ itemName: '【楽天1位】遮光/遮熱モデル追加！FIELDOOR ワンタッチタープテント 3m×3m', makerModel: 'ワンタッチタープテント', brand: 'FIELDOOR', price: 10780, skuCount: 151, manageNumber: 'a04309_sale',
+      axes: [{ key: 'タイプ', values: ['4点脚ロック', 'センターロック'] }, { key: 'カラー', values: ['グリーン', 'ブルー', 'オレンジ', 'ブラック', 'ホワイト', 'カーキ'] }] }), 200, ['sale_page', 'price_mismatch']);
+  t('sale_page なし: itemName の「セール sale」は根拠にしない（色×色の 21 SKU）', { name: 'OSOTO ゆらふわモック ノーマルタイプ 自立式ハンモック', price: '8082' },
+    mkPage({ itemName: '【送料無料】 自立式ハンモック ゆらふわモック ノーマルタイプ セール sale', price: 8480, skuCount: 21, manageNumber: 'ss-yurafuwamock',
+      axes: [{ key: '＜スタンドカラー＞', values: ['スタンドカラー/ホワイト', 'ブラック', 'ブラウン'] }, { key: '＜ネットカラー＞', values: ['ネットカラー/レインボー', 'ホワイト', 'ブラウン', 'ブラック', 'モスグリーン', 'イエロー', 'ベージュ'] }] }), 200, [], ['sale_page']);
+  t('sale_page なし: サイズ×色だけの 49 SKU は通常の変種ページ', { name: 'DAICHU リュックカバー ブラック XS', price: '1000' },
+    mkPage({ itemName: 'リュック カバー レインカバー', price: 1000, skuCount: 49, manageNumber: '20230207-backpack-cover',
+      axes: [{ key: 'サイズ', values: ['XS(15-25L)', 'S(30-40L)', 'M(40-50L)', 'L(55-65L)', 'XL(70-75L)', 'XXL(75-85L)', 'XXXL(90-100L)'] }, { key: 'カラー', values: ['ブラック', 'シルバー', 'カーキ', '蛍光黄色', 'オレンジ', 'ブルー', 'ネイビー'] }] }), 200, [], ['sale_page']);
+  t('sale_page なし: 色軸が多くても SKU 少・セール語なし', { name: 'カリマー タトラ20 ブラック', price: '9900' },
+    mkPage({ itemName: 'カリマー karrimor タトラ20 tatra 20', brand: 'karrimor', price: 9900, skuCount: 12, axes: [{ key: 'カラー', values: ['Black', 'Navy', 'Olive', 'Red', 'Blue', 'Gray', 'Green', 'Tan', 'Sand', 'Pink', 'White', 'Khaki'] }] }), 200, [], ['sale_page']);
+  t('price_mismatch: +3% 以上', { name: 'SOTO ST-310', price: '6000' },
+    mkPage({ itemName: 'SOTO ST-310', makerModel: 'ST-310', price: 6400 }), 200, ['price_mismatch']);
+  t('price_mismatch なし: +1.6%', { name: 'SOTO ST-310', price: '6000' },
+    mkPage({ itemName: 'SOTO ST-310', makerModel: 'ST-310', price: 6096 }), 200, [], ['price_mismatch']);
+  t('OK: 全部一致', { name: 'DOD ワンポールテントS T3-44-TN タン 3人用', price: '20000' },
+    mkPage({ itemName: 'DOD ワンポールテントS T3-44-TN タン', makerModel: 'T3-44-TN', brand: 'DOD', price: 20000, attrs: [['最大収容人数', '3']], axes: [{ key: 'カラー', values: ['タン', 'ブラック'] }] }), 200, []);
+
+  // url_unparsable は rakutenUrl() の単体テストで担保
+  const urlCases = [
+    ['https://hb.afl.rakuten.co.jp/hgc/x/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fluxim647%2F3sp02%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fluxim647%2Fi%2F10000005%2F', 'https://item.rakuten.co.jp/luxim647/3sp02/'],
+    ['https://hb.afl.rakuten.co.jp/hgc/x/?m=http%3A%2F%2Fm.rakuten.co.jp%2Fluxim647%2Fi%2F10000005%2F', 'http://m.rakuten.co.jp/luxim647/i/10000005/'],
+    ['https://item.rakuten.co.jp/shop/abc/', 'https://item.rakuten.co.jp/shop/abc/'],
+    ['#', ''],
+    ['https://amzn.to/abc', ''],
+    ['', ''],
+  ];
+
+  let pass = 0, fail = 0;
+  for (const c of T) {
+    const r = judge(c.card, c.page, c.http);
+    const ok = c.expect.every((f) => r.flags.includes(f)) && c.notExpect.every((f) => !r.flags.includes(f)) && (c.expect.length || c.notExpect.length || r.flags.length === 0);
+    if (ok) pass++; else fail++;
+    console.log(`${ok ? 'PASS' : 'FAIL'}  ${c.label}  → [${r.flags.join(',')}]${ok ? '' : `  期待=[${c.expect.join(',')}] 非期待=[${c.notExpect.join(',')}]`}${r.notes.length ? '  ' + r.notes.join(' ') : ''}`);
+  }
+  for (const [inp, exp] of urlCases) {
+    const got = rakutenUrl(inp);
+    const ok = got === exp;
+    if (ok) pass++; else fail++;
+    console.log(`${ok ? 'PASS' : 'FAIL'}  rakutenUrl(${JSON.stringify(inp).slice(0, 60)}) → ${JSON.stringify(got)}${ok ? '' : ` 期待=${JSON.stringify(exp)}`}`);
+  }
+  console.log(`\n${pass} passed / ${fail} failed（判定 ${T.length} ケース＋URL ${urlCases.length} ケース）`);
+  return fail === 0;
+}
+
+// ---------------------------------------------------------------------------
+// CLI
+// ---------------------------------------------------------------------------
+function parseArgs(argv) {
+  const o = { limit: 0, only: [], recheck: false, dry: false, test: false, cached: false, maxMinutes: 0, url: '', name: '', price: '' };
+  for (let i = 0; i < argv.length; i++) {
+    const a = argv[i];
+    if (a === '--limit') o.limit = Number(argv[++i]) || 0;
+    else if (a === '--only') o.only = String(argv[++i] || '').split(',').map((s) => s.trim()).filter(Boolean);
+    else if (a === '--recheck') o.recheck = true;
+    else if (a === '--cached') o.cached = true;
+    else if (a === '--dry') o.dry = true;
+    else if (a === '--test') o.test = true;
+    else if (a === '--max-minutes') o.maxMinutes = Number(argv[++i]) || 0;
+    else if (a === '--url') o.url = argv[++i] || '';
+    else if (a === '--name') o.name = argv[++i] || '';
+    else if (a === '--price') o.price = argv[++i] || '';
+    else { console.error(`不明な引数: ${a}`); process.exit(1); }
+  }
+  return o;
+}
+
+async function main() {
+  const opt = parseArgs(process.argv.slice(2));
+  if (opt.test) { process.exit(runTests() ? 0 : 1); }
+
+  if (opt.url) {
+    const card = { slug: '(adhoc)', rank: 0, id: '', name: opt.name, price: opt.price, url: opt.url };
+    const r = await checkCard(card, { saveHtml: false });
+    console.log(JSON.stringify(r.row, null, 2));
+    if (r.notes) console.log('notes:', r.notes.join(' '));
+    return;
+  }
+
+  const { cards, files } = loadAllCards();
+  const parsable = cards.filter((c) => c.url).length;
+  const unparsable = cards.length - parsable;
+  console.log(`記事 ${files} 本 / カード ${cards.length} 枚 / 楽天URL取得 ${parsable} 枚 / url_unparsable ${unparsable} 枚 / frozen ${cards.filter((c) => FROZEN_SLUGS.has(c.slug)).length} 枚`);
+
+  const existing = readTsv();
+  const byKey = new Map(existing.map((r) => [rowKey(r), r]));
+
+  let targets;
+  if (opt.only.length) {
+    targets = [];
+    for (const spec of opt.only) {
+      const m = /^(.+?)#(\d+)$/.exec(spec);
+      if (!m) { console.error(`--only の書式は slug#rank: ${spec}`); process.exit(1); }
+      const hit = cards.find((c) => c.slug === m[1] && c.rank === Number(m[2]));
+      if (!hit) { console.error(`見つかりません: ${spec}`); process.exit(1); }
+      targets.push(hit);
+    }
+  } else {
+    targets = cards.filter((c) => opt.recheck || !byKey.has(rowKey(c)));
+    // --cached は「楽天へ行かない」モード。保存 HTML が無いカードは対象から外す（--recheck と組んでも fetch しない）
+    if (opt.cached) targets = targets.filter((c) => fs.existsSync(path.join(HTML_DIR, `${c.slug}__${c.rank}.html`)));
+    if (opt.limit > 0) targets = targets.slice(0, opt.limit);
+  }
+  console.log(`既存行 ${existing.length} / 今回の対象 ${targets.length} 枚${opt.dry ? '（--dry: fetch しない）' : ''}`);
+  if (opt.dry) {
+    for (const c of targets.slice(0, 20)) console.log(`  ${c.slug}#${c.rank} ${c.id} | ${c.name.slice(0, 40)} | ${c.url || '(url_unparsable)'}`);
+    if (targets.length > 20) console.log(`  … 他 ${targets.length - 20} 枚`);
+    // url_unparsable の一覧
+    const up = cards.filter((c) => !c.url);
+    if (up.length) { console.log('\nurl_unparsable:'); for (const c of up) console.log(`  ${c.slug}#${c.rank} ${c.id} | ${c.affiliateUrl.slice(0, 60)}`); }
+    return;
+  }
+
+  const started = Date.now();
+  let done = 0, stopped = '';
+  const dist = {};
+  for (const card of targets) {
+    if (opt.maxMinutes && Date.now() - started > opt.maxMinutes * 60000) { stopped = `--max-minutes ${opt.maxMinutes} 経過`; break; }
+    const r = await checkCard(card, { cached: opt.cached });
+    byKey.set(rowKey(r.row), r.row);
+    done++;
+    for (const f of r.row.flags.split(',')) dist[f] = (dist[f] || 0) + 1;
+    console.log(`[${done}/${targets.length}] ${card.slug}#${card.rank} http=${r.row.http} flags=${r.row.flags}${r.notes && r.notes.length ? '  (' + r.notes.join(' ') + ')' : ''}`);
+    if (r.throttled) { stopped = `HTTP ${r.row.http}（${done} 枚目 ${card.slug}#${card.rank}）で停止`; break; }
+    if (card.url && !r.cached) await sleep(INTERVAL_MS);
+  }
+  // 既存順を保ちつつ追記
+  const rows = [];
+  const seen = new Set();
+  for (const r of existing) { const k = rowKey(r); rows.push(byKey.get(k)); seen.add(k); }
+  for (const c of cards) { const k = rowKey(c); if (!seen.has(k) && byKey.has(k)) { rows.push(byKey.get(k)); seen.add(k); } }
+  writeTsv(rows);
+  const secs = ((Date.now() - started) / 1000).toFixed(1);
+  console.log(`\n処理 ${done} 枚 / ${secs} 秒（1枚あたり ${(done ? secs / done : 0).toFixed(2)} 秒）→ ${path.relative(ROOT, OUT)}（計 ${rows.length} 行）`);
+  console.log('フラグ分布: ' + Object.entries(dist).sort((a, b) => b[1] - a[1]).map(([k, v]) => `${k}=${v}`).join(' '));
+  const remaining = cards.filter((c) => !byKey.has(rowKey(c))).length;
+  console.log(`未チェック残: ${remaining} 枚`);
+  if (stopped) { console.log(`停止理由: ${stopped}`); if (/HTTP/.test(stopped)) process.exit(2); }
+}
+
+if (require.main === module) {
+  main().catch((e) => { console.error(e); process.exit(1); });
+}
+
+module.exports = { parseCards, rakutenUrl, parseRakutenHtml, judge, specs, modelTokens, typeWords, FROZEN_SLUGS };
