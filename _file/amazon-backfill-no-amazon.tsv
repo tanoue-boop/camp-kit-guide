@@ -14,3 +14,9 @@ camp-hot-carpet	4	hitachi-hhlu-s2020	campkit-20260921-17	日立 HHLU-S2020 は A
 coleman-bonfire	4	coleman-firedisk-table	campkit-20260921-17	楽天はファイアーディスク+マルチファイアプレイステーブルのセット（2000031235+VP160401J01）。Amazon はファイアーディスク単品 B01LT5ES1Q のみで構成違い
 coleman-two-burner	1	cb-coleman-set-table	campkit-20260921-17	楽天はツーバーナー+キッチンテーブル+LPガス470T×2 のセット（2000006707+2000031294+5103A470T）。Amazon は各単品（B004IWR3Z6／B01N9SLIIE／B00I78H1UE 等）のみで構成違い
 coleman-two-burner	2	cb-coleman-powerhouse-gasset	campkit-20260921-17	楽天はツーバーナー+LPガス470T×2 のセット（2000006707+5103A470T）。Amazon はツーバーナー単品 B004IWR3Z6（LPガス別売り）のみで構成違い
+family-camp-tent	2	tent-f-rank-2	campkit-20260921-18	RATELWORKS BODEN RWS0111 は Amazon 出品なし（RATELWORKS 公式出品は WAL LIGHT BF(B0H6NWYKF2)/VOGEL(B0H4ZBHNXH)/ヴァルテント2(B09NC9FJFJ)/テーブル・小物のみ。「RWS0111」「ラーテルワークス BODEN」等9語で検索）
+fireproof-gloves	2	fg-zencamps	campkit-20260921-18	ZEN Camps 耐熱グローブは Amazon 出品なし（ZEN Camps 出品は焚き火シート/アッシュカリー/アイスジャグ等のみ）。楽天の「メーカー型番」も camping-glove で実型番ではなく、M/L/XL の多サイズSKU
+group-camp-table	1	rattan-garden-table-180	campkit-20260921-18	お宝ワールドの無名OEM品（楽天 attributes ブランド名=-/メーカー型番=-、KM-F002R-BK/BR・LW-A40 は店舗管理番号）。Amazon の類似ラタン調180cmテーブル（三栄コーポレーション等）と同一品を特定できない
+group-camp-table	4	folding-table-180x70	campkit-20260921-18	お宝ワールドの無名OEM品（ブランド名=-/メーカー型番=-、KM-F002 は店舗管理番号。SKU一覧は テーブル+ベンチ2個 KM-002ETB/ベンチ単品 KM-F015AB のみで「テーブルのみ」は無し）。Amazon の類似HDPE折りたたみテーブル（DesertFox XN008 等）と同一品を特定できない
+hot-sandwich-maker	3	vastland-hsm-tsubame	campkit-20260921-18	同型番 VL0112（VASTLAND 直火式 燕三条製）は B08NVMWZ67 にあるが「現在在庫切れ・再入荷予定なし」で購入ボックス無し。B09Z2JCM6Q(¥1,980) は IH対応・着脱式の別モデル VL0250。再入荷したら B08NVMWZ67 を再検討
+hot-water-bottle	2	hagoogi-lxe01	campkit-20260921-18	HAGOOGI 名義の湯たんぽ出品なし。同一写真の YUSIDO 名義 B0DCK58L5J 等はモデル名 LXE-8008-01-GY/型番 LXE-8008 で、楽天の LXE-01-xx とブランド・型番が不一致

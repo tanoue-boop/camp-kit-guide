@@ -18,6 +18,10 @@
  *      rakutenRating / rakutenReviewCount を取り、campkit-20260921-15 §8(b) の基準でスコアを付ける:
  *        型番らしいトークン +3 ／ 実在ブランド名 +2 ／ メーカー公式店URL +1 ／
  *        複数型番が並ぶ −2 ／ 汎用語のみ（ブランドも型番も無い） −3 ／
+ *        型番同士が `+`/`＋` で直接連結された複合型番（例 2000021950+5103A470T）−3
+ *          ※ 楽天店が組んだ「本体＋ガス」等のセット品で Amazon は単品売りのみになる型。
+ *            「セット」の語だけで型番連結が無いもの（BLUETTI EB3A（…セット）等）は対象外
+ *            （2026-09-21 campkit-20260921-18）／
  *        「ふるさと納税・並行輸入・訳あり・アウトレット」は除外
  *   4. 変更禁止リスト（FROZEN_SLUGS）の記事は候補から除外する。
  *   4.5 `_file/amazon-backfill-no-amazon.tsv`（slug / rank / id / judged_task / reason）があれば、
@@ -145,6 +149,30 @@ function modelTokens(name) {
   return list.filter((t) => !list.some((o) => o !== t && o.startsWith(t) && o.length > t.length));
 }
 
+// 複合型番: 型番らしいトークン同士が `+` / `＋` で直接連結されたもの（例: 2000021950+5103A470T / 205588+5103A230T /
+// 2000031235+VP160401J01）。楽天店が組んだセット品の目印で、Amazon は単品売りのみ＝構成違いになる（campkit-20260921-17 で4枚混入）。
+// コールマン等は型番が純数字なので、片側は英字無しでも型番とみなす（isModelToken より緩い条件）。
+const COMPOUND_SIDE = '[A-Z0-9]+(?:-[A-Z0-9]+)*';
+const COMPOUND_MODEL_RE = new RegExp(`(?<![A-Za-z0-9])${COMPOUND_SIDE}(?:[+＋]${COMPOUND_SIDE})+(?![A-Za-z0-9])`, 'g');
+// 単位付き数値（268WH / 130W / 470G / 10CM 等）は型番ではない
+const UNIT_TOKEN_RE = /^\d+(?:W|WH|V|A|AH|MAH|MM|CM|M|KG|G|L|ML|D|T|H|X|P|K)$/;
+
+function isCompoundSide(tok) {
+  if (tok.length < 4) return false;
+  if ((tok.match(/\d/g) || []).length < 2) return false;
+  if (UNIT_TOKEN_RE.test(tok)) return false;
+  return true;
+}
+
+function compoundModels(name) {
+  const found = [];
+  for (const m of name.matchAll(COMPOUND_MODEL_RE)) {
+    const sides = m[0].split(/[+＋]/);
+    if (sides.length >= 2 && sides.every(isCompoundSide)) found.push(m[0]);
+  }
+  return found;
+}
+
 // ---------------------------------------------------------------------------
 // 台帳・記事の読み込み
 // ---------------------------------------------------------------------------
@@ -238,6 +266,12 @@ function score(name, url) {
     // 「A+B セット」型の複合ページは Amazon が単体売りのみで構成違いになりやすい（15 §8(b)）
     s -= 2;
     reasons.push('セット品-2');
+  }
+  // 型番＋型番の複合はセット品として更に −3（campkit-20260921-18）。「セット」の語だけのものは従来どおり
+  const compounds = compoundModels(name);
+  if (compounds.length) {
+    s -= 3;
+    reasons.push(`複合型番セット-3(${compounds[0]})`);
   }
   const brands = BRANDS.filter(([re]) => re.test(name));
   if (brands.length) {
