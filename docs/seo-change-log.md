@@ -3,6 +3,16 @@
 数値の推移はGAS「SEOレポート」の履歴で追う。本ファイルは「いつ・どの記事を・なぜ・どう変えたか」を記録し、次回レポートで効果を評価するための施策台帳。新しい施策は上に追記する。
 
 ---
+## 2026-09-22：ProductCard `name` の一括修正 第4弾（44枚／19記事）— キュー#15-b（campkit-20260921-32）
+
+- **位置づけ**: 第3弾（campkit-20260921-31・下記）の続き。同じ抽出条件の **先頭44枚／19記事** を書き換えた。**触ったのは `ProductCardMdx` の `name` 属性のみ**（title／description／updatedAt／本文・比較表・まとめ表・リンク・price は不変更）。**検出器（`scripts/check-card-name-vs-sku.cjs`）のロジックは変更していない**（`TASK_ID` の更新のみ・`--test` 173 passed 不変）
+- **対象記事（19本）**: group-camp-tent（3）／guy-rope-recommend（1）／hanging-rack（2）／helinox-chair（1）／hexa-tarp（2）／hot-water-bottle（2）／infinity-chair（5）／inner-tent-kangaroo（1）／insulated-tumbler（2）／large-tarp-recommend（1）／large-tent-guide（4）／lightweight-mountain-tent（3）／log-carrier（1）／low-style-chair（2）／mestin-recommend（2）／mobile-battery-camp（3）／montbell-sleeping-bag（1）／moraknife（4）／mountain-backpack-30l（4）。変更禁止リスト（2026-10-18 まで）の記事は含まない
+- **書き換えの基準**: 第3弾までの基準（CLAUDE.md「ProductCard `name` の書き方の基準」）＋ task-32 §0 Q2 で確定した §B の軸の動かし方。§B（既定 qty=0 → 同構成・同価格で在庫のある軸順先頭）を適用した5枚＝hexa-tarp #5 unigear カーキ→**グリーン**、infinity-chair #2 FUNJOB ブラウン→**ベージュ**（型番も該当 SKU の Z0677680）、large-tarp-recommend #5 モダンデコ ピスタチオグリーン→**テラコッタ**、mobile-battery-camp #3 SHRATCH ホワイト→**パープル（ロゴあり）**、mountain-backpack-30l #2 SUPERIOR ブラック→**ブルー**（型番 SP-BG001-BL）・#4 マムート 0001(black)→**40294(dk marsh-bk)**。カード price と一致する変種を優先した例＝moraknife #4 スパーク（既定 ブラック ¥4,840 ではなく カード ¥4,290 と一致し在庫のある **ブルー**→price_mismatch 解消）。**記事の内容を優先した例**＝group-camp-tent #2 タンスのゲン（旧 name「3mx3m 2m×2m」並記から検出器は価格一致で 2m×2m を選んでいたが、description・本文・比較表が 3m×3m なので **3m×3m** に固定→+11.1% を price_unconfirmed で起票。同一商品の large-tent-guide #2 は本文が併記のため価格一致の **2m×2m**）、lightweight-mountain-tent #2 Lanshan1（カード ¥3,680 に一致するのは「専用グランドシート」の SKU だけなので名指しせずテント本体 **タン** ¥20,800 のまま）。判断材料は保存HTML（`_file/_work/html-24/`）と `card-name-check.tsv` のみで、**楽天への新規アクセスは0回**
+- **再判定（`--cached`）**: 対象フラグ（color_unspecified／size_unspecified／store_copy）は 44枚すべてで消滅。**name 固定によって新たに立ったフラグは1枚**＝group-camp-tent #2 の price_mismatch（上記・意図した結果）。variant_unavailable の新規は0。price_mismatch は 16枚が変更前からの既存分（うち moraknife #4 は解消）。`--cached --recheck` 全1113枚で対象44枚以外の差分0（OK 526→553／color_unspecified 243→202／store_copy 82→75／size_unspecified 54→46／price_mismatch 340 不変）
+- **台帳（article-fix-backlog.tsv）**: 400行のまま（pending 283／blocked 96／needs-human 1／done 20）。open 行12件の `position` を新 name に更新し notes を追記（group-camp-tent #1／hexa-tarp #5／infinity-chair #3／large-tent-guide #1／lightweight-mountain-tent #2・#3／mestin-recommend #1・#2／mobile-battery-camp #1・#2／montbell-sleeping-bag #3／mountain-backpack-30l #4）、**moraknife #4 の price_unconfirmed 行は name 固定で価格一致になり根拠が消えたため削除**、group-camp-tent #2 を price_unconfirmed（C）で新規起票
+- **効果測定**: 第1〜3弾と同じく検索順位の直接施策ではないため計測対象外
+
+---
 ## 2026-09-22：ProductCard `name` の一括修正 第3弾（44枚／21記事）＋売切既定の書き直し4枚— キュー#15-b（campkit-20260921-31）
 
 - **位置づけ**: 第2弾（campkit-20260921-30・下記）の続き。同じ抽出条件の **先頭44枚／21記事** を書き換え（C）、加えて第2弾で「既定の色・サイズが売切でも既定に固定」した4枚（camp-rainwear #1・#3・#4／camp-tarp-beginner #5）を新基準（B・後述）で書き直した。**触ったのは `ProductCardMdx` の `name` 属性のみ**（title／description／updatedAt／本文・比較表・まとめ表・リンク・price は不変更）。合計 **48枚／23記事**

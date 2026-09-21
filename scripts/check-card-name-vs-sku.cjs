@@ -67,7 +67,7 @@ const ROOT = path.join(__dirname, '..');
 const POSTS_DIR = path.join(ROOT, 'content', 'posts');
 const OUT = path.join(ROOT, '_file', 'card-name-check.tsv');
 const HTML_DIR = path.join(ROOT, '_file', '_work', 'html-24');
-const TASK_ID = 'campkit-20260921-31'; // 走査・再判定を行ったタスク（TSV の judged_task 列に入る）
+const TASK_ID = 'campkit-20260921-32'; // 走査・再判定を行ったタスク（TSV の judged_task 列に入る）
 
 // ---------------------------------------------------------------------------
 // 閾値・定数（A-4 の回帰検証で調整する。slug / id を条件に埋め込まない）
