@@ -65,7 +65,7 @@ const ROOT = path.join(__dirname, '..');
 const POSTS_DIR = path.join(ROOT, 'content', 'posts');
 const OUT = path.join(ROOT, '_file', 'card-name-check.tsv');
 const HTML_DIR = path.join(ROOT, '_file', '_work', 'html-24');
-const TASK_ID = 'campkit-20260921-26'; // 走査・再判定を行ったタスク（TSV の judged_task 列に入る）
+const TASK_ID = 'campkit-20260921-27'; // 走査・再判定を行ったタスク（TSV の judged_task 列に入る）
 
 // ---------------------------------------------------------------------------
 // 閾値・定数（A-4 の回帰検証で調整する。slug / id を条件に埋め込まない）
@@ -150,7 +150,9 @@ const SET_WORD_RE = /(?<!カ)セット|(?<![A-Za-z])set(?![A-Za-z])|[0-9０-９]
 // セレクタ値のセット/単品判定（"MDX+" のような末尾 + は除く）
 const SET_VAL_RE = /(?<!カ)セット|(?<![A-Za-z])set(?![A-Za-z])|付き|付属|同梱|\S\s*[+＋]\s*\S|入り|付$/i;
 // 「カラーなし」「サイズなし」は色/サイズ軸のプレースホルダであってセット/単品の軸ではない（第2バッチ camp-knife-beginner #5）
-const NONE_VAL_RE = /^(?:なし|無し|無|-|―|本体のみ|単品|単体|標準)$|本体のみ|のみ$|(?<!カラー|色|サイズ|柄)(?:なし|無し)$/;
+// 「基本セット/インナーテント×1」「標準セット」のように 基本/標準 で始まるセット内容の値は本体のみ相当（着地時の既定構成）。
+//   同じ店の別ページでは「テント本体セットのみ」と書かれる値で、これを既定と認識しないと オプション軸が束ね軸扱いになり sale_page になる（第4バッチ two-room-tent-guide #1）
+const NONE_VAL_RE = /^(?:なし|無し|無|-|―|本体のみ|単品|単体|標準)$|本体のみ|のみ$|(?<!カラー|色|サイズ|柄)(?:なし|無し)$|^(?:基本|標準)セット(?:$|[\s/／(（])/;
 // 数量を選ぶ軸（1個/2個セット・1枚/2枚…）はセット/単品の軸と同じ扱い（着地時は先頭値＝最少数量）
 //   ただし「1個/1枚」の選択肢がある軸だけ（枚数 [2枚, 3枚]＝付属プレート枚数のようなモデル差の軸は除く）。
 //   値は数量表記で終わるか区切り/セット/単品が続くもの（「4点脚ロックタイプ」は数量ではない）
@@ -359,13 +361,24 @@ function chosenValueLists(axes, cardName) {
 //   name では先頭が採用仕様（カード price は 5cm の価格）であって、長い方（10cm）ではない（第3バッチ naturehike-mat #2）
 //   並記のときは選択SKUの決定（parseRakutenHtml）で「価格がカード price と一致する変種」を優先する（group-camp-tent #2: name「3mx3m 2m×2m」・
 //   カード ¥8,999 は 2m×2m の価格）。並記の name は size_unspecified で別途拾うので、恣意的な選択で price_mismatch を立てない
+//   「480/600ml」「10L/18L/23L」のように単位が末尾にしか無い数値並記は、各数値に単位を配ってから照合する（480ml/600ml）。配らないと
+//   先頭の値（480mL）が名指しと認識されず、末尾の値（600mL）だけが選ばれて価格乖離が恣意的になる（第4バッチ thermal-bottle #2・#3／portable-fridge #1）
+function expandSlashUnits(nk) {
+  return nk.replace(/((?:\d+(?:\.\d+)?\/)+)(\d+(?:\.\d+)?)([a-zℓ]+|人用|合|度|℃)/g, (m, list, last, unit) =>
+    list.split('/').filter(Boolean).map((n) => n + unit).join('/') + '/' + last + unit);
+}
 function nameSpecifiedValues(a, cardName) {
-  const nk = norm(cardName || '').replace(/\s+/g, '');
+  //   照合先は「空白を / に置換した name」を優先し、「空白を除いた name」はフォールバック。空白を除くと「DB01 10L」が「0110l」になり
+  //   数字隣接ガード（175cm に 75cm を含めない）で 10L を落としてしまう（第4バッチ portable-fridge #1）
+  const nkSep = expandSlashUnits(norm(cardName || '').trim().replace(/\s+/g, '/'));
+  const nkRaw = expandSlashUnits(norm(cardName || '').replace(/\s+/g, ''));
   const out = [];
   for (const v of a.values) {
-    const vk0 = norm(v).replace(/\s+/g, '');
-    if (vk0.length < 2 || NONE_VAL_RE.test(v) || NOTICE_VAL_RE.test(v)) continue;
-    for (const vk of [vk0, vk0.replace(/[()\[\]「」]/g, '')]) {
+    const vkRaw = norm(v).replace(/\s+/g, '');
+    if (vkRaw.length < 2 || NONE_VAL_RE.test(v) || NOTICE_VAL_RE.test(v)) continue;
+    const vkSep = norm(v).trim().replace(/\s+/g, '/');
+    const cands = [[nkSep, vkSep], [nkSep, vkSep.replace(/[()\[\]「」]/g, '')], [nkRaw, vkRaw], [nkRaw, vkRaw.replace(/[()\[\]「」]/g, '')]];
+    for (const [nk, vk] of cands) {
       if (vk.length < 2) continue;
       const i = nk.indexOf(vk);
       if (i < 0) continue;
@@ -397,6 +410,20 @@ function plusJoin(s) {
   return false;
 }
 function cardHasSet(name) { return SET_WORD_RE.test(name) || plusJoin(name); }
+// 数量付きのセット表現（「3セット」「2本セット」「3点セット」「3SET」）を正規化して列挙（空白除去・小文字・セット→set）
+function numericSetExprs(s) {
+  return [...toHalfWidth(s || '').matchAll(/[0-9]+\s*(?:点|本|個|枚|台|脚|組)?\s*(?:セット|set)/gi)].map((m) => m[0].replace(/\s+/g, '').toLowerCase().replace(/セット/g, 'set'));
+}
+// カード name の「3セット」が商品そのものの名前（itemName／メーカー型番にも同じ表現がある）で、かつセット軸の値がその表現を選ぶものでない
+//   （オプション軸「キャンプラックのみ／ケース付き」）なら、軸の既定が「のみ」でもカードのセット表記は整合（第4バッチ takibi-table #2: 「キャンプラック 3セット」＝3台組の商品・型番 -3SET）
+//   軸の値に同じ表現がある（「1本のみ／2本セット」）なら、その軸が選ぶセットなので従来どおり set_mismatch（trekking-pole #4）
+function cardSetIsProduct(name, pageText, axis) {
+  const ce = numericSetExprs(name);
+  if (!ce.length) return false;
+  const pe = numericSetExprs(pageText);
+  const ae = axis.values.flatMap((v) => numericSetExprs(v));
+  return ce.some((e) => pe.includes(e)) && !ce.some((e) => ae.includes(e));
+}
 // セレクタ値の数量（"4台（レイアウト自在！）" → 4、数量表記でなければ null）
 function qtyOf(v) { const m = /^(\d+)\s*(?:個|枚|本|脚|点|袋|組|台|セット|set)(?:$|[\s(（/／・、,☆★]|セット|単品|入り|set)/i.exec(toHalfWidth(v).trim()); return m ? Number(m[1]) : null; }
 // カード name がセレクタ値の文字列をそのまま含むか（空白・全角半角の差は無視。「なし/のみ」の値も対象にする点が nameSpecifiedValue と違う）
@@ -528,10 +555,16 @@ function isModelToken(tok) {
   if (UNIT_TOKEN_RE.test(tok)) return false;
   return true;
 }
+// 直後に %／OFF／倍／円／pt が続く英数字（「MAX35％OFF」「P10倍」）は販促の数値であって型番ではない（第4バッチ stylish-camp-tent #4: name 先頭の【MAX35％OFFクーポン配布中！】）
+const PROMO_AFTER_RE = /^\s*(?:[%％]|OFF|倍|円|pt|ポイント)/i;
 function modelTokens(name) {
   const found = new Set();
   const s = toHalfWidth(name).replace(/###[^#]*###/g, ' ');
-  for (const m of s.matchAll(MODEL_TOKEN_RE)) if (isModelToken(m[0])) found.add(m[0]);
+  for (const m of s.matchAll(MODEL_TOKEN_RE)) {
+    if (!isModelToken(m[0])) continue;
+    if (PROMO_AFTER_RE.test(s.slice(m.index + m[0].length))) continue;
+    found.add(m[0]);
+  }
   const list = [...found];
   return list.filter((t) => !list.some((o) => o !== t && o.startsWith(t) && o.length > t.length));
 }
@@ -581,13 +614,21 @@ function bigrams(s) { const o = []; for (let i = 0; i + 1 < s.length; i++) o.pus
 // 型語: name 先頭 HEAD_LEN 字（飾り除去後）のトークンから、ブランドっぽい英字語・数値・単位語・色語を除いたもの
 // name の先頭トークンは CLAUDE.md の規約（"メーカー名 商品名"）上ブランドなので、複数トークンあるときは除く
 function typeWords(name, brand) {
-  // 先頭 HEAD_LEN 字で切るが、語の途中で切らない（camp-backpack-beginner #2: 「ボルケニックブラック」が「ボルケニックブラ」になり色語判定を外れる）
+  // 先頭トークン（規約上ブランド）と直後の「(別名)」を外した残りから HEAD_LEN 字を取る。ブランド込みで数えると「Coleman(コールマン) 調味料入れ スパイスボックス」の
+  //   15 字をブランドが使い、商品名の「スパイスボックス」が型語から切れて「調味料入れ」だけで照合してしまう（第4バッチ spice-box #2）
+  // 語の途中で切らない（camp-backpack-beginner #2: 「ボルケニックブラック」が「ボルケニックブラ」になり色語判定を外れる）
   const full = toHalfWidth(stripDecor(name));
-  const head = full.slice(0, HEAD_LEN) + (/^[^\s／/・,、，【】\[\]()「」『』｜|&＆+＋×x~]*/.exec(full.slice(HEAD_LEN)) || [''])[0];
+  const SEP = '\\s／/・,、，【】\\[\\]()「」『』｜|&＆+＋×x~';
+  //   先頭の「…」（「お買い物マラソン」＝販促の括弧書き）は飛ばしてからブランドを外す（camp-chair-lightweight #4）
+  let rest = full;
+  if (tokens(full).length > 1) {
+    const lead = new RegExp('^(?:「[^」]*」\\s*)?[^' + SEP + ']+\\s*(?:\\([^)]*\\)\\s*)?').exec(full);
+    if (lead) rest = full.slice(lead[0].length);
+  }
+  const head = rest.slice(0, HEAD_LEN) + (new RegExp('^[^' + SEP + ']*').exec(rest.slice(HEAD_LEN)) || [''])[0];
   const brandKeys = tokens(brand || '').concat(tokens(brand || '').map((t) => t.replace(/\(.*$/, '')));
-  const firstTok = tokens(toHalfWidth(stripDecor(name)))[0];
-  const all = tokens(head);
-  if (all.length > 1 && all[0] === firstTok) all.shift();
+  // 販促文言は複合語のまま先に外す（「お買い物マラソン」を分割すると「お買い物」が型語に残る）
+  const all = tokens(head).filter((t) => !STORE_COPY_WORDS.test(t));
   // 「ファミリー封筒型寝袋」のようにカタカナ語と漢字語が連結した複合語は、カタカナ↔漢字/かな の境界で分けて個別に照合する
   //   （第3バッチ naturehike-sleeping-bag #4: 実リンク先は「寝袋 シュラフ 封筒型 家族用」で、複合語のままだと 2-gram 被覆率が 0.33）
   const split = all.flatMap((t) => t.split(/(?<=[ァ-ヶー])(?=[一-龠ぁ-ん])|(?<=[一-龠ぁ-ん])(?=[ァ-ヶー])/).filter((x) => x.length >= 2));
@@ -612,7 +653,8 @@ function typeWordFound(word, hay) {
 
 // 数値スペック抽出: [{kind, value, unit, raw}]
 function specs(name) {
-  const s = toHalfWidth(name);
+  // 桁区切りのカンマ（耐水圧2,000mm／1,500mm）は外してから数値を取る。外さないと「000mm」が単独スペックになる（第4バッチ one-pole-tent #5）
+  const s = toHalfWidth(name).replace(/(\d),(\d{3})(?!\d)/g, '$1$2');
   const out = [];
   const used = [];
   // 範囲（40〜60L）・下限上限（50L以上）は kind='range' として先に取り、単一スペックの対象から外す
@@ -656,7 +698,8 @@ function axesCarryValue(axes, sp) {
   return axes.some((a) => a.values.some((v) => re.test(toHalfWidth(v))));
 }
 function specFound(sp, hayText, attrs) {
-  const hay = norm(hayText);
+  const hay = norm(hayText).replace(/(\d),(\d{3})(?!\d)/g, '$1$2'); // 照合先の桁区切り（耐水圧 2,000mm）も外す
+
   const val = sp.value;
   const units = UNIT_ALIASES[sp.unit] || (sp.unit ? [sp.unit] : ['']);
   const cands = [];
@@ -784,6 +827,7 @@ function judge(card, page, http) {
     // カード name が選択値そのもの（「テント本体セットのみ」）を名指ししていれば、セット語の有無に関わらず整合（第3バッチ fieldoor-tent #2）
     const named = nameContainsValue(name, sel);
     if (named) { /* 整合 */ }
+    else if (cardSet && !skuIsSet && cardSetIsProduct(stripDecor(name), [itemName, page.makerModel].join(' '), page.axes[setAxisIdx])) { /* 整合: カードの「Nセット」は商品自体の名前 */ }
     else if (cardSet && !skuIsSet) { flags.push('set_mismatch'); notes.push(`set:card=set,sku=single(${sel})`); }
     else if (!cardSet && skuIsSet) { flags.push('set_mismatch'); notes.push(`set:card=single,sku=set(${sel})`); }
   } else if (cardSet && !PAGE_SET_RE.test([itemName, page.makerModel].join(' ')) && !plusJoin([itemName, page.makerModel].join(' '))) {
@@ -1152,6 +1196,37 @@ function runTests() {
     mkPage({ itemName: 'モバイルバッテリー 超マット加工 大容量 小型 5000/10000mAh', makerModel: '100-1', brand: 'inklink', price: 2660, selectorValues: ['LCタイプ', '10000mAh', 'さくらピンク'],
       axes: [{ key: 'コネクタタイプ', values: ['LCタイプ', 'CCタイプ'] }, { key: '容量・表示タイプ', values: ['5000mAh　ベーシック', '5000mAh　デジタル', '10000mAh'] }, { key: 'カラー', values: ['さくらピンク', 'ブラック'] }] }), 200, ['size_unspecified', 'price_mismatch'], ['spec_mismatch']);
 
+  // ── 第4バッチ（campkit-20260921-27）で潰した誤検知 ──
+  t('model_mismatch なし: 「MAX35％OFF」の販促数値は型番ではない（stylish-camp-tent #4）', { name: '【MAX35％OFFクーポン配布中！GW応援】 Naturehike ワンタッチテント ロッジ型 テント 前室 Ti BLACK 小屋 2-4人用 UPF11000+ ポール付き', price: '39990' },
+    mkPage({ itemName: 'ポイント15倍＆5％OFFクーポン配布中！ ワンタッチテント ロッジ型 テント Naturehike wuji6 前室 Ti BLACK 小屋 2-4人用 UPF11000+ ポール付き', makerModel: 'Village 6.0', brand: 'Naturehike', price: 39990, selectorValues: ['Village 6.0'], axes: [{ key: 'バリエーション', values: ['Village 6.0', 'Village 6.0 Plus'] }] }), 200, ['store_copy'], ['model_mismatch']);
+  t('model_mismatch: 販促数値を除いても実在の型番（ST-760）はそのまま照合する（torch-burner #3: ST-760 はボンベの型番で本体は ST-451）', { name: 'SOTO（新富士バーナー）フィールドチャッカー ST-760 パワートーチ', price: '3290' },
+    mkPage({ itemName: 'PSLPG適合品 フィールドチャッカー 日本製 パワートーチ ガスバーナー ST-700付属 ST-451 SOTO ソト', makerModel: 'ST-451', brand: '新富士バーナー / ソト / SOTO', price: 3290, desc: '使用ボンベ：ST-760、ST-700、ST-712' }), 200, ['model_mismatch']);
+  t('set_mismatch なし: 「キャンプラック 3セット」は商品自体の名前（itemName「3セット」・型番 -3SET）でオプション軸「のみ」は付属品の話（takibi-table #2）', { name: 'PYKES PEAK キャンプラック 3セット（焚き火テーブル）', price: '5680' },
+    mkPage({ itemName: 'キャンプ ラック 3セット キャンピングラック グラウンド 焚き火テーブル PYKES PEAK', makerModel: 'P0078CRCK3-BLK-3SET', brand: 'PYKES PEAK', price: 5680, selectorValues: ['ブラック', 'キャンプラックのみ'],
+      axes: [{ key: 'カラー', values: ['ブラック'] }, { key: 'オプション', values: ['キャンプラックのみ', 'ケース付き（オリーブ）'] }] }), 200, [], ['set_mismatch']);
+  t('set_mismatch: 「2本セット」が軸の値にある（1本のみ/2本セット）なら軸が選ぶセットなので従来どおり（trekking-pole #4）', { name: 'TheBestDay A7075アルミ トレッキングポール 260g 2本セット', price: '4980' },
+    mkPage({ itemName: 'トレッキングポール 登山ストック 折りたたみ式 軽量A7075アルミ製 260g 1本 2本', makerModel: 'SENUN-955', brand: 'SENUN', price: 2980, selectorValues: ['ブラック（長さ100～120cm）', '1本のみ'],
+      axes: [{ key: 'カラー', values: ['ブラック（長さ100～120cm）', 'レッド（長さ100～120cm）'] }, { key: 'セット内容', values: ['1本のみ', '2本セット'] }] }), 200, ['set_mismatch', 'price_mismatch']);
+  t('sale_page なし: 「基本セット/インナーテント×1」は本体のみ相当＝セット軸（束ね軸ではない）（two-room-tent-guide #1）', { name: '【楽天1位】FIELDOOR テント 大型 ドームテント トンネルテント 620 260cm×620cm 2ルームテント 4人用 6人用 8人用 インナーテント付き', price: '28710' },
+    mkPage({ itemName: '【楽天1位】FIELDOOR テント 大型 ドームテント トンネルテント 620 260cm×620cm 2ルームテント 4人用 6人用 8人用 インナーテント付き', makerModel: 'トンネルテント620', brand: 'FIELDOOR', price: 28710, skuCount: 32, manageNumber: 'a16865',
+      selectorValues: ['ライトベージュ：標準タイプ', '基本セット/インナーテント×1'],
+      axes: [{ key: 'カラー/生地', values: ['ライトベージュ：標準タイプ', 'ダークブラウン：標準タイプ', 'カーキ：標準タイプ', 'グレー：遮光高耐水タイプ'] }, { key: 'セット', values: ['基本セット/インナーテント×1', 'A/基本＆180cm追加ポール2組', 'B/基本＆追加インナーテント', 'C/基本＆専用グランドシート1枚', 'D/基本＆追加インナー/ポール', 'E/基本＆ポール/グランドシート1枚', 'F/基本＆追加インナー/シート2枚', 'G/基本＆インナー/シート2/ポール'] }] }), 200, ['store_copy'], ['sale_page', 'set_mismatch']);
+  t('set_mismatch: 「基本セット」が既定でもカードがセット表記（グランドシートセット）なら従来どおり', { name: 'FIELDOOR トンネルテント620 グランドシートセット', price: '32560' },
+    mkPage({ itemName: 'FIELDOOR テント トンネルテント 620', makerModel: 'トンネルテント620', brand: 'FIELDOOR', price: 28710, selectorValues: ['ライトベージュ：標準タイプ', '基本セット/インナーテント×1'],
+      axes: [{ key: 'カラー/生地', values: ['ライトベージュ：標準タイプ', 'カーキ：標準タイプ'] }, { key: 'セット', values: ['基本セット/インナーテント×1', 'C/基本＆専用グランドシート1枚'] }] }), 200, ['set_mismatch', 'price_mismatch']);
+  t('spec_mismatch なし: 「耐水圧2,000mm」の桁区切りカンマ（one-pole-tent #5）', { name: 'ワンポールテント 軽量 UVカット メッシュ インナーシート 4人用 ポリエステル 耐水圧2,000mm 大型', price: '7980' },
+    mkPage({ itemName: 'テント ポールテント ワンポールテント 軽量 UVカット メッシュ インナーシート 4人 2000mmポリエステル', brand: 'モダンデコ', price: 12980, axes: [{ key: 'カラー', values: ['サンドベージュ', 'アッシュホワイト'] }] }), 200, ['color_unspecified', 'price_mismatch'], ['spec_mismatch']);
+  t('spec_mismatch なし: 照合先が「2,000mm」表記でも一致', { name: 'テント 耐水圧2000mm', price: '7980' },
+    mkPage({ itemName: 'テント 耐水圧2,000mm', price: 7980 }), 200, [], ['spec_mismatch']);
+  t('spec_mismatch: カンマを外しても数値が違えば従来どおり（2,000mm ↔ 1500mm）', { name: 'テント 耐水圧2,000mm', price: '7980' },
+    mkPage({ itemName: 'テント 耐水圧1500mm', price: 7980 }), 200, ['spec_mismatch']);
+  t('type_mismatch なし: 「Coleman(コールマン)」の別名込みで先頭20字を数えず、「スパイスボックス」を型語に含める（spice-box #2）', { name: 'Coleman(コールマン) 調味料入れ スパイスボックス', price: '2174' },
+    mkPage({ itemName: '【最大10万P当選★要エントリー★9/20～9/30】 コールマン (Coleman) スパイスボックス (コヨーテ) キャンプ用品 ファミリークックウェア コヨーテ 218581', makerModel: '2185814', brand: 'コールマン', price: 1680, selectorValues: ['コヨーテ', '.'], axes: [{ key: 'カラー', values: ['コヨーテ'] }, { key: 'サイズ', values: ['.'] }] }), 200, ['price_mismatch'], ['type_mismatch']);
+  t('type_mismatch: ブランド別名を外しても型語が実リンク先に無ければ従来どおり', { name: 'Coleman(コールマン) 調味料入れ スパイスボックス', price: '2174' },
+    mkPage({ itemName: 'コールマン (Coleman) クーラーボックス 25QT', brand: 'コールマン', price: 2174 }), 200, ['type_mismatch']);
+  t('type_mismatch なし: 先頭の「お買い物マラソン」は飛ばし、分割前に販促文言を外す（camp-chair-lightweight #4 の副作用）', { name: '「お買い物マラソン」Moon Lence アウトドアチェア キャンプ椅子 折りたたみ コンパクト 超軽量907g CH-7', price: '3799' },
+    mkPage({ itemName: 'Moon Lence アウトドアチェア 折りたたみ キャンプ椅子 コンパクト 907g超軽量 耐荷重150kg CH-7', makerModel: 'CH-7B', brand: 'MOON LENCE', price: 3799, axes: [{ key: 'カラー', values: ['ブラック', 'オレンジ'] }] }), 200, ['store_copy', 'color_unspecified'], ['type_mismatch']);
+
   // url_unparsable は rakutenUrl() の単体テストで担保
   const urlCases = [
     ['https://hb.afl.rakuten.co.jp/hgc/x/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fluxim647%2F3sp02%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fluxim647%2Fi%2F10000005%2F', 'https://item.rakuten.co.jp/luxim647/3sp02/'],
@@ -1218,7 +1293,17 @@ function runTests() {
     ct('選択SKU: 価格が無ければ name で先に出る 3m×3m', s3 === '3m×3m', s3);
     const s4 = parseRakutenHtml(html, '', 'タープテント 2m×2m', '9999').firstSku.selectorValues[0];
     ct('選択SKU: 名指しが1値なら価格に関わらずその値（2m×2m）', s4 === '2m×2m', s4);
-    ct('itemCodeOf: 店名を除いた商品コード', itemCodeOf('https://item.rakuten.co.jp/futon-outlet/10002239/') === '10002239' && itemCodeOf('https://item.rakuten.co.jp/smile88/a04309_sale/?variantId=1') === 'a04309_sale', itemCodeOf('https://item.rakuten.co.jp/futon-outlet/10002239/'));
+    // 第4バッチ: 単位が末尾にしか無い数値並記（480/600ml）
+    const got4 = nameSpecifiedValues({ key: '容量', values: ['360mL', '480mL', '600mL'] }, 'タイガー 真空断熱ボトル SAHARA 480/600ml').map((x) => x.v).join(',');
+    ct('nameSpecifiedValues: 「480/600ml」は 480mL・600mL の両方を名指し（先頭は 480mL）（thermal-bottle #2）', got4 === '480mL,600mL', got4);
+    const got5 = nameSpecifiedValues({ key: 'サイズ', values: ['10L', '18L', '23L', 'D23 PLUS'] }, 'EENOUR ポータブル冷蔵庫 DB01 10L/18L/23L バッテリータイプ').map((x) => x.v).join(',');
+    ct('nameSpecifiedValues: 「10L/18L/23L」は 3 値とも名指し（portable-fridge #1）', got5 === '10L,18L,23L', got5);
+    const html2 = '<title>t</title>{"itemInfoSku":{"title":"象印 ボトル","manageNumber":"x"},"variantSelectors":[{"label":"容量","values":[{"label":"600ml"},{"label":"720ml"},{"label":"950ml"}]}],"sku":[{"variantId":"a","selectorValues":["600ml"],"taxIncludedPrice":3220},{"variantId":"b","selectorValues":["720ml"],"taxIncludedPrice":3680},{"variantId":"c","selectorValues":["950ml"],"taxIncludedPrice":3980}]}';
+    const s5 = parseRakutenHtml(html2, '', '象印 シームレス ステンレスボトル 600/720/950ml', '3220').firstSku.selectorValues[0];
+    ct('選択SKU: 「600/720/950ml」でカード ¥3,220 と一致する 600ml を選ぶ（thermal-bottle #3）', s5 === '600ml', s5);
+    const s6 = parseRakutenHtml(html2, '', '象印 シームレス ステンレスボトル 600/720/950ml', '9999').firstSku.selectorValues[0];
+    ct('選択SKU: 価格一致が無ければ name で先に出る 600ml', s6 === '600ml', s6);
+    ct('itemCodeOf: 店名を除いた商品コード',itemCodeOf('https://item.rakuten.co.jp/futon-outlet/10002239/') === '10002239' && itemCodeOf('https://item.rakuten.co.jp/smile88/a04309_sale/?variantId=1') === 'a04309_sale', itemCodeOf('https://item.rakuten.co.jp/futon-outlet/10002239/'));
   }
   for (const c of cacheCases) {
     if (c.ok) pass++; else fail++;
