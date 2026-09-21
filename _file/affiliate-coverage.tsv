@@ -2,7 +2,7 @@ slug	date	updatedAt	product_cards	rakuten_afl	rakuten_raw	amazon_asin	amazon_url
 air-frame-tent	2026-09-15	2026-09-15	5	4	0	4	0	0	0	8	card-without-link	cards NG: #3=別形式(B0FD3FRJG4)
 alcohol-stove	2026-08-14	2026-08-14	5	5	0	3	0	0	0	8	ok	Amazon未設定カード 2/5 (#3,#4)
 anker-power	2026-06-15	2026-09-16	5	10	0	5	5	5	0	20	ok	
-attack-pack	2026-09-03	2026-09-03	5	10	0	1	0	0	0	11	ok	Amazon未設定カード 4/5 (#1,#3,#4,#5)
+attack-pack	2026-09-03	2026-09-21	5	10	0	2	0	0	0	12	ok	Amazon未設定カード 3/5 (#1,#4,#5) ｜2026-09-21 backfill(campkit-20260921-16): #3=B08LP1WWPT(オスプレー デイライトプラス OS57176・楽天SKU属性 ブランド=OSPREY/メーカー型番OS57176 ↔ Amazonページtitle「[オスプレー] デイライトプラス OS57176 ブラック ワンサイズ」一致(Amazonのメーカー型番欄はOsprey社内コード10002925)・楽天既定SKU ブラック(OS57176001)と同色・¥12,760同額・販売元 Outdoor Style サンデーマウンテン=楽天canpaneraと同一事業者・残り2点・★4.6(1,801)。osprey-backpack等の既存記事と同ASIN)
 autumn-hiking-rental	2026-09-17	2026-09-17	0	0	0	0	0	0	1	1	ok	
 backpack-large	2026-06-02	2026-06-02	5	10	0	0	2	2	0	12	ok	Amazon未設定カード 3/5 (#1,#2,#4)
 backpack-rain-cover	2026-09-10	2026-09-10	5	5	0	0	0	0	0	5	ok	Amazon未設定カード 5/5 (#1,#2,#3,#4,#5)
@@ -42,7 +42,7 @@ camp-gift	2026-09-08	2026-09-08	7	7	0	5	1	1	0	13	ok	Amazon未設定カード 1/7
 camp-grill-plate	2026-05-26	2026-05-26	5	5	0	4	0	0	0	9	ok	Amazon未設定カード 1/5 (#1)
 camp-hammock	2026-06-02	2026-06-02	5	10	0	3	0	0	0	13	ok	Amazon未設定カード 2/5 (#1,#4)
 camp-headlight-beginner	2026-04-26	2026-06-29	5	5	0	1	2	2	0	8	ok	Amazon未設定カード 2/5 (#2,#4)
-camp-hot-carpet	2026-08-31	2026-08-31	5	5	0	3	0	0	0	8	ok	Amazon未設定カード 2/5 (#2,#4)
+camp-hot-carpet	2026-08-31	2026-08-31	5	5	0	3	0	0	0	8	ok	Amazon未設定カード 2/5 (#2,#4) ｜2026-09-21 backfill(campkit-20260921-16): #2 山善 YZD-101FL は no-amazon: 楽天既定SKU=1畳/ライトブラウン メーカー型番YZD-101FL(LBR) 170×85cm ¥12,800(2026年8月にYZC-109FL→YZD-101FLへ型番変更・サイズ176×88→170×85に変更と楽天本文に明記)。Amazon検索「山善 ホットカーペット YZD-101FL」「YZD-101FL」「YZD-101FL OR YZD-151FL OR YZD-201FL 山善」は該当なし、「山善 ホットカーペット フローリング調 1畳 YZC-109FL」で出るのは旧型 B0DDKWVYLG(YZC-109FL(LBR) 176×88cm・現在お取り扱いできません)の変種11件のみ→別モデルかつ在庫なしで不採用。SUC-102系(B0G6YLT7P5)はフローリング調でない別シリーズ
 camp-kettle-recommend	2026-06-02	2026-06-02	5	10	0	5	0	0	0	15	ok	
 camp-knife-beginner	2026-04-20		5	5	0	0	5	5	0	10	ok	
 camp-lantern-led	2024-06-15	2026-09-21	5	5	0	0	5	5	0	10	ok	
@@ -64,7 +64,7 @@ camp-smoker	2026-08-14	2026-08-14	5	5	0	4	0	0	0	9	ok	Amazon未設定カード 1/
 camp-table-folding	2024-06-20	2026-09-21	5	5	0	1	3	3	0	9	ok	Amazon未設定カード 1/5 (#2)
 camp-table-set	2026-06-02	2026-09-04	5	5	0	0	5	5	0	10	ok	
 camp-tarp-beginner	2026-04-24	2026-06-29	5	5	0	0	5	5	0	10	ok	
-camp-windscreen	2026-08-10	2026-08-10	5	5	0	2	0	0	0	7	ok	Amazon未設定カード 3/5 (#3,#4,#5)
+camp-windscreen	2026-08-10	2026-08-10	5	5	0	2	0	0	0	7	ok	Amazon未設定カード 3/5 (#3,#4,#5) ｜2026-09-21 backfill(campkit-20260921-16): #4 OneTigris TC陣幕 は no-amazon(在庫切れ): 楽天SKU属性 ブランド=OneTigris Camping/メーカー型番 CE-QZM01-CB(ブラウン)・CE-QZM01-RG(アーミーグリーン) 218×130×85cm 1.9kg ¥8,390。Amazon検索「OneTigris 陣幕 TC ポリコットン」「OneTigris CE-QZM01」で同一品 B0BN3CCYJ8→子B0BWDLF3F3(メーカー型番CE-QZM01-CB ブラウン・388×218×130cm・1.87kg・★4.4(265))を確認したが「現在在庫切れ・再入荷予定なし」、アーミーグリーン(CE-QZM01-RG)の出品は検索「OneTigris 焚き火陣幕 アーミーグリーン 218」「"CE-QZM01-RG"」とも該当なし→§3-8により不採用。再入荷したら B0BWDLF3F3 を再検討
 captain-stag-bonfire	2026-08-24	2026-08-24	5	5	0	5	0	0	0	10	ok	
 captain-stag-chair	2026-06-15	2026-06-15	5	10	0	5	5	5	0	20	ok	
 captain-stag-table	2026-06-08	2026-06-08	5	10	0	5	0	0	0	15	ok	
@@ -94,7 +94,7 @@ day-camp-cooler-box	2026-04-25	2026-04-25	5	5	0	3	0	0	0	8	ok	Amazon未設定カ�
 day-camp-grill	2026-04-27	2026-04-27	5	5	0	1	0	0	0	6	ok	Amazon未設定カード 4/5 (#1,#2,#3,#4)
 day-camp-led-lantern	2026-04-27	2026-04-27	5	5	0	2	0	0	0	7	ok	Amazon未設定カード 3/5 (#3,#4,#5)
 day-camp-starter-set	2026-04-27	2026-04-27	5	5	0	3	0	0	0	8	ok	Amazon未設定カード 2/5 (#1,#2)
-day-camp-tarp-cheap	2026-04-27	2026-04-27	5	5	0	2	0	0	0	7	ok	Amazon未設定カード 3/5 (#3,#4,#5)
+day-camp-tarp-cheap	2026-04-27	2026-09-21	5	5	0	3	0	0	0	8	ok	Amazon未設定カード 2/5 (#3,#4) ｜2026-09-21 backfill(campkit-20260921-16): #5=B0CZKVNCPD(Bears Rock しろくまスクエアタープ SQT-401 カーキ・楽天SKU属性 ブランド=Bears Rock/メーカー型番SQT-401 ↔ Amazonメーカー型番「SQT-401」一致・展開300×300×210/収納58×12/耐水圧2000mmも一致・楽天既定SKU カーキ(セレクタ先頭)と同色の子ASINを採用(タン=B0CZKYZJTR)・販売元ホーマックス(メーカー正規販売店)・¥7,150(楽天¥6,600より高い)・残り10点・★3.8(3))
 day-camp-tent	2026-05-26	2026-09-21	4	4	0	2	0	0	0	6	ok	Amazon未設定カード 2/4 (#1,#3) ｜2026-09-21 backfill(campkit-20260921-15): #2=B0GBVXC628(QUICKCAMP コンパクトシェード QC-CS180・楽天SKU属性 ブランド=クイックキャンプ/型番QC-CS180 ↔ Amazon本文「メーカー品番：QC-CS180」一致・展開180×150×130/収納60×15×15/3.3kg/耐水圧3000mmも一致・販売元YOCABITO同一・既定SKU サンドベージュ/PUコーティング ¥6,990(カード価格と同額)を採用。※カードname/description/badgeは「遮光100% ブラックコーティング」を謳うが、それは同ページ別SKU グレー/ブラックコーティング ¥8,990(Amazon B0GBWCXMPM)の仕様で、price 6990 はPU版の価格→表記と価格が別SKUを指す不整合・別タスク)。#1 Noone ワンタッチテント200×320 は no-amazon: 楽天SKU属性 ブランド=-/型番TNT-200(店舗コード)の無名OEM、Amazon検索「ワンタッチテント TNT-200 200×320 フルクローズ」は禄越/ENDLESS BASE等の別OEMのみ。#3 and wander×エアバギー ポップアップテント は no-amazon: 楽天ページ dogcart/000000004987405 がHTTP404で仕様確認不可(discontinued_404候補)、Amazon検索「and wander ポップアップテント エアバギー」はCROWN SHADES/EchoSmile等の無関係商品のみで出品なし
 deuter-backpack	2026-06-15	2026-09-21	5	10	0	1	0	0	0	11	ok	Amazon未設定カード 4/5 (#1,#2,#3,#5)
 disaster-camp-gear	2026-08-25	2026-08-25	0	0	0	0	0	0	1	1	ok	
@@ -109,7 +109,7 @@ dutch-oven	2026-06-08	2026-06-23	5	10	0	0	5	5	0	15	ok
 ecoflow-power	2026-06-08	2026-09-21	5	10	0	5	5	5	0	20	ok	
 electric-blanket-camp	2026-06-08	2026-09-21	5	10	0	2	0	0	0	12	ok	Amazon未設定カード 3/5 (#1,#3,#4)
 family-camp-bbq	2026-05-26	2026-09-21	5	5	0	1	0	0	0	6	ok	Amazon未設定カード 4/5 (#1,#3,#4,#5)
-family-camp-chair	2026-04-28	2026-04-28	5	5	0	1	0	0	0	6	ok	Amazon未設定カード 4/5 (#1,#2,#3,#5)
+family-camp-chair	2026-04-28	2026-09-21	5	5	0	2	0	0	0	7	ok	Amazon未設定カード 3/5 (#1,#3,#5) ｜2026-09-21 backfill(campkit-20260921-16): #2=B0FZS14VJ7(BUNDOK ラウンジチェア BD-187WG ウォームグレー・楽天URLは livinglinks/bd-183nv だが実ページの商品番号はBD-187、SKU属性 メーカー型番=BD-187BLK/BD-187OL/BD-187WG ¥1,980→カードname「BD-187」と実リンク先は一致しており name不整合ではない(URLスラッグ bd-183nv は旧管理番号の名残と判断)・Amazonメーカー型番「BD-187WG」一致・50×70×78cm/2.3kg一致・楽天既定SKU ウォームグレー(セレクタ先頭)と同色・販売元リビングリンクス=楽天と同一店・¥1,980同額・通常2〜3日以内に発送・★4.1(1,294)。他色: ブラック=B0FZS2B1XN／オリーブ=B0FZS3KVLB)
 family-camp-cot	2026-06-08	2026-06-08	5	10	0	2	0	0	0	12	ok	Amazon未設定カード 3/5 (#2,#3,#5)
 family-camp-lantern	2026-04-24	2026-04-24	5	5	0	5	0	0	0	10	ok	
 family-camp-mat	2026-05-26	2026-05-26	5	5	0	0	5	5	0	10	ok	
@@ -142,7 +142,7 @@ group-camp-tent	2026-04-29	2026-04-29	5	5	0	3	0	0	0	8	ok	Amazon未設定カー�
 guy-rope-recommend	2026-08-17	2026-08-17	5	5	0	2	0	0	0	7	ok	Amazon未設定カード 3/5 (#1,#3,#5)
 hand-axe	2026-07-27	2026-09-21	5	5	0	3	0	0	0	8	ok	Amazon未設定カード 2/5 (#1,#3)
 hanging-rack	2026-08-19	2026-08-19	5	5	0	2	0	0	0	7	ok	Amazon未設定カード 3/5 (#1,#2,#5)
-headlight-rechargeable	2026-06-02	2026-06-02	5	10	0	3	0	0	0	13	ok	Amazon未設定カード 2/5 (#1,#3)
+headlight-rechargeable	2026-06-02	2026-06-02	5	10	0	3	0	0	0	13	ok	Amazon未設定カード 2/5 (#1,#3) ｜2026-09-21 backfill(campkit-20260921-16): #1 N-FORCE SR-01L は no-amazon(構成違い): 楽天SKU属性 ブランド=N-FORCE/メーカー型番SR-01L・付属品「本体・充電池2本・充電ケーブル」¥2,880。N-FORCEはAmazonに出品あり(正規店 FLUFFY_STORE)だが、検索「N-FORCE ヘッドライト SR-01L」「"N-FORCE" ヘッドライト」で出るのは B07FR6RLCF(メーカー型番SR-02・単3×3本または18650×2本のハイブリッド電源・充電池は付属しない・¥2,180)と SP-20A/SC-200B/SC-300R の別型番のみ。SR-02は同筐体(170g/260g・5000lm)でも充電池非同梱の別構成・別型番のため不採用
 helinox-chair	2026-06-15	2026-06-15	4	8	0	0	4	4	0	12	ok	
 hexa-tarp	2026-06-02	2026-06-02	5	10	0	1	0	0	0	11	ok	Amazon未設定カード 4/5 (#2,#3,#4,#5)
 hot-sandwich-maker	2026-06-02	2026-06-02	5	10	0	3	0	0	0	13	ok	Amazon未設定カード 2/5 (#3,#5)
@@ -181,7 +181,7 @@ mummy-sleeping-bag	2026-06-02	2026-08-12	5	10	0	1	0	0	0	11	ok	Amazon未設定カ
 mysteryranch-backpack	2026-06-15	2026-09-20	4	8	0	2	0	0	0	10	ok	Amazon未設定カード 2/4 (#3,#4)
 nanga-down-jacket	2026-09-14	2026-09-14	5	10	0	2	0	0	0	12	ok	Amazon未設定カード 3/5 (#1,#3,#4)
 nanga-sleeping-bag	2026-06-01	2026-06-29	5	5	0	5	5	5	0	15	ok	
-naturehike-mat	2026-06-08	2026-06-08	5	10	0	2	0	0	0	12	ok	Amazon未設定カード 3/5 (#1,#3,#4)
+naturehike-mat	2026-06-08	2026-06-08	5	10	0	2	0	0	0	12	ok	Amazon未設定カード 3/5 (#1,#3,#4) ｜2026-09-21 backfill(campkit-20260921-16): #1 Naturehike 高R値エアーマット は no-amazon(既定SKU不定＋在庫切れ): 楽天ページは R4.6(CNK2450WS014・グリーン)/R5.8(CNH22DZ016・シルバー/オレンジ)/R8.8(CNK2450WS015)×サイズ7種の13SKU(¥12,490〜21,490)で既定選択なし(itemprop price=minPrice 12,490)。カード価格¥12,490に一致するのは R4.6/グリーン/レクタ型M(186×58×8cm)のみ。Amazon検索「Naturehike 高R値 エアーマット R4.6」「Naturehike CNK2450WS014」「Naturehike エアーマット R4.6 グリーン 186」→ R4.6は公式 B0D9PX96KD(グリーン長方形 186×58×8・型番TUYE)と windhike出品 B0DW454LT4(196×64×8)の2件ともに「現在在庫切れ・再入荷予定なし」。在庫ありは R5.8マミー型S B0F249YQ6R(型番TY5.8-MS ¥12,990)等の別R値/別サイズのみで、R値・厚さ・サイズを1つに特定できないため不採用
 naturehike-sleeping-bag	2026-06-15	2026-06-15	5	10	0	2	5	5	0	17	ok	
 naturehike-tent	2026-06-02	2026-09-21	5	10	0	4	0	0	0	14	ok	Amazon未設定カード 1/5 (#2) ｜2026-09-21 backfill(campkit-20260921-14): #1=B0D478VBQC(Naturehike公式ショップ Clould up2 Pro 20Dダークベージュ/PRO2人用 ¥23,990・楽天公式 cloud up pro 2人用 ベージュ ¥23,990と同額。楽天型番CNK2350WS020 vs Amazon型番Clouldup2-Proで文字列不一致、公式店同士の商品名・サイズ・価格で照合)。#4=B0DYF5RNY2(Naturehike公式ショップ village13 Ti Black素材 メーカー型番CNH22ZP004TB ¥66,990・楽天型番CNH22ZP004の前方一致。※楽天ページは「Village 13.0 Pro」ベーシック版¥75,990/19kgへ更新済みでカード価格56,993と乖離→price_unconfirmed候補)。#2 nh17t140-j は no-amazon: 楽天ページ404(廃番の疑い・discontinued_404候補)、Amazon検索「Naturehike NH17T140-J」ヒットなし
 northface-backpack	2026-07-24	2026-07-24	5	5	0	3	0	0	0	8	ok	Amazon未設定カード 2/5 (#2,#5)
@@ -228,7 +228,7 @@ solo-tent-beginner	2025-04-21	2026-09-21	5	10	0	0	5	5	0	15	ok
 solo-tent-lightweight	2026-04-28	2026-08-28	5	5	0	0	5	5	0	10	ok	
 solo-tent-overall	2026-04-29	2026-09-21	5	5	0	0	5	5	0	10	ok	
 soto-burner	2026-06-15	2026-09-21	5	10	0	4	5	5	0	19	ok	
-soup-jar-camp	2026-09-11	2026-09-11	5	5	0	2	0	0	0	7	ok	Amazon未設定カード 3/5 (#3,#4,#5)
+soup-jar-camp	2026-09-11	2026-09-21	5	5	0	3	0	0	0	8	ok	Amazon未設定カード 2/5 (#3,#5) ｜2026-09-21 backfill(campkit-20260921-16): #4=B0CDL2G2DZ(アトラス フードポット AFP-301MBK マットブラック 310ml・楽天SKU属性 ブランド=アトラス/メーカー型番AFP-301MBK ↔ Amazonページtitle「…マットブラック AFP-301MBK」一致・楽天既定SKU マットブラック(セレクタ先頭・カードnameと同色)を採用(マットシルバー=B0CDL8DS78)・販売元アトラスオンラインショップ=楽天atlas-onlineと同一(メーカー直販)・¥1,380同額・在庫あり・★3.5(72))
 spice-box	2026-08-24	2026-08-24	5	3	0	3	0	0	0	6	card-without-link	cards NG: #3=別形式(B0C1PBZVYJ); #5=別形式(B099NJ82YB)
 stove-fan	2026-09-18	2026-09-18	5	5	0	4	0	0	0	9	ok	Amazon未設定カード 1/5 (#2)
 stove-guard	2026-09-17	2026-09-17	5	5	0	5	0	0	0	10	ok	
@@ -242,10 +242,10 @@ tent-size-beginner-guide	2026-05-25	2026-09-20	3	3	0	2	1	1	0	6	ok
 tent-waterproof-spray	2026-09-14	2026-09-14	5	10	0	3	0	0	0	13	ok	Amazon未設定カード 2/5 (#1,#5)
 tent-wood-stove	2026-07-30	2026-07-30	5	5	0	4	0	0	0	9	ok	Amazon未設定カード 1/5 (#2)
 thermal-bottle	2026-08-11	2026-08-11	5	5	0	5	0	0	0	10	ok	
-titanium-cooker	2026-09-07	2026-09-07	5	5	0	4	0	0	0	9	ok	Amazon未設定カード 1/5 (#1)
+titanium-cooker	2026-09-07	2026-09-21	5	5	0	5	0	0	0	10	ok	Amazon未設定カード 0/5 ｜2026-09-21 backfill(campkit-20260921-16): #1=B000AR2N3K(スノーピーク チタントレック900 SCS-008T・楽天商品属性 ブランド=スノーピーク/メーカー型番SCS-008T ↔ Amazon製品型番「SCS-008T」一致・ポットφ120×107/フタφ128×39/収納φ130×140/900ml+250ml/175gも一致・変種表「900ml/チタン」を採用(1400ml/チタン=B000AR2N3U、900ml/アルミ=B000AR2N2Q)・販売元 Victoria L-Breath・¥5,940同額・在庫あり・★4.3(901)。不採用: B0CWCFBB8R(ノベルティ付き・取扱不可)/B0D31C4GR9(900ml/1400ml混在の汎用ページ・取扱不可))
 titanium-mug	2026-08-11	2026-08-11	5	5	0	4	0	0	0	9	ok	Amazon未設定カード 1/5 (#5)
 torch-burner	2026-08-07	2026-08-07	5	5	0	2	0	0	0	7	ok	Amazon未設定カード 3/5 (#1,#2,#3)
-trekking-pole	2026-08-25	2026-08-25	5	5	0	2	0	0	0	7	ok	Amazon未設定カード 3/5 (#2,#4,#5)
+trekking-pole	2026-08-25	2026-09-21	5	5	0	3	0	0	0	8	ok	Amazon未設定カード 2/5 (#2,#4) ｜2026-09-21 backfill(campkit-20260921-16): #5=B0DZCGHRNM(Black Diamond トレイル BD82505 アイロンレッド・楽天SKU属性 ブランド=Black Diamond/メーカー型番BD82505 ↔ Amazonメーカー型番「BD82505」文字列一致・100〜140cm/収納65cm/480g(1ペア)/アルミ合金も一致・楽天既定SKU アイロンレッド(セレクタ先頭)と同色・販売元 楽山荘・¥18,700(現行楽天価格と同額。カードprice 17,500は旧価格→price_unconfirmed候補)・残り1点。同一品の別出品 B0DYNKDCD9(title「トレイル BD82505 アイロンレッド」・メーカー型番欄はBD社グローバルコードBD110045・Amazon出荷・¥15,800・残り3点・★4.5(5))は型番欄が不一致のため次点。B0DZCGHRNMが在庫切れになったら B0DYNKDCD9 へ差し替え可)
 two-room-tent-guide	2026-04-23	2026-06-29	5	5	0	0	5	5	0	10	ok	
 uniflame-burner	2026-06-15	2026-06-15	3	6	0	3	0	0	0	9	ok	
 uniflame-fire-grill	2026-07-27	2026-07-27	5	5	0	5	0	0	0	10	ok	
