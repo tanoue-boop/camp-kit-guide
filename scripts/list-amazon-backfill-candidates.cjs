@@ -26,6 +26,15 @@
  *        JIS アルミ合金番号（A5052/A6061/A7075）は型番とみなさない／
  *        「◯◯専用」「◯◯対応」の適合機種として書かれたブランド名はブランド加点の対象外
  *            （2026-09-21 campkit-20260921-20）／
+ *        数量セット（N脚セット/N個セット/N点セット/N台セット/N枚セット/N本セット/N組セット、N>=2）−2
+ *            ※ 連結記号の無い「2脚セット」は従来の セット品-2 に掛からず、楽天セット↔Amazon単品の構成違いで
+ *              空振りした（campkit-20260921-20 の waq-chair #5「リクライニングローチェア 2脚セット WAQ-RLC2」）。
+ *              セット品-2／複合型番セット-3 と同時該当した場合は減点幅の大きい1つだけを適用
+ *              （2026-09-21 campkit-20260921-21 A-1）／
+ *        コストコ転売品（name に コストコ/COSTCO）−3
+ *            ※ 楽天SKUのメーカー型番欄が色ごとにコストコ商品番号になり Amazon と文字列一致が取れない
+ *              （campkit-20260921-20 の coleman-sleeping-bag #5・楽天 caramelcafe。店舗コードでは判定しない）
+ *              （2026-09-21 campkit-20260921-21 A-2）／
  *        「ふるさと納税・並行輸入・訳あり・アウトレット」は除外
  *   4. 変更禁止リスト（FROZEN_SLUGS）の記事は候補から除外する。
  *   4.5 `_file/amazon-backfill-no-amazon.tsv`（slug / rank / id / judged_task / reason）があれば、
@@ -193,6 +202,28 @@ function compoundModels(name) {
   return found;
 }
 
+// 数量セット: 「2脚セット」「2個セット」「3点セット」「2本セット」のように数量＋助数詞＋セット（間の空白は任意）。
+// 連結記号（+/＋/&/＆）を伴わないため既存の セット品-2 に掛からず、楽天がセット・Amazon が単品のみの構成違いで空振りした
+// （campkit-20260921-20 の waq-chair #5「WAQ リクライニングローチェア 2脚セット WAQ-RLC2」／coleman-sleeping-bag #4「…セット 2000034772」）。
+// 数量が 1（「1個」「1脚」）は実質単品なので減点しない。全角数字も数える
+const QTY_SET_RE = /([0-9０-９]+)\s*(?:脚|個|点|台|枚|本|組)\s*セット/g;
+// コストコ転売品: name に コストコ/COSTCO。店舗コード（caramelcafe 等）での決め打ちはしない（店舗は入れ替わり、同じ店が正規品も扱う）
+const COSTCO_RE = /コストコ|costco/i;
+
+function toHalfWidthDigits(s) {
+  return s.replace(/[０-９]/g, (c) => String.fromCharCode(c.charCodeAt(0) - 0xfee0));
+}
+
+// 数量が 2 以上の「N◯セット」を返す（例: ['2脚セット']）。無ければ空配列
+function quantitySets(name) {
+  const found = [];
+  for (const m of name.matchAll(QTY_SET_RE)) {
+    const qty = Number(toHalfWidthDigits(m[1]));
+    if (qty >= 2) found.push(m[0].replace(/\s+/g, ''));
+  }
+  return found;
+}
+
 // name 中の実ブランド（適合機種として書かれただけのブランドを除く）を BRANDS の順で返す
 function realBrands(name) {
   const decor = (NAME_DECOR_RE.exec(name) || [''])[0].length;
@@ -306,12 +337,14 @@ function score(name, url) {
     s += 3;
     reasons.push(`型番+3(${tokens[0]})`);
   }
+  let connectorSet = false;
   if (tokens.length >= 2) {
     s -= 2;
     reasons.push(`複数型番-2(${tokens.join('/')})`);
   } else if (/セット/.test(name) && /[+＋&＆]/.test(name)) {
     // 「A+B セット」型の複合ページは Amazon が単体売りのみで構成違いになりやすい（15 §8(b)）
     s -= 2;
+    connectorSet = true;
     reasons.push('セット品-2');
   }
   // 型番＋型番の複合はセット品として更に −3（campkit-20260921-18）。「セット」の語だけのものは従来どおり
@@ -319,6 +352,21 @@ function score(name, url) {
   if (compounds.length) {
     s -= 3;
     reasons.push(`複合型番セット-3(${compounds[0]})`);
+  }
+  // 数量セット（2脚セット/2個セット 等）は −2（campkit-20260921-21 A-1）。セット品-2／複合型番セット-3 と同時該当した
+  // 場合は重複加算せず、減点幅の大きい方（既に付いている方）だけを残す。
+  // ※ セット品-2 と 複合型番セット-3 の同時適用（18 の設計・coleman-two-burner #4 等が 0 点になる根拠）はここでは崩さない。
+  //    崩すと「ツーバーナー+ガス」型のセット品が score 2 に浮上して 18 の対策が無効になるため
+  const qtySets = quantitySets(name);
+  if (qtySets.length && !connectorSet && !compounds.length) {
+    s -= 2;
+    reasons.push(`数量セット-2(${qtySets[0]})`);
+  }
+  // コストコ転売品は楽天SKUの型番欄がコストコ商品番号になり Amazon と文字列一致が取れない（campkit-20260921-21 A-2）。
+  // EXCLUDE_RE には入れない（完全除外ではなく減点にとどめる）
+  if (COSTCO_RE.test(name)) {
+    s -= 3;
+    reasons.push('コストコ転売-3');
   }
   // 「◯◯専用」「◯◯対応」として書かれた適合機種のブランドは加点しない（campkit-20260921-20 A-3）
   const brands = realBrands(name);
@@ -433,4 +481,6 @@ function main() {
   console.log(`出力: ${path.relative(ROOT, OUT)}`);
 }
 
-main();
+// 単体テスト（score() を直接呼ぶ）用に export。直接実行時のみ main を走らせる（campkit-20260921-21）
+module.exports = { score, quantitySets, realBrands, modelTokens };
+if (require.main === module) main();
