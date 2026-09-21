@@ -382,13 +382,14 @@ function expandSlashUnits(nk) {
 //   固定しても既定の S で判定されていた（camp-rainwear #2）。1 文字の照合は誤爆しやすいので次の条件を全部満たすときだけ名指しと認める。
 //   1. サイズ軸に限る: 軸の値（注意書きを除く）がすべて既知のサイズラベル（XS S M L XL XXL LL 3L 4L F FREE フリー）か
 //      「M(胸囲88-96)」のような 1〜3 文字の英大文字/数字＋括弧補足 で構成されている。色軸・タイプ軸・数量軸には適用しない（軸名は見ない）
-//      ※ 既知ラベルは task-31 の列挙をそのまま含む同一体系の族として持つ: XXS〜XXXL／LL・LLL／2L〜9L／2XL〜9XL と、アパレルの B体
-//        （SB／MB／LB／LLB／MBB）。発端の camp-rainwear #2（ミズノ）のサイズ軸が「S|M|L|XL|2XL|SB|MB|MBB」で、列挙どおりだと軸自体が
-//        サイズ軸と認められず緩和が 1 枚も効かないため。列挙に戻すなら SIZE_LABEL_RE を差し替えるだけでよい
+//      ※ 既知ラベルは task-31 の列挙をそのまま含む同一体系の族として持つ: XXS〜XXXL／LL・LLL／EL（ワークウェアの XL 表記）／2L〜9L／
+//        2XL〜9XL と、アパレルの B体（SB／MB／LB／LLB／MBB）。発端の camp-rainwear #2（ミズノ）のサイズ軸が「S|M|L|XL|2XL|SB|MB|MBB」、
+//        同 #4（Makku）が「S|M|L|LL|EL|4L」で、列挙どおりだと軸自体がサイズ軸と認められず緩和が効かないため。列挙に戻すなら SIZE_LABEL_RE を
+//        差し替えるだけでよい
 //   2. 完全一致のみ: 前方一致（skuValueMatches）は使わない。skuValueMatches 側の「2 文字未満は不使用」もそのまま
 //   3. name 側では独立トークンのときだけ: 前後が 空白／全角空白／`/`／`｜`／括弧／【】／行頭行末 のいずれか（直後が「サイズ」でも可）。
 //      直前直後が英数字・ハイフンなら拾わない（M-STYLE の M／SUS6A の S／AS-7100 の S）。英大文字のみ・小文字（3×3m の m）は拾わない
-const SIZE_LABEL_RE = /^(?:X{0,3}S|M|X{0,3}L|L{2,3}|[2-9]L|[2-9]XL|F|FREE|フリー)(?:B{1,2})?$/;
+const SIZE_LABEL_RE = /^(?:X{0,3}S|M|X{0,3}L|L{2,3}|EL|[2-9]L|[2-9]XL|F|FREE|フリー)(?:B{1,2})?$/;
 function sizeLabelCore(v) {
   const m = /^([^\s()]{1,4})\s*(\([^()]*\))?$/.exec(toHalfWidth(v).trim());
   if (!m) return '';
@@ -1545,6 +1546,8 @@ function runTests() {
     ct('1文字サイズ: 2XL／B体（SB/MB/MBB）を含むミズノのサイズ軸もサイズ軸（camp-rainwear #2 の実軸）', a14 === 'M', a14 || '(なし)');
     const a15 = nsv({ key: 'サイズ', values: ['S', 'M', 'L', 'XL', '2XL', 'SB', 'MB', 'MBB'] }, 'ミズノ レインスーツ A2MG8A01 MB ドレスネイビー');
     ct('1文字サイズ: 2 文字以上の値（MB）は従来の照合のまま', a15 === 'MB', a15 || '(なし)');
+    const a17 = nsv({ key: 'サイズ', values: ['S', 'M', 'L', 'LL', 'EL', '4L'] }, 'Makku マック レインウェア 上下セット AS-7100 ブルー M 耐水圧10000mm');
+    ct('1文字サイズ: EL（ワークウェアの XL 表記）を含む Makku のサイズ軸もサイズ軸（camp-rainwear #4 の実軸）', a17 === 'M', a17 || '(なし)');
     const a16 = nsv({ key: 'サイズ', values: ['S', 'M', 'L', 'XL', 'ワイド'] }, 'レインウェア M ネイビー');
     ct('1文字サイズ（効かない）: サイズラベル以外の値（ワイド）が混ざる軸は対象外', a16 === '', a16 || '(なし)');
     const html5 = '<title>t</title>{"itemInfoSku":{"title":"レインスーツ","manageNumber":"x"},"variantSelectors":[{"label":"サイズ","values":[{"label":"S"},{"label":"M"},{"label":"L"}]},{"label":"カラー","values":[{"label":"25：ブルー"},{"label":"71：ドレスネイビー"}]}],"sku":[{"variantId":"s-blue","selectorValues":["S","25：ブルー"],"taxIncludedPrice":13750},{"variantId":"m-blue","selectorValues":["M","25：ブルー"],"taxIncludedPrice":15840},{"variantId":"m-navy","selectorValues":["M","71：ドレスネイビー"],"taxIncludedPrice":15840}]}';
