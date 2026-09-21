@@ -1,24 +1,13 @@
 slug	rank	id	score	name	rakuten_url	price	score_reason
-mountain-camp-mat	2	mat-rank-2	2	キャンプ マット キャンプ用品 [ アルミコーティングで熱を逃がさない オールシーズン使えるリバーシブル 凹凸で体圧を分散 ] テント アウトドア マット レジャーマット 寝袋 マット 防災 グッズ アウトドアマット 登山 登山用品 登山グッズ LAD WEATHER ラドウェザー	https://item.rakuten.co.jp/vanilla-vague/ladsheet006/	2280	ブランド+2(ladweather)
-mummy-sleeping-bag	1	bearsrock-15	2	Bears Rock -15度 マミー型 洗える寝袋 丸洗い センタージッパー 4シーズン対応 冬用	https://item.rakuten.co.jp/gorilla55/fx-405/	10350	ブランド+2(bearsrock)
-nanga-down-jacket	1	nanga-hinoc-limhood	2	NANGA（ナンガ） 別注HINOC ヒノック リムフード ダウンジャケット カーキ 2026年モデル 日本製	https://item.rakuten.co.jp/rococostore/010900-2-06/	64900	ブランド+2(nanga)
-nanga-down-jacket	3	nanga-whitelabel-cardigan	2	NANGA WHITE LABEL（ナンガ ホワイトレーベル） ダウンカーディガン JET BLACK 別注 900FP グースダウン	https://item.rakuten.co.jp/moonloid/nwl-0005/	47300	ブランド+2(nanga)
-nanga-down-jacket	4	nanga-whitelabel-type1	2	NANGA WHITE LABEL（ナンガ ホワイトレーベル） 最強ダウンジャケット タイプ1 JET BLACK 別注	https://item.rakuten.co.jp/moonloid/nwl-0001/	137500	ブランド+2(nanga)
-one-touch-tent	1	fielddoor-onetouch-200	2	FIELDOOR ワンタッチテント 200cm 2〜4人用 遮光・遮熱UVカット スクエア型	https://item.rakuten.co.jp/maxshare/max-a09177/	7920	ブランド+2(fieldoor)
-one-touch-tent	3	fielddoor-onetouch-hexagon	2	FIELDOOR ワンタッチテント ヘキサゴン型 3m×2.5m 4〜5人用 完全遮光	https://item.rakuten.co.jp/maxshare/a07578/	11990	ブランド+2(fieldoor)
-outdoor-wagon	4	fieldoor-wagon	2	FIELDOOR アウトドアワゴン	https://item.rakuten.co.jp/smile88/a14444/	8910	ブランド+2(fieldoor)
-pup-tent	3	soomloom-pup-tc	2	SoomLoom パップテント ノーマル/ビッグサイズ 軍幕 TC素材 ポリコットン ソロテント 防風防雨	https://item.rakuten.co.jp/yiprefer/outdoor-0640102/	8400	ブランド+2(soomloom)
-screen-tarp	2	st-fieldoor-ot	2	【楽天1位】FIELDOOR テント スクリーンタープ スクリーンテント ワンタッチ 幅285×奥行285cm 日よけ ドームテント タープテント タープ キャノピー ポール2本付き 日よけテント 虫よけ 蚊帳 メッシュ 大型 サンシェード 組み立て 簡単 1年保証 ★[送料無料]	https://item.rakuten.co.jp/maxshare/a11938/	13860	ブランド+2(fieldoor)
-stove-fan	2	fieldoor-5blade-16cm	2	FIELDOOR ストーブファン 5枚羽根 直径約16cm	https://item.rakuten.co.jp/maxshare/a08438/	4510	ブランド+2(fieldoor)
 winter-camp-gloves	5	lad-weather-alt	2	ラドウェザー LAD WEATHER 完全防水 3M高級中綿 手袋 スマートフォン対応 すべり止め	https://item.rakuten.co.jp/emix/ladgloves009/	1480	ブランド+2(ladweather)
 mestin-recommend	5	mr250-mestin-set	1	MR-250 Pro+ メスティン All in1セット レギュラー バリ取り済 湯切り穴 目盛付 5点セット シルバー	https://item.rakuten.co.jp/ohstore/2b61kqcpr6/	2880	型番+3(MR-250) セット品-2
 coleman-two-burner	4	cb-coleman-red-gasset	0	コールマン ツーバーナーセット LPツーバーナーストーブレッド 純正LPガス燃料[Tタイプ]470g×2個 2000021950+5103A470T Coleman	https://item.rakuten.co.jp/himaraya/0000563892set/	14460	型番+3(5103A470T) セット品-2 複合型番セット-3(2000021950+5103A470T) ブランド+2(coleman)
 day-camp-starter-set	1	starter-rank-1	0	【楽天1位】キャンプ お買い得 4点セット （ファミリーテント+タープ+シート+ポール） 4人〜6人用 大型 キャンプテント ドームテント キャノピーテント フルクローズ 組み立て簡単 入門 初心者 エントリー アウトドア キャンプ FIELDOOR 1年保証 ■[送料無料]	https://item.rakuten.co.jp/smile88/a18347/	27830	セット品-2 ブランド+2(fieldoor)
 day-camp-starter-set	2	starter-rank-2	0	キャンプ お買い得 4点セット （ファミリーテント+タープ+シート+ポール） 4人〜6人用 大型 キャンプテント ドームテント キャノピーテント フルクローズテント テント 組み立て簡単 入門 初心者 エントリー アウトドア キャンプ FIELDOOR ●[送料無料]	https://item.rakuten.co.jp/happy11/a18347/	27830	セット品-2 ブランド+2(fieldoor)
 gas-lantern	1	gaslantern-rank-1	0	Coleman(コールマン) 2500ノーススターLPガスランタン 最大1543ルーメン+ガス燃料+マントル【お得な3点セット】 レッド 2000015521	https://item.rakuten.co.jp/naturum/2570772/	11342	セット品-2 ブランド+2(coleman)
-tarp-pole	2	fielddoor-pole-28	0	FIELDOOR アルミ製テントポール タープポール 2本セット 直径28mm 高さ89〜230cm スライド伸縮式 無段階調整	https://item.rakuten.co.jp/smile88/a18851/	3300	数量セット-2(2本セット) ブランド+2(fieldoor)
-tarp-pole	3	soomloom-pole-28	0	Soomloom タープポール テントポール アルミ製 2本セット 直径28mm 高さ60〜240cm 4段階調整 ビッグタープ対応	https://item.rakuten.co.jp/yiprefer/outdoor-012/	4464	数量セット-2(2本セット) ブランド+2(soomloom)
-tarp-pole	4	fielddoor-pole-32	0	FIELDOOR アルミ製テントポール タープポール 2本セット 直径32mm 高さ80〜250cm スライド伸縮式 無段階調整	https://item.rakuten.co.jp/smile88/a13774/	3960	数量セット-2(2本セット) ブランド+2(fieldoor)
+nanga-down-jacket	1	nanga-hinoc-limhood	-1	NANGA（ナンガ） 別注HINOC ヒノック リムフード ダウンジャケット カーキ 2026年モデル 日本製	https://item.rakuten.co.jp/rococostore/010900-2-06/	64900	別注品-3 ブランド+2(nanga)
+nanga-down-jacket	3	nanga-whitelabel-cardigan	-1	NANGA WHITE LABEL（ナンガ ホワイトレーベル） ダウンカーディガン JET BLACK 別注 900FP グースダウン	https://item.rakuten.co.jp/moonloid/nwl-0005/	47300	別注品-3 ブランド+2(nanga)
+nanga-down-jacket	4	nanga-whitelabel-type1	-1	NANGA WHITE LABEL（ナンガ ホワイトレーベル） 最強ダウンジャケット タイプ1 JET BLACK 別注	https://item.rakuten.co.jp/moonloid/nwl-0001/	137500	別注品-3 ブランド+2(nanga)
 alcohol-stove	3	al-gotoku-set	-3	アルコールストーブ 五徳セット（収納袋付き）	https://item.rakuten.co.jp/umbrelland/co768/	1880	汎用語のみ-3
 alcohol-stove	4	al-bottle-set	-3	アルコールストーブ バーナー（燃料ボトル付き）	https://item.rakuten.co.jp/suports-kuiyouo/skittle1/	1390	汎用語のみ-3
 backpack-large	1	tousen-40-60l	-3	tousen 登山リュック 40〜60L 大容量 バックパック 防水 軽量 多機能 キャンプ用リュック	https://item.rakuten.co.jp/tousenmizumoto/c-666-1/	3852	汎用語のみ-3
@@ -172,6 +161,7 @@ tc-tarp-takibi	5	unigear-hexa-tc	-3	Unigear ヘキサタープ TCポリコット
 tent-waterproof-spray	1	saphir-super-water-repellent	-3	SAPHIR 超撥水スプレー 300ml 撥水効果3ヶ月 衣類 靴 バッグ アウトドア テント キャンプ用品	https://item.rakuten.co.jp/primeavenue/8810002000/	2970	汎用語のみ-3
 tent-wood-stove	2	honma-clock1-glass	-3	ホンマ製作所 時計1型 薪ストーブ ガラス窓付き	https://item.rakuten.co.jp/yamakishi/35773184/	8980	汎用語のみ-3
 titanium-mug	5	tm-pykespeak-junchitan	-3	PYKES PEAK 純チタンマグ 日本製	https://item.rakuten.co.jp/pykespeak/p0135tm301/	1000	汎用語のみ-3
+trekking-pole	2	hikinglife-carbon-pole	-3	HikingLife カーボン折りたたみトレッキングポール 2本セット レギュラーサイズ	https://item.rakuten.co.jp/hikinglife/hl-c-009/	8980	汎用語のみ-3
 water-jug	2	wj-allegia	-3	【楽天1位】アレジア アイスコンテナ ジャグ アウトドア 真空 ボトル 1.8L 3.5L 氷 持ち運び 長時間 保冷 HOTも対応 ステンレス キャンプ 氷入れ AR-VICB ALLEGiA	https://item.rakuten.co.jp/a-and-r-shop/p0002340/	5980	汎用語のみ-3
 water-jug	5	wj-livingut	-3	ウォータータンク 3タイプ 10L 12L 20L コック付き （ 水 タンク 防災グッズ ウォータージャグ 給水タンク 給水 ポリタンク 防災用品 アウトドア キャンプ 持ち運び ウォッシャブルタンク 水タンク 水缶 ）	https://item.rakuten.co.jp/livingut/228188/	2180	汎用語のみ-3
 waterproof-backpack	2	tousen-daiyouryou	-3	tousen 登山リュック 40〜60L 大容量 防水 軽量 多機能 バックパック	https://item.rakuten.co.jp/tousenmizumoto/c-666-1/	3852	汎用語のみ-3
@@ -192,4 +182,3 @@ guy-rope-recommend	1	dailycompass-tentrope-8	-5	テントロープ ガイロー�
 guy-rope-recommend	5	unicona-guyrope-3mm-4	-5	UNICONA ガイロープ テントロープ 4本セット 3mm×4m（反射材入り・自在金具付）	https://item.rakuten.co.jp/unicona/uc-0170/	1000	数量セット-2(4本セット) 汎用語のみ-3
 sierra-cup	2	sierra-3set	-5	シェラカップ 3個セット フック付き 計量メモリ付き アウトドア食器	https://item.rakuten.co.jp/alice-zk/od297/	1029	数量セット-2(3個セット) 汎用語のみ-3
 tent-waterproof-spray	5	kaminaga-waterproof-spray-2set	-5	カミナガ防水スプレー 420ml×2本セット 送料無料 テント スキー スノボ 皮革製品	https://item.rakuten.co.jp/kurashikaiteki-shop/10000565/	2530	数量セット-2(2本セット) 汎用語のみ-3
-trekking-pole	2	hikinglife-carbon-pole	-5	HikingLife カーボン折りたたみトレッキングポール 2本セット レギュラーサイズ	https://item.rakuten.co.jp/hikinglife/hl-c-009/	8980	数量セット-2(2本セット) 汎用語のみ-3

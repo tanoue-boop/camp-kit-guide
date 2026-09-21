@@ -30,11 +30,20 @@
  *            ※ 連結記号の無い「2脚セット」は従来の セット品-2 に掛からず、楽天セット↔Amazon単品の構成違いで
  *              空振りした（campkit-20260921-20 の waq-chair #5「リクライニングローチェア 2脚セット WAQ-RLC2」）。
  *              セット品-2／複合型番セット-3 と同時該当した場合は減点幅の大きい1つだけを適用
- *              （2026-09-21 campkit-20260921-21 A-1）／
+ *              （2026-09-21 campkit-20260921-21 A-1）
+ *            ※ ポール類（name に ポール/pole/支柱）の「N本セット」は減点しない。タープポールは Amazon 側も 2本組で
+ *              売られるのが普通で（FIELDOOR 28mm 2本セット B0F1F4VMFB／32mm B097T1MC2P の実在を 21 で確認）、
+ *              21 で tarp-pole #2/#3/#4 が過剰に落ちた。助数詞が 本 以外（脚/個/点/台/枚/組）はポール類でも従来どおり
+ *              （2026-09-21 campkit-20260921-22 A-1）／
  *        コストコ転売品（name に コストコ/COSTCO）−3
  *            ※ 楽天SKUのメーカー型番欄が色ごとにコストコ商品番号になり Amazon と文字列一致が取れない
  *              （campkit-20260921-20 の coleman-sleeping-bag #5・楽天 caramelcafe。店舗コードでは判定しない）
  *              （2026-09-21 campkit-20260921-21 A-2）／
+ *        販路限定の別注品（name に 別注）−3
+ *            ※ 楽天ショップ別注モデルは Amazon 側に同一品が無い可能性が高く、多軸バリエーションで子ASINにも辿り着きにくい
+ *              （campkit-20260921-21 §10 の nanga-down-jacket #1/#3/#4。#1 は楽天のメーカー型番欄が `-`）。
+ *              `WHITE LABEL`／`ホワイトレーベル` はライン名なので単独では判定しない。EXCLUDE_RE には入れない
+ *              （2026-09-21 campkit-20260921-22 A-2）／
  *        「ふるさと納税・並行輸入・訳あり・アウトレット」は除外
  *   4. 変更禁止リスト（FROZEN_SLUGS）の記事は候補から除外する。
  *   4.5 `_file/amazon-backfill-no-amazon.tsv`（slug / rank / id / judged_task / reason）があれば、
@@ -206,20 +215,36 @@ function compoundModels(name) {
 // 連結記号（+/＋/&/＆）を伴わないため既存の セット品-2 に掛からず、楽天がセット・Amazon が単品のみの構成違いで空振りした
 // （campkit-20260921-20 の waq-chair #5「WAQ リクライニングローチェア 2脚セット WAQ-RLC2」／coleman-sleeping-bag #4「…セット 2000034772」）。
 // 数量が 1（「1個」「1脚」）は実質単品なので減点しない。全角数字も数える
-const QTY_SET_RE = /([0-9０-９]+)\s*(?:脚|個|点|台|枚|本|組)\s*セット/g;
+const QTY_SET_RE = /([0-9０-９]+)\s*(脚|個|点|台|枚|本|組)\s*セット/g;
+// ポール類（タープポール／テントポール／支柱）は Amazon 側も「2本セット」で売られるのが普通なので、助数詞 本 の数量セットは
+// 楽天セット↔Amazon単品の構成違いに当たらない。campkit-20260921-21 A-1 の数量セット-2 で tarp-pole #2/#3/#4
+// （FIELDOOR 28mm／Soomloom 28mm／FIELDOOR 32mm いずれも 2本セット）が score 2→0 に過剰に落ちたが、Amazon には
+// FIELDOOR 伸縮式アルミテントポール 2本セット（直径28mm B0F1F4VMFB／直径32mm B097T1MC2P）が実在した。
+// name に ポール/pole/支柱 を含み、かつ助数詞が 本 のときだけ減点しない。脚/個/点/台/枚/組 はポール類でも従来どおり減点し、
+// ポール以外の「N本セット」（防水スプレー 2本セット等）も従来どおり −2（2026-09-21 campkit-20260921-22 A-1）
+const POLE_RE = /ポール|pole|支柱/i;
 // コストコ転売品: name に コストコ/COSTCO。店舗コード（caramelcafe 等）での決め打ちはしない（店舗は入れ替わり、同じ店が正規品も扱う）
 const COSTCO_RE = /コストコ|costco/i;
+// 販路限定の別注品: name に 別注。楽天ショップ別注モデルは Amazon 側に同一品が無い可能性が高く、多軸バリエーション
+// （28〜30SKU）で「セレクタ先頭値」を取っても子ASINに辿り着きにくい（campkit-20260921-21 §10 の nanga-down-jacket #1/#3/#4）。
+// `WHITE LABEL`／`ホワイトレーベル` はライン名であって別注とは限らないので、`別注` の語だけで判定する。
+// EXCLUDE_RE には入れず減点にとどめる（2026-09-21 campkit-20260921-22 A-2）
+const BESPOKE_RE = /別注/;
 
 function toHalfWidthDigits(s) {
   return s.replace(/[０-９]/g, (c) => String.fromCharCode(c.charCodeAt(0) - 0xfee0));
 }
 
-// 数量が 2 以上の「N◯セット」を返す（例: ['2脚セット']）。無ければ空配列
+// 数量が 2 以上の「N◯セット」を返す（例: ['2脚セット']）。無ければ空配列。
+// ポール類の「N本セット」は除く（A-1 の是正。ポール類でも 脚/個/点/台/枚/組 は返す）
 function quantitySets(name) {
   const found = [];
+  const isPole = POLE_RE.test(name);
   for (const m of name.matchAll(QTY_SET_RE)) {
     const qty = Number(toHalfWidthDigits(m[1]));
-    if (qty >= 2) found.push(m[0].replace(/\s+/g, ''));
+    if (qty < 2) continue;
+    if (isPole && m[2] === '本') continue;
+    found.push(m[0].replace(/\s+/g, ''));
   }
   return found;
 }
@@ -367,6 +392,11 @@ function score(name, url) {
   if (COSTCO_RE.test(name)) {
     s -= 3;
     reasons.push('コストコ転売-3');
+  }
+  // 販路限定の別注品は Amazon 側に同一品が無い可能性が高い（campkit-20260921-22 A-2）。`別注` の語だけで判定
+  if (BESPOKE_RE.test(name)) {
+    s -= 3;
+    reasons.push('別注品-3');
   }
   // 「◯◯専用」「◯◯対応」として書かれた適合機種のブランドは加点しない（campkit-20260921-20 A-3）
   const brands = realBrands(name);
