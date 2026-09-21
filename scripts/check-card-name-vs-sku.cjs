@@ -33,6 +33,8 @@
  *                     itemName・SKU属性・仕様欄（商品説明）のいずれにも無い。バリエーション軸にその数値が値として並ぶ
  *                     ページでは選択SKUのセレクタ値＋SKU属性だけで判定。範囲（40〜60L／50L以上）や同単位の並記
  *                     （8/10cm／1.9L 3.8L）は単独スペックではないので size_unspecified 側で扱う
+ *   variant_unavailable カード name が名指しした変種（軸の値、または軸の値に現れる数値スペック「2人用」）に対応する SKU がページの
+ *                     SKU 一覧に無い（軸の値としては並ぶが選べない）。「カードの商品が買えない」実態は全変種欠品と同じ（第5弾で追加・検出のみ）
  *   set_mismatch      カード name がセット表記なのに実SKUが単品（セット/単品/数量を選ぶ軸があればその既定値、無ければ
  *                     itemName／メーカー型番にセット語・「A+B」なし）、または逆（カードが単品表記なのに既定SKUがセット）
  *                     セット軸＝「なし/本体のみ/単品」の値がある・値の半数以上がセット語（全値ではない）・数量軸（1個の選択肢あり）
@@ -65,7 +67,7 @@ const ROOT = path.join(__dirname, '..');
 const POSTS_DIR = path.join(ROOT, 'content', 'posts');
 const OUT = path.join(ROOT, '_file', 'card-name-check.tsv');
 const HTML_DIR = path.join(ROOT, '_file', '_work', 'html-24');
-const TASK_ID = 'campkit-20260921-27'; // 走査・再判定を行ったタスク（TSV の judged_task 列に入る）
+const TASK_ID = 'campkit-20260921-28'; // 走査・再判定を行ったタスク（TSV の judged_task 列に入る）
 
 // ---------------------------------------------------------------------------
 // 閾値・定数（A-4 の回帰検証で調整する。slug / id を条件に埋め込まない）
@@ -383,6 +385,8 @@ function nameSpecifiedValues(a, cardName) {
       const i = nk.indexOf(vk);
       if (i < 0) continue;
       if (i > 0 && /[0-9.]/.test(nk[i - 1]) && /^[0-9]/.test(vk)) continue;
+      //   範囲「40〜60L」「2-4人用」の上限値は名指しではない（range は size_unspecified 側で扱う。第5バッチ waterproof-backpack #2: 60L が選ばれ 40L の既定SKUと違う価格で判定していた）
+      if (i > 0 && /[~\-]/.test(nk[i - 1]) && /^[0-9]/.test(vk)) continue;
       out.push({ v, pos: i, len: vk.length });
       break;
     }
@@ -650,6 +654,20 @@ function typeWordFound(word, hay) {
   const hit = bg.filter((b) => hay.includes(b)).length;
   return hit / bg.length >= TYPE_BIGRAM_MIN;
 }
+// 英字の商品名（「ZZZ BAG」のように英字語が2語以上連続する固有名）が実リンク先に連続して現れれば、型語（寝袋）が無くても同じ商品とみなす。
+//   店が「ブランド＋商品名」だけで itemName を書き、カテゴリ語（寝袋/テント）を入れないページで type_mismatch にしない（第5バッチ washable-sleeping-bag #5:
+//   name「NANGA ZZZ BAG 10 寝袋」↔ itemName「ナンガ(NANGA) ZZZ BAG 10 REGULAR FGY」）。1語だけの一致（BAG）は根拠にしない。ブランド語・単位語は除く
+function englishPhraseFound(name, hay, brand) {
+  const brandKeys = new Set(tokens(brand || '').concat(tokens(brand || '').map((t) => t.replace(/\(.*$/, ''))));
+  const toks = tokens(toHalfWidth(stripDecor(name)));
+  const hayNoSpace = hay.replace(/\s+/g, '');
+  for (let i = 0; i + 1 < toks.length; i++) {
+    const a = toks[i], b = toks[i + 1];
+    if (![a, b].every((t) => /^[a-z]{2,}$/.test(t) && !brandKeys.has(t) && !UNIT_TOKEN_RE.test(t))) continue;
+    if (hay.includes(`${a} ${b}`) || hayNoSpace.includes(a + b)) return true;
+  }
+  return false;
+}
 
 // 数値スペック抽出: [{kind, value, unit, raw}]
 function specs(name) {
@@ -712,6 +730,9 @@ function specFound(sp, hayText, attrs) {
     if (n % 100 === 0) for (const u of UNIT_ALIASES.m) cands.push(norm((n / 100) + u));
   }
   if (sp.kind === 'width') for (const u of UNIT_ALIASES.cm) cands.push(norm('幅' + val + u), norm('幅 ' + val + u));
+  //   「幅20×奥行20×高さ7.5cm」のように単位が末尾にしか無い寸法列は、照合先も同じ書き方（幅20x奥行20x…）なので「幅20」の直後が数字・小数点・mm でなければ一致
+  //   （第5バッチ wooden-tableware #2: 仕様欄「本体サイズ（約）：幅20×奥行20×高さ7.5cm」が name と同一表記なのに 20cm の候補だけで探して不一致になった）
+  if (sp.kind === 'width' && new RegExp('幅\\s*' + escapeRe(norm(val)) + '(?![0-9.]|\\s*mm)').test(hay)) return true;
   if (sp.kind === 'person') cands.push(norm(val + '人'), norm(val + '名'));
   for (const c of cands) {
     if (!c) continue;
@@ -736,6 +757,38 @@ function specFound(sp, hayText, attrs) {
     }
   }
   return false;
+}
+
+// variant_unavailable（作業D・campkit-20260921-28）: カード name が名指しした変種（軸の値、または軸の値に現れる数値スペック）に対応する
+//   SKU がページの SKU 一覧に無い（軸の値としては並ぶが選べない＝販売終了か非表示）。「カードに書いてある商品が買えない」点で
+//   pup-tent #4（購入可能 SKU がスノースカート付きのみ）／solo-tent-overall #4（1-2人用 SKU が無く 3-4人用のみ）と同じ実態。
+//   - 名指しの判定は nameSpecifiedValues（セット軸は除く）。並記（5cm/10cm）は1つでも SKU にあれば整合
+//   - 数値スペック（2人用）は、軸の値にその数値＋単位が現れる（axesCarryValue）のに、その値を持つ SKU が無いとき。name が同じ軸の値を
+//     文字列で名指ししていればそちらの判定に任せる
+//   - 軸の値が SKU の selectorValues に1つも現れない軸（label と value が違うページ）は判定しない（誤検知ガード）
+//   - 軸に「1.5L」と「1.5L│2～3人・調理」のように新旧ラベルが並び SKU が長い方だけを使うページがある（camp-kettle-recommend #1）ので、
+//     名指しした値を含む SKU 値があれば整合
+//   在庫 0（qty=0）は out_of_stock の管轄なので SKU の在庫は見ない
+function variantUnavailable(name, page) {
+  if (!page || !Array.isArray(page.skus) || !page.skus.length || !page.axes.length) return [];
+  const miss = [];
+  const skuHas = (i, v) => { const vk = norm(v).replace(/\s+/g, ''); return page.skus.some((s) => norm(s.selectorValues[i] || '').replace(/\s+/g, '').includes(vk)); };
+  const namedByAxis = page.axes.map((a, i) => {
+    if (isSetAxis(a) || !a.values.some((v) => skuHas(i, v))) return null;
+    return nameSpecifiedValues(a, name).map((x) => x.v);
+  });
+  namedByAxis.forEach((named, i) => {
+    if (named && named.length && !named.some((v) => skuHas(i, v))) miss.push(`${page.axes[i].key}:${named.join('|')}`);
+  });
+  for (const sp of specs(name)) {
+    if (sp.kind === 'range' || !axesCarryValue(page.axes, sp)) continue;
+    const units = UNIT_ALIASES[sp.unit] || [sp.unit];
+    const re = new RegExp('(?<![0-9.])' + escapeRe(sp.value) + '\\s*(?:' + units.map(escapeRe).join('|') + ')(?![A-Za-z])', 'i');
+    const vals = [];
+    page.axes.forEach((a, i) => { if (namedByAxis[i] && !namedByAxis[i].length) a.values.forEach((v) => { if (re.test(toHalfWidth(v))) vals.push([i, v]); }); });
+    if (vals.length && !vals.some(([i, v]) => skuHas(i, v))) miss.push(sp.raw.trim());
+  }
+  return uniq(miss);
 }
 
 // ---------------------------------------------------------------------------
@@ -779,12 +832,13 @@ function judge(card, page, http) {
   //   店が商品名に別の呼び方（「リラックスローチェア F-1002C」↔「ハイバックチェア」）を使っているだけの誤検知を避ける（第3バッチ fireproof-chair #5）
   //   英字だけの型語（catalyst／scree）は「見つかった」側の根拠にだけ使う。英字語しか無い name（「キャンピングムーン CAMPINGMOON ガスランタン」の
   //   先頭20字＝英字ブランド名だけ）で照合を始めると、店が英字名を書いていないだけで type_mismatch になる（gas-lantern #5）
+  //   英字2語以上の固有名（ZZZ BAG）が itemName に連続して一致していれば、カテゴリ語（寝袋）が無くても同じ商品（englishPhraseFound）
   const tw = typeWords(name, page.brand);
   const twJp = tw.filter((w) => !/^[a-z]+$/.test(w));
   if (twJp.length && !(cm.length && !missing.length)) {
     const hay = norm(keyText);
     const found = tw.filter((w) => typeWordFound(w, hay));
-    if (found.length < TYPE_MIN_COMMON) { flags.push('type_mismatch'); notes.push(`type:${tw.join('|')}`); }
+    if (found.length < TYPE_MIN_COMMON && !englishPhraseFound(name, hay, page.brand)) { flags.push('type_mismatch'); notes.push(`type:${tw.join('|')}`); }
   }
 
   // spec_mismatch
@@ -810,6 +864,10 @@ function judge(card, page, http) {
     return !specFound(sp, hay, first.attrs);
   });
   if (missSpec.length) { flags.push('spec_mismatch'); notes.push(`spec:${missSpec.map((s) => s.raw.trim()).join('|')}`); }
+
+  // variant_unavailable（name が名指しした変種の SKU がページに無い。作業D・campkit-20260921-28。検出のみ・起票は 29 以降）
+  const vu = variantUnavailable(name, page);
+  if (vu.length) { flags.push('variant_unavailable'); notes.push(`variant:${vu.join('|')}`); }
 
   // set_mismatch
   //   セット/単品を選ぶ軸（値に セット/付き/入り、または なし/本体のみ を含む軸）があればその選択SKUの値で判定。
@@ -1227,6 +1285,37 @@ function runTests() {
   t('type_mismatch なし: 先頭の「お買い物マラソン」は飛ばし、分割前に販促文言を外す（camp-chair-lightweight #4 の副作用）', { name: '「お買い物マラソン」Moon Lence アウトドアチェア キャンプ椅子 折りたたみ コンパクト 超軽量907g CH-7', price: '3799' },
     mkPage({ itemName: 'Moon Lence アウトドアチェア 折りたたみ キャンプ椅子 コンパクト 907g超軽量 耐荷重150kg CH-7', makerModel: 'CH-7B', brand: 'MOON LENCE', price: 3799, axes: [{ key: 'カラー', values: ['ブラック', 'オレンジ'] }] }), 200, ['store_copy', 'color_unspecified'], ['type_mismatch']);
 
+  // ── 第5バッチ（campkit-20260921-28）で潰した誤検知 ──
+  t('type_mismatch なし: 英字の商品名「ZZZ BAG」が itemName に連続して一致すればカテゴリ語（寝袋）が無くてもよい（washable-sleeping-bag #5）', { name: '[ナンガ] NANGA ZZZ BAG 10 寝袋', price: '11190' },
+    mkPage({ itemName: 'ナンガ(NANGA) ZZZ BAG 10 REGULAR FGY N2600-2C091E154071', makerModel: 'N2600-2C091E154071', brand: 'ナンガ(NANGA)', price: 12650 }), 200, ['price_mismatch'], ['type_mismatch']);
+  t('type_mismatch: 英字の並びが一致しなければ従来どおり（ZZZ BAG ↔ オーロラライト）', { name: '[ナンガ] NANGA ZZZ BAG 10 寝袋', price: '11190' },
+    mkPage({ itemName: 'ナンガ(NANGA) オーロラライト 450DX REGULAR', makerModel: 'N14DX', brand: 'ナンガ(NANGA)', price: 11190 }), 200, ['type_mismatch']);
+  t('type_mismatch: 英字1語（BAG）だけの一致・ブランド語（NANGA）との並びは根拠にしない', { name: 'NANGA BAG 寝袋', price: '11190' },
+    mkPage({ itemName: 'ナンガ(NANGA) BAG ダウンジャケット', brand: 'ナンガ(NANGA)', price: 11190 }), 200, ['type_mismatch']);
+  t('spec_mismatch なし: 「幅20×奥行20×高さ7.5cm」の 幅20 は仕様欄の同じ表記に一致（wooden-tableware #2）', { name: '不二貿易 アカシア 木製食器 サラダボウル 幅20×奥行20×高さ7.5cm', price: '1554' },
+    mkPage({ itemName: '不二貿易 アカシア ラウンドボウル XL 30144 acacia tableware series [30144]', makerModel: '30144', brand: '不二貿易', price: 1980, desc: '■ 仕 様 ■ カラー：ブラウン 本体サイズ（約）：幅20×奥行20×高さ7.5cm 材質：天然木（アカシア材）' }), 200, ['price_mismatch'], ['spec_mismatch']);
+  t('spec_mismatch: 幅が違えば従来どおり（幅20 ↔ 幅25）', { name: '不二貿易 アカシア サラダボウル 幅20×奥行20×高さ7.5cm', price: '1554' },
+    mkPage({ itemName: '不二貿易 アカシア ラウンドボウル', brand: '不二貿易', price: 1554, desc: '本体サイズ（約）：幅25×奥行25×高さ7.5cm' }), 200, ['spec_mismatch']);
+  t('spec_mismatch: 「幅20」は「幅200」「幅20mm」には一致しない', { name: '不二貿易 アカシア サラダボウル 幅20×奥行20×高さ7.5cm', price: '1554' },
+    mkPage({ itemName: '不二貿易 アカシア ラウンドボウル', brand: '不二貿易', price: 1554, desc: '本体サイズ：幅200×奥行200×高さ7.5cm 幅20mm' }), 200, ['spec_mismatch']);
+  // ── 作業D（campkit-20260921-28）: variant_unavailable ──
+  t('variant_unavailable: name「2人用」に対応する軸の値「1-2人用」が SKU に無く 3-4人用しか買えない（solo-tent-overall #4）', { name: '【在庫処分77%OFF】テント 2人用 1人用テント 前室後室あり 4000mm耐水圧 ソロテント', price: '5680' },
+    mkPage({ itemName: '【在庫処分78%OFF】テント 2人用 1人用テント 前室後室あり 4000mm耐水圧', makerModel: 'HFJTD01', brand: 'HOMFINE', axes: [{ key: 'サイズ', values: ['1-2人用', '3-4人用'] }, { key: 'カラー', values: ['サンドカーキ', 'オリーブグリーン'] }],
+      skus: [[['3-4人用', 'サンドカーキ'], 5280], [['3-4人用', 'オリーブグリーン'], 5280]], desc: '4000mm' }), 200, ['variant_unavailable', 'spec_mismatch']);
+  t('variant_unavailable なし: 「1-2人用」の SKU があれば整合', { name: 'テント 2人用 1人用テント 前室後室あり 4000mm耐水圧', price: '5680' },
+    mkPage({ itemName: 'テント 2人用 1人用テント 前室後室あり 4000mm耐水圧', makerModel: 'HFJTD01', axes: [{ key: 'サイズ', values: ['1-2人用', '3-4人用'] }, { key: 'カラー', values: ['サンドカーキ', 'オリーブグリーン'] }],
+      skus: [[['1-2人用', 'サンドカーキ'], 5680], [['3-4人用', 'サンドカーキ'], 5280]] }), 200, ['color_unspecified'], ['variant_unavailable', 'spec_mismatch']);
+  t('variant_unavailable: 名指しした色「ブラウン」が軸にはあるが SKU に無い', { name: 'OneTigris ROC SHIELD パップテント ブラウン', price: '24800' },
+    mkPage({ itemName: 'OneTigris ROC SHIELD パップテント', brand: 'OneTigris', axes: [{ key: 'カラー', values: ['ブラウン', 'グリーン'] }],
+      skus: [[['グリーン'], 34100]] }), 200, ['variant_unavailable']);
+  t('variant_unavailable なし: 軸の新旧ラベル（「1.5L」と「1.5L│2～3人・調理」）で SKU が長い方だけを使う（camp-kettle-recommend #1）', { name: 'キャンピングムーン キャンプケトル 直火 やかん 1L/1.5L/2.0L アルミ', price: '2680' },
+    mkPage({ itemName: 'キャンピングムーン キャンプケトル 直火 やかん', brand: 'キャンピングムーン', axes: [{ key: 'サイズ', values: ['1.0L', '1.5L', '2.0L', '1.0L│1～2人・定番', '1.5L│2～3人・調理', '2.0L│ファミリー・大容量'] }],
+      skus: [[['1.0L│1～2人・定番'], 2380], [['1.5L│2～3人・調理'], 2680], [['2.0L│ファミリー・大容量'], 2980]] }), 200, ['size_unspecified'], ['variant_unavailable']);
+  t('variant_unavailable なし: 軸の値が SKU の selectorValues に1つも現れない軸（label≠value）は判定しない', { name: 'テント ブラウン', price: '24800' },
+    mkPage({ itemName: 'テント', axes: [{ key: 'カラー', values: ['ブラウン', 'グリーン'] }], skus: [[['c01'], 24800], [['c02'], 24800]] }), 200, [], ['variant_unavailable']);
+  t('variant_unavailable なし: 並記「5cm/10cm」は1つでも SKU にあれば整合', { name: 'Naturehike キャンプマット 厚手5cm/10cm', price: '5990' },
+    mkPage({ itemName: 'Naturehike キャンプマット', brand: 'Naturehike', axes: [{ key: '厚さ', values: ['5cm', '10cm'] }], skus: [[['10cm'], 7990]] }), 200, ['size_unspecified', 'price_mismatch'], ['variant_unavailable']);
+
   // url_unparsable は rakutenUrl() の単体テストで担保
   const urlCases = [
     ['https://hb.afl.rakuten.co.jp/hgc/x/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fluxim647%2F3sp02%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fluxim647%2Fi%2F10000005%2F', 'https://item.rakuten.co.jp/luxim647/3sp02/'],
@@ -1303,6 +1392,11 @@ function runTests() {
     ct('選択SKU: 「600/720/950ml」でカード ¥3,220 と一致する 600ml を選ぶ（thermal-bottle #3）', s5 === '600ml', s5);
     const s6 = parseRakutenHtml(html2, '', '象印 シームレス ステンレスボトル 600/720/950ml', '9999').firstSku.selectorValues[0];
     ct('選択SKU: 価格一致が無ければ name で先に出る 600ml', s6 === '600ml', s6);
+    // 第5バッチ: 範囲「40〜60L」の上限は名指しではない
+    const got6 = nameSpecifiedValues({ key: 'サイズ', values: ['40Ｌ', '60Ｌ'] }, 'tousen 登山リュック 40〜60L 大容量 防水').map((x) => x.v).join(',');
+    ct('nameSpecifiedValues: 範囲「40〜60L」の上限 60L は名指しではない（waterproof-backpack #2）', got6 === '', got6 || '(なし)');
+    const got7 = nameSpecifiedValues({ key: 'サイズ', values: ['40Ｌ', '60Ｌ'] }, 'tousen 登山リュック 60L 大容量 防水').map((x) => x.v).join(',');
+    ct('nameSpecifiedValues: 単独の「60L」は従来どおり名指し', got7 === '60Ｌ', got7);
     ct('itemCodeOf: 店名を除いた商品コード',itemCodeOf('https://item.rakuten.co.jp/futon-outlet/10002239/') === '10002239' && itemCodeOf('https://item.rakuten.co.jp/smile88/a04309_sale/?variantId=1') === 'a04309_sale', itemCodeOf('https://item.rakuten.co.jp/futon-outlet/10002239/'));
   }
   for (const c of cacheCases) {
@@ -1425,4 +1519,4 @@ if (require.main === module) {
   main().catch((e) => { console.error(e); process.exit(1); });
 }
 
-module.exports = { parseCards, loadAllCards, rakutenUrl, parseRakutenHtml, judge, specs, modelTokens, typeWords, cacheFileOf, resolveOnly, rowKey, FROZEN_SLUGS, HTML_DIR };
+module.exports = { parseCards, loadAllCards, rakutenUrl, parseRakutenHtml, judge, specs, modelTokens, typeWords, variantUnavailable, cacheFileOf, resolveOnly, rowKey, FROZEN_SLUGS, HTML_DIR };
