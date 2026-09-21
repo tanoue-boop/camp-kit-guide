@@ -372,6 +372,9 @@ ASP枠は日次で1本ずつ消費される一方、長らく**補給タスク�
 - **消化する側（executor）**: `campkit-new-article-draft`（平日日次）が、新規作成より前に pending 最上位1件を手順Fで差し替え実行し、当日3枠の1つに充てる（＝新規商品記事を1本減らす）。差し替え商品は楽天API/Amazonの実在・レビュー実績データで選び直し、KW整合性（価格帯・用途）を満たすこと。
 - **例外の範囲**: 手順Fは「既存記事は上書きしない」原則の明示的な例外。ただし触ってよいのは【対象の該当ProductCard＋その商品に紐づく比較表行・まとめ表行・description中の該当価格/商品名】のみ。記事の他の商品・構成・アフィリリンク・thumbnailは変更しない。適切な代替が無い/構成の作り直しが要る重い案件は status=needs-human にして notes に論点を残し、当日枠は新規に振り替える（品質優先）。
 - **記録**: 差し替えを実行したら `docs/seo-change-log.md` に「対象記事・旧→新・理由(issue_type)」を追記し、backlog 行を status=done（notes に日付）にする。
+- **2026-09-21 追加（campkit-20260921-25）**: `scripts/check-card-name-vs-sku.cjs`（ProductCard の name/price と楽天実SKUの整合検出）の結果から一括起票した。追加語彙は次の2つ。
+  - `issue_type=name_fix`: 商品は合っているが name の書き方だけ直す案件（複数型番の並記／楽天商品名の全選択肢列挙）。商品差し替え不要で、name を採用した1仕様に固定するだけ。
+  - `status=blocked`: 変更禁止リスト（task-16・**2026-10-18 まで**）の記事に対する起票。日次タスクは `pending` だけを消費するので拾われない。2026-10-19 以降に `pending` へ昇格させる（keyword-backlog の `blocked` と同じ運用）。
 
 ---
 

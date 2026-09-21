@@ -24,14 +24,16 @@
  *   404               HTTP 404、または商品ページが消えている（itemInfoSku が無い／エラーページ）
  *   type_mismatch     カード name 先頭 HEAD_LEN 字の「型語」（ブランド・数値・単位を除いた語）が itemName／メーカー型番／
  *                     シリーズ名のどこにも現れない（共通語数 < TYPE_MIN_COMMON）
- *   model_mismatch    カード name の型番トークンが itemName／メーカー型番／SKU属性／商品管理番号のどこにも無い
- *                     （カード→実リンク先の向きのみ。逆向きはバンドル管理番号・JAN で誤検知するため付与しない）
+ *   model_mismatch    カード name の型番トークンが itemName／メーカー型番／SKU属性／説明文の「型番」欄のどこにも無い
+ *                     （カード→実リンク先の向きのみ。逆向きはバンドル管理番号・JAN で誤検知するため付与しない。
+ *                     管理番号・URL・説明文の自由文は照合先に含めない＝改名ページ（AC70→AORA 100 mini）を見逃さないため）
  *   spec_mismatch     カード name の単独の数値スペック（幅NNcm／NNL／N人用／N合／NNNW／NNNWh／NNcm／Nm 等）が
  *                     itemName・SKU属性・仕様欄（商品説明）のいずれにも無い。バリエーション軸にその数値が値として並ぶ
  *                     ページでは選択SKUのセレクタ値＋SKU属性だけで判定。範囲（40〜60L／50L以上）や同単位の並記
  *                     （8/10cm／1.9L 3.8L）は単独スペックではないので size_unspecified 側で扱う
- *   set_mismatch      カード name がセット表記なのに実SKUが単品（セット/単品を選ぶ軸があればその既定値、無ければ
- *                     itemName／メーカー型番にセット語なし）、または逆（カードが単品表記なのに既定SKUがセット）
+ *   set_mismatch      カード name がセット表記なのに実SKUが単品（セット/単品/数量を選ぶ軸があればその既定値、無ければ
+ *                     itemName／メーカー型番にセット語・「A+B」なし）、または逆（カードが単品表記なのに既定SKUがセット）
+ *                     セット軸＝「なし/本体のみ/単品」の値がある・値の半数以上がセット語（全値ではない）・数量軸（1個の選択肢あり）
  *   color_unspecified カード name に色語が無い（軸の値の名指しも無い）のに色軸のセレクタ値が COLOR_AXIS_MIN 以上、
  *                     または name に「色A/色B」の並記
  *   size_unspecified  同様にサイズ軸（S/M/L・cm・L・ノーマル/ビッグ 等）。name の「サイズA/サイズB」並記・範囲・同単位並記も含む
@@ -58,7 +60,7 @@ const ROOT = path.join(__dirname, '..');
 const POSTS_DIR = path.join(ROOT, 'content', 'posts');
 const OUT = path.join(ROOT, '_file', 'card-name-check.tsv');
 const HTML_DIR = path.join(ROOT, '_file', '_work', 'html-24');
-const TASK_ID = 'campkit-20260921-24';
+const TASK_ID = 'campkit-20260921-25'; // 走査・再判定を行ったタスク（TSV の judged_task 列に入る）
 
 // ---------------------------------------------------------------------------
 // 閾値・定数（A-4 の回帰検証で調整する。slug / id を条件に埋め込まない）
@@ -99,7 +101,7 @@ const FROZEN_SLUGS = new Set([
 ]);
 
 // 販促文言（store_copy）。【…】内に含まれる場合と、name 中に裸で現れる場合の両方を見る
-const STORE_COPY_WORDS = /楽天\s*(?:\d+位|ランキング|1位)|ランキング\s*\d*位|送料無料|期間限定|P\s*\d+倍|ポイント\s*\d+倍|スーパーSALE|(?<![A-Za-z])SALE(?![A-Za-z])|セール|クーポン|あす楽|即納|最安値?|激安|在庫限り|数量限定|在庫処分|今だけ|限定価格|レビュー特典|マラソン|\d+\s*[%％]\s*[O0]FF|OFF[!！]|まで延長|値下げ|割引|＼[^／]*／/i;
+const STORE_COPY_WORDS = /楽天\s*(?:\d+位|ランキング|1位)|ランキング\s*\d*位|送料無料|期間限定|P\s*\d+倍|ポイント\s*\d+倍|スーパーSALE|(?<![A-Za-z])SALE(?![A-Za-z])|セール|クーポン|あす楽|即納|最安値?|激安|在庫限り|数量限定|在庫処分|今だけ|限定価格|レビュー特典|マラソン|\d+\s*[%％]\s*[O0]FF|OFF[!！]|円\s*[O0]FF|円引き?|通常価格|定価|まで延長|値下げ|割引|＼[^／]*／/i;
 const STORE_COPY_BRACKET_RE = /【[^】]*】|＼[^／]*／|\[[^\]]*\]/g;
 
 // 色語（color_unspecified）。カード name とセレクタ値の両方で使う
@@ -137,12 +139,25 @@ const PURE_DIGIT_MODEL_MIN = 7; // 純数字の型番（コールマン 20000155
 // セット表記（カード name 側）。「カセット（ガス/コンロ）」の セット は除く。
 // `+`/`＋` は語と語の間にあり、かつ片側が数字でないときだけ（"40+5"（容量）・"DARKROOM ST+("（型番末尾）は除く。
 // "Gen 2 ＋ PS100"／"268Wh ＋ 130W" は片側が英字なのでセット）
-const SET_WORD_RE = /(?<!カ)セット|(?<![A-Za-z])set(?![A-Za-z])|[0-9０-９]+\s*点|[^\s\d]\s*[+＋]\s*[^\s()（）]|\d\s*[+＋]\s*[^\s\d()（）]/i;
+//   `+` の判定は plusJoin() に分離（第2バッチ: "usb led+ランタン" の複合語・括弧内の "ソーラー＋手回し＋乾電池" の仕様並記を除く）
+const SET_WORD_RE = /(?<!カ)セット|(?<![A-Za-z])set(?![A-Za-z])|[0-9０-９]+\s*点/i;
 // セレクタ値のセット/単品判定（"MDX+" のような末尾 + は除く）
 const SET_VAL_RE = /(?<!カ)セット|(?<![A-Za-z])set(?![A-Za-z])|付き|付属|同梱|\S\s*[+＋]\s*\S|入り|付$/i;
-const NONE_VAL_RE = /^(?:なし|無し|無|-|―|本体のみ|単品|単体|標準)$|本体のみ|のみ$|なし$|無し$/;
+// 「カラーなし」「サイズなし」は色/サイズ軸のプレースホルダであってセット/単品の軸ではない（第2バッチ camp-knife-beginner #5）
+const NONE_VAL_RE = /^(?:なし|無し|無|-|―|本体のみ|単品|単体|標準)$|本体のみ|のみ$|(?<!カラー|色|サイズ|柄)(?:なし|無し)$/;
+// 数量を選ぶ軸（1個/2個セット・1枚/2枚…）はセット/単品の軸と同じ扱い（着地時は先頭値＝最少数量）
+//   ただし「1個/1枚」の選択肢がある軸だけ（枚数 [2枚, 3枚]＝付属プレート枚数のようなモデル差の軸は除く）。
+//   値は数量表記で終わるか区切り/セット/単品が続くもの（「4点脚ロックタイプ」は数量ではない）
+const QTY_AXIS_KEY_RE = /数量|數量|個数|枚数|本数|セット数|脚数|入数/;
+const QTY_VAL_RE = /^[0-9０-９]+\s*(?:個|枚|本|脚|点|袋|組|台|セット|set)(?:$|[\s(（/／・、,☆★]|セット|単品|入り|set)/i;
+// セレクタの先頭値が注意書き（「発送予定日をご確認ください。」「選択してください」）のページでは、次の実値を先頭値とみなす
+const NOTICE_VAL_RE = /ください|下さい|ご確認|選択して/;
 // 実リンク先（itemName／メーカー型番）側のセット語
 const PAGE_SET_RE = /(?<!カ)セット|(?<![A-Za-z])(?:set|with|bundle)(?![A-Za-z])|同梱|バンドル/i;
+// 説明文中の「型番」欄（型番／品番／型式／Model の直後）。itemName／メーカー型番に型番が無いページでも、ここに書かれていれば照合先に含める
+//   （第2バッチ: 日立 HHLU-S2020＝itemName に型番なし・説明文「型番 HHLU-S2020」／Jackery JE-500A＝説明文「【型番】JE-500A」）
+//   meta description や本文の自由文にあるだけでは含めない（bluetti-power #1 の AORA ページは meta に旧型番 AC70 が残っている）
+const DESC_MODEL_LABEL = '(?:型番|品番|型式|型名|モデル|model(?:\\s*no\\.?)?)';
 // 範囲・下限上限の表記（40〜60L／50L以上／15L〜100L対応）は単一スペックではない
 const RANGE_RE = /(\d+(?:\.\d+)?)\s*(L|cm|mm|人用)?\s*[~〜～\-ー–]\s*(\d+(?:\.\d+)?)\s*(L|cm|mm|人用)/g;
 const BOUND_RE = /(\d+(?:\.\d+)?)\s*(L|cm|mm|人用)\s*(?:以上|以下|以内|まで|未満|対応|クラス)/g;
@@ -302,26 +317,60 @@ function jsonString(html, key) {
 // セット/単品を選ぶ軸（値に セット/付き/入り/なし/本体のみ）は名指しに関係なく先頭値＝ページ着地時の既定値を使う。
 // カードが「セット」と書いていても読者が着地するのは既定 SKU なので、その差は set_mismatch として出す
 // （compact-portable-power #3: name「130Wソーラーパネルセット」・price は単体価格・既定 SKU は「なし」）
-function isSetAxis(a) { return a.values.some((v) => SET_VAL_RE.test(v) || NONE_VAL_RE.test(v)); }
+// セット/単品を選ぶ軸: 「なし/本体のみ/単品」の値がある、値の半数以上がセット語、または数量軸（1個/2個セット…）。
+//   値の1つに「付き」があるだけの軸（charcoal-starter #3「五徳付き四角型／四角型／三角型」＝タイプ軸）はセット軸ではない
+function isSetAxis(a) {
+  if (!a.values.length) return false;
+  if (a.values.some((v) => NONE_VAL_RE.test(v))) return true;
+  // 全値がセット語（"original set"／"premium set" のようなシリーズ名）なら、セット/単品を選ぶ軸ではない
+  const setVals = a.values.filter((v) => SET_VAL_RE.test(v)).length;
+  if (setVals * 2 >= a.values.length && setVals < a.values.length) return true;
+  if (!a.values.some((v) => qtyOf(v) === 1)) return false;
+  if (QTY_AXIS_KEY_RE.test(a.key) && a.values.length >= 2) return true;
+  return a.values.filter((v) => QTY_VAL_RE.test(toHalfWidth(v).trim())).length * 2 >= a.values.length;
+}
+function firstValue(a) { return a.values.find((v) => !NOTICE_VAL_RE.test(v)) ?? a.values[0]; }
 function chosenValues(axes, cardName) {
-  return axes.map((a) => (isSetAxis(a) ? '' : nameSpecifiedValue(a, cardName)) || a.values[0]);
+  return axes.map((a) => (isSetAxis(a) ? '' : nameSpecifiedValue(a, cardName)) || firstValue(a));
 }
 // カード name が名指ししている軸の値（無ければ ''）
+//   値の括弧は外しても照合する（car-camp-bed-kit #1: 軸の値「極厚（10cm）」↔ name「極厚 10cm」）
 function nameSpecifiedValue(a, cardName) {
   const nk = norm(cardName || '').replace(/\s+/g, '');
   {
     let best = '';
     for (const v of a.values) {
-      const vk = norm(v).replace(/\s+/g, '');
-      if (vk.length < 2 || NONE_VAL_RE.test(v)) continue;
-      const i = nk.indexOf(vk);
-      if (i < 0) continue;
-      if (i > 0 && /[0-9.]/.test(nk[i - 1]) && /^[0-9]/.test(vk)) continue;
-      if (vk.length > best.length) best = v;
+      const vk0 = norm(v).replace(/\s+/g, '');
+      if (vk0.length < 2 || NONE_VAL_RE.test(v) || NOTICE_VAL_RE.test(v)) continue;
+      for (const vk of [vk0, vk0.replace(/[()\[\]「」]/g, '')]) {
+        if (vk.length < 2) continue;
+        const i = nk.indexOf(vk);
+        if (i < 0) continue;
+        if (i > 0 && /[0-9.]/.test(nk[i - 1]) && /^[0-9]/.test(vk)) continue;
+        if (vk.length > best.length) best = v;
+        break;
+      }
     }
     return best;
   }
 }
+// 「A+B」「A＋B」の結合がセット（同梱）を表すか。
+//   除く: 数字同士（容量 40+5）／右が括弧（型番末尾 ST+(）／末尾の +（MDX+）／
+//         英字語に直結して右がカタカナ（"usb led+ランタン"＝複合語）／括弧内（"（ソーラー＋手回し＋乾電池）"＝仕様の並記）
+function plusJoin(s) {
+  const t = toHalfWidth(s).replace(/\([^)]*\)/g, ' ');
+  for (const m of t.matchAll(/(\S)\s*[+＋]\s*(\S)/g)) {
+    const [, l, r] = m;
+    if (/\d/.test(l) && /\d/.test(r)) continue;
+    if (/[()/／、,・]/.test(r)) continue;
+    if (/[A-Za-z]/.test(l) && !/\s/.test(m[0]) && /^[ァ-ヶー]/.test(r)) continue;
+    return true;
+  }
+  return false;
+}
+function cardHasSet(name) { return SET_WORD_RE.test(name) || plusJoin(name); }
+// セレクタ値の数量（"4台（レイアウト自在！）" → 4、数量表記でなければ null）
+function qtyOf(v) { const m = /^(\d+)\s*(?:個|枚|本|脚|点|袋|組|台|セット|set)(?:$|[\s(（/／・、,☆★]|セット|単品|入り|set)/i.exec(toHalfWidth(v).trim()); return m ? Number(m[1]) : null; }
 
 function parseRakutenHtml(html, url, cardName = '') {
   const page = {
@@ -435,7 +484,16 @@ function modelTokens(name) {
   const list = [...found];
   return list.filter((t) => !list.some((o) => o !== t && o.startsWith(t) && o.length > t.length));
 }
-function modelKey(tok) { return norm(tok).replace(/[-\s_.]/g, ''); }
+// 全角ハイフン・ダッシュ類も同一視（第2バッチ camp-nata #3: メーカー型番「ＤＧ－Ｎ００１」↔ name「DG-N001」）
+function modelKey(tok) { return norm(tok).replace(/[-－‐‑–—\s_.]/g, ''); }
+// 説明文の「型番」欄に、その型番が書かれているか（ラベル直後 12 文字以内。ハイフン・空白の有無は無視）
+function descHasLabeledModel(descText, tok) {
+  const key = modelKey(tok);
+  if (!key) return false;
+  const body = key.split('').map(escapeRe).join('[-－‐‑–—\\s_.]?');
+  const re = new RegExp(DESC_MODEL_LABEL + '[^A-Za-z0-9]{0,12}' + body + '(?![A-Za-z0-9])', 'i');
+  return re.test(toHalfWidth(descText || ''));
+}
 
 function hasColorWord(s) { return COLOR_RE.test(toHalfWidth(s)); }
 function isColorAxis(axis) {
@@ -472,7 +530,9 @@ function bigrams(s) { const o = []; for (let i = 0; i + 1 < s.length; i++) o.pus
 // 型語: name 先頭 HEAD_LEN 字（飾り除去後）のトークンから、ブランドっぽい英字語・数値・単位語・色語を除いたもの
 // name の先頭トークンは CLAUDE.md の規約（"メーカー名 商品名"）上ブランドなので、複数トークンあるときは除く
 function typeWords(name, brand) {
-  const head = toHalfWidth(stripDecor(name)).slice(0, HEAD_LEN);
+  // 先頭 HEAD_LEN 字で切るが、語の途中で切らない（camp-backpack-beginner #2: 「ボルケニックブラック」が「ボルケニックブラ」になり色語判定を外れる）
+  const full = toHalfWidth(stripDecor(name));
+  const head = full.slice(0, HEAD_LEN) + (/^[^\s／/・,、，【】\[\]()「」『』｜|&＆+＋×x~]*/.exec(full.slice(HEAD_LEN)) || [''])[0];
   const brandKeys = tokens(brand || '').concat(tokens(brand || '').map((t) => t.replace(/\(.*$/, '')));
   const firstTok = tokens(toHalfWidth(stripDecor(name)))[0];
   const all = tokens(head);
@@ -480,7 +540,8 @@ function typeWords(name, brand) {
   return all.filter((t) => {
     if (t.length < 2) return false;
     if (/^[a-z0-9-]+$/.test(t)) return false;          // 英数字だけ（ブランド・型番・単位）は除く
-    if (/^\d/.test(t)) return false;                    // 数値始まり（200cm / 2~4人用）
+    if (/^\d/.test(t)) return false;                    // 数値始まり（200cm / 2~4人用）。「ズール35」のような語末の数字は型語のまま
+    if (STORE_COPY_WORDS.test(t)) return false;         // 販促文言（送料無料・通常価格より2000円OFF 等）は型語ではない
     if (hasColorWord(t) && t.length <= 6) return false; // 色語
     if (brandKeys.includes(t)) return false;
     return true;
@@ -617,9 +678,10 @@ function judge(card, page, http) {
   //   メーカー型番欄に JAN 4976790764001 が入っている例）だったため付与しない。カード側の型番が実リンク先のどこにも無い場合だけ
   //   照合先は itemName／メーカー型番／SKU属性（商品名としての欄）に限り、店舗の管理番号・URL・説明文は含めない。
   //   含めると bluetti-power #1（name「AC70」↔ itemName「AORA 100 mini」・管理番号 bluettijapan_ac70＝改名後のページ）を見逃す
+  //   例外: 説明文の「型番」欄（型番／品番／型式 の直後）に書かれている型番は一致扱い（descHasLabeledModel）。
   const cm = modelTokens(name);
   const hayModel = modelKey([keyText, page.attrsText].join(' '));
-  const missing = cm.filter((t) => !hayModel.includes(modelKey(t)));
+  const missing = cm.filter((t) => !hayModel.includes(modelKey(t)) && !descHasLabeledModel(page.descText, t));
   if (missing.length) { flags.push('model_mismatch'); notes.push(`model:${missing.join('|')}`); }
 
   // spec_mismatch
@@ -648,15 +710,17 @@ function judge(card, page, http) {
   // set_mismatch
   //   セット/単品を選ぶ軸（値に セット/付き/入り、または なし/本体のみ を含む軸）があればその選択SKUの値で判定。
   //   無ければ itemName／メーカー型番のセット語で判定（逆向きは itemName のセット語が SEO ノイズになりやすいので軸がある時だけ）
-  const cardSet = SET_WORD_RE.test(toHalfWidth(stripDecor(name)));
-  const setAxisIdx = page.axes.findIndex((a) => a.values.some((v) => SET_VAL_RE.test(v)) || a.values.some((v) => NONE_VAL_RE.test(v)));
+  //   itemName の「A+B」（coleman-lantern #3: ルミエールランタン+純正LPガス燃料）もセット語として扱う
+  const cardSet = cardHasSet(toHalfWidth(stripDecor(name)));
+  const setAxisIdx = page.axes.findIndex(isSetAxis);
   if (setAxisIdx >= 0) {
     const sel = first.selectorValues[setAxisIdx] || '';
     const axisHasNone = page.axes[setAxisIdx].values.some((v) => NONE_VAL_RE.test(v));
-    const skuIsSet = !NONE_VAL_RE.test(sel) && (SET_VAL_RE.test(sel) || axisHasNone);
+    const qn = qtyOf(sel); // 数量軸: 2以上ならセット扱い（camp-table-folding #5: 既定「4台」）
+    const skuIsSet = !NONE_VAL_RE.test(sel) && (SET_VAL_RE.test(sel) || axisHasNone || (qn != null && qn >= 2));
     if (cardSet && !skuIsSet) { flags.push('set_mismatch'); notes.push(`set:card=set,sku=single(${sel})`); }
     else if (!cardSet && skuIsSet) { flags.push('set_mismatch'); notes.push(`set:card=single,sku=set(${sel})`); }
-  } else if (cardSet && !PAGE_SET_RE.test([itemName, page.makerModel].join(' '))) {
+  } else if (cardSet && !PAGE_SET_RE.test([itemName, page.makerModel].join(' ')) && !plusJoin([itemName, page.makerModel].join(' '))) {
     flags.push('set_mismatch'); notes.push('set:card=set,sku=single');
   }
 
@@ -681,7 +745,9 @@ function judge(card, page, http) {
   const itemModels = modelTokens(itemName);
   const totalVals = page.axes.reduce((s, a) => s + a.values.length, 0);
   const saleUrl = SALE_URL_RE.test(page.manageNumber || '') || SALE_URL_RE.test(card.url || '');
-  const bundlingAxis = page.axes.some((a) => a.values.length >= 2 && !isColorAxis(a) && !isSizeAxis(a));
+  //   セット/数量の軸はオプションであって別商品を束ねる軸ではない。カード name が値を名指ししている軸も、そのカードにとっては曖昧でない
+  //   （第2バッチ car-camp-mat #4: サイズ×タイプ×色×セットの 70 SKU だが name が S／大型二重バルブ／ベージュ を名指し）
+  const bundlingAxis = page.axes.some((a) => a.values.length >= 2 && !isColorAxis(a) && !isSizeAxis(a) && !isSetAxis(a) && !nameSpecifiedValue(a, name));
   if (itemModels.length === 0 && ((saleUrl && totalVals >= SALE_VALUES_MIN) || (page.skuCount >= SALE_SKU_MIN && bundlingAxis))) flags.push('sale_page');
 
   // price_mismatch
@@ -857,6 +923,59 @@ function runTests() {
     mkPage({ itemName: 'コールマン タフスクリーン2ルームエアー DARKROOM LDX+/MDX+', brand: 'Coleman', price: 87800, selectorValues: ['LDX+'], axes: [{ key: 'style', values: ['MDX+', 'LDX+'] }] }), 200, [], ['set_mismatch']);
   t('set_mismatch なし: itemName の英語 with はセット語', { name: 'Anker Solix C1000 Gen 2 ＋ PS100 ソーラーパネル セット', price: '159900' },
     mkPage({ itemName: 'Anker Solix C1000 Gen 2 with Anker Solix PS100', makerModel: 'B1763', brand: 'ANKER', price: 159900 }), 200, [], ['set_mismatch', 'model_mismatch']);
+  // ── 第2バッチ（campkit-20260921-25）で潰した誤検知 ──
+  t('set_mismatch なし: "usb led+ランタン" の + は複合語（セットではない）', { name: 'LEDランタン ライト 充電式 1個/お得2個 Type-C usb led+ランタン', price: '1000' },
+    mkPage({ itemName: 'LEDランタン ライト 充電式 1個/お得2個', price: 1000, selectorValues: ['1個単品', 'メール便'], axes: [{ key: '個数', values: ['1個単品', 'お得2個セット'] }, { key: '配送方法', values: ['メール便', '宅配便'] }] }), 200, [], ['set_mismatch']);
+  t('set_mismatch: 数量軸の既定が 1個 でカードが 2個セット', { name: 'LEDランタン お得2個セット', price: '1800' },
+    mkPage({ itemName: 'LEDランタン 1個/お得2個', price: 1000, selectorValues: ['1個単品'], axes: [{ key: '個数', values: ['1個単品', 'お得2個セット'] }] }), 200, ['set_mismatch']);
+  t('set_mismatch なし: 括弧内の「ソーラー＋手回し＋乾電池」は仕様の並記', { name: 'LAD WEATHER 防災ラジオ ブラック（AM/FM・ソーラー＋手回し＋乾電池）', price: '5680' },
+    mkPage({ itemName: 'ラジオ 防災グッズ 防災ラジオ ソーラー 手回し', brand: 'LAD WEATHER', price: 5680, axes: [{ key: 'カラー', values: ['01.オレンジ', '02.ブラック'] }] }), 200, [], ['set_mismatch']);
+  t('set_mismatch なし: itemName の「A+B」はセット', { name: 'コールマン ルミエールランタン 純正LPガス燃料セット 205588', price: '5247' },
+    mkPage({ itemName: 'Coleman(コールマン) ルミエールランタン+純正LPガス燃料[Tタイプ] 205588+5103A230T', makerModel: '205588+5103A230T', brand: 'Coleman', price: 5247 }), 200, [], ['set_mismatch']);
+  t('set_mismatch なし: 「カラーなし」はセット軸の値ではない', { name: 'ロゴス Bamboo ナイフ＆まな板セット 81280009', price: '4950' },
+    mkPage({ itemName: 'ロゴス Bamboo ナイフ＆まな板セット 81280009', makerModel: '81280009', brand: 'LOGOS', price: 4950, selectorValues: ['カラーなし', 'FREE'], axes: [{ key: 'カラー', values: ['カラーなし'] }, { key: 'サイズ', values: ['FREE', '選択してください'] }] }), 200, [], ['set_mismatch']);
+  t('set_mismatch なし: 値の1つに「付き」があるだけのタイプ軸はセット軸ではない', { name: 'キャンピングムーン 折りたたみ火起し器 FD', price: '3125' },
+    mkPage({ itemName: 'キャンピングムーン 火起こし器 チャコールスターター', makerModel: 'MT-19', brand: 'キャンピングムーン', price: 3125, selectorValues: ['五徳付き四角型（調理OK／2WAY）'], axes: [{ key: 'タイプを選ぶ', values: ['五徳付き四角型（調理OK／2WAY）', '四角型（スタンダード）', '三角型（コンパクト収納）'] }] }), 200, [], ['set_mismatch']);
+  t('model_mismatch なし: 全角ハイフンの型番（ＤＧ－Ｎ００１）', { name: '大進 鉈 鋼付 両刃 165mm DG-N001', price: '3200' },
+    mkPage({ itemName: '大進 鉈 鋼付 両刃 165mm ＤＧ－Ｎ００１', makerModel: 'ＤＧ－Ｎ００１', brand: 'DAISHIN', price: 3200, desc: '165mm' }), 200, [], ['model_mismatch']);
+  t('model_mismatch なし: 説明文の「型番」欄にある（HHLU-S2020）', { name: '日立 ホットカーペット HHLU-S2020 2畳 本体', price: '14980' },
+    mkPage({ itemName: '日立 ホットカーペット 電気カーペット 2畳 本体', brand: '日立', price: 14980, desc: '※画像はイメージです。 型番 HHLU-S2020 JANコード 4526044016167 重量 約3kg' }), 200, [], ['model_mismatch']);
+  t('model_mismatch なし: 説明文の「【型番】JE-500A」', { name: 'Jackery ポータブル電源 500 New 512Wh（JE-500A）', price: '59800' },
+    mkPage({ itemName: 'Jackery ポータブル電源 500 New 512Wh', makerModel: '500New', brand: 'Jackery', price: 59800, desc: '商品説明 【ポータブル電源・型番】JE-500A 【業界最軽量ボディ】 512Wh' }), 200, [], ['model_mismatch']);
+  t('model_mismatch: 説明文に型番があっても「型番」欄でなければ見逃さない（AORA ページの meta に残る AC70）', { name: 'BLUETTI ポータブル電源 AC70 768Wh', price: '88000' },
+    mkPage({ itemName: 'BLUETTI ポータブル電源 AORA 100 mini 1004.8Wh 700W', makerModel: 'AORA 100 mini', brand: 'BLUETTI', price: 96800, desc: '【安心の公式ショップ】BLUETTI AC70 768Wh/1000W (サージ2000W) 純正弦波' }), 200, ['model_mismatch']);
+  t('type_mismatch なし: 先頭の販促文言（通常価格より2000円OFF）は型語にしない', { name: '☆シルバーコーティングタイプ 通常価格より2000円OFF！☆【楽天1位】 ワンタッチタープ 2.5m', price: '9980' },
+    mkPage({ itemName: 'ワンタッチタープ 2.5m ワンタッチテント 遮光', makerModel: 'QC-TP250', brand: 'クイックキャンプ', price: 9980, desc: '2.5m' }), 200, ['store_copy'], ['type_mismatch']);
+  t('spec_mismatch なし: 軸の値「極厚（10cm）」を name が「極厚 10cm」で名指し', { name: 'キャンプ マット 車中泊 [ 極厚 10cm 撥水 ] キャンプマット', price: '4980' },
+    mkPage({ itemName: 'キャンプ マット 車中泊 [ 極厚 10cm 撥水 ]', brand: 'LAD WEATHER', price: 4980, selectorValues: ['01.ブラック', '極厚（10cm）', 'マット単品'],
+      axes: [{ key: 'カラー', values: ['01.ブラック', '02.グレー'] }, { key: '厚み', values: ['中厚（8cm）', '極厚（10cm）'] }, { key: 'オプション', values: ['マット単品', '枕付き'] }] }), 200, ['color_unspecified'], ['spec_mismatch']);
+  t('sale_page なし: 多SKUでも name が非色・非サイズ軸の値を名指し（car-camp-mat #4）', { name: 'FIELDOOR 車中泊マット Sサイズ 60×188cm 厚さ10cm ベージュ 大型二重バルブタイプ', price: '5940' },
+    mkPage({ itemName: '【楽天1位】FIELDOOR 車中泊マット 厚さ10cm S M L エアーマット', makerModel: '車中泊マット', brand: 'FIELDOOR', price: 6710, skuCount: 70, manageNumber: 'max-a09610',
+      selectorValues: ['S：幅60x長さ188cm', '大型二重バルブタイプ', 'ベージュ', 'マット1枚単品'],
+      axes: [{ key: 'サイズ', values: ['S：幅60x長さ188cm', 'M：幅90x長さ195cm', 'L：幅120x長さ195cm'] }, { key: 'タイプ', values: ['大型二重バルブタイプ', '電動ポンプ内蔵タイプ'] }, { key: 'カラー', values: ['ベージュ', 'ブラウン', 'ブラック', 'カーキ'] }, { key: 'セット', values: ['マット1枚単品', 'マット2枚セット'] }] }), 200, ['price_mismatch'], ['sale_page', 'set_mismatch']);
+  t('sale_page: SKU 多・name が指定しないタイプ軸あり（セット軸は根拠にしない）', { name: 'タープテント 2.5m ワンタッチタープテント 遮熱 遮光', price: '8999' },
+    mkPage({ itemName: 'タープテント 2.5m 遮光 遮熱 ワンタッチタープテント', brand: 'モダンデコ', price: 9999, skuCount: 140, manageNumber: 'r-sku00000016',
+      selectorValues: ['ベーシック', 'グレージュ', 'テント本体のみ'],
+      axes: [{ key: 'タイプ', values: ['ベーシック', 'オーニング', 'ハイルーフ', 'ワイド'] }, { key: 'カラー', values: ['グレージュ', 'アースブラウン', 'ピスタチオグリーン', 'オールドセピア', 'テラコッタ', 'オリーブグリーン', 'サンドベージュ'] }, { key: 'オプション', values: ['テント本体のみ', 'サイドシート1枚', 'サイドシート2枚', '補強フレーム・ホワイト', '補強フレーム・ブラック'] }] }), 200, ['sale_page']);
+  t('sale_page なし: 非色・非サイズ軸がセット/数量軸だけ（1枚/2枚 × サイズ13）', { name: '保冷剤 ステンレス製 アイスパック', price: '1680' },
+    mkPage({ itemName: '【保冷剤 ステンレス製】驚異の保冷力 アイスパック', brand: 'COVELL KEVIN', price: 1580, skuCount: 70, manageNumber: 'bxgbp',
+      selectorValues: ['1枚', '円形S(6.3*2.5cm)'],
+      axes: [{ key: '数量', values: ['1枚', '2枚', '3枚', '4枚', '5枚', '6枚'] }, { key: 'サイズ', values: ['円形S(6.3*2.5cm)', '円形M(9.5*2cm)', '四角形S(12.7*7.6*1.6cm)', '四角形M(17.5*11.5*1.3cm)', 'ボトル形(4*4*16cm)'] }] }), 200, [], ['sale_page']);
+  t('type_mismatch なし: 先頭20字が語の途中でも「ズール35」を型語として照合', { name: 'グレゴリー ズール35 ボルケニックブラック SM/MD', price: '33000' },
+    mkPage({ itemName: 'グレゴリー ズール35 GREGORY ZULU 35 メンズ レディース', brand: 'GREGORY', price: 33000, selectorValues: ['SM／MD', 'ボルケニックブラック'], axes: [{ key: 'サイズ', values: ['SM／MD', 'MD／LG'] }, { key: 'カラー', values: ['ボルケニックブラック'] }] }), 200, []);
+  t('sale_page: 全値が "set" のシリーズ軸はセット軸ではなく束ね軸（camp-cutlery #2: 31SKU・本数×シリーズ×色）', { name: 'ステンレス カトラリーセット（楽天1位）', price: '1980' },
+    mkPage({ itemName: 'クーポン利用で２個目５０％OFF カトラリーセット 【楽天1位】 カトラリー シルバー ゴールド', makerModel: 'J-MAX.CO.LTD', brand: 'JH-STUDIO', price: 2998, skuCount: 31, manageNumber: '10000105',
+      selectorValues: ['５本セット', 'original set', 'ティファニーブルーシルバー'],
+      axes: [{ key: '本数', values: ['５本セット', '３本セット'] }, { key: 'シリーズ', values: ['original set', 'Vitella premium set'] }, { key: 'カラー', values: ['ティファニーブルーシルバー', 'ホワイトシルバー', 'ブラックシルバー', 'グレーシルバー', 'マットシルバー', 'ブラックゴールド', 'ホワイトゴールド', 'ピングゴールド'] }] }), 200, ['sale_page', 'price_mismatch'], ['set_mismatch']);
+  t('set_mismatch なし: 数量軸の既定「4台」はセット扱い（カードもセット表記）', { name: 'キャンピングムーン フィールドラック 4個 セット ケース付き', price: '2680' },
+    mkPage({ itemName: 'フィールドラック キャンピングムーン ラック 3段', makerModel: 'T-235-4T', brand: 'キャンピングムーン', price: 9680, selectorValues: ['4台（レイアウト自在！）', 'ラック＋収納ケース'],
+      axes: [{ key: 'ラック数', values: ['4台（レイアウト自在！）', '3台（人気！）', '2台（定番！）', '1台（お試し！）'] }, { key: 'セット内容', values: ['ラック＋収納ケース', 'ラック＋天板＋収納ケース', 'ラックのみ'] }] }), 200, ['price_mismatch'], ['set_mismatch']);
+  t('set_mismatch なし: 枚数 [2枚, 3枚]（付属プレート枚数＝モデル差）は数量軸ではない', { name: 'アイリスオーヤマ ホットプレート 焼肉プレート2枚・たこ焼きプレート3枚付き PIHA-A20B', price: '9980' },
+    mkPage({ itemName: 'ホットプレート 焼肉 焼肉プレート コンパクト', makerModel: 'PIHA-A20B', brand: 'アイリスオーヤマ', price: 9980, selectorValues: ['通常モデル', '2枚'], axes: [{ key: 'モデル', values: ['ネット限定モデル', '通常モデル'] }, { key: '枚数', values: ['2枚', '3枚'] }] }), 200, [], ['set_mismatch']);
+  t('set_mismatch なし: 「4点脚ロックタイプ」は数量ではない（sale_page は維持）', { name: 'FIELDOOR ワンタッチタープテント 3m×3m 頑丈スチールフレーム', price: '8800' },
+    mkPage({ itemName: '【楽天1位】FIELDOOR ワンタッチタープテント 3m×3m', makerModel: 'ワンタッチタープテント', brand: 'FIELDOOR', price: 10780, skuCount: 151, manageNumber: 'a04309_sale',
+      selectorValues: ['4点脚ロックタイプ', '標準：グリーン', 'タープ本体のみ'],
+      axes: [{ key: '【選べるロックタイプ】', values: ['4点脚ロックタイプ', 'センターロックタイプ'] }, { key: '【選べるトップカバー】', values: ['標準：グリーン', '標準：ブルー', '標準：オレンジ'] }, { key: '【追加で選べるオプションセット】', values: ['タープ本体のみ', 'Ａ：フレーム強化サポートセット', 'Ｂ：バグガードスクリーンセット'] }] }), 200, ['sale_page', 'price_mismatch'], ['set_mismatch']);
   t('spec/size: 範囲 "40〜60L" は spec_mismatch にせず、L 軸があれば size_unspecified', { name: 'tousen 登山リュック 40〜60L 大容量', price: '4280' },
     mkPage({ itemName: '登山リュック 40～60L', price: 4280, selectorValues: ['40L', 'レッド'], axes: [{ key: 'サイズ', values: ['40L', '50L', '60L'] }, { key: 'カラー', values: ['レッド', 'ブラック'] }] }), 200, ['size_unspecified', 'color_unspecified'], ['spec_mismatch']);
   t('spec: 軸の値に無い数値（600W）は全文で見る', { name: 'BLUETTI EB3A 268Wh 600W出力', price: '32900' },
