@@ -3,6 +3,17 @@
 数値の推移はGAS「SEOレポート」の履歴で追う。本ファイルは「いつ・どの記事を・なぜ・どう変えたか」を記録し、次回レポートで効果を評価するための施策台帳。新しい施策は上に追記する。
 
 ---
+## 2026-09-22：ProductCard `name` の一括修正 第2弾（43枚／17記事）— キュー#15-b（campkit-20260921-30）
+
+- **位置づけ**: 第1弾（campkit-20260921-29・下記）の続き。同じ抽出条件（`color_unspecified`／`size_unspecified`／`store_copy` が立ち、404・sale_page・set_mismatch・model_mismatch・variant_unavailable を併発せず、台帳に open な差し替え系案件が無い frozen=0 のカード）の **先頭44枚のうち、backpack-rain-cover #4（DAICHU）を検出器側の緩和（後述 C-2）で解消したため mdx の書き換えは43枚**。**触ったのは `ProductCardMdx` の `name` 属性のみ**（title／description／updatedAt／本文・比較表・まとめ表・リンク・price は不変更）
+- **対象記事（17本）**: camp-cooler-soft（5）／camp-cutlery（2）／camp-dust-stand（5）／camp-electric-heater（1）／camp-fan-summer（1）／camp-grill-plate（2）／camp-headlight-beginner（2）／camp-hot-carpet（1）／camp-kettle-recommend（2）／camp-knife-beginner（1）／camp-lighting-guide（2）／camp-pillow（3）／camp-rainwear（4）／camp-sleeping-mat（5）／camp-tarp-beginner（3）／camp-windscreen（3）／captain-stag-chair（1）。変更禁止リスト（2026-10-18 まで）の記事は含まない
+- **書き換えの基準**: 第1弾と同じ ①〜③。カード price と一致する変種を優先した例＝captain-stag-chair #1（既定 ノーマル/アイボリー ¥2,480 ではなく カード ¥1,880 と一致する **ミニ/アイボリー UC-1844** に固定→price_mismatch 解消）／camp-rainwear #2 ミズノ（既定 S/ブルー ¥13,750 ではなく カード ¥15,840 と一致し在庫のある **M/ドレスネイビー**）。既定の色が売切でも SKU が実在すれば既定に固定（camp-rainwear #1 XS/テラコッタ・#3 ベージュ/S・#4 ブルー/S、camp-tarp-beginner #5 ライトグレー＝第1弾と同じ扱い）。並記の絞り込み＝camp-kettle-recommend #1「1L/1.5L/2.0L」→ **1.0L**（記事見出し「1.0〜2.0L」の先頭値）、camp-sleeping-mat #1「8/10cm・幅75cm・枕付き」→ **厚手10cm 枕付き 幅75cm ベージュ**（枕付き幅75cm は 10cm のみ実在。inflatable-mat #1 と同じ着地・C-1）。判断材料は保存HTML（`_file/_work/html-24/`）と `card-name-check.tsv` のみで、**楽天への新規アクセスは0回**
+- **検出器の変更（別 commit）**: (a) C-2＝軸の値そのものが範囲表記を含む（`XS(15-25L)`）ときは name の同じ範囲「XSサイズ（15〜25L）」を1仕様の名指しとみなし `size_unspecified` を立てない（`rangeIsAxisValue`・影響1枚＝backpack-rain-cover #4 のみ・size_unspecified 73→72）。(b) 軸に新旧ラベル（「1.0L」と「1.0L│1～2人・定番」）が並び SKU が長い方だけを使うページで、name が名指しした短いラベルに完全一致する SKU が無いときだけ前方一致で選択SKUを決める（`skuValueMatches`・影響1枚＝camp-kettle-recommend #1 のみ）。`--test` 137→151 passed
+- **再判定（`--cached`）**: 対象フラグは 43枚すべてで消滅（＋DAICHU は緩和で消滅＝44/44）。**name 固定によって新たに立った構造フラグ・price_mismatch は0枚**。残る price_mismatch 10枚は変更前から立っていた既存分（うち captain-stag-chair #1 は逆に解消）。camp-sleeping-mat #1 の spec_mismatch（幅75cm）は店の軸ラベル「枕付きバーション(幅75cm)」（店側の誤字）のため残存（C-1 と同じ）。`--cached --recheck` 全1113枚で対象43枚以外の差分0
+- **台帳（article-fix-backlog.tsv）**: 29 で列ずれした8行（`issue_type` と `detail` の間のタブ欠落・9列化）を 1a5a086 版から原状回復し、`scripts/validate-backlog-tsv.cjs`（列数・ヘッダ・値ドメイン検査）を新設して `deploy.cjs` 手順1.6 に組み込んだ。今回は 401→**400行**（pending 283／blocked 96／needs-human 1／done 20）: open 行9件の `position` を新 name に更新（camp-cooler-soft #5／camp-cutlery #1／camp-fan-summer #5／camp-kettle-recommend #1／camp-lighting-guide #3／camp-rainwear #1・#2／camp-sleeping-mat #1・#3）、notes 追記4件、**captain-stag-chair #1 の price_unconfirmed 行は name 固定で価格一致になり根拠が消えたため削除**。新規起票0
+- **効果測定**: 第1弾と同じく検索順位の直接施策ではないため計測対象外
+
+---
 ## 2026-09-22：ProductCard `name` の一括修正 第1弾（44枚／17記事）— キュー#15-b（campkit-20260921-29）
 
 - **位置づけ**: SEO施策ではなく、`scripts/check-card-name-vs-sku.cjs`（キュー#15）の検出結果にもとづく**カード名の仕様固定**。`color_unspecified`／`size_unspecified`／`store_copy` が立っていて、404・sale_page・set_mismatch・model_mismatch・variant_unavailable を併発せず、台帳に open な差し替え系案件（discontinued_404／out_of_stock／product_swap／sale_page）が無い **frozen=0 のカード先頭44枚**（母数450枚／165記事）。**触ったのは `ProductCardMdx` の `name` 属性のみ**（title／description／updatedAt／本文・比較表・まとめ表・リンク・price は不変更。SEO計測中のため監督側で据え置き）
