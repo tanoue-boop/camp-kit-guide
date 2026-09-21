@@ -157,11 +157,11 @@ jackery-power-station	2026-06-08	2026-09-21	5	10	0	5	5	5	0	20	ok
 karrimor-backpack	2026-06-15	2026-09-21	4	8	0	0	4	4	0	12	ok	
 kids-sleeping-bag	2026-04-28	2026-08-27	5	5	0	1	0	0	0	6	ok	Amazon未設定カード 4/5 (#1,#3,#4,#5)
 lantern-furusato	2026-08-24	2026-08-24	0	1	0	0	0	0	0	1	ok	
-lantern-stand	2026-06-02	2026-06-02	5	10	0	1	0	0	0	11	ok	Amazon未設定カード 4/5 (#1,#2,#4,#5)
-large-tarp-recommend	2026-06-02	2026-06-02	5	10	0	1	0	0	0	11	ok	Amazon未設定カード 4/5 (#1,#2,#4,#5)
+lantern-stand	2026-06-02	2026-06-02	5	10	0	3	0	0	0	13	ok	Amazon未設定カード 2/5 (#4,#5)
+large-tarp-recommend	2026-06-02	2026-06-02	5	10	0	3	0	0	0	13	ok	Amazon未設定カード 2/5 (#2,#4)
 large-tent-guide	2026-05-26	2026-06-29	5	5	0	0	5	5	0	10	ok	
 lightweight-mountain-tent	2026-04-29	2026-06-29	5	5	0	0	5	5	0	10	ok	
-log-carrier	2026-08-07	2026-08-07	5	5	0	1	0	0	0	6	ok	Amazon未設定カード 4/5 (#1,#3,#4,#5)
+log-carrier	2026-08-07	2026-08-07	5	5	0	2	0	0	0	7	ok	Amazon未設定カード 3/5 (#1,#3,#4)
 logos-bonfire	2026-06-08	2026-06-08	3	6	0	2	3	3	0	11	ok	
 logos-sleeping-bag	2026-09-07	2026-09-07	5	5	0	4	0	0	0	9	ok	Amazon未設定カード 1/5 (#5)
 logos-tent	2026-08-24	2026-08-24	5	5	0	5	0	0	0	10	ok	
@@ -181,21 +181,21 @@ mummy-sleeping-bag	2026-06-02	2026-08-12	5	10	0	1	0	0	0	11	ok	Amazon未設定カ
 mysteryranch-backpack	2026-06-15	2026-09-20	4	8	0	2	0	0	0	10	ok	Amazon未設定カード 2/4 (#3,#4)
 nanga-down-jacket	2026-09-14	2026-09-14	5	10	0	2	0	0	0	12	ok	Amazon未設定カード 3/5 (#1,#3,#4)
 nanga-sleeping-bag	2026-06-01	2026-06-29	5	5	0	5	5	5	0	15	ok	
-naturehike-mat	2026-06-08	2026-06-08	5	10	0	2	0	0	0	12	ok	Amazon未設定カード 3/5 (#1,#3,#4) ｜2026-09-21 backfill(campkit-20260921-16): #1 Naturehike 高R値エアーマット は no-amazon(既定SKU不定＋在庫切れ): 楽天ページは R4.6(CNK2450WS014・グリーン)/R5.8(CNH22DZ016・シルバー/オレンジ)/R8.8(CNK2450WS015)×サイズ7種の13SKU(¥12,490〜21,490)で既定選択なし(itemprop price=minPrice 12,490)。カード価格¥12,490に一致するのは R4.6/グリーン/レクタ型M(186×58×8cm)のみ。Amazon検索「Naturehike 高R値 エアーマット R4.6」「Naturehike CNK2450WS014」「Naturehike エアーマット R4.6 グリーン 186」→ R4.6は公式 B0D9PX96KD(グリーン長方形 186×58×8・型番TUYE)と windhike出品 B0DW454LT4(196×64×8)の2件ともに「現在在庫切れ・再入荷予定なし」。在庫ありは R5.8マミー型S B0F249YQ6R(型番TY5.8-MS ¥12,990)等の別R値/別サイズのみで、R値・厚さ・サイズを1つに特定できないため不採用
+naturehike-mat	2026-06-08	2026-09-21	5	10	0	4	0	0	0	14	ok	Amazon未設定カード 1/5 (#1) ｜2026-09-21 backfill(campkit-20260921-19): #3=B0DLW8WQRH(Naturehike Store公式・変種「長方形-シルバー／R6.5-M（186x58x10cm）」・¥19,990=楽天Mサイズ同額・Amazon出荷・残り6点・★4.1(638)。楽天SKU Tuye65-m(186×58cm・460g・シルバー・メーカー型番欄は店舗コード cnk2450ws038)↔ Amazon メーカー型番「Tuye 6.5-FM-Black」: 型番本体「Tuye 6.5」のみ一致で完全一致ではない。Amazon本文「R6.5 Mサイズ:約460g、Lサイズ:約540g」が楽天のM 460g/L 540gと一致・公式店同士・寸法/厚さ/価格一致で同一品と判断。※Amazon型番末尾「Black」は変種名シルバーと矛盾するAmazon側データ不備。L=B0DLWBS7YD)。#4=B0F24F4T3Q(Naturehike Store公式・変種「1人用（200x100x25cm）」・¥7,990=楽天 25cm一人用SKU同額・Amazon出荷・在庫あり・★3.8(49)。楽天variantId CHENJING-25-ONE(メーカー型番欄 cnk2550ws013・200×100×25cm・2.9kg・耐荷重150kg・Type-C)↔ Amazon メーカー型番「chenjing-1」: 型番本体「CHENJING」一致＋ONE↔1人用。1/2/3人用の寸法(200×100/150/180×25)と耐荷重150/300/450kg・ハニカム構造・Type-C充電が両者で一致。2人用=B0F248LMYR/3人用=B0F249Y8SY。枕付き25cm版 CNK2450WS040(B0DLSR2KDN ¥10,990)は#5相当の別商品) ｜2026-09-21 backfill(campkit-20260921-16): #1 Naturehike 高R値エアーマット は no-amazon(既定SKU不定＋在庫切れ): 楽天ページは R4.6(CNK2450WS014・グリーン)/R5.8(CNH22DZ016・シルバー/オレンジ)/R8.8(CNK2450WS015)×サイズ7種の13SKU(¥12,490〜21,490)で既定選択なし(itemprop price=minPrice 12,490)。カード価格¥12,490に一致するのは R4.6/グリーン/レクタ型M(186×58×8cm)のみ。Amazon検索「Naturehike 高R値 エアーマット R4.6」「Naturehike CNK2450WS014」「Naturehike エアーマット R4.6 グリーン 186」→ R4.6は公式 B0D9PX96KD(グリーン長方形 186×58×8・型番TUYE)と windhike出品 B0DW454LT4(196×64×8)の2件ともに「現在在庫切れ・再入荷予定なし」。在庫ありは R5.8マミー型S B0F249YQ6R(型番TY5.8-MS ¥12,990)等の別R値/別サイズのみで、R値・厚さ・サイズを1つに特定できないため不採用
 naturehike-sleeping-bag	2026-06-15	2026-06-15	5	10	0	2	5	5	0	17	ok	
-naturehike-tent	2026-06-02	2026-09-21	5	10	0	4	0	0	0	14	ok	Amazon未設定カード 1/5 (#2) ｜2026-09-21 backfill(campkit-20260921-14): #1=B0D478VBQC(Naturehike公式ショップ Clould up2 Pro 20Dダークベージュ/PRO2人用 ¥23,990・楽天公式 cloud up pro 2人用 ベージュ ¥23,990と同額。楽天型番CNK2350WS020 vs Amazon型番Clouldup2-Proで文字列不一致、公式店同士の商品名・サイズ・価格で照合)。#4=B0DYF5RNY2(Naturehike公式ショップ village13 Ti Black素材 メーカー型番CNH22ZP004TB ¥66,990・楽天型番CNH22ZP004の前方一致。※楽天ページは「Village 13.0 Pro」ベーシック版¥75,990/19kgへ更新済みでカード価格56,993と乖離→price_unconfirmed候補)。#2 nh17t140-j は no-amazon: 楽天ページ404(廃番の疑い・discontinued_404候補)、Amazon検索「Naturehike NH17T140-J」ヒットなし
+naturehike-tent	2026-06-02	2026-09-21	5	10	0	4	0	0	0	14	ok	Amazon未設定カード 1/5 (#2) ｜2026-09-21 backfill(campkit-20260921-19): #2 nh17t140-j は空欄のまま。楽天URL https://item.rakuten.co.jp/naturehike-direct/nh17t140-j/ を2回実取得しいずれも HTTP404(【楽天市場】エラー)＝廃番確定扱い。タスク指示どおりAmazon照合は行わず article-fix-backlog に discontinued_404 で起票、amazon-backfill-no-amazon.tsv にも登録(候補から除外) ｜2026-09-21 backfill(campkit-20260921-14): #1=B0D478VBQC(Naturehike公式ショップ Clould up2 Pro 20Dダークベージュ/PRO2人用 ¥23,990・楽天公式 cloud up pro 2人用 ベージュ ¥23,990と同額。楽天型番CNK2350WS020 vs Amazon型番Clouldup2-Proで文字列不一致、公式店同士の商品名・サイズ・価格で照合)。#4=B0DYF5RNY2(Naturehike公式ショップ village13 Ti Black素材 メーカー型番CNH22ZP004TB ¥66,990・楽天型番CNH22ZP004の前方一致。※楽天ページは「Village 13.0 Pro」ベーシック版¥75,990/19kgへ更新済みでカード価格56,993と乖離→price_unconfirmed候補)。#2 nh17t140-j は no-amazon: 楽天ページ404(廃番の疑い・discontinued_404候補)、Amazon検索「Naturehike NH17T140-J」ヒットなし
 northface-backpack	2026-07-24	2026-07-24	5	5	0	3	0	0	0	8	ok	Amazon未設定カード 2/5 (#2,#5)
 ogawa-tent	2026-08-26	2026-08-26	5	4	0	4	0	0	0	8	card-without-link	cards NG: #5=別形式(B0843M38FP)
 oil-lantern	2026-07-27	2026-07-27	5	5	0	5	0	0	0	10	ok	
-one-pole-tent	2026-06-02	2026-06-29	5	10	0	3	0	0	0	13	ok	Amazon未設定カード 2/5 (#3,#5)
+one-pole-tent	2026-06-02	2026-09-21	5	10	0	4	0	0	0	14	ok	Amazon未設定カード 1/5 (#5) ｜2026-09-21 backfill(campkit-20260921-19): #3=B0922R7GGY(WAQ Alpha TC 1人用テント・変種「タンカラー」のみ・メーカー型番「waq-tct1」↔ 楽天ページURL/商品名の「waq-tct1」および楽天SKU merchantDefinedSkuId「waq-tct1tan」(タン)と一致。楽天attributesのメーカー型番欄は「-」。カード画像 waq-tct1-cart.jpg はタン色の商品画像。本体重量6.5kg・240×240×150cm も一致。¥29,800=楽天現行価格(全3色同額)・出荷元Amazon／販売元WAQ(ワック)・在庫あり・★4.3(651)。※カードprice 17,980 は楽天現行 29,800 と乖離(+66%)→price-checkで要確認)
 one-touch-tarp	2026-07-24	2026-07-24	5	5	0	5	0	0	0	10	ok	
 one-touch-tent	2026-09-03	2026-09-03	5	10	0	2	0	0	0	12	ok	Amazon未設定カード 3/5 (#1,#2,#3)
 osprey-backpack	2026-06-15	2026-09-21	4	8	0	4	0	0	0	12	ok	
 osprey-daily-backpack	2026-08-07	2026-08-07	5	5	0	5	0	0	0	10	ok	
-outdoor-coffee-mill	2026-08-12	2026-08-12	5	5	0	3	0	0	0	8	ok	Amazon未設定カード 2/5 (#4,#5)
+outdoor-coffee-mill	2026-08-12	2026-09-21	5	5	0	4	0	0	0	9	ok	Amazon未設定カード 1/5 (#4) ｜2026-09-21 backfill(campkit-20260921-19): #5=B0DJVCV1N8(アトラス コーヒーミル セラミック 臼式 … カフェリンク ACG-BKP・変種「ブラック」。楽天SKU acg-bkp メーカー型番「ACG-BKP」↔ Amazonタイトル末尾「ACG-BKP」文字列一致(商品詳細テーブルに型番欄なし・タイトルで照合、mottole MTL-W001-WH と同型の根拠)。¥1,998=楽天同額・出荷元/販売元 アトラスオンラインショップ(楽天 atlas-online と同一の公式店)・通常2〜3日以内に発送(カート可)・★3.7(22)。楽天は ブラック/ブラウン 2色同額でカード画像は両色並び・nameに色なし→楽天セレクタ先頭のブラックを採用。ブラウン=B0F2DXNJ74(ACG-BRP))
 outdoor-kitchen-table	2026-08-12	2026-09-21	5	5	0	2	0	0	0	7	ok	Amazon未設定カード 3/5 (#3,#4,#5)
 outdoor-wagon	2026-08-03	2026-08-03	5	5	0	2	0	0	0	7	ok	Amazon未設定カード 3/5 (#3,#4,#5)
-peg-hammer	2026-07-30	2026-07-30	5	5	0	2	0	0	0	7	ok	Amazon未設定カード 3/5 (#1,#3,#5)
+peg-hammer	2026-07-30	2026-07-30	5	5	0	3	0	0	0	8	ok	Amazon未設定カード 2/5 (#3,#5)
 petzl-headlight	2026-09-16	2026-09-16	5	5	0	5	0	0	0	10	ok	
 portable-cooler-aircon	2026-07-31	2026-07-31	5	5	0	2	0	0	0	7	ok	Amazon未設定カード 3/5 (#2,#3,#5)
 portable-electric-kettle	2026-08-14	2026-08-14	5	5	0	3	0	0	0	8	ok	Amazon未設定カード 2/5 (#1,#2)
@@ -232,10 +232,10 @@ soup-jar-camp	2026-09-11	2026-09-21	5	5	0	4	0	0	0	9	ok	Amazon未設定カード 
 spice-box	2026-08-24	2026-08-24	5	3	0	3	0	0	0	6	card-without-link	cards NG: #3=別形式(B0C1PBZVYJ); #5=別形式(B099NJ82YB)
 stove-fan	2026-09-18	2026-09-18	5	5	0	4	0	0	0	9	ok	Amazon未設定カード 1/5 (#2)
 stove-guard	2026-09-17	2026-09-17	5	5	0	5	0	0	0	10	ok	
-stylish-camp-tent	2026-04-28	2026-09-08	5	5	0	3	0	0	0	8	ok	Amazon未設定カード 2/5 (#1,#5)
+stylish-camp-tent	2026-04-28	2026-09-08	5	5	0	3	0	0	0	8	ok	Amazon未設定カード 2/5 (#1,#5) ｜2026-09-21 backfill(campkit-20260921-19): #1 GIMMICK パップテント m8 GM-TT3000 は空欄のまま。楽天URL https://item.rakuten.co.jp/axes0317/gm-tt3000/ を2回実取得しいずれも HTTP404(【楽天市場】エラー)＝廃番/出品終了。naturehike-tent #2 と同じ扱いでAmazon照合は行わず article-fix-backlog に discontinued_404 で起票、no-amazon.tsv に登録。参考: Amazon検索「GIMMICK パップテント GM-TT3000」もヒットなし(差し替え時の参考)
 takibi-table	2026-07-23	2026-07-23	5	5	0	4	0	0	0	9	ok	Amazon未設定カード 1/5 (#4)
-tarp-pole	2026-06-02	2026-06-02	5	10	0	1	0	0	0	11	ok	Amazon未設定カード 4/5 (#1,#2,#3,#4)
-tc-tarp-takibi	2026-09-01	2026-09-01	5	5	0	2	0	0	0	7	ok	Amazon未設定カード 3/5 (#2,#4,#5)
+tarp-pole	2026-06-02	2026-06-02	5	10	0	1	0	0	0	11	ok	Amazon未設定カード 4/5 (#1,#2,#3,#4) ｜2026-09-21 backfill(campkit-20260921-19): #1 VASTLAND タープポール 280cm 直径33mm は no-amazon(在庫切れ)。楽天 vastland/vl0025-1 はSKU3件(VL0025 ゴールド TP33-GD-2/VL0122 ブラック TP33-BLK-2/VL0123 レッド TP33-RED-2・各¥6,480)で**全SKU isSoldOut:true(売り切れ)**、カード画像 vl0025_y1 はゴールド。Amazon直検索「VASTLAND タープポール 280cm 33mm」「VASTLAND TP33-GD-2」「VASTLAND アルミ タープポール」「ヴァストランド ポール」ではVASTLANDのスチール16mm(B0B2DGG285/B0B2DFKNQ5)しか出ず、Yahoo経由で親 B07PRFMDM1 →子 B08LFWG6PP(同一タイトル・メーカー型番 VL0122=ブラック・¥6,499・★4.4(520))を特定したが「現在在庫切れです。この商品の再入荷予定は立っておりません」で購入ボックス無し、ゴールド(VL0025)の子ASINは存在せず。楽天側も全色売り切れのため article-fix-backlog に out_of_stock で起票
+tc-tarp-takibi	2026-09-01	2026-09-21	5	5	0	3	0	0	0	8	ok	Amazon未設定カード 2/5 (#4,#5) ｜2026-09-21 backfill(campkit-20260921-19): #2=B0BHHNYGHR(VASTLAND TCレクタタープ スクエア型・変種「【3】L/タン」・メーカー型番「VL-TRT-L-TAN」↔ 楽天SKU VL0300(タン)のメーカー型番「VL-TRT-L-TAN」完全一致。カード画像 vl0300_smn-2 はVL0300=タン。¥19,980=楽天同額・出荷元/販売元 VASTLAND DIRECT STORE・在庫あり・★4.5(47)・7.1kg・500×500cm・セット内容(本体/ペグ8/自在ロープ8/収納袋)も同一。他変種: L/オリーブ=B0C6SGS7BJ(VL-TRT-L-OLV相当)・L/ブラック=B0C6SK4JT7・M/タン=B0BHHPLHH5・M/オリーブ=B0BHHPLGND)
 tebura-camp	2026-07-31	2026-07-31	0	0	0	0	0	0	1	1	ok	
 tent-furusato	2026-07-31	2026-07-31	0	1	0	0	0	0	0	1	ok	
 tent-size-beginner-guide	2026-05-25	2026-09-20	3	3	0	2	1	1	0	6	ok	
@@ -245,12 +245,12 @@ thermal-bottle	2026-08-11	2026-08-11	5	5	0	5	0	0	0	10	ok
 titanium-cooker	2026-09-07	2026-09-21	5	5	0	5	0	0	0	10	ok	Amazon未設定カード 0/5 ｜2026-09-21 backfill(campkit-20260921-16): #1=B000AR2N3K(スノーピーク チタントレック900 SCS-008T・楽天商品属性 ブランド=スノーピーク/メーカー型番SCS-008T ↔ Amazon製品型番「SCS-008T」一致・ポットφ120×107/フタφ128×39/収納φ130×140/900ml+250ml/175gも一致・変種表「900ml/チタン」を採用(1400ml/チタン=B000AR2N3U、900ml/アルミ=B000AR2N2Q)・販売元 Victoria L-Breath・¥5,940同額・在庫あり・★4.3(901)。不採用: B0CWCFBB8R(ノベルティ付き・取扱不可)/B0D31C4GR9(900ml/1400ml混在の汎用ページ・取扱不可))
 titanium-mug	2026-08-11	2026-08-11	5	5	0	4	0	0	0	9	ok	Amazon未設定カード 1/5 (#5)
 torch-burner	2026-08-07	2026-08-07	5	5	0	2	0	0	0	7	ok	Amazon未設定カード 3/5 (#1,#2,#3)
-trekking-pole	2026-08-25	2026-09-21	5	5	0	3	0	0	0	8	ok	Amazon未設定カード 2/5 (#2,#4) ｜2026-09-21 backfill(campkit-20260921-16): #5=B0DZCGHRNM(Black Diamond トレイル BD82505 アイロンレッド・楽天SKU属性 ブランド=Black Diamond/メーカー型番BD82505 ↔ Amazonメーカー型番「BD82505」文字列一致・100〜140cm/収納65cm/480g(1ペア)/アルミ合金も一致・楽天既定SKU アイロンレッド(セレクタ先頭)と同色・販売元 楽山荘・¥18,700(現行楽天価格と同額。カードprice 17,500は旧価格→price_unconfirmed候補)・残り1点。同一品の別出品 B0DYNKDCD9(title「トレイル BD82505 アイロンレッド」・メーカー型番欄はBD社グローバルコードBD110045・Amazon出荷・¥15,800・残り3点・★4.5(5))は型番欄が不一致のため次点。B0DZCGHRNMが在庫切れになったら B0DYNKDCD9 へ差し替え可)
+trekking-pole	2026-08-25	2026-09-21	5	5	0	3	0	0	0	8	ok	Amazon未設定カード 2/5 (#2,#4) ｜2026-09-21 backfill(campkit-20260921-19): #4 TheBestDay A7075アルミ トレッキングポール 260g 2本セット は no-amazon。楽天 bestday/tbd-035955 のSKU属性は ブランド名=SENUN/メーカー型番=SENUN-955(ブラック 035955・レッド 037645 各¥4,980・カード画像 035955-top=ブラック)。「A7075」はアルミ合金規格で型番ではなく候補スコアの「型番+3」は誤検知。Amazon直検索「SENUN トレッキングポール」「SENUN アルミ トレッキングポール 260g」「SENUN 折りたたみ式 トレッキングポール 2本セット」「SENUN」およびYahoo経由「SENUN-955」「TheBestDay トレッキングポール A7075 260g」→ SENUN(販売元 (株)SENUNJAPAN)のAmazon出品は 3Kカーボン193g折りたたみ(B0GQXYWYCH 1本/B0GYH6K45D 2本・メーカー型番 SENUN-045920)とカーボン168g伸縮式(B0HGXQ27Y6)のみで、A7075アルミ260g折りたたみ(SENUN-955)の出品なし。「SENUN-955」検索は無関係商品のみ ｜2026-09-21 backfill(campkit-20260921-16): #5=B0DZCGHRNM(Black Diamond トレイル BD82505 アイロンレッド・楽天SKU属性 ブランド=Black Diamond/メーカー型番BD82505 ↔ Amazonメーカー型番「BD82505」文字列一致・100〜140cm/収納65cm/480g(1ペア)/アルミ合金も一致・楽天既定SKU アイロンレッド(セレクタ先頭)と同色・販売元 楽山荘・¥18,700(現行楽天価格と同額。カードprice 17,500は旧価格→price_unconfirmed候補)・残り1点。同一品の別出品 B0DYNKDCD9(title「トレイル BD82505 アイロンレッド」・メーカー型番欄はBD社グローバルコードBD110045・Amazon出荷・¥15,800・残り3点・★4.5(5))は型番欄が不一致のため次点。B0DZCGHRNMが在庫切れになったら B0DYNKDCD9 へ差し替え可)
 two-room-tent-guide	2026-04-23	2026-06-29	5	5	0	0	5	5	0	10	ok	
 uniflame-burner	2026-06-15	2026-06-15	3	6	0	3	0	0	0	9	ok	
 uniflame-fire-grill	2026-07-27	2026-07-27	5	5	0	5	0	0	0	10	ok	
 vastland-tent	2026-06-08	2026-06-08	5	9	0	5	0	0	0	14	ok	
-waq-chair	2026-06-08	2026-06-08	5	10	0	2	0	0	0	12	ok	Amazon未設定カード 3/5 (#3,#4,#5)
+waq-chair	2026-06-08	2026-06-08	5	10	0	3	0	0	0	13	ok	Amazon未設定カード 2/5 (#4,#5) ｜2026-09-21 backfill(campkit-20260921-19): #4 WAQ リラクシング コンフォートチェア(waq-rcc1) は空欄のまま。楽天URL https://item.rakuten.co.jp/waqoutdoor/waq-rcc1/ を2回実取得しいずれも HTTP404(【楽天市場】エラー。同店の waq-rlc2 は200で店舗自体は稼働中)＝出品終了/廃番。naturehike-tent #2 と同じ扱いでAmazon照合は行わず article-fix-backlog に discontinued_404 で起票、no-amazon.tsv に登録。参考: Amazon検索「WAQ リラクシング コンフォートチェア RCC1」でもRCC1の出品なし(WAQ-RLC1 B0CGVN1DVG 等・Reclining Mid Chair B0HHN1X7X5 のみ＝差し替え時の参考)
 washable-sleeping-bag	2026-09-15	2026-09-15	5	5	0	5	0	0	0	10	ok	
 water-jug	2026-07-27	2026-07-27	5	5	0	2	0	0	0	7	ok	Amazon未設定カード 3/5 (#2,#3,#5)
 waterproof-backpack	2026-06-08	2026-09-21	5	10	0	3	0	0	0	13	ok	Amazon未設定カード 2/5 (#2,#5) ｜2026-09-21 backfill(campkit-20260921-13): #1=B07PX8SH28(LAD WEATHER 型番ladbag002-bkgy ブラック×グレー 25L)・#3=B07VV1JL9D(TaoTech モデルfsb 30L ブラック)を設置。#2 tousen(楽天ブランド属性=旅行バッグ・型番なし・過去3回も該当なし)・#5 Mt.happy(型番なし・Amazonの同ブランドはサイクリングバッグのみ)は no-amazon
