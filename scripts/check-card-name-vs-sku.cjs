@@ -67,7 +67,7 @@ const ROOT = path.join(__dirname, '..');
 const POSTS_DIR = path.join(ROOT, 'content', 'posts');
 const OUT = path.join(ROOT, '_file', 'card-name-check.tsv');
 const HTML_DIR = path.join(ROOT, '_file', '_work', 'html-24');
-const TASK_ID = 'campkit-20260921-29'; // 走査・再判定を行ったタスク（TSV の judged_task 列に入る）
+const TASK_ID = 'campkit-20260921-30'; // 走査・再判定を行ったタスク（TSV の judged_task 列に入る）
 
 // ---------------------------------------------------------------------------
 // 閾値・定数（A-4 の回帰検証で調整する。slug / id を条件に埋め込まない）
@@ -715,6 +715,16 @@ function axesCarryValue(axes, sp) {
   const re = new RegExp('(?<![0-9.])' + escapeRe(sp.value) + '\\s*(?:' + units.map(escapeRe).join('|') + ')(?![A-Za-z])', 'i');
   return axes.some((a) => a.values.some((v) => re.test(toHalfWidth(v))));
 }
+// 範囲表記の正規化キー: 全角/半角・空白・区切り（〜 ～ - ー – — ~）の揺れを潰す（"15〜25L" / "15-25L" / "１５～２５Ｌ" → "15~25l"）
+function rangeKey(s) { return toHalfWidth(s).toLowerCase().replace(/[~〜～\-ー–—]/g, '~').replace(/\s+/g, ''); }
+// name の範囲表記（sp.kind==='range'）が、軸の値そのものに含まれる範囲表記と一致するか（"XS(15-25L)" に "15〜25L"）。
+//   軸の値の側が範囲を含む場合に限る。値が単一値（40L）の軸に name の範囲（40〜60L）が「含まれる」ことは無いので従来の判定は変わらない
+function rangeIsAxisValue(axes, sp) {
+  const key = rangeKey(sp.raw);
+  if (!key || !/\d/.test(key)) return false;
+  const re = new RegExp('(?<![0-9.])' + escapeRe(key)); // 直前が数字なら別の数（"115~125l" に "15~25l" を含めない）
+  return (axes || []).some((a) => a.values.some((v) => re.test(rangeKey(v))));
+}
 function specFound(sp, hayText, attrs) {
   const hay = norm(hayText).replace(/(\d),(\d{3})(?!\d)/g, '$1$2'); // 照合先の桁区切り（耐水圧 2,000mm）も外す
 
@@ -857,8 +867,13 @@ function judge(card, page, http) {
     for (const sp of sps) if (['liter', 'len', 'thick', 'width', 'ah'].includes(sp.kind)) (groups[sp.kind + sp.unit] ||= new Set()).add(sp.value);
     for (const [k, vals] of Object.entries(groups)) if (vals.size >= 2) multi.add(k);
   }
+  //   範囲表記でも、軸の値そのものが同じ範囲を含む（サイズ軸 "XS(15-25L)" ↔ name「XSサイズ（15〜25L）」）なら 1 仕様の名指しであって
+  //   未指定ではない（campkit-20260921-30 C-2・backpack-rain-cover #4）。軸の値が単一値（40L/50L/60L）で name が範囲（40〜60L）の従来
+  //   ケースはこれまでどおり size_unspecified。name に範囲が 2 つ以上あれば並記なので緩和しない。選択SKUの決定（nameSpecifiedValues）とは独立
+  const rangeSps = sps.filter((sp) => sp.kind === 'range');
+  const rangeNamed = rangeSps.length === 1 && rangeIsAxisValue(page.axes, rangeSps[0]);
   const missSpec = sps.filter((sp) => {
-    if (sp.kind === 'range') { if (axesCarryUnit(page.axes, sp)) rangeSize = true; return false; }
+    if (sp.kind === 'range') { if (axesCarryUnit(page.axes, sp) && !rangeNamed) rangeSize = true; return false; }
     if (multi.has(sp.kind + sp.unit)) { rangeSize = true; return false; }
     const hay = axesCarryValue(page.axes, sp) ? selText : allText;
     return !specFound(sp, hay, first.attrs);
@@ -1315,6 +1330,21 @@ function runTests() {
     mkPage({ itemName: 'テント', axes: [{ key: 'カラー', values: ['ブラウン', 'グリーン'] }], skus: [[['c01'], 24800], [['c02'], 24800]] }), 200, [], ['variant_unavailable']);
   t('variant_unavailable なし: 並記「5cm/10cm」は1つでも SKU にあれば整合', { name: 'Naturehike キャンプマット 厚手5cm/10cm', price: '5990' },
     mkPage({ itemName: 'Naturehike キャンプマット', brand: 'Naturehike', axes: [{ key: '厚さ', values: ['5cm', '10cm'] }], skus: [[['10cm'], 7990]] }), 200, ['size_unspecified', 'price_mismatch'], ['variant_unavailable']);
+
+  // ── campkit-20260921-30 C-2: 軸の値そのものが範囲表記を含むときは name の同じ範囲は 1 仕様の名指し ──
+  const daichuAxes = [{ key: 'サイズ', values: ['XS(15-25L)', 'S(30-40L)', 'M(40-50L)', 'L(55-65L)', 'XL(70-75L)', 'XXL(75-85L)', 'XXXL(90-100L)'] }, { key: 'カラー', values: ['ブラック', 'シルバー', 'カーキ', '蛍光黄色', 'オレンジ', 'ブルー', 'ネイビー'] }];
+  t('size_unspecified なし: 軸の値「XS(15-25L)」に name の「XSサイズ（15〜25L）」が一致（backpack-rain-cover #4）', { name: '雑貨ストアDAICHU リュックカバー XSサイズ（15〜25L）ブラック', price: '1000' },
+    mkPage({ itemName: 'リュック カバー レインカバー 15L〜100L対応', price: 1000, skuCount: 49, manageNumber: '20230207-backpack-cover', selectorValues: ['XS(15-25L)', 'ブラック'], axes: daichuAxes }), 200, [], ['size_unspecified', 'color_unspecified', 'spec_mismatch']);
+  t('size_unspecified なし: 区切り・全角の揺れ（１５～２５Ｌ ↔ 15-25L）も一致', { name: 'DAICHU リュックカバー XS（１５～２５Ｌ）ブラック', price: '1000' },
+    mkPage({ itemName: 'リュック カバー レインカバー', price: 1000, selectorValues: ['XS(15-25L)', 'ブラック'], axes: daichuAxes }), 200, [], ['size_unspecified']);
+  t('size_unspecified: 軸の値が単一値（40L/50L/60L）で name が範囲「40〜60L」の従来ケースは緩和しない', { name: 'tousen 登山リュック 40〜60L 大容量 ブラック', price: '4280' },
+    mkPage({ itemName: '登山リュック 40～60L', price: 4280, selectorValues: ['40L', 'ブラック'], axes: [{ key: 'サイズ', values: ['40L', '50L', '60L'] }, { key: 'カラー', values: ['レッド', 'ブラック'] }] }), 200, ['size_unspecified'], ['color_unspecified']);
+  t('size_unspecified: name の範囲（15〜30L）が軸のどの値の範囲とも一致しなければ従来どおり', { name: 'DAICHU リュックカバー XS（15〜30L）ブラック', price: '1000' },
+    mkPage({ itemName: 'リュック カバー レインカバー', price: 1000, selectorValues: ['XS(15-25L)', 'ブラック'], axes: daichuAxes }), 200, ['size_unspecified']);
+  t('size_unspecified: name に範囲が 2 つ（15〜25L／30〜40L）並ぶのは並記なので緩和しない', { name: 'DAICHU リュックカバー XS（15〜25L）S（30〜40L）ブラック', price: '1000' },
+    mkPage({ itemName: 'リュック カバー レインカバー', price: 1000, selectorValues: ['XS(15-25L)', 'ブラック'], axes: daichuAxes }), 200, ['size_unspecified']);
+  t('size_unspecified: 「15〜25L」は「115-125L」の値には一致しない（数字隣接ガード）', { name: 'カバー XS（15〜25L）ブラック', price: '1000' },
+    mkPage({ itemName: 'カバー', price: 1000, selectorValues: ['XS(115-125L)', 'ブラック'], axes: [{ key: 'サイズ', values: ['XS(115-125L)', 'S(130-140L)'] }, { key: 'カラー', values: ['ブラック', 'ブルー'] }] }), 200, ['size_unspecified']);
 
   // url_unparsable は rakutenUrl() の単体テストで担保
   const urlCases = [

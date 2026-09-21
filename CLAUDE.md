@@ -376,6 +376,7 @@ ASP枠は日次で1本ずつ消費される一方、長らく**補給タスク�
   - `issue_type=name_fix`: 商品は合っているが name の書き方だけ直す案件（複数型番の並記／楽天商品名の全選択肢列挙）。商品差し替え不要で、name を採用した1仕様に固定するだけ。
   - `status=blocked`: 変更禁止リスト（task-16・**2026-10-18 まで**）の記事に対する起票。日次タスクは `pending` だけを消費するので拾われない。2026-10-19 以降に `pending` へ昇格させる（keyword-backlog の `blocked` と同じ運用）。
   - ⚠️ **ProductCard の `rank` は記事内で一意ではない**（dod-tarp／mountain-camp-lantern／sierra-cup／vastland-tent は本体と関連アイテムが同じ rank）。カードを特定するキーは必ず `slug＋rank＋id` にする。2026-09-21（campkit-20260921-26）に、保存HTMLを rank だけで管理していたことによる取り違え（dod-tarp のオクラタープをポールのHTMLで判定→誤起票）を修正し、誤起票行は削除した。起票の `position` には `（id: …）` を必ず含める。
+- **2026-09-22 追加（campkit-20260921-30）: 台帳 TSV を書き換えたら必ず `node scripts/validate-backlog-tsv.cjs` を通す**。29 で `position` 8行を手編集（Edit ツールの文字列置換）した際に `issue_type` と `detail` の間のタブが落ち、その8行だけ9列に潰れたまま push された（ビルドは通るので気づけない）。同スクリプトは `article-fix-backlog.tsv`／`rewrite-backlog.tsv`／`card-name-check.tsv` の列数・ヘッダ名・status/issue_type の値ドメイン・行数を検査して NG なら非0終了する。`deploy.cjs` の手順1.6 に組み込み済みで、崩れていれば push 前に自動停止する。**台帳の編集は手作業の文字列置換ではなく、列を配列として扱う小スクリプトで行う**（`_file/_work/t30-fix-backlog.cjs` が例）。
 
 ---
 

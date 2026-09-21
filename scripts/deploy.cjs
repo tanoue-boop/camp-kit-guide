@@ -186,6 +186,20 @@ console.log('\n■ 1.5 太字破綻チェック (lint-bold.cjs)');
   }
 }
 
+// 1.6 台帳 TSV の構造検査（validate-backlog-tsv.cjs）
+// 2026-09-22 追加（campkit-20260921-30 作業A）: 29 で article-fix-backlog.tsv の 8 行を手編集した際にタブが 1 つ落ちて
+// 9 列に潰れたまま push された。ビルドは通るので誰も気づかない。台帳（_file/article-fix-backlog.tsv／rewrite-backlog.tsv／
+// card-name-check.tsv）の列数・ヘッダ・値ドメインをここで検査し、崩れていれば push 前に止める。
+console.log('\n■ 1.6 台帳 TSV 構造検査 (validate-backlog-tsv.cjs)');
+try {
+  run('node scripts/validate-backlog-tsv.cjs');
+} catch {
+  abort(
+    '台帳 TSV の構造が崩れています（列数・ヘッダ・値ドメイン）。push せず停止します。\n' +
+      '  台帳を編集したときはタブ（列区切り）が落ちていないかを確認し、`node scripts/validate-backlog-tsv.cjs` が PASS するまで直してください。'
+  );
+}
+
 // 2. ビルド（必須・EXIT 0 を確認）
 console.log('\n■ 2. ビルド (npm run build)');
 try {
