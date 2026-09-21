@@ -51,7 +51,7 @@ camp-nata	2026-08-18	2026-08-18	5	5	0	5	0	0	0	10	ok
 camp-oil-stove	2026-08-03	2026-08-03	5	5	0	3	0	0	0	8	ok	Amazon未設定カード 2/5 (#4,#5)
 camp-pillow	2026-06-02	2026-06-29	5	10	0	2	0	0	0	12	ok	Amazon未設定カード 3/5 (#1,#4,#5)
 camp-portable-power-beginner	2026-04-23	2026-09-21	5	5	0	5	0	0	0	10	ok	
-camp-rainwear	2026-06-01	2026-06-01	5	5	0	1	0	0	0	6	ok	Amazon未設定カード 4/5 (#1,#3,#4,#5)
+camp-rainwear	2026-06-01	2026-09-21	5	5	0	4	0	0	0	9	ok	Amazon未設定カード 1/5 (#5) ｜2026-09-21 backfill(campkit-20260921-15): #1=B08VNM2FVQ(namelessage NASR-100 上下セット・楽天SKU属性 ブランド=ネームレスエイジ/型番NASR-100 ↔ Amazonタイトル「NASR-100」一致・販売元OC(=OC STYLE)。楽天既定SKU=上下セット(ポケット無PT)/XS/[01]テラコッタ ¥8,980だがAmazon変種にXSが無くテラコッタ/XL ¥8,990を採用。※カード価格3500は現行楽天価格8,980(単品でも3,990〜)と乖離→price_unconfirmed候補)。#3=B09FXG2ZQ6(DOQMENT/カジメイク 4WAYストレッチシールドEX・楽天SKU型番7572 ↔ Amazonメーカー型番7572 一致・色サイズ18変種も一致・既定SKU ベージュ/S を採用・販売元Amazon.co.jp ¥4,442)。#4=B08ZS99S9Q(Makku アジャストマックライト AS-7100・楽天SKU型番AS-7100 ↔ Amazon製造元リファレンスAS7100/メーカー型番AS7100BLM 一致・耐水圧10000/透湿5000も一致。販売元ハンドルキング(アレグレット)¥5,480で楽天¥3,490より高い。楽天既定SKU=AS-7100/ブルー/S だがAmazon変種にブルー/Sが無くブルー/Mを採用。Makku公式出品B0C32HTGCZ系は130/140のキッズ用で不採用)。#5 MAKKU レイントラック AS-900/AS-950 は no-amazon: 楽天は「ジャケットAS-900＋パンツAS-950の上下セット¥5,050(単一SKU rain300・色サイズは項目選択)」だがAmazonはジャケット単体(B003XNMWXY系・型番AS-900-LL ¥2,962)とパンツ単体(B00GRT4CQQ系 AS-950)のみでセット出品なし(構成違い)
 camp-rainy-day-plan	2026-09-02	2026-09-02	0	0	0	0	0	0	1	1	ok	
 camp-rental-flow	2026-08-27	2026-08-27	0	0	0	0	0	0	1	1	ok	
 camp-rental-hygiene	2026-09-09	2026-09-09	0	0	0	0	0	0	1	1	ok	
@@ -95,7 +95,7 @@ day-camp-grill	2026-04-27	2026-04-27	5	5	0	1	0	0	0	6	ok	Amazon未設定カード
 day-camp-led-lantern	2026-04-27	2026-04-27	5	5	0	2	0	0	0	7	ok	Amazon未設定カード 3/5 (#3,#4,#5)
 day-camp-starter-set	2026-04-27	2026-04-27	5	5	0	3	0	0	0	8	ok	Amazon未設定カード 2/5 (#1,#2)
 day-camp-tarp-cheap	2026-04-27	2026-04-27	5	5	0	2	0	0	0	7	ok	Amazon未設定カード 3/5 (#3,#4,#5)
-day-camp-tent	2026-05-26	2026-08-24	4	4	0	1	0	0	0	5	ok	Amazon未設定カード 3/4 (#1,#2,#3)
+day-camp-tent	2026-05-26	2026-09-21	4	4	0	2	0	0	0	6	ok	Amazon未設定カード 2/4 (#1,#3) ｜2026-09-21 backfill(campkit-20260921-15): #2=B0GBVXC628(QUICKCAMP コンパクトシェード QC-CS180・楽天SKU属性 ブランド=クイックキャンプ/型番QC-CS180 ↔ Amazon本文「メーカー品番：QC-CS180」一致・展開180×150×130/収納60×15×15/3.3kg/耐水圧3000mmも一致・販売元YOCABITO同一・既定SKU サンドベージュ/PUコーティング ¥6,990(カード価格と同額)を採用。※カードname/description/badgeは「遮光100% ブラックコーティング」を謳うが、それは同ページ別SKU グレー/ブラックコーティング ¥8,990(Amazon B0GBWCXMPM)の仕様で、price 6990 はPU版の価格→表記と価格が別SKUを指す不整合・別タスク)。#1 Noone ワンタッチテント200×320 は no-amazon: 楽天SKU属性 ブランド=-/型番TNT-200(店舗コード)の無名OEM、Amazon検索「ワンタッチテント TNT-200 200×320 フルクローズ」は禄越/ENDLESS BASE等の別OEMのみ。#3 and wander×エアバギー ポップアップテント は no-amazon: 楽天ページ dogcart/000000004987405 がHTTP404で仕様確認不可(discontinued_404候補)、Amazon検索「and wander ポップアップテント エアバギー」はCROWN SHADES/EchoSmile等の無関係商品のみで出品なし
 deuter-backpack	2026-06-15	2026-09-21	5	10	0	1	0	0	0	11	ok	Amazon未設定カード 4/5 (#1,#2,#3,#5)
 disaster-camp-gear	2026-08-25	2026-08-25	0	0	0	0	0	0	1	1	ok	
 disaster-portable-power	2026-08-19	2026-09-21	5	5	0	3	0	0	0	8	ok	Amazon未設定カード 2/5 (#2,#4)
@@ -176,7 +176,7 @@ mountain-backpack-30l	2026-04-23	2026-09-11	5	5	0	4	0	0	0	9	ok	Amazon未設定�
 mountain-camp-lantern	2026-05-26	2026-08-26	6	6	0	1	5	5	0	12	ok	
 mountain-camp-mat	2026-04-25	2026-04-25	5	5	0	3	0	0	0	8	ok	Amazon未設定カード 2/5 (#1,#2)
 mountain-camp-tent	2026-04-29	2026-06-29	5	5	0	1	0	0	0	6	ok	Amazon未設定カード 4/5 (#2,#3,#4,#5)
-mountain-tent-cheap	2026-05-26	2026-05-26	5	5	0	2	0	0	0	7	ok	Amazon未設定カード 3/5 (#1,#2,#3)
+mountain-tent-cheap	2026-05-26	2026-09-21	5	5	0	3	0	0	0	8	ok	Amazon未設定カード 2/5 (#1,#3) ｜2026-09-21 backfill(campkit-20260921-15): #2=B07X38Y39Y(GEERTOP 2人用 4シーズン「Top Road 2」・楽天SKU型番は「-」のためブランド＋仕様で照合: 140×210×115cm/総重量3kg/フライ210T PU3000mm/フロア210D PU5000mm/2ドア/アルミポール2本 が楽天本文とAmazon本文で全一致・楽天既定SKU グリーン ↔ Amazon変種アーミーグリーン(他 レモン色/ナイトブルー/カモ柄)・販売元GEERTOP/出荷元Amazon ¥13,999 在庫あり)。#1 FIELDOOR フィールドキャンプドーム100 は no-amazon: 楽天SKU属性 型番「フィールドキャンプドーム100 ライト（フライシート付）」＝ライト版(20Dリップストップ/1.6kg/収納φ16×32/耐水圧1,984mm/グレー)だが、Amazonにあるのは標準版B08G44M7DL系(ポリエステル/2.2kg/収納φ18×40/耐水圧1,500mm/ライトベージュ ¥7,400)のみで別モデル。ライト版の出品は検索3回で見つからず。#3 Naturehike 1人用 20D(nh18t010-t-3) は no-amazon: 楽天ページ naturehike-direct/nh18t010-t-3 がHTTP404で仕様確認不可(discontinued_404候補)、Amazon検索「Naturehike NH18T010-T」は型番NH18A095-D(B0BBMJKHX1)等の別モデルのみ
 mummy-sleeping-bag	2026-06-02	2026-08-12	5	10	0	1	0	0	0	11	ok	Amazon未設定カード 4/5 (#1,#2,#3,#4)
 mysteryranch-backpack	2026-06-15	2026-09-20	4	8	0	2	0	0	0	10	ok	Amazon未設定カード 2/4 (#3,#4)
 nanga-down-jacket	2026-09-14	2026-09-14	5	10	0	2	0	0	0	12	ok	Amazon未設定カード 3/5 (#1,#3,#4)
