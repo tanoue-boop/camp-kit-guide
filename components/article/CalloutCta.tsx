@@ -33,6 +33,10 @@ const A8_IMPRESSION_PIXELS: Record<string, string> = {
   "4B8BWS+G9UK1E+4U5Q+BX3J6": "https://www18.a8.net/0.gif?a8mat=4B8BWS+G9UK1E+4U5Q+BX3J6",
   // hinataレンタル
   "4B8B4S+5AIQCY+4U5Q+5YJRM": "https://www15.a8.net/0.gif?a8mat=4B8B4S+5AIQCY+4U5Q+5YJRM",
+  // やまどうぐレンタル屋（s00000011202001・素材ID 003「登山道具レンタル」・通常広告用。2026-09-21 管理画面で確認）
+  "4B8BWS+GI6MIA+2EFO+5YZ76": "https://www14.a8.net/0.gif?a8mat=4B8BWS+GI6MIA+2EFO+5YZ76",
+  // アソビュー（s00000019330001・素材ID 042「日本最大級のレジャー総合情報サイト「asoview!(アソビュー)」」・通常広告用。2026-09-21 管理画面で確認）
+  "4B8B4S+5VCWJ6+455G+67C4I": "https://www17.a8.net/0.gif?a8mat=4B8B4S+5VCWJ6+455G+67C4I",
 };
 
 /** href が px.a8.net のときだけ a8mat 値を返す（楽天ふるさと納税CTA等は undefined） */
