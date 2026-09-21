@@ -3,6 +3,16 @@
 数値の推移はGAS「SEOレポート」の履歴で追う。本ファイルは「いつ・どの記事を・なぜ・どう変えたか」を記録し、次回レポートで効果を評価するための施策台帳。新しい施策は上に追記する。
 
 ---
+## 2026-09-22：ProductCard `name` の一括修正 第5弾（44枚／14記事）— キュー#15-b（campkit-20260921-33）
+
+- **位置づけ**: 第4弾（campkit-20260921-32・下記）の続き。同じ抽出条件の **先頭44枚／14記事** を書き換えた。**触ったのは `ProductCardMdx` の `name` 属性のみ**（title／description／updatedAt／本文・比較表・まとめ表・リンク・price は不変更）。**検出器（`scripts/check-card-name-vs-sku.cjs`）のロジックは変更していない**（`TASK_ID` の更新のみ・`--test` 173 passed 不変）
+- **対象記事（14本）**: mountain-camp-mat（5）／mountain-camp-tent（2）／mountain-tent-cheap（2）／mummy-sleeping-bag（5）／nanga-down-jacket（5）／nanga-sleeping-bag（5）／naturehike-mat（2）／naturehike-sleeping-bag（4）／naturehike-tent（1）／northface-backpack（2）／oil-lantern（1）／one-pole-tent（2）／one-touch-tarp（3）／osprey-daily-backpack（5）。変更禁止リスト（2026-10-18 まで）の記事は含まない
+- **書き換えの基準**: 第4弾までの基準（CLAUDE.md「ProductCard `name` の書き方の基準」）＋ task-33 §0 で確定した 3 点＝①店側の表記ノイズ（誤字・値先頭の区切り記号）は name に写さない（選択SKU不変＋対象フラグ消滅をシミュレータで確認）、②軸先頭値に SKU が無いときは着地時の variantId を既定とみなす、③§B の遷移先が qty=1〜2 の薄在庫しか無ければ既定据え置き。**ウェア5枚（nanga-down-jacket）**はサイズ軸の値（XXS／XS／WS／L）を独立トークンで名指し。§B（既定 qty=0 → 同構成・同価格で在庫のある軸順先頭）を適用した4枚＝nanga-down-jacket #2 オーロラ メンズ S→**L**（モカグレー据え置き。軸順先頭の M は qty=1 の薄在庫なので飛ばした）・#5 オーロラ レディース ブラック→**モカグレー**（WS 据え置き。ブラックは全サイズ qty=0 なので §B(2) で色を動かした）、one-touch-tarp #3 モダンデコ ピスタチオグリーン→**テラコッタ**（第4弾の large-tarp-recommend #5 と同一商品・同じ着地）、osprey-daily-backpack #5 ULスタッフパック ウォーターフロントブルー→**タンドラグリーン**。**据え置き（§B 不適用）**＝naturehike-mat #2（5cm/ベージュ qty=0・同価格の SKU 無し→out_of_stock で起票）。カード price と一致する変種を優先した例＝oil-lantern #1 VASTLAND（S/タン ¥1,280 soldout ではなく カード ¥1,780 と一致し在庫のある **Sサイズ オリーブ** qty=267→price_mismatch 解消）。**記事の内容を優先した例**＝naturehike-tent #1（旧 name「1〜2人用」の範囲から検出器は 1人用 ¥19,990 を選んでいたが、見出し・本文・比較表が「Cloud Up2 Pro」＝2人用なので **2人用** ¥23,990 に固定→乖離 +19.0%→+42.9%・既存行 L293 の notes に記録）、mummy-sleeping-bag #4 HAWK GEAR（カード ¥4,280 に一致するのは「軽量タイプ」だが記事は -15度耐寒の通常モデルなので既定 **ブラック** ¥4,990 のまま）、northface-backpack #5（カード ¥14,750 に一致する ROYAL_BLUE は型番 NM2DQ04D＝別モデルなので **BLACK (NM2DS52A)** のまま）。表記ノイズを落とした例＝OneTigris の軸値「‐ブラウン」「‐アーミーグリーン」→**ブラウン／アーミーグリーン**、GEERTOP「140cm x 210cm」→**140cm×210cm**（並記扱いを回避）。判断材料は保存HTML（`_file/_work/html-24/`）と `card-name-check.tsv` のみで、**楽天への新規アクセスは0回**
+- **再判定（`--cached`）**: 対象フラグ（color_unspecified／size_unspecified／store_copy）は 44枚すべてで消滅。**name 固定によって新たに立ったフラグは0**（variant_unavailable の新規も0）。price_mismatch は 17枚が変更前からの既存分（うち oil-lantern #1 は解消）。`--cached --recheck` 全1113枚で対象44枚以外の差分0（OK 553→580／color_unspecified 202→168／store_copy 75→71／size_unspecified 46→34／price_mismatch 340→339）
+- **台帳（article-fix-backlog.tsv）**: 400行のまま（pending 283／blocked 96／needs-human 1／done 20）。open 行14件の `position` を新 name に更新し notes を追記（mountain-camp-mat #5／mummy-sleeping-bag #2・#3・#4／nanga-sleeping-bag #1・#5／naturehike-tent #1／northface-backpack #5／one-pole-tent #2・#3／one-touch-tarp #4／osprey-daily-backpack #2・#4・#5）、**oil-lantern #1 の price_unconfirmed 行は name 固定で価格一致になり根拠が消えたため削除**、naturehike-mat #2 を out_of_stock（B）で新規起票
+- **効果測定**: 第1〜4弾と同じく検索順位の直接施策ではないため計測対象外
+
+---
 ## 2026-09-22：ProductCard `name` の一括修正 第4弾（44枚／19記事）— キュー#15-b（campkit-20260921-32）
 
 - **位置づけ**: 第3弾（campkit-20260921-31・下記）の続き。同じ抽出条件の **先頭44枚／19記事** を書き換えた。**触ったのは `ProductCardMdx` の `name` 属性のみ**（title／description／updatedAt／本文・比較表・まとめ表・リンク・price は不変更）。**検出器（`scripts/check-card-name-vs-sku.cjs`）のロジックは変更していない**（`TASK_ID` の更新のみ・`--test` 173 passed 不変）
