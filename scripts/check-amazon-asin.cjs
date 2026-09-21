@@ -43,7 +43,10 @@
  *   inconsistent_shared  shared_asin のうち、カードの brand または型番トークンが記事間で食い違う
  *   bad_format           ASIN が ^B0[A-Z0-9]{8}$ にも旧形式 ^[A-Z0-9]{10}$ にも一致しない
  *   no_amazon_conflict   _file/amazon-backfill-no-amazon.tsv に載っている slug/rank/id なのに Amazon リンクが付いている
- *   legacy_form          旧形式（source="amazon" ＋ affiliateUrl=ASIN）＝キュー#17 の対象
+ *   legacy_form          旧形式（source="amazon" ＋ affiliateUrl=ASIN で、amazonAsin／amazonUrl を持たない＝link_form が legacy_source_amazon）
+ *                        ＝キュー#17 の対象（campkit-20260921-38 で 8→0）
+ *   asin_in_affiliate_url source="amazon" ＋ affiliateUrl=ASIN のまま amazonAsin を足したカード（38 §A-2／A-3 の 5 枚）。描画は amazonAsin を
+ *                        使うので導線は現行形式だが、affiliateUrl に ASIN が残っている（楽天が見つかったら source="rakuten"＋hb.afl に置き換える）
  *   short_url            amazonUrl（amzn.to 短縮）＝キュー#18 の対象
  *   both_forms           amazonAsin と amazonUrl が同居（描画は amazonUrl。ASIN 系の検査は amazonAsin の値で行う）
  *
@@ -69,7 +72,7 @@ const NO_AMAZON_TSV = path.join(ROOT, '_file', 'amazon-backfill-no-amazon.tsv');
 const CARD_NAME_TSV = path.join(ROOT, '_file', 'card-name-check.tsv');
 const HTML_DIRS = ['html-asin-37', 'html-asin-36'].map((d) => path.join(ROOT, '_file', '_work', d));
 const HTML_DIR = HTML_DIRS[0];
-const TASK_ID = 'campkit-20260921-37';
+const TASK_ID = 'campkit-20260921-38';
 
 const INTERVAL_MS = 2000;
 const FETCH_TIMEOUT_MS = 25000;
@@ -163,7 +166,10 @@ function linkFormOf(attrs) {
   if (hasAsin && attrs.amazonAsin) { asin = attrs.amazonAsin; if (link_form === 'none') link_form = 'amazonAsin'; }
   if (link_form === 'none' && legacy) { link_form = 'legacy_source_amazon'; asin = attrs.affiliateUrl; }
   if (!amazon_url && asin) amazon_url = `https://www.amazon.co.jp/dp/${asin}`;
-  return { link_form, asin, amazon_url, both: hasAsin && hasUrl && !!attrs.amazonAsin && !!attrs.amazonUrl, legacy: !!legacy };
+  //   legacy（＝legacy_form フラグ）は「affiliateUrl の ASIN でしか Amazon リンクを持てない」カードだけ。amazonAsin／amazonUrl を持つカードは
+  //   描画がそちらを使うので旧形式ではない（campkit-20260921-38 §A-2 で amazonAsin を足しつつ source="amazon"＋affiliateUrl=ASIN を残した
+  //   5 枚がこれ。その残滓は asin_in_affiliate_url で別に立てる）
+  return { link_form, asin, amazon_url, both: hasAsin && hasUrl && !!attrs.amazonAsin && !!attrs.amazonUrl, legacy: link_form === 'legacy_source_amazon', asinInAffiliate: !!legacy && link_form !== 'legacy_source_amazon' };
 }
 
 function loadAllCards() {
@@ -176,7 +182,7 @@ function loadAllCards() {
       const lf = linkFormOf(c.attrs);
       out.push({
         slug, rank: c.rank, id: c.id, index: c.index, frozen: FROZEN_SLUGS.has(slug) ? 1 : 0,
-        link_form: lf.link_form, asin: lf.asin, amazon_url: lf.amazon_url, both: lf.both, legacy: lf.legacy,
+        link_form: lf.link_form, asin: lf.asin, amazon_url: lf.amazon_url, both: lf.both, legacy: lf.legacy, asinInAffiliate: lf.asinInAffiliate,
         card_name: clean(c.attrs.name), brand: brandOf(c.attrs.name), maker_model: modelTokens(c.attrs.name).join(' '),
         card_price: clean(c.attrs.price),
       });
@@ -225,6 +231,7 @@ function staticCheck(cards, noAmazonKeys) {
     }
     if (c.link_form !== 'none' && noAmazonKeys.has(`${c.slug}\t${c.rank}\t${c.id}`)) flags.push('no_amazon_conflict');
     if (c.legacy) flags.push('legacy_form');
+    if (c.asinInAffiliate) flags.push('asin_in_affiliate_url');
     if (c.link_form === 'amazonUrl') flags.push('short_url');
     if (c.both) flags.push('both_forms');
     c.static_flags = flags.length ? flags.join(',') : (c.link_form === 'none' ? '-' : 'OK');
@@ -466,6 +473,10 @@ function runTests() {
   t('legacy source=amazon', p('<ProductCardMdx rank="3" id="c" affiliateUrl="B09DBDH7VB" source="amazon" />').link_form, 'legacy_source_amazon');
   t('legacy asin', p('<ProductCardMdx rank="3" id="c" affiliateUrl="B09DBDH7VB" source="amazon" />').asin, 'B09DBDH7VB');
   t('source=amazon だが affiliateUrl が URL なら legacy ではない', p('<ProductCardMdx rank="3" id="c" affiliateUrl="https://www.amazon.co.jp/dp/B09DBDH7VB" source="amazon" />').link_form, 'none');
+  // campkit-20260921-38 §A-2: amazonAsin を足して source="amazon"＋affiliateUrl=ASIN を残した形は旧形式ではない（描画は amazonAsin）
+  t('legacy + amazonAsin → link_form は amazonAsin・legacy=false・asinInAffiliate=true', (() => { const r = p('<ProductCardMdx rank="5" id="e" affiliateUrl="B0843M38FP" amazonAsin="B0843M38FP" source="amazon" />'); return [r.link_form, r.asin, r.legacy, r.asinInAffiliate]; })(), ['amazonAsin', 'B0843M38FP', false, true]);
+  t('legacy のみ → legacy=true・asinInAffiliate=false', (() => { const r = p('<ProductCardMdx rank="3" id="c" affiliateUrl="B09DBDH7VB" source="amazon" />'); return [r.legacy, r.asinInAffiliate]; })(), [true, false]);
+  t('source=rakuten + amazonAsin（現行形式）→ asinInAffiliate=false', p('<ProductCardMdx rank="1" id="a" amazonAsin="B0DR43CC43" affiliateUrl="https://hb.afl.rakuten.co.jp/x" source="rakuten" />').asinInAffiliate, false);
   t('none', p('<ProductCardMdx rank="4" id="d" affiliateUrl="https://hb.afl.rakuten.co.jp/x" source="rakuten" />').link_form, 'none');
   t('amazonAsin="" は none', p('<ProductCardMdx rank="4" id="d" amazonAsin="" />').link_form, 'none');
   t('rank 無しは通し番号', p('<ProductCardMdx id="d" />').rank, 1);
@@ -494,6 +505,7 @@ function runTests() {
     mk('k', 1, 'k1', 'B0FFFFFFFF', 'K', { both: true, link_form: 'amazonUrl' }),
     mk('l', 1, 'l1', 'B0GGGGGGGG', 'L'),
     mk('m', 1, 'm1', '', 'M', { link_form: 'amazonUrl' }),
+    mk('n', 1, 'n1', 'B0HHHHHHHH', 'N', { asinInAffiliate: true }),
   ];
   staticCheck(cs, new Set(['l\t1\tl1', 'i\t1\ti1']));
   t('dup_in_article', cs[0].static_flags, 'dup_in_article');
@@ -507,6 +519,7 @@ function runTests() {
   t('no_amazon_conflict', cs[12].static_flags, 'no_amazon_conflict');
   t('no-amazon 台帳に載っていてもリンクが無ければ立てない', cs[9].static_flags, '-');
   t('short_url', cs[13].static_flags, 'short_url');
+  t('asin_in_affiliate_url（38 §A-2 の残滓）', cs[14].static_flags, 'asin_in_affiliate_url');
   // autoVerdict（合成 dp）
   const dp0 = { title: 'Naturehike Village 13', model: 'CNH22ZP004', details: {}, oos: [], buybox: 'cart', availability: '在庫あり' };
   t('autoVerdict ok', autoVerdict({ card_name: 'Naturehike CNH22ZP004' }, dp0, 200).verdict, 'ok');

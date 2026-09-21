@@ -188,14 +188,16 @@ OK: 「**充電を忘れても電池を買えばすぐ復帰できる**」とい
   amazonReviewCount="3200"
   rakutenRating="4.4"
   rakutenReviewCount="980"
-  affiliateUrl="#"
-  source="amazon"
+  affiliateUrl="https://hb.afl.rakuten.co.jp/hgc/<AFF_ID>/?pc=<URLエンコードした楽天商品URL>"
+  amazonAsin="B0XXXXXXXX"
+  source="rakuten"
   badge="バッジテキスト（任意）"
 />
 ```
 
 - `price` は数値を文字列で渡す（例: `"19800"`）
-- `affiliateUrl` は実際のアフィリエイトURLまたは `"#"`
+- `affiliateUrl` は**楽天の hb.afl アフィリエイトURL**（`scripts/rakuten-search.mjs` が出力する形）または `"#"`
+- ⚠️ **Amazon リンクは必ず `amazonAsin="<ASIN>"` で持つ。ASIN を `affiliateUrl` に入れない**（2026-09-22 追加・campkit-20260921-38）。`source` は仕入れ先に合わせ、楽天リンクがあれば `source="rakuten"`、Amazon 実データのみで楽天に同一商品が無いときは `source="amazon"` ＋ `affiliateUrl="#"` ＋ `amazonAsin` にする。旧テンプレート（`source="amazon"` ＋ `affiliateUrl="<ASIN>"`）は `ProductCard` が ASIN として読める（`getAmazonUrl` の後方互換）ため Amazon ボタンは出るが、楽天ボタンが**アフィリエイト収益の付かない検索URL**にフォールバックし、`scripts/check-card-name-vs-sku.cjs` でも `url_unparsable` になって照合できない。2026-07〜09 の「Amazon源5選／Amazon実データ5選」記事（montbell-sleeping-bag／wooden-tableware／ogawa-tent／sleeping-bag-cover／spice-box／air-frame-tent）がこの形で生まれ、2026-09-20（42枚）・09-22（8枚）で現行形式へ統一済み
 - `id` はページ内アンカーリンクに使う（まとめ表のリンク先）
 - ⚠️ **バリエーション商品は `name` にカラー/サイズ/容量を必ず含める（2026-08-19 追加）**：楽天で色・サイズ・R値・容量などの選択肢がある商品は、**実際に採用した1つの仕様を `name` に書く**
   - ◯「DOD ワンポールテントS T3-44-TN(タン) 3人用」／「ZEN Camps アッシュキャリー Mサイズ(32×29cm)」／「deuter オルチャ 25 ブラック」
@@ -376,6 +378,7 @@ ASP枠は日次で1本ずつ消費される一方、長らく**補給タスク�
   - `issue_type=name_fix`: 商品は合っているが name の書き方だけ直す案件（複数型番の並記／楽天商品名の全選択肢列挙）。商品差し替え不要で、name を採用した1仕様に固定するだけ。
   - `issue_type=asin_mismatch`（2026-09-22 追加・campkit-20260921-36 §B・キュー#16）: 既設置の `amazonAsin` が別変種（サイズ違い・Plus モデル等＝verdict `model_mismatch`）や別商品（本体のカードにグランドシートの ASIN 等＝`different_product`）を指している案件。対処は **`amazonAsin` の差し替えのみ**（name／price／本文は触らない）。detail に Amazon 側の変種一覧から拾った候補 ASIN を書くが**未照合**なので、差し替え前に dp ページで変種名・価格を確認する。検出は `scripts/check-amazon-asin.cjs`（`--static` は静的検査のみでネットに出ない／`--verify N` で Amazon dp を N 件だけ照合・間隔 2 秒・429/503/CAPTCHA で exit 2／`--judge slug#rank#id=verdict --note …` で人手判定を記録）。出力 `_file/amazon-asin-check.tsv`（全 1121 カード・`link_form`＝amazonAsin／amazonUrl／legacy_source_amazon／none）。第1弾（20 枚照合）では **air-frame-tent が 5 枚中 4 枚誤り**（Cowork の Amazon 実データ選定時に変種 ASIN を取り違えた記事）だったので、同経路（`fce3941` 系「Amazon実データ5選」）の記事を優先して照合する。
     - **2026-09-22 追加（campkit-20260921-37 §A）**: TSV は 21 列。`verdict` の直後に `price_gap`（(Amazon価格−カードprice)÷カードprice の整数%・`+24%`／`-4%`／`0%`・書き出しのたびに自動再計算するので手で書かない）と `seller_type`（`official`／`amazon`／`marketplace`／`reseller`／`unknown`。fetch 直後は機械分類＝Amazon.co.jp→amazon・公式/Official/Direct→official・他→unknown。marketplace／reseller は `--judge … --seller X` か `--set-seller slug#rank#id=X` で人手記入）を持つ。**価格乖離や非公式店は verdict を変えず（ok のまま）この 2 列で読む**。`verdict=unverifiable` は台帳に起票しない。第2弾（30 枚）の誤りは 3 枚＝色違い変種 2（camp-cooler-soft#3・camp-dust-stand#2）＋ASIN 消滅で兄弟変種（アクセサリ）に着地 1（naturehike-tent#3）。
+    - **2026-09-22 追加（campkit-20260921-38・キュー#17）**: 旧形式 8 枚（`source="amazon"`＋`affiliateUrl=<ASIN>`）を現行形式へ統一し `legacy_form` は 8→0。楽天に同一商品（公式店 or 型番完全一致・価格差 ±3% 超は `price_unconfirmed` 起票）が見つかった 3 枚（air-frame-tent#3 TOMOUNT 公式／sleeping-bag-cover#3 OUTBEAR 公式／wooden-tableware#1 Joshin 30149）は `source="rakuten"`＋hb.afl＋`amazonAsin`。楽天に無い 5 枚（ogawa-tent#5＝在庫あり出品なし／sleeping-bag-cover#4＝中古のみ／spice-box#3・#5＝転売系のみで価格 +34〜49%／montbell-sleeping-bag#1＝転売系のみ +64% かつ Amazon 新品出品なし→`product_swap` priority A 起票）は `amazonAsin` を足して `source="amazon"`＋`affiliateUrl=<ASIN>` を残した。この 5 枚は静的検査で **`asin_in_affiliate_url`**（情報フラグ。描画は `amazonAsin` を使うので導線は現行形式）として見える。楽天が見つかった時点で `source="rakuten"`＋hb.afl に置き換える。
   - `status=blocked`: 変更禁止リスト（task-16・**2026-10-18 まで**）の記事に対する起票。日次タスクは `pending` だけを消費するので拾われない。2026-10-19 以降に `pending` へ昇格させる（keyword-backlog の `blocked` と同じ運用）。
   - ⚠️ **ProductCard の `rank` は記事内で一意ではない**（dod-tarp／mountain-camp-lantern／sierra-cup／vastland-tent は本体と関連アイテムが同じ rank）。カードを特定するキーは必ず `slug＋rank＋id` にする。2026-09-21（campkit-20260921-26）に、保存HTMLを rank だけで管理していたことによる取り違え（dod-tarp のオクラタープをポールのHTMLで判定→誤起票）を修正し、誤起票行は削除した。起票の `position` には `（id: …）` を必ず含める。
 - **2026-09-22 追加（campkit-20260921-31）: ProductCard `name` の書き方の基準（キュー#15-b の name 修正で適用）**。①販促文言を落とし「ブランド＋商品名＋型番＋主要スペック」に整える。②色・サイズは着地時既定（各軸の先頭値）に固定するが、**カード `price` と一致する変種があればそちらを優先**し、**既定の SKU が qty=0 で同一構成・同価格の購入可能な SKU があれば、その在庫のある値（軸順で最初）を書く**（売切の XS/S を読者に名指ししない。同価格の在庫が無ければ既定のまま据え置き、理由を report に書く）。③並記・範囲（「8/10cm」「20〜30cm 4〜16本」）は1仕様に絞る。楽天の軸値が「ライトベージュ：標準タイプ」のように「色：タイプ」形式のときは**値を「：」込みでそのまま書く**（検出器が名指しとして拾える）。1文字サイズ（S/M/L）はサイズ軸に限り独立トークン（前後が空白・区切り）で書けば名指しになる（`check-card-name-vs-sku.cjs` §A・2026-09-22）。レンタル品の「【レンタル】」・返礼品の「【ふるさと納税】」は商品の性質なので残す。
