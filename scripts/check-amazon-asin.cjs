@@ -100,7 +100,7 @@ const NO_AMAZON_TSV = path.join(ROOT, '_file', 'amazon-backfill-no-amazon.tsv');
 const CARD_NAME_TSV = path.join(ROOT, '_file', 'card-name-check.tsv');
 const HTML_DIRS = ['html-asin-39', 'html-asin-37', 'html-asin-36'].map((d) => path.join(ROOT, '_file', '_work', d));
 const HTML_DIR = HTML_DIRS[0];
-const TASK_ID = 'campkit-20260921-56';
+const TASK_ID = 'campkit-20260921-57';
 
 const INTERVAL_MS = 2000;
 const FETCH_TIMEOUT_MS = 25000;
@@ -138,11 +138,15 @@ const FROZEN_SLUGS = new Set([
   'camp-portable-power-beginner',
 ]);
 
-// 型番トークン（check-card-name-vs-sku.cjs と同じ判定を自己完結で持つ）
+// 型番トークン（check-card-name-vs-sku.cjs と同じ判定を自己完結で持つ。
+//   ただし 57 §B 以降、純数字の下限だけは本ファイルが 6・check-card-name-vs-sku.cjs が 7 で食い違う）
 const MODEL_TOKEN_RE = /(?<![A-Za-z0-9])[A-Z0-9]+(?:-[A-Z0-9]+)*(?![A-Za-z0-9])/g;
 const NOT_MODEL_RE = /^(?:\d+[A-Z]{1,2}|(?:UV|UPF|SPF|PU|IPX?|USB|R|T|D|SS|SH|L|M|S|XL|XXL|LL|3L|4L|5L)\d+|(?:DC|AC)\d+V|(?:DC|AC)(?:12|24|100|110|120|220|230|240)|\d+X\d+|\d+-\d+|\d+(?:-\d+)*[A-Z]{0,2}|A\d{4})$/;
 const UNIT_TOKEN_RE = /^\d+(?:W|WH|V|A|AH|MAH|MM|CM|M|KG|G|L|ML|D|T|H|X|P|K|LM|℃)$/i;
-const PURE_DIGIT_MODEL_MIN = 7;
+//   57 §B: 7→6。国内メーカーのカタログ番号は 6 桁が多く（ユニフレーム 683040・コールマン 205588・イスカ 117212・カリマー 501212）、
+//     7 桁だと拾えずに autoVerdict が unverifiable に落ちていた。全 1121 カードで測定し、増えるトークンは 25 個すべて実在の型番、
+//     static_flags 分布（inconsistent_shared を含む）は完全に不変であることを確認して適用した。
+const PURE_DIGIT_MODEL_MIN = 6;
 const STORE_BRACKET_RE = /【[^】]*】|＼[^／]*／|\[[^\]]*\]/g;
 
 function clean(v) { return String(v ?? '').replace(/[\t\r\n]+/g, ' ').replace(/\s+/g, ' ').trim(); }
@@ -409,8 +413,12 @@ function parseDp(html) {
   for (const m of html.matchAll(/id="variation_([a-z_]+)"[\s\S]{0,800}?class="selection"[^>]*>([\s\S]*?)<\/span>/g)) details['sel-' + m[1]] = stripTags(m[2]);
   out.details = details;
   out.model = details['po-model_name'] || details['b-メーカー型番'] || details['b-製品型番'] || details['t-メーカー型番'] || details['t-製品型番'] || details['b-型番'] || '';
-  out.captcha = /captcha|Robot Check|自動アクセス/i.test(html) && !out.title;
+  //   57 §A: notFound を captcha より先に決め、captcha は notFound でないときだけ立てる。
+  //     消滅 ASIN の正規 404 ページ（title 無し・<title>ページが見つかりません</title>）には
+  //     HTML コメントの定型文「…Amazonデータの自動アクセスについては…」が入っており、旧実装では captcha が立って
+  //     verify() が blocked_by_amazon で停止していた（54 camp-lighting-guide#2 B08VFHJJLG）。本物のブロックは 429/503 か Robot Check。
   out.notFound = !out.title && /dogsofamazon|ページが見つかりません|お探しのページ/.test(html);
+  out.captcha = /captcha|Robot Check|自動アクセス/i.test(html) && !out.title && !out.notFound;
   //   着地先すり替えの材料（campkit-20260921-39 §B）: landingAsin は変種ページの JSON にしか無い。currentAsin は JSON → hidden input#ASIN の順
   //   51 §A: hidden input#ASIN は hiddenAsin として別に持つ（JSON が無い非変種ページで要求 ASIN と比べる材料）
   out.landingAsin = (html.match(/"landingAsin"\s*:\s*"([A-Z0-9]{10})"/) || [])[1] || '';
@@ -547,7 +555,9 @@ async function verify(cards, rows, opts) {
       seen.add({ asin: c.asin, html, status });
     }
     const dp = parseDp(html);
-    if (status === 429 || status === 503 || dp.captcha) {
+    //   57 §A: HTTP 404 は dp.captcha より先に扱う（消滅 ASIN の正規 404 ページは本物のブロックではないので停止条件に入れない）。
+    //     429/503 は従来どおり無条件で停止する
+    if (status === 429 || status === 503 || (status !== 404 && dp.captcha)) {
       r.verdict = 'blocked_by_amazon'; r.amazon_stock = `http=${status}${dp.captcha ? ' captcha' : ''}`;
       r.checked_at = new Date().toISOString().replace(/\.\d+Z$/, 'Z'); r.judged_task = TASK_ID; r.note = 'auto: 429/503/CAPTCHA で停止';
       console.log(`[${c.slug}#${c.rank} ${c.asin}] http=${status} captcha=${dp.captcha} → 停止 (exit 2)`);
@@ -614,6 +624,12 @@ function runTests() {
   t('modelTokens', modelTokens('WAQ Reclining Low Chair WAQ-RLC1 CHARCOAL(チャコール) 8980円'), ['WAQ-RLC1']);
   t('modelTokens 単位・サイズは除外', modelTokens('Naturehike ビレッジ13 3〜4人用 耐水圧2000mm 20L XL'), []);
   t('modelTokens 純数字7桁以上', modelTokens('コールマン 2000015521 テント'), ['2000015521']);
+  // 57 §B: 純数字の下限を 7→6（国内メーカーのカタログ番号）。5 桁以下は従来どおり拾わない
+  t('57B modelTokens 純数字6桁を拾う（ユニフレーム 683040）', modelTokens('ユニフレーム ファイアグリル 683040'), ['683040']);
+  t('57B modelTokens 純数字5桁は拾わない（価格・容量の誤検出を防ぐ）', modelTokens('メーカー 商品 12345 の 19800 円'), []);
+  t('57B modelTokens 6桁が複数（uniflame-fire-grill#3 の 2 点セット）', modelTokens('ユニフレーム ファイアグリル＋収納ケース 2点セット 683040+683187'), ['683040', '683187']);
+  t('57B 英数字型番と 6 桁の併存（uniflame-burner#1）', modelTokens('ユニフレーム ツインバーナー US-1900 610305'), ['US-1900', '610305']);
+  t('57B PURE_DIGIT_MODEL_MIN は 6', PURE_DIGIT_MODEL_MIN, 6);
   t('modelTokens 型番複数', modelTokens('モンベル シームレスダウンハガー800 #3 R/ZIP #1121401'), ['1121401']);
   t('brandOf', brandOf('【楽天1位】FIELDOOR テント 620'), 'FIELDOOR');
   t('brandOf 括弧前', brandOf('Snugpak(スナグパック) 寝袋'), 'Snugpak');
@@ -651,6 +667,16 @@ function runTests() {
   t('autoVerdict oos', autoVerdict({ card_name: 'X' }, { ...dp0, oos: ['在庫切れ'] }, 200).verdict, 'out_of_stock');
   t('autoVerdict no buybox', autoVerdict({ card_name: 'X' }, { ...dp0, buybox: 'none' }, 200).verdict, 'out_of_stock');
   t('autoVerdict 404', autoVerdict({ card_name: 'X' }, { ...dp0, title: '', notFound: true }, 404).verdict, '404');
+  // 57 §A（キュー#29 第3弾）: 正規 404 ページの「自動アクセス」定型文で captcha を立てない（54 camp-lighting-guide#2 B08VFHJJLG の偽陽性）
+  //   実 HTML と同じ形: title 要素はあるが id="productTitle" は無い／HTML コメントに「自動アクセス」の定型文
+  const html404 = '<html><head><title>ページが見つかりません</title></head><body><!-- 自動化されたデータにアクセスするには、Amazonデータの自動アクセスについては、 contact api-services-support@amazon.com にお問い合わせください。--><img src="/dogsofamazon/x.jpg"/></body></html>';
+  const htmlRobot = '<html><head><title>Robot Check</title></head><body><p>申し訳ありませんが、Amazonデータの自動アクセスについては…</p><form action="/errors/validateCaptcha"></form></body></html>';
+  t('57A(1) 正規 404 ページ → captcha=false・notFound=true', (() => { const d = parseDp(html404); return [d.captcha, d.notFound]; })(), [false, true]);
+  t('57A(2) 本物の Robot Check → captcha=true・notFound=false', (() => { const d = parseDp(htmlRobot); return [d.captcha, d.notFound]; })(), [true, false]);
+  t('57A(3) 正規 404 は autoVerdict で status 404/200 のどちらも 404', (() => { const d = parseDp(html404); return [autoVerdict({ card_name: 'X' }, d, 404).verdict, autoVerdict({ card_name: 'X' }, d, 200).verdict]; })(), ['404', '404']);
+  t('57A(4) 正常な dp は本文に「自動アクセス」があっても captcha=false（!title 条件）', (() => { const d = parseDp('<html><span id="productTitle">Naturehike Village 13</span><p>Amazonデータの自動アクセスについては…</p></html>'); return [d.captcha, d.notFound, d.title]; })(), [false, false, 'Naturehike Village 13']);
+  t('57A dogsofamazon のみ（404 の語なし）でも notFound 優先で captcha=false', (() => { const d = parseDp('<html><img src="/dogsofamazon/a.jpg"><p>自動アクセス</p></html>'); return [d.captcha, d.notFound]; })(), [false, true]);
+  t('57A 404 の語も Robot Check も無い CAPTCHA ページは従来どおり captcha=true', parseDp('<html><p>captcha</p></html>').captcha, true);
   // 着地先すり替え（campkit-20260921-39 §B）: landingAsin / currentAsin の抽出と redirected_to
   const htmlVar = (landing, current) => `<html><input type="hidden" id="ASIN" name="ASIN" value="${current}"><script>var o = {"currentAsin" : "${current}",\n"landingAsin": "${landing}"};</script><span id="productTitle">X</span></html>`;
   t('parseDp landingAsin==currentAsin → redirected_to 無し', (() => { const d = parseDp(htmlVar('B0CP3FSK4B', 'B0CP3FSK4B')); return [d.landingAsin, d.currentAsin, redirectedTo(d)]; })(), ['B0CP3FSK4B', 'B0CP3FSK4B', '']);
