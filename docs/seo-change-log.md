@@ -3,6 +3,21 @@
 数値の推移はGAS「SEOレポート」の履歴で追う。本ファイルは「いつ・どの記事を・なぜ・どう変えたか」を記録し、次回レポートで効果を評価するための施策台帳。新しい施策は上に追記する。
 
 ---
+## 2026-09-22：キュー#39 — camp-knife-beginner 第1〜5位のカードを見出しの商品へ差し替え（(a) 方式・campkit-20260921-55）
+
+- **対象**: `content/posts/camp-knife-beginner.mdx` の 5 カードの購入導線系フィールド（`name`／`price`／`affiliateUrl`／`image`／`rakutenRating`／`rakutenReviewCount`／`amazonAsin`）＋比較表・まとめ表の **価格セルだけ**＋frontmatter `description` の商品列挙部分。見出し・本文・主なスペック・FAQ・お手入れ節・カードの `id`／`rank`／`description`／`badge`・比較表の商品名／刃長／重量／素材／ロック機構は不変更。`_file/article-fix-backlog.tsv`（done 7 行）＋`_file/amazon-asin-check.tsv`（7 行）＋`scripts/check-amazon-asin.cjs`（`TASK_ID` 1 行）＋本ログ
+- **理由（issue_type）**: 53 §B-3 起票の `product_swap` 5 行＝見出し（モーラ／オピネル／ビクトリノックス／スパイダルコ／バック）と購入導線（キャプテンスタッグ折込包丁／belmont BM-164／COOK'N'ESCAPE まな板セット／belmont BM-163／ロゴス Bamboo セット）が全 5 位で別商品。第3位は `discontinued_404`（kingcamp/200078 HTTP404）、第5位は `out_of_stock`（alpen/7620123092 全変種 soldout）も同時解消
+- **旧→新**（楽天 / Amazon）:
+  - 第1位 `mora-companion`: キャプテンスタッグ 折込包丁 ¥2,330 / B000G2KEGW → **Morakniv コンパニオン ステンレス 12215 ミリタリーグリーン**（UPI 楽天市場店 ¥2,420・★4.65/722）/ **B004ZAIXSC**（dp: 刃長10.4cm・84g・販売元 UPI・moraknife#1 と同 SKU＝`shared_asin`）
+  - 第2位 `opinel-no8`: belmont BM-164 ¥7,700 / B0BXWT48YP → **OPINEL ステンレススチール No.8 41438 国内正規品**（YOSHIKI P2 ¥2,376・★4.57/7）/ **B0811Q8VN7**（123080＝41438 と同一商品・並行輸入品 ¥2,250・在庫あり。国内正規 ASIN B0054IAGIO／B000UGYWTO は購入ボックスなし）
+  - 第3位 `victorinox-hunter`: COOK'N'ESCAPE まな板セット ¥5,750（404）/ B0CP5NRLWS → **VICTORINOX ハンティングPro M ブラック 0.9411.M3**（ビクトリノックス公式 楽天市場店 ¥14,300・★4.75/8）/ **B07MW1C3PB**（dp: 刃体98mm・162g・Amazon.co.jp ¥10,069）。楽天にウッド（ウォルナット柄）版の出品は無い
+  - 第4位 `spyderco-tenacious`: belmont BM-163 ¥9,350 / B0BXWVLFVC → **Spyderco テネイシャス C122GP 直刃 8Cr13MoV**（ミリタリーショップ レプマート ¥16,570）/ **ASIN なし**（Amazon.co.jp に Tenacious の出品が無い＝検索 2 回で確認・楽天のみの導線）
+  - 第5位 `buck-110`: ロゴス Bamboo セット ¥4,950（soldout）/ B0B2DWM25S → **BUCK 110 フォールディングハンター 110BRS 420HC**（アウトドアナイフ専門グローイング ¥15,680）/ **B000EHYZKK**（dp: 刃長9.5cm・204g・420HC・ロックバック・MTショッピング ¥17,608）
+- **価格セル**: 比較表・まとめ表 ¥2,750／¥2,200／¥8,800／¥8,250／¥11,000 → ¥2,420／¥2,376／¥14,300／¥16,570／¥15,680（実勢）。最高÷最低＝6.8 倍（差し替え前の記事記載値でも 5.0 倍）
+- **Amazon 本体へのアクセス**: GET 15 回（検索 7＝うち 2 回は Akamai bm-verify で空応答／dp 7／販売元ページ 1・間隔 2 秒・並列なし・429/503/CAPTCHA 0）。楽天 API 12 クエリ＋商品ページ 5 回（`--url` モード・TSV 不書込）
+- **効果測定**: 検索順位の直接施策ではないため計測対象外（購入導線の復旧）
+
+---
 ## 2026-09-22：キュー#28 拡張 — `asin_mismatch` 6枚／5記事を「再探索 1 回 → 差し替え or `amazonAsin` 除去」で着地（campkit-20260921-49）
 
 - **対象**: `content/posts/` の 5 記事（sleeping-bag-summer-cospa／naturehike-sleeping-bag／naturehike-tent／camp-cooler-soft／camp-dust-stand）の **Amazon 属性行（`amazonAsin`）のみ**（`git diff` は 5 ファイルで −6 行／+4 行。name／price／affiliateUrl／source／badge／本文／frontmatter は不変更）＋ `_file/amazon-asin-check.tsv`（7 行）＋ `_file/article-fix-backlog.tsv`（done 6 行・起票 1 行＝422→423 行）＋ `scripts/check-amazon-asin.cjs`（`TASK_ID` 1 行）＋ `CLAUDE.md`・本ログ。検出器の判定規則・`verify-deploy.cjs`・`FROZEN_SLUGS` は不変更。48 の QUESTION-2／-3／-4(a) の消化を含む
