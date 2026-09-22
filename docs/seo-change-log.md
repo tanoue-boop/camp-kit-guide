@@ -3,6 +3,23 @@
 数値の推移はGAS「SEOレポート」の履歴で追う。本ファイルは「いつ・どの記事を・なぜ・どう変えたか」を記録し、次回レポートで効果を評価するための施策台帳。新しい施策は上に追記する。
 
 ---
+## 2026-09-22：キュー#28 拡張 — `asin_mismatch` 6枚／5記事を「再探索 1 回 → 差し替え or `amazonAsin` 除去」で着地（campkit-20260921-49）
+
+- **対象**: `content/posts/` の 5 記事（sleeping-bag-summer-cospa／naturehike-sleeping-bag／naturehike-tent／camp-cooler-soft／camp-dust-stand）の **Amazon 属性行（`amazonAsin`）のみ**（`git diff` は 5 ファイルで −6 行／+4 行。name／price／affiliateUrl／source／badge／本文／frontmatter は不変更）＋ `_file/amazon-asin-check.tsv`（7 行）＋ `_file/article-fix-backlog.tsv`（done 6 行・起票 1 行＝422→423 行）＋ `scripts/check-amazon-asin.cjs`（`TASK_ID` 1 行）＋ `CLAUDE.md`・本ログ。検出器の判定規則・`verify-deploy.cjs`・`FROZEN_SLUGS` は不変更。48 の QUESTION-2／-3／-4(a) の消化を含む
+- **Amazon 本体へのアクセス**: GET **10 回**（dp 7＝候補・在庫確認／検索ページ 3＝再探索・間隔 2 秒・並列なし・429/503/CAPTCHA 0）。保存 HTML は `_file/_work/html-asin-49/`。楽天へのアクセス 0 回（2026-09-21 取得の保存 HTML `html-24/` を読んだだけ）
+- **差し替え 4 枚**（読者の飛び先が直る）:
+  - `sleeping-bag-summer-cospa#4` NH21MSD09 ブラウン M: `B08CV8XM26`（失効→グリーン左開き M へ着地）→ **`B08CV9F2XP`**（48 で照合済の ブラウン右開き M・49 で在庫再確認 ¥3,990 在庫あり）。naturehike-sleeping-bag#1 と同 SKU＝別記事共有（`shared_asin`）で正常・**`inconsistent_shared` 2→0**
+  - `naturehike-sleeping-bag#3` CNK2300SD016 225×75cm: 再探索 1 回（検索「Naturehike 寝袋 封筒型 225×75cm」）で LD シリーズ出品（親 B0DK7RXDPT・Naturehike Store）を特定し、変種一覧の LD150 ホワイト＝**`B0DY4L64WG`**（LD150-white・225×75cm・¥5,990・残り5点）を dp 照合＝楽天 選択SKU LD150-white ¥5,990 と一致。「190×75cm ¥3,990 の別商品」→ 正しい 225×75cm へ
+  - `naturehike-tent#5` ビレッジ13 前幕付き: `B0DR43CC43`（village6.0 Plus 6㎡）→ **`B0DYF6W1C5`**（village13-Plus・CNH22ZP004plus・前幕×1 同梱・23.8kg・¥79,990・Naturehike 公式ショップ・在庫あり＝楽天 cnh22zp004-ti の SKU「Village13.0 Plus」¥79,990 と全項目一致）。#4 の `B0DYF5RNY2`（village13-Ti Black素材・**前幕なし**・22kg・ペグ×31・¥66,990）は前幕を含まないので #5 には当たらず据え置き＝同一記事内の ASIN 重複なし。39 §C-2 の振り分け案（#4→Plus／#5→TB）は採らず
+  - `camp-dust-stand#2` R2 コヨーテ: `B093L1PZ5P`（ブラックカモ）→ **`B093L3G2MB`**（同 dp 変種一覧の コヨーテ・40×45cm・TP-700・¥4,442・Amazon.co.jp・残り10点）
+- **除去 2 枚**（再探索 1 回で候補なし → `amazonAsin` 行を削除・楽天ボタンのみ。キュー#28 の本筋）:
+  - `naturehike-tent#3` Dune7.6: 検索の ¥49,990 候補 2 件（`B0FH4ZFR8F`・`B0CKH93Q63`）は仕様が楽天 CNH22ZP028 と一致するが**ブランド欄 windhike・販売元 windhike Store／windhike official store**で Naturehike 公式の出品ではなく、既設置の親 B0CY1GDFF4 の変種一覧にも Dune7.6 本体は無い → 公式の同一商品と確定できず除去。「¥49,990 のテントのカードから ¥5,990 の TPU ドアへ飛ぶ」状態は解消（windhike 出品の採否は report QUESTION）
+  - `camp-cooler-soft#3` AL-CB180 コヨーテ: 検索で ALBATRE 18L は ジェットブラック／ダークオリーブ のみ。楽天 yamatoasobu の商品説明に「**コヨーテカラーは山と遊ぶ限定カラー**」と明記＝店限定色で Amazon 公式出品に存在しない → 除去
+- **§G 起票のみ**: `logos-bonfire#3`（#1 と同一商品 81064162 なのに本文・比較表・description が「L の BBQコンロ版」＝別モデルとして説明）を `product_swap` priority B で `article-fix-backlog.tsv` に 1 行。記事は不変更（48 QUESTION-4(a) の監督回答）
+- **結果**: `static_flags` OK 607→605／`-` 294→296／**inconsistent_shared 2→0**／shared_asin 153・short_url 70・both_forms 18・asin_in_affiliate_url 5 は不変。distinct ASIN 691→689。verdict: ok 73→77・model_mismatch 9→7・different_product 4→2（除去 2 枚は除去前の verdict と note を監査証跡として残す＝48 QUESTION-4(b) 追認どおり）。`article-fix-backlog.tsv` の `asin_mismatch` は pending 13→7・done 3→9
+- **効果測定**: 検索順位の直接施策ではないため計測対象外
+
+---
 ## 2026-09-22：キュー#35 拡張 — `conflict` 3枚＋`dup_in_article` 2枚＋`inconsistent_shared` 2枚を Amazon dp の変種一覧で確定（campkit-20260921-48）
 
 - **対象**: `content/posts/` の 4 記事（coleman-lantern／dod-tarp／naturehike-sleeping-bag／logos-bonfire）の **Amazon 属性行のみ**（`git diff` は 4 ファイルで −5 行／+2 行。name／price／affiliateUrl／source／本文／frontmatter は不変更）＋ `_file/amazon-asin-check.tsv`（7 行の照合結果）＋ `_file/article-fix-backlog.tsv`（done 3 行・起票 2 行＝420→422 行）＋ `scripts/check-amazon-asin.cjs`（`TASK_ID` 1 行）＋ `CLAUDE.md`・本ログ。検出器の判定規則・`verify-deploy.cjs` は不変更
