@@ -24,6 +24,9 @@
  *   node scripts/check-amazon-asin.cjs --list legacy_form       # static_flags に該当する行を一覧（TSV から）
  *   node scripts/check-amazon-asin.cjs --clear-verdict naturehike-tent#3#nh-dune76   # link_form=none に落ちた行の verdict/price_gap/seller_type/checked_at/judged_task/note を空に戻す
  *                                                                                    # （複数指定可。link_form≠none の行は拒否。amazon_title/amazon_price/amazon_stock は残す）
+ *   node scripts/check-amazon-asin.cjs --refresh-stock --cached   # 保存 HTML のある行の amazon_stock 列だけを現行パーサで作り直す（53 §A＝キュー#29 第2弾）
+ *                                                                 # （--cached 必須。--verify/--only/--judge/--set-seller/--clear-verdict と併用不可。autoVerdict は呼ばず
+ *                                                                 #   verdict/note/checked_at/judged_task/amazon_title/amazon_price/seller_type は触らない。保存 HTML の無い行は不変）
  *
  * 出力 `_file/amazon-asin-check.tsv`（タブ区切り・BOM無し・CR無し・末尾改行1つ）: キー = slug + rank + id。全カード（Amazon リンクの無いカードも
  *   link_form=none で）1 行。静的検査は毎回全行を再計算し、照合結果（amazon_* / verdict / price_gap / seller_type / checked_at / judged_task / note）は既存行から引き継ぐ。
@@ -54,6 +57,7 @@
  *   `id="pqv-newer-version"`）の先頭の `/dp/<ASIN>` を拾い、要求した ASIN と異なれば `amazon_stock` の末尾に `; successor=<ASIN>` を足す
  *   （redirected_to と併存可。順序は base; redirected_to; successor）。39 の camp-fan-summer#2（OT-F12 の dp が新モデル B0CY1XSQ77 を案内）を機械化したもの。
  *   **note には書かない・verdict も変えない**（人手判定の材料）。保存 HTML 164 枚中 17 枚（重複除き 11 ASIN）にブロックがあることを 51 で実測。
+ *   既に照合済みの行へ後から載せ直すには `--refresh-stock --cached`（53 §A）を使う（`--cached --recheck` は autoVerdict が人手 verdict を上書きするので使わない）。
  *
  * link_form: amazonAsin / amazonUrl（amzn.to 短縮。amazonAsin と同居していれば描画上は amazonUrl が優先されるのでこちら）/
  *            legacy_source_amazon（source="amazon" かつ affiliateUrl が ASIN のみ）/ none
@@ -96,7 +100,7 @@ const NO_AMAZON_TSV = path.join(ROOT, '_file', 'amazon-backfill-no-amazon.tsv');
 const CARD_NAME_TSV = path.join(ROOT, '_file', 'card-name-check.tsv');
 const HTML_DIRS = ['html-asin-39', 'html-asin-37', 'html-asin-36'].map((d) => path.join(ROOT, '_file', '_work', d));
 const HTML_DIR = HTML_DIRS[0];
-const TASK_ID = 'campkit-20260921-52';
+const TASK_ID = 'campkit-20260921-53';
 
 const INTERVAL_MS = 2000;
 const FETCH_TIMEOUT_MS = 25000;
@@ -458,6 +462,38 @@ function stockLabel(dp, status, requestedAsin) {
   return base ? `${base}; ${extras.join('; ')}` : extras.join('; ');
 }
 
+// 保存 HTML の探索（--cached の読み取り規則。verify() から切り出したもので挙動は同じ）:
+//   今回の保存先→過去の回の順に `<slug>__<rank>__<asin>.html` を探し、無ければ同じ ASIN を別カードで取得済みのファイル（`*__<asin>.html`）を使う
+function findCachedHtml(c) {
+  const cacheName = `${c.slug}__${c.rank}__${c.asin}.html`;
+  return HTML_DIRS.map((d) => path.join(d, cacheName)).find((f) => fs.existsSync(f))
+    || HTML_DIRS.flatMap((d) => (fs.existsSync(d) ? fs.readdirSync(d).filter((f) => f.endsWith(`__${c.asin}.html`)).map((f) => path.join(d, f)) : []))[0];
+}
+// --refresh-stock --cached（53 §A＝キュー#29 第2弾）: 保存 HTML のある行の amazon_stock 列だけを現行の stockLabel で作り直す。
+//   verdict／note／checked_at／judged_task／amazon_title／amazon_price／seller_type は触らない（autoVerdict は呼ばない）。保存 HTML の無い行は不変。
+//   htmlOf(row) は保存 HTML の文字列（無ければ null）を返す（--test では合成 HTML を差し込む）。CAPTCHA 応答が保存されていた行は触らない。
+function refreshStock(rows, htmlOf = defaultHtmlOf) {
+  const changes = [];
+  let withHtml = 0;
+  for (const r of rows) {
+    if (!r.asin) continue;
+    const html = htmlOf(r);
+    if (html == null) continue;
+    withHtml++;
+    const dp = parseDp(html);
+    if (dp.captcha) continue;
+    const after = stockLabel(dp, 200, r.asin);
+    if (after === r.amazon_stock) continue;
+    changes.push({ key: `${r.slug}#${r.rank}#${r.id}`, before: r.amazon_stock, after });
+    r.amazon_stock = after;
+  }
+  return { withHtml, changes };
+}
+function defaultHtmlOf(r) {
+  const f = findCachedHtml(r);
+  return f ? fs.readFileSync(f, 'utf8') : null;
+}
+
 // 照合の優先順: --only > 静的検査 (1)(3)(4)(5) > inconsistent_shared > TSV 順
 function verifyPriority(c) {
   const f = c.static_flags || '';
@@ -489,9 +525,8 @@ async function verify(cards, rows, opts) {
     // 同じ ASIN は 1 回だけ取得（同一バッチ内）
     const cacheName = `${c.slug}__${c.rank}__${c.asin}.html`;
     const cacheFile = path.join(HTML_DIR, cacheName);
-    //   --cached の読み取りは今回の保存先→過去の回の順で探す（同じ ASIN を別カードで取得済みならそれも使う）
-    const cachedHit = opts.cached ? HTML_DIRS.map((d) => path.join(d, cacheName)).find((f) => fs.existsSync(f))
-      || HTML_DIRS.flatMap((d) => (fs.existsSync(d) ? fs.readdirSync(d).filter((f) => f.endsWith(`__${c.asin}.html`)).map((f) => path.join(d, f)) : []))[0] : null;
+    //   --cached の読み取りは今回の保存先→過去の回の順で探す（同じ ASIN を別カードで取得済みならそれも使う）＝findCachedHtml
+    const cachedHit = opts.cached ? findCachedHtml(c) : null;
     let html; let status;
     const same = [...seen].find((s) => s.asin === c.asin);
     if (same) { html = same.html; status = same.status; }
@@ -670,6 +705,46 @@ function runTests() {
   t('51D 対象が特定できなければ例外', (() => { try { clearVerdict([mkRow({})], 'y#1#y1'); return 'no-throw'; } catch (e) { return /対象が 0 件/.test(e.message); } })(), true);
   t('51D 拒否されたときは行を変更しない', (() => { const rows = [mkRow({ link_form: 'amazonAsin', asin: 'B0AAAAAAAA', static_flags: 'OK' })]; try { clearVerdict(rows, 'x#3#x3'); } catch (e) { /* expected */ } return [rows[0].verdict, rows[0].note]; })(), ['different_product', '49: …']);
   t('51D クリア後の行は priceGapOfRow でも空（verdict 空）', priceGapOfRow(clearVerdict([mkRow({ amazon_price: '200', card_price: '100' })], 'x#3#x3').row), '');
+  // 53 §A（キュー#29 第2弾）: --refresh-stock --cached（amazon_stock 列だけを保存 HTML から作り直す）
+  //   フィクスチャ: 行 a1（人手 verdict・保存 HTML に redirected_to＋successor）／a2（auto verdict・保存 HTML に在庫文言のみ）／a3（保存 HTML 無し）／
+  //                 a4（未照合・保存 HTML あり）／n1（link_form=none・asin 空）
+  const argErr = (argv) => { try { parseArgs(argv); return 'no-throw'; } catch (e) { return e.message; } };
+  t('53A --refresh-stock 単独 → エラー（--cached 必須）', /--cached と一緒に/.test(argErr(['--refresh-stock'])), true);
+  t('53A --refresh-stock --cached → 受理', (() => { const o = parseArgs(['--refresh-stock', '--cached']); return [o.refreshStock, o.cached]; })(), [true, true]);
+  t('53A --refresh-stock --cached と --verify/--only/--judge/--set-seller/--clear-verdict の併用は全てエラー',
+    [['--verify', '3'], ['--only', 'a#1'], ['--judge', 'a#1#x=ok'], ['--set-seller', 'a#1#x=official'], ['--clear-verdict', 'a#1#x']].map((extra) => /併用できない/.test(argErr(['--refresh-stock', '--cached', ...extra]))),
+    [true, true, true, true, true]);
+  t('53A --refresh-stock を付けない既存の引数解釈は不変（refreshStock=false）', [parseArgs(['--static']).refreshStock, parseArgs(['--only', 'a#1', '--cached']).refreshStock], [false, false]);
+  const rsRow = (o) => ({ slug: 'a', rank: '1', id: 'a1', frozen: '0', link_form: 'amazonAsin', asin: 'B0AAAAAAAA', amazon_url: 'https://www.amazon.co.jp/dp/B0AAAAAAAA', card_name: 'X', brand: 'X', maker_model: '', card_price: '1000',
+    static_flags: 'OK', amazon_title: 'T', amazon_price: '1200', amazon_stock: 'in_stock(cart) 在庫あり', verdict: 'model_mismatch', price_gap: '+20%', seller_type: 'marketplace', checked_at: '2026-09-21T22:36:37Z', judged_task: 'campkit-20260921-52', note: '52: 人手 verdict', ...o });
+  const rsRows = () => [
+    rsRow({}),
+    rsRow({ rank: '2', id: 'a2', asin: 'B0BBBBBBBB', amazon_stock: 'in_stock(cart) 在庫あり。 {"isInternal":false,"showInsightsH', verdict: 'ok', note: 'auto: 型番一致 X', judged_task: 'campkit-20260921-36' }),
+    rsRow({ rank: '3', id: 'a3', asin: 'B0CCCCCCCC', amazon_stock: 'oos:在庫切れ', verdict: 'out_of_stock', price_gap: '', seller_type: 'official' }),
+    rsRow({ rank: '4', id: 'a4', asin: 'B0DDDDDDDD', amazon_title: '', amazon_price: '', amazon_stock: '', verdict: '', price_gap: '', seller_type: '', checked_at: '', judged_task: '', note: '' }),
+    rsRow({ slug: 'n', rank: '1', id: 'n1', link_form: 'none', asin: '', amazon_url: '', static_flags: '-', amazon_title: '', amazon_price: '', amazon_stock: '', verdict: '', price_gap: '', seller_type: '', checked_at: '', judged_task: '', note: '' }),
+  ];
+  //   合成 HTML: a1 は hidden#ASIN が要求と違い（→redirected_to）かつ newerVersionFeature あり（→successor）、在庫あり＋カート。a2 は在庫文言＋カートのみ。a4 は pqv 後継のみ
+  const htmlStock = (body) => `<html><span id="productTitle">X</span><div id="availability"><span>在庫あり。</span></div><input id="add-to-cart-button" type="submit">${body}</html>`;
+  const rsHtml = {
+    'a\t1\ta1': htmlStock(`<input type="hidden" id="ASIN" name="ASIN" value="B0AAAAAAA2">${htmlNewer('B0AAAAAAA3').replace(/^<html>|<\/html>$/g, '')}`),
+    'a\t2\ta2': htmlStock(''),
+    'a\t4\ta4': htmlStock(htmlPqv('B0DDDDDDD2').replace(/^<html>|<\/html>$/g, '')),
+  };
+  const rsHtmlOf = (r) => rsHtml[`${r.slug}\t${r.rank}\t${r.id}`] ?? null;
+  const NON_STOCK = COLUMNS.filter((k) => k !== 'amazon_stock');
+  const snap = (rows) => rows.map((r) => JSON.stringify(NON_STOCK.map((k) => r[k])));
+  t('53A(2) 保存 HTML のある行の amazon_stock が base; redirected_to; successor の順で作り直される', (() => { const rows = rsRows(); const res = refreshStock(rows, rsHtmlOf); return [res.withHtml, res.changes.map((c) => c.key), rows[0].amazon_stock, rows[1].amazon_stock, rows[3].amazon_stock]; })(),
+    [3, ['a#1#a1', 'a#2#a2', 'a#4#a4'], 'in_stock(cart) 在庫あり。; redirected_to=B0AAAAAAA2; successor=B0AAAAAAA3', 'in_stock(cart) 在庫あり。', 'in_stock(cart) 在庫あり。; successor=B0DDDDDDD2']);
+  t('53A(2) changes は before/after を持つ（a2 は 36 の JSON 残滓が落ちる）', refreshStock(rsRows(), rsHtmlOf).changes[1], { key: 'a#2#a2', before: 'in_stock(cart) 在庫あり。 {"isInternal":false,"showInsightsH', after: 'in_stock(cart) 在庫あり。' });
+  t('53A(3) 保存 HTML の無い行（a3）と asin 空の行（n1）は行全体が不変（全 21 列を JSON 比較）', (() => { const before = rsRows(); const rows = rsRows(); refreshStock(rows, rsHtmlOf); return [JSON.stringify(rows[2]) === JSON.stringify(before[2]), JSON.stringify(rows[4]) === JSON.stringify(before[4])]; })(), [true, true]);
+  t('53A(4) amazon_stock 以外の 20 列は全行不変（人手 verdict の a1・auto の a2・未照合の a4 を含む）', (() => { const before = rsRows(); const rows = rsRows(); refreshStock(rows, rsHtmlOf); return JSON.stringify(snap(rows)) === JSON.stringify(snap(before)); })(), true);
+  t('53A(4) verdict/note/judged_task/checked_at/amazon_title/amazon_price/seller_type の値そのまま（a1）', (() => { const rows = rsRows(); refreshStock(rows, rsHtmlOf); const r = rows[0]; return [r.verdict, r.note, r.judged_task, r.checked_at, r.amazon_title, r.amazon_price, r.seller_type]; })(), ['model_mismatch', '52: 人手 verdict', 'campkit-20260921-52', '2026-09-21T22:36:37Z', 'T', '1200', 'marketplace']);
+  t('53A(4) 未照合の行（a4）は amazon_stock だけ埋まり verdict/checked_at/judged_task は空のまま', (() => { const rows = rsRows(); refreshStock(rows, rsHtmlOf); const r = rows[3]; return [r.verdict, r.checked_at, r.judged_task, r.amazon_title, r.note]; })(), ['', '', '', '', '']);
+  t('53A(5) 冪等: 2 回目は withHtml は同じで changes が 0・行も不変', (() => { const rows = rsRows(); refreshStock(rows, rsHtmlOf); const once = rows.map((r) => JSON.stringify(r)); const res = refreshStock(rows, rsHtmlOf); return [res.withHtml, res.changes.length, JSON.stringify(rows.map((r) => JSON.stringify(r))) === JSON.stringify(once)]; })(), [3, 0, true]);
+  t('53A 保存 HTML が CAPTCHA 応答なら触らない（withHtml には数える）', (() => { const rows = rsRows(); const res = refreshStock(rows, (r) => (r.id === 'a1' ? '<html><title>Robot Check</title><p>自動アクセス</p></html>' : null)); return [res.withHtml, res.changes.length, rows[0].amazon_stock]; })(), [1, 0, 'in_stock(cart) 在庫あり']);
+  t('53A writeTsv 相当の再計算を通しても amazon_stock 以外は不変（price_gap／static_flags は導出値で同じ）', (() => { const rows = rsRows(); refreshStock(rows, rsHtmlOf); return rows.map((r) => [priceGapOfRow(r) === r.price_gap, withInfoFlags(r) === r.static_flags]); })(), [[true, true], [true, true], [true, true], [true, true], [true, true]]);
+  t('53A findCachedHtml: asin 空でも例外にならない（実ディレクトリ探索・該当なし）', findCachedHtml({ slug: 'zz', rank: '9', asin: 'B0ZZZZZZZZ' }) == null, true);
   // matchOnly
   t('matchOnly slug#rank', matchOnly({ slug: 'a', rank: 5, id: 'x' }, 'a#5'), true);
   t('matchOnly slug#id', matchOnly({ slug: 'a', rank: 5, id: 'x' }, 'a#x'), true);
@@ -739,7 +814,7 @@ function runTests() {
 // main
 // ---------------------------------------------------------------------------
 function parseArgs(argv) {
-  const o = { static: false, dry: false, test: false, verify: 0, only: [], maxMinutes: 0, recheck: false, judge: [], note: '', seller: '', setSeller: [], list: '', clearVerdict: [] };
+  const o = { static: false, dry: false, test: false, verify: 0, only: [], maxMinutes: 0, recheck: false, judge: [], note: '', seller: '', setSeller: [], list: '', clearVerdict: [], refreshStock: false };
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i];
     if (a === '--static') o.static = true;
@@ -756,10 +831,14 @@ function parseArgs(argv) {
     else if (a === '--set-seller') o.setSeller.push(String(argv[++i] || ''));
     else if (a === '--list') o.list = String(argv[++i] || '');
     else if (a === '--clear-verdict') o.clearVerdict.push(...String(argv[++i] || '').split(',').filter(Boolean));
+    else if (a === '--refresh-stock') o.refreshStock = true;
     else throw new Error(`不明な引数: ${a}`);
   }
   if (o.seller && !SELLER_TYPES.includes(o.seller)) throw new Error(`--seller は ${SELLER_TYPES.join('|')} のいずれか: ${o.seller}`);
   if (o.clearVerdict.length && (o.verify || o.only.length || o.judge.length || o.setSeller.length)) throw new Error('--clear-verdict は --verify/--only/--judge/--set-seller と併用できない');
+  //   53 §A: --refresh-stock は --cached 必須（保存 HTML だけを読む＝ネットに出ない）。照合・判定系のフラグとは併用できない
+  if (o.refreshStock && !o.cached) throw new Error('--refresh-stock は --cached と一緒に指定する（保存 HTML だけを読む）');
+  if (o.refreshStock && (o.verify || o.only.length || o.judge.length || o.setSeller.length || o.clearVerdict.length)) throw new Error('--refresh-stock は --verify/--only/--judge/--set-seller/--clear-verdict と併用できない');
   return o;
 }
 // --judge / --set-seller の対象行を 1 件に特定する
@@ -827,6 +906,15 @@ async function main() {
     console.log(`→ ${path.relative(ROOT, OUT)}（計 ${rows.length} 行）`);
     return;
   }
+  if (opts.refreshStock) {
+    //   保存 HTML のある行の amazon_stock だけを作り直す（53 §A）。fetch には入らない（Amazon アクセス 0 回）
+    const { withHtml, changes } = refreshStock(rows);
+    for (const c of changes) console.log(`refresh-stock: ${c.key}\n  before: ${c.before}\n  after : ${c.after}`);
+    writeTsv(rows);
+    console.log(`refresh-stock: 保存 HTML あり ${withHtml} 行 / amazon_stock 変更 ${changes.length} 行 / Amazon アクセス 0 回`);
+    console.log(`→ ${path.relative(ROOT, OUT)}（計 ${rows.length} 行）`);
+    return;
+  }
 
   let exitCode = 0;
   if (opts.verify > 0 || opts.only.length) {
@@ -844,4 +932,4 @@ async function main() {
 }
 
 if (require.main === module) main().catch((e) => { console.error(e); process.exit(1); });
-module.exports = { parseCards, linkFormOf, modelTokens, brandOf, staticCheck, autoVerdict, parseDp, redirectedTo, successorAsin, stockLabel, priceGap, priceGapOfRow, priceGapPct, resellerMarkup, withInfoFlags, clearVerdict, sellerTypeOf, FROZEN_SLUGS, COLUMNS, SELLER_TYPES, PRICE_GAP_RE, CLEAR_VERDICT_COLUMNS };
+module.exports = { parseCards, linkFormOf, modelTokens, brandOf, staticCheck, autoVerdict, parseDp, redirectedTo, successorAsin, stockLabel, priceGap, priceGapOfRow, priceGapPct, resellerMarkup, withInfoFlags, clearVerdict, refreshStock, findCachedHtml, sellerTypeOf, FROZEN_SLUGS, COLUMNS, SELLER_TYPES, PRICE_GAP_RE, CLEAR_VERDICT_COLUMNS };
