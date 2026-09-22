@@ -198,6 +198,7 @@ OK: 「**充電を忘れても電池を買えばすぐ復帰できる**」とい
 - `price` は数値を文字列で渡す（例: `"19800"`）
 - `affiliateUrl` は**楽天の hb.afl アフィリエイトURL**（`scripts/rakuten-search.mjs` が出力する形）または `"#"`
 - ⚠️ **Amazon リンクは必ず `amazonAsin="<ASIN>"` で持つ。ASIN を `affiliateUrl` に入れない**（2026-09-22 追加・campkit-20260921-38）。`source` は仕入れ先に合わせ、楽天リンクがあれば `source="rakuten"`、Amazon 実データのみで楽天に同一商品が無いときは `source="amazon"` ＋ `affiliateUrl="#"` ＋ `amazonAsin` にする。旧テンプレート（`source="amazon"` ＋ `affiliateUrl="<ASIN>"`）は `ProductCard` が ASIN として読める（`getAmazonUrl` の後方互換）ため Amazon ボタンは出るが、楽天ボタンが**アフィリエイト収益の付かない検索URL**にフォールバックし、`scripts/check-card-name-vs-sku.cjs` でも `url_unparsable` になって照合できない。2026-07〜09 の「Amazon源5選／Amazon実データ5選」記事（montbell-sleeping-bag／wooden-tableware／ogawa-tent／sleeping-bag-cover／spice-box／air-frame-tent）がこの形で生まれ、2026-09-20（42枚）・09-22（8枚）で現行形式へ統一済み
+- ⚠️ **`amazonUrl`（amzn.to 短縮リンク）を ProductCardMdx に新規で書かない。Amazon は `amazonAsin` を使う**（2026-09-22 追加・campkit-20260921-41・キュー#18）。短縮URLは中身が見えずリンク先の差し替わりを検知できず、`amazonAsin` と同居させると描画で `amazonUrl` が優先されて台帳の ASIN と読者の飛び先が食い違いうる。既存の `amazonUrl` は `check-amazon-asin.cjs --static` の `short_url` フラグで棚卸しし、キュー#18 で順次 `amazonAsin` へ置き換える（第1弾 47枚／12記事は 09-22 に置換済み・残 161枚／38記事）
 - `id` はページ内アンカーリンクに使う（まとめ表のリンク先）
 - ⚠️ **バリエーション商品は `name` にカラー/サイズ/容量を必ず含める（2026-08-19 追加）**：楽天で色・サイズ・R値・容量などの選択肢がある商品は、**実際に採用した1つの仕様を `name` に書く**
   - ◯「DOD ワンポールテントS T3-44-TN(タン) 3人用」／「ZEN Camps アッシュキャリー Mサイズ(32×29cm)」／「deuter オルチャ 25 ブラック」

@@ -3,6 +3,16 @@
 数値の推移はGAS「SEOレポート」の履歴で追う。本ファイルは「いつ・どの記事を・なぜ・どう変えたか」を記録し、次回レポートで効果を評価するための施策台帳。新しい施策は上に追記する。
 
 ---
+## 2026-09-22：キュー#18 第1弾 — `amazonUrl`（amzn.to 短縮）47枚／12記事を `amazonAsin` 形式へ一本化（campkit-20260921-41）
+
+- **対象**: anker-power #1〜#5（`both_forms`）／backpack-large #3・#5／barebones-light #1〜#4／camp-burner-beginner #1〜#5／camp-chair-highback #1〜#5／camp-chair-lightweight #1〜#5／camp-cooker-beginner #1〜#5／camp-cooler-box-beginner #1〜#5／camp-gift #5／camp-headlight-beginner #1・#3／camp-knife-beginner #1〜#5／camp-lighting-guide #1〜#3（`short_url` 208枚／50記事のうち frozen=0 の先頭 12 記事・47枚）。触った属性は **`amazonUrl` の削除と `amazonAsin` の追加だけ**（`git diff --numstat` で `-amazonUrl` 47 行／`+amazonAsin` 42 行のみ。name／price／affiliateUrl／source／本文／frontmatter は不変更）
+- **狙い**: (1) 短縮URLは中身が見えず、リンク先が差し替わっても検知できない。ASIN 形式にすれば `check-amazon-asin.cjs` の照合（キュー#16）に乗る。(2) `both_forms`（`amazonAsin` と `amazonUrl` の同居）は描画で `amazonUrl` が優先されるため、台帳の ASIN と読者が飛ぶ先が食い違いうる＝実測で潰す
+- **§A（解決・amzn.to へ 47 回・間隔 1.7 秒・429/503/CAPTCHA 0・Amazon 本体へは 0 回）**: HEAD＋手動リダイレクト追跡で amzn.to の Location（`www.amazon.co.jp/…/dp/<ASIN>`）を最終URLとし、dp ページには HEAD も送らない設計（本タスクは照合ではない）。結果 **`plain` 42／`same` 5／`conflict`・`non_dp`・`dead` 0**。anker-power の 5 枚は短縮URLの着地 ASIN が既存 `amazonAsin` と全て一致（＝台帳と読者の飛び先に食い違い無し）。台帳への起票は **0 件**
+- **§D（再集計）**: `short_url` 208→161／`both_forms` 47→42／`link_form=amazonAsin` 620→667／`amazonUrl` 208→161／`shared_asin` 120→134（可視化された ASIN が他記事と共有＝情報フラグ）／**`dup_in_article` 0→2**（camp-cooler-box-beginner #3 VITC-40 と #4 VITC-20 が同じ B0B7RYDRRN に着地。短縮URLの時点で同一だったものが ASIN 化で見えた。本タスクでは起票せず、`verifyPriority=0` なのでキュー#16 の次弾で先頭照合される）。既存 verdict 80 枚（36:20／37:30／39:30）は 1 つも消えず値も不変更
+- **残り**: `short_url` 161枚／38記事（frozen=0 91枚／21記事・frozen=1 70枚／17記事＝10-18 まで着手不可）。第2弾は frozen=0 の残り 21 記事（camp-sleeping-mat 〜 winter-camp-guide）
+- **効果測定**: 検索順位の直接施策ではないため計測対象外
+
+---
 ## 2026-09-22：キュー#30 — デプロイ検証の穴 2 つを塞ぐ（楽天リンク数の空振り PASS／旧キャッシュへの PASS）（campkit-20260921-40）
 
 - **対象**: `scripts/verify-deploy.cjs`・`scripts/deploy.cjs`（呼び出し部）・`docs/deploy-note.md`・`CLAUDE.md`・本ログのみ。**`content/posts/`・`_file/` の台帳・`check-card-name-vs-sku.cjs`・`check-amazon-asin.cjs` は 1 文字も変更していない**
