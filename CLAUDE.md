@@ -446,7 +446,9 @@ Vercel のダッシュボードでデプロイログを確認できる。
 
 Cowork の穴埋め等を Claude Code に渡してデプロイする際、**Claude Code 側で独自の検証bashを生成しないこと**。`git diff`＋`grep`／`awk`／`for`ループ／`exec`／`$(...)` を含む照合ワンライナーは、command-substitution を含むため許可リストでも毎回「Do you want to proceed?」が出て手間になる（`Bash(*)` 許可や bypass でも `exec`/`$()` は確認対象）。
 
-- **実行して良いのは `node scripts/deploy.cjs "<メッセージ>"` の1コマンドのみ。** build → commit → push → 本番検証は deploy.cjs が内部で実施する。
+- **実行して良いのは `node scripts/deploy.cjs "<メッセージ>"` の1コマンドのみ。** build → 太字lint(1.5) → 台帳検査(1.6) → commit → push → 本番検証は deploy.cjs が内部で実施する。
+- **本番検証（verify-deploy.cjs）の楽天リンクは `hb.afl` 限定（2026-09-22・campkit-20260921-40）**: ProductCard の楽天ボタンの `hb.afl.rakuten.co.jp` 数が、mdx から算出した期待数（`source="rakuten"` かつ `affiliateUrl` が hb.afl のカード数）と**一致**して PASS。`search.rakuten.co.jp` の検索URL（`source="amazon"` カード）は数えない（期待 0 は実測 0 で PASS）。
+- **反映待ちの扱い（同上）**: `x-vercel-cache=HIT` で `age` が push（`deploy.cjs` が `--deployed-at` で渡す）より古い応答は内容が合っていても「旧キャッシュ」として 30秒×最大6回再取得し、上限で FAIL する。FAIL したら Vercel の反映を確認して `node scripts/verify-deploy.cjs` を再実行（手動時は HEAD のコミット時刻で判定）。手作業の `?cb=` ポーリングは不要。判定ロジックは `node scripts/verify-deploy.cjs --test`（24ケース・ネット不使用）。
 - ASIN数の照合・記事内重複チェック・書式検証などの**独自ワンライナーは組み立てない／実行しない**（deploy.cjs の検証に一任）。
 - どうしても事前確認が要る場合でも `git diff --numstat content/posts/`（削除列が0か）程度の単純コマンドに留め、`$(...)`・`exec`・ループは使わない。
 - Cowork 側がデプロイ受け渡しを報告する際は、この方針（「deploy.cjs 単体実行・検証bash不要」）を受け渡し文に明記する。

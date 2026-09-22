@@ -109,15 +109,27 @@ slug を明示したい場合:
 node scripts/verify-deploy.cjs snowpeak-tent montbell-sleeping-bag
 ```
 
-検証項目は次の5点。すべて PASS なら完了、1件でも FAIL なら exit 1 になる。
+検証項目は次の6点。すべて PASS なら完了、1件でも FAIL なら exit 1 になる。
 
+0. 取得した本番HTMLが**デプロイ前の旧キャッシュでない**こと（`x-vercel-cache` / `age` ヘッダで判定。2026-09-22 追加・下記）
 1. 本番URLが 200 を返す
 2. `<title>` がローカル frontmatter の `title` と一致
-3. アフィリリンク数がローカルの `ProductCardMdx` 数以上（楽天 rafcid / Amazon `dp?tag=` / `amzn.to` を合算）。Amazon・楽天それぞれの実リンク数も個別に期待数（`amazonAsin=`/`amazonUrl=`/`source="amazon"` の数、`source="rakuten"` の数）以上であることをチェックし、未達の間は反映待ちとしてリトライする（2026-09-15追記：合算チェックのみだと「楽天リンクだけを追加したデプロイ」で旧HTMLの合計がたまたま一致し誤PASSする穴があったため）
+3. アフィリリンク数
+   - **楽天（2026-09-22 変更）**: 「収益の付くリンク」＝ProductCard の楽天ボタンのうち href が `hb.afl.rakuten.co.jp` のものだけを数え、**mdx から算出した期待数（`source="rakuten"` かつ `affiliateUrl` が `https://hb.afl.rakuten.co.jp/` で始まるカードの枚数）と一致**することを必須にする。`search.rakuten.co.jp` の検索URL（`source="amazon"` カードの楽天ボタン＝収益なし）は別カウントで合否に使わない。期待 0（全カード `source="amazon"`）は実測 0 で PASS
+   - Amazon: `dp?tag=` / `amzn.to` の実数が期待数（`amazonAsin=`/`amazonUrl=`/`source="amazon"` の数）以上（2026-09-15追記：合算チェックのみだと「楽天リンクだけを追加したデプロイ」で旧HTMLの合計がたまたま一致し誤PASSする穴があったため個別チェックにした）
 4. PR表記（景表法対応）が本文に含まれる
-5. `og:image`（サムネイル）が `/images/outdoor-0X.png` 形式で、その画像URLが 200 を返す
+5. `og:image`（サムネイル）が `/images/thumbnails/<slug>.png` または `/images/outdoor-0X.png` 形式で、frontmatter の `thumbnail` と一致し、その画像URLが 200 を返す
 
-デプロイ反映前だと 404/旧内容で FAIL することがある。スクリプトは自動で **20回×15秒（最大約5分）** リトライするので、**呼び出し側で待機ループを書く必要はない**。それでも FAIL する場合は Vercel のデプロイログを確認してから再実行する。
+デプロイ反映前だと 404/旧内容で FAIL することがある。スクリプトは自動で **内容不一致は 20回×15秒（最大約5分）／旧キャッシュは 30秒×6回（最大180秒）** リトライするので、**呼び出し側で待機ループを書く必要はない**。それでも FAIL する場合は Vercel のデプロイログを確認してから再実行する。判定ロジックは `node scripts/verify-deploy.cjs --test` でネットに出ずに検査できる（24ケース）。
+
+#### 2026-09-22 追記：楽天リンク数の空振り PASS（2026-09-15 と同じ系列の穴）
+
+`campkit-20260921-38`（旧形式 Amazon リンク 8 枚を現行形式へ統一＋楽天リンク 3 枚追加）のデプロイで、**Vercel のビルド完了前の旧 HTML（`x-vercel-cache=HIT`）に対して verify-deploy が PASS を出した**。実際の反映は作業側が手作業で `x-vercel-cache=PRERENDER`・`age=0` になるまで 30 秒間隔でポーリングしてから確認している（38 レポート §9／§11-3）。
+
+- **原因**: 旧実装は `hb.afl.rakuten.co.jp/hgc/` の**全出現数**（＋ `item.rakuten.co.jp/…rafcid=`）を数えて「`source="rakuten"` の数**以上**」で PASS にしていた。ところが 1 枚のカードの hb.afl は本番 HTML に **3 回**（ボタン `href`／JSON-LD `offers.url`／`__NEXT_DATA__` の compiledSource）＋比較表の購入先リンク 1 回で現れるため、旧 HTML に楽天カードが 3 枚しか無くても 9 ≧ 4 で期待数を満たしてしまう。2026-09-15 の「合算チェックの穴」と同じく**旧 HTML でも条件が成り立つ**系列の穴。
+  - 38 レポートは原因を「`rafcid` を数えるため検索URLも加算」と書いていたが、旧正規表現 `item\.rakuten\.co\.jp\/[^"']*rafcid=` は `search.rakuten.co.jp` に当たらない。実際の原因は上記の重複出現と `≧` 判定（本タスクで実測して確認）。
+- **対策（`scripts/verify-deploy.cjs`）**: (1) 楽天は ProductCard の楽天ボタン（`class="…ProductCard…__rakuten"` の `<a>`）の `hb.afl` 数だけを数え、mdx 由来の期待数と**一致**で判定。検索URL・比較表リンク・全出現数は参考表示のみ。(2) `x-vercel-cache` が `HIT`/`STALE` で `age` が「デプロイ後の経過秒数」より大きい応答（＝push より前にキャッシュされた旧 HTML）は内容が一致していても「反映待ち」として 30 秒×最大 6 回再取得し、上限で FAIL。デプロイ時刻は `deploy.cjs` が push 直前に `--deployed-at=<epoch秒>` で渡す（手動実行時は HEAD のコミット時刻で代用）。判定用の取得には `?cb=<エポック秒>` を付ける。
+- **なぜヘッダ判定を「期待文字列が出るまでポーリング」に足したか**: 内容ベースの判定は「変更が verify の観測項目に現れる」ことが前提で、38 のように観測項目の値が旧 HTML でも同じになるデプロイ（あるいは本文の文言だけの修正）では原理的に旧 HTML を弾けない。ヘッダ判定は内容に依らず「push より古いキャッシュか」だけを見るので、その死角を塞ぐ。
 
 ---
 

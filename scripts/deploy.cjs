@@ -250,15 +250,18 @@ run(`git commit -m ${JSON.stringify(msg)}`);
 
 // 5. push（＝本番デプロイ）
 console.log('\n■ 5. push origin main（本番デプロイ）');
+// push 直前の時刻（epoch秒）を verify-deploy.cjs に渡す。verify 側はこれより古い age の
+// x-vercel-cache=HIT 応答を「デプロイ前の旧キャッシュ」とみなして再取得する（2026-09-22・campkit-20260921-40 §B）。
+const deployedAt = Math.floor(Date.now() / 1000);
 run('git push origin main');
 
-// 6. 本番検証（反映待ちは verify 側が 20回×15秒でリトライ）
+// 6. 本番検証（反映待ちは verify 側がリトライ: 内容不一致は 20回×15秒、旧キャッシュは 30秒×6回=最大180秒）
 // このコミットに記事（content/posts/*.mdx）が1件も無いと verify-deploy.cjs は検証対象なしで exit 0 する
 // （＝本番HTML検証は実質スキップ）。挙動はそのままに、最終表示だけ実態に合わせる（2026-09-21）。
 const stagedArticles = staged.split('\n').filter((f) => f.startsWith('content/posts/') && f.endsWith('.mdx'));
 console.log('\n■ 6. 本番検証 (verify-deploy.cjs)' + (stagedArticles.length ? '' : ' ※記事の変更なし → 検証対象なし'));
 try {
-  run('node scripts/verify-deploy.cjs');
+  run(`node scripts/verify-deploy.cjs --deployed-at=${deployedAt}`);
 } catch {
   abort('本番検証で FAIL。Vercel のデプロイログを確認し、反映後に `node scripts/verify-deploy.cjs` を再実行してください。');
 }

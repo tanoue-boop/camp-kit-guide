@@ -3,6 +3,17 @@
 数値の推移はGAS「SEOレポート」の履歴で追う。本ファイルは「いつ・どの記事を・なぜ・どう変えたか」を記録し、次回レポートで効果を評価するための施策台帳。新しい施策は上に追記する。
 
 ---
+## 2026-09-22：キュー#30 — デプロイ検証の穴 2 つを塞ぐ（楽天リンク数の空振り PASS／旧キャッシュへの PASS）（campkit-20260921-40）
+
+- **対象**: `scripts/verify-deploy.cjs`・`scripts/deploy.cjs`（呼び出し部）・`docs/deploy-note.md`・`CLAUDE.md`・本ログのみ。**`content/posts/`・`_file/` の台帳・`check-card-name-vs-sku.cjs`・`check-amazon-asin.cjs` は 1 文字も変更していない**
+- **発端**: 38 のデプロイで、Vercel ビルド完了前の旧 HTML（`x-vercel-cache=HIT`）に verify-deploy が PASS を出した（38 §11-3）。放置すると以後の本番検証が空振りしうる
+- **§A（楽天リンク判定）**: 旧規則＝`hb.afl.rakuten.co.jp/hgc/` の全出現数＋`item.rakuten.co.jp/…rafcid=` を数え「`source="rakuten"` の数以上」で PASS。実際は 1 カードの hb.afl が本番 HTML に 3 回（ボタン href／JSON-LD／`__NEXT_DATA__`）＋比較表リンクで現れるため、旧 HTML でも期待数を満たしていた（38 の「rafcid で検索URLも加算」という診断は不正確で、旧正規表現は `search.rakuten.co.jp` に当たらない）。新規則＝**ProductCard の楽天ボタンの `hb.afl` 数だけを数え、mdx 由来の期待数（`source="rakuten"` かつ `affiliateUrl` が `https://hb.afl.rakuten.co.jp/` 始まりのカード数）と一致**で判定。`search.rakuten.co.jp` は別カウント（合否不使用）。期待 0 は実測 0 で PASS
+- **§B（反映待ち）**: `x-vercel-cache` が HIT/STALE かつ `age` ＞ デプロイ後経過秒（`deploy.cjs` が push 直前に `--deployed-at=<epoch秒>` で渡す／手動時は HEAD コミット時刻）なら旧キャッシュとみなし 30 秒×最大 6 回（180 秒）再取得、上限で FAIL。取得 URL には `?cb=<エポック秒>` を付与。内容ベースの反映待ち（title／Amazon 数／楽天 hb.afl 一致／og:image）は従来どおり 20 回×15 秒
+- **§C（テスト）**: `node scripts/verify-deploy.cjs --test` を新設（0→24 ケース・ネット不使用）。旧 HTML（検索URLのみ）で FAIL／新 HTML で PASS／旧規則の穴（3 枚×3 出現=9≧4）の再現／HIT+age 大で反映待ち／上限 6 回で staleTimeout（無限ループしない）を含む
+- **§D（回帰）**: 38 の 6 記事＋anker-power・naturehike-tent の 8 本に新ロジックを実行し全 PASS（楽天 hb.afl の期待＝実測が 8/8 一致）。`validate-backlog-tsv.cjs`・両検出器の `--test` も PASS
+- **効果測定**: 検索順位の直接施策ではないため計測対象外
+
+---
 ## 2026-09-22：キュー#16 第3弾 — 既設置 Amazon ASIN の照合 30枚＋検出器に「着地先すり替え」の機械検知を追加（campkit-20260921-39）
 
 - **対象**: `_file/amazon-asin-check.tsv`・`_file/article-fix-backlog.tsv`・`scripts/check-amazon-asin.cjs` のみ。**`content/posts/` は 1 文字も変更していない**（Amazon リンクの差し替えは台帳 `asin_mismatch` 行として起票するだけ）
