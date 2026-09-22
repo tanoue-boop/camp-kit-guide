@@ -22,6 +22,8 @@
  *   node scripts/check-amazon-asin.cjs --judge … --seller official                                           # 人手判定と同時に seller_type を記録
  *   node scripts/check-amazon-asin.cjs --set-seller ogawa-tent#5#ogawa-tierra5ex2=marketplace               # seller_type だけ書く（verdict/judged_task は触らない）
  *   node scripts/check-amazon-asin.cjs --list legacy_form       # static_flags に該当する行を一覧（TSV から）
+ *   node scripts/check-amazon-asin.cjs --clear-verdict naturehike-tent#3#nh-dune76   # link_form=none に落ちた行の verdict/price_gap/seller_type/checked_at/judged_task/note を空に戻す
+ *                                                                                    # （複数指定可。link_form≠none の行は拒否。amazon_title/amazon_price/amazon_stock は残す）
  *
  * 出力 `_file/amazon-asin-check.tsv`（タブ区切り・BOM無し・CR無し・末尾改行1つ）: キー = slug + rank + id。全カード（Amazon リンクの無いカードも
  *   link_form=none で）1 行。静的検査は毎回全行を再計算し、照合結果（amazon_* / verdict / price_gap / seller_type / checked_at / judged_task / note）は既存行から引き継ぐ。
@@ -38,12 +40,20 @@
  *     - `marketplace` … 商材が関連する小売店、または詳細欄がある店（例: PC FREAK＝家電小売がホットマット・bonbon lab・Victoria L-Breath・上河商会）
  *     - `official`  … ブランドの公式ストアに加え、**ブランド運営会社名義**も official（例: Legare＝TITAN MANIA・edge.＝ALBATRE・OTG Camping Gear＝OneTigris）
  *
- * amazon_stock の `redirected_to=<ASIN>`（campkit-20260921-39 §B・着地先すり替えの機械検知）:
- *   dp の HTML 中の JSON `"landingAsin"`（要求した ASIN）と `"currentAsin"`（実際に表示している ASIN。JSON が無ければ hidden input#ASIN）を拾い、
- *   **両方取れて異なる**ときだけ `amazon_stock` に `redirected_to=<currentAsin>` を出す（在庫文言があれば末尾に `; redirected_to=…`）。
- *   37 の naturehike-tent#3（B0CP3FSK4B が変種一覧から消え、Amazon が兄弟変種 B0CQ2DDXJN「TPUドア」¥5,990 へ黙って着地させた）を HTML の目視で
- *   見つけたのを機械化したもの。**verdict の自動判定・静的フラグの規則は変えていない**（人手判定の材料を増やすだけ）。
- *   landingAsin／currentAsin の JSON は変種のあるページにしか無い（36・37 の保存 HTML 49 本中 36 本）。片方でも欠ければ出さない。
+ * amazon_stock の `redirected_to=<ASIN>`（campkit-20260921-39 §B・着地先すり替えの機械検知。51 §A＝キュー#29-① で非変種ページにも拡張）:
+ *   (a) dp の HTML 中の JSON `"landingAsin"`（要求した ASIN）と `"currentAsin"`（実際に表示している ASIN。JSON が無ければ hidden input#ASIN）が
+ *       **両方取れる**とき: 異なれば `redirected_to=<currentAsin>`（39 のまま・規則不変更）。
+ *   (b) 両方は取れないとき: **要求した ASIN（TSV の asin 列）と dp の hidden `input#ASIN` の値**を比べ、異なれば `redirected_to=<hidden の ASIN>`。
+ *       landingAsin／currentAsin の JSON は変種のあるページにしか無い（36・37 の保存 HTML 49 本中 36 本）ので、非変種ページのすり替えは (b) で拾う。
+ *   (c) hidden も取れない: 何も出さない。
+ *   在庫文言があれば末尾に `; redirected_to=…`。37 の naturehike-tent#3（B0CP3FSK4B が変種一覧から消え、Amazon が兄弟変種 B0CQ2DDXJN「TPUドア」¥5,990 へ
+ *   黙って着地させた）を HTML の目視で見つけたのを機械化したもの。**verdict の自動判定・静的フラグの規則は変えていない**（人手判定の材料を増やすだけ）。
+ *
+ * amazon_stock の `successor=<ASIN>`（campkit-20260921-51 §B＝キュー#29-②・後継モデルの機械検知）:
+ *   dp の「この商品には新しいモデルがあります」ブロック（`id="newerVersionFeature"`＝`newerVersion_feature_div`。無ければ product quick view の
+ *   `id="pqv-newer-version"`）の先頭の `/dp/<ASIN>` を拾い、要求した ASIN と異なれば `amazon_stock` の末尾に `; successor=<ASIN>` を足す
+ *   （redirected_to と併存可。順序は base; redirected_to; successor）。39 の camp-fan-summer#2（OT-F12 の dp が新モデル B0CY1XSQ77 を案内）を機械化したもの。
+ *   **note には書かない・verdict も変えない**（人手判定の材料）。保存 HTML 164 枚中 17 枚（重複除き 11 ASIN）にブロックがあることを 51 で実測。
  *
  * link_form: amazonAsin / amazonUrl（amzn.to 短縮。amazonAsin と同居していれば描画上は amazonUrl が優先されるのでこちら）/
  *            legacy_source_amazon（source="amazon" かつ affiliateUrl が ASIN のみ）/ none
@@ -60,6 +70,9 @@
  *                        使うので導線は現行形式だが、affiliateUrl に ASIN が残っている（楽天が見つかったら source="rakuten"＋hb.afl に置き換える）
  *   short_url            amazonUrl（amzn.to 短縮）＝キュー#18 の対象
  *   both_forms           amazonAsin と amazonUrl が同居（描画は amazonUrl。ASIN 系の検査は amazonAsin の値で行う）
+ *   reseller_markup      情報フラグ（campkit-20260921-51 §C＝キュー#29-③）: 照合済み行で `price_gap` が +100% 以上かつ `seller_type=reseller`
+ *                        （転売店が定価の 2 倍以上で出している導線）。mdx ではなく台帳の price_gap／seller_type から立てるので、書き出しのたびに再計算する。
+ *                        OK／-／他フラグの規則・verifyPriority は変えない（他フラグと同様に OK を置き換える形で並ぶ）
  *
  * verdict の値域: ok / model_mismatch / different_product / out_of_stock / 404 / unverifiable / blocked_by_amazon
  *   fetch 直後は機械判定（404 → 404、CAPTCHA/429/503 → blocked_by_amazon、在庫切れ表示 → out_of_stock、
@@ -83,7 +96,7 @@ const NO_AMAZON_TSV = path.join(ROOT, '_file', 'amazon-backfill-no-amazon.tsv');
 const CARD_NAME_TSV = path.join(ROOT, '_file', 'card-name-check.tsv');
 const HTML_DIRS = ['html-asin-39', 'html-asin-37', 'html-asin-36'].map((d) => path.join(ROOT, '_file', '_work', d));
 const HTML_DIR = HTML_DIRS[0];
-const TASK_ID = 'campkit-20260921-50';
+const TASK_ID = 'campkit-20260921-51';
 
 const INTERVAL_MS = 2000;
 const FETCH_TIMEOUT_MS = 25000;
@@ -99,6 +112,8 @@ const NO_PRICE_VERDICTS = new Set(['out_of_stock', '404', 'blocked_by_amazon']);
 const PRICE_GAP_RE = /^(?:|0%|[+-][1-9]\d*%)$/;
 const ASIN_NEW_RE = /^B0[A-Z0-9]{8}$/;
 const ASIN_OLD_RE = /^[A-Z0-9]{10}$/;
+//   reseller_markup（51 §C）: price_gap がこの % 以上（+100% ちょうどを含む）かつ seller_type=reseller
+const RESELLER_MARKUP_MIN_PCT = 100;
 
 // 変更禁止リスト（2026-10-18 まで。check-card-name-vs-sku.cjs と同じ 52 slug を独立に持つ。--test で TSV の frozen 列と全行一致を検証）
 const FROZEN_SLUGS = new Set([
@@ -282,13 +297,43 @@ function loadExisting() {
 function toRow(c, prev) {
   const p = prev || {};
   const keep = (k) => (c[k] != null ? c[k] : (p[k] ?? ''));
-  return {
+  const r = {
     slug: c.slug, rank: String(c.rank), id: c.id, frozen: String(c.frozen), link_form: c.link_form, asin: c.asin, amazon_url: c.amazon_url,
     card_name: c.card_name, brand: c.brand, maker_model: c.maker_model, card_price: c.card_price, static_flags: c.static_flags,
     amazon_title: keep('amazon_title'), amazon_price: keep('amazon_price'), amazon_stock: keep('amazon_stock'),
     verdict: keep('verdict'), price_gap: keep('price_gap'), seller_type: keep('seller_type'),
     checked_at: keep('checked_at'), judged_task: keep('judged_task'), note: keep('note'),
   };
+  r.price_gap = priceGapOfRow(r);
+  r.static_flags = withInfoFlags(r);
+  return r;
+}
+// price_gap の文字列（"+287%"／"-4%"／"0%"／空）→ 整数（空・不正は null）
+function priceGapPct(s) {
+  const m = /^([+-]?)(\d+)%$/.exec(String(s ?? ''));
+  if (!m) return null;
+  return (m[1] === '-' ? -1 : 1) * Number(m[2]);
+}
+// 台帳の照合結果から立てる情報フラグ（51 §C）: mdx 由来の static_flags に reseller_markup を足す／外す。他のフラグと OK／- の規則は触らない
+function resellerMarkup(r) {
+  const pct = priceGapPct(r.price_gap);
+  return r.seller_type === 'reseller' && pct != null && pct >= RESELLER_MARKUP_MIN_PCT;
+}
+function withInfoFlags(r) {
+  const flags = String(r.static_flags || '').split(',').filter((f) => f && f !== 'reseller_markup' && f !== 'OK' && f !== '-');
+  if (resellerMarkup(r)) flags.push('reseller_markup');
+  return flags.length ? flags.join(',') : (r.link_form === 'none' ? '-' : 'OK');
+}
+// --clear-verdict（51 §D＝キュー#29-⑦）: link_form=none に落ちた行の照合結果を未照合に戻す。amazon_title／amazon_price／amazon_stock は残す
+//   （どの dp を見たかの痕跡）。seller_type は「verdict 空の行は price_gap／seller_type も空」の不変条件があるので一緒に空にする
+const CLEAR_VERDICT_COLUMNS = ['verdict', 'price_gap', 'seller_type', 'checked_at', 'judged_task', 'note'];
+function clearVerdict(rows, key) {
+  const r = pickRow(rows, key);
+  if (r.link_form !== 'none') throw new Error(`--clear-verdict: link_form=${r.link_form} の行には使えない（none だけ）: ${key}`);
+  const before = Object.fromEntries(CLEAR_VERDICT_COLUMNS.map((k) => [k, r[k]]));
+  for (const k of CLEAR_VERDICT_COLUMNS) r[k] = '';
+  r.static_flags = withInfoFlags(r);
+  return { row: r, before };
 }
 // (amazon_price − card_price) ÷ card_price を整数 % で四捨五入。どちらかが数値でなければ空。0 は "0%"、符号は必ず付ける
 function priceGap(amazonPrice, cardPrice) {
@@ -316,6 +361,7 @@ function writeTsv(rows) {
   const lines = [COLUMNS.join('\t')];
   for (const r of rows) {
     r.price_gap = priceGapOfRow(r);
+    r.static_flags = withInfoFlags(r);   // reseller_markup は price_gap／seller_type から書き出しのたびに再計算（51 §C）
     lines.push(COLUMNS.map((k) => clean(r[k])).join('\t'));
   }
   fs.writeFileSync(OUT, lines.join('\n') + '\n', 'utf8');
@@ -362,13 +408,30 @@ function parseDp(html) {
   out.captcha = /captcha|Robot Check|自動アクセス/i.test(html) && !out.title;
   out.notFound = !out.title && /dogsofamazon|ページが見つかりません|お探しのページ/.test(html);
   //   着地先すり替えの材料（campkit-20260921-39 §B）: landingAsin は変種ページの JSON にしか無い。currentAsin は JSON → hidden input#ASIN の順
+  //   51 §A: hidden input#ASIN は hiddenAsin として別に持つ（JSON が無い非変種ページで要求 ASIN と比べる材料）
   out.landingAsin = (html.match(/"landingAsin"\s*:\s*"([A-Z0-9]{10})"/) || [])[1] || '';
-  out.currentAsin = (html.match(/"currentAsin"\s*:\s*"([A-Z0-9]{10})"/) || html.match(/<input[^>]+id="ASIN"[^>]+value="([A-Z0-9]{10})"/) || html.match(/<input[^>]+value="([A-Z0-9]{10})"[^>]+id="ASIN"/) || [])[1] || '';
+  out.hiddenAsin = (html.match(/<input[^>]+id="ASIN"[^>]+value="([A-Z0-9]{10})"/) || html.match(/<input[^>]+value="([A-Z0-9]{10})"[^>]+id="ASIN"/) || [])[1] || '';
+  out.currentAsin = (html.match(/"currentAsin"\s*:\s*"([A-Z0-9]{10})"/) || [])[1] || out.hiddenAsin;
+  //   後継モデル（51 §B）: 「この商品には新しいモデルがあります」ブロック → 無ければ product quick view の pqv-newer-version。ブロック先頭の /dp/<ASIN>
+  out.successor = successorAsin(html);
   return out;
 }
-// landingAsin と currentAsin の両方が取れて異なるときだけ、着地先の ASIN を返す（片方欠落・一致は空）
-function redirectedTo(dp) {
-  return dp.landingAsin && dp.currentAsin && dp.landingAsin !== dp.currentAsin ? dp.currentAsin : '';
+// 「新しいモデル」ブロック内の先頭 /dp/<ASIN>。ブロックが無ければ空（本文の他所にある /dp/ は見ない）
+function successorAsin(html) {
+  for (const re of [/id="newerVersionFeature"[\s\S]{0,3000}?\/dp\/([A-Z0-9]{10})/, /id="pqv-newer-version"[\s\S]{0,1500}?\/dp\/([A-Z0-9]{10})/]) {
+    const m = html.match(re);
+    if (m) return m[1];
+  }
+  return '';
+}
+// 着地先すり替え（51 §A で (b) を追加）:
+//   (a) landingAsin と currentAsin が両方取れる → 異なれば currentAsin（39 のまま）
+//   (b) 両方は取れない → 要求した ASIN と hidden input#ASIN を比べ、異なれば hidden の ASIN
+//   (c) hidden も取れない（または要求 ASIN が無い）→ 空
+function redirectedTo(dp, requestedAsin) {
+  if (dp.landingAsin && dp.currentAsin) return dp.landingAsin !== dp.currentAsin ? dp.currentAsin : '';
+  if (requestedAsin && dp.hiddenAsin) return dp.hiddenAsin !== requestedAsin ? dp.hiddenAsin : '';
+  return '';
 }
 function autoVerdict(card, dp, status) {
   if (status === 404 || dp.notFound) return { verdict: '404', note: 'auto: HTTP 404 / dp ページなし' };
@@ -381,15 +444,18 @@ function autoVerdict(card, dp, status) {
   if (tokens.length && !hit.length) return { verdict: 'unverifiable', note: `auto: カード型番 ${tokens.join('/')} が Amazon 側（${dp.model || '型番欄なし'}）に無い→要人手判定` };
   return { verdict: 'unverifiable', note: 'auto: カードに型番トークン無し→要人手判定（タイトル・仕様で判断）' };
 }
-function stockLabel(dp, status) {
+function stockLabel(dp, status, requestedAsin) {
   let base;
   if (status === 404 || dp.notFound) base = '404';
   else if (dp.oos.length) base = `oos:${dp.oos.join('/')}`.slice(0, 60);
   else base = `${dp.buybox === 'none' ? 'no_buybox' : 'in_stock(' + dp.buybox + ')'}${dp.availability ? ' ' + dp.availability.slice(0, 40) : ''}`;
-  //   着地先すり替え（campkit-20260921-39 §B）: 在庫文言が空ならそのまま、あれば末尾に `; ` で足す
-  const rd = redirectedTo(dp);
-  if (!rd) return base;
-  return base ? `${base}; redirected_to=${rd}` : `redirected_to=${rd}`;
+  //   着地先すり替え（campkit-20260921-39 §B・51 §A）と後継モデル（51 §B）: 在庫文言が空ならそのまま、あれば末尾に `; ` で足す
+  const extras = [];
+  const rd = redirectedTo(dp, requestedAsin);
+  if (rd) extras.push(`redirected_to=${rd}`);
+  if (dp.successor && dp.successor !== requestedAsin) extras.push(`successor=${dp.successor}`);
+  if (!extras.length) return base;
+  return base ? `${base}; ${extras.join('; ')}` : extras.join('; ');
 }
 
 // 照合の優先順: --only > 静的検査 (1)(3)(4)(5) > inconsistent_shared > TSV 順
@@ -456,7 +522,7 @@ async function verify(cards, rows, opts) {
     const av = autoVerdict(c, dp, status);
     r.amazon_title = clean(dp.title).slice(0, 200);
     r.amazon_price = dp.price;
-    r.amazon_stock = stockLabel(dp, status);
+    r.amazon_stock = stockLabel(dp, status, c.asin);
     r.verdict = av.verdict;
     r.price_gap = priceGapOfRow(r);
     r.seller_type = (av.verdict === '404') ? '' : sellerTypeOf(dp.seller);
@@ -559,6 +625,51 @@ function runTests() {
   t('stockLabel: すり替え無し → 従来どおり', stockLabel({ ...dp0, landingAsin: 'B0CP3FSK4B', currentAsin: 'B0CP3FSK4B' }, 200), 'in_stock(cart) 在庫あり');
   t('stockLabel: oos＋すり替え', stockLabel({ ...dp0, oos: ['在庫切れ'], landingAsin: 'B0AAAAAAAA', currentAsin: 'B0BBBBBBBB' }, 200), 'oos:在庫切れ; redirected_to=B0BBBBBBBB');
   t('autoVerdict はすり替えで変わらない（規則不変更）', autoVerdict({ card_name: 'Naturehike CNH22ZP004' }, { ...dp0, landingAsin: 'B0AAAAAAAA', currentAsin: 'B0BBBBBBBB' }, 200).verdict, 'ok');
+  // 51 §A（キュー#29-①）: redirected_to を非変種ページ（JSON 無し）にも広げる。要求 ASIN と hidden input#ASIN の比較
+  const htmlHidden = (hidden) => `<html><input type="hidden" id="ASIN" name="ASIN" value="${hidden}"><span id="productTitle">X</span></html>`;
+  t('51A(a) JSON あり・一致 → 空（hidden が要求と違っても JSON を優先）', (() => { const d = parseDp(htmlVar('B0CP3FSK4B', 'B0CP3FSK4B')); return [d.hiddenAsin, redirectedTo(d, 'B0CP3FSK4B'), redirectedTo(d, 'B0ZZZZZZZZ')]; })(), ['B0CP3FSK4B', '', '']);
+  t('51A(b′) JSON あり・不一致 → currentAsin（39 のまま・要求 ASIN は見ない）', (() => { const d = parseDp(htmlVar('B0CP3FSK4B', 'B0CQ2DDXJN')); return [redirectedTo(d, 'B0CP3FSK4B'), redirectedTo(d, 'B0CQ2DDXJN')]; })(), ['B0CQ2DDXJN', 'B0CQ2DDXJN']);
+  t('51A(c) JSON なし・hidden が要求と一致 → 空', (() => { const d = parseDp(htmlHidden('B08CZWJ7P8')); return [d.landingAsin, d.hiddenAsin, d.currentAsin, redirectedTo(d, 'B08CZWJ7P8')]; })(), ['', 'B08CZWJ7P8', 'B08CZWJ7P8', '']);
+  t('51A(d) JSON なし・hidden が要求と不一致 → redirected_to=hidden', (() => { const d = parseDp(htmlHidden('B0BBBBBBBB')); return redirectedTo(d, 'B0AAAAAAAA'); })(), 'B0BBBBBBBB');
+  t('51A(d) stockLabel に載る', stockLabel({ ...parseDp(htmlHidden('B0BBBBBBBB')), ...dp0 }, 200, 'B0AAAAAAAA'), 'in_stock(cart) 在庫あり; redirected_to=B0BBBBBBBB');
+  t('51A(e) JSON も hidden も無い → 空', (() => { const d = parseDp('<html><span id="productTitle">X</span></html>'); return [d.landingAsin, d.hiddenAsin, d.currentAsin, redirectedTo(d, 'B0AAAAAAAA')]; })(), ['', '', '', '']);
+  t('51A hidden の属性順が逆（value が先）でも取れる', parseDp('<html><input type="hidden" name="ASIN" value="B0CCCCCCCC" id="ASIN"></html>').hiddenAsin, 'B0CCCCCCCC');
+  t('51A landingAsin のみ（currentAsin JSON も hidden も無い）→ 空', redirectedTo({ landingAsin: 'B0AAAAAAAA', currentAsin: '', hiddenAsin: '' }, 'B0AAAAAAAA'), '');
+  t('51A 要求 ASIN 無し（旧呼び出し）＋ hidden のみ → 空（既存 93 ケースと同じ挙動）', redirectedTo(parseDp(htmlHidden('B0BBBBBBBB'))), '');
+  t('51A autoVerdict は (b) のすり替えでも変わらない', autoVerdict({ card_name: 'Naturehike CNH22ZP004' }, { ...parseDp(htmlHidden('B0BBBBBBBB')), ...dp0 }, 200).verdict, 'ok');
+  // 51 §B（キュー#29-②）: 後継 ASIN（「この商品には新しいモデルがあります」ブロック → pqv-newer-version）
+  const htmlNewer = (asin) => `<html><span id="productTitle">X</span><div id="newer-version" class="a-row"><div id="newerVersionFeature" cel_widget_id="newerVersion_feature_div" class="celwidget"><hr/><h4>この商品には新しいモデルがあります:</h4><div><a class="a-link-normal" href="/Anker-Portable/dp/${asin}/ref=dp_ob_image_wld"><img alt="x"/></a></div></div></div><a href="/dp/B0OTHEROTH/ref=x">other</a></html>`;
+  const htmlPqv = (asin) => `<html><span id="productTitle">X</span><div id="pqv-newer-version" data-target="#newerVersion_feature_div" class="a-section"><h2 id="pqv-newer-version-heading">新しいバージョンがあります</h2><a class="a-link-normal" href="/BLUETTI-x/dp/${asin}?ref=dp_product_quick_view">Y</a></div></html>`;
+  t('51B newerVersionFeature ブロックの先頭 /dp/ を拾う（後続の別 /dp/ は拾わない）', successorAsin(htmlNewer('B0FK9YH385')), 'B0FK9YH385');
+  t('51B parseDp.successor', parseDp(htmlNewer('B0FK9YH385')).successor, 'B0FK9YH385');
+  t('51B pqv-newer-version のみ（bluetti-power#1 の形）', successorAsin(htmlPqv('B0DT9FR2MP')), 'B0DT9FR2MP');
+  t('51B ブロック無し → 空（本文の /dp/ は見ない）', successorAsin('<html><span id="productTitle">X</span><a href="/dp/B0OTHEROTH">o</a><script>"newerVersion_feature_div"</script></html>'), '');
+  t('51B stockLabel: successor は末尾に "; successor="', stockLabel({ ...parseDp(htmlNewer('B0FK9YH385')), ...dp0 }, 200, 'B0CTYBTCH9'), 'in_stock(cart) 在庫あり; successor=B0FK9YH385');
+  t('51B stockLabel: redirected_to と successor の併存（順序 redirected_to → successor）', stockLabel({ ...dp0, landingAsin: 'B0AAAAAAAA', currentAsin: 'B0BBBBBBBB', successor: 'B0CCCCCCCC' }, 200, 'B0AAAAAAAA'), 'in_stock(cart) 在庫あり; redirected_to=B0BBBBBBBB; successor=B0CCCCCCCC');
+  t('51B stockLabel: oos＋successor', stockLabel({ ...dp0, oos: ['在庫切れ'], successor: 'B0CCCCCCCC' }, 200, 'B0AAAAAAAA'), 'oos:在庫切れ; successor=B0CCCCCCCC');
+  t('51B successor が要求 ASIN と同じなら出さない', stockLabel({ ...dp0, successor: 'B0AAAAAAAA' }, 200, 'B0AAAAAAAA'), 'in_stock(cart) 在庫あり');
+  t('51B autoVerdict は successor で変わらない', autoVerdict({ card_name: 'Naturehike CNH22ZP004' }, { ...dp0, successor: 'B0CCCCCCCC' }, 200).verdict, 'ok');
+  // 51 §C（キュー#29-③）: reseller_markup 情報フラグ（price_gap >= +100% かつ seller_type=reseller）
+  const rr = (price_gap, seller_type, static_flags = 'OK', link_form = 'amazonAsin') => ({ price_gap, seller_type, static_flags, link_form, verdict: 'ok' });
+  t('51C priceGapPct', ['+287%', '+100%', '+99%', '0%', '-4%', '', 'x'].map(priceGapPct), [287, 100, 99, 0, -4, null, null]);
+  t('51C +287% × reseller → 立つ（camp-coffee-dripper#3）', withInfoFlags(rr('+287%', 'reseller')), 'reseller_markup');
+  t('51C +100% ちょうど × reseller → 立つ', withInfoFlags(rr('+100%', 'reseller')), 'reseller_markup');
+  t('51C +99% × reseller → 立たない', withInfoFlags(rr('+99%', 'reseller')), 'OK');
+  t('51C +287% × marketplace → 立たない', withInfoFlags(rr('+287%', 'marketplace')), 'OK');
+  t('51C +287% × unknown → 立たない', withInfoFlags(rr('+287%', 'unknown')), 'OK');
+  t('51C price_gap 空 × reseller → 立たない', withInfoFlags(rr('', 'reseller')), 'OK');
+  t('51C 既存フラグに足す（shared_asin の後ろ）', withInfoFlags(rr('+150%', 'reseller', 'shared_asin,short_url')), 'shared_asin,short_url,reseller_markup');
+  t('51C 既存フラグは保持・条件を外れたら reseller_markup だけ落ちる', withInfoFlags(rr('+50%', 'reseller', 'shared_asin,reseller_markup')), 'shared_asin');
+  t('51C OK に戻る（reseller_markup だけだった行が条件を外れた）', withInfoFlags(rr('+50%', 'reseller', 'reseller_markup')), 'OK');
+  t('51C link_form=none は "-" のまま', withInfoFlags(rr('', '', '-', 'none')), '-');
+  t('51C 冪等（2 回通しても同じ）', withInfoFlags(rr('+287%', 'reseller', withInfoFlags(rr('+287%', 'reseller')))), 'reseller_markup');
+  // 51 §D（キュー#29-⑦）: --clear-verdict（link_form=none の行だけ・verdict/price_gap/seller_type/checked_at/judged_task/note を空に）
+  const mkRow = (o) => ({ slug: 'x', rank: '3', id: 'x3', link_form: 'none', static_flags: '-', asin: '', amazon_title: 'T', amazon_price: '100', amazon_stock: 'in_stock(cart)', verdict: 'different_product', price_gap: '', seller_type: 'official', checked_at: '2026-09-21T22:36:37Z', judged_task: 'campkit-20260921-49', note: '49: …', ...o });
+  t('51D none 行 → 6 列が空・amazon_title/price/stock は残る・static_flags は -', (() => { const rows = [mkRow({})]; const { row, before } = clearVerdict(rows, 'x#3#x3'); return [CLEAR_VERDICT_COLUMNS.map((k) => row[k]), row.amazon_title, row.amazon_price, row.amazon_stock, row.static_flags, before.verdict, before.judged_task]; })(), [['', '', '', '', '', ''], 'T', '100', 'in_stock(cart)', '-', 'different_product', 'campkit-20260921-49']);
+  t('51D link_form=amazonAsin の行は拒否（例外）', (() => { try { clearVerdict([mkRow({ link_form: 'amazonAsin', asin: 'B0AAAAAAAA', static_flags: 'OK' })], 'x#3#x3'); return 'no-throw'; } catch (e) { return /link_form=amazonAsin/.test(e.message); } })(), true);
+  t('51D 対象が特定できなければ例外', (() => { try { clearVerdict([mkRow({})], 'y#1#y1'); return 'no-throw'; } catch (e) { return /対象が 0 件/.test(e.message); } })(), true);
+  t('51D 拒否されたときは行を変更しない', (() => { const rows = [mkRow({ link_form: 'amazonAsin', asin: 'B0AAAAAAAA', static_flags: 'OK' })]; try { clearVerdict(rows, 'x#3#x3'); } catch (e) { /* expected */ } return [rows[0].verdict, rows[0].note]; })(), ['different_product', '49: …']);
+  t('51D クリア後の行は priceGapOfRow でも空（verdict 空）', priceGapOfRow(clearVerdict([mkRow({ amazon_price: '200', card_price: '100' })], 'x#3#x3').row), '');
   // matchOnly
   t('matchOnly slug#rank', matchOnly({ slug: 'a', rank: 5, id: 'x' }, 'a#5'), true);
   t('matchOnly slug#id', matchOnly({ slug: 'a', rank: 5, id: 'x' }, 'a#x'), true);
@@ -615,6 +726,8 @@ function runTests() {
     t('TSV: seller_type 値域（空 or 許可値）', rows.every((r) => r.seller_type === '' || SELLER_TYPES.includes(r.seller_type)), true);
     t('TSV: verdict 空の行は price_gap / seller_type も空', rows.filter((r) => !r.verdict).every((r) => r.price_gap === '' && r.seller_type === ''), true);
     t('TSV: price_gap は amazon_price / card_price から再計算した値と一致', rows.every((r) => r.price_gap === priceGapOfRow(r)), true);
+    t('TSV: reseller_markup は price_gap / seller_type から再計算した値と一致（51 §C）', rows.every((r) => r.static_flags === withInfoFlags(r)), true);
+    t('TSV: reseller_markup の行は全て seller_type=reseller かつ price_gap>=+100%', rows.filter((r) => /(^|,)reseller_markup(,|$)/.test(r.static_flags)).every((r) => resellerMarkup(r)), true);
     t('TSV: 行数 = カード数', rows.length, cards.length);
     t('TSV: キー一意', new Set(rows.map((r) => `${r.slug}\t${r.rank}\t${r.id}`)).size, rows.length);
   }
@@ -626,7 +739,7 @@ function runTests() {
 // main
 // ---------------------------------------------------------------------------
 function parseArgs(argv) {
-  const o = { static: false, dry: false, test: false, verify: 0, only: [], maxMinutes: 0, recheck: false, judge: [], note: '', seller: '', setSeller: [], list: '' };
+  const o = { static: false, dry: false, test: false, verify: 0, only: [], maxMinutes: 0, recheck: false, judge: [], note: '', seller: '', setSeller: [], list: '', clearVerdict: [] };
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i];
     if (a === '--static') o.static = true;
@@ -642,9 +755,11 @@ function parseArgs(argv) {
     else if (a === '--seller') o.seller = String(argv[++i] || '');
     else if (a === '--set-seller') o.setSeller.push(String(argv[++i] || ''));
     else if (a === '--list') o.list = String(argv[++i] || '');
+    else if (a === '--clear-verdict') o.clearVerdict.push(...String(argv[++i] || '').split(',').filter(Boolean));
     else throw new Error(`不明な引数: ${a}`);
   }
   if (o.seller && !SELLER_TYPES.includes(o.seller)) throw new Error(`--seller は ${SELLER_TYPES.join('|')} のいずれか: ${o.seller}`);
+  if (o.clearVerdict.length && (o.verify || o.only.length || o.judge.length || o.setSeller.length)) throw new Error('--clear-verdict は --verify/--only/--judge/--set-seller と併用できない');
   return o;
 }
 // --judge / --set-seller の対象行を 1 件に特定する
@@ -704,6 +819,14 @@ async function main() {
     console.log(`→ ${path.relative(ROOT, OUT)}（計 ${rows.length} 行）`);
     return;
   }
+  if (opts.clearVerdict.length) {
+    //   link_form=none に落ちた行の照合結果を未照合に戻す（51 §D）。対象が 1 件でも特定できなければ何も書かずに例外で止まる
+    const done = opts.clearVerdict.map((k) => clearVerdict(rows, k));
+    for (const { row, before } of done) console.log(`clear-verdict: ${row.slug}#${row.rank}#${row.id} → ${CLEAR_VERDICT_COLUMNS.map((k) => `${k}=${JSON.stringify(before[k])}`).join(' ')} を空に`);
+    writeTsv(rows);
+    console.log(`→ ${path.relative(ROOT, OUT)}（計 ${rows.length} 行）`);
+    return;
+  }
 
   let exitCode = 0;
   if (opts.verify > 0 || opts.only.length) {
@@ -713,8 +836,12 @@ async function main() {
   const vc = {};
   for (const r of rows) if (r.verdict) vc[r.verdict] = (vc[r.verdict] || 0) + 1;
   console.log(`→ ${path.relative(ROOT, OUT)}（計 ${rows.length} 行）verdict 分布: ${Object.entries(vc).map(([k, v]) => `${k}=${v}`).join(' ') || '（照合なし）'} / 未照合（ASIN あり）${rows.filter((r) => r.asin && !r.verdict).length} 枚`);
+  //   台帳側の static_flags（mdx 由来のフラグ＋照合結果から立てる情報フラグ reseller_markup）
+  const fc = {};
+  for (const r of rows) for (const f of (r.static_flags || '').split(',')) fc[f] = (fc[f] || 0) + 1;
+  console.log(`static_flags 分布（台帳）: ${Object.entries(fc).sort((a, b) => b[1] - a[1]).map(([k, v]) => `${k}=${v}`).join(' ')}`);
   process.exit(exitCode);
 }
 
 if (require.main === module) main().catch((e) => { console.error(e); process.exit(1); });
-module.exports = { parseCards, linkFormOf, modelTokens, brandOf, staticCheck, autoVerdict, parseDp, redirectedTo, stockLabel, priceGap, priceGapOfRow, sellerTypeOf, FROZEN_SLUGS, COLUMNS, SELLER_TYPES, PRICE_GAP_RE };
+module.exports = { parseCards, linkFormOf, modelTokens, brandOf, staticCheck, autoVerdict, parseDp, redirectedTo, successorAsin, stockLabel, priceGap, priceGapOfRow, priceGapPct, resellerMarkup, withInfoFlags, clearVerdict, sellerTypeOf, FROZEN_SLUGS, COLUMNS, SELLER_TYPES, PRICE_GAP_RE, CLEAR_VERDICT_COLUMNS };
