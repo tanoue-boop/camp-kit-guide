@@ -3,6 +3,15 @@
 数値の推移はGAS「SEOレポート」の履歴で追う。本ファイルは「いつ・どの記事を・なぜ・どう変えたか」を記録し、次回レポートで効果を評価するための施策台帳。新しい施策は上に追記する。
 
 ---
+## 2026-09-22：キュー#33 — camp-cooler-box-beginner #3/#4 の `dup_in_article`（同一 ASIN B0B7RYDRRN）を解消（campkit-20260921-43）
+
+- **対象**: `content/posts/camp-cooler-box-beginner.mdx` の **#4 `iris-hugel-vitc20` の `amazonAsin` 1 属性のみ**（`B0B7RYDRRN` → `B0B7S1MQ3L`）。#3 `iris-hugel-vitc40`（`B0B7RYDRRN`）は正なので据え置き。name／price／affiliateUrl／source／rakuten*／thumbnail／本文／frontmatter は不変更（`git diff` は mdx 1 行の置換のみ）。ほかに `_file/amazon-asin-check.tsv`（照合結果 2 行）・`scripts/check-amazon-asin.cjs`（`TASK_ID` 1 行）・本ログ
+- **発端**: 41 で amzn.to を ASIN 化した結果、40L（#3）と 20L（#4）＝別商品の 2 カードが同じ `B0B7RYDRRN` を指していることが可視化（`dup_in_article=2`）。41 のデプロイで `verify-deploy.cjs` の「ASIN重複なし」が同記事で 1 件 FAIL していた
+- **§B（dp 照合・Amazon 本体へ GET 2 回・429/503/CAPTCHA 0）**: `B0B7RYDRRN` の dp タイトルは「アイリスオーヤマ HUGEL 真空断熱クーラーボックス 40L … 13.3日保冷 … チャコールグレー VITC-40」（model=VITC-40）＝**40L が正しく、誤りは #4（20L）**。同 dp の変種 JSON `dimensionValuesDisplayData` は `"B0B7RYDRRN":["チャコールグレー","40L【13.3日保冷】"]`／`"B0B7S1MQ3L":["チャコールグレー","20L【6.1日保冷】"]`（親 ASIN `B0D8VX6G6Q`・8 変種）。`B0B7S1MQ3L` の dp を 1 回取得して確認: タイトル「【6.1日保冷】 アイリスオーヤマ HUGEL 真空断熱クーラーボックス 20L チャコ-ルグレー … VITC-20」・model=VITC-20・seller=Amazon.co.jp・在庫あり（残り1点・入荷予定あり）・¥16,800（カード ¥21,780 に対し gap -23%）→ `--judge … =ok --seller amazon` で記録。**同じ VITC-20 は `camp-cooler-box-overall#4` も既に `B0B7S1MQ3L`** で一致（同一商品は同じ SKU に揃える原則どおり）
+- **§C（結果）**: `--static` の `dup_in_article` **2→0**。`shared_asin` 134→136 は `B0B7S1MQ3L` が beginner#4／overall#4 の 2 記事で共有されたことによる情報フラグ（別記事間の同一商品共有は正常）。fallback（ASIN 除去＋台帳起票）は不要だったので `article-fix-backlog.tsv` は不変更
+- **効果測定**: 検索順位の直接施策ではないため計測対象外
+
+---
 ## 2026-09-22：キュー#24 — `rewrite-backlog.tsv` の `added_date` に混入した実施メモ 3 行を `notes` へ移し、台帳検査を完全一致に戻す（campkit-20260921-42）
 
 - **対象**: `_file/rewrite-backlog.tsv`・`scripts/validate-backlog-tsv.cjs`・本ログのみ。**`content/posts/`・他の台帳 TSV・`check-card-name-vs-sku.cjs`・`check-amazon-asin.cjs`・`verify-deploy.cjs`・`deploy.cjs` は 1 文字も変更していない**
