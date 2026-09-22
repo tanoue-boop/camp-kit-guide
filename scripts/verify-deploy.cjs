@@ -41,6 +41,23 @@
  *        dp?tag=／amzn.to の全出現数は参考表示に残す（合否対象外）。
  *        （2026-09-15 追記：合算チェックだけだと「楽天リンクだけを追加したデプロイ」で旧HTMLの合計が
  *        たまたま一致し誤PASSする穴があったため個別チェックにした、という経緯はそのまま）
+ *      - リンクの「値」の照合（2026-09-22 追記・campkit-20260921-47／キュー#34）: 枚数一致だけでは
+ *        「枚数が変わらない変更」（ASIN の差し替え・amazonUrl(amzn.to)→同一商品の amazonAsin 置換・楽天 affiliateUrl の
+ *        差し替え）で旧HTMLを弾けない（44 で実際に発生。45 の枚数一致でも検出不可＝47 §B で再現）。そのため
+ *        ProductCard の Amazon ボタン／楽天ボタン（hb.afl）の href を文書順に取り出し、mdx から算出した
+ *        「期待 href」（Amazon: getAmazonUrl() と同じ優先順で amazonUrl はそのまま／amazonAsin・legacy は
+ *        https://www.amazon.co.jp/dp/<ASIN>、楽天: source="rakuten" かつ hb.afl の affiliateUrl そのまま）と
+ *        【多重集合として一致】することを必須にする。順序は問わない（カードの並べ替えだけで反映待ちにしない）。
+ *        ・Amazon dp URL の ?tag= 以降は照合対象から外す（ローカルの .env.local はプレースホルダで、Vercel 側の
+ *          NEXT_PUBLIC_AMAZON_ASSOCIATE_TAG を verify 側から知る手段が無い。タグの健全性（空タグ0／プレースホルダ0）は
+ *          3b の別検査が担当）。
+ *        ・href は HTML エンティティを復号して比べる（hb.afl の &m=…&rafcid=… は本番HTMLで &amp; になる）。
+ *        ・JSON-LD／__NEXT_DATA__／比較表／本文リンクは対象外（ボタンのみ）。
+ *        ・枚数一致（judgeRakuten／judgeAmazon）はそのまま残し、値照合（judgeRakutenHrefs／judgeAmazonHrefs）を追加。
+ *      - 従来の「ProductCard 件数 ≦ 全リンク出現数（links.total ≧ cardCount）」は 47 で外した。getRakutenUrl() は
+ *        常に URL を返す＝楽天ボタンは必ず 1 枚出るので「リンクが 1 本も無いカード」は原理的に無く、total は
+ *        JSON-LD／__NEXT_DATA__ 込みの混在カウントで判定として意味が薄いため（45 QUESTION-1 への監督判断）。
+ *        合否は「楽天枚数一致 && Amazon枚数一致 && 楽天値一致 && Amazon値一致」。
  *   4. PR表記（景表法対応）が本文に含まれる
  *   5. og:image がサムネイル規約（/images/thumbnails/<slug>.png または /images/outdoor-0X.png）に一致し、
  *      【ローカル frontmatter の thumbnail と同じ画像】であり、その画像URLが実際に 200 を返す
@@ -72,6 +89,11 @@ const STALE_SLACK_SEC = 5;
 // 形式NGで FAIL していたため thumbnails/ を追加した。
 const THUMB_RE = /\/images\/(?:outdoor-0[1-9]|thumbnails\/[a-z0-9-]+)\.png/;
 const HB_AFL_PREFIX = 'https://hb.afl.rakuten.co.jp/';
+// lib/amazon.ts の buildAmazonUrl() が組む URL の ?tag= を除いた部分。値照合はこの「タグ無し dp URL」の形で行う
+// （campkit-20260921-47・理由はファイル冒頭コメント 3 の「値の照合」参照）。
+const AMAZON_DP_PREFIX = 'https://www.amazon.co.jp/dp/';
+// pendingReasons / 表示で不一致 href を列挙するときの上限件数（不足・余剰それぞれ）
+const HREF_DIFF_SHOW = 3;
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
@@ -115,12 +137,21 @@ function parseLocal(src) {
   //   amazonUrl（空でない）→ amazonAsin（空でない）→ source="amazon" かつ affiliateUrl が空でも "#" でもない（ASIN とみなす）
   // amazonUrl と amazonAsin を両方持つカードでもボタンは 1 つなので 1 と数える（2026-09-22・campkit-20260921-45）。
   let amazonExpected = 0;
+  // 値照合用（campkit-20260921-47）: カードごとに「本番のボタンに出るはずの href」を文書順に積む。
+  //   楽天: source="rakuten" かつ hb.afl の affiliateUrl そのもの（getRakutenUrl() が affiliateUrl をそのまま返す枝）
+  //   Amazon: expectedAmazonHref()（getAmazonUrl() と同じ優先順・dp はタグ無しの正規形）
+  const rakutenExpectedHrefs = [];
+  const amazonExpectedHrefs = [];
   for (const card of cards) {
     const source = (card.match(/\bsource="([^"]*)"/) || [])[1] || '';
     const aff = (card.match(/\baffiliateUrl="([^"]*)"/) || [])[1] || '';
-    if (source === 'rakuten' && aff.startsWith(HB_AFL_PREFIX)) rakutenExpected++;
-    else if (source !== 'other') rakutenSearchExpected++;
+    if (source === 'rakuten' && aff.startsWith(HB_AFL_PREFIX)) {
+      rakutenExpected++;
+      rakutenExpectedHrefs.push(aff);
+    } else if (source !== 'other') rakutenSearchExpected++;
     if (cardHasAmazonButton(card, source, aff)) amazonExpected++;
+    const amazonHref = expectedAmazonHref(card, source, aff);
+    if (amazonHref) amazonExpectedHrefs.push(amazonHref);
   }
   // 参考: 旧実装が期待値にしていた「amazonAsin= / amazonUrl= / source="amazon" の mdx 全文出現数」（合否には使わない）
   const amazonHints = (src.match(/amazonAsin="|amazonUrl="|source="amazon"/g) || []).length;
@@ -136,6 +167,8 @@ function parseLocal(src) {
     amazonHints,
     rakutenExpected,
     rakutenSearchExpected,
+    rakutenExpectedHrefs,
+    amazonExpectedHrefs,
     dupAsins,
   };
 }
@@ -147,12 +180,62 @@ function parseLocal(src) {
 //   return null;   → ボタンなし
 // ProductCardMdx は属性文字列をそのまま渡すので、空文字（amazonUrl=""）は falsy＝ボタンなし。
 function cardHasAmazonButton(card, source, aff) {
+  return expectedAmazonHref(card, source, aff) !== null;
+}
+
+// getAmazonUrl() が返す href を mdx 属性の上で再現する（campkit-20260921-47）。ボタンの有無は cardHasAmazonButton と同値。
+//   amazonUrl   → その文字列そのまま（amzn.to 短縮URL。ProductCard もそのまま href に出す）
+//   amazonAsin  → lib/amazon.ts buildAmazonUrl(asin) ＝ https://www.amazon.co.jp/dp/<ASIN>?tag=<タグ>。
+//                 照合はタグを外した正規形（normalizeAmazonHref）で行うので、ここではタグ無しで組む
+//   legacy      → source="amazon" かつ affiliateUrl が空でも "#" でもない → affiliateUrl を ASIN とみなして同上
+//   それ以外    → null（ボタンなし）
+function expectedAmazonHref(card, source, aff) {
   const amazonUrl = (card.match(/\bamazonUrl="([^"]*)"/) || [])[1] || '';
   const amazonAsin = (card.match(/\bamazonAsin="([^"]*)"/) || [])[1] || '';
-  if (amazonUrl) return true;
-  if (amazonAsin) return true;
-  if (source === 'amazon' && aff && aff !== '#') return true;
-  return false;
+  if (amazonUrl) return normalizeAmazonHref(amazonUrl);
+  if (amazonAsin) return AMAZON_DP_PREFIX + amazonAsin;
+  if (source === 'amazon' && aff && aff !== '#') return AMAZON_DP_PREFIX + aff;
+  return null;
+}
+
+// Amazon dp URL は「https://www.amazon.co.jp/dp/<ASIN>」に正規化（?tag= 以降・www. の有無・http/https を吸収）。
+// dp 以外（amzn.to など）はそのまま返す。
+function normalizeAmazonHref(href) {
+  const m = href.match(/^https?:\/\/(?:www\.)?amazon\.co\.jp\/dp\/([A-Za-z0-9]+)/);
+  return m ? AMAZON_DP_PREFIX + m[1] : href;
+}
+
+// href 属性値の HTML エンティティを復号する（React の SSR は & を &amp; に、" を &quot; に、' を &#x27; にする）。
+function decodeHtmlAttr(s) {
+  return s
+    .replace(/&#x([0-9a-fA-F]+);/g, (_, h) => String.fromCodePoint(parseInt(h, 16)))
+    .replace(/&#(\d+);/g, (_, d) => String.fromCodePoint(Number(d)))
+    .replace(/&quot;/g, '"')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&amp;/g, '&');
+}
+
+// 2 つの文字列配列を多重集合として比べ、不足（期待にあって実測に無い）と余剰（実測にあって期待に無い）を返す。
+// 順序は問わない。同じ値が複数回出るときは回数まで一致を要求する（shared_asin＝同一 ASIN が 2 カードに付く記事の担保）。
+function diffMultiset(expected, actual) {
+  const count = new Map();
+  for (const v of expected) count.set(v, (count.get(v) || 0) + 1);
+  for (const v of actual) count.set(v, (count.get(v) || 0) - 1);
+  const missing = [];
+  const extra = [];
+  for (const [v, n] of count) {
+    for (let i = 0; i < n; i++) missing.push(v);
+    for (let i = 0; i < -n; i++) extra.push(v);
+  }
+  return { ok: missing.length === 0 && extra.length === 0, missing, extra };
+}
+
+// 不一致 href の要約（不足／余剰を最大 HREF_DIFF_SHOW 件ずつ＋件数）。pendingReasons と表示の両方で使う。
+function describeHrefDiff(diff) {
+  const fmt = (label, arr) =>
+    arr.length === 0 ? '' : `${label}${arr.length}件: ${arr.slice(0, HREF_DIFF_SHOW).join(' , ')}${arr.length > HREF_DIFF_SHOW ? ' …' : ''}`;
+  return [fmt('不足', diff.missing), fmt('余剰', diff.extra)].filter(Boolean).join('／');
 }
 
 function readLocal(slug) {
@@ -184,16 +267,22 @@ function countAffiliateLinks(html) {
   let amazonButtonDp = 0;
   let amazonButtonShort = 0;
   let amazonButtonOther = 0;
+  // 値照合用（campkit-20260921-47）: ボタンの href を文書順に積む（HTML エンティティ復号済み。Amazon dp はタグ無しに正規化）。
+  const rakutenHbHrefs = [];
+  const amazonButtonHrefs = [];
   for (const tag of html.match(/<a\s[^>]*>/g) || []) {
-    const href = (tag.match(/\bhref="([^"]*)"/) || [])[1] || '';
+    const href = decodeHtmlAttr((tag.match(/\bhref="([^"]*)"/) || [])[1] || '');
     const cls = (tag.match(/\bclass="([^"]*)"/) || [])[1] || '';
     if (/ProductCard[^\s"]*__rakuten\b/.test(cls)) {
-      if (href.startsWith(HB_AFL_PREFIX)) rakutenHb++;
-      else if (/^https?:\/\/search\.rakuten\.co\.jp\//.test(href)) rakutenSearch++;
+      if (href.startsWith(HB_AFL_PREFIX)) {
+        rakutenHb++;
+        rakutenHbHrefs.push(href);
+      } else if (/^https?:\/\/search\.rakuten\.co\.jp\//.test(href)) rakutenSearch++;
     } else if (/ProductCard[^\s"]*__amazon\b/.test(cls)) {
       if (/^https?:\/\/(?:www\.)?amazon\.co\.jp\/dp\/[A-Z0-9]+\?tag=/.test(href)) amazonButtonDp++;
       else if (/^https?:\/\/amzn\.to\/[A-Za-z0-9]+/.test(href)) amazonButtonShort++;
       else amazonButtonOther++;
+      amazonButtonHrefs.push(normalizeAmazonHref(href));
     } else if (/ComparisonTable[^\s"]*__link\b/.test(cls) && href.startsWith(HB_AFL_PREFIX)) {
       rakutenTableHb++;
     }
@@ -221,6 +310,9 @@ function countAffiliateLinks(html) {
     amznTo,
     amazonEmptyTag,
     amazonPlaceholderTag,
+    rakutenHbHrefs,
+    amazonButtonHrefs,
+    // 参考: 47 までは verify() が「ProductCard 件数 ≦ total」を合否に使っていた（混在カウント・現在は合否対象外）
     total: rakutenHb + amazonTag + amznTo,
   };
 }
@@ -235,6 +327,28 @@ function judgeRakuten(local, links) {
 // 実測（ProductCard の Amazon ボタン枚数）の一致だけを見る。期待 0 は実測 0 で PASS。
 function judgeAmazon(local, links) {
   return links.amazonButtons === local.amazonExpected;
+}
+
+// 楽天ボタン href の値照合（campkit-20260921-47）。期待（source="rakuten" かつ hb.afl の affiliateUrl）と
+// 実測（楽天ボタンの hb.afl href・復号済み）を多重集合として比べる。戻り値 { ok, missing, extra }。
+function judgeRakutenHrefs(local, links) {
+  return diffMultiset(local.rakutenExpectedHrefs || [], links.rakutenHbHrefs || []);
+}
+
+// Amazon ボタン href の値照合（campkit-20260921-47）。期待（expectedAmazonHref・dp はタグ無し正規形）と
+// 実測（Amazon ボタンの href・dp はタグ無しに正規化）を多重集合として比べる。戻り値 { ok, missing, extra }。
+function judgeAmazonHrefs(local, links) {
+  return diffMultiset(local.amazonExpectedHrefs || [], links.amazonButtonHrefs || []);
+}
+
+// アフィリリンクの合否をまとめる（verify() の 3 で使う）。
+// 合否＝楽天枚数一致 && Amazon枚数一致 && 楽天値一致 && Amazon値一致（47 で「total ≧ cardCount」を外した）。
+function judgeLinks(local, links) {
+  const rakutenOk = judgeRakuten(local, links);
+  const amazonOk = judgeAmazon(local, links);
+  const rakutenHref = judgeRakutenHrefs(local, links);
+  const amazonHref = judgeAmazonHrefs(local, links);
+  return { ok: rakutenOk && amazonOk && rakutenHref.ok && amazonHref.ok, rakutenOk, amazonOk, rakutenHref, amazonHref };
 }
 
 // ── 反映待ちの判定 ────────────────────────────────────────────────────────
@@ -261,6 +375,21 @@ function pendingReasons(html, local) {
   // 旧HTMLの重複出現（1カード3〜4回）で期待数を満たしてしまい、反映待ちを検出できなかった。
   if (!judgeRakuten(local, l)) {
     reasons.push(`本番の楽天リンク(hb.afl ボタン)が${l.rakutenHb}本で期待${local.rakutenExpected}本と不一致です`);
+  }
+  // 値の照合（2026-09-22・campkit-20260921-47）: 枚数が同じでも href が違えば旧HTML（ASIN 差し替え・amzn.to→amazonAsin 置換・
+  // 楽天 affiliateUrl 差し替え）。44 で実際に発生し、枚数一致（上 2 つ）では検出できなかった。
+  // 枚数が不一致のときは上の理由で既に反映待ちになるので、href の理由は枚数が一致しているときだけ足す（理由の重複を避ける）。
+  if (judgeAmazon(local, l)) {
+    const amazonHref = judgeAmazonHrefs(local, l);
+    if (!amazonHref.ok) {
+      reasons.push(`本番のAmazonリンク(ボタン)の href が期待と不一致です（${describeHrefDiff(amazonHref)}）`);
+    }
+  }
+  if (judgeRakuten(local, l)) {
+    const rakutenHref = judgeRakutenHrefs(local, l);
+    if (!rakutenHref.ok) {
+      reasons.push(`本番の楽天リンク(hb.afl ボタン)の href が期待と不一致です（${describeHrefDiff(rakutenHref)}）`);
+    }
   }
   // サムネイルだけを差し替えたデプロイ（title・リンク数は不変）は上の条件では検出できない
   // （2026-09-17 に実際に発生）ため og:image も期待値と照合する。
@@ -418,17 +547,15 @@ async function verify(slug, deployedAt) {
   results.push(titleOk);
   console.log(`  ${titleOk ? 'PASS' : 'FAIL'}  title  期待:「${local.title}」 実際:「${liveTitle}」`);
 
-  // 3. アフィリリンク数
+  // 3. アフィリリンク数＋値
   //   楽天: ボタンの hb.afl 数が mdx 由来の期待数と一致（§A・2026-09-22）
   //   Amazon: ボタンの枚数が mdx 由来（カード単位・getAmazonUrl と同じ優先順）の期待数と一致（campkit-20260921-45・2026-09-22）
-  //   （ProductCard 件数 ≦ 全リンク出現数 の従来チェックは残す）
+  //   値: 楽天／Amazon ボタンの href が mdx 由来の期待 href と多重集合として一致（campkit-20260921-47・2026-09-22）
+  //   （「ProductCard 件数 ≦ 全リンク出現数」の従来チェックは 47 で外した。理由はファイル冒頭コメント 3）
   const links = countAffiliateLinks(html);
-  const rakutenOk = judgeRakuten(local, links);
-  const amazonOk = judgeAmazon(local, links);
-  const linkOk =
-    (local.cardCount === 0 ? true : links.total >= local.cardCount) &&
-    amazonOk &&
-    rakutenOk;
+  const lj = judgeLinks(local, links);
+  const { rakutenOk, amazonOk } = lj;
+  const linkOk = lj.ok;
   results.push(linkOk);
   console.log(
     `  ${linkOk ? 'PASS' : 'FAIL'}  アフィリリンク  ProductCard ${local.cardCount}件` +
@@ -436,7 +563,9 @@ async function verify(slug, deployedAt) {
       `（検索URL${links.rakutenSearch}・比較表hb.afl${links.rakutenTableHb}・hb.afl全出現${links.rakutenHbAll}は合否対象外）` +
       ` / Amazonボタン 期待${local.amazonExpected}→実${links.amazonButtons}${amazonOk ? '' : ' ✖不一致'}` +
       `（dp${links.amazonButtonDp}・amzn.to${links.amazonButtonShort}${links.amazonButtonOther ? `・その他${links.amazonButtonOther}` : ''}）` +
-      `（dp?tag=全出現${links.amazonTag}・amzn.to全出現${links.amznTo}・旧期待値(属性出現数)${local.amazonHints}は合否対象外）`
+      `（dp?tag=全出現${links.amazonTag}・amzn.to全出現${links.amznTo}・旧期待値(属性出現数)${local.amazonHints}は合否対象外）` +
+      ` / href照合 楽天${lj.rakutenHref.ok ? 'OK' : `✖(${describeHrefDiff(lj.rakutenHref)})`}` +
+      `・Amazon${lj.amazonHref.ok ? 'OK' : `✖(${describeHrefDiff(lj.amazonHref)})`}`
   );
 
   // 3b. Amazonタグ健全性: 空タグ / プレースホルダは成果が計上されないため FAIL
@@ -556,6 +685,10 @@ function buildMdxCards(cards, { title = 'テスト記事', thumbnail = '/images/
 //   __NEXT_DATA__ の compiledSource には mdx 属性がそのまま入る（amazonAsin は ASIN 文字列のまま＝dp URL にはならない、
 //   amazonUrl は amzn.to の URL がそのまま入る＝amzn.to が 1 回余分に出る）。
 // cards = [{ amazonHref: null|URL, rakutenHref: URL, source, nextData: { amazonAsin?, amazonUrl? } }]
+// href 属性は React の SSR と同じく & を &amp; にエスケープして埋める（2026-09-22 camp-bbq-grill の本番HTMLで
+// hb.afl の &m=…&rafcid=… が &amp; になっているのを確認・campkit-20260921-47）。JSON-LD の offers.url は本番でも
+// & のまま（同日確認）なのでエスケープしない。
+const escAttr = (s) => String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;');
 function buildHtmlCards(cards, { title = 'テスト記事', og = '/images/thumbnails/test-slug.png', tableAmazonLinks = 0, tableRakutenLinks = 0 } = {}) {
   let h = `<html><head><title data-next-head="">${title} | CampKit Guide</title><meta property="og:image" content="https://www.camp-kit-guide.com${og}"/></head><body><p>本ページはアフィリエイト広告を含みます</p>`;
   let nextData = '';
@@ -566,9 +699,9 @@ function buildHtmlCards(cards, { title = 'テスト記事', og = '/images/thumbn
     h += `<script type="application/ld+json">{"@context":"https://schema.org","@type":"Product","name":"商品${n}","description":"説明${n}","offers":{"@type":"Offer","price":1000,"priceCurrency":"JPY","availability":"https://schema.org/InStock","url":"${ldUrl}"}}</script>`;
     h += `<div id="p${n}" style="scroll-margin-top:90px"><div class="ProductCard-module__ZglCRW__card" data-product-name="商品${n}"><div class="ProductCard-module__ZglCRW__buttons">`;
     if (c.amazonHref) {
-      h += `<a href="${c.amazonHref}" target="_blank" rel="noopener noreferrer nofollow" class="ProductCard-module__ZglCRW__btn ProductCard-module__ZglCRW__amazon"><span class="ProductCard-module__ZglCRW__btnBrand">amazon</span></a>`;
+      h += `<a href="${escAttr(c.amazonHref)}" target="_blank" rel="noopener noreferrer nofollow" class="ProductCard-module__ZglCRW__btn ProductCard-module__ZglCRW__amazon"><span class="ProductCard-module__ZglCRW__btnBrand">amazon</span></a>`;
     }
-    h += `<a href="${rakutenHref}" target="_blank" rel="noopener noreferrer nofollow" class="ProductCard-module__ZglCRW__btn ProductCard-module__ZglCRW__rakuten"><span class="ProductCard-module__ZglCRW__btnBrand">Rakuten</span></a></div></div></div>`;
+    h += `<a href="${escAttr(rakutenHref)}" target="_blank" rel="noopener noreferrer nofollow" class="ProductCard-module__ZglCRW__btn ProductCard-module__ZglCRW__rakuten"><span class="ProductCard-module__ZglCRW__btnBrand">Rakuten</span></a></div></div></div>`;
     nextData += `\\n  affiliateUrl: \\"${(c.nextData && c.nextData.affiliateUrl) || rakutenHref}\\",`;
     if (c.nextData && c.nextData.amazonUrl) nextData += `\\n  amazonUrl: \\"${c.nextData.amazonUrl}\\",`;
     if (c.nextData && c.nextData.amazonAsin) nextData += `\\n  amazonAsin: \\"${c.nextData.amazonAsin}\\",`;
@@ -863,6 +996,161 @@ async function runTests() {
     eq(judgeCache({ cache: 'HIT', age: '3600' }, NOW - 120, NOW).stale, true);
   });
 
+  // ── §E（campkit-20260921-47）: リンクの「値」をカード単位で照合（枚数が変わらない変更で旧HTMLを弾く） ───────
+  // 実 hb.afl の形（&m=…&rafcid=… を含む。2026-09-22 camp-bbq-grill の mdx から形だけ借用）
+  const FX_HB_AMP = (i) => `https://hb.afl.rakuten.co.jp/hgc/g00tl94n.20yyld50.g00tl94n.20yym5bc/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fshop${i}%2Fitem%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fshop${i}%2Fi%2F1000${i}%2F&rafcid=wsc_i_is_ea4b84f0-cfca-4a84-b96e-a8423bbc252f`;
+  const DP_PLAIN = (asin) => `https://www.amazon.co.jp/dp/${asin}`;
+
+  t('E-1 同一カードで ASIN だけが違う旧HTML（枚数5=5）→ 45 の枚数一致は PASS のまま・値照合で FAIL・pendingReasons 発火', () => {
+    const local = parseLocal(buildMdxCards([1, 2, 3, 4, 5].map((i) => ({ amazonAsin: ASIN(i) }))));
+    eq(local.amazonExpectedHrefs.join(','), [1, 2, 3, 4, 5].map((i) => DP_PLAIN(ASIN(i))).join(','), '期待 href はタグ無し dp');
+    const html = buildHtmlCards([
+      { amazonHref: FX_DP('B0OLDASIN01'), nextData: { amazonAsin: 'B0OLDASIN01' } },
+      ...[2, 3, 4, 5].map((i) => ({ amazonHref: FX_DP(ASIN(i)), nextData: { amazonAsin: ASIN(i) } })),
+    ]);
+    const links = countAffiliateLinks(html);
+    eq(judgeAmazon(local, links), true, '枚数一致（45）では通ってしまう');
+    eq(judgeRakuten(local, links), true);
+    const d = judgeAmazonHrefs(local, links);
+    eq(d.ok, false, '値照合は FAIL'); eq(d.missing.join(','), DP_PLAIN(ASIN(1))); eq(d.extra.join(','), DP_PLAIN('B0OLDASIN01'));
+    eq(judgeLinks(local, links).ok, false, '合否も FAIL');
+    const reasons = pendingReasons(html, local);
+    eq(reasons.length, 1); eq(reasons[0].includes('Amazonリンク(ボタン)の href が期待と不一致'), true);
+    eq(reasons[0].includes('不足1件: ' + DP_PLAIN(ASIN(1))), true, '不足の href を出す'); eq(reasons[0].includes('余剰1件: ' + DP_PLAIN('B0OLDASIN01')), true, '余剰の href を出す');
+  });
+  t('E-2 44 の実例: amzn.to → 同一商品の amazonAsin に置き換えたデプロイの旧HTML（枚数5=5・amzn.to が __NEXT_DATA__ にも残る）→ 値照合で FAIL', () => {
+    const local = parseLocal(buildMdxCards([1, 2, 3, 4, 5].map((i) => ({ amazonAsin: ASIN(i) }))));
+    const oldHtml = buildHtmlCards([
+      { amazonHref: SHORT(1), nextData: { amazonUrl: SHORT(1) } },
+      ...[2, 3, 4, 5].map((i) => ({ amazonHref: FX_DP(ASIN(i)), nextData: { amazonAsin: ASIN(i) } })),
+    ]);
+    const links = countAffiliateLinks(oldHtml);
+    eq(links.amazonButtons, 5); eq(links.amazonButtonShort, 1); eq(links.amznTo, 2, 'amzn.to はボタン＋__NEXT_DATA__ で 2');
+    eq(judgeAmazon(local, links), true, '§B: 45 の枚数一致では検出できない');
+    eq(judgeAmazonHrefs(local, links).ok, false, '値照合で検出');
+    eq(judgeAmazonHrefs(local, links).extra.join(','), SHORT(1), '余剰＝旧 amzn.to');
+    // 新HTML（反映後）は PASS
+    const newHtml = buildHtmlCards([1, 2, 3, 4, 5].map((i) => ({ amazonHref: FX_DP(ASIN(i)), nextData: { amazonAsin: ASIN(i) } })));
+    eq(judgeLinks(local, countAffiliateLinks(newHtml)).ok, true); eq(pendingReasons(newHtml, local).length, 0);
+  });
+  t('E-3 カードの並べ替えのみ（値の多重集合は同じ）→ PASS（順序は問わない）', () => {
+    const local = parseLocal(buildMdxCards([{ amazonAsin: ASIN(1) }, { amazonAsin: ASIN(2) }, { amazonAsin: ASIN(3) }]));
+    // 本番はまだ旧順序（3→1→2）。楽天 href も同じ順で入れ替わる
+    const html = buildHtmlCards([
+      { amazonHref: FX_DP(ASIN(3)), rakutenHref: FX_HB(3) },
+      { amazonHref: FX_DP(ASIN(1)), rakutenHref: FX_HB(1) },
+      { amazonHref: FX_DP(ASIN(2)), rakutenHref: FX_HB(2) },
+    ]);
+    const links = countAffiliateLinks(html);
+    eq(links.amazonButtonHrefs.join(','), [3, 1, 2].map((i) => DP_PLAIN(ASIN(i))).join(','), '実測は文書順');
+    eq(judgeAmazonHrefs(local, links).ok, true); eq(judgeRakutenHrefs(local, links).ok, true); eq(judgeLinks(local, links).ok, true);
+    eq(pendingReasons(html, local).length, 0);
+  });
+  t('E-4 同じ ASIN が 2 カードに付く記事（shared_asin）で実測にも 2 回出る → PASS／回数が違えば FAIL（集合ではなく多重集合）', () => {
+    const local = parseLocal(buildMdxCards([{ amazonAsin: ASIN(1) }, { amazonAsin: ASIN(1) }, { amazonAsin: ASIN(2) }]));
+    eq(local.amazonExpectedHrefs.length, 3);
+    const same = countAffiliateLinks(buildHtmlCards([{ amazonHref: FX_DP(ASIN(1)) }, { amazonHref: FX_DP(ASIN(1)) }, { amazonHref: FX_DP(ASIN(2)) }]));
+    eq(judgeAmazonHrefs(local, same).ok, true, '2 回出れば PASS');
+    // 枚数 3=3・値の集合 {1,2}={1,2} だが回数が違う（1,2,2）→ 多重集合では FAIL
+    const skew = countAffiliateLinks(buildHtmlCards([{ amazonHref: FX_DP(ASIN(1)) }, { amazonHref: FX_DP(ASIN(2)) }, { amazonHref: FX_DP(ASIN(2)) }]));
+    eq(judgeAmazon(local, skew), true, '枚数は一致');
+    const d = judgeAmazonHrefs(local, skew);
+    eq(d.ok, false); eq(d.missing.join(','), DP_PLAIN(ASIN(1))); eq(d.extra.join(','), DP_PLAIN(ASIN(2)));
+  });
+  t('E-5 楽天 affiliateUrl の差し替え（枚数5=5）→ 40 の枚数一致は PASS のまま・値照合で FAIL・pendingReasons 発火', () => {
+    const local = parseLocal(buildMdxCards([{}, {}, {}, {}, {}]));
+    eq(local.rakutenExpectedHrefs.length, 5); eq(local.rakutenExpectedHrefs[2], FX_HB(3));
+    const html = buildHtmlCards([{}, {}, { rakutenHref: FX_HB(99) }, {}, {}]);
+    const links = countAffiliateLinks(html);
+    eq(judgeRakuten(local, links), true, '枚数一致（40）では通ってしまう');
+    const d = judgeRakutenHrefs(local, links);
+    eq(d.ok, false); eq(d.missing.join(','), FX_HB(3)); eq(d.extra.join(','), FX_HB(99));
+    eq(judgeLinks(local, links).ok, false);
+    const reasons = pendingReasons(html, local);
+    eq(reasons.length, 1); eq(reasons[0].includes('楽天リンク(hb.afl ボタン)の href が期待と不一致'), true);
+  });
+  t('E-6 §D-3: affiliateUrl="#" かつ Amazon 属性なしのカードでも楽天ボタン（検索URL）が 1 枚出て PASS（total≧cardCount を外しても落ちない）', () => {
+    const local = parseLocal(buildMdxCards([{ affiliateUrl: '#' }]));
+    eq(local.cardCount, 1); eq(local.rakutenExpected, 0); eq(local.amazonExpected, 0);
+    eq(local.rakutenExpectedHrefs.length, 0); eq(local.amazonExpectedHrefs.length, 0);
+    const html = buildHtmlCards([{ rakutenHref: 'https://search.rakuten.co.jp/search/mall/%E5%95%86%E5%93%811/?rafcid=wsc_i_is_1234567890' }]);
+    const links = countAffiliateLinks(html);
+    eq(links.rakutenSearch, 1, '楽天ボタンは検索URLで 1 枚出る'); eq(links.rakutenHb, 0); eq(links.amazonButtons, 0);
+    eq(links.total, 0, '旧チェック（total≧cardCount）なら 0≧1 で FAIL していた');
+    eq(judgeLinks(local, links).ok, true, '新合否は PASS'); eq(pendingReasons(html, local).length, 0);
+  });
+  t('E-7 実HTMLの形: hb.afl の & が href で &amp; にエスケープされていても復号して一致（camp-bbq-grill 型）', () => {
+    const local = parseLocal(buildMdxCards([{ affiliateUrl: FX_HB_AMP(1), amazonAsin: ASIN(1) }, { affiliateUrl: FX_HB_AMP(2) }]));
+    eq(local.rakutenExpectedHrefs[0], FX_HB_AMP(1), 'mdx 側は & のまま');
+    const html = buildHtmlCards([{ amazonHref: FX_DP(ASIN(1)), rakutenHref: FX_HB_AMP(1) }, { rakutenHref: FX_HB_AMP(2) }]);
+    eq(html.includes('&amp;m=http'), true, 'フィクスチャの href は &amp; になっている');
+    const links = countAffiliateLinks(html);
+    eq(links.rakutenHb, 2); eq(links.rakutenHbHrefs[0], FX_HB_AMP(1), '復号して & に戻る');
+    eq(judgeRakutenHrefs(local, links).ok, true); eq(judgeLinks(local, links).ok, true);
+    eq(decodeHtmlAttr('a&amp;b&quot;c&#x27;d&#39;e&lt;f&gt;'), 'a&b"c\'d\'e<f>', 'エンティティ復号');
+  });
+  t('E-8 Amazon dp の ?tag= は照合対象外（本番タグがローカルと違っても値照合は PASS・タグ健全性は別検査）／amazonUrl は文字列そのまま照合', () => {
+    const local = parseLocal(buildMdxCards([{ amazonAsin: ASIN(1) }, { amazonUrl: SHORT(2) }, { source: 'amazon', affiliateUrl: ASIN(3) }]));
+    eq(local.amazonExpectedHrefs.join(','), [DP_PLAIN(ASIN(1)), SHORT(2), DP_PLAIN(ASIN(3))].join(','), 'amazonUrl はそのまま・legacy は dp');
+    const html = buildHtmlCards([
+      { amazonHref: `https://www.amazon.co.jp/dp/${ASIN(1)}?tag=another-tag-22` },
+      { amazonHref: SHORT(2), nextData: { amazonUrl: SHORT(2) } },
+      { amazonHref: `http://amazon.co.jp/dp/${ASIN(3)}?tag=campkit26-22`, source: 'amazon', rakutenHref: 'https://search.rakuten.co.jp/search/mall/x/?rafcid=wsc_i_is_1' },
+    ]);
+    const links = countAffiliateLinks(html);
+    eq(links.amazonButtonHrefs.join(','), [DP_PLAIN(ASIN(1)), SHORT(2), DP_PLAIN(ASIN(3))].join(','), 'タグ・www・http を正規化');
+    eq(judgeAmazonHrefs(local, links).ok, true);
+    // amazonUrl（amzn.to）は 1 文字違えば FAIL
+    const html2 = buildHtmlCards([{ amazonHref: FX_DP(ASIN(1)) }, { amazonHref: 'https://amzn.to/4fAr7PX' }, { amazonHref: FX_DP(ASIN(3)), source: 'amazon' }]);
+    eq(judgeAmazonHrefs(local, countAffiliateLinks(html2)).ok, false);
+    eq(normalizeAmazonHref('https://amzn.to/abc'), 'https://amzn.to/abc', 'dp 以外は不変');
+  });
+  t('E-9 fetchWithRetry: 枚数は同じで ASIN だけ違う旧HTML（fresh ヘッダ）を反映待ちとして再取得し、新HTMLで PASS', async () => {
+    const local = parseLocal(buildMdxCards([{ amazonAsin: ASIN(1) }, { amazonAsin: ASIN(2) }, {}]));
+    const oldHtml = buildHtmlCards([{ amazonHref: FX_DP('B0OLDASIN01') }, { amazonHref: FX_DP(ASIN(2)) }, {}]);
+    const newHtml = buildHtmlCards([{ amazonHref: FX_DP(ASIN(1)) }, { amazonHref: FX_DP(ASIN(2)) }, {}]);
+    eq(judgeAmazon(local, countAffiliateLinks(oldHtml)), true, '枚数は一致');
+    const seq = [fakeResponse({ html: oldHtml, cache: 'PRERENDER', age: '0' }), fakeResponse({ html: newHtml, cache: 'PRERENDER', age: '0' })];
+    const waits = [];
+    const logs = [];
+    const r = await fetchWithRetry('https://example.test/posts/x', local, {
+      deployedAt: NOW - 60, now: () => NOW, log: (m) => logs.push(m), fetchImpl: async () => seq.shift(), sleepImpl: async (ms) => { waits.push(ms); },
+    });
+    eq(r.fetches, 2); eq(waits.join(','), String(RETRY_WAIT_MS)); eq(r.reasons.length, 0);
+    eq(logs[0].includes('href が期待と不一致'), true, '待ちの理由に href 不一致が出る');
+    eq(judgeLinks(local, countAffiliateLinks(r.html)).ok, true);
+  });
+  t('E-10 不一致 href の列挙は不足・余剰それぞれ最大3件＋件数（4件以上は … で省略）', () => {
+    const local = parseLocal(buildMdxCards([1, 2, 3, 4, 5].map((i) => ({ amazonAsin: ASIN(i) }))));
+    const html = buildHtmlCards([1, 2, 3, 4, 5].map((i) => ({ amazonHref: FX_DP(`B0OLDASIN0${i}`) })));
+    const d = judgeAmazonHrefs(local, countAffiliateLinks(html));
+    eq(d.missing.length, 5); eq(d.extra.length, 5);
+    const s = describeHrefDiff(d);
+    eq(s.startsWith('不足5件: '), true); eq(s.includes('／余剰5件: '), true); eq((s.match(/ …/g) || []).length, 2, '両側とも省略記号');
+    eq((s.match(/amazon\.co\.jp\/dp\//g) || []).length, 6, '表示は 3＋3 件');
+  });
+  t('E-11 既存の枚数判定・期待値は値照合の追加で不変（D-1/D-4 型フィクスチャ再確認・legacy/source=amazon・期待0）', () => {
+    // D-1 型: 旧HTML ボタン4（期待5）→ 枚数で FAIL・値照合も不足1
+    const l1 = parseLocal(buildMdxCards([{ amazonAsin: ASIN(1) }, { amazonAsin: ASIN(2) }, { amazonAsin: ASIN(3) }, { amazonAsin: ASIN(4) }, { source: 'amazon', affiliateUrl: ASIN(5) }]));
+    const k1 = countAffiliateLinks(buildHtmlCards([
+      { amazonHref: FX_DP(ASIN(1)) }, { amazonHref: FX_DP(ASIN(2)) }, { amazonHref: FX_DP(ASIN(3)) }, { amazonHref: null },
+      { amazonHref: FX_DP(ASIN(5)), source: 'amazon', rakutenHref: 'https://search.rakuten.co.jp/search/mall/x/?rafcid=wsc_i_is_1' },
+    ]));
+    eq(judgeAmazon(l1, k1), false); eq(judgeAmazonHrefs(l1, k1).missing.join(','), DP_PLAIN(ASIN(4)));
+    const r1 = pendingReasons(buildHtmlCards([{ amazonHref: FX_DP(ASIN(1)) }, { amazonHref: FX_DP(ASIN(2)) }, { amazonHref: FX_DP(ASIN(3)) }, { amazonHref: null }, { amazonHref: FX_DP(ASIN(5)), source: 'amazon', rakutenHref: 'https://search.rakuten.co.jp/search/mall/x/?rafcid=wsc_i_is_1' }]), l1);
+    eq(r1.length, 1, '枚数不一致のときは枚数の理由だけ（href の理由は重ねない＝D-9 の前提を維持）'); eq(r1[0].includes('Amazonリンク(ボタン)が4本で期待5本'), true);
+    // D-4 型: source="amazon"＋amazonAsin ×5・比較表 dp 5 本 → 値照合もボタンだけを見る＝PASS
+    const l4 = parseLocal(buildMdxCards([1, 2, 3, 4, 5].map((i) => ({ source: 'amazon', affiliateUrl: ASIN(i), amazonAsin: ASIN(i) }))));
+    const k4 = countAffiliateLinks(buildHtmlCards(
+      [1, 2, 3, 4, 5].map((i) => ({ amazonHref: FX_DP(ASIN(i)), source: 'amazon', rakutenHref: `https://search.rakuten.co.jp/search/mall/x${i}/?rafcid=wsc_i_is_1` })),
+      { tableAmazonLinks: 5 }
+    ));
+    eq(k4.amazonTag, 15); eq(k4.amazonButtonHrefs.length, 5, '比較表の dp はボタン href に入らない'); eq(judgeLinks(l4, k4).ok, true);
+    // 期待0・実測0（両方とも空配列）→ PASS
+    const l0 = parseLocal(buildMdxCards([{}, {}]));
+    eq(judgeLinks(l0, countAffiliateLinks(buildHtmlCards([{}, {}]))).ok, true);
+  });
+
   let pass = 0;
   let fail = 0;
   for (const c of cases) {
@@ -930,4 +1218,8 @@ if (require.main === module) {
   })();
 }
 
-module.exports = { parseLocal, countAffiliateLinks, judgeRakuten, judgeAmazon, pendingReasons, judgeCache, fetchWithRetry, extractOgImage };
+module.exports = {
+  parseLocal, countAffiliateLinks, judgeRakuten, judgeAmazon, pendingReasons, judgeCache, fetchWithRetry, extractOgImage,
+  // campkit-20260921-47: 値照合（監督側から単体で叩けるように）
+  judgeRakutenHrefs, judgeAmazonHrefs, judgeLinks, expectedAmazonHref, normalizeAmazonHref, decodeHtmlAttr, diffMultiset, describeHrefDiff,
+};

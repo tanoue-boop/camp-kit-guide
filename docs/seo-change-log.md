@@ -3,6 +3,18 @@
 数値の推移はGAS「SEOレポート」の履歴で追う。本ファイルは「いつ・どの記事を・なぜ・どう変えたか」を記録し、次回レポートで効果を評価するための施策台帳。新しい施策は上に追記する。
 
 ---
+## 2026-09-22：キュー#34 — デプロイ検証にリンクの「値」のカード単位照合を追加（枚数が変わらない変更でも旧HTMLを弾く・campkit-20260921-47）
+
+- **対象**: `scripts/verify-deploy.cjs`・`docs/deploy-note.md`・`CLAUDE.md`・本ログのみ。**`content/posts/`・`_file/` の台帳・`check-amazon-asin.cjs`・`check-card-name-vs-sku.cjs`・`validate-backlog-tsv.cjs`・`deploy.cjs` は 1 文字も変更していない**。40 の楽天枚数判定・`x-vercel-cache` 判定、45 の Amazon 枚数判定、`RETRY`／`STALE_*` 定数、既存 34 テストも不変更
+- **発端**: 44 の実変更（1 カードの `amazonUrl`(amzn.to) → 同一商品の `amazonAsin`）は**ボタン枚数が変わらない**ため、45 の枚数一致でも旧HTMLで期待 5＝実測 5・`pendingReasons` 空＝PASS になる（§B で 45 時点のコードに 44 型フィクスチャを流して再現）。45 で閉じたのは「枚数が変わる変更」の穴だけ
+- **§C（変更）**: `parseLocal` がカードごとの期待 href（楽天＝`source="rakuten"` かつ hb.afl の `affiliateUrl` そのまま／Amazon＝`getAmazonUrl()` と同じ優先順で `amazonUrl` はそのまま・`amazonAsin`／legacy は `https://www.amazon.co.jp/dp/<ASIN>`）を積み、`countAffiliateLinks` がボタン href（HTML エンティティ復号・dp はタグ無しに正規化）を文書順に積む。`judgeRakutenHrefs`／`judgeAmazonHrefs` が**多重集合**として比べ `{ ok, missing, extra }` を返す（順序は問わない。shared_asin＝同一 ASIN 2 カードは回数まで一致を要求）。`pendingReasons` は枚数が一致しているときだけ href 不一致の理由（不足／余剰の href 最大 3 件＋件数）を足す。表示は既存 1 行の末尾に `href照合 楽天OK・AmazonOK`（不一致時だけ差分）
+- **タグの扱い**: Amazon dp の `?tag=` 以降は照合対象外。ローカル `.env.local` はプレースホルダで Vercel 側の `NEXT_PUBLIC_AMAZON_ASSOCIATE_TAG` を verify から知る手段が無く、タグの健全性は既存の「Amazonタグ健全性」検査が担当しているため
+- **§D（45 QUESTION-1 の決着）**: `verify()` の `links.total >= local.cardCount` を外し、合否を「楽天枚数一致 && Amazon枚数一致 && 楽天値一致 && Amazon値一致」（`judgeLinks`）にした。理由: `getRakutenUrl()` は常に URL を返す＝楽天ボタンは必ず 1 枚出るので「リンクが 1 本も無いカード」は原理的に無く、`total` は JSON-LD／`__NEXT_DATA__` 込みの混在カウントで判定として意味が薄い。担保テスト E-6（`affiliateUrl="#"`＋Amazon 属性なしでも PASS。旧チェックなら 0≧1 で FAIL していた）
+- **§E（テスト）**: `--test` 34→**45**（E-1〜E-11・ネット不使用）。フィクスチャ `buildHtmlCards` は href の `&` を React と同じく `&amp;` にする形に合わせた（2026-09-22 camp-bbq-grill の本番 HTML で確認）
+- **§F（空撃ち・読み取りのみ・46 の 10 記事）**: href 照合は **10/10 で楽天・Amazon とも OK**（large-tent-guide／lightweight-mountain-tent／logos-bonfire／nanga-sleeping-bag／naturehike-sleeping-bag／sleeping-bag-summer-cospa／sleeping-bag-winter-beginner／solar-portable-power／two-room-tent-guide／winter-camp-guide）。logos-bonfire は既存検査「ASIN重複なし」で FAIL（#1/#3 同一 `B0792FP76X`＝46 の QUESTION 据え置き分。値照合由来ではない・mdx は触らず QUESTION 継続）
+- **効果測定**: 検索順位の直接施策ではないため計測対象外
+
+---
 ## 2026-09-22：キュー#18 第3弾（frozen=0 最終弾）— `amazonUrl`（amzn.to 短縮）44枚／10記事のうち 43枚を `amazonAsin` 形式へ一本化・`conflict` 1枚を起票（campkit-20260921-46）
 
 - **対象**: large-tent-guide #1〜#5／lightweight-mountain-tent #1〜#5／logos-bonfire #1・#2（`both_forms`）・#3／nanga-sleeping-bag #1〜#5（全て `both_forms`）／naturehike-sleeping-bag #1（`both_forms`）・#2〜#4・#5（`both_forms`）／sleeping-bag-summer-cospa #1〜#5／sleeping-bag-winter-beginner #1〜#5／solar-portable-power #1〜#5／two-room-tent-guide #1〜#5／winter-camp-guide #8（`short_url` 116枚のうち frozen=0 の 10 記事・44枚。44 で据え置いた `conflict` 2 枚は対象外）。触った属性は **`amazonUrl` の削除と `amazonAsin` の追加だけ**（`git diff --numstat` で `-amazonUrl` 43 行／`+amazonAsin` 35 行のみ。name／price／affiliateUrl／source／本文／frontmatter は不変更）
