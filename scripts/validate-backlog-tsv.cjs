@@ -45,8 +45,8 @@ const SPECS = {
   '_file/rewrite-backlog.tsv': {
     header: ['status', 'priority', 'target_slug', 'cluster', 'gsc_impressions', 'gsc_position', 'lever', 'detail', 'source', 'added_date', 'notes'],
     domains: { status: ['pending', 'blocked', 'needs-human', 'done'] },
-    //   added_date は既存 3 行（L2/L4/L6・2026-08 の手順R 実施分）が「日付 ｜実施メモ」の形で書かれているため前方一致に留める（列ずれではない＝11 列は揃っている）
-    patterns: { target_slug: /^[a-z0-9-]+$/, added_date: /^\d{4}-\d{2}-\d{2}/ },
+    //   added_date は 2026-09-22・campkit-20260921-42 で「日付 ｜実施メモ」形の 3 行（L2/L4/L6）を整形（メモは notes 末尾へ移動）済みのため完全一致に戻した
+    patterns: { target_slug: /^[a-z0-9-]+$/, added_date: /^\d{4}-\d{2}-\d{2}$/ },
     summarize: ['status', 'lever'],
   },
   '_file/card-name-check.tsv': {

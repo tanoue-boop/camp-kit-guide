@@ -3,6 +3,15 @@
 数値の推移はGAS「SEOレポート」の履歴で追う。本ファイルは「いつ・どの記事を・なぜ・どう変えたか」を記録し、次回レポートで効果を評価するための施策台帳。新しい施策は上に追記する。
 
 ---
+## 2026-09-22：キュー#24 — `rewrite-backlog.tsv` の `added_date` に混入した実施メモ 3 行を `notes` へ移し、台帳検査を完全一致に戻す（campkit-20260921-42）
+
+- **対象**: `_file/rewrite-backlog.tsv`・`scripts/validate-backlog-tsv.cjs`・本ログのみ。**`content/posts/`・他の台帳 TSV・`check-card-name-vs-sku.cjs`・`check-amazon-asin.cjs`・`verify-deploy.cjs`・`deploy.cjs` は 1 文字も変更していない**
+- **発端**: 2026-08 の手順R 実施時に、実施メモが `notes` ではなく `added_date` 列に「`2026-08-17 ｜2026-08-18 実施: …`」の形で追記された行が 3 行（L2 kids-sleeping-bag 407字／L4 solo-tent-lightweight 1267字／L6 camp-backpack-capacity-guide 545字）あり、30 で新設した台帳検査はこの 3 行のために `added_date` を前方一致（`/^\d{4}-\d{2}-\d{2}/`）に緩めていた（列ずれではなく 11 列は揃っていた）
+- **§A（整形・無損失）**: 列を配列として扱う一時スクリプト（`_file/_work/t42-fix-rewrite-backlog.cjs`・.gitignore 下）で、`added_date` が `^\d{4}-\d{2}-\d{2}$` に一致しない行を機械的に選び、先頭の日付だけ残してメモ本体（日付直後の区切り「｜」「／」と前後空白を除いたもの）を **`notes` 末尾に ` ／` 区切りで連結**。`notes` の増分（+397／+1257／+535 字）＝`added_date` から除いた字数と厳密一致（落とした区切り 2 字＝足した区切り 2 字）。他 9 列は全行で行別ハッシュが before と一致、行数 18・タブ数 10・BOM 無し・CR 無し・末尾 LF 1 つを維持
+- **§B（検査を戻す）**: `rewrite-backlog.tsv` の `added_date` パターンを `/^\d{4}-\d{2}-\d{2}$/`（完全一致）へ。整形前の TSV を同パターンで検査すると想定どおり L2/L4/L6 の 3 行が NG になることを確認済み（緩和を戻した効果の反証）
+- **効果測定**: 検索順位の直接施策ではないため計測対象外
+
+---
 ## 2026-09-22：キュー#18 第1弾 — `amazonUrl`（amzn.to 短縮）47枚／12記事を `amazonAsin` 形式へ一本化（campkit-20260921-41）
 
 - **対象**: anker-power #1〜#5（`both_forms`）／backpack-large #3・#5／barebones-light #1〜#4／camp-burner-beginner #1〜#5／camp-chair-highback #1〜#5／camp-chair-lightweight #1〜#5／camp-cooker-beginner #1〜#5／camp-cooler-box-beginner #1〜#5／camp-gift #5／camp-headlight-beginner #1・#3／camp-knife-beginner #1〜#5／camp-lighting-guide #1〜#3（`short_url` 208枚／50記事のうち frozen=0 の先頭 12 記事・47枚）。触った属性は **`amazonUrl` の削除と `amazonAsin` の追加だけ**（`git diff --numstat` で `-amazonUrl` 47 行／`+amazonAsin` 42 行のみ。name／price／affiliateUrl／source／本文／frontmatter は不変更）
