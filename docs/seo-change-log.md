@@ -3,6 +3,17 @@
 数値の推移はGAS「SEOレポート」の履歴で追う。本ファイルは「いつ・どの記事を・なぜ・どう変えたか」を記録し、次回レポートで効果を評価するための施策台帳。新しい施策は上に追記する。
 
 ---
+## 2026-09-22：キュー#18 第2弾 — `amazonUrl`（amzn.to 短縮）47枚／11記事のうち 45枚を `amazonAsin` 形式へ一本化・`conflict` 2枚を起票（campkit-20260921-44）
+
+- **対象**: camp-sleeping-mat #1〜#4／camp-tarp-beginner #1〜#5／captain-stag-chair #1〜#5（`both_forms`）／coleman-lantern #1〜#5（#1・#2・#4・#5 が `both_forms`）／dod-chair #1・#2（`both_forms`）／dod-tarp #1 オクラタープ・#1 ポール・#2・#3（`both_forms`・rank=1 が 2 枚なので id で区別）／dutch-oven #1〜#5／family-camp-mat #1〜#5／gentos-light #1〜#5／group-camp-table #2・#3・#5／helinox-chair #1〜#4（`short_url` 161枚／38記事のうち frozen=0 の 11 記事・47枚）。触った属性は **`amazonUrl` の削除と `amazonAsin` の追加だけ**（`git diff --numstat` で `-amazonUrl` 45 行／`+amazonAsin` 32 行のみ。name／price／affiliateUrl／source／本文／frontmatter は不変更）
+- **狙い**: 第1弾（41）と同じ。(1) 短縮URLを ASIN 形式にしてキュー#16 の照合に乗せる。(2) `both_forms` の描画優先（`amazonUrl`）で台帳の ASIN と読者の飛び先が食い違っていないかを実測で潰す
+- **§A（解決・amzn.to へ 47 回・間隔 1.7〜1.9 秒・429/503/CAPTCHA 0・Amazon 本体へは 0 回）**: 41 と同じ HEAD＋手動リダイレクト追跡（dp には HEAD も送らない）。結果 **`plain` 32／`same` 13／`conflict` 2／`non_dp`・`dead` 0**。`both_forms` 15 枚のうち 13 枚は着地 ASIN が既存 `amazonAsin` と一致（captain-stag-chair 5・coleman-lantern 3・dod-chair 2・dod-tarp 3）
+- **§C（`conflict` 2 枚＝mdx 不変更・`article-fix-backlog.tsv` に `asin_mismatch` priority A で起票 417→419 行）**: ① **coleman-lantern#1 ノーススター 2500 レッド 2000015521**: 既存 `amazonAsin=B08CZRB714`（09-11 backfill）に対し amzn.to（06-22 Cowork）は `B00I03IDXA` に着地。campkit-20260921-23 の no-amazon 台帳に「B00I03IDXA＝dp 型番 2000015521・レッド・Amazon.co.jp」の dp 確認記録があり、`B08CZRB714` は未照合。② **dod-tarp#1 ビッグタープポール XP5-507R レッド**（id: dod-big-tarp-pole）: 既存 `amazonAsin=B01N8XAGUC`（09-11 backfill・楽天価格一致）に対し amzn.to（07-21 batch3）は `B079J1LN67` に着地。解決先 URL のタイトル部が「XP5-507-WD」でカードの「XP5-507R レッド」と色コードが違う可能性。いずれも読者は現在 amzn.to 側（`amazonUrl` 優先描画）へ飛んでいる。どちらが正か dp 未照合のため、キュー#16 の枠で照合してから片方に寄せる
+- **§D（再集計）**: `short_url` 161→**116**（期待 114 に対し +2＝`conflict` 2 枚の `amazonUrl` を据え置いたため）／`both_forms` 42→**29**（＝42 − same 13、期待どおり）／`link_form=amazonAsin` 667→712／`amazonUrl` 161→116／`shared_asin` 136→137（camp-tarp-beginner#1「DOD いつかのタープ」`B07VF37G57` が dod-tarp#2・hexa-tarp#1・day-camp-tarp-cheap#2 と同一商品共有＝情報フラグ）／`dup_in_article` 0（変化なし）。既存 verdict 82 行（`ok` 68・model_mismatch 8・different_product 3・out_of_stock 2・unverifiable 1）は 1 つも消えず値も不変更
+- **残り**: `short_url` 116枚（frozen=0 46枚＝第3弾の 10 記事 44 枚＋本弾の `conflict` 2 枚／frozen=1 70枚＝10-18 まで着手不可）
+- **効果測定**: 検索順位の直接施策ではないため計測対象外
+
+---
 ## 2026-09-22：キュー#33 — camp-cooler-box-beginner #3/#4 の `dup_in_article`（同一 ASIN B0B7RYDRRN）を解消（campkit-20260921-43）
 
 - **対象**: `content/posts/camp-cooler-box-beginner.mdx` の **#4 `iris-hugel-vitc20` の `amazonAsin` 1 属性のみ**（`B0B7RYDRRN` → `B0B7S1MQ3L`）。#3 `iris-hugel-vitc40`（`B0B7RYDRRN`）は正なので据え置き。name／price／affiliateUrl／source／rakuten*／thumbnail／本文／frontmatter は不変更（`git diff` は mdx 1 行の置換のみ）。ほかに `_file/amazon-asin-check.tsv`（照合結果 2 行）・`scripts/check-amazon-asin.cjs`（`TASK_ID` 1 行）・本ログ
