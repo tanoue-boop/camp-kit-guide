@@ -3,6 +3,17 @@
 数値の推移はGAS「SEOレポート」の履歴で追う。本ファイルは「いつ・どの記事を・なぜ・どう変えたか」を記録し、次回レポートで効果を評価するための施策台帳。新しい施策は上に追記する。
 
 ---
+## 2026-09-22：キュー#18 第3弾（frozen=0 最終弾）— `amazonUrl`（amzn.to 短縮）44枚／10記事のうち 43枚を `amazonAsin` 形式へ一本化・`conflict` 1枚を起票（campkit-20260921-46）
+
+- **対象**: large-tent-guide #1〜#5／lightweight-mountain-tent #1〜#5／logos-bonfire #1・#2（`both_forms`）・#3／nanga-sleeping-bag #1〜#5（全て `both_forms`）／naturehike-sleeping-bag #1（`both_forms`）・#2〜#4・#5（`both_forms`）／sleeping-bag-summer-cospa #1〜#5／sleeping-bag-winter-beginner #1〜#5／solar-portable-power #1〜#5／two-room-tent-guide #1〜#5／winter-camp-guide #8（`short_url` 116枚のうち frozen=0 の 10 記事・44枚。44 で据え置いた `conflict` 2 枚は対象外）。触った属性は **`amazonUrl` の削除と `amazonAsin` の追加だけ**（`git diff --numstat` で `-amazonUrl` 43 行／`+amazonAsin` 35 行のみ。name／price／affiliateUrl／source／本文／frontmatter は不変更）
+- **狙い**: 41・44 と同じ。(1) 短縮URLを ASIN 形式にしてキュー#16 の照合に乗せる。(2) `both_forms` の描画優先（`amazonUrl`）で台帳の ASIN と読者の飛び先が食い違っていないかを実測で潰す
+- **§A（解決・amzn.to へ 44 回・間隔 1.7〜1.8 秒・429/503/CAPTCHA 0・Amazon 本体へは 0 回）**: 41・44 と同じ HEAD＋手動リダイレクト追跡（dp には HEAD も送らない）。結果 **`plain` 35／`same` 8／`conflict` 1／`non_dp`・`dead` 0**。`both_forms` 9 枚のうち 8 枚は着地 ASIN が既存 `amazonAsin` と一致（logos-bonfire 2・nanga-sleeping-bag 5・naturehike-sleeping-bag #5）
+- **§C（`conflict` 1 枚＝mdx 不変更・`article-fix-backlog.tsv` に `asin_mismatch` priority A で起票 419→420 行）**: **naturehike-sleeping-bag#1 3.5シーズン 封筒型寝袋 NH21MSD09 ブラウン M**（id: naturehike-3season）: 既存 `amazonAsin=B08CVB4FF6`（09-18 backfill `e170b38`・根拠メモなし）に対し amzn.to（06-22 `af9a482` batch1）は `B0F4VP9GD8` に着地。同一商品名の sleeping-bag-summer-cospa#4 は amzn.to → `B08CV8XM26` で、その ASIN は `asp-product-article-map.tsv` では 225×75cm モデル（CNK2300SD016＝naturehike-sleeping-bag#3）の ASIN として登録＝NH21MSD09 の周りに 3 ASIN が絡む。読者は現在 amzn.to 側（`amazonUrl` 優先描画）へ飛んでいる。どれが正か dp 未照合のため、キュー#16 の枠で照合してから片方に寄せる
+- **§D（再集計）**: `short_url` 116→**73**（期待 72＋`conflict` 1 据え置き＝73、一致）／`both_forms` 29→**21**（＝29 − same 8、一致）／`link_form=amazonAsin` 712→755／`amazonUrl` 116→73／`shared_asin` 137→**153**（+16＝新たに別記事間で同一 ASIN を共有した 8 組×2 枚: EcoFlow DELTA 3 Classic・Jackery 1000/2000・Pyke's Peak 大型テント・OneTigris テント・Naturehike B08CV8XM26・インナーシュラフ・Bears Rock FX-503W。別記事間の同一商品共有は正常な情報フラグ）／**`dup_in_article` 0→2**（logos-bonfire #1・#3 が同じ `B0792FP76X`＝「the ピラミッドTAKIBI L」を楽天の店違いで 2 枚採用しており、amzn.to の時点から同じ ASIN へ飛んでいた。本タスクでは直さず QUESTION）／**`inconsistent_shared` 0→2**（`B08CV8XM26` を naturehike-sleeping-bag#3 CNK2300SD016 と sleeping-bag-summer-cospa#4 NH21MSD09＝型番の違う 2 カードが共有。どちらかの amzn.to が最初から別商品を指していた可能性。キュー#16 の `--verify` 優先順 1 に自動で乗る）。既存 verdict 82 行（`ok` 68・model_mismatch 8・different_product 3・out_of_stock 2・unverifiable 1）は 1 つも消えず値も不変更
+- **残り**: `short_url` 73枚＝frozen=0 **3枚**（すべて `conflict` 据え置き: coleman-lantern#1／dod-tarp#1 ポール／naturehike-sleeping-bag#1）／frozen=1 **70枚**（10-18 まで着手不可）。frozen=0 の `amazonUrl` 一本化はこれで完了
+- **効果測定**: 検索順位の直接施策ではないため計測対象外
+
+---
 ## 2026-09-22：キュー#32 — デプロイ検証の Amazon リンク数を「ボタン枚数＝カード単位の期待数（一致）」に揃える（campkit-20260921-45）
 
 - **対象**: `scripts/verify-deploy.cjs`・`docs/deploy-note.md`・`CLAUDE.md`・本ログのみ。**`content/posts/`・`_file/` の台帳・`check-amazon-asin.cjs`・`check-card-name-vs-sku.cjs`・`validate-backlog-tsv.cjs`・`deploy.cjs` は 1 文字も変更していない**。40 で入れた楽天判定・`x-vercel-cache` 判定・既存 24 テストも不変更
