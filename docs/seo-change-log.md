@@ -3,6 +3,19 @@
 数値の推移はGAS「SEOレポート」の履歴で追う。本ファイルは「いつ・どの記事を・なぜ・どう変えたか」を記録し、次回レポートで効果を評価するための施策台帳。新しい施策は上に追記する。
 
 ---
+## 2026-09-22：キュー#35 拡張 — `conflict` 3枚＋`dup_in_article` 2枚＋`inconsistent_shared` 2枚を Amazon dp の変種一覧で確定（campkit-20260921-48）
+
+- **対象**: `content/posts/` の 4 記事（coleman-lantern／dod-tarp／naturehike-sleeping-bag／logos-bonfire）の **Amazon 属性行のみ**（`git diff` は 4 ファイルで −5 行／+2 行。name／price／affiliateUrl／source／本文／frontmatter は不変更）＋ `_file/amazon-asin-check.tsv`（7 行の照合結果）＋ `_file/article-fix-backlog.tsv`（done 3 行・起票 2 行＝420→422 行）＋ `scripts/check-amazon-asin.cjs`（`TASK_ID` 1 行）＋ `CLAUDE.md`・本ログ。検出器の判定規則・`verify-deploy.cjs` は不変更
+- **§B（dp 照合・Amazon 本体へ GET 8 回＝`--only` 5＋候補 ASIN 3・間隔 2 秒・429/503/CAPTCHA 0）**:
+  - `coleman-lantern#1` 2500ノーススター レッド 2000015521: 既設置 `B08CZRB714` は dp が「ランタン+ランタンスタンド」**2 パック**（¥14,285・Amazon.co.jp・親 B08DK5HSLL）＝構成違い。amzn.to/4xJ59AD の解決先 `B00I03IDXA` は メーカー型番 2000015521・カラー レッド・入り数 1・¥7,945・Amazon.co.jp・在庫あり（親 B0CYBL1J66: グリーン B00I03IDX0／バターナッツ B0BG49CBRC）→ **`amazonAsin="B00I03IDXA"` に差し替え・`amazonUrl` 行削除**（読者の飛び先は従来から amazonUrl 優先で B00I03IDXA＝変化なし）
+  - `dod-tarp#1#dod-big-tarp-pole` XP5-507R レッド: 既設置 `B01N8XAGUC` は dp の製品型番 XP5-507R・色 レッド・¥3,918・Amazon.co.jp・在庫あり。変種一覧 レッド B01N8XAGUC／ブラック B01MQGJZRN／ウッド B079J1LN67 で、amzn.to/4vy96pF の解決先 `B079J1LN67` は**ウッド**（XP5-507-WD）＝色違い → **`amazonAsin` 据え置き・`amazonUrl` 行削除**（読者の飛び先は ウッド→レッド に直る）
+  - `naturehike-sleeping-bag#1` NH21MSD09 ブラウン M: 既設置 `B08CVB4FF6`＝NH21MSD04 **グリーン左開き** M（色違い）、amzn.to/4voG2kW の解決先 `B0F4VP9GD8`＝別出品 PL01 **ブラウン XL 205×85cm** ¥4,290（サイズ違い）。**どちらも不一致**だったが、同 dp（親 B08F54G2HC）の変種一覧に ブラウン右開き M(190*75cm)＝`B08CV9F2XP` があり dp を直接照合（NH21MSD04・680g・380T・15〜22℃/下限-3℃・¥3,990・Naturehike Store・在庫あり＝楽天 nh21msd09 の選択SKU LW180M-brown と全項目一致）→ **`amazonAsin="B08CV9F2XP"` に差し替え・`amazonUrl` 行削除**（読者の飛び先は ブラウン XL ¥4,290 → ブラウン M ¥3,990 に直る）。左右開きはカード・記事とも名指ししておらず、楽天の無印「Ｍ」が「M（左開き）」と別軸値なので右開きを採用
+  - `logos-bonfire#1／#3`（同一 `B0792FP76X`）: dp は メーカー型番 81064162（the ピラミッドTAKIBI L）・39×38.5×28cm・3.1kg・構成 本体/焚火ゴトク(串焼きプレート付)/ワイヤーロストル/収納バッグ・¥8,650・KabooStore・残り2点。変種一覧は XL／L／M／Lコンプリート／M・XL コンプリートDX／23FW Limited で「L の BBQ コンロ版」は存在せず、楽天の着地ページも #1 himaraya/0000000761618・#3 niche-express/lgs00000000716 とも メーカー型番 81064162・JAN 4981325500030・寸法/重量/構成が同一＝**同一商品**（店舗と価格が違うだけ）→ 2026-09-21 19:24 の判断どおり**後位カード #3 の `amazonAsin` 行を削除**（楽天ボタンは残る）。`dup_in_article` 2→0 で、47 まで logos-bonfire で FAIL していた `verify-deploy.cjs` の「ASIN重複なし」が通るようになる。記事本文が #1「焚き火台モデル」と #3「BBQコンロ版」を別モデルとして書いている点は本タスクの範囲外（report の QUESTION）
+  - `naturehike-sleeping-bag#3`（CNK2300SD016 225×75cm）／`sleeping-bag-summer-cospa#4`（NH21MSD09 ブラウン M）の共有 `B08CV8XM26`: dp は変種一覧に無く、Amazon が `B08CVB4FF6`（NH21MSD04 グリーン左開き M）へ黙って着地させる（`redirected_to` で機械検知）。#3 は**別商品**（`different_product`・同ファミリーに 225×75cm は無く候補 ASIN 無し）、cospa#4 は**色違い**（`model_mismatch`・正解は B08CV9F2XP）。#3 は §C-1 の規則（候補が無ければ mdx を触らない）、cospa#4 は §G（対象 4 記事外）により **mdx 不変更**で `asin_mismatch` A を 2 行起票。`inconsistent_shared` は 2 のまま（2 行の消化で 0 になる）
+- **§C（結果）**: `static_flags` OK 603→607／`-` 293→294／short_url 73→70／both_forms 21→18／dup_in_article 2→0／shared_asin 153・inconsistent_shared 2・asin_in_affiliate_url 5 は不変。`article-fix-backlog.tsv` の 44/46 起票 `asin_mismatch` 3 行を **実際に差し替えたので `done`**（notes に dp 実測を追記）
+- **効果測定**: 検索順位の直接施策ではないため計測対象外
+
+---
 ## 2026-09-22：キュー#34 — デプロイ検証にリンクの「値」のカード単位照合を追加（枚数が変わらない変更でも旧HTMLを弾く・campkit-20260921-47）
 
 - **対象**: `scripts/verify-deploy.cjs`・`docs/deploy-note.md`・`CLAUDE.md`・本ログのみ。**`content/posts/`・`_file/` の台帳・`check-amazon-asin.cjs`・`check-card-name-vs-sku.cjs`・`validate-backlog-tsv.cjs`・`deploy.cjs` は 1 文字も変更していない**。40 の楽天枚数判定・`x-vercel-cache` 判定、45 の Amazon 枚数判定、`RETRY`／`STALE_*` 定数、既存 34 テストも不変更
