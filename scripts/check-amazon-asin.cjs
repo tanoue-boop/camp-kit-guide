@@ -352,9 +352,19 @@ function priceGap(amazonPrice, cardPrice) {
   if (pct === 0) return '0%';
   return `${pct > 0 ? '+' : '-'}${Math.abs(pct)}%`;
 }
+// amazon_stock の base 部分（`; ` で足される redirected_to／successor より前）が `no_buybox` で始まる＝購入ボックスの無いページ。
+//   parseDp は id="corePrice" が取れないとページ内の任意の class="a-price-whole" にフォールバックするため、
+//   この場合の amazon_price は「買える価格」ではなく（他の出品者・関連商品の値を拾っている）、card_price との比は意味を持たない。
+//   例: coleman-lantern#3（カード ¥5,247 = ランタン+純正LPガス燃料セット／dp はランタン単品で出品なし）が -68% になっていた。
+const NO_BUYBOX_RE = /^no_buybox(?:\s|$)/;
+function hasNoBuybox(r) { return NO_BUYBOX_RE.test(String(r.amazon_stock || '').split('; ')[0]); }
 // verdict が付いていて Amazon 価格が「買える価格」として取れている行だけ price_gap を持つ
+//   60 §B: verdict が NO_PRICE_VERDICTS でなくても（人手で different_product 等に上書きした行でも）、
+//   購入ボックスが無いページ由来の価格なら price_gap は空にする。amazon_title／amazon_price／amazon_stock／verdict／
+//   seller_type／note は監査証跡として残す（空にするのは導出列の price_gap だけ）。
 function priceGapOfRow(r) {
   if (!r.verdict || NO_PRICE_VERDICTS.has(r.verdict)) return '';
+  if (hasNoBuybox(r)) return '';
   return priceGap(r.amazon_price, r.card_price);
 }
 // 販売元表示からの機械分類。marketplace／reseller は人手でしか区別できないので機械では unknown に留める
@@ -790,6 +800,15 @@ function runTests() {
   t('priceGapOfRow ok → 計算', priceGapOfRow({ verdict: 'ok', amazon_price: '3250', card_price: '2660' }), '+22%');
   t('priceGapOfRow model_mismatch も計算（別変種の価格差を読めるように）', priceGapOfRow({ verdict: 'model_mismatch', amazon_price: '21998', card_price: '23600' }), '-7%');
   t('PRICE_GAP_RE 値域', ['', '0%', '+24%', '-4%', '+0%', '-0%', '24%', '+5', 'x'].map((v) => PRICE_GAP_RE.test(v)), [true, true, true, true, false, false, false, false, false]);
+  // 60 §B: 購入ボックスの無いページ（amazon_stock の base が no_buybox）は price_gap を空にする
+  t('60B no_buybox かつ人手 verdict → 空（coleman-lantern#3 の -68%）', priceGapOfRow({ verdict: 'different_product', amazon_stock: 'no_buybox', amazon_price: '1680', card_price: '5247' }), '');
+  t('60B no_buybox＋availability 文言 → 空', priceGapOfRow({ verdict: 'ok', amazon_stock: 'no_buybox 通常2～3日以内に発送します。 在庫状況 について', amazon_price: '3000', card_price: '2000' }), '');
+  t('60B no_buybox＋redirected_to → 空', priceGapOfRow({ verdict: 'model_mismatch', amazon_stock: 'no_buybox; redirected_to=B07D2JN939', amazon_price: '3000', card_price: '2000' }), '');
+  t('60B in_stock は従来どおり計算', priceGapOfRow({ verdict: 'ok', amazon_stock: 'in_stock(cart) 在庫あり。', amazon_price: '3250', card_price: '2660' }), '+22%');
+  t('60B NO_PRICE_VERDICTS は在庫があっても従来どおり空', priceGapOfRow({ verdict: 'out_of_stock', amazon_stock: 'in_stock(cart)', amazon_price: '3250', card_price: '2660' }), '');
+  t('60B amazon_stock 空は従来どおり計算（no_buybox とみなさない）', priceGapOfRow({ verdict: 'ok', amazon_stock: '', amazon_price: '3250', card_price: '2660' }), '+22%');
+  t('60B oos: は no_buybox ではない（NO_PRICE_VERDICTS 側で扱う）', priceGapOfRow({ verdict: 'different_product', amazon_stock: 'oos:在庫切れ', amazon_price: '3250', card_price: '2660' }), '+22%');
+  t('60B no_buybox は語境界で判定（no_buyboxX は対象外）', priceGapOfRow({ verdict: 'ok', amazon_stock: 'no_buyboxX', amazon_price: '3250', card_price: '2660' }), '+22%');
   // seller_type（機械分類）
   t('sellerTypeOf Amazon.co.jp', sellerTypeOf('Amazon.co.jp'), 'amazon');
   t('sellerTypeOf 公式', sellerTypeOf('Naturehike公式ショップ'), 'official');

@@ -67,7 +67,7 @@ const ROOT = path.join(__dirname, '..');
 const POSTS_DIR = path.join(ROOT, 'content', 'posts');
 const OUT = path.join(ROOT, '_file', 'card-name-check.tsv');
 const HTML_DIR = path.join(ROOT, '_file', '_work', 'html-24');
-const TASK_ID = 'campkit-20260921-56'; // 走査・再判定を行ったタスク（TSV の judged_task 列に入る）
+const TASK_ID = 'campkit-20260921-60'; // 走査・再判定を行ったタスク（TSV の judged_task 列に入る）
 
 // ---------------------------------------------------------------------------
 // 閾値・定数（A-4 の回帰検証で調整する。slug / id を条件に埋め込まない）
@@ -141,7 +141,13 @@ const MODEL_TOKEN_RE = /(?<![A-Za-z0-9])[A-Z0-9]+(?:-[A-Z0-9]+)*(?![A-Za-z0-9])/
 //    V 付き（AC100V／DC12V）と代表的な電圧値だけに絞る（第1バッチの bluetti-power #1: name「AC70」↔ 実リンク先「AORA 100 mini」）
 const NOT_MODEL_RE = /^(?:\d+[A-Z]{1,2}|(?:UV|UPF|SPF|PU|IPX?|USB|R|T|D|SS|SH|L|M|S|XL|XXL|LL|3L|4L|5L)\d+|(?:DC|AC)\d+V|(?:DC|AC)(?:12|24|100|110|120|220|230|240)|\d+X\d+|\d+-\d+|\d+(?:-\d+)*[A-Z]{0,2}|A\d{4})$/;
 const UNIT_TOKEN_RE = /^\d+(?:W|WH|V|A|AH|MAH|MM|CM|M|KG|G|L|ML|D|T|H|X|P|K|LM|℃)$/i;
-const PURE_DIGIT_MODEL_MIN = 7; // 純数字の型番（コールマン 2000015521 等）はこの桁数以上
+// 純数字の型番（コールマン 2000015521 等）はこの桁数以上。
+//   60 §A: 7→6（57 §B で check-amazon-asin.cjs を 6 にした際の食い違いを解消）。全 1121 カードで測定し、
+//     modelTokens が変わるのは 24 枚／増えるトークン 25 個はすべて実在の型番（ユニフレーム 683040 等・コールマン 205588/203535・
+//     イスカ 117212/111803/125809/201621・カリマー 501212/501213/501205）で価格・容量・年・JAN の混入 0／消えるトークン 0。
+//     flags が変わるのは 1 行のみ（isuka-sleeping-bag#2: カード name の品番 111803 に対し実 SKU のメーカー型番は 111809 →
+//     model_mismatch が新たに立つ＝真の不一致の顕在化。59 が name_fix で起票済み）。sku_selected の変化は 0 行。
+const PURE_DIGIT_MODEL_MIN = 6;
 
 // セット表記（カード name 側）。「カセット（ガス/コンロ）」の セット は除く。
 // `+`/`＋` は語と語の間にあり、かつ片側が数字でないときだけ（"40+5"（容量）・"DARKROOM ST+("（型番末尾）は除く。
