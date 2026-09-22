@@ -449,6 +449,7 @@ Cowork の穴埋め等を Claude Code に渡してデプロイする際、**Clau
 
 - **実行して良いのは `node scripts/deploy.cjs "<メッセージ>"` の1コマンドのみ。** build → 太字lint(1.5) → 台帳検査(1.6) → commit → push → 本番検証は deploy.cjs が内部で実施する。
 - **本番検証（verify-deploy.cjs）の楽天リンクは `hb.afl` 限定（2026-09-22・campkit-20260921-40）**: ProductCard の楽天ボタンの `hb.afl.rakuten.co.jp` 数が、mdx から算出した期待数（`source="rakuten"` かつ `affiliateUrl` が hb.afl のカード数）と**一致**して PASS。`search.rakuten.co.jp` の検索URL（`source="amazon"` カード）は数えない（期待 0 は実測 0 で PASS）。
+- **本番検証の Amazon リンクも同じ「ボタン枚数＝カード単位の期待数（一致）」（2026-09-22・campkit-20260921-45・キュー#32）**: ProductCard の Amazon ボタン（`class="…ProductCard…__amazon"`）の枚数が、mdx をカード単位に見て `ProductCard.getAmazonUrl()` と同じ優先順（`amazonUrl` → `amazonAsin` → `source="amazon"` のとき `affiliateUrl` を ASIN とみなす）で「ボタンが出るカード」を数えた期待数と**一致**して PASS（期待 0 は実測 0 で PASS）。JSON-LD／`__NEXT_DATA__`／比較表の `dp?tag=`・`amzn.to` は数えない（参考表示のみ）。旧規則（`dp?tag=`/`amzn.to` 全出現数 ≧ 属性出現数）は `source="amazon"` カードの JSON-LD・`amazonUrl` カードの `__NEXT_DATA__` の重複出現で偶然つじつまが合っていた（ogawa-tent／coleman-lantern／dod-tarp で実測）。`--test` は 34 ケース。
 - **反映待ちの扱い（同上）**: `x-vercel-cache=HIT` で `age` が push（`deploy.cjs` が `--deployed-at` で渡す）より古い応答は内容が合っていても「旧キャッシュ」として 30秒×最大6回再取得し、上限で FAIL する。FAIL したら Vercel の反映を確認して `node scripts/verify-deploy.cjs` を再実行（手動時は HEAD のコミット時刻で判定）。手作業の `?cb=` ポーリングは不要。判定ロジックは `node scripts/verify-deploy.cjs --test`（24ケース・ネット不使用）。
 - ASIN数の照合・記事内重複チェック・書式検証などの**独自ワンライナーは組み立てない／実行しない**（deploy.cjs の検証に一任）。
 - どうしても事前確認が要る場合でも `git diff --numstat content/posts/`（削除列が0か）程度の単純コマンドに留め、`$(...)`・`exec`・ループは使わない。

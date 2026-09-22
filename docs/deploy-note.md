@@ -116,11 +116,11 @@ node scripts/verify-deploy.cjs snowpeak-tent montbell-sleeping-bag
 2. `<title>` がローカル frontmatter の `title` と一致
 3. アフィリリンク数
    - **楽天（2026-09-22 変更）**: 「収益の付くリンク」＝ProductCard の楽天ボタンのうち href が `hb.afl.rakuten.co.jp` のものだけを数え、**mdx から算出した期待数（`source="rakuten"` かつ `affiliateUrl` が `https://hb.afl.rakuten.co.jp/` で始まるカードの枚数）と一致**することを必須にする。`search.rakuten.co.jp` の検索URL（`source="amazon"` カードの楽天ボタン＝収益なし）は別カウントで合否に使わない。期待 0（全カード `source="amazon"`）は実測 0 で PASS
-   - Amazon: `dp?tag=` / `amzn.to` の実数が期待数（`amazonAsin=`/`amazonUrl=`/`source="amazon"` の数）以上（2026-09-15追記：合算チェックのみだと「楽天リンクだけを追加したデプロイ」で旧HTMLの合計がたまたま一致し誤PASSする穴があったため個別チェックにした）
+   - **Amazon（2026-09-22 変更・campkit-20260921-45）**: ProductCard の Amazon ボタン（`class="…ProductCard…__amazon"` の `<a>`）の枚数が、**mdx をカード単位に解析して「そのカードに Amazon ボタンが出るか」を `ProductCard.getAmazonUrl()` と同じ優先順（`amazonUrl` → `amazonAsin` → `source="amazon"` のとき `affiliateUrl` を ASIN とみなす）で判定した期待数と一致**することを必須にする。JSON-LD／`__NEXT_DATA__`／比較表に出る `dp?tag=`・`amzn.to` は数えない（全出現数と旧期待値＝属性出現数は参考表示のみ）。期待 0 は実測 0 で PASS。旧規則（`dp?tag=`/`amzn.to` の全出現数 ≧ `amazonAsin=`/`amazonUrl=`/`source="amazon"` の mdx 全文出現数）は下記の追記を参照（2026-09-15追記：合算チェックのみだと「楽天リンクだけを追加したデプロイ」で旧HTMLの合計がたまたま一致し誤PASSする穴があったため個別チェックにした、という経緯はそのまま）
 4. PR表記（景表法対応）が本文に含まれる
 5. `og:image`（サムネイル）が `/images/thumbnails/<slug>.png` または `/images/outdoor-0X.png` 形式で、frontmatter の `thumbnail` と一致し、その画像URLが 200 を返す
 
-デプロイ反映前だと 404/旧内容で FAIL することがある。スクリプトは自動で **内容不一致は 20回×15秒（最大約5分）／旧キャッシュは 30秒×6回（最大180秒）** リトライするので、**呼び出し側で待機ループを書く必要はない**。それでも FAIL する場合は Vercel のデプロイログを確認してから再実行する。判定ロジックは `node scripts/verify-deploy.cjs --test` でネットに出ずに検査できる（24ケース）。
+デプロイ反映前だと 404/旧内容で FAIL することがある。スクリプトは自動で **内容不一致は 20回×15秒（最大約5分）／旧キャッシュは 30秒×6回（最大180秒）** リトライするので、**呼び出し側で待機ループを書く必要はない**。それでも FAIL する場合は Vercel のデプロイログを確認してから再実行する。判定ロジックは `node scripts/verify-deploy.cjs --test` でネットに出ずに検査できる（34ケース＝40 の 24＋45 の Amazon 10）。
 
 #### 2026-09-22 追記：楽天リンク数の空振り PASS（2026-09-15 と同じ系列の穴）
 
@@ -130,6 +130,15 @@ node scripts/verify-deploy.cjs snowpeak-tent montbell-sleeping-bag
   - 38 レポートは原因を「`rafcid` を数えるため検索URLも加算」と書いていたが、旧正規表現 `item\.rakuten\.co\.jp\/[^"']*rafcid=` は `search.rakuten.co.jp` に当たらない。実際の原因は上記の重複出現と `≧` 判定（本タスクで実測して確認）。
 - **対策（`scripts/verify-deploy.cjs`）**: (1) 楽天は ProductCard の楽天ボタン（`class="…ProductCard…__rakuten"` の `<a>`）の `hb.afl` 数だけを数え、mdx 由来の期待数と**一致**で判定。検索URL・比較表リンク・全出現数は参考表示のみ。(2) `x-vercel-cache` が `HIT`/`STALE` で `age` が「デプロイ後の経過秒数」より大きい応答（＝push より前にキャッシュされた旧 HTML）は内容が一致していても「反映待ち」として 30 秒×最大 6 回再取得し、上限で FAIL。デプロイ時刻は `deploy.cjs` が push 直前に `--deployed-at=<epoch秒>` で渡す（手動実行時は HEAD のコミット時刻で代用）。判定用の取得には `?cb=<エポック秒>` を付ける。
 - **なぜヘッダ判定を「期待文字列が出るまでポーリング」に足したか**: 内容ベースの判定は「変更が verify の観測項目に現れる」ことが前提で、38 のように観測項目の値が旧 HTML でも同じになるデプロイ（あるいは本文の文言だけの修正）では原理的に旧 HTML を弾けない。ヘッダ判定は内容に依らず「push より古いキャッシュか」だけを見るので、その死角を塞ぐ。
+
+#### 2026-09-22 追記：Amazon リンク数も楽天と同じ「ボタン枚数＝カード単位の期待数（一致）」に揃えた（campkit-20260921-45／キュー#32）
+
+40 で楽天を直した時点で、Amazon 側には同じ形の穴が残っていた（40 §10-1 の QUESTION）。
+
+- **旧規則の穴**: 期待側は `amazonAsin=`／`amazonUrl=`／`source="amazon"` の **mdx 全文の属性出現数**、実測側は `dp?tag=`／`amzn.to` の**全出現数**で「期待数以上」。ところが (1) `source="amazon"` カードは `dp?tag=` が**ボタン href と JSON-LD `offers.url` の 2 回**出る、(2) `amazonUrl`（amzn.to）カードは `amzn.to` が**ボタン href と `__NEXT_DATA__` の 2 回**出る、(3) `amazonUrl` と `amazonAsin` を両方持つカードは属性 2 つ（期待 2）に対しボタンは 1 つ、(4) `source="amazon"`＋`affiliateUrl="#"` はボタンが出ないのに期待に数える——ため、期待と実測が別々の理由でずれ、**旧 HTML にボタンが足りなくても重複出現ぶんで期待数を満たして PASS しえた**。45 の空撃ちで確認した実例: ogawa-tent／sleeping-bag-cover は旧期待 6（`amazonAsin`×5＋`source="amazon"`×1）に対し `dp?tag=` 全出現 6（ボタン 5＋JSON-LD 1）、coleman-lantern は旧期待 6（`amazonAsin`×5＋`amazonUrl`×1）に対し dp 4＋amzn.to 2＝6、dod-tarp は旧期待 5 に対し dp 3＋amzn.to 2＝5——いずれも**偶然つじつまが合っていただけ**（実際のボタンは 5／5／5／4 枚）。
+- **対策（`scripts/verify-deploy.cjs`）**: 実測は ProductCard の Amazon ボタン（`class="…ProductCard…__amazon"` の `<a>`）の枚数だけ（href が dp か amzn.to かは内訳表示）。期待は mdx をカード単位に解析し、`components/article/ProductCard.tsx` の `getAmazonUrl()` と同じ優先順（`amazonUrl` → `amazonAsin` → `source="amazon"` かつ `affiliateUrl` が空でも `"#"` でもない）で「そのカードにボタンが出るか」を 0/1 で数える。合否は**一致**（期待 0 は実測 0 で PASS）。反映待ち判定（`pendingReasons`）も同じ一致条件に変更（旧規則は「未達」のみ再取得）。`dp?tag=`／`amzn.to` の全出現数と旧期待値（属性出現数）は参考表示に残す。「Amazonタグ健全性」「ASIN重複なし」の 2 検査、40 の楽天判定・キャッシュ判定、`deploy.cjs` との `--deployed-at` インタフェースは不変更。`judgeAmazon` を `module.exports` に追加。
+- **テスト**: `--test` 24→34（D-1〜D-10）。旧 HTML（JSON-LD／`__NEXT_DATA__` の重複出現で旧規則 PASS）が新規則で FAIL する再現、ボタン過多で FAIL、JSON-LD／`__NEXT_DATA__`／比較表の `dp?tag=` を数えない、期待 0・実測 0 PASS、`amazonUrl` 優先（両方持ちで期待 1）、`source="amazon"` の `affiliateUrl`=ASIN で期待 1（`"#"` は 0）、Amazon だけ足りない旧 HTML を反映待ちとして再取得——を含む。フィクスチャは 2026-09-22 に ogawa-tent／camp-table-folding の本番 HTML を取得して構造（JSON-LD → カード div → ボタン群、`__NEXT_DATA__` に属性がそのまま入る）を合わせた。
+- **空撃ち（読み取りのみ）**: 13 記事（ogawa-tent／sleeping-bag-cover＋44 の 11 記事）に新ロジックを実行し **13/13 PASS**（Amazon ボタンの期待＝実測が全記事一致。mdx の修正は不要だった）。
 
 ---
 

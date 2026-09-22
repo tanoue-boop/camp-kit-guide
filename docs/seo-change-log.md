@@ -3,6 +3,16 @@
 数値の推移はGAS「SEOレポート」の履歴で追う。本ファイルは「いつ・どの記事を・なぜ・どう変えたか」を記録し、次回レポートで効果を評価するための施策台帳。新しい施策は上に追記する。
 
 ---
+## 2026-09-22：キュー#32 — デプロイ検証の Amazon リンク数を「ボタン枚数＝カード単位の期待数（一致）」に揃える（campkit-20260921-45）
+
+- **対象**: `scripts/verify-deploy.cjs`・`docs/deploy-note.md`・`CLAUDE.md`・本ログのみ。**`content/posts/`・`_file/` の台帳・`check-amazon-asin.cjs`・`check-card-name-vs-sku.cjs`・`validate-backlog-tsv.cjs`・`deploy.cjs` は 1 文字も変更していない**。40 で入れた楽天判定・`x-vercel-cache` 判定・既存 24 テストも不変更
+- **発端**: 40 §10-1 の QUESTION。楽天は 40 で「ボタンの hb.afl 数＝mdx 期待数の一致」に直したが、Amazon は「`dp?tag=`／`amzn.to` の全出現数 ≧ `amazonAsin=`/`amazonUrl=`/`source="amazon"` の mdx 全文出現数」のまま。`source="amazon"` カードは `dp?tag=` がボタン href＋JSON-LD offers.url の 2 回、`amazonUrl` カードは `amzn.to` がボタン href＋`__NEXT_DATA__` の 2 回出るため、期待と実測が別々の理由でずれて偶然つじつまが合っていた（ogawa-tent／sleeping-bag-cover の「期待6→実6」＝属性 5＋1 と ボタン 5＋JSON-LD 1）
+- **§B（変更）**: 実測＝ProductCard の Amazon ボタン（`class="…ProductCard…__amazon"` の `<a>`）の枚数だけ（dp／amzn.to／その他の内訳を表示）。期待＝mdx をカード単位に解析し `ProductCard.getAmazonUrl()` と同じ優先順（`amazonUrl` → `amazonAsin` → `source="amazon"` かつ `affiliateUrl` が空でも `"#"` でもない）で 0/1 を数える（`cardHasAmazonButton`）。合否＝**一致**（期待 0 は実測 0 で PASS）。反映待ち（`pendingReasons`）も同じ一致条件。`dp?tag=`／`amzn.to` の全出現数・旧期待値（属性出現数）は参考表示として残す。「Amazonタグ健全性」「ASIN重複なし」は不変更。`judgeAmazon` を export に追加（`module.exports` の既存 7 関数は維持）
+- **§C（テスト）**: `--test` 24→**34**（D-1〜D-10・ネット不使用・既存 24 は 1 つも変えていない）。D-1＝JSON-LD 重複で旧規則 PASS・新規則 FAIL の再現／D-2＝`__NEXT_DATA__` の amzn.to 重複で同上／D-3＝ボタン過多 FAIL／D-4＝JSON-LD・`__NEXT_DATA__`・比較表の `dp?tag=` 15 出現でもボタン 5＝期待 5 で PASS／D-5＝期待 0・実測 0 PASS／D-6＝`amazonUrl`＋`amazonAsin` 両方持ちで期待 1（旧期待値は 2）／D-7＝`source="amazon"`＋`affiliateUrl`=ASIN で期待 1・`"#"`／`amazonUrl=""` は 0／D-8＝属性順・その他 href の分類／D-9＝Amazon だけ足りない旧 HTML を反映待ちとして再取得し新 HTML で PASS／D-10＝楽天・キャッシュ判定がカード単位フィクスチャでも不変。フィクスチャは本番 HTML（ogawa-tent／camp-table-folding を 2026-09-22 に取得）の構造＝JSON-LD → カード div → ボタン群、`__NEXT_DATA__` に mdx 属性がそのまま入る（ASIN は dp URL にならず amzn.to は URL のまま）に合わせた
+- **§D（空撃ち・読み取りのみ）**: 13 記事（ogawa-tent／sleeping-bag-cover／44 の 11 記事）に新ロジックを実行し **13/13 PASS**。旧期待値と新期待値の差が出た記事: ogawa-tent・sleeping-bag-cover（旧 6／新 5、`dp?tag=` 全出現 6＝ボタン 5＋JSON-LD 1）、coleman-lantern（旧 6／新 5、dp 4＋amzn.to 2＝6、#1 が `amazonUrl`＋`amazonAsin` 両方持ち）、dod-tarp（旧 5／新 4、dp 3＋amzn.to 2＝5、#1 ポールが両方持ち）＝いずれも旧規則は重複出現で偶然一致していた。mdx の修正は不要
+- **効果測定**: 検索順位の直接施策ではないため計測対象外
+
+---
 ## 2026-09-22：キュー#18 第2弾 — `amazonUrl`（amzn.to 短縮）47枚／11記事のうち 45枚を `amazonAsin` 形式へ一本化・`conflict` 2枚を起票（campkit-20260921-44）
 
 - **対象**: camp-sleeping-mat #1〜#4／camp-tarp-beginner #1〜#5／captain-stag-chair #1〜#5（`both_forms`）／coleman-lantern #1〜#5（#1・#2・#4・#5 が `both_forms`）／dod-chair #1・#2（`both_forms`）／dod-tarp #1 オクラタープ・#1 ポール・#2・#3（`both_forms`・rank=1 が 2 枚なので id で区別）／dutch-oven #1〜#5／family-camp-mat #1〜#5／gentos-light #1〜#5／group-camp-table #2・#3・#5／helinox-chair #1〜#4（`short_url` 161枚／38記事のうち frozen=0 の 11 記事・47枚）。触った属性は **`amazonUrl` の削除と `amazonAsin` の追加だけ**（`git diff --numstat` で `-amazonUrl` 45 行／`+amazonAsin` 32 行のみ。name／price／affiliateUrl／source／本文／frontmatter は不変更）
