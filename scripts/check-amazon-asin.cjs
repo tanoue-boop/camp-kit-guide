@@ -100,7 +100,7 @@ const NO_AMAZON_TSV = path.join(ROOT, '_file', 'amazon-backfill-no-amazon.tsv');
 const CARD_NAME_TSV = path.join(ROOT, '_file', 'card-name-check.tsv');
 const HTML_DIRS = ['html-asin-39', 'html-asin-37', 'html-asin-36'].map((d) => path.join(ROOT, '_file', '_work', d));
 const HTML_DIR = HTML_DIRS[0];
-const TASK_ID = 'campkit-20260921-73';
+const TASK_ID = 'campkit-20260921-74';
 
 const INTERVAL_MS = 2000;
 const FETCH_TIMEOUT_MS = 25000;
