@@ -3,6 +3,16 @@
 数値の推移はGAS「SEOレポート」の履歴で追う。本ファイルは「いつ・どの記事を・なぜ・どう変えたか」を記録し、次回レポートで効果を評価するための施策台帳。新しい施策は上に追記する。
 
 ---
+## 2026-09-23：週次price-check — 8記事の価格照合（本文変更なし・backlog1件追記）
+
+- **対象**: GSC検索パフォーマンス（過去28日・クリック数上位）から選定した8記事 osprey-daily-backpack／camp-backpack-capacity-guide／osprey-backpack／mountain-camp-lantern／inflatable-mat／soto-burner／mysteryranch-backpack／deuter-backpack。GSCはChromeログイン済みで正常取得（合計クリック1280・表示回数3.06万・平均CTR4.2%・平均順位11.9、過去28日）。
+- **方法**: 各記事のProductCardMdx記載商品を、楽天商品ページ（item.rakuten.co.jp）を直接fetchしitemprop="price"を抽出する方式（楽天APIの代替・docs/scheduled-task-spec.md記載の手順）で照合。全34点をチェック。
+- **結果**: 4記事（camp-backpack-capacity-guide／osprey-backpack／deuter-backpack／mysteryranch-backpack）と mountain-camp-lantern は task-16（2026-10-18まで本文・frontmatter変更禁止）の対象記事のため、既存のblocked行（osprey-daylite-plus +11.1%、deuter-orcha +17.5%、deuter-lugano/aircontact-core 404、mysteryranch各種out_of_stock等）以外の新規異常なし。凍結対象外の3記事（osprey-daily-backpack／inflatable-mat／soto-burner）は既存pending行（osprey-daylite-13/hikelite-26/ul-stuffpack、aiflycy）と一致する軽微な乖離（+9〜12%、目安15%未満）のみで、直接更新が必要な確定的価格ずれ（15%超・非frozen・在庫あり）は無し。
+- **backlog追記1件**: osprey-daily-backpack 第3位 アーケイン ラージデイ（osprey-arcane-largeday）が実リンク先で【SALE Max50%OFF】・現行¥9,350（在庫あり、記載¥19,835比 -52.9%）。タイムセール性の一時的な安値の可能性があり「通常価格」と断定できないため確定更新は見送り、price_unconfirmedとして`_file/article-fix-backlog.tsv`に追記（priority B）。
+- **ファイル変更**: `content/posts/*.mdx` は不変更（確定・非凍結の15%超ずれが無かったため）。`_file/article-fix-backlog.tsv`に1行追記のみ。
+- **注記**: 楽天ページのitemprop=price抽出は色/サイズ違いの複数SKU商品（例: Aiflycyインフレーターマット）では選択SKUと一致しない場合があるため、そうした既存pending行（variant-specific）は上書きしていない。
+
+---
 ## 2026-09-22：キュー#39 — camp-knife-beginner 第1〜5位のカードを見出しの商品へ差し替え（(a) 方式・campkit-20260921-55）
 
 - **対象**: `content/posts/camp-knife-beginner.mdx` の 5 カードの購入導線系フィールド（`name`／`price`／`affiliateUrl`／`image`／`rakutenRating`／`rakutenReviewCount`／`amazonAsin`）＋比較表・まとめ表の **価格セルだけ**＋frontmatter `description` の商品列挙部分。見出し・本文・主なスペック・FAQ・お手入れ節・カードの `id`／`rank`／`description`／`badge`・比較表の商品名／刃長／重量／素材／ロック機構は不変更。`_file/article-fix-backlog.tsv`（done 7 行）＋`_file/amazon-asin-check.tsv`（7 行）＋`scripts/check-amazon-asin.cjs`（`TASK_ID` 1 行）＋本ログ
