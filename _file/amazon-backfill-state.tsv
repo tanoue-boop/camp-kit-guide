@@ -320,7 +320,7 @@ set	family-camp-cot	gussuri-air-cot	B0C69VS9L1	2026-09-22
 set	family-camp-cot	yurafuwa-hammock	B08TMBRPY7	2026-09-22	
 pending	alcohol-stove	al-gotoku-set			
 pending	alcohol-stove	al-bottle-set			
-pending	attack-pack	gregory-daypack-26l			
+set	attack-pack	gregory-daypack-26l	B08C7J8555	2026-09-23	
 pending	backpack-large	tousen-40-60l			
 pending	backpack-large	tousen-65l			
 pending	backpack-large	kuriaafew-65l			
@@ -484,10 +484,10 @@ pending	hot-water-bottle	hagoogi-lxe01
 pending	hot-water-bottle	sleepplus-danloop			
 pending	infinity-chair	sidetable-recliner			
 pending	infinity-chair	headrest-infinity			
-pending	karrimor-backpack	karrimor-eclipse27			
-pending	karrimor-backpack	karrimor-tribute40			
-pending	karrimor-backpack	karrimor-vt-daypack			
-pending	karrimor-backpack	karrimor-tatra20			
+set	karrimor-backpack	karrimor-eclipse27	B0D6GJLJFS	2026-09-23	
+set	karrimor-backpack	karrimor-tribute40	B0DM5H6TNR	2026-09-23	
+set	karrimor-backpack	karrimor-vt-daypack	B0D6GF4K7K	2026-09-23	
+set	karrimor-backpack	karrimor-tatra20	B004BNN83I	2026-09-23	
 pending	kids-sleeping-bag	kids-sb-rank-1			
 pending	kids-sleeping-bag	kids-sb-rank-3			
 pending	kids-sleeping-bag	kids-sb-rank-4			
@@ -510,13 +510,13 @@ pending	mountain-camp-tent	mountain-tent-rank-2
 pending	mountain-camp-tent	mountain-tent-rank-3			
 pending	mountain-camp-tent	mountain-tent-rank-4			
 pending	mountain-camp-tent	mountain-tent-rank-5			
-pending	mountain-tent-cheap	fieldoor-dome100			
-pending	mountain-tent-cheap	naturehike-solo-tent			
+no-amazon	mountain-tent-cheap	fieldoor-dome100		2026-09-23	楽天は「フィールドキャンプドーム100ライト」(重量約1.6kg・本体210x105cm・収納36x16cm)だが、Amazon上に同一軽量版が見つからず、確認できたのは通常版(重量2.2kg・収納φ18x44cm)のみで重量/収納サイズが矛盾するため不採用
+no-amazon	mountain-tent-cheap	naturehike-solo-tent		2026-09-23	楽天商品ページが削除済み(エラー)でモバイル版もAmazonへリダイレクトされ実売仕様を確認不能。カード名も型番不明の汎用マーケティング文言のみのためAmazon商品を確定できず
 pending	mummy-sleeping-bag	hawkgear-3852			
 pending	mummy-sleeping-bag	hawkgear-2500			
 pending	mummy-sleeping-bag	hawkgear-4280			
-pending	mysteryranch-backpack	mr-radix-47			
-pending	mysteryranch-backpack	mr-scree-33			
+set	mysteryranch-backpack	mr-radix-47	B0CQJ4YP2T	2026-09-23	
+set	mysteryranch-backpack	mr-scree-33	B0F8GNL6M9	2026-09-23	
 pending	one-pole-tent	onepole-family-4p			
 pending	one-touch-tent	moderndeco-onetouch-fullclose			
 pending	outdoor-coffee-mill	mill-sukizuki			
@@ -575,7 +575,7 @@ pending	stylish-camp-tent	tent-s-rank-5
 pending	takibi-table	yoler-mesh			
 pending	tc-tarp-takibi	goglamping-hengen-tc			
 pending	tc-tarp-takibi	unigear-hexa-tc			
-pending	tent-size-beginner-guide	ts-bundok-solo-dome			
+set	tent-size-beginner-guide	ts-bundok-solo-dome	B07VN86DXB	2026-09-23	
 pending	tent-wood-stove	honma-clock1-glass			
 pending	titanium-mug	tm-pykespeak-junchitan			
 pending	trekking-pole	hikinglife-carbon-pole			
