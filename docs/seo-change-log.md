@@ -3,6 +3,19 @@
 数値の推移はGAS「SEOレポート」の履歴で追う。本ファイルは「いつ・どの記事を・なぜ・どう変えたか」を記録し、次回レポートで効果を評価するための施策台帳。新しい施策は上に追記する。
 
 ---
+
+## 2026-09-28：waterproof-backpack 商品差し替え2枚（#2 LAD WEATHER 40L ／ #5 V.for.M funcle 25L）
+
+- **対象**: `content/posts/waterproof-backpack.mdx`（防水リュックおすすめ5選【2026年版】）
+- **狙い**: `article-fix-backlog` の起票（`price_unconfirmed` / `asin_mismatch`）を解消し、実在・在庫あり・価格の裏が取れた出品へリンクを寄せる。あわせて Amazon リンク（`amazonAsin`）を 4枚→5枚 に揃える
+- **変更内容（第2位・`campkit-20260927-115`）**: 旧 tousen 登山リュック 40L → **LAD WEATHER 防水リュック 40L `02.カーキ×グレー`**（楽天 `vanilla-vague/ladbag003` ¥4,980 ／ `amazonAsin="B07D3T11Z4"`）。見出し・カード `name`/`description`/`price`/`rakutenRating`/`rakutenReviewCount`/`affiliateUrl`/`image`・本文・比較表・まとめ表を更新
+- **変更内容（第5位・`campkit-20260927-117`）**: 旧 Mt.happy 防水リュック 25L（`mthappy/0003-045` ¥2,290）→ **V.for.M funcle 防水リュック 25L ブラック**（楽天 `auc-claireonline/cy-fs0203` ¥2,770 ／ `amazonAsin="B07T2YCWGG"` ／ `カラー` 軸 8 値の先頭値 `ブラック` ／ レビュー 117件・★4.37）。あわせて第2位の「向いている人」を `多機能重視の方` → `完全防水で確実に濡らしたくない方`、比較表 `#2` の `feature` を `大容量/リフレクター` → `大容量40L/PVC完全防水` に修正（`#1` と同一文字列で比較表の意味が失われていたため）
+- **frontmatter**: 記事 `description` の価格下限を `実勢2,290〜8,049円` → `実勢2,770〜8,049円` に更新。`title` と `updatedAt`（`2026-09-21`）は `docs/判定基準.md` §6（「`updatedAt` は絶対に動かさない」）により不変更
+- **台帳**: `article-fix-backlog.tsv` L381（`#2` `price_unconfirmed`）を `done`。`amazon-backfill-no-amazon.tsv` から `#5` の行を削除（157→156 行）。`amazon-backfill-state.tsv` / `card-name-check.tsv` / `amazon-asin-check.tsv` の該当行を更新
+- **残**: `#1 zettai-nurenai` の `asin_mismatch`（`article-fix-backlog.tsv` L561・`pending`）は横断案件として持ち越し。カード `id`（`tousen-daiyouryou` / `mthappy-25l`）は旧ブランド名由来のままで、改名は 6 台帳＋mdx 2 箇所を 1 回で動かす専用タスクで行う
+- **効果測定**: 次回の `campkit-price-check` / `campkit-seo-competitor-scan` で価格の追随と順位を確認する
+
+---
 ## 2026-09-23：週次price-check — 8記事の価格照合（本文変更なし・backlog1件追記）
 
 - **対象**: GSC検索パフォーマンス（過去28日・クリック数上位）から選定した8記事 osprey-daily-backpack／camp-backpack-capacity-guide／osprey-backpack／mountain-camp-lantern／inflatable-mat／soto-burner／mysteryranch-backpack／deuter-backpack。GSCはChromeログイン済みで正常取得（合計クリック1280・表示回数3.06万・平均CTR4.2%・平均順位11.9、過去28日）。
