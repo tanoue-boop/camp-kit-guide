@@ -4,6 +4,18 @@
 
 ---
 
+## 2026-09-30：logos-bonfire #3 を商品差し替え（L BBQコンロ＝#1 と同一商品 → the ピラミッドTAKIBI XL・`product_swap`・campkit-20260930-127）
+
+- **対象**: `content/posts/logos-bonfire.mdx` 第3位（ロゴスの焚き火台おすすめ3選【2026年版】）
+- **理由（issue_type）**: `product_swap`（`article-fix-backlog.tsv` L424・`pending`→`done`。campkit-20260921-49 起票）。記事は #3 を「L の BBQコンロ版」＝#1 とは別モデルとして説明していたが、実測では #1（`himaraya/0000000761618`）と #3（`niche-express/lgs00000000716`）はどちらも**メーカー型番 81064162・JAN 4981325500030 の同一商品**で、Amazon 変種一覧（親 `B07CCSW3L7`）にも「L の BBQコンロ版」は存在しなかった（「バーベキューコンロ」は店側の呼称）。同一記事内の商品重複＋記事の前提が事実と不一致という二重の不具合
+- **旧→新**: 第3位 **ロゴス バーベキューコンロ the ピラミッドTAKIBI L（`niche-express/lgs00000000716` ¥12,870・Amazon リンクなし）→ ロゴス the ピラミッドTAKIBI XL 焚き火台 81064161**（楽天 `naturum/2891503` ¥16,830 ／ `amazonAsin="B0792DWZRM"`）。カード `id` も `logos-takibi-l-bbq` → `logos-takibi-xl`
+- **選定根拠**: 楽天は 段②大手ナチュラムを採用（実取得 2026-09-30: `ブランド名 = ロゴス(LOGOS)`／`メーカー型番 = 81064161`／`taxIncludedPrice = 16830`／`InStock`／軸なし単一SKU／レビュー3件・★3.33）。同一商品の楽天最安は ¥15,147 で +11.1% ＝ `docs/判定基準.md` §11-3 の +20% 以内。段①のロゴス公式店（`logosshop/lgs26081`・XL 本体のみ ¥15,147・qty=6）は 3 軸のバリエーション選択式（サイズ／保護カバー／たき火台シート）で、オプション 2 軸が NONE 型のためカード `name` に literal で書けず §11-6 追補(b)-2 を満たせないので採らなかった。Amazon は dp `B0792DWZRM` を実取得し、`dimensionValuesDisplayData` の着地値 `XL`・ブランド欄 `ロゴス(LOGOS)`（楽天と literal 一致＝ゲート①）・メーカー型番/品番・型番 `81064161`（楽天と完全一致＝ゲート②）・`landingAsin`＝`currentAsin`・購入ボックスあり（残り15点）・構成4点（本体／焚火ゴトク（串焼きプレート付）／ワイヤーロストル／収納バッグ）が楽天公式店の XLサイズ 仕様表と一致することを確認
+- **本文の変更範囲（3モデル比較の成立）**: frontmatter `description`（「L焚き火台、M・LのBBQコンロ版」→「M・L・XL の3サイズ」・価格帯 9,900〜16,830円）／はじめに／ポイント1（サイズ比較を M 2.2kg・L 3.1kg・XL 5.4kg の実寸へ）／ポイント2（「焚き火台 vs BBQコンロ」という誤った前提を「本体構成は共通・付属品と別売ネットで用途が変わる」へ）／ポイント3・4（収納サイズとオプションを実印字値へ）／第3位の見出し・カード・本文・向いている人／比較表（`タイプ` 列を `本体サイズ`＋`総重量` に置換し3行を型番つきに）／表下の注記／お手入れTips 1項目／FAQ Q1・Q2・Q3・Q4／まとめ表（アンカー `#logos-takibi-xl`）とまとめ文。**`title` と `updatedAt`（2026-06-08）は §6 により不変更**。#1・#2 のカード（商品・価格・リンク・`image`）は不変更で、#2 の `description` のみ「BBQコンロ版」という誤表現を実スペック表記に修正
+- **台帳**: `article-fix-backlog.tsv` L424 を `done`（`notes` 末尾に差し替え内容を追記）。`amazon-backfill-no-amazon.tsv` から `logos-bonfire/3/logos-takibi-l-bbq` を削除（156→155行。カードが消え Amazon リンクも設置されたため）。`amazon-asin-check.tsv` は旧キー1行が落ち新キー1行が追加（`verdict=ok`・`price_gap=-45%`・`seller_type=amazon`）、`card-name-check.tsv` に新カード1行を追加（`flags=OK`）。#2 の `price_unconfirmed`（L257・カード ¥9,900 対 実勢 ¥8,910）は別 `issue_type` なので今回は触らず `pending` 継続
+- **効果測定**: 記事の主軸が「焚き火台/BBQコンロの二分」から「M・L・XL のサイズ選び」に変わったため、`ロゴス 焚き火台 サイズ`／`ピラミッドタキビ XL`／`81064161` 系クエリの表示・順位を次回 `campkit-seo-competitor-scan`（金）で確認する。CVR 面では同一記事内の商品重複（#1＝#3）が解消し、3枚すべてが楽天＋Amazon の両導線を持つ状態になった
+
+---
+
 ## 2026-09-30：camp-chair-highback #3 の Amazon リンクを色違い変種へ差し替え（`asin_mismatch`・campkit-20260930-126）
 
 - **対象**: `content/posts/camp-chair-highback.mdx` 第3位 `onetigris-dragonhide-highback`（アウトドアハイバックチェアおすすめ5選【2026年版】）
