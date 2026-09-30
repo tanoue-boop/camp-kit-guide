@@ -4,6 +4,19 @@
 
 ---
 
+## 2026-09-30：camp-chair-highback #3 の Amazon リンクを色違い変種へ差し替え（`asin_mismatch`・campkit-20260930-126）
+
+- **対象**: `content/posts/camp-chair-highback.mdx` 第3位 `onetigris-dragonhide-highback`（アウトドアハイバックチェアおすすめ5選【2026年版】）
+- **理由（issue_type）**: `asin_mismatch`（`article-fix-backlog.tsv` L430・`pending`→`done`）。既設置の `amazonAsin="B0D4M6VXR7"` は OneTigris Dragonhide ハイバックチェアの **ブラック**変種で、カード `name`・見出し・本文・比較表がいずれも名指ししている **ブラウン**と食い違っていた（`verdict=model_mismatch`・campkit-20260921-52 が変種一覧を実取得して起票）。読者が「ブラウン」の紹介を読んでブラックの商品ページへ着地する状態だった
+- **旧→新（Amazon のみ）**: `amazonAsin` **B0D4M6VXR7（ブラック）→ B0CQ4L1V5X（ブラウン）**。本日 dp `B0CQ4L1V5X` を実取得し、`dimensionValuesDisplayData`（ブラック=B0D4M6VXR7／ブラウン=B0CQ4L1V5X／グリーン=B0D4M997K4）で**着地変種＝ブラウン**を確認（`docs/判定基準.md` §3-2 段階1・§4-3 追補4への追補 1.）。dp ブランド欄 `ONETIGRIS`・メーカー型番 `CE-ZDY06-JP`・￥9,559・在庫あり・購入ボックスあり・`landingAsin`＝`currentAsin`＝`B0CQ4L1V5X`
+- **変更範囲**: **`amazonAsin` の1属性1行のみ**。`name`／`description`／`price`／`badge`／`image`／`affiliateUrl`（楽天）／見出し／本文／比較表／まとめ表／frontmatter（`title`・`description`・`updatedAt`）は**すべて不変更**（`asin_mismatch` の処置範囲は ASIN の差し替えのみ。本記事は `FROZEN_SLUGS` 対象外だが範囲は同じ）
+- **台帳**: `article-fix-backlog.tsv` L430 を `done`／L429（#2 `asin_mismatch`）を `pending`→`needs-human`／L73（#2 `out_of_stock`）の `notes` に本日の在庫切れ再確認を追記。`amazon-asin-check.tsv` は該当1行のみ更新（`verdict` `model_mismatch`→`ok`・`seller_type=marketplace`・`price_gap=+10%`）。`amazon-backfill-no-amazon.tsv` は不変更（156行）
+- **同記事の残**: **#2 `moderndeco-zerogravity` は Amazon リンク無しのまま**。楽天 `dondon/lxc06` を本日実取得して `ブランド名 = AND・DECO（アンドデコ）`／`メーカー型番 = -`＝§4-2 追補3 の**型I-b**と確認し、`/s` を2本（`AND・DECO 無重力チェア`／`アンドデコ 無重力チェア`）投げたが、ブランド語の印字が検索語のエコー以外に **0箇所**＝条文3(a) を満たす候補が0件のため条文5 により dp を開かず採用不可。**加えて楽天リンク自体が在庫切れ**（`availability=OutOfStock`・全4SKU `qty=0`・2026-09-21 から9日間）で、**商品差し替えが本筋**の案件として `needs-human` に倒した
+- **同日の別コミット（参考・`684138e`）**: 同じ `campkit-20260930-126` の前半セッションで `fire-extinguish-pot` #2 に `amazonAsin="B09MJX4V38"`、`bonfire-sheet` #4 に `amazonAsin="B0DQKDFGH5"` を**新規設置**（差し替えではないため旧→新の記録は無し。両記事は5枚すべて楽天＋Amazon 両リンク完備になった）
+- **効果測定**: リンク先の変更のみで本文テキストは動いていないため順位への影響は想定しない。**評価軸は CVR**（ブラウンを探す読者が正しい商品ページへ着地するようになった）。次回の `campkit-price-check` で #3 の `price_unconfirmed`（L74・カード ¥8,690 に対し Amazon 実測 ¥9,559・+10.0%）を併せて確認する
+
+---
+
 ## 2026-09-28：waterproof-backpack 商品差し替え2枚（#2 LAD WEATHER 40L ／ #5 V.for.M funcle 25L）
 
 - **対象**: `content/posts/waterproof-backpack.mdx`（防水リュックおすすめ5選【2026年版】）
