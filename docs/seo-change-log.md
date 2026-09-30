@@ -4,6 +4,27 @@
 
 ---
 
+## 2026-10-01：alcohol-stove #4 を商品差し替え（実リンク先が燃料ボトル単体 → NCNL 真鍮製アルコールストーブ・`product_swap`・campkit-20261001-M02）
+
+- **対象**: `content/posts/alcohol-stove.mdx` 第4位（アルコールストーブおすすめ5選｜ソロ登山の軽量調理に【2026年版】）
+- **理由（issue_type）**: `product_swap`（`article-fix-backlog.tsv` の `alcohol-stove` 行・`pending`→`done`）。カード `name`／`description`／見出しは「アルコールストーブ バーナー（燃料ボトル付き）」＝ストーブ本体＋燃料ボトルのセットだが、`affiliateUrl` の実リンク先 `suports-kuiyouo/skittle1` を実取得（HTTP200・`quantity=9`・`variantSelectors` なし）したところ、商品は **146ml のステンレス製燃料ボトル（スキットル・ロート付）単体 ¥1,390** で、ストーブ本体を含まないことを確認した。商品名の先頭に「アルコールストーブ バーナー」という語が入っているのは店側のキーワード詰め込み
+- **旧→新**: 第4位 **アルコールストーブ バーナー（燃料ボトル付き）（`suports-kuiyouo/skittle1` ¥1,390・Amazon リンクなし）→ NCNL(NO CAMP NO LIFE) アルコールストーブ 真鍮製 五徳・消火蓋・収納袋付き ブラック**（楽天 `legare-factory/ncnl2062` ¥1,780・★4.65/17件 ／ `amazonAsin="B0CB8P2MX7"`）。カード `id` も `al-bottle-set` → `al-ncnl`
+- **選定根拠（楽天）**: 楽天API（`sort=-reviewCount`・`availability=1`）の「アルコールストーブ」上位20件から、記事の「最安枠」を保てる価格（既存4枠の最安 ¥1,880 を下回る ¥1,780）・レビュー実績あり・記事の選び方軸（ポイント1 の**真鍮**、ポイント3 の**火力調整/消火用のフタ**）を埋める構成、という3点で選定。実取得（2026-10-01）で `ブランド名 = NO CAMP NO LIFE`／`メーカー型番 = -`／`taxIncludedPrice = 1780`／`quantity=19`／`variantSelectors`・`selectorValues` ともに存在せず単一SKU、を確認（`docs/判定基準.md` §4-2 追補3 の**型I-b**）
+- **選定根拠（Amazon）**: 型I-b の手順どおり `/s` 結果からブランド語 `NO CAMP NO LIFE` が literal 印字された候補 `B0CB8P2MX7`（¥1,780＝採用楽天SKU価格と **0%**）に限って dp を1件だけ実取得。`ブランド名 = NCNL NO CAMP NO LIFE`／`メーカー名 = NCNL(NO CAMP NO LIFE)`／`品番・型番 = 1`（`メーカー型番`・`製品型番` は `NOT_PRESENT`）／`dimensionValuesDisplayData` は色×燃料有無の6変種で**着地は [ブラック, 燃料なし]**＝楽天SKU（代表カラー ブラック・燃料なし）と構成一致／¥1,780・在庫 残り19点・購入ボックスあり／販売元「Legare（レガーレ）」。楽天ブランド欄 `NO CAMP NO LIFE` と dp ブランド欄 `NCNL NO CAMP NO LIFE` の差は**頭字語の併記（楽天の商品名も `NCNL(NO CAMP NO LIFE)` と印字）**であり、同一ブランドの括弧ゆれとして §4-2 ゲート① 成立と判断した
+- **本文の変更範囲**: 第4位の見出し／カード（`id`・`name`・`description`・`price`・`rakutenRating`・`rakutenReviewCount`・`affiliateUrl`・`badge`・`image`・`amazonAsin` 新規）／本文2段落／比較表の該当1行／まとめ表の該当1行とアンカー／frontmatter `description`（「ボトル付き」→「NCNL真鍮製」・価格レンジ 1,390〜→1,780〜）／はじめにの価格レンジ／FAQ「初心者はどう選べばいい？」とまとめ文の該当表現。**`title`・`updatedAt`（2026-08-14）と #1・#2・#3・#5 のカードは不変更**
+- **台帳**: `article-fix-backlog.tsv` の該当行を `done`（`notes` 末尾に追記）。`card-name-check.tsv` に新カード1行を追加（`flags=OK`・1122→1123行）。`amazon-asin-check.tsv` は `--static` で旧キー1行が落ち新キー1行が入れ替わり（1121行は不変）。あわせて **#3 `al-gotoku-set`** を `amazon-backfill-no-amazon.tsv` に登録（楽天 `umbrelland/co768` の `ブランド名 = ノーブランド`／`メーカー型番 = -` ＝型II で、`/s`「アルコールストーブ 五徳 セット 収納袋付き」organic 30件にカード `price ¥1,880` の ±3% に入る候補が0件のため §4-2 追補1 条文3・5 により採用不可）
+- **効果測定**: 第4位の商品が「燃料ボトル単体」から実在のアルコールストーブに変わり、**購入導線の内容不一致が解消**。CVR 面では5枠中4枠が楽天＋Amazon の両導線を持つ状態になった（#3 のみ Amazon 非対応として台帳登録）。`アルコールストーブ 真鍮`／`アルコールストーブ 消火蓋`／`NCNL アルコールストーブ` 系クエリの表示を次回 `campkit-seo-competitor-scan`（金）で確認する
+
+---
+
+## 2026-10-01：camp-burner-beginner #2 は Amazon に同一構成のセットなしと実確認（`asin_mismatch` 決着・campkit-20261001-M02）
+
+- **対象**: `content/posts/camp-burner-beginner.mdx` 第2位 `soto-amicus`
+- **判定**: カード／楽天 `naturum/2705518` は「SOTO AMICUS(アミカス)＋パワーガス250トリプルミックス【お得な2点セット】」（実取得 HTTP200・`quantity=24`・単一SKU）。Amazon `/s` を2本投げ（1本目は `bm-verify` の 3,177バイト インタースティシャル＝§12-2 の真ブロック形／2本目は HTTP200・1,107,960バイト・`totalResultCount=18`・organic 18件）、**アミカス本体＋ガス缶の2点セット出品は0件**。既往の実取得でも Amazon のアミカスは本体単品 SOD-320（¥7,500）とクッカーコンボ SOD-320CC（`B01B36TQGS`）のみで、`docs/判定基準.md` §4-1 恒久ルール(A)（セット構成を名指しするカードに同梱物の異なる ASIN を当てない・**単品側が高い場合は例外なし**）により採用不可
+- **変更**: mdx は**不変更**。`amazon-backfill-no-amazon.tsv` に1行登録し、`article-fix-backlog.tsv` の該当 `asin_mismatch` 行を `needs-human`→`done`（`notes` 末尾に追記）。これで同記事は5枠とも楽天リンク健在・Amazon は4枠設置＋1枠が「Amazon 非対応」として台帳に明記された状態になった
+
+---
+
 ## 2026-09-30：logos-bonfire #3 を商品差し替え（L BBQコンロ＝#1 と同一商品 → the ピラミッドTAKIBI XL・`product_swap`・campkit-20260930-127）
 
 - **対象**: `content/posts/logos-bonfire.mdx` 第3位（ロゴスの焚き火台おすすめ3選【2026年版】）
