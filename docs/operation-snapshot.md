@@ -64,25 +64,26 @@
 
 ---
 
-## 記事数（2026-09-17 時点）
+## 記事数（2026-10-01 時点）
 
-- **総記事数: 262記事**（本日の新規4本＝camp-electric-grill／camp-rice-cooker／stove-guard／autumn-hiking-rental を content/posts に配置した時点の実測値。既存記事修正・リライトは0本〔rewrite-backlogのpendingなしのため商品5選へ振替〕。デプロイは人間レビュー後に deploy.cjs で実施）
-- 内訳の推移: `a45a1e5`=212 → `6ebde0f`=215（前バッチ3本＝camp-air-pump／disaster-camp-gear／trekking-pole）→ `7f9b41f`=218（3本＝solar-lantern／disaster-radio／solo-gear-rental）→ 2026-09-04時点=231 → 2026-09-07時点=234 → 2026-09-08時点=237 → 2026-09-09時点=240 → 2026-09-10時点=243 → 2026-09-11時点=247 → 2026-09-14時点=250 → 2026-09-15時点=254 → 2026-09-16時点=258 → 2026-09-17時点=262
+- **総記事数: 265記事**（`ls content/posts/*.mdx | wc -l` と `check-amazon-asin.cjs --static` の「記事 265 本」で実測。本日の新規1本＝**sleeping-bag-recommend**〔寝袋おすすめ総合ハブ・campkit-20261001-R02〕を配置した時点の値）
+- 内訳の推移: `a45a1e5`=212 → `6ebde0f`=215（前バッチ3本＝camp-air-pump／disaster-camp-gear／trekking-pole）→ `7f9b41f`=218（3本＝solar-lantern／disaster-radio／solo-gear-rental）→ 2026-09-04時点=231 → 2026-09-07時点=234 → 2026-09-08時点=237 → 2026-09-09時点=240 → 2026-09-10時点=243 → 2026-09-11時点=247 → 2026-09-14時点=250 → 2026-09-15時点=254 → 2026-09-16時点=258 → 2026-09-17時点=262 → **2026-10-01時点=265**
+  - ⚠️ 262→264 の2本は 2026-09-18〜09-30 のバッチで追加されたもので、本ファイルの記事数セクションが更新されていなかった（09-17 のまま据え置かれていた）。2026-10-01 に全カテゴリを `grep -h "^category:" content/posts/*.mdx` で再集計し、実測値へ補正した。
 
-### カテゴリ別内訳（frontmatter `category` を集計）
+### カテゴリ別内訳（frontmatter `category` を集計・2026-10-01 実測）
 
 | slug | 表示名 | 記事数 |
 |------|--------|-------:|
 | tent | テント | 71 |
-| sleeping-bag | 寝袋・シュラフ | 28 |
+| sleeping-bag | 寝袋・シュラフ | 29 |
 | cookware | 調理器具 | 39 |
 | chair-table | チェア・テーブル | 29 |
 | lighting | 照明・ランタン | 18 |
 | power | 電源・バッテリー | 25 |
-| bonfire | 焚き火台 | 30 |
-| backpack | バックパック | 19 |
+| bonfire | 焚き火台 | 31 |
+| backpack | バックパック | 20 |
 | clothing | ウェア・装備 | 3 |
-| **合計** | | **262** |
+| **合計** | | **265** |
 
 > 直近: 2026-09-09（日次タスク＝商品5選2本＋ASP専用1本＋既存記事リライト1本の4枠。既存記事修正キューpendingなしのため商品5選は2本のまま：car-camp-mat＝車中泊マットのおすすめ5選（sleeping-bag・既存6記事とのカニバリ懸念を「車中泊専用・厚み/R値/車種別サイズ」に角度を絞って回避）／inner-tent-kangaroo＝カンガルースタイル用インナーテント5選（tent・楽天供給薄のためAmazon源へ切替）／camp-rental-hygiene＝レンタル用品の衛生事情（sleeping-bag・hinataレンタル・variant=rental）／electric-blanket-campリライト（lever=cannibal-check、camp-hot-carpetとの重複を調査し非カニバリと結論、論点はneeds-humanへ）。記事数237→240、tent 64→65・sleeping-bag 24→26。Amazonリンクは新規カード10枚中7件set／3件no-amazon）
 
