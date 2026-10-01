@@ -4,6 +4,22 @@
 
 ---
 
+## 2026-10-01 inflatable-mat リライト／狙いKW インフレーターマット おすすめ／リライト前の関連順位 20.2（GSC 28日）
+
+- **対象**: `content/posts/inflatable-mat.mdx`。5製品 → **10製品**の全面リライト（campkit-20261001-R01・田之上さん直接指示）
+- **狙い**: 「インフレーターマット おすすめ」（月間1万〜10万）。**リライト前のGSC直近28日の関連クエリ平均順位は 20.2 位**。上位（hinata・my-best・MOTA・有野実苑・ハピキャン）は10〜18製品でWAQ・VASTLAND・コールマン・スノーピーク・VENTLAX・キャプテンスタッグ・ロゴス・DODなど**検索者が比較したいブランド**を並べているのに対し、旧記事はAiflycy・OneTigris・PYKES PEAKなど無名寄りの5製品だけで、比較対象として選ばれていなかった
+- **title / description**: 「インフレーターマットおすすめ5選【2026年版】厚さ・寝心地で選ぶ」→ **「インフレーターマットおすすめ10選【2026年】WAQ・VASTLAND・コールマンを比較」**。description も比較軸（厚さ・R値・展開/収納サイズ・重量・連結可否）とブランド名・価格レンジ（3,450〜30,800円）を含む形に差し替え。`updatedAt` 2026-09-21 → **2026-10-01**（リライト回は更新可）
+- **採用10製品（全件 楽天 hb.afl ＋ `amazonAsin` を実在・在庫実確認のうえ設置）**: ①VASTLAND 8cm ¥6,780（`B09F2RVRZM`）②WAQ RELAXING WIDE MAT 8cm ¥13,800（`B0CDRYH1P7`）③コールマン ハイピーク/シングル 10cm ¥13,728（`B07YWYC5RF`）④VENTLAX 8cm ¥6,980（`B092S6GRZ8`）⑤ロゴス 100セルフインフレートマット・SOLO 10cm ¥12,375（`B09KBVJS6C`）⑥PYKES PEAK 8cm R値8.93 ¥5,980（`B0CLV79J6K`・旧記事から継続）⑦コールマン WセットII 5cm×2 ¥14,900（`B07923XJ1W`）⑧キャプテンスタッグ UB-3006 ダブル ¥6,800（`B00BCEC31W`）⑨スノーピーク キャンピングマット2.5w ¥30,800（`B00QEN7Y3S`）⑩Bears Rock 3cm ¥3,450（`B085TBSTW4`・旧記事から継続）
+- **落とした旧3製品**: Aiflycy（実体は CAMDOOR でブランド表記が誤り・`article-fix-backlog` に price_unconfirmed／asin_mismatch／name_fix の pending 3行が残っていた）、電動インフレーターマット（無名OEM）、OneTigris DREAMSTAR（¥18,590・ブランド軸から外れる）。pending 3行は**カードごと消滅したため done** に落とした
+- **DODを採用しなかった理由**: ソトネノキワミLite（S/M/L＝`B0GP6QSJD1`／`B0GP5CQ55R`／`B0GP6MJVWW`）は dp が3サイズとも **buybox なし＝Amazonで購入不可**。両モールで買える「どちらかで売っていない商品は採用しない」の条件に合わないため外した（マクラなしの `B0FPLRT7LM` は両モールで買えるが ¥18,700・楽天レビュー1件で採用基準に届かず）
+- **構造の変更**: (a) 冒頭に**用途別おすすめ早見表**（10行・用途ごとに1製品・アンカーリンク付き）を新設 (b) **「この記事の情報源について」**を明示（メーカー/販売ページの公表値・レビューの集計値であり実機テストではないと宣言） (c) 選び方を4点に再構成＝**運び方（ソロ・登山／ファミリー・連結／車中泊）→ 厚さ5/8/10cm → R値と季節 → エア/クローズドセルとの違い** (d) 比較表を**厚さ・R値・展開サイズ・収納サイズ・重量・連結可否・実勢価格の8列**に拡張し、公表値が無い項目は**すべて「非公表」**と明記（表の下に読み方の注記3点） (e) FAQ を6問 → **7問**（寿命・パンク・空気の入れ方・収納袋に入らない・厚さ・R値非公表モデル・連結）
+- **この記事の差別化ポイント**: R値を公表しているのは10製品中 **PYKES PEAK（8.93）だけ**で、残り9製品は非公表という事実を本文に書き切った（上位記事はR値を推測で埋めたり触れずに流している）。あわせて「R値非公表モデルを冬に使うなら厚さ8cm以上＋クローズドセル重ね敷き」という代替策を提示した
+- **維持したもの**: 旧記事で順位が付いていた「何センチを選ぶ？8cmと10cmの境界」「耐久性・寿命とバルブ故障」「お手入れ・使い方Tips」の3セクションは本文を残したまま、掲載モデル名を新ラインナップに合わせて更新。既存の内部リンクは全維持し、`car-camp-mat`／`family-camp-mat`／`mountain-camp-mat`／`camp-sleeping-mat`／`closed-cell-mat` へのリンクを**用途別の節から**張り直した（`sleeping-bag-temperature-guide`／`camp-pillow`／`kids-sleeping-bag` も維持）。`thumbnail`（`/images/outdoor-06.png`）は不変更
+- **検証**: `check-amazon-asin.cjs --test` 164 passed / 0 failed、`check-card-name-vs-sku.cjs --only inflatable-mat#1〜#10` 全10枚 `flags=OK`（#9 は name の「幅77cm」が `spec_mismatch` になったため削除して解消）、`validate-backlog-tsv.cjs` 全PASS、`lint-bold.cjs` PASS、`npm run build` 成功
+- **効果測定**: 2〜3週間後の `campkit-seo-competitor-scan`（金）で「インフレーターマット おすすめ」の順位を **20.2 位から**どう動いたかを測る。製品数が5→10に増えたことによる滞在時間・比較表のスクロール率も併せて見る
+
+---
+
 ## 2026-10-01：day-camp-tent #3 を商品差し替え（404 の and wander×エアバギー → コールマン クイックアップシェード DR 50周年リミテッド・`discontinued_404`・campkit-20261001-03）
 
 - **対象**: `content/posts/day-camp-tent.mdx` 第3位 `tent-rank-3`（デイキャンプテントおすすめ4選【2026年版】）
