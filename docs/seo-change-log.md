@@ -4,6 +4,20 @@
 
 ---
 
+## 2026-10-01：naturehike-tent #4 をリンク先の実態に合わせて書き換え（Village13 標準 → Village 13.0 Pro ベーシック版・`product_swap`／`price_unconfirmed`・campkit-20261001-02）
+
+- **対象**: `content/posts/naturehike-tent.mdx` 第4位 `nh-lodge-13`（Naturehikeテントおすすめ5選【2026年版】）
+- **理由（issue_type）**: `product_swap`（backlog L425・`pending`→`done`）＋ `price_unconfirmed`（L294・`pending`→`done`）。カードは「Ti black ロッジ型テント 13平米／耐水圧2000mm／¥56,993」と書いていたが、`affiliateUrl` の実リンク先 `naturehike-direct/cnh22zp004` を実取得（HTTP200・商品番号 `WUJI13PRO`・軸「タイプ: ベーシック版 ¥75,990／プレミアム版 ¥93,990」）したところ、**実体は Village 13.0 Pro**（仕様表の印字＝インナー面積 約10.7平方メートル／インナーサイズ 395×270×H183cm／前室・キャノピー 約10平方メートル／重量 約19kg／ポール×4・ペグ×26・ロープ×14／フライ 150Dポリエステル 耐水圧10,000mm+ Ti blackコーティング）で、カードの記述とは別モデルだった
+- **経路の選択**: まず「カードの旧仕様に一致する在庫ありの別ページ」を探したが **0件**（楽天API 3本＝`Naturehike ワンタッチテント 13平米 Ti black` 1件／`ネイチャーハイク ビレッジ13 ロッジ型 テント` 1件／`Naturehike ビレッジ13 テント` 2件。いずれも第1位・第3位・第5位が使用中の3URL か本件の対象ページそのもの、ほかはグランドシート）。よって**カードを実リンク先の実態に合わせる**方式を採った（楽天 URL は据え置き）
+- **変更範囲**: 第4位の見出し／カードの `name`・`description`・`price`（56,993→**75,990**）・`badge`・`image`（`wuji13pro/zt1.jpg` はページから消えていたため採用 variant の `wuji13pro/basic.jpg` へ）／本文2段落／比較表 `lodge13` 行（`name`・`waterproof` 2000mm→10,000mm+・`price`）／まとめ表（56,000円台→75,000円台）／FAQ「約57,000円→約76,000円」／「③ ワンタッチ・ロッジ型（5万円台〜→5万〜7万円台）」とその早見段落／frontmatter `description`（実勢14,990〜56,993円→**14,990〜75,990円**）。**`title`・`updatedAt`（2026-09-29）・`affiliateUrl`・`rakutenRating`／`rakutenReviewCount`・#1/#2/#3/#5 のカードは不変更**
+- **仕様値の食い違い（`docs/判定基準.md` §11-15）**: 同じページで item タイトルは「耐水圧2000mm／前室ポール3つ付き／3-4人用」、仕様表は「耐水圧10,000mm+／ポール×4／ペグ×26」と食い違う。タイトル側は旧 Village13 標準の販促コピーの残存と読み、**仕様表の印字を採用**した（条文1：名指しが無いときは仕様表を優先）
+- **Amazon**: 既設置 `B0DYF5RNY2` は変種ラベル `village13-Ti Black素材`＝Village13 標準で Pro とは別モデルのため**除去**。Pro 相当の候補として `B0GTTHXXWK`（village13-neo・¥59,852・-21.2%）と `B0GTTRJ58L`（village13-neo-plus・¥95,990・+26.3%）の dp を各1回実取得したが、Pro の仕様語（150D／耐水圧10,000mm／ポール×4／ペグ×26／19kg）の印字が**両方とも0件**・価格も ±3% 外で不成立。親 `B0C9XHRN81` の変種一覧（9件）に `pro` は存在しない。`amazon-backfill-no-amazon.tsv` に1行登録した
+- **あわせて実施（第3位）**: `nh-dune76` に `amazonAsin="B0CP3FSK4B"` を**新規設置**。再設置禁止の前提（dp が `currentAsin=B0CQ2DDXJN` の TPUドア ¥5,990 へ着地する）は実取得で消滅しており、着地は変種ラベル「テント（Dune7.6 アップグレード版）」・販売元 Naturehike 公式直営店・¥49,990（カード `price` と 0%）・`landingAsin=currentAsin=B0CP3FSK4B`。`no-amazon` の該当行は削除した
+- **残課題**: 実取得時点で `cnh22zp004` は両 variant とも `quantity=0`・`schema.org/OutOfStock`・「【予約販売】決済後4週間前後の発送予定」（楽天API `availability=1` では返る＝予約注文は可能）。在庫が戻らない場合は `out_of_stock` としての扱いを別途判断する必要がある
+- **効果測定**: 本記事は 第3位の Amazon 導線が復活（Amazon ボタン 4→5→4枚・第4位ぶんが入れ替わり）し、第4位は「カードの記述とリンク先商品の不一致」が解消。順位よりも CVR と直帰で評価する
+
+---
+
 ## 2026-10-01：day-camp-tent #4 の楽天リンクを在庫のある DOD 認定正規取引店へ差し替え（`out_of_stock`・campkit-20261001-M02）
 
 - **対象**: `content/posts/day-camp-tent.mdx` 第4位 `tent-rank-4`（デイキャンプテントおすすめ4選【2026年版】）
