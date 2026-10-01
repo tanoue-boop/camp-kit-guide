@@ -4,6 +4,21 @@
 
 ---
 
+## 2026-10-02 記事単位の購入導線クローズ（campkit-20261002-M01）／bonfire-stand-beginner・coleman-chair・camp-table-folding
+
+- **狙い**: 「記事内の全カードに楽天アフィリエイトリンクと Amazon リンク（`amazonAsin`）が、記事の趣旨に合った正しい商品で入っている」状態まで記事単位で閉じる（監視役タスク campkit-20261002-M01）。SEO の順位施策ではなく**収益導線の欠落を記事単位でゼロにする作業**だが、商品の差し替えで本文・比較表・まとめ表が動くため本ログに記録する
+- **`bonfire-stand-beginner`（本文不変更・リンク形式のみ）**: 5枚すべての `amazonUrl`（`amzn.to` 短縮URL）を `amazonAsin` へ展開した。§4-4 により着地先は1文字も変わらない操作で、`amzn.to` の Location を手動で辿って最終 URL が `/dp/<ASIN>` であることを全件確認（#1 TKB-ST43 → `B09XPYRKYL`／#2 TKB-TP135 → `B09XQ4NYH4`／#3 TKB-TB98 → `B09XQKJ8JT`／#4 TRGR → `B0D1XY14Q8`／#5 BaTaRaN J05 → `B0CQ4T5KH8`。いずれも 301 の1ホップ）。短縮URLは中身が見えずリンク先の差し替わりを検知できないため、CLAUDE.md のキュー#18 の方針どおり `amazonAsin` に統一した
+- **`coleman-chair`（第2位を商品差し替え・手順F）**: 第2位が第1位と**同一商品**（ともに メーカー型番 2000033139 のインフィニティチェア）で、Amazon 側 2000033139 のファミリーには ベージュ（第1位）と オリーブ（第5位）しか変種が無く、第2位に Amazon を付けると記事内 ASIN 重複になる詰み（`article-fix-backlog` L593 `product_swap`）だった。第2位を **コールマン ヒーリングチェア NX ネクスト オリーブ 2190857**（楽天 コールマン公式店 `coleman/col2063`・¥5,280・★4.6/65件／`amazonAsin="B0BJKDHPZJ"`・¥3,991）へ差し替えて解消
+  - **選定根拠**: 楽天API「コールマン チェア」上位30件のうち、①既存4枠（インフィニティ 2000033139／デッキチェアST 2190860／2点セット 2000033809／インフィニティ オリーブ 2000038848）と重複しない ②第3位の「最安 ¥4,800」の役割を崩さない価格 ③レビュー実績がある ④公式店で買える、の4点を満たす候補として選んだ。レイチェアNX18（¥11,980）は第5位の ¥11,900 と価格帯が衝突し、リゾートチェア（¥2,979）は第3位の最安の役割を奪うため不採用
+  - **色の選び方（判定基準に条文が無く、その場で判断した点）**: 楽天の カラー軸は モスグリーン(qty=0)／チャコール(qty=4)／オリーブ(qty=3)／グレージュ(qty=0)。CLAUDE.md の §B（売切既定の書き直し）に従えば軸順で最初の在庫＝チャコールだが、**Amazon 側 2190857 の変種は オリーブ `B0BJKDHPZJ`／グレージュ `B0BJKFMRRR` の2つだけで チャコールが存在しない**。チャコールを name に書くと構造的に `asin_mismatch` になるため、**両モールで同時に購入可能な唯一の色＝オリーブ**を名指しした
+  - **変更範囲**: 第2位の 見出し／カード（`id` を `coleman-infinity-grey` → `coleman-healing-chair-nx`・`name`・`description`・`price` 9,980 → 5,280・`rakutenRating`／`rakutenReviewCount`・`affiliateUrl`・`badge`・`image`・`amazonAsin` 新規）／本文2段落と「向いている人」／比較表の該当1行（`type` を「ロースタイル」、`recline` を「なし（固定）」に）／まとめ表の該当1行とアンカー／frontmatter `description`（「カラー違い3モデル」→「カラー違い2モデル」＋ヒーリングチェア NX を追記）／はじめの1文／ポイント1（3タイプ → 4タイプ）／まとめの締め1文。**`title`・`date`・`updatedAt`（2026-09-20）・`thumbnail`・第1/3/4/5位のカードは不変更**
+- **`camp-table-folding`**: 第1・3・5位の `amzn.to` を `amazonAsin` へ展開（#1 MERMONT → `B00WG5TSAK`／#3 キャンパーズコレクション YAT-1260-BWH → `B0CZK4GLZ5`／#5 CAMPING MOON T-235-4T → `B0DHRT2WHR`）。第2位（楽天 `round-era/table-001`）は `ブランド名 = -`／`メーカー型番` が店舗コードと同値の**型II（無名OEM）**で、Amazon `/s` 2本とも同一商品の候補が無かったため `amazon-backfill-no-amazon.tsv` に登録した
+- **台帳**: `article-fix-backlog.tsv` の coleman-chair 2行（L593 `product_swap`／L137 `price_unconfirmed`）を **done**。camp-table-folding 第2位の「カード name が 135×60cm・耐荷重50kg（大型 ¥8,980）を指しているのに `price` ¥4,980 は小型 variant の価格」という不整合を `name_fix` で新規起票した
+- **検証**: 各記事ごとに `check-affiliate-links.cjs` PASS、`check-amazon-asin.cjs --test` 164 passed / 0 failed、`validate-backlog-tsv.cjs` 全 PASS、`lint-bold.cjs` PASS、`verify-deploy.cjs` で本番の楽天 hb.afl・Amazon ボタンの**枚数と href の値**が期待と一致することを確認
+- **効果測定**: 本件は導線の修復なので順位ではなく**アフィリエイト経由のクリック／成果**で見る。coleman-chair のみ第2位の商品が変わったため、2〜3週間後の `campkit-seo-competitor-scan`（金）で「コールマン チェア」関連クエリの順位が落ちていないかも併せて確認する
+
+---
+
 ## 2026-10-02 gregory-backpack リライト／狙いKW グレゴリー リュック／リライト前の関連順位 9.1（GSC 28日）
 
 - **対象**: `content/posts/gregory-backpack.mdx`。5製品 → **11製品**の全面リライト（campkit-20261002-R05・田之上さん直接指示）。`thumbnail`（`/images/outdoor-01.png`）と `date`（2026-06-15）は不変更、`updatedAt` 2026-09-21 → **2026-10-02**
