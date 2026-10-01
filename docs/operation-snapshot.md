@@ -66,8 +66,8 @@
 
 ## 記事数（2026-10-01 時点）
 
-- **総記事数: 265記事**（`ls content/posts/*.mdx | wc -l` と `check-amazon-asin.cjs --static` の「記事 265 本」で実測。本日の新規1本＝**sleeping-bag-recommend**〔寝袋おすすめ総合ハブ・campkit-20261001-R02〕を配置した時点の値）
-- 内訳の推移: `a45a1e5`=212 → `6ebde0f`=215（前バッチ3本＝camp-air-pump／disaster-camp-gear／trekking-pole）→ `7f9b41f`=218（3本＝solar-lantern／disaster-radio／solo-gear-rental）→ 2026-09-04時点=231 → 2026-09-07時点=234 → 2026-09-08時点=237 → 2026-09-09時点=240 → 2026-09-10時点=243 → 2026-09-11時点=247 → 2026-09-14時点=250 → 2026-09-15時点=254 → 2026-09-16時点=258 → 2026-09-17時点=262 → **2026-10-01時点=265**
+- **総記事数: 266記事**（`ls content/posts/*.mdx | wc -l` と `check-amazon-asin.cjs --static` の「記事 266 本」で実測。本日の新規2本＝**sleeping-bag-recommend**〔寝袋おすすめ総合ハブ・campkit-20261001-R02〕と**air-mat**〔エアマットおすすめ11選・campkit-20261001-R04〕を配置した時点の値）
+- 内訳の推移: `a45a1e5`=212 → `6ebde0f`=215（前バッチ3本＝camp-air-pump／disaster-camp-gear／trekking-pole）→ `7f9b41f`=218（3本＝solar-lantern／disaster-radio／solo-gear-rental）→ 2026-09-04時点=231 → 2026-09-07時点=234 → 2026-09-08時点=237 → 2026-09-09時点=240 → 2026-09-10時点=243 → 2026-09-11時点=247 → 2026-09-14時点=250 → 2026-09-15時点=254 → 2026-09-16時点=258 → 2026-09-17時点=262 → 2026-10-01時点=265（R02 sleeping-bag-recommend）→ **2026-10-01時点=266（R04 air-mat）**
   - ⚠️ 262→264 の2本は 2026-09-18〜09-30 のバッチで追加されたもので、本ファイルの記事数セクションが更新されていなかった（09-17 のまま据え置かれていた）。2026-10-01 に全カテゴリを `grep -h "^category:" content/posts/*.mdx` で再集計し、実測値へ補正した。
 
 ### カテゴリ別内訳（frontmatter `category` を集計・2026-10-01 実測）
@@ -75,7 +75,7 @@
 | slug | 表示名 | 記事数 |
 |------|--------|-------:|
 | tent | テント | 71 |
-| sleeping-bag | 寝袋・シュラフ | 29 |
+| sleeping-bag | 寝袋・シュラフ | 30 |
 | cookware | 調理器具 | 39 |
 | chair-table | チェア・テーブル | 29 |
 | lighting | 照明・ランタン | 18 |
@@ -83,9 +83,11 @@
 | bonfire | 焚き火台 | 31 |
 | backpack | バックパック | 20 |
 | clothing | ウェア・装備 | 3 |
-| **合計** | | **265** |
+| **合計** | | **266** |
 
-> 直近: 2026-09-09（日次タスク＝商品5選2本＋ASP専用1本＋既存記事リライト1本の4枠。既存記事修正キューpendingなしのため商品5選は2本のまま：car-camp-mat＝車中泊マットのおすすめ5選（sleeping-bag・既存6記事とのカニバリ懸念を「車中泊専用・厚み/R値/車種別サイズ」に角度を絞って回避）／inner-tent-kangaroo＝カンガルースタイル用インナーテント5選（tent・楽天供給薄のためAmazon源へ切替）／camp-rental-hygiene＝レンタル用品の衛生事情（sleeping-bag・hinataレンタル・variant=rental）／electric-blanket-campリライト（lever=cannibal-check、camp-hot-carpetとの重複を調査し非カニバリと結論、論点はneeds-humanへ）。記事数237→240、tent 64→65・sleeping-bag 24→26。Amazonリンクは新規カード10枚中7件set／3件no-amazon）
+> 直近: 2026-10-01（チャット側からの直接投入タスク campkit-20261001-R04＝**新規記事 air-mat**〔エアマットおすすめ11選・sleeping-bag〕を作成。狙いKW「エアマット」（月間1万〜10万・GSC関連クエリ平均25.6位）で、空気だけでふくらませるタイプの専用記事がサイトに無かったため `inflatable-mat`（自動膨張）と狙いを分けた。採用11製品はすべて**楽天 hb.afl ＋ amazonAsin の両リンクを両モールの在庫実確認のうえ設置**＝スノーピーク TM-089／WAQ UL AirMat／OneTigris OBSIDIAN／Bestway AlpineLite／VASTLAND 400g／サーマレスト ネオエアーXサーモ NXT R／ニーモ テンサー オールシーズン RWR／OneTigris NOBLEJADE／WAQ AIR BED セット／INTEX ダウニー／コールマン コンフォートエアーマットレス/W。モンベル・シートゥサミット・クライミット・7Gadget は「両モールで在庫あり」を満たせず不採用。あわせて `inflatable-mat` に本記事への内部リンクを1本追加（商品・価格は不変更）。記事数265→266、sleeping-bag 29→30）
+
+> 前回: 2026-09-09（日次タスク＝商品5選2本＋ASP専用1本＋既存記事リライト1本の4枠。既存記事修正キューpendingなしのため商品5選は2本のまま：car-camp-mat＝車中泊マットのおすすめ5選（sleeping-bag・既存6記事とのカニバリ懸念を「車中泊専用・厚み/R値/車種別サイズ」に角度を絞って回避）／inner-tent-kangaroo＝カンガルースタイル用インナーテント5選（tent・楽天供給薄のためAmazon源へ切替）／camp-rental-hygiene＝レンタル用品の衛生事情（sleeping-bag・hinataレンタル・variant=rental）／electric-blanket-campリライト（lever=cannibal-check、camp-hot-carpetとの重複を調査し非カニバリと結論、論点はneeds-humanへ）。記事数237→240、tent 64→65・sleeping-bag 24→26。Amazonリンクは新規カード10枚中7件set／3件no-amazon）
 
 > 前回: 2026-09-08（日次タスク＝商品5選2本＋ASP専用1本＋既存記事リライト1本の4枠。既存記事修正キュー・リライトキューともにpendingありのうちリライトのみ消化：winter-camp-guide＝冬キャンプ装備完全ガイド（tent・keyword-backlogのpriority A。「地面/空気/体」の3層構成で13カテゴリの代表商品を紹介、各商品データは closed-cell-mat/winter-camp-tent/camp-oil-stove/cassette-gas-heater/tent-wood-stove/electric-blanket-camp/camp-hot-carpet/sleeping-bag-winter-beginner/hot-water-bottle/winter-camp-gloves/camp-blanket/thermal-bottle/co-checkerの既存実データを再利用・新規Rakuten APIコールなし）／camp-gift＝キャンプ好きへのプレゼント予算別ガイド（tent・priority A。予算4帯7点はsierra-cup/winter-camp-gloves/titanium-mug/thermal-bottle/camp-lantern-led/camp-blanket/compact-portable-powerの既存実データを再利用）／furusato-camp-ticket＝ふるさと納税のキャンプ場・グランピング利用券（tent・楽天ふるさと納税・variant=furusato・keyword-backlogのsource=asp優先度B。既存の物販系ふるさと納税8記事とは「体験・利用券」軸で非カニバリ）／stylish-camp-tent リライト（lever=structure＝「テントが『おしゃれに見える』かを決める4つの条件」セクションを追記、順位10位のため商品順序・構成は維持、title/description軽微調整・updatedAt更新）。記事数234→237、tent 61→64。Amazonリンクは新規カード20枚中16件set／4件no-amazon（詳細はamazon-backfill-state.tsv）)
 
