@@ -196,7 +196,8 @@ OK: 「**充電を忘れても電池を買えばすぐ復帰できる**」とい
 ```
 
 - `price` は数値を文字列で渡す（例: `"19800"`）
-- `affiliateUrl` は**楽天の hb.afl アフィリエイトURL**（`scripts/rakuten-search.mjs` が出力する形）または `"#"`
+- 🚧 **全カードに楽天アフィリエイトリンク（hb.afl）と Amazon リンク（`amazonAsin`）の両方が必須。`deploy.cjs` の検査（手順1.4・`scripts/check-affiliate-links.cjs`）に通らない記事は公開できない（例外は `_file/amazon-backfill-no-amazon.tsv` 登録済みのカードのみ／スキップオプションなし）**（2026-10-01 追加・campkit-20261001-G01）。検査対象はそのデプロイで変更された記事だけ。サイト全体の棚卸しは `node scripts/check-affiliate-links.cjs --all`（2026-10-01 時点で 42記事／110件が未充足＝既存の穴埋め対象）
+- `affiliateUrl` は**楽天の hb.afl アフィリエイトURL**（`scripts/rakuten-search.mjs` が出力する形）。`"#"` は上の検査に落ちるので、変更・新規の記事では使えない（楽天に同一商品が無いなら商品自体を選び直す）
 - ⚠️ **Amazon リンクは必ず `amazonAsin="<ASIN>"` で持つ。ASIN を `affiliateUrl` に入れない**（2026-09-22 追加・campkit-20260921-38）。`source` は仕入れ先に合わせ、楽天リンクがあれば `source="rakuten"`、Amazon 実データのみで楽天に同一商品が無いときは `source="amazon"` ＋ `affiliateUrl="#"` ＋ `amazonAsin` にする。旧テンプレート（`source="amazon"` ＋ `affiliateUrl="<ASIN>"`）は `ProductCard` が ASIN として読める（`getAmazonUrl` の後方互換）ため Amazon ボタンは出るが、楽天ボタンが**アフィリエイト収益の付かない検索URL**にフォールバックし、`scripts/check-card-name-vs-sku.cjs` でも `url_unparsable` になって照合できない。2026-07〜09 の「Amazon源5選／Amazon実データ5選」記事（montbell-sleeping-bag／wooden-tableware／ogawa-tent／sleeping-bag-cover／spice-box／air-frame-tent）がこの形で生まれ、2026-09-20（42枚）・09-22（8枚）で現行形式へ統一済み
 - ⚠️ **`amazonUrl`（amzn.to 短縮リンク）を ProductCardMdx に新規で書かない。Amazon は `amazonAsin` を使う**（2026-09-22 追加・campkit-20260921-41・キュー#18）。短縮URLは中身が見えずリンク先の差し替わりを検知できず、`amazonAsin` と同居させると描画で `amazonUrl` が優先されて台帳の ASIN と読者の飛び先が食い違いうる。既存の `amazonUrl` は `check-amazon-asin.cjs --static` の `short_url` フラグで棚卸しし、キュー#18 で順次 `amazonAsin` へ置き換える（第1弾 47枚／12記事は 09-22 に置換済み・残 161枚／38記事）
 - `id` はページ内アンカーリンクに使う（まとめ表のリンク先）
@@ -227,7 +228,7 @@ OK: 「**充電を忘れても電池を買えばすぐ復帰できる**」とい
 
 - **実在する人気ブランドの定番モデルのみ**（架空の商品禁止）
 - Amazonと楽天の両方で購入できることを確認
-- `affiliateUrl` は現時点では `"#"` でOK（後から差し替え）
+- `affiliateUrl` は hb.afl アフィリエイトURLを必ず入れる（2026-10-01 以降・旧「`"#"` でOK」は撤回。deploy.cjs 手順1.4 の検査で止まる）
 - 価格・レビュー数は執筆時点の参考値でOK（仮データ可）
 - 1記事に同一ブランドが3製品以上重複しないようにする
 

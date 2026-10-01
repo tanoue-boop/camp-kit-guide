@@ -14,6 +14,7 @@
  *   - コミットメッセージ未指定なら中止
  *   - 変更が無ければ中止
  *   - .env* / node_modules が変更・ステージに混入していたら中止（誤コミット防止）
+ *   - 変更された記事のカードに楽天 or Amazon のリンクが欠けていれば中止（check-affiliate-links.cjs・手順1.4）
  *   - ビルド失敗なら push せず中止
  *   - 本番検証(verify-deploy.cjs)が FAIL なら exit 1
  */
@@ -162,6 +163,28 @@ console.log(status || '(変更なし)');
 if (!status) abort('コミットする変更がありません。');
 if (hasDangerousPath(status)) {
   abort('.env / node_modules が変更に含まれています。手動で確認してください。');
+}
+
+// 1.4 楽天・Amazon 両リンク検査（check-affiliate-links.cjs）
+// 2026-10-01 追加（campkit-20261001-G01）: リライト・新規作成で増えたカードに片方のリンクしか無い
+// （＝収益が片側ゼロ）状態が本番に出る事故を仕組みで止める。build/commit より前に関門を置く。
+// 検査対象は「このデプロイで変更された記事」だけ（スコープ未指定なら検査スクリプトが git 差分から自動抽出）。
+// サイト全体を関門にすると既存記事に残る旧形式で日次デプロイが全部止まるため。スキップオプションは設けない。
+console.log('\n■ 1.4 楽天・Amazon 両リンク検査 (check-affiliate-links.cjs)');
+{
+  const linkTargets = scoped
+    ? scopedFiles.filter((f) => f.endsWith('.mdx')).map((f) => JSON.stringify(f)).join(' ')
+    : '';
+  try {
+    run(`node scripts/check-affiliate-links.cjs ${linkTargets}`.trim());
+  } catch {
+    abort(
+      '楽天アフィリエイトリンク／Amazon リンクが欠けているカードがあります。push せず停止します。\n' +
+        '  全カードに楽天（hb.afl アフィリエイトURL）と Amazon（amazonAsin="<10桁ASIN>"）の両方が必須です。\n' +
+        '  楽天URLの発行: node scripts/rakuten-search.mjs\n' +
+        '  Amazon に恒久的に同一商品が無いカードだけ _file/amazon-backfill-no-amazon.tsv に登録してください（例外はこれのみ）。'
+    );
+  }
 }
 
 // 1.5 太字破綻チェック（lint-bold.cjs）
