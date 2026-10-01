@@ -12,7 +12,7 @@
  * 使い方:
  *   node scripts/check-amazon-asin.cjs --static                 # 静的検査のみ（ネットに一切出ない）。TSV を書き出す
  *   node scripts/check-amazon-asin.cjs --dry                    # 何も書かず件数だけ
- *   node scripts/check-amazon-asin.cjs --test                   # 単体テスト（frozen 52 slug が card-name-check.tsv と全行一致することを含む）
+ *   node scripts/check-amazon-asin.cjs --test                   # 単体テスト（frozen 列が card-name-check.tsv と全行一致することを含む。2026-10-01 の凍結全面解除で frozen は 0 slug）
  *   node scripts/check-amazon-asin.cjs --verify 12              # 未照合のうち優先順で先頭 12 件を Amazon で照合
  *   node scripts/check-amazon-asin.cjs --verify 12 --max-minutes 8
  *   node scripts/check-amazon-asin.cjs --only naturehike-tent#5              # 名指し（既に verdict があっても再取得）
@@ -100,7 +100,7 @@ const NO_AMAZON_TSV = path.join(ROOT, '_file', 'amazon-backfill-no-amazon.tsv');
 const CARD_NAME_TSV = path.join(ROOT, '_file', 'card-name-check.tsv');
 const HTML_DIRS = ['html-asin-39', 'html-asin-37', 'html-asin-36'].map((d) => path.join(ROOT, '_file', '_work', d));
 const HTML_DIR = HTML_DIRS[0];
-const TASK_ID = 'campkit-20261001-03';
+const TASK_ID = 'campkit-20261001-04';
 
 const INTERVAL_MS = 2000;
 const FETCH_TIMEOUT_MS = 25000;
@@ -119,24 +119,9 @@ const ASIN_OLD_RE = /^[A-Z0-9]{10}$/;
 //   reseller_markup（51 §C）: price_gap がこの % 以上（+100% ちょうどを含む）かつ seller_type=reseller
 const RESELLER_MARKUP_MIN_PCT = 100;
 
-// 変更禁止リスト（2026-10-18 まで。check-card-name-vs-sku.cjs と同じ 52 slug を独立に持つ。--test で TSV の frozen 列と全行一致を検証）
-const FROZEN_SLUGS = new Set([
-  'osprey-backpack', 'camp-backpack-capacity-guide', 'soto-burner', 'mysteryranch-backpack',
-  'karrimor-backpack', 'gregory-backpack', 'deuter-backpack', 'portable-fridge',
-  'camp-gear-sale-timing', 'camp-table-set', 'camp-table-folding', 'car-camp-lighting',
-  'torch-burner', 'bluetti-power', 'sleeping-bag-temperature-guide', 'duo-tent',
-  'fire-extinguish-pot',
-  'camp-cooler-box-overall', 'portable-power-vehicle-camp', 'cooler-ice-pack', 'snowpeak-tent',
-  'dod-table', 'low-style-table', 'outdoor-kitchen-table', 'solo-tent-overall',
-  'solo-tent-beginner', 'coleman-tent', 'dod-tent', 'secondary-combustion-bonfire',
-  'charcoal-starter', 'bonfire-sheet', 'bonfire-stand-beginner', 'car-camp-bed-kit',
-  'car-camp-mat', 'camp-lantern-led', 'electric-blanket-camp', 'fire-blower', 'camp-bbq-grill',
-  'family-camp-bbq', 'hand-axe', 'disaster-portable-power', 'jackery-power-station',
-  'ecoflow-power', 'portable-power-large',
-  'family-camp-summer-tent', 'coleman-chair', 'tent-size-beginner-guide',
-  'kids-sleeping-bag', 'camp-backpack-beginner', 'solo-tent-lightweight', 'mountain-camp-lantern',
-  'camp-portable-power-beginner',
-]);
+// 変更禁止リスト（2026-10-01 に全面解除。`--test` で TSV の frozen 列と全行一致を検証する仕組みは残す）
+// 2026-10-01 凍結全面解除（result-POLICY-20261001-unfreeze.md・田之上さん決定）。解除前の 52 slug は git 履歴を参照。
+const FROZEN_SLUGS = new Set([]);
 
 // 型番トークン（check-card-name-vs-sku.cjs と同じ判定を自己完結で持つ。
 //   ただし 57 §B 以降、純数字の下限だけは本ファイルが 6・check-card-name-vs-sku.cjs が 7 で食い違う）
@@ -826,7 +811,7 @@ function runTests() {
   for (const c of cards) { const f = cnKey.get(keyOf(c)); if (f == null) missing++; else if (f !== String(c.frozen)) mismatch++; }
   t(`frozen 列: card-name-check.tsv ${cn.length} 行と突合（行キー欠損）`, missing, 0);
   t(`frozen 列: card-name-check.tsv と全 ${cards.length} 行一致（不一致件数）`, mismatch, 0);
-  t('frozen slug 数', FROZEN_SLUGS.size, 52);
+  t('frozen slug 数', FROZEN_SLUGS.size, 0);
   t('frozen=1 のカード数が card-name-check.tsv と一致', cards.filter((c) => c.frozen).length, cn.filter((r) => r.frozen === '1').length);
   // 実データ: TSV 出力の書式
   if (fs.existsSync(OUT)) {

@@ -67,7 +67,7 @@ const ROOT = path.join(__dirname, '..');
 const POSTS_DIR = path.join(ROOT, 'content', 'posts');
 const OUT = path.join(ROOT, '_file', 'card-name-check.tsv');
 const HTML_DIR = path.join(ROOT, '_file', '_work', 'html-24');
-const TASK_ID = 'campkit-20261001-03'; // 走査・再判定を行ったタスク（TSV の judged_task 列に入る）
+const TASK_ID = 'campkit-20261001-04'; // 走査・再判定を行ったタスク（TSV の judged_task 列に入る）
 
 // ---------------------------------------------------------------------------
 // 閾値・定数（A-4 の回帰検証で調整する。slug / id を条件に埋め込まない）
@@ -83,29 +83,9 @@ const SALE_SKU_MIN = 30;         // sale_page: SKU 数がこれ以上（型番�
 const SALE_VALUES_MIN = 6;       // sale_page: セール語あり かつ セレクタ値の合計がこれ以上（型番なし）
 const PRICE_TOL = 0.03;          // price_mismatch: ±3%（23 §3-3(3) で採択）
 
-// 変更禁止リスト（2026-10-18 まで本文・frontmatter とも変更禁止。task-campkit-20260921-16 より）。
-// 走査自体は行い（読むだけ）、`frozen` 列に 1 を立てるだけ。
-const FROZEN_SLUGS = new Set([
-  // 施策本体（測定中）
-  'osprey-backpack', 'camp-backpack-capacity-guide', 'soto-burner', 'mysteryranch-backpack',
-  'karrimor-backpack', 'gregory-backpack', 'deuter-backpack', 'portable-fridge',
-  'camp-gear-sale-timing', 'camp-table-set', 'camp-table-folding', 'car-camp-lighting',
-  'torch-burner', 'bluetti-power', 'sleeping-bag-temperature-guide', 'duo-tent',
-  'fire-extinguish-pot',
-  // リンク元として 09-21 に変更済み（計27本）
-  'camp-cooler-box-overall', 'portable-power-vehicle-camp', 'cooler-ice-pack', 'snowpeak-tent',
-  'dod-table', 'low-style-table', 'outdoor-kitchen-table', 'solo-tent-overall',
-  'solo-tent-beginner', 'coleman-tent', 'dod-tent', 'secondary-combustion-bonfire',
-  'charcoal-starter', 'bonfire-sheet', 'bonfire-stand-beginner', 'car-camp-bed-kit',
-  'car-camp-mat', 'camp-lantern-led', 'electric-blanket-camp', 'fire-blower', 'camp-bbq-grill',
-  'family-camp-bbq', 'hand-axe', 'disaster-portable-power', 'jackery-power-station',
-  'ecoflow-power', 'portable-power-large',
-  // 09-20 に title/description を変更し CTR を測定中
-  'family-camp-summer-tent', 'coleman-chair', 'tent-size-beginner-guide',
-  // 別タスクで扱うため触らない
-  'kids-sleeping-bag', 'camp-backpack-beginner', 'solo-tent-lightweight', 'mountain-camp-lantern',
-  'camp-portable-power-beginner',
-]);
+// 変更禁止リスト（2026-10-01 に全面解除）。`frozen` 列に 1 を立てる仕組み自体は残す。
+// 2026-10-01 凍結全面解除（result-POLICY-20261001-unfreeze.md・田之上さん決定）。解除前の 52 slug は git 履歴を参照。
+const FROZEN_SLUGS = new Set([]);
 
 // 販促文言（store_copy）。【…】内に含まれる場合と、name 中に裸で現れる場合の両方を見る
 const STORE_COPY_WORDS = /楽天\s*(?:\d+位|ランキング|1位)|ランキング\s*\d*位|送料無料|期間限定|P\s*\d+倍|ポイント\s*\d+倍|スーパーSALE|(?<![A-Za-z])SALE(?![A-Za-z])|セール|クーポン|あす楽|即納|最安値?|激安|在庫限り|数量限定|在庫処分|今だけ|限定価格|レビュー特典|マラソン|\d+\s*[%％]\s*[O0]FF|OFF[!！]|円\s*[O0]FF|円引き?|通常価格|定価|まで延長|値下げ|割引|＼[^／]*／/i;

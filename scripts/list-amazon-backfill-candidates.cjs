@@ -68,29 +68,10 @@ const OUT = path.join(ROOT, '_file', 'amazon-backfill-candidates.tsv');
 const NO_AMAZON = path.join(ROOT, '_file', 'amazon-backfill-no-amazon.tsv');
 
 // ---------------------------------------------------------------------------
-// 変更禁止リスト（2026-10-18 まで本文・frontmatter とも変更禁止。task-campkit-20260921-16 より）
+// 変更禁止リスト（2026-10-01 に全面解除）。除外の仕組み自体は残す（空集合なので誰も除外されない）。
+// 2026-10-01 凍結全面解除（result-POLICY-20261001-unfreeze.md・田之上さん決定）。解除前の 52 slug は git 履歴を参照。
 // ---------------------------------------------------------------------------
-const FROZEN_SLUGS = new Set([
-  // 施策本体（測定中）
-  'osprey-backpack', 'camp-backpack-capacity-guide', 'soto-burner', 'mysteryranch-backpack',
-  'karrimor-backpack', 'gregory-backpack', 'deuter-backpack', 'portable-fridge',
-  'camp-gear-sale-timing', 'camp-table-set', 'camp-table-folding', 'car-camp-lighting',
-  'torch-burner', 'bluetti-power', 'sleeping-bag-temperature-guide', 'duo-tent',
-  'fire-extinguish-pot',
-  // リンク元として 09-21 に変更済み（計27本）
-  'camp-cooler-box-overall', 'portable-power-vehicle-camp', 'cooler-ice-pack', 'snowpeak-tent',
-  'dod-table', 'low-style-table', 'outdoor-kitchen-table', 'solo-tent-overall',
-  'solo-tent-beginner', 'coleman-tent', 'dod-tent', 'secondary-combustion-bonfire',
-  'charcoal-starter', 'bonfire-sheet', 'bonfire-stand-beginner', 'car-camp-bed-kit',
-  'car-camp-mat', 'camp-lantern-led', 'electric-blanket-camp', 'fire-blower', 'camp-bbq-grill',
-  'family-camp-bbq', 'hand-axe', 'disaster-portable-power', 'jackery-power-station',
-  'ecoflow-power', 'portable-power-large',
-  // 09-20 に title/description を変更し CTR を測定中
-  'family-camp-summer-tent', 'coleman-chair', 'tent-size-beginner-guide',
-  // 別タスクで扱うため触らない
-  'kids-sleeping-bag', 'camp-backpack-beginner', 'solo-tent-lightweight', 'mountain-camp-lantern',
-  'camp-portable-power-beginner',
-]);
+const FROZEN_SLUGS = new Set([]);
 
 // ---------------------------------------------------------------------------
 // 実在ブランド（CLAUDE.md の推奨ブランド表 ＋ backfill 実績で Amazon 出品を確認したブランド）
