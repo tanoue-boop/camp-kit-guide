@@ -4,6 +4,17 @@
 
 ---
 
+## 2026-10-03 記事単位フェーズ M02：camp-windscreen の第1位ブランド表記を実商品に合わせて修正（campkit-20261003-M02）
+
+- **狙い**: 第1位カードが名指しするブランド「Pin-Eagle」が、実リンク先（楽天 `jupino3965/10000027`）の商品ブランド **CAMP GREEB（キャンプグリーブ）** と食い違っていた（`article-fix-backlog` L473 `product_swap`）。読者が記事で読んだブランド名と着地先・Amazon dp（`B076B85VWP` の商品名も「キャンプグリーブ 【国内ブランド】 大型風防板…」）のブランドが一致しない状態を解消する。
+- **経緯の確認**: 起票元（campkit-20260921-65）と監督の裏取り（同-66）で、`jupino3965` の**店舗名自体が「Pin-Eagle ＆ CAMP GREEB【公式】」**＝同一事業者が扱う2ブランドの併記であり、カードは**店舗名の併記ブランドを商品ブランドと取り違えていた**ことが判明していた。商品自体のブランドは CAMP GREEB。
+- **変更内容（「Pin-Eagle」表記 6 箇所をすべて CAMP GREEB へ）**: ①frontmatter `description`「定番のPin-Eagleリフレクター(3,980円)」②第1位カード `name`「Pin-Eagle 風防板 リフレクター（60×120cm・折りたたみ）」③第2位カード `description`「1位のPin-Eagleと同じ60×120cmサイズ」④比較表の `name`「Pin-Eagle リフレクター 60×120」⑤まとめ表の該当行⑥締めパラグラフ「**Pin-Eagleのリフレクター**が第一候補」。
+- **不変更**: `amazonAsin="B076B85VWP"`・`affiliateUrl`・`price`・`image`・`badge`・`title`・`date`／`updatedAt`。起票どおり **ASIN は実リンク先の商品として正しく**（dp のブランドも CAMP GREEB・Amazon 価格 ¥3,980＝カード `price` と一致・`price_gap` 0%）、誤っていたのはカードの文言側だけなので商品・リンクには触っていない。
+- **購入導線の状態**: 全5カードが楽天 hb.afl を保持し、#1〜#3 は `amazonAsin` 設置済み、#4（OneTigris TC陣幕＝同一品 `B0BWDLF3F3` が在庫切れ・再入荷予定なし）・#5（陣幕＋焚き火シート2点セット＝Amazon にセット構成の出品が存在しない）は `_file/amazon-backfill-no-amazon.tsv` 登録済みの恒久例外。`check-affiliate-links.cjs` は PASS。
+- **効果測定**: ブランド名の誤記が解消されたので、「キャンプグリーブ 風防板」「CAMP GREEB リフレクター」系のブランドクエリで表示が立つかを次回の `campkit-seo-competitor-scan`（金）で確認する。
+
+---
+
 ## 2026-10-03 記事単位フェーズ M01：camp-cutlery／camp-grill-plate／camp-lantern-led の購入導線を完成（campkit-20261003-M01）
 
 - **狙い**: 3記事の全カードに「楽天アフィリエイトリンク＋Amazonリンク（`amazonAsin`）が、記事の趣旨に合った正しい商品で」入った状態にし、`article-fix-backlog` の `product_swap` を解消する。収益が片側ゼロのカードと、記事の趣旨と違う商品を指すカードをなくす。
