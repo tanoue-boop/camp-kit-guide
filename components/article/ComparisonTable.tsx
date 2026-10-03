@@ -32,9 +32,11 @@ function renderCell(col: Column, product: Product, isFirst: boolean) {
     );
   }
   if (col.key === "rating") {
+    const num = Number(val);
+    const hasRating = val !== null && val !== undefined && val !== "" && Number.isFinite(num);
     return (
       <td key={col.key} className={`${styles.td} ${isFirst ? styles.tdFirst : ""}`}>
-        <span className={styles.rating}>★ {Number(val).toFixed(1)}</span>
+        {hasRating ? <span className={styles.rating}>★ {num.toFixed(1)}</span> : <span>—</span>}
       </td>
     );
   }
