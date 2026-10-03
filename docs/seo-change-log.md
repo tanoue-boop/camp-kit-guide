@@ -4,6 +4,20 @@
 
 ---
 
+## 2026-10-04 記事単位の購入導線クローズ（camp-table-folding／camp-oil-stove／camp-pillow）（campkit-20261004-M02）
+
+- **狙い**: M01 と同じく「全カードに楽天アフィリエイトリンクと Amazon リンクの両方が、記事の趣旨に合った正しい商品で入っている」状態に記事単位で持っていく。本回の 3 本はいずれも M01 の result で「閉じられない理由」が書かれていた記事で、理由の確認で終わらせず `product_swap`（手順F）で閉じた。
+- **camp-table-folding 第2位（型II＝楽天ブランド欄が `-` の無名OEM）**: 「アウトドア テーブル 耐荷重50kg 135*60cm …」（楽天 `round-era/table-001` ¥4,980）→ **ユニフレーム(UNIFLAME) 焚き火テーブル 682104**（楽天 `himaraya/0003102000995` ¥8,800 ★4.79/431件・Amazon `B000B5WLVU` ¥8,706）。§4-2 追補1 条文9（型II は探索を重ねても完成の定義を満たす経路が無い）に従い商品ごと差し替え。**記事 title の「耐荷重50kg」は、差し替え先の楽天ページに「分散耐荷重：約50kg」・Amazon dp に「最大推奨重量 50 キログラム」の印字があるため引き続き成立**する（title は不変更）。天板が 135×60cm → 55×35cm に変わるため、見出し・本文4段落・主なスペック・冒頭の5選表1行・比較表1行・まとめ表1行・「ファミリー・グループキャンプ向け」節・締め1文・frontmatter `description`（価格レンジ 約2,700〜7,900円 → 約2,700〜8,800円）を整合させた。`article-fix-backlog` L594（`name_fix`）を done。
+- **camp-table-folding 第4位（Amazon リンクが別ブランドの商品を指していた）**: `amazonAsin` **B071HW4LNR（ブランド欄「フロンティア」の別商品）→ B07B48FPV6**。92 が記録していた候補 `B078J3QW5Q` は本日時点で失効しており（dp の `currentAsin` が `B07MHVGVF3` にすり替わり、照合済みだった【C】シルバー/幅90cm が変種一覧から消滅）、同時に楽天側も着地時既定の アルミ調シルバー が qty=0 になっていた。そこで在庫のある同価格・同構成の **ヘリンボーン/オーシャン**（楽天 a13293 ¥7,920 qty=25 ／ Amazon B07B48FPV6 ¥8,580）に両側を揃え、カード `name` に軸の値を literal で追記した。`article-fix-backlog` L452（`asin_mismatch`）を done。
+- **camp-table-folding 第1位・第3位・第5位**: `amazonUrl`（`amzn.to` 短縮）を `amazonAsin` へ展開（`B00WG5TSAK` / `B0CZK4GLZ5` / `B0DHRT2WHR`）。§4-4 のとおり読者の着地先は 1 文字も変わらないため、判定列は書かず本文も触っていない。
+- **camp-oil-stove 第5位**: 無名OEMの「対流型石油ストーブ 小型（電源不要・収納袋付き）」（楽天URL が HTTP 404・旧価格 ¥8,800）→ **PASECO(パセコ) 対流型石油ストーブ JKH-1S ブラック**（楽天 `paseco/jkh-1s` ¥20,900 ★4.66/141件・段①メーカー公式店・Amazon `B0DCG23DYS` ¥20,900＝価格差0%）。L109 が `needs-human` で止まっていた理由は「¥8,800 の対流型石油ストーブに該当するブランド品が存在せず、差し替えると価格設計の作り直しになる」ことだったので、**価格設計の作り直しもあわせて実施**: 「1万円以下の入門枠」→「2万円台の最安枠」に改め、frontmatter `description`・比較表1行・まとめ表1行・FAQ「価格の安い機種と高い機種は何が違う？」・まとめ締め1文を新価格に整合させた。楽天ページの印字「使用場所＝屋外専用」をカード `description` と比較表に明記（幕内利用の注意を扱う記事なので読者に必要な情報）。`article-fix-backlog` L109（`discontinued_404`）を done。
+- **camp-pillow 第4位**: 「GRANDOOR アウトドア枕 ウレタン 通気性 …」（楽天URL が HTTP 404・旧価格 ¥3,980）→ **DOD(ディーオーディー) ソトネノマクラ2 タン CP1-204-TN**（楽天 `naturum-outdoor/4040417` ¥3,960・単独SKU・Amazon `B0G8WS2819` ¥3,641）。`updatedAt`・`title` は不変更で、frontmatter `description` の価格レンジ「実勢1,700〜3,980円台」は新価格を包含するため価格部分は変えず商品名のみ差し替えた。**楽天側のレビューが全出品 ★0/0 件（2026年の新モデル）**のため、カードの `rakutenRating`／`rakutenReviewCount` 属性を省略し（`ProductCard` は属性が無いと評価ブロックを描画しない）、本文からレビュー実績の記述を外した。比較表の `reviews` は「—」。`article-fix-backlog` L111（`discontinued_404`）を done。
+- **`amazon-backfill-no-amazon.tsv` から 2 行を削除**（`camp-oil-stove#5` / `camp-pillow#4`）。どちらも行自身の `reason` に「商品差し替え後は本行を削除して再照合すること」と書かれていたもの。`camp-oil-stove#4`（コロナ SZ-F32A(CF)＝コロナストア限定で Amazon 出品なし）は恒久例外として残置。
+- **updatedAt は3記事とも据え置き**（§6 追補・リンク／商品差し替え回は動かさない）。
+- **効果測定**: 型番クエリ（「ユニフレーム 焚き火テーブル 682104」「パセコ JKH-1S」「DOD ソトネノマクラ2」「FIELDOOR ヘリンボーン オーシャン 90cm」）の表示回数・CTR を次回以降の `campkit-seo-competitor-scan`（金）で確認する。あわせて **camp-table-folding と `takibi-table`（第1位が同じ B000B5WLVU＝ユニフレーム 焚き火テーブル）の食い合い**を観測点に入れる。
+
+---
+
 ## 2026-10-04 記事単位の購入導線クローズ（day-camp-grill／portable-fridge／bluetti-power）（campkit-20261004-M01）
 
 - **狙い**: 「全カードに楽天アフィリエイトリンクと Amazon リンクの両方が、記事の趣旨に合った正しい商品で入っている」状態（＝完成）に記事単位で持っていく。SEO 的には、無名OEM品を実在ブランドの型番付きモデルへ差し替えることで、商品名クエリ（型番検索）での受け皿を作り、カード記述と実リンク先の食い違い（E-E-A-T のマイナス）を解消する。
