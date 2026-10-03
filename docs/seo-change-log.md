@@ -4,6 +4,17 @@
 
 ---
 
+## 2026-10-04 記事単位の購入導線クローズ（day-camp-grill／portable-fridge／bluetti-power）（campkit-20261004-M01）
+
+- **狙い**: 「全カードに楽天アフィリエイトリンクと Amazon リンクの両方が、記事の趣旨に合った正しい商品で入っている」状態（＝完成）に記事単位で持っていく。SEO 的には、無名OEM品を実在ブランドの型番付きモデルへ差し替えることで、商品名クエリ（型番検索）での受け皿を作り、カード記述と実リンク先の食い違い（E-E-A-T のマイナス）を解消する。
+- **day-camp-grill 第2位**: 無名OEMの「焚き火台 コンパクト 折りたたみ式…」（楽天 `plusiine/bonfire02` ¥3,680）→ **キャプテンスタッグ ヘキサ ステンレス ファイアグリル M-6498**（楽天 `naturum/808366` ¥4,827 ★4.54/41件・Amazon `B003AKZ7BE` ¥3,955）。見出し・カード（name／description／price／rakutenRating／rakutenReviewCount／affiliateUrl／amazonAsin／badge／image）・本文2段落・比較表1行・まとめ表1行・締め1文・frontmatter `description` を新商品の実測値に更新。`article-fix-backlog` L588（`product_swap`）を done。
+- **portable-fridge 第3位**: 無名OEMの「ポータブル冷凍庫 18L/22L/25L/30L…」（楽天 `thnlight/18lreizou` ¥17,480）→ **LVYUAN（リョクエン）ポータブル冷蔵庫 18L FSAK-CL18-LV-JP**（楽天 `lvyuan/c9` 18L SKU ¥19,998 ★4.48/44件・Amazon `B092VPS6ZN` ¥19,998＝価格差0%）。同じ範囲を新商品の実測値に更新。
+- **bluetti-power 第1位・第5位**: 第1位は楽天リンク先が AC70（768Wh）から **AORA 100 mini**（1004.8Wh/700W）へ差し替わっていたため、カードを実商品に合わせて作り直し（リンクも商品専用ページ `bluettijapan_aora100mini` に変更・Amazon `B0H36KVXXY`）。第5位は「EB3A ＋ 130Wソーラーパネル セット」表記に対し実際の着地SKUがパネル「なし」だったため、**EB3A 本体のみ（ソーラーパネルなし）**へ記述を統一。選び方ポイント1・2・4／Tips／FAQ 3問／比較表2行／まとめ表2行／frontmatter `description` まで整合させた。`article-fix-backlog` L60・L61（`product_swap`）を done。
+- **updatedAt は3記事とも据え置き**（§6 追補・リンク／商品差し替え回は動かさない）。
+- **効果測定**: 型番クエリ（「M-6498」「LVYUAN 18L 車載冷蔵庫」「BLUETTI AORA 100 mini」「BLUETTI EB3A」）の表示回数・CTR を次回以降の `campkit-seo-competitor-scan`（金）で確認する。
+
+---
+
 ## 2026-10-04 karrimor-backpack リライト／狙いKW カリマー リュック／リライト前の関連順位 6.1（GSC 28日）（campkit-20261004-R07）
 
 - **狙い**: 「カリマー リュック」（月間1万〜10万）。GSC 直近28日（10/1時点）の関連順位は **6.1** で、1ページ目上位〜上位3位を取りにいく。**4製品 → 10製品**の全面リライト。
