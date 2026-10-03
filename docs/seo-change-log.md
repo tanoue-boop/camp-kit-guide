@@ -4,6 +4,18 @@
 
 ---
 
+## 2026-10-03 camp-windscreen 第4位を OneTigris TC陣幕 → VASTLAND TC ポップアップシールド陣幕へ差し替え（campkit-20261003-02）
+
+- **狙い**: 第4位（`windscreen-onetigris-tc`）は `amazon-backfill-no-amazon.tsv` の恒久例外（`同一品 B0BWDLF3F3 が在庫切れ・再入荷予定なし`）に頼って `check-affiliate-links.cjs` を通していたが、**恒久例外は「Amazon に同一品・同等品が実在しないことを実物で確認した枚」に限られ、在庫切れはこれに当たらない**。加えて `card-name-check.tsv` の `rakuten_item_name` が **`★完売次第廃盤★`** で始まっており、楽天側の出品自体が終売予定でこの枠はいずれ楽天リンクごと死ぬ状態だった。両モールの導線が生きている商品へ枠ごと移す。
+- **旧 → 新**: `OneTigris ポリコットンTC 陣幕 前幕 CE-QZM01-CB ブラウン`（¥8,390／★4.59・209件／Amazon リンクなし） → **`VASTLAND TC ポップアップシールド陣幕 VL-TPT-S-TAN（タン）`**（¥10,980／★4.3・30件／`amazonAsin="B0CGZJBTZM"`）。楽天は **VASTLAND DIRECT STORE（shopCode `vastland`）＝ブランド公式店**の `vastland/vl0484-1`（itemCode `vastland:10000331`）、採用変種は `タン`（variantId `VL0484`・`メーカー型番 VL-TPT-S-TAN`・在庫 182・`hidden` false）。
+- **Amazon 側の同一性**: 型番クエリ `VASTLAND VL-TPT-S-TAN` の `/s` 1本で該当1件に到達し、dp で §4-2 恒久ルール (B) の **①②③すべてが成立**（① ブランド欄 `ヴァストランド(VASTLAND)`／② 商品モデル番号 `VL-TPT-S-TAN` が楽天 `attributes` のメーカー型番と完全一致／③ 色 `タン`・変種一覧 `[タン／オリーブ]` に `タン` あり）。**dp 価格 ¥10,980 はカード `price` と同額（`price_gap 0%`）**・`在庫あり。`・カート有効・出荷元/販売元 `VASTLAND DIRECT STORE`（`seller_type=official`）。
+- **価格帯**: 第4位の枠は ¥8,390 → ¥10,980 へ上がった（監督が本回で価格帯を ¥9,900〜¥12,500 に引き上げた。前回 `campkit-20261003-01` は ¥6,000〜¥9,900 の帯で5ブランドを探索したが帯に収まる TC 陣幕が実在せず不採用で終えていた）。これに合わせて frontmatter `description` の価格レンジ（`2,980〜8,390円` → `2,980〜10,980円`）、比較表の第4位行（商品名・特長・価格・評価）、FAQ の価格差の説明（`8,000円前後` → `11,000円前後`）、まとめ表（`8,300円台` → `10,900円台`）、締めの段落のブランド名を実測値へ揃えた。
+- **本文に書いた事実の裏取り**: カード `description` の素材（`ポリエステル・コットン混紡素材`）・展開サイズ（`90°展開時 約195cm×98cm`／`1パネルあたり 約138cm×120cm`）・収納サイズ（`100cm×15cm×15cm`）・ワンタッチ構造（`ワンタッチポップアップ仕様`）は、すべて実取得した楽天 item ページの印字で裏が取れたもののみ。監督案にあった「火の粉の飛散をやわらげる」は、印字が `火の粉が当たっても燃え広がりにくい`（素材の耐燃性）であって飛散の遮蔽ではないため**落とした**。
+- **不変更**: カード `id`（`windscreen-onetigris-tc`）・`rank`・`source`・frontmatter の `date`／`updatedAt`（`2026-08-10`）・第1位〜第3位・第5位のカード・記事の他の見出しと本文・`thumbnail`。`amazon-backfill-no-amazon.tsv` の `rank=5`（`windscreen-dreambrother-2set`＝構成違いによる正当な恒久例外）の行も無傷。
+- **効果測定**: 第4位の片側ゼロが解消し、記事内5枚のうち4枚が両モール導線を持つ状態になった（第5位は構成違いの恒久例外で楽天のみ）。「焚き火 陣幕」「TC 陣幕」「ウィンドスクリーン 焚き火」系クエリの CTR・収益を次回の `campkit-seo-competitor-scan`（金）で確認する。
+
+---
+
 ## 2026-10-03 記事単位フェーズ M02：secondary-combustion-bonfire 第3位に Amazon リンクを設置して購入導線を完成（campkit-20261003-M02）
 
 - **狙い**: 5枚のうち第3位（`glass-window-stove`）だけ Amazon 導線が無く `check-affiliate-links.cjs` が FAIL していた。カード `name` が「二次燃焼型 焚き火台 ガラス窓 二層壁構造 五徳・収納袋付き 30×14×23.5cm」とブランド語を持たない商材説明文だったため未設置のまま残っていたが、**楽天 item ページ側には `ブランド名=YOLER`・`メーカー型番=YR-TKB01` が印字されている型I**なので型番クエリで到達できる。
