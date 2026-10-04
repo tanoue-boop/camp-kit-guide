@@ -25,9 +25,11 @@ function renderCell(col: Column, product: Product, isFirst: boolean) {
   const strVal = String(val ?? "");
 
   if (col.key === "price") {
+    const num = Number(val);
+    const hasPrice = val !== null && val !== undefined && val !== "" && Number.isFinite(num);
     return (
       <td key={col.key} className={`${styles.td} ${isFirst ? styles.tdFirst : ""}`}>
-        <span className={styles.price}>¥{Number(val).toLocaleString()}</span>
+        {hasPrice ? <span className={styles.price}>¥{num.toLocaleString()}</span> : <span>—</span>}
       </td>
     );
   }
@@ -41,11 +43,16 @@ function renderCell(col: Column, product: Product, isFirst: boolean) {
     );
   }
   if (col.key === "source") {
+    const label = product.source === "amazon" ? "Amazon" : "楽天";
     return (
       <td key={col.key} className={`${styles.td} ${isFirst ? styles.tdFirst : ""}`}>
-        <a href={product.affiliateUrl ?? "#"} target="_blank" rel="noopener noreferrer nofollow" className={styles.link}>
-          {product.source === "amazon" ? "Amazon" : "楽天"}
-        </a>
+        {product.affiliateUrl ? (
+          <a href={product.affiliateUrl} target="_blank" rel="noopener noreferrer nofollow" className={styles.link}>
+            {label}
+          </a>
+        ) : (
+          <span>{label}</span>
+        )}
       </td>
     );
   }
