@@ -4,6 +4,26 @@
 
 ---
 
+## 2026-10-07 family-camp-bbq／family-camp-mat／family-camp-tent の購入導線を完成（7枚を product_swap ＋ Amazon リンク設置）（campkit-20261007-M01）
+
+- **狙い**: 3記事の全カードを「楽天 hb.afl ＋ Amazon amazonAsin の両方が正しい商品で入っている」状態にし、`article-fix-backlog.tsv` に残っていた `discontinued_404`（priority A×3）を解消する。無名OEM・楽天404・全変種 soldout のカードが購入導線を塞いでいたため、商品そのものを有名ブランドの在庫あり品へ差し替えた（§4-2 追補1 条文9: 型II カードは探索では閉じられないので同一タスクで `product_swap` する）。
+- **差し替え6枚（すべて楽天 item ページと Amazon dp を実取得して確定）**:
+  - `family-camp-bbq` 第1位: ダーチ DARCHE BBQ CHARCOAL STARTER（716select・qty=1）→ **コールマン クールステージ ツーウェイグリル レッド 170-9433**（コールマン公式 楽天市場店 `coleman/col3880`・¥7,920・★4.71/41件・`amazonAsin=B004IWR4UU`）。DARCHE は Amazon `/s` が2回連続 `bm-verify` の真ブロック（§12-5-2 の4点すべて成立）で採否を確定できず、§12-4 により打ち切って商品を差し替えた。
+  - `family-camp-bbq` 第3位: 楽天404の無名OEM超大型BBQコンロ → **ユニフレーム ファイアグリル 本体 683040**（`naturum-outdoor/20510`・¥7,120・★4.67/9件・`amazonAsin=B000AR5Y90`）
+  - `family-camp-bbq` 第4位: 全変種 soldout の無名OEMファイヤーピット → **スノーピーク 焚火台 M ST-033R**（Snow Peak 公式 `snowpeak-official/st-033r`・¥17,160・★4.67/3件・`amazonAsin=B00FXFFST0`）
+  - `family-camp-bbq` 第5位: price +40.3% 乖離の型II焚き火台 → **キャプテンスタッグ ヘキサ ステンレス ファイアグリル M-6498**（`naturum/808366`・¥4,827・★4.54/41件・`amazonAsin=B003AKZ7BE`）
+  - `family-camp-mat` 第2位: 全変種 soldout の型II（patri/ad011）→ **VASTLAND インフレーターマット 厚さ8cm ブラック**（VASTLAND 公式 `vastland/vl0160-1`・¥6,780・★4.61/226件・`amazonAsin=B09F2RVRZM`）
+  - `family-camp-mat` 第3位: 楽天404の無名OEM（alice-zk/ad024）→ **コールマン キャンパーインフレーターマット/シングルIII 2000032354**（`store-megasports/58968470`・¥10,450・★4.61/56件・`amazonAsin=B0792324NS`）
+  - `family-camp-tent` 第3位: 楽天404の TOMOUNT TRT-KAKO → **コールマン トンネル2ルーム/240 2207110**（`naturum/3454296`・¥56,354・レビュー0件のため評価属性は省略・`amazonAsin=B0CPXZP1MF`）
+- **SEO 的な狙い**: (1) 3記事とも無名OEM中心だった採用商品を**コールマン・ユニフレーム・スノーピーク・キャプテンスタッグ・VASTLAND の定番モデル**へ置き換え、検索者がブランド名で探す需要（「コールマン クールステージ」「ユニフレーム ファイアグリル」「スノーピーク 焚火台 M」「VASTLAND インフレーターマット」等）の受け皿を作った。(2) `family-camp-bbq` は5製品が5ブランドに分散し、BBQ専用グリル（コールマン）と兼用モデル（ユニフレーム・キャプテンスタッグ）の比較軸が成立するようになった。(3) `family-camp-tent` は TOMOUNT 3点占有→2点に緩和（CLAUDE.md のブランド占有ルール）。
+- **本文の書き方**: 差し替えた7枚は見出し・地の文・比較表の行・まとめ表の行・カード属性すべてを新商品の実測値へ更新（§12-5-9 条文1）。カード `id`・比較表の `id`・アンカーは据え置き（条文2）。スペックは楽天販売ページの仕様欄の印字のみを根拠にし、公表値が無い `対応人数` は「非公表（焼面30×45cm）」「非公表（火床43×43cm）」と明記して推測で埋めていない。`family-camp-bbq` の frontmatter `description` は価格帯（3,850〜17,160円）とブランド名を更新。
+- **据え置いたもの**: `updatedAt` は3記事とも不変更（§6 追補: 商品差し替え回は動かさない＝リライト効果測定の待機対象に入れない）。
+- **台帳**: `article-fix-backlog.tsv` は8行を `done`（family-camp-bbq 3行／family-camp-mat 4行／family-camp-tent 1行）。`mountain-camp-mat` 第3位の既存 `asin_mismatch` 行（L500）には、本タスクの dp 実測で確定した差し替え先 `B09F2RVRZM` を notes 追記（同一キーは新規起票しない＝§5-2）。
+- **効果測定**: 2〜3週間後の `campkit-seo-competitor-scan`（金）で、新ブランドクエリの表示回数の立ち上がりと、既存クエリ（「ファミリーキャンプ BBQ」「ファミリーキャンプ マット」「ファミリーテント おすすめ」）の順位を確認する。
+- **未完**: `family-camp-mat` 第1位・第4位（通販の暁／雑貨の国のアリスの無名OEM・ともに全変種 soldout）は `out_of_stock` の backlog 行が `pending` のまま。両リンクは正しい商品を指しているが楽天側が買えない状態なので、次に同記事を触る回で `product_swap` を検討する。
+
+---
+
 ## 2026-10-07 portable-power-large リライト／狙いKW ポータブル電源 おすすめ／リライト前の関連順位 26.1（GSC 28日）（campkit-20261007-R10）
 
 - **狙い**: 「ポータブル電源 おすすめ」（月間1万〜10万）。GSC直近28日の関連クエリ平均順位 26.1 位。上位記事（my-best／ポータブル電源ラボ／360life 等）は Jackery・EcoFlow・Anker・BLUETTI・DJI を 10〜20 製品で容量帯別に並べており、5製品・2000Wh級一辺倒だった旧記事では比較の土俵に乗れていなかった。
