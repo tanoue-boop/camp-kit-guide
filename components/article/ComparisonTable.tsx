@@ -108,7 +108,7 @@ export default function ComparisonTable({ products = [], columns = defaultColumn
                     const baseClass = `${styles.td} ${isFirst ? styles.tdFirst : ""} ${styles.tdSticky} ${isFirst ? styles.tdStickyFirst : isEven ? styles.tdStickyEven : styles.tdStickyDefault}`;
                     return (
                       <td key={col.key} className={baseClass}>
-                        {(product as Record<string, unknown>)[col.key] as string ?? ""}
+                        {String((product as Record<string, unknown>)[col.key] ?? "")}
                       </td>
                     );
                   })}

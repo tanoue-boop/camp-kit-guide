@@ -58,7 +58,30 @@
  *        常に URL を返す＝楽天ボタンは必ず 1 枚出るので「リンクが 1 本も無いカード」は原理的に無く、total は
  *        JSON-LD／__NEXT_DATA__ 込みの混在カウントで判定として意味が薄いため（45 QUESTION-1 への監督判断）。
  *        合否は「楽天枚数一致 && Amazon枚数一致 && 楽天値一致 && Amazon値一致」。
+ *   3d. 比較表（ComparisonTableMdx）の購入先リンク（2026-10-06 追加・campkit-20261006-01）
+ *      ★旧実装の穴: カード（ProductCardMdx）しか合否に使っておらず、比較表の行は 1 行も見ていなかった
+ *      （rakutenTableHb は数えていたが「合否対象外」と明記して捨てていた）。そのため「カードの href を
+ *      1 文字も変えず比較表だけを変える回」は、本番が旧キャッシュのままでも PASS した。
+ *      - 検査1（回帰検知）: columns に {"key":"source"} を含む比較表ブロックの行のうち affiliateUrl が
+ *        hb.afl で始まる本数（mdx 由来の期待値）と、本番の比較表リンク（<a class="…ComparisonTable…__link">の
+ *        hb.afl）の本数が【一致】すること。期待 0 は実測 0 で PASS。
+ *        ・比較表の行の affiliateUrl は全てが楽天とは限らない（charcoal-starter の 5 行は Amazon の dp URL）。
+ *          したがって「行数＝hb.afl 数」ではなく「hb.afl で始まる行数＝hb.afl 数」で見る。
+ *        ・ComparisonTable がリンクを描くのは source 列のセルだけなので、source 列を持つブロックが
+ *          1 つも無い記事はこの検査の対象外（PASS）にする。
+ *      - 検査2（購入導線の欠落検知）: 同じブロックの全行が空でない affiliateUrl を持つこと
+ *        （hb.afl でも Amazon dp でもよい）。既知例外は TABLE_AFFILIATE_EXEMPT のみ免除する。
+ *        ・検査2 は mdx 側のデータ不備＝待っても直らないので【反映待ちの理由には入れない】（合否だけに使う）。
+ *      ※この 2 検査は check-affiliate-links.cjs（deploy.cjs の build 前の関門）には足さない。
+ *        あちらで FAIL するとその記事がデプロイ不能になるため（campkit-20261006-01 §A-3）。
  *   4. PR表記（景表法対応）が本文に含まれる
+ *   4b. 本番HTMLに描画事故の痕跡（NaN / >undefined<）が 0 件であること（2026-10-06 追加・campkit-20261006-01）
+ *      2026-10-04 に camp-pillow の比較表で「★ NaN」が本番に出た（rows から rating キーを落としたのに
+ *      columns に {"key":"rating"} が残っていた）。当時の verify はリンク数・href 値・タグ健全性・PR表記・
+ *      og:image を見るがセル内の文字列を見ないので PASS した。コンポーネント側のガードは 2026-10-04 の 01 で
+ *      入っており現在は「—」が出る。本検査はそのガードが将来外れたときの回帰検知である。
+ *      ・検査語は NaN と >undefined< の 2 つだけ。null / Infinity は __NEXT_DATA__ に正当に出るので入れない。
+ *      ・undefined は裸の語では数えない（JSON や外部スクリプトに正当に出る余地がある）。
  *   5. og:image がサムネイル規約（/images/thumbnails/<slug>.png または /images/outdoor-0X.png）に一致し、
  *      【ローカル frontmatter の thumbnail と同じ画像】であり、その画像URLが実際に 200 を返す
  *      （2026-09-17追記：形式と200しか見ていなかったため、サムネイルだけを差し替えたデプロイで
@@ -89,6 +112,15 @@ const STALE_SLACK_SEC = 5;
 // 形式NGで FAIL していたため thumbnails/ を追加した。
 const THUMB_RE = /\/images\/(?:outdoor-0[1-9]|thumbnails\/[a-z0-9-]+)\.png/;
 const HB_AFL_PREFIX = 'https://hb.afl.rakuten.co.jp/';
+// 比較表の行に affiliateUrl が無いことが既知の記事（検査2 の例外・campkit-20261006-01）。
+// osprey-backpack: 比較表1ブロック10行すべてに affiliateUrl が無い。リライト監督（R06）の担当記事。
+// → R06 が10行を埋めたら、この Set から名前を外すこと。2026-10-06 時点で全266記事中この1記事だけ。
+const TABLE_AFFILIATE_EXEMPT = new Set(['osprey-backpack']);
+// 本番HTMLに出てはいけない描画事故の痕跡（4b）。NaN は素の語で数える（2026-10-06 時点の本番実測で 0 件）。
+// undefined はタグに挟まれて画面に出ている形だけを数える（裸の語は __NEXT_DATA__ 等に正当に出る余地がある）。
+const FORBIDDEN_TEXTS = ['NaN', '>undefined<'];
+// 4b が FAIL したときに出す前後文脈の文字数（最初の出現箇所の前後それぞれ）
+const FORBIDDEN_CONTEXT = 60;
 // lib/amazon.ts の buildAmazonUrl() が組む URL の ?tag= を除いた部分。値照合はこの「タグ無し dp URL」の形で行う
 // （campkit-20260921-47・理由はファイル冒頭コメント 3 の「値の照合」参照）。
 const AMAZON_DP_PREFIX = 'https://www.amazon.co.jp/dp/';
@@ -170,6 +202,60 @@ function parseLocal(src) {
     rakutenExpectedHrefs,
     amazonExpectedHrefs,
     dupAsins,
+    // 比較表（ComparisonTableMdx）の期待値（campkit-20261006-01・ファイル冒頭コメント 3d）
+    ...parseComparisonTables(src),
+  };
+}
+
+// 比較表（ComparisonTableMdx）から購入先リンクの期待値を算出する（campkit-20261006-01）。
+//   tableBlocks               : 比較表ブロックの総数（参考値）
+//   tableSourceBlocks         : columns に {"key":"source"} を含むブロック数。0 なら検査1・検査2 の対象外
+//   tableRowsTotal            : 上記ブロックの行の総数（参考値）
+//   tableRakutenExpected      : 上記ブロックの行のうち affiliateUrl が hb.afl で始まる本数（検査1 の期待値）
+//   tableRowsWithoutAffiliate : 上記ブロックの行のうち affiliateUrl が無い／空の本数（検査2）
+//   tableParseFailed          : columns / rows の JSON parse に失敗したブロック数（そのブロックは母数から外す）
+// 属性値はシングルクォート囲み（columns='[{"key":"name",…}]'）である。JSON は読むだけで再シリアライズしない。
+function parseComparisonTables(src) {
+  const blocks = src.match(/<ComparisonTableMdx[\s\S]*?\/>/g) || [];
+  let tableSourceBlocks = 0;
+  let tableRowsTotal = 0;
+  let tableRakutenExpected = 0;
+  let tableRowsWithoutAffiliate = 0;
+  let tableParseFailed = 0;
+  for (const block of blocks) {
+    const colsRaw = (block.match(/\bcolumns='([\s\S]*?)'/) || [])[1];
+    const rowsRaw = (block.match(/\brows='([\s\S]*?)'/) || [])[1];
+    let cols;
+    let rows;
+    try {
+      cols = JSON.parse(colsRaw);
+      rows = JSON.parse(rowsRaw);
+    } catch {
+      // 壊れた JSON／属性欠落は例外にせず「母数から外す」扱いにする（落ちてはいけない）
+      tableParseFailed++;
+      continue;
+    }
+    if (!Array.isArray(cols) || !Array.isArray(rows)) {
+      tableParseFailed++;
+      continue;
+    }
+    // ComparisonTable がリンクを描くのは source 列のセルだけなので、source 列を持つブロックだけを対象にする
+    if (!cols.some((c) => c && c.key === 'source')) continue;
+    tableSourceBlocks++;
+    tableRowsTotal += rows.length;
+    for (const row of rows) {
+      const aff = row && typeof row.affiliateUrl === 'string' ? row.affiliateUrl : '';
+      if (!aff) tableRowsWithoutAffiliate++;
+      else if (aff.startsWith(HB_AFL_PREFIX)) tableRakutenExpected++;
+    }
+  }
+  return {
+    tableBlocks: blocks.length,
+    tableSourceBlocks,
+    tableRowsTotal,
+    tableRakutenExpected,
+    tableRowsWithoutAffiliate,
+    tableParseFailed,
   };
 }
 
@@ -341,6 +427,41 @@ function judgeAmazonHrefs(local, links) {
   return diffMultiset(local.amazonExpectedHrefs || [], links.amazonButtonHrefs || []);
 }
 
+// 比較表の購入先リンクの合否・検査1（回帰検知・campkit-20261006-01）。
+// mdx 由来の期待数（source 列を持つブロックの行のうち affiliateUrl が hb.afl で始まる本数）と
+// 実測（比較表リンクの hb.afl 数）の一致を見る。期待 0 は実測 0 で PASS（charcoal-starter 型＝Amazon dp のみ）。
+// source 列を持つブロックが 1 つも無い記事はリンクが描かれないので対象外＝PASS。
+function judgeTableRakuten(local, links) {
+  if (!local.tableSourceBlocks) return true;
+  return links.rakutenTableHb === (local.tableRakutenExpected || 0);
+}
+
+// 比較表の購入先リンクの合否・検査2（購入導線の欠落検知・campkit-20261006-01）。
+// source 列を持つブロックの全行が空でない affiliateUrl を持つこと。既知例外（TABLE_AFFILIATE_EXEMPT）は免除する。
+// 戻り値 { ok, exempt, missing }。これは mdx 側のデータ不備なので反映待ちの理由には使わない（合否だけ）。
+function judgeTableAffiliate(local, slug) {
+  const missing = local.tableRowsWithoutAffiliate || 0;
+  if (!local.tableSourceBlocks) return { ok: true, exempt: false, missing: 0 };
+  if (TABLE_AFFILIATE_EXEMPT.has(slug)) return { ok: true, exempt: true, missing };
+  return { ok: missing === 0, exempt: false, missing };
+}
+
+// 本番HTMLに描画事故の痕跡（NaN / >undefined<）が無いかを調べる（4b・campkit-20261006-01）。
+// 見つかった検査語ごとに { needle, count, context } を返す（context は最初の出現箇所の前後 FORBIDDEN_CONTEXT 文字）。
+function findForbiddenText(html) {
+  const hits = [];
+  for (const needle of FORBIDDEN_TEXTS) {
+    const count = String(html).split(needle).length - 1;
+    if (count === 0) continue;
+    const at = String(html).indexOf(needle);
+    const context = String(html)
+      .slice(Math.max(0, at - FORBIDDEN_CONTEXT), at + needle.length + FORBIDDEN_CONTEXT)
+      .replace(/\s+/g, ' ');
+    hits.push({ needle, count, context });
+  }
+  return hits;
+}
+
 // アフィリリンクの合否をまとめる（verify() の 3 で使う）。
 // 合否＝楽天枚数一致 && Amazon枚数一致 && 楽天値一致 && Amazon値一致（47 で「total ≧ cardCount」を外した）。
 function judgeLinks(local, links) {
@@ -390,6 +511,15 @@ function pendingReasons(html, local) {
     if (!rakutenHref.ok) {
       reasons.push(`本番の楽天リンク(hb.afl ボタン)の href が期待と不一致です（${describeHrefDiff(rakutenHref)}）`);
     }
+  }
+  // 比較表の購入先リンク（2026-10-06・campkit-20261006-01）: カードの href を 1 文字も変えず比較表だけを変える回は
+  // 上の判定では検出できない（旧キャッシュを素通しする穴）。検査1（期待数との一致）だけを反映待ちの理由にする。
+  // 検査2（affiliateUrl の欠落）は mdx 側のデータ不備で待っても直らないため理由には入れない
+  // （入れると未知の欠落が出たときに反映待ちループが上限まで空回りする）。
+  if (!judgeTableRakuten(local, l)) {
+    reasons.push(
+      `本番の比較表の楽天リンク(hb.afl)が${l.rakutenTableHb}本で期待${local.tableRakutenExpected || 0}本と不一致です`
+    );
   }
   // サムネイルだけを差し替えたデプロイ（title・リンク数は不変）は上の条件では検出できない
   // （2026-09-17 に実際に発生）ため og:image も期待値と照合する。
@@ -560,12 +690,29 @@ async function verify(slug, deployedAt) {
   console.log(
     `  ${linkOk ? 'PASS' : 'FAIL'}  アフィリリンク  ProductCard ${local.cardCount}件` +
       ` / 楽天hb.afl 期待${local.rakutenExpected}→実${links.rakutenHb}${rakutenOk ? '' : ' ✖不一致'}` +
-      `（検索URL${links.rakutenSearch}・比較表hb.afl${links.rakutenTableHb}・hb.afl全出現${links.rakutenHbAll}は合否対象外）` +
+      `（検索URL${links.rakutenSearch}・hb.afl全出現${links.rakutenHbAll}は合否対象外）` +
       ` / Amazonボタン 期待${local.amazonExpected}→実${links.amazonButtons}${amazonOk ? '' : ' ✖不一致'}` +
       `（dp${links.amazonButtonDp}・amzn.to${links.amazonButtonShort}${links.amazonButtonOther ? `・その他${links.amazonButtonOther}` : ''}）` +
       `（dp?tag=全出現${links.amazonTag}・amzn.to全出現${links.amznTo}・旧期待値(属性出現数)${local.amazonHints}は合否対象外）` +
       ` / href照合 楽天${lj.rakutenHref.ok ? 'OK' : `✖(${describeHrefDiff(lj.rakutenHref)})`}` +
       `・Amazon${lj.amazonHref.ok ? 'OK' : `✖(${describeHrefDiff(lj.amazonHref)})`}`
+  );
+
+  // 3d. 比較表（ComparisonTableMdx）の購入先リンク（campkit-20261006-01・ファイル冒頭コメント 3d）
+  //   検査1: 比較表リンクの hb.afl 数が mdx 由来の期待数と一致（source 列を持つブロックが無い記事は対象外）
+  //   検査2: source 列を持つブロックの全行が空でない affiliateUrl を持つ（既知例外は免除）
+  const tableRakutenOk = judgeTableRakuten(local, links);
+  const tableAff = judgeTableAffiliate(local, slug);
+  const tableOk = tableRakutenOk && tableAff.ok;
+  results.push(tableOk);
+  console.log(
+    `  ${tableOk ? 'PASS' : 'FAIL'}  比較表の購入先リンク` +
+      `  source列ブロック${local.tableSourceBlocks}/${local.tableBlocks}件・行${local.tableRowsTotal}` +
+      (local.tableParseFailed ? `（JSON parse失敗${local.tableParseFailed}件は母数外）` : '') +
+      (local.tableSourceBlocks
+        ? ` / 比較表hb.afl 期待${local.tableRakutenExpected}→実${links.rakutenTableHb}${tableRakutenOk ? '' : ' ✖不一致'}` +
+          ` / 比較表affiliateUrl欠落${tableAff.missing}行${tableAff.missing === 0 ? '' : tableAff.exempt ? '（既知例外）' : ' ✖'}`
+        : ' / source列なし＝対象外')
   );
 
   // 3b. Amazonタグ健全性: 空タグ / プレースホルダは成果が計上されないため FAIL
@@ -588,6 +735,17 @@ async function verify(slug, deployedAt) {
   const prOk = html.includes(PR_TEXT);
   results.push(prOk);
   console.log(`  ${prOk ? 'PASS' : 'FAIL'}  PR表記（景表法対応）`);
+
+  // 4b. 描画事故の痕跡（NaN / >undefined<）が 0 件（campkit-20261006-01・ファイル冒頭コメント 4b）
+  const forbidden = findForbiddenText(html);
+  const forbiddenOk = forbidden.length === 0;
+  results.push(forbiddenOk);
+  console.log(
+    `  ${forbiddenOk ? 'PASS' : 'FAIL'}  描画事故の痕跡なし（NaN / >undefined<）` +
+      (forbiddenOk
+        ? ''
+        : forbidden.map((h) => `\n        「${h.needle}」${h.count}件  …${h.context}…`).join(''))
+  );
 
   // 5. og:image（サムネイル）検証
   // 形式・画像取得に加えて【ローカル frontmatter の thumbnail と一致するか】も照合する
@@ -1151,6 +1309,125 @@ async function runTests() {
     eq(judgeLinks(l0, countAffiliateLinks(buildHtmlCards([{}, {}]))).ok, true);
   });
 
+  // ── §F（campkit-20261006-01）: 比較表の購入先リンクを合否に入れる／NaN・>undefined< の 0 件検査 ───────
+  // mdx 側のフィクスチャ。columns / rows はシングルクォート囲みの JSON 文字列（実記事と同じ形）。
+  const TBL_COLS_SOURCE = [{ key: 'name', label: '商品名' }, { key: '価格', label: '価格' }, { key: 'source', label: '購入先' }];
+  const TBL_COLS_NO_SOURCE = [{ key: 'name', label: '商品名' }, { key: '価格', label: '価格' }];
+  // mode: 'hb'（楽天 hb.afl）／'amazon'（Amazon dp・charcoal-starter 型）／'none'（affiliateUrl キーなし）
+  const tblRows = (n, mode) =>
+    Array.from({ length: n }, (_, i) => {
+      const row = { id: `t${i + 1}`, name: `商品${i + 1}`, 価格: '1,000円台' };
+      if (mode === 'hb') row.affiliateUrl = FX_HB(i + 1);
+      else if (mode === 'amazon') row.affiliateUrl = FX_DP(`B0TABLE000${i + 1}`);
+      if (mode === 'hb' || mode === 'amazon') row.source = mode === 'hb' ? 'rakuten' : 'amazon';
+      return row;
+    });
+  const buildTableBlock = (cols, rows) =>
+    `<ComparisonTableMdx\n  columns='${JSON.stringify(cols)}'\n  rows='${JSON.stringify(rows)}'\n/>\n`;
+  const buildMdxTables = (blocks, { title = 'テスト記事', thumbnail = '/images/thumbnails/test-slug.png' } = {}) =>
+    `---\ntitle: "${title}"\nthumbnail: "${thumbnail}"\n---\n` + blocks.join('\n');
+
+  t('F-1 比較表: source列あり・全行 hb.afl 4行 → 期待4・実4 で PASS（検査2 も PASS）', () => {
+    const local = parseLocal(buildMdxTables([buildTableBlock(TBL_COLS_SOURCE, tblRows(4, 'hb'))]));
+    eq(local.tableBlocks, 1); eq(local.tableSourceBlocks, 1); eq(local.tableRowsTotal, 4);
+    eq(local.tableRakutenExpected, 4); eq(local.tableRowsWithoutAffiliate, 0); eq(local.tableParseFailed, 0);
+    const html = buildHtmlCards([], { tableRakutenLinks: 4 });
+    const links = countAffiliateLinks(html);
+    eq(links.rakutenTableHb, 4, '実測');
+    eq(judgeTableRakuten(local, links), true, '検査1');
+    eq(judgeTableAffiliate(local, 'dod-table').ok, true, '検査2');
+    eq(pendingReasons(html, local).length, 0, '反映待ちなし');
+  });
+  t('F-2 比較表: 本番が期待より少ない（旧キャッシュ）→ 検査1 FAIL かつ反映待ちの理由に出る', () => {
+    const local = parseLocal(buildMdxTables([buildTableBlock(TBL_COLS_SOURCE, tblRows(4, 'hb'))]));
+    const html = buildHtmlCards([], { tableRakutenLinks: 2 });
+    const links = countAffiliateLinks(html);
+    eq(links.rakutenTableHb, 2); eq(judgeTableRakuten(local, links), false);
+    const reasons = pendingReasons(html, local);
+    eq(reasons.length, 1); eq(reasons[0].includes('比較表の楽天リンク(hb.afl)が2本で期待4本'), true);
+    // 多くても不一致＝反映待ち（旧HTMLに旧行が残るケース）
+    eq(judgeTableRakuten(local, countAffiliateLinks(buildHtmlCards([], { tableRakutenLinks: 5 }))), false);
+  });
+  t('F-3 比較表: 行が Amazon dp 形式のみ（charcoal-starter 型）→ 期待0・実0 で PASS・検査2 も PASS', () => {
+    const local = parseLocal(buildMdxTables([buildTableBlock(TBL_COLS_SOURCE, tblRows(5, 'amazon'))]));
+    eq(local.tableSourceBlocks, 1); eq(local.tableRowsTotal, 5);
+    eq(local.tableRakutenExpected, 0, '行数ではなく hb.afl 始まりの行数で見る'); eq(local.tableRowsWithoutAffiliate, 0);
+    const html = buildHtmlCards([], { tableAmazonLinks: 5 });
+    const links = countAffiliateLinks(html);
+    eq(links.rakutenTableHb, 0); eq(judgeTableRakuten(local, links), true);
+    eq(judgeTableAffiliate(local, 'charcoal-starter').ok, true);
+    eq(pendingReasons(html, local).length, 0);
+  });
+  t('F-4 比較表: source列を持たないブロックは検査1・検査2 とも対象外で PASS', () => {
+    const local = parseLocal(buildMdxTables([buildTableBlock(TBL_COLS_NO_SOURCE, tblRows(3, 'none'))]));
+    eq(local.tableBlocks, 1); eq(local.tableSourceBlocks, 0); eq(local.tableRowsTotal, 0);
+    eq(local.tableRakutenExpected, 0); eq(local.tableRowsWithoutAffiliate, 0);
+    const html = buildHtmlCards([], { tableRakutenLinks: 3 });
+    eq(judgeTableRakuten(local, countAffiliateLinks(html)), true, '対象外＝PASS');
+    eq(judgeTableAffiliate(local, 'x').ok, true); eq(pendingReasons(html, local).length, 0);
+  });
+  t('F-5 比較表: 行に affiliateUrl が無い → 検査2 が FAIL（例外リスト外の slug）', () => {
+    const local = parseLocal(buildMdxTables([buildTableBlock(TBL_COLS_SOURCE, tblRows(10, 'none'))]));
+    eq(local.tableSourceBlocks, 1); eq(local.tableRowsTotal, 10); eq(local.tableRowsWithoutAffiliate, 10);
+    const j = judgeTableAffiliate(local, 'some-other-slug');
+    eq(j.ok, false); eq(j.exempt, false); eq(j.missing, 10);
+    // 検査1 は 期待0・実0 で PASS、検査2 の欠落は反映待ちの理由に【入れない】
+    const html = buildHtmlCards([], { tableRakutenLinks: 0 });
+    eq(judgeTableRakuten(local, countAffiliateLinks(html)), true);
+    eq(pendingReasons(html, local).length, 0, '欠落は待っても直らないので反映待ちにしない');
+  });
+  t('F-6 比較表: 同じ状況で slug が既知例外（osprey-backpack）→ 検査2 は免除されて PASS', () => {
+    const local = parseLocal(buildMdxTables([buildTableBlock(TBL_COLS_SOURCE, tblRows(10, 'none'))]));
+    const j = judgeTableAffiliate(local, 'osprey-backpack');
+    eq(j.ok, true); eq(j.exempt, true); eq(j.missing, 10);
+    eq(TABLE_AFFILIATE_EXEMPT.size, 1, '例外は1件だけ');
+  });
+  t('F-7 比較表: 1記事に複数ブロック（hb.afl＋Amazon＋source列なし）を合算する', () => {
+    const local = parseLocal(
+      buildMdxTables([
+        buildTableBlock(TBL_COLS_SOURCE, tblRows(3, 'hb')),
+        buildTableBlock(TBL_COLS_SOURCE, tblRows(2, 'amazon')),
+        buildTableBlock(TBL_COLS_NO_SOURCE, tblRows(4, 'none')),
+      ])
+    );
+    eq(local.tableBlocks, 3); eq(local.tableSourceBlocks, 2); eq(local.tableRowsTotal, 5); eq(local.tableRakutenExpected, 3);
+    eq(judgeTableRakuten(local, countAffiliateLinks(buildHtmlCards([], { tableRakutenLinks: 3, tableAmazonLinks: 2 }))), true);
+  });
+  t('F-8 比較表: columns が壊れた JSON → parse 失敗を数えて落ちない（母数から外す）', () => {
+    const broken = `<ComparisonTableMdx\n  columns='[{"key":"name",]'\n  rows='[{"id":"a"}]'\n/>\n`;
+    const local = parseLocal(buildMdxTables([broken, buildTableBlock(TBL_COLS_SOURCE, tblRows(2, 'hb'))]));
+    eq(local.tableBlocks, 2); eq(local.tableParseFailed, 1); eq(local.tableSourceBlocks, 1); eq(local.tableRakutenExpected, 2);
+    // columns / rows 属性が無いブロックも parse 失敗として扱い、例外を投げない
+    eq(parseLocal(buildMdxTables(['<ComparisonTableMdx />\n'])).tableParseFailed, 1);
+  });
+  t('F-9 4b: 本番HTMLの NaN / >undefined< を検出（清浄なHTMLは 0 件）', () => {
+    eq(findForbiddenText(buildHtmlCards([{ amazonAsin: ASIN(1) }], { tableRakutenLinks: 1 })).length, 0, '清浄');
+    const nan = findForbiddenText('<td><span class="r">★ NaN</span></td><td>★ NaN</td>');
+    eq(nan.length, 1); eq(nan[0].needle, 'NaN'); eq(nan[0].count, 2); eq(nan[0].context.includes('★ NaN'), true);
+    const und = findForbiddenText('<td>>undefined<</td>');
+    eq(und.length, 1); eq(und[0].needle, '>undefined<');
+    // 裸の undefined（__NEXT_DATA__ 等）は数えない／null・Infinity は検査語にしない
+    eq(findForbiddenText('{"a":"undefined","b":null,"c":"Infinity"}').length, 0);
+  });
+  t('F-10 既存のカード判定は比較表の追加で不変（カード期待一致・比較表も一致で PASS）', () => {
+    // mdx: カード2枚（hb.afl＋amazonAsin）＋ source 列の比較表 2 行 → カード期待2/2・比較表期待2
+    const mdx = buildMdxCards([{ amazonAsin: ASIN(1) }, { amazonAsin: ASIN(2) }]) + buildTableBlock(TBL_COLS_SOURCE, tblRows(2, 'hb'));
+    const local = parseLocal(mdx);
+    eq(local.cardCount, 2); eq(local.rakutenExpected, 2); eq(local.amazonExpected, 2); eq(local.tableRakutenExpected, 2);
+    const html = buildHtmlCards(
+      [{ amazonHref: FX_DP(ASIN(1)) }, { amazonHref: FX_DP(ASIN(2)) }],
+      { tableRakutenLinks: 2 }
+    );
+    const links = countAffiliateLinks(html);
+    eq(judgeLinks(local, links).ok, true, 'カード側の合否は不変'); eq(judgeTableRakuten(local, links), true);
+    eq(judgeTableAffiliate(local, 'x').ok, true); eq(pendingReasons(html, local).length, 0);
+    // 比較表だけが旧HTML（カードの href は 1 文字も違わない）→ 本タスクで塞いだ穴
+    const stale = buildHtmlCards([{ amazonHref: FX_DP(ASIN(1)) }, { amazonHref: FX_DP(ASIN(2)) }], { tableRakutenLinks: 1 });
+    eq(judgeLinks(local, countAffiliateLinks(stale)).ok, true, 'カードだけ見ていた旧実装は PASS していた');
+    eq(judgeTableRakuten(local, countAffiliateLinks(stale)), false, '新検査で FAIL');
+    eq(pendingReasons(stale, local).length, 1);
+  });
+
   let pass = 0;
   let fail = 0;
   for (const c of cases) {
@@ -1222,4 +1499,6 @@ module.exports = {
   parseLocal, countAffiliateLinks, judgeRakuten, judgeAmazon, pendingReasons, judgeCache, fetchWithRetry, extractOgImage,
   // campkit-20260921-47: 値照合（監督側から単体で叩けるように）
   judgeRakutenHrefs, judgeAmazonHrefs, judgeLinks, expectedAmazonHref, normalizeAmazonHref, decodeHtmlAttr, diffMultiset, describeHrefDiff,
+  // campkit-20261006-01: 比較表の購入先リンク（検査1・検査2）と描画事故の痕跡（NaN / >undefined<）
+  parseComparisonTables, judgeTableRakuten, judgeTableAffiliate, findForbiddenText, TABLE_AFFILIATE_EXEMPT,
 };
