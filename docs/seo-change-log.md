@@ -4,6 +4,16 @@
 
 ---
 
+## 2026-10-07 portable-power-large リライト／狙いKW ポータブル電源 おすすめ／リライト前の関連順位 26.1（GSC 28日）（campkit-20261007-R10）
+
+- **狙い**: 「ポータブル電源 おすすめ」（月間1万〜10万）。GSC直近28日の関連クエリ平均順位 26.1 位。上位記事（my-best／ポータブル電源ラボ／360life 等）は Jackery・EcoFlow・Anker・BLUETTI・DJI を 10〜20 製品で容量帯別に並べており、5製品・2000Wh級一辺倒だった旧記事では比較の土俵に乗れていなかった。
+- **変更**: title を「ポータブル電源おすすめ11選【2026年】大容量モデルをJackery・EcoFlow・Ankerで比較」に、description を容量帯・価格帯（59,980〜229,900円）入りへ書き直し。商品を5→11製品に入れ替え、512Wh／1024Wh／1536Wh／2048Wh の4帯をカバー。冒頭に用途別おすすめ早見表（7用途）を新設し、選び方を4→5ポイント（必要容量の逆算・定格と瞬間最大・電池種とサイクル寿命・充電3系統・防災とUPS）へ再構成。比較表を5項目→9項目（容量／定格出力／サイズ／重量／電池種類／サイクル寿命／ソーラー入力／UPS／実勢価格）に拡張し、公表値のない項目は「非公表」と明記。FAQ5問を検索需要に合わせて差し替え（何日使えるか・キャンプ持ち込み・家電が動かない理由・電池種の違い・ソーラーの要否）。
+- **採用製品（全11枚とも楽天 hb.afl ＋ Amazon amazonAsin の両リンク設置・購入ボックス実取得で確認）**: Jackery 2000 New V2／EcoFlow DELTA 3 Max／Anker Solix C2000 Gen 2／Jackery 1500 New／BLUETTI AORA 100 V2／Anker Solix C1000／EcoFlow DELTA 3 Plus／DJI Power 1000 V2／EENOUR P2001PLUS／Dabbsson 2000L／Jackery 500 New。EENOUR と Dabbsson は旧記事からコスパ枠として継続。
+- **内部リンク**: portable-power-guide／disaster-portable-power／portable-power-vehicle-camp／camp-portable-power-beginner／compact-portable-power／solar-portable-power／jackery-power-station／ecoflow-power／anker-power／bluetti-power／electric-blanket-camp へ用途別の節とまとめから発リンク（既存リンクは維持）。
+- **効果測定**: 2〜3週間後の `campkit-seo-competitor-scan`（金）で「ポータブル電源 おすすめ」系クエリの順位を再測定する。
+
+---
+
 ## 2026-10-06 group-camp-tent 第5位の差し替えは条件不成立で見送り（campkit-20261006-03）
 
 - **狙い**: `group-camp-tent` の第5位（FIELDOOR フィールドキャンプドーム300・楽天 `smile88/a13380`）は**楽天の全8SKU が sold-out・Amazon の同一品 `B089D5L5QF` も在庫切れ**で、両モールで購入導線が死んでいる。`article-fix-backlog.tsv` L33（`out_of_stock`）の解消として別商品への `product_swap` を試みた。
