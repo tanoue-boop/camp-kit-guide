@@ -4,6 +4,19 @@
 
 ---
 
+## 2026-10-06 本番検証に「比較表の購入先リンク」と「描画事故（NaN／undefined）」の検査を追加（campkit-20261006-01）
+
+- **狙い**: `verify-deploy.cjs` が見ていたのは `ProductCardMdx` のカードだけで、**比較表（`ComparisonTableMdx`）の行を1行も合否に使っていなかった**（`rakutenTableHb` は数えていたが出力に「合否対象外」と明記して捨てていた）。そのため「カードの href を1文字も変えず比較表だけを変える回」は、本番が旧キャッシュのままでも PASS した。2026-10-04 の `03`・`04` と 2026-10-05 の `02` は、成果物が本番に出たことを `deploy.cjs` 単体では検証できていなかった。その穴を塞ぐ。
+- **検査1（回帰検知・反映待ちの理由にも入れる）**: `columns` に `{"key":"source"}` を含む比較表ブロックの行のうち `affiliateUrl` が `https://hb.afl.rakuten.co.jp/` 始まりの本数（mdx 由来の期待値）と、本番の比較表リンク（`<a class="…ComparisonTable…__link">` の hb.afl）の本数が**一致**して PASS。比較表の行は全てが楽天とは限らない（`charcoal-starter` の5行は Amazon の dp URL）ので「行数＝hb.afl 数」ではなく「hb.afl 始まりの行数＝hb.afl 数」で判定する（期待0は実測0で PASS）。`source` 列を持つブロックが1つも無い記事はリンクが描かれないので対象外＝PASS。
+- **検査2（購入導線の欠落検知・合否のみ）**: 同じブロックの全行が空でない `affiliateUrl` を持つこと（hb.afl でも Amazon dp でもよい）。**既知例外は `osprey-backpack` の1記事だけ**（比較表1ブロック10行すべてに `affiliateUrl` が無い。リライト監督 R06 の担当記事なので中身は触らず、`TABLE_AFFILIATE_EXEMPT` にコメント付きで登録＝R06 が10行を埋めたら外す）。欠落は mdx 側のデータ不備で待っても直らないため、**反映待ちの理由には入れない**（入れると未知の欠落で反映待ちループが上限まで空回りする）。
+- **描画事故の検査（4b）**: 本番HTMLに `NaN` と `>undefined<` が 0 件であることを記事単位の合否に追加。2026-10-04 に `camp-pillow` の比較表で「★ NaN」が本番に出た（`rows` から `rating` キーを落としたのに `columns` に `{"key":"rating"}` が残っていた）ときも、当時の検証はセル内の文字列を見ないため PASS した。コンポーネント側のガードは 2026-10-04 の `01` で入っており現在は「—」が出るので、本検査はガードが将来外れたときの回帰検知。`null`／`Infinity` は `__NEXT_DATA__` に正当に出るので検査語にせず、`undefined` は裸の語では数えない。
+- **コンポーネント側の穴**: `components/article/ComparisonTable.tsx` の第1列 sticky セルが `[col.key] as string ?? ""` で、`as` は実行時に何もしないため値が `undefined` のとき `?? ""` に落ちず `undefined` が描画される余地があった（`price`／`rating`／`source` 分岐には同型のガードが既に入っていた）。`String(… ?? "")` に変更。全266記事・比較表228ブロックを走査して**第1列の値が文字列でない行は0件**なので、現在の表示に対しては完全な no-op（本番HTMLは1文字も変わらない）。
+- **検査の追加先**: `check-affiliate-links.cjs`（`deploy.cjs` の build 前の G01 関門）には**足していない**。あちらで FAIL するとその記事がデプロイ不能になり、`osprey-backpack` を含む記事群が公開できなくなるため。追加先は `verify-deploy.cjs` だけ。
+- **実測（全266記事・ネット0回の空振り検査）**: 比較表ブロック 228／JSON parse 失敗 0／`source` 列を含むブロック 110／その行の総数 559／hb.afl 始まりの行 544（＋Amazon dp 5＝`charcoal-starter`／`affiliateUrl` なし 10＝`osprey-backpack`）／`columns[0].key` は `name` 226・`セット` 2。検査2 で FAIL する記事は例外1件を除いて 0 件。
+- **記事・台帳への影響**: なし（`content/posts/` 266ファイルと `_file/*.tsv` は1バイトも変更していない）。`--test` は 45→55 ケース（既存45件は1件も書き換えず全て PASS のまま）。
+
+---
+
 ## 2026-10-06 記事単位の購入導線クローズ（dod-table／dod-tent／electric-blanket-camp）（campkit-20261006-M02）
 
 - **狙い**: 3記事を「全カードに楽天 hb.afl と Amazon リンクの両方が、記事の趣旨に合った正しい商品で入っている（またはAmazonに同一品が実在しないことを実測で確定させて恒久例外に登録した）」状態へ持っていく。あわせて `article-fix-backlog` に残っていた `discontinued_404` 2行（`dod-table` L173・`dod-tent` L175・どちらも priority A）を実行して解消した。
