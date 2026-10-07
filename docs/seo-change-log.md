@@ -4,6 +4,32 @@
 
 ---
 
+## 2026-10-08 large-tent-guide・low-style-table・mobile-battery-camp の購入導線を完成（product_swap 3枚＋Amazonリンク新設3枚・campkit-20261008-M01）
+
+- **狙い**: 3記事に残っていた「楽天かAmazonのどちらかが死んでいるカード」をすべて解消し、全カードで楽天アフィリエイトリンクとAmazonリンクの両方が生きている状態にする。あわせて `article-fix-backlog.tsv` の `product_swap`／`discontinued_404` を消化する。
+
+### low-style-table（ロースタイルテーブルおすすめ5選）
+
+- **第3位 product_swap**: FIELDOOR ウッドロールテーブル 90×60cm（¥6,930・楽天 `smile88/a14361` が HTTP404・Amazon `B0832CJ39Z` も失効）→ **FIELDOOR ウッドロールトップテーブル W120xD70xH45cm ナチュラル/木製フレーム**（楽天 `maxshare/a15575` ¥14,080・★4.42/293件・qty=56／`amazonAsin=B07X2WR1CC` ¥14,900 在庫あり）。90×60cm は campkit-20260921-99 が「楽天に存在しない」と確定済みのため、同一製品ラインの現行サイズへ商品ごと差し替えた。カード name/description/price/評価/レビュー数/badge/image・見出し・地の文・比較表行・まとめ表行・frontmatter description をすべて実測値へ更新（id とアンカーは据え置き）。
+- **第2位・第4位に Amazon リンクを新設**: 第2位 LAD WEATHER 折りたたみテーブル → `B09985PSSQ`（dp メーカー型番 `ladtable002` が楽天 attributes の メーカー型番と完全一致）。第4位 FIELDOOR バンブー竹製 → `B07QD4DVYN`（dp メーカー型番 `a14389` が楽天商品説明の品番と完全一致）。
+- **SEO 的な狙い**: (1) 第3位が 90×60cm → 120×70cm になり、比較表のサイズレンジが 幅60cm／記載なし／60×100cm／**120×70cm** とファミリーサイズまで広がった。「ウッドロールトップテーブル」「120×70 ローテーブル」というサイズ・型番クエリの受け皿を新設。(2) レビュー実績が 143件 → 293件 に増え、記事内で最も実績のあるカードになった。(3) 価格レンジが 1,780〜7,260円 → 1,780〜14,080円 に広がり、比較型KW（ロースタイルテーブル おすすめ）としての価格帯カバレッジが改善。frontmatter description の価格表記も追随。
+
+### mobile-battery-camp（キャンプ向けモバイルバッテリー5選）
+
+- **第4位 discontinued_404**: 無名OEM 40000mAh 4台同時充電（¥3,180・楽天 `livelylife/c302364-1` が HTTP404）→ **Anker Power Bank A1383 20000mAh 87W ブラック**（楽天公式 `anker/a1383` ¥7,490・★4.44/141件・qty=2173／`amazonAsin=B0CXNY69DC`）。campkit-20260921-100 が「ブランド欄も型番も無い無名OEMで同一商品に到達不能＝型(c)」と確定していた案件。
+- **第5位 product_swap**: 無名OEM 5000/10000mAh（¥1,760・楽天 `case-by-case/3017` が SKU56・3軸のセール統合ページで、読者の着地商品がカードと一致しない）→ **Anker PowerCore Fusion 10000 A1623 ブラック**（楽天公式 `anker/a1623` ¥4,490・★4.31/850件・qty=2872／`amazonAsin=B08HCVG4FB`）。同カードの `name_fix` 行（容量並記 5000mAh/10000mAh）も同時に解消。
+- **SEO 的な狙い**: (1) 採用5製品が「無名OEM 5枚」から「無名OEM 3枚＋**Anker 2枚**」になり、E-E-A-T の観点で記事の信頼性が大きく改善した。モバイルバッテリーは発火リスクのあるジャンルで、検索者の比較対象に必ず入る定番ブランドが1つも無い状態は上位記事と戦えなかった。(2) 「Anker モバイルバッテリー キャンプ」「Anker 20000mAh」「PowerCore Fusion 10000」というブランド・型番クエリの受け皿を新設。(3) 第4位が 40000mAh → 20000mAh/87W、第5位が小型 → コンセント一体型になり、第2位（40000mAh）との容量重複が解消して「容量・出力・同時充電数で選ぶ」という記事の軸に沿った5枚構成になった。(4) 価格レンジは 1,760〜3,180円 → 2,380〜7,490円（最高÷最低 3.15倍）で、KW整合性ルールの5倍以内を維持。
+
+### large-tent-guide（大型テントおすすめ）
+
+- **第3位**: FIELDOOR フィールドキャンプドーム300（組み立て式）は Amazon に本体の出品が無いことを `/s` 実取得で再確認し（広告でない結果29件・FIELDOOR印字518箇所・300番台はワンタッチテント300＝別モデルのみ）、`amazon-backfill-no-amazon.tsv` に恒久例外として登録。記事本文は無変更。
+
+### 申し送り（次回以降の案件）
+
+- `low-style-table` 第5位（FIELDOOR コンパクト アルミレジャーテーブル W60xD40xH24.5cm）は楽天が sold-out・在庫ある別店舗も無し・Amazon も同等品なしで、購入導線が完全に死んでいる。`out_of_stock` / priority B で新規起票した（差し替え時は #3・#4 が FIELDOOR なのでブランド占有ルールに注意し、非FIELDOORから選ぶ）。
+- `low-style-table` 第2位は カード price ¥1,780 が楽天の現行SKU価格 ¥2,880 と +61.8% 乖離しており、既存の `price_unconfirmed` 行が pending のまま残る（本タスクの対象外）。
+- `low-style-table` 第4位は実物が「四つ折り」構造だが、カード name・比較表の天板タイプが「ロール」になっている（楽天商品説明文「四つ折り構造採用のテーブル」で確認）。`name_fix` 相当の軽微な表記ずれ。
+
 ## 2026-10-07 day-camp-cooler-box 第3位を product_swap（LOGOS 9L 両モール在庫切れ → イグルー ハイブリッド12 11.4L）＋ Amazon リンク設置（campkit-20261007-02）
 
 - **狙い**: 第3位（`id=cooler-rank-3`）が 2026-09-21 から**楽天・Amazon の両方で買えない**状態だった。楽天 `baronessod/81448054` は HTTP200 のまま単一SKUが sold-out（再入荷お知らせ登録のみ）、Amazon の同型番 `B0BSH3CJ97`（LOGOS アウトドアクーラー S・9L）は `unqualifiedBuyBox` で「すべての出品を見る」のみ＝購入ボックス無し。`amazon-backfill-no-amazon.tsv` に在庫切れ理由で登録されていたが、これは POLICY の恒久例外（Amazon に同一品・同等品が実在しない枚）に当たらないので差し替えで解消した。
