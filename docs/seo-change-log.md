@@ -3,6 +3,31 @@
 数値の推移はGAS「SEOレポート」の履歴で追う。本ファイルは「いつ・どの記事を・なぜ・どう変えたか」を記録し、次回レポートで効果を評価するための施策台帳。新しい施策は上に追記する。
 
 ---
+## 2026-10-08：技術SEO監査（campkit-technical-seo-audit／月次）
+
+GSC取得は成功（tanoue@mjo-style.com、URLプレフィックスプロパティ）。実行した是正は**0件**——代表3ページの点検に「機械的に確実で安全」な欠陥がなかったため（content/posts等の変更なし。本エントリのみ追記）。
+
+### 点検結果（前回2026-09-17比）
+
+- **GSCインデックス作成レポート**: 登録済み **219**（前回203、+16）／未登録 **73**（前回75、−2）。内訳: 404 **9**（前回7、+2）／リダイレクト **3**（同）／代替canonical **1**（同）／クロール済み-未登録 **59**（前回62、−3）／検出-未登録 **1**（新規）。
+- **GSC Core Web Vitals**: モバイル・PCとも「過去90日間にトラフィックが十分にありません」（前回から変化なし）。
+- **PageSpeed Insights API**: 429（クォータ超過）。20秒空けて再試行も同じで**3ヶ月連続ラボデータ未取得**。
+- **robots.txt**: 正常・変更なし。**sitemap**: 子サイトマップ1本（`/sitemap-0.xml`）に**280 URL**（前回272、+8）。lastmodは全件ビルド時刻（2026-10-07T22:15Z）で同一（既知課題が継続）。
+- **代表3ページ**:
+  - `soto-burner` / `osprey-backpack`: canonical正／h1×1／JSON-LD（BlogPosting+author／BreadcrumbList／Product）正常／og:imageは**絶対URL化を確認**（9/17実施のSeo.tsx修正が本番に反映済み）／SNSシェアurlパラメータは記事URLで非空／H1直下にPR表記あり／商品カード画像は楽天外部直リンク（想定どおり、thumbnail・og:imageは自社ホスト）。alt欠落はヘッダー/カテゴリのSVGアイコン（記事本文の画像は欠落なし）。
+  - トップ: canonical正／h1×1／WebSite+Organization／og:imageは絶対URL（`og-default.png`）。
+  - title実長は54〜55文字（サフィックス「| CampKit Guide」込み、構造的）、descriptionは145〜149文字で規定90字（全角換算）を超過傾向（前回から継続の既知事項）。
+
+### 実行した是正：0件
+
+### 未解決の提案（人間判断待ち）
+
+1. クロール済み-未登録59件・404が+2件（9件）: 品質/重複シグナルの問題で、`campkit-seo-competitor-scan`/rewriteで対処。404増分のURL特定は次回。
+2. PSI APIクォータ超過（3ヶ月連続）: APIキー発行を推奨。
+3. SVGアイコンのalt欠落（`alt=""`＋`aria-hidden`化）・sitemap lastmodの個別化・ComparisonTable.tsx の `href ?? "#"` 防御・description超過傾向: いずれもコンポーネント/設定変更のため提案のまま。
+4. リポジトリ直下の `result-campkit-20260926-104.md`（84KB）が未追跡のまま残り、auto-deployが「その他1件」として拾って `deploy-failed`（ステージ対象外のため「ステージに何もありません」で中止）を繰り返している。不要なら削除、残すなら `.gitignore` 追加を推奨（実害はなく公開内容には影響なし）。
+
+---
 
 ## 2026-10-08 mountain-camp-tent・mummy-sleeping-bag・outdoor-kitchen-table の購入導線を完成（product_swap 4枚＋Amazonリンク新設2枚・campkit-20261008-M02）
 
