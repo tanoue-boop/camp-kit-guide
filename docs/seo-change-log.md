@@ -3,6 +3,26 @@
 数値の推移はGAS「SEOレポート」の履歴で追う。本ファイルは「いつ・どの記事を・なぜ・どう変えたか」を記録し、次回レポートで効果を評価するための施策台帳。新しい施策は上に追記する。
 
 ---
+
+## 2026-10-09 pup-tent・portable-electric-kettle・portable-power-vehicle-camp の購入導線を完成（product_swap 1枚＋価格/仕様整合 1枚＋no-amazon 登録 2枚・campkit-20261009-M01）
+
+- **狙い**: 3記事に残っていた「楽天が404／購入できるSKUが1つしかないのにカードが別仕様を名乗っている／Amazonリンクが無い」カードを解消し、全カードを「楽天アフィリエイトリンク＋Amazonリンクの両方が生きている、またはAmazonに同等品が無いことを台帳で明示している」状態にする。`article-fix-backlog.tsv` の `discontinued_404` 1件・`product_swap` 1件・`asin_mismatch` 1件を消化。updatedAt は3記事とも据え置き（リンク・商品差し替え回は動かさないルール）。
+
+### pup-tent（パップテント（軍幕）おすすめ5選）
+
+- **第3位 discontinued_404**: SoomLoom パップテント ノーマル/ビッグサイズ（¥8,400・楽天 `yiprefer/outdoor-0640102` が HTTP404。前回タスクで楽天の代替なしと確定済み）→ **Soomloom 1.65ミリタリーテント 2.0 ビッグサイズ**（楽天 `yiprefer/outdoor-252-upgrade` ¥28,970・★5.0/3件・単独出品・在庫あり／`amazonAsin=B0DT3KNBYW` ¥29,990）。460×250×160cm・11kg・T/C素材・煙突穴付きの実測値で、カード名・本文・比較表・まとめ表・frontmatter description まで差し替え。
+- **第4位 product_swap**: OneTigris ROC SHIELD は、カラー軸3値のうち購入できるSKUが `CE-BHS04-RG-A／グリーン (スノースカート付き）` ¥34,100 の1つだけという状態が継続していたため、カード名に当該軸値を明記し `price` を ¥24,800→¥34,100 に是正（比較表・まとめ表・本文の付属品/重量記述も楽天の印字に整合）。`amazonAsin=B0B2W946JV` は同一仕様のため据え置きで、価格乖離は +38%→0% に解消。
+- **SEO 的な狙い**: (1) 「最安級の入門TC軍幕」という枠が、楽天から当該商品が消えたことで実物のない訴求になっていたため、「ビッグサイズ（460×250cm）で前室と寝室を同時に広く取れる軍幕」という実スペック由来の差別化軸に組み替えた。まとめ表の行も「まず軍幕を安く試したい」→「前室を広く・ビッグサイズで使いたい」に変更。(2) 記事内の価格表記（frontmatter description・比較表・まとめ表）が実勢価格と一致する状態に戻った（旧: 8,400〜33,600円 → 新: 17,982〜34,100円）。(3) ブランド表記を楽天／Amazonの印字どおり `Soomloom` に統一（旧 `SoomLoom`）。
+
+### portable-electric-kettle（第5位・車載電気ケトル cc625）
+
+- 楽天側がブランド欄「なし」・型番が店舗SKUコード `cc625` のみの無名OEMで、Amazon側も同一スペック文の出品が ¥3,860〜¥6,488 の5 ASINに分散して1つに特定できないため、`amazon-backfill-no-amazon.tsv` に登録して台帳を閉じた（再探索は前回タスクで48件を全件列挙済み）。楽天リンクは2026-10-09時点で生存しており、購入導線は楽天のみで維持。記事は変更していない。
+
+### portable-power-vehicle-camp（第3位・EcoFlow RIVER 2 Pro 768Wh + 160W ソーラーパネル セット）
+
+- カード名がセット構成を名乗るため単品ASINは採用不可。Amazon `/s` 2本（1本目はbm-verifyブロック、2本目はHTTP200・organic 21件）でセットASINが0件だったため `amazon-backfill-no-amazon.tsv` に登録。楽天側も `ecoflow/river-pro` が【売り切れ】のままで、両導線が死んでいることが確定したため、`article-fix-backlog.tsv` の `out_of_stock` 行を priority C→A に引き上げ、在庫のあるEcoFlow公式店セット（例: DELTA 3 Classic 1024Wh+160W ¥160,300・★4.65/948件）を差し替え候補として記録した。記事は変更していない。
+
+---
 ## 2026-10-08：技術SEO監査（campkit-technical-seo-audit／月次）
 
 GSC取得は成功（tanoue@mjo-style.com、URLプレフィックスプロパティ）。実行した是正は**0件**——代表3ページの点検に「機械的に確実で安全」な欠陥がなかったため（content/posts等の変更なし。本エントリのみ追記）。
