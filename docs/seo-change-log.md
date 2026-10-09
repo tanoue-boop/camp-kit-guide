@@ -4,6 +4,17 @@
 
 ---
 
+## 2026-10-10 camp-lantern-led リライト／狙いKW ランタン おすすめ／リライト前の関連順位 13.8（GSC 28日）
+
+- **狙い**: 「ランタン おすすめ」（月間1,000〜1万）で上位記事と戦える内容にする。リライト前は5製品（Soomloom Helio5000／楽天総合1位63灯／ラドウェザー／ブルーノ／充電式1000LM）で、上位記事（my-best 25製品・hinata 20製品・camphack 13製品・happycamper 14製品）が必ず比較するクレイモア・ルーメナー・ゴールゼロ・コールマン・スノーピーク・ロゴス・ベアボーンズが1点も入っていなかった。
+- **変更内容**: 有名ブランド8点＋現記事から継続1点（ラドウェザー）の**9製品**へ全面リライト。クレイモア ULTRA 3.0 L／ルーメナー2X／コールマン クアッドマルチパネルランタンplus／ロゴス 野電 パワーストックランタン2000／スノーピーク ほおずき ES-070BR／ベアボーンズ フォレストランタン LED 2.0／ゴールゼロ ライトハウス マイクロフラッシュ（日本別注ホワイト）／パナソニック 多機能LEDランタン BF-BL45M-W／ラドウェザー LEDランタン1,000ルーメン。全9カードに楽天 hb.afl ＋ Amazon amazonAsin の両リンクを設置（Amazon は全枚 dp を 90 秒間隔で実取得し購入ボックス・型番・色を確認、台帳 verdict=ok）。
+- **構成の変更**: title を「ランタン おすすめ9選【2026年】LEDを明るさ・点灯時間・電源方式で比較」へ、description を狙いKW＋採用ブランド＋価格帯（2,280〜18,240円）入りに書き換え。用途別おすすめ早見表（9用途×1モデル）・情報源の説明・選び方6観点（明るさの目安／電源方式3択／光色と調光／IP等級の読み方／吊り下げとマグネット／モバイルバッテリー兼用）・9製品スペック比較表（明るさ・点灯時間・電源方式・重量・防水・主な用途・サイズ・実勢価格・評価・購入先の10列）・「何台で組むか」の照明計画・お手入れTips5項目・FAQ6問（何lm必要／電池式とUSB式／充電式の寿命／虫が寄りにくい色／防災兼用／機内・車載保管）・まとめ表（3列5行）を新設。
+- **内部リンク**: camp-lighting-guide／gas-lantern／oil-lantern／family-camp-lantern／lantern-stand／car-camp-lighting／solar-lantern／coleman-lantern／snowpeak-lantern／barebones-light／mountain-camp-lantern／gentos-light／camp-headlight-beginner へ用途別・ブランド別の節からリンク。既存の car-camp-lighting リンクは維持。
+- **updatedAt**: 2026-10-10（date は 2024-06-15 据え置き・thumbnail も不変更）
+- **効果測定**: 2〜3週間後の `campkit-seo-competitor-scan`（金）で「ランタン おすすめ」「LEDランタン おすすめ」系クエリの平均順位（リライト前 13.8）とクリック数を再測定する。
+
+---
+
 ## 2026-10-09 rectangle-sleeping-bag・solo-tent-beginner・snowpeak-tent の購入導線を完成（product_swap 3枚＋amzn.to展開 5枚＋no-amazon 登録 1枚・campkit-20261009-M02）
 
 - **狙い**: 3記事に残っていた「楽天のリンク先が404／統合セールページで読者が着地する商品を特定できない／Amazonリンクが中身の見えない `amzn.to` 短縮URLのまま」というカードを解消し、全カードを「楽天アフィリエイトリンク＋Amazonリンクの両方が生きている、またはAmazonに同等品が無いことを台帳で明示している」状態にする。`article-fix-backlog.tsv` の `product_swap` 2件・`discontinued_404` 1件を消化。updatedAt は3記事とも据え置き（リンク・商品差し替え回は動かさないルール）。
