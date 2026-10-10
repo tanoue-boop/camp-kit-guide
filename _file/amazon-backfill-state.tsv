@@ -555,11 +555,11 @@ pending	solar-lantern	solar-lantern-6000mah
 pending	solar-lantern	solar-lantern-12led			
 pending	solar-panel-folding	togopower-120			
 pending	solar-panel-folding	motteru-24w			
-pending	solo-tent-beginner	bundok-solo-tipi-bdk75			
-pending	solo-tent-beginner	bearsrock-hayabusa-ts201h			
-pending	solo-tent-beginner	bundok-solo-base-tc-bdk79			
-pending	solo-tent-beginner	bundok-solo-dome-bdk08o			
-pending	solo-tent-beginner	tomount-ny-tent			
+done	solo-tent-beginner	bundok-solo-tipi-bdk75		2026-10-11	campkit-20261011-R14: solo-tent-beginner のリライトで当該カードは消滅。新9カードはすべて amazonAsin 設置済み（check-affiliate-links PASS）。
+done	solo-tent-beginner	bearsrock-hayabusa-ts201h		2026-10-11	campkit-20261011-R14: solo-tent-beginner のリライトで当該カードは消滅。新9カードはすべて amazonAsin 設置済み（check-affiliate-links PASS）。
+done	solo-tent-beginner	bundok-solo-base-tc-bdk79		2026-10-11	campkit-20261011-R14: solo-tent-beginner のリライトで当該カードは消滅。新9カードはすべて amazonAsin 設置済み（check-affiliate-links PASS）。
+done	solo-tent-beginner	bundok-solo-dome-bdk08o		2026-10-11	campkit-20261011-R14: solo-tent-beginner のリライトで当該カードは消滅。新9カードはすべて amazonAsin 設置済み（check-affiliate-links PASS）。
+done	solo-tent-beginner	tomount-ny-tent		2026-10-11	campkit-20261011-R14: solo-tent-beginner のリライトで当該カードは消滅。新9カードはすべて amazonAsin 設置済み（check-affiliate-links PASS）。
 pending	solo-tent-lightweight	tomount-ny-tent			
 pending	solo-tent-lightweight	pykes-peak-solo			
 pending	solo-tent-lightweight	bears-rock-hayabusa			
