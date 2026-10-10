@@ -4,6 +4,17 @@
 
 ---
 
+## 2026-10-11 camp-electric-grill 第2位をタイガー CRC-A300 へ差し替え（issue_type=product_swap・campkit-20261011-M01）
+
+- **対象記事**: `content/posts/camp-electric-grill.mdx` の第2位。**旧**＝アイリスオーヤマ ホットプレート PIHA-A20B/PIHA-A30B/APA-139-B（¥7,980・Amazon は同型番 B0H2YRT3QR が購入ボックス無しで `amazon-backfill-no-amazon.tsv` 登録＝Amazon導線なし）／**新**＝タイガー魔法瓶 これ1台 CRC-A300 ブラウン（楽天公式店 ¥16,800・レビュー709件 ★4.58・qty 27 ／ Amazon `B00E3J6L7K` ¥14,801・メーカー型番 CRC-A300-T・購入ボックスあり・販売 Amazon.co.jp）。
+- **理由（issue_type=product_swap）**: 旧カードは楽天のみの片輪導線で、全カードに楽天＋Amazonの両リンクを必須とする現行ルール（`check-affiliate-links.cjs`）の趣旨を満たせていなかった。差し替えにより記事5枚すべてが両リンク充足（本番検証で楽天5/5・Amazon5/5・href照合OK）。
+- **候補の採否**: 前回（campkit-20261010-04）の差し替え先候補 象印 EA-KJ30-BA は、Amazon に当該型番の出品が無いことを再確認（`/s?k=EA-KJ30` で totalResultCount 18・結果18件の title に EA-KJ30 は0件／象印の現行は EA-KK30-BA 等の別型番）。象印 EA-KK30-BA は楽天の新品最安が ¥16,980・レビュー3件と実績が薄く不採用。タイガー CRC-A300 は楽天公式店＋レビュー709件で実績が最も厚く、旧カードの役割（3種プレートのファミリー向け多機能モデル）をそのまま引き継げるため採用した。
+- **変更範囲**: 第2位の見出し・ProductCard・紹介本文・スペック行、比較表の該当行、まとめ表の該当行、および第3位冒頭の「同じくアイリスオーヤマの」→「こちらはアイリスオーヤマの」（第2位がタイガーに変わったことによる接続の整合）のみ。他4製品・frontmatter・thumbnail は変更していない。
+- **KW整合性**: 5製品の価格は ¥3,980〜¥16,800 で最高÷最低＝4.22倍（5倍以内）。全製品が電源サイト／ポータブル電源向けの電気グリル・ホットプレートで用途は一貫。
+- **台帳**: `article-fix-backlog.tsv` 物理行601（product_swap・pending）を done。`amazon-backfill-no-amazon.tsv` の (camp-electric-grill, 2) 行を削除。`amazon-backfill-state.tsv` の旧2行を set（ASIN `B00E3J6L7K`）。`amazon-asin-check.tsv`（verdict=ok・price_gap -12%・seller amazon）と `card-name-check.tsv`（flags=OK）を新カードで更新。これで**全145記事が完成（145/145）**。
+
+---
+
 ## 2026-10-11 solo-tent-beginner を初心者向けソロテント比較に全面リライト（狙いKW「テント 初心者」・campkit-20261011-R14）
 
 - **対象記事**: `content/posts/solo-tent-beginner.mdx`。5製品 → **9製品**に組み替え、記事の役割を「初心者×ソロ（設営しやすさ・失敗しにくさ・価格）」に絞った。`updatedAt` を **2026-10-11** に更新（SEOリライト施策回なので更新する）。
