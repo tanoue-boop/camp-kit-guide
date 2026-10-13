@@ -4,6 +4,24 @@
 
 ---
 
+## 2026-10-13 Amazon無しカード解消：mountain-tent-cheap／camp-oil-stove の計2枚（campkit-20261013-M03）
+
+- **背景・方針**: `result-POLICY-20261013-no-amazon-zero.md` に基づき、`_file/amazon-backfill-no-amazon.tsv` 上から他タスク未使用の2記事（mountain-tent-cheap／camp-oil-stove）の登録カード全2枚を処理した。
+- **① mountain-tent-cheap 第3位（id: naturehike-solo-tent）＝Amazonリンク設置のみ（商品は差し替えなし）**: 登録理由（campkit-20260921-15）は「楽天SKU `nh18t010-t-3` が404（廃番疑い）」。楽天側は現在 ナチュラム 楽天市場支店 `naturum/4051378` に張り替わっており、HTTP 200・¥16,990（カード price と同額）・在庫ありを実測で確認した。商品の正体は **Naturehike クラウドアップ（Cloud Up）20D 1人用 NH18T010-T グリーン**（楽天ページ記載: インナー210×110×100cm／フライ275×110×100cm、収納 直径13×41cm、最大1,560g・最小1,033g、フライ 20Dシルナイロン 耐水圧PU4,000mm、ポール 7001アルミ合金）。
+  - **Amazon**: Naturehike公式ショップの「Clould up」ファミリー（15変種）に **`B0GRGYYQSS` = 「20Dグリーン／PRO1人用（270*120*110CM）」** が実在。フライ全長275×110cm と変種表記 270*120*110CM が一致し、色（グリーン）・生地（20D）・人数（1人用）も一致するため同一商品と確定した（landing=current=`B0GRGYYQSS` ですり替えなし、`add-to-cart-button`=1・`unqualifiedBuyBox`/`outOfStockBuyBox`=0 で購入ボックスあり、ブランド Naturehike・bylineInfo「Naturehikeのストアを表示」＝公式出品）。Amazon価格 ¥19,990 に対しカード price は楽天の ¥16,990（楽天のほうが安い）。
+  - **記事側の修正**: `amazonAsin="B0GRGYYQSS"` を設置。あわせて name から販促文言「【SS先行セール！いち早くゲット！】」を落とし、**ブランド＋商品名＋型番（NH18T010-T）＋色（グリーン）＋主要スペック**の形に整えた（CLAUDE.md の name 基準）。description は実スペック（フライ耐水圧4,000mm・最小重量1,033g）に合わせ、**出典が消えた旧 `rakutenRating=4.57/14件`（404になった naturehike-direct 出品の数値）を外し、実測した Amazon の ★4.6/10件 に差し替えた**。見出し「第3位：Naturehike テント 1人用」→「第3位：Naturehike クラウドアップ20D 1人用」、本文2段落を実スペック（インナー/フライ寸法・収納サイズ・重量・フライ耐水圧PU4,000mm）へ、比較表の耐水圧列「3,000〜4,000mm」→「フライ4,000mm」、まとめ表とFAQ Q5 の商品名・耐水圧表記も追随させた（楽天ページに床面耐水圧の数値記載がないため「フロア4,000mm」は削除）。**商品・price・楽天リンク・image・thumbnail は変更していない。**
+- **② camp-oil-stove 第4位（id: corona-sz-f32a）＝product_swap（コロナ SZ-F32A(CF) → キャプテンスタッグ×コロナ SZ-32CS ダークグリーン）**: 登録理由（campkit-20260921-17）は「コロナストア限定モデル SZ-F32A(CF) は Amazon 出品なし」。今回 Amazon を再検索（`コロナ 石油ストーブ 対流形 キャンプ`・totalResultCount 134・オーガニック38件を列挙）しても **SZ-F32A は依然として出品なし**だったため差し替えた。
+  - **選定理由（1行）**: 旧カードの役割「日本製の信頼とアウトドア色（コロナ製の対流形をキャンプ向けカラーにしたモデル）」をそのまま引き継げるのは、コロナ本体がキャプテンスタッグと組んだ限定カラーの SZ-32CS だけで、楽天（公式店・在庫8・¥36,800）とAmazon（公式店・同額・購入ボックスあり）の双方でメーカー型番 U-1241 が完全一致して買えるから。
+  - **楽天**: キャプテンスタッグ公式ストア `captainstagstore/4560464291612` **¥36,800 ★4.61/23件**。カラー軸の先頭値＝**ダークグリーン（qty=8・在庫あり／メーカー型番 U-1241・2024年モデル）**、ベージュ×ブラウンは U-1417 ¥37,800（qty=88）、軸値「ベージュ」はSKUなし。name は着地時既定かつカード price と一致するダークグリーンに固定した。
+  - **Amazon**: **`B0CJ4L42CK`**（親 `B0FXWC43Q5` の子変種「ダークグリーン／SZ」）。dp タイトルは「キャプテンスタッグ×コロナ 石油ストーブ **SZ-32CS** 日本製 ダークグリーン U-1241」で**子ASINは単一モデル**（親タイトルは SZ/SL/ファンヒーターの多型番表記だが、子ASIN単位では1型番に確定する）。¥36,800＝楽天と同額（price_gap 0%）、残り17点、`add-to-cart-button`=1・`unqualifiedBuyBox`/`outOfStockBuyBox`=0、ブランド キャプテンスタッグ公式ストア、メーカー型番 `U-1241` が楽天と完全一致。
+  - **実スペック**: 型式 SZ-32CS（基本型式 SZ-32）、しん式・自然対流形、点火方式は点火用ライター（**本体に点火装置なし＝電源不要**）、暖房出力 3.19kW（0.310L/h）、油タンク 3.8L、燃焼継続 約12.3時間、暖房のめやす 木造9畳／コンクリート12畳、外形 高さ475×幅355×奥行355mm、6.3kg、**対震自動消火装置**付き、原産国 日本。公式商品説明に「安全にお使い頂ける機能を備えたテント内での使用が可能」と明記。
+  - **記事側の追随**: frontmatter `description` を「コロナ」→「キャプテンスタッグ×コロナSZ-32CS」に（147字）、`updatedAt` を 2026-10-13 に。カードは id `corona-sz-f32a`→`captainstag-corona-sz32cs`、name・description・price（34,800→36,800）・badge（「日本製・アウトドア色」→「日本製・テント内使用可」）・image・affiliateUrl・amazonAsin を新商品に揃えた。比較表1行は 対応の目安「中型幕」→「小〜中型幕（木造9畳）」、電源「不要」→「不要（ライター点火）」、価格「約34,800円」→「約36,800円」、評価「★4.71（42件）」→「★4.61（23件）」。まとめ表1行は「コロナ SZ-F32A(CF) / 34,000円台」→「キャプテンスタッグ×コロナ SZ-32CS / 36,000円台」。
+- **KW整合性**: camp-oil-stove は ¥20,900〜¥36,800（**1.76倍**で5倍以内）。5製品すべて対流式・電源不要のキャンプ向けで、ブランドは アルパカ／トヨトミ2点／キャプテンスタッグ×コロナ／パセコ＝同一ブランド3点以上なし。mountain-tent-cheap は商品を変えていないため価格帯（¥7,990〜¥26,290）に変化なし。
+- **検証**: `npm run build` PASS、`check-affiliate-links.cjs`（2記事）PASS、`lint-bold.cjs`／`validate-backlog-tsv.cjs` PASS、`verify-deploy.cjs` で本番反映を確認。全記事の ProductCardMdx **1,205枚すべてが hb.afl を持つ（非 hb.afl は 0 枚）**。
+- **台帳**: `amazon-backfill-no-amazon.tsv` から2行を削除（139枚/84記事 → **137枚/82記事**）。
+
+---
+
 ## 2026-10-13 Amazon無しカード解消：camp-headlight-beginner／naturehike-mat の計3枚（campkit-20261013-M02）
 
 - **背景・方針**: `result-POLICY-20261013-no-amazon-zero.md` に基づき、`_file/amazon-backfill-no-amazon.tsv` 上から他タスク未使用の2記事（camp-headlight-beginner／naturehike-mat）の登録カード全3枚を処理した。
