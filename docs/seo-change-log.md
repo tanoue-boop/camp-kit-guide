@@ -4,6 +4,23 @@
 
 ---
 
+## 2026-10-18 Amazon無しカード解消：mountain-camp-mat 1枚・backpack-large 2枚（campkit-20261018-M03）
+
+- **背景・方針**: `result-POLICY-20261013-no-amazon-zero.md` に基づき `_file/amazon-backfill-no-amazon.tsv` の先頭2記事（`mountain-camp-mat`／`backpack-large`）の登録カード計3枚を処理した回。**3枚とも §2a の再検索で同一商品が見つからず、POLICY 2-b の商品差し替えで解消**した。Amazon リクエストは `/s` 6本（うち1本が `bm-verify` で拒否 → 間隔200秒・短いクエリに言い換えて成功）・`/dp` 5本。楽天は API 16クエリ・item ページ 6本。
+- **mountain-camp-mat 第1位（id: mat-rank-1）：Groovy 樅 インフレーターマット x26972 → MERMONT インフレーターマット 10cm グリーン**: 台帳の旧判定（campkit-20260921-79＝「Groovy 名義の Amazon 出品は B079YYQ2S4 の1件のみで型番・寸法・色のいずれも不一致」）を、楽天の商品番号 `x26972` をクエリにした再検索（結果55件）で追認した（Groovy／樅 名義 0件）。差し替え先は **WEIMALL公式ストア楽天市場店の MERMONT `BAB002`**（¥5,680・評価4.26/35件・在庫59・198×65×厚10cm・高反発ウレタン・自動膨張・連結可能・収納袋＋収納バンド付き）。Amazon 側は **`B0D6BGGZB1`（メーカー型番 `BAB002GR`・寸法 198×65×10cm が楽天と完全一致・購入ボックスあり ¥6,119）**。
+  - 選定理由（1行）: 記事が掲げる「登山なら5〜10cm厚」「連結機能」を両方満たしたうえで、旧カード ¥5,922 とほぼ同額（¥5,680）で価格ラダーを崩さず、型番 `BAB002GR` で Amazon 側の同一性を確定できたため。
+  - 変更箇所: 第1位の見出し・カード（name/description/price/rating/reviews/affiliateUrl/image/amazonAsin）・本文2段落・比較表の mat-rank-1 行（厚さ「―」→「10cm」）・まとめ表の1行。ほかの4商品・frontmatter は変更なし。
+  - 価格乖離: Amazon ¥6,119 対 楽天 ¥5,680 で **+7.7%**。Amazon 側の出品者は「カーステーション星光」（評価4,804件）で marketplace 出品だが、メーカー型番・寸法が完全一致するため同一商品と確定した。
+- **backpack-large 第1位（id: tousen-40-60l）：tousen 登山リュック 40L → HAWK GEAR バックパック 55L ジェットブラック**／**第2位（id: tousen-65l）：tousen 登山リュック 65L → ウミネコ UM-FB-04 JINBEI 3WAY 60L ブラウン**: 台帳の旧判定（「ブランド tousen／TOUSEN は Amazon に存在しない。同型の無名OEMが多数あり1件に絞れない」）は今回の調査でも覆らず、¥3,600〜3,900 の価格帯は楽天側が同一OEM（型番 818／8022 系）の相乗り出品で埋まっており Amazon 側に対応出品が無いことを確認した。そこで**記事の価格帯（旧 3,680〜8,082円）の内側で、楽天・Amazon 双方に実在し購入できる2点**へ差し替えた。
+  - 第1位 = **HAWK GEAR 55L**（楽天 `ymbstore/backpack02` ¥5,980・評価4.58/48件・在庫10／Amazon `B01J9LWQ7A` ジェットブラック ¥5,092・購入ボックスあり）。選定理由: 3位で採用済みの HAWK GEAR 80L と同シリーズの一回り小さいサイズで、「まず一本」の枠に必要な 1〜2泊向け容量・防水・レインカバー付きを満たし、両モールで同一商品を確定できたため（同一ブランドは記事内2点で、3点以上の占有ルールには抵触しない）。
+  - 第2位 = **ウミネコ UM-FB-04 JINBEI 3WAY 60L**（楽天 `umineko-shoji/um-fb-04-jinbei-np` のブラウンSKU ¥7,000・評価4.35/218件・在庫4／Amazon `B00YML5EH2` ブラウン ¥6,880・購入ボックスあり・製造元リファレンス `UM-FB-04-JINBEI` が楽天の商品番号と一致）。選定理由: 1位より一回り大きい60Lで、広口開口・3WAY・レインカバー付きという「連泊・防災で容量に余裕」の枠の要件を満たし、本記事で2番目にレビュー母数が大きいため。
+  - 色の選び方: 3枚とも**Amazon 側の購入ボックスを実確認できた色**（グリーン／ジェットブラック／ブラウン）に楽天の選択SKUを合わせた。楽天は3枚とも全色同価格で、`check-card-name-vs-sku.cjs` の選択SKUは name の名指しどおりに解決し flags=OK。
+  - 変更箇所: 第1位・第2位の見出し・カード・本文・「向いている人」行、比較表の2行（row id も `hawkgear55`／`umineko60` に変更。row id は React の key でアンカーには使われない）、まとめ表の2行（リンク先アンカー `#tousen-40-60l`／`#tousen-65l` はカード id 据え置きのためそのまま）、frontmatter の `description`（「tousenの40〜60L・65L…実勢3,680〜8,082円台」→「HAWK GEAR 55L・80L、ウミネコ JINBEI 3WAY 60L…実勢4,980〜8,082円台」）。3〜5位は変更なし。
+- **検証**: `check-card-name-vs-sku.cjs --only`（3枚とも flags=OK）／`check-affiliate-links.cjs` PASS ／`check-amazon-asin.cjs --static`（3枚とも static_flags=OK・旧形式0・amazonUrl 0）／`validate-backlog-tsv.cjs` PASS ／`lint-bold.cjs` PASS。台帳 `amazon-backfill-no-amazon.tsv` は 53枚/37記事 → **50枚/35記事**。
+- **申し送り**: backpack-large 第5位（M-STYLE 90L）は楽天現行 ¥8,980 に対しカード `price` が ¥8,082 のままで乖離している（本タスクの対象カードではないため未修正）。
+
+---
+
 ## 2026-10-18 Amazon無しカード解消：fire-tongs 1枚・mestin-recommend 1枚（campkit-20261018-M02）
 
 - **背景・方針**: `result-POLICY-20261013-no-amazon-zero.md` に基づき `_file/amazon-backfill-no-amazon.tsv` の先頭2記事（`fire-tongs`／`mestin-recommend`）の登録カード各1枚を処理した回。**2枚で結論が分かれた**: `fire-tongs` は §2a の再検索でブランド自体に該当商品が無いことを再確認して商品差し替え（POLICY 2-b）、`mestin-recommend` は **§2a の再検索で同一商品が見つかり `amazonAsin` を設置するだけで解消（POLICY 2-a）**した。Amazon リクエストは `/s` 3本・`/dp` 2本（うち `/s` 1本が `bm-verify` で拒否→間隔200秒・1トークンへ短縮して再試行し成功）。楽天は API 11本・item ページ 3本（すべて検出器 `check-card-name-vs-sku.cjs` による取得）。
