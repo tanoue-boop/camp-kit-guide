@@ -6,7 +6,7 @@
 
 ## 2026-10-18 Amazon無しカード解消：mountain-camp-mat 1枚・backpack-large 2枚（campkit-20261018-M03）
 
-- **背景・方針**: `result-POLICY-20261013-no-amazon-zero.md` に基づき `_file/amazon-backfill-no-amazon.tsv` の先頭2記事（`mountain-camp-mat`／`backpack-large`）の登録カード計3枚を処理した回。**3枚とも §2a の再検索で同一商品が見つからず、POLICY 2-b の商品差し替えで解消**した。Amazon リクエストは `/s` 6本（うち1本が `bm-verify` で拒否 → 間隔200秒・短いクエリに言い換えて成功）・`/dp` 5本。楽天は API 16クエリ・item ページ 6本。
+- **背景・方針**: `result-POLICY-20261013-no-amazon-zero.md` に基づき `_file/amazon-backfill-no-amazon.tsv` の先頭2記事（`mountain-camp-mat`／`backpack-large`）の登録カード計3枚を処理した回。**3枚とも §2a の再検索で同一商品が見つからず、POLICY 2-b の商品差し替えで解消**した。Amazon リクエストは `/s` 6本（うち1本が `bm-verify` で拒否 → 間隔200秒・短いクエリに言い換えて成功）・`/dp` 5本。楽天は 商品検索API 60クエリ（16バッチ）と item ページ 10本（うち4本は検出器 `check-card-name-vs-sku.cjs` による取得）。
 - **mountain-camp-mat 第1位（id: mat-rank-1）：Groovy 樅 インフレーターマット x26972 → MERMONT インフレーターマット 10cm グリーン**: 台帳の旧判定（campkit-20260921-79＝「Groovy 名義の Amazon 出品は B079YYQ2S4 の1件のみで型番・寸法・色のいずれも不一致」）を、楽天の商品番号 `x26972` をクエリにした再検索（結果55件）で追認した（Groovy／樅 名義 0件）。差し替え先は **WEIMALL公式ストア楽天市場店の MERMONT `BAB002`**（¥5,680・評価4.26/35件・在庫59・198×65×厚10cm・高反発ウレタン・自動膨張・連結可能・収納袋＋収納バンド付き）。Amazon 側は **`B0D6BGGZB1`（メーカー型番 `BAB002GR`・寸法 198×65×10cm が楽天と完全一致・購入ボックスあり ¥6,119）**。
   - 選定理由（1行）: 記事が掲げる「登山なら5〜10cm厚」「連結機能」を両方満たしたうえで、旧カード ¥5,922 とほぼ同額（¥5,680）で価格ラダーを崩さず、型番 `BAB002GR` で Amazon 側の同一性を確定できたため。
   - 変更箇所: 第1位の見出し・カード（name/description/price/rating/reviews/affiliateUrl/image/amazonAsin）・本文2段落・比較表の mat-rank-1 行（厚さ「―」→「10cm」）・まとめ表の1行。ほかの4商品・frontmatter は変更なし。
