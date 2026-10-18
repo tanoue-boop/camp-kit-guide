@@ -6,7 +6,7 @@
 
 ## 2026-10-19 Amazon無しカード解消：outdoor-coffee-mill 1枚／camp-dust-stand 1枚（campkit-20261019-01）
 
-- **背景・方針**: `_file/amazon-backfill-no-amazon.tsv` の先頭2行（`outdoor-coffee-mill#4#mill-sukizuki`／`camp-dust-stand#4#trashbox-30l`）を `result-POLICY-20261013-no-amazon-zero.md` の方針2に沿って処理。**2枚はどちらも `docs/判定基準.md` §4-2 追補1 条文9 の「型II（識別子ゼロ）」で、過去タスク 83／84／85／86 が探索を尽くして一致0件を確定済み**なので、ルートa（同一商品の再検索）は行わず**最初からルートb（商品差し替え）で2枚とも閉じた**（条文9「探索タスクを重ねて投入してはならない」に従う）。Amazon は `/s` 2本・`/dp` 2本＝計4本（拒否0回）、楽天は 商品検索API 22本・item ページ 3本（別途 `check-card-name-vs-sku.cjs` が 2本取得）。
+- **背景・方針**: `_file/amazon-backfill-no-amazon.tsv` の先頭2行（`outdoor-coffee-mill#4#mill-sukizuki`／`camp-dust-stand#4#trashbox-30l`）を `result-POLICY-20261013-no-amazon-zero.md` の方針2に沿って処理。**2枚はどちらも `docs/判定基準.md` §4-2 追補1 条文9 の「型II（識別子ゼロ）」で、過去タスク 83／84／85／86 が探索を尽くして一致0件を確定済み**なので、ルートa（同一商品の再検索）は行わず**最初からルートb（商品差し替え）で2枚とも閉じた**（条文9「探索タスクを重ねて投入してはならない」に従う）。Amazon は `/s` 2本・`/dp` 2本＝計4本（拒否0回）、楽天は 商品検索API 28本・item ページ 3本（別途 `check-card-name-vs-sku.cjs` が 2本取得）。
 - **outdoor-coffee-mill 第4位（id: mill-sukizuki）: ミニ手挽きコーヒーミル ステンレス×ブラウン（掃除ブラシ付き・無名OEM）¥2,980 → ハリオ コーヒーミル・セラミックスリム MSS-1TB ¥2,820**:
   - 旧カードは楽天 `sukizuki/rkt-kfjmini` の無名OEMで、brand 列が「ミニ手挽きコーヒーミル」（カテゴリ語）・maker_model 空＝識別子ゼロ。83 が楽天の特徴量（20g／60×165mm／セラミックカッター／ブラシ付き／4色）を揃えたクエリで25件を走査して一致0件を確定済み。
   - 楽天 **`libret/10002045`**（リブレ・**単一SKU**（カラー軸なし）・qty=100・¥2,820・★4.53/19件／幅150×奥72×高220mm・口径70mm・実用容量 コーヒー粉24g(2杯用)・臼セラミック・**食洗機可(臼のみ)**・JAN 4977642707597）＋ Amazon **`B001804CLY`**（**¥1,927＝`price_gap` -32%**・出荷元/販売元 Amazon.co.jp＝`seller_type=amazon`・`corePrice` 1,927／`add-to-cart-button` 1件／`unqualifiedBuyBox` 0件／`outOfStockBuyBox` 0件＝購入ボックスあり）。
