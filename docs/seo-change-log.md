@@ -6,7 +6,7 @@
 
 ## 2026-10-19 Amazon無しカード解消：guy-rope-recommend 2枚／cooler-stand 1枚（campkit-20261019-M01）
 
-- **背景・方針**: `_file/amazon-backfill-no-amazon.tsv` の先頭2記事（`guy-rope-recommend` 2枚・`cooler-stand` 1枚）を `result-POLICY-20261013-no-amazon-zero.md` の方針2に沿って処理。**3枚すべてルートa（同一商品の Amazon 再検索）が空振りで、3枚とも商品差し替えで解消**。Amazon リクエストは `/s` 3本・`/dp` 5本（うち `/s` 2本は bm-verify で拒否されたため、間隔を 90秒→200〜260秒へ延ばし短いクエリに言い換えて再試行）。楽天は 商品検索API 25本・item ページ 5本。
+- **背景・方針**: `_file/amazon-backfill-no-amazon.tsv` の先頭2記事（`guy-rope-recommend` 2枚・`cooler-stand` 1枚）を `result-POLICY-20261013-no-amazon-zero.md` の方針2に沿って処理。**3枚すべてルートa（同一商品の Amazon 再検索）が空振りで、3枚とも商品差し替えで解消**。Amazon リクエストは `/s` 4本・`/dp` 6本＝計10本（うち `/s` の最初の2本が bm-verify で拒否。間隔を 90秒→200〜260秒へ延ばし、短いクエリに言い換えて再試行して以後8本はすべて HTTP 200・拒否 0）。楽天は 商品検索API 35本・item ページ 6本（別途 `check-card-name-vs-sku.cjs` が 7本取得）。
 - **guy-rope-recommend 第1位（id: dailycompass-tentrope-8）: デイリーコンパス テントロープ 8本セット 5mm×4m ¥1,680 → NCNL(NO CAMP NO LIFE) パラコード ガイロープ 5mm×4m 8本セット オリーブ ¥2,080**:
   - ルートa の決定的な実測: `/dp B0F1JMLJ4Y`（楽天 `k292_tentrope_8` の姉妹品＝`k291_tentrope_4`・販売元 デイリーコンパス）の `dimensionValuesDisplayData` は **色8値 × サイズ1値（4ｍ×5mm）の 8 ASIN のみ**で、語 `8本` は 0 回。**同出品者の Amazon カタログには 4本セットしか存在しない**ことが確定したので、台帳 `campkit-20260921-82` の判断（構成不一致）を追認して差し替えに倒した。
   - 差し替え先は 楽天 `legare-factory/ncnl2088` ¥2,080（`ブランド名 = NO CAMP NO LIFE`・`availability = InStock`・単一SKU オリーブ・5mm/4m/69g/15芯/強化ポリエステル/耐荷重430kg/自在金具/収納袋）＋ Amazon **`B0CBJP6QL8`**（オリーブ 8本入り・¥1,976・`price_gap` **-5%**・ブランド欄 `NCNL NO CAMP NO LIFE`・購入ボックスあり・`landingAsin = currentAsin`）。両側の仕様ブロックが literal 一致（`太さ(約)：5mm、長さ(約)：4m、重量(約)：69g、材質：強化ポリエステル、耐荷重(約)：430kg`）。
