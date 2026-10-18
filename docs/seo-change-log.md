@@ -4,6 +4,27 @@
 
 ---
 
+## 2026-10-19 Amazon無しカード解消：portable-electric-kettle 2枚／sleeping-bag-liner 1枚（campkit-20261019-M04）
+
+- **背景・方針**: `_file/amazon-backfill-no-amazon.tsv` の先頭から、同日の M01（guy-rope-recommend／cooler-stand）・M02（camp-coffee-dripper／group-camp-tent）・M03（camp-cooler-soft／day-camp-cooler-box）で使っていない2記事3枚を `result-POLICY-20261013-no-amazon-zero.md` の方針2に沿って処理。**3枚のうち2枚はルートa（同一商品の Amazon ASIN を設置するだけ）、1枚は商品差し替え**で解消。
+- **sleeping-bag-liner 第3位（id: liner-rank-3）: 防災士監修 封筒型フリース ワインレッド ¥1,599 → 商品そのまま／`amazonAsin="B07M7CCKQC"` を設置**:
+  - 台帳 `campkit-20260921-84` は「楽天の ¥1,599 は特価で Amazon 側の同型OEMが ¥1,899〜2,030 に張り付くため価格差が上限に収まる出品が存在しない」として登録していたが、**楽天 `patri/ad196` と同じ商品を売る 楽天ショップ「雑貨の国のアリス」（`alice-zk/ad196`）が Amazon にも同名ブランドで出品している**ことを突き止めた。
+  - Amazon **`B07M7CCKQC`**（`雑貨の国のアリス 寝袋 インナーシュラフ ブランケット 収納袋付き 首元調節 ファスナーガード付き 75*180cm [並行輸入品]`・ブランド欄も `雑貨の国のアリス`・色 **ワインレッド**＝カードが名指しする色・商品の寸法 180×75cm＝楽天と一致・600g／ポリエステル・変種3色にワインレッド在り・**¥1,726＝`price_gap` +7.9%**・出荷元/販売元 雑貨の国のアリス＝`seller_type=official`・在庫あり・購入ボックスあり）。台帳が記録した ¥2,030 は現在 ¥1,726 まで下がっており、±15% の内側に入っていた。
+  - 変更は `amazonAsin` の1属性追加のみ。`name`・`price`・`affiliateUrl`・`image`・`rakutenRating`／`rakutenReviewCount`・見出し・本文・比較表・まとめ表は**同一商品なので据え置き**（記事の書き替えゼロ＝最小リグレッション）。
+- **portable-electric-kettle 第5位（id: car-kettle-keepwarm-450）: 車載電気ケトル 保温機能付き 450ml ブラック ¥5,980 → 商品そのまま／`amazonAsin="B0FXDTVN7G"` を設置**:
+  - 台帳 `campkit-20261009-M01` は「Amazon 側も同一スペック文の出品が ¥3,860〜6,488 の 5 ASIN に分散し1つに特定できない／カードが名指しする ブラック が候補 dp に印字されない」として登録していたが、候補のうち **`B0FXDTVN7G` を dp で実取得すると商品情報テーブルに `容量 450ml`・`色 ブラック` が印字されていた**（登録時は未確認だった列）。
+  - Amazon **`B0FXDTVN7G`**（`車載電気ケトル 40℃～100℃ 450ml大容量急速加熱カー用＆トラック用DC12V/24V 加熱•保温 カップ LCD温度表示 沸騰/断熱/お茶作り/ブリューミルク 4つの定温モード …`・ブランド AIGOU-Life・商品の説明に「容量：450mL／カラー：ブラック/ホワイト／車電圧：DC12V/24V／食品グレード304ステンレス鋼」・**¥5,780＝`price_gap` -3.3%**・販売元 huanpingJP＝`seller_type=marketplace`・残り20点・購入ボックスあり）。楽天 `mhpro/cc625`（カラー軸2値・ブラックを名指し・qty=710）の販促文とタイトルが語順まで一致し、**2色展開・450ml・40〜100℃・定温モード・LCD の5点がすべて符合**したので同一品と確定した。
+  - 変更は `amazonAsin` の1属性追加のみ（記事の書き替えゼロ）。
+  - ⚠️ 併せて検討した**ブランド品への差し替えは不採用**。大自工業メルテック `CK-673`（楽天 `ainekusu/ck-673` ¥4,686・qty=10・★4.07/30件）は Amazon の該当 ASIN `B00H3IR168` が「警告:専門医療機器」のブラックカーテン（`/black-curtain/medical-black-curtain`）に恒久的にリダイレクトされ、購入ボックスを数えられず読者も警告ページを経由してしまう（`?th=1&psc=1` 付き・プレーン `/dp/` の2形で実測）。CK-754 は 24V トラック専用、`B086JZVTSP` は炊飯器とのセット買いで構成違い。450ml 帯の楽天は20ショップすべてが同一の無名OEMでブランド品が存在しないため、ルートa（同一OEM出品の特定）で閉じた。
+- **portable-electric-kettle 第2位（id: silicone-folding-kettle-600）: SHIMC 折りたたみ電気ケトル bw5116 600ml ¥2,280 → MRG 折りたたみ電気ケトル 600ml シリコン ホワイト ¥2,680**:
+  - **ルートa は空振り**（台帳 `campkit-20260921-83`＝`BW5116` 型番検索と 600ml シリコン折りたたみケトルのカテゴリ検索の2回で SHIMC 名義・型番一致とも0件。本タスクの `/s 折りたたみケトル` 48件でも SHIMC／BW5116 の印字は0件）。無名OEMしか残らないため §2b で差し替え。
+  - 楽天 **`bagray/portablekettle001`**（バッグレイ・**ブランド名 MRG**・`availability = InStock`・**単一SKU**（ホワイト）・¥2,680・★4.32/59件／600ml・展開 約18.5×12.5×17.2cm・収納 約14.5×12.5×10cm・500g・110V 50/60Hz・600W・最短4分・304ステンレス鋼+PP+シリコン）＋ Amazon **`B0D89WNT7K`**（`[MRG]電気ケトル 折りたたみ式 600ml 海外対応 変圧器必須 ポータブルケトル … (ホワイト)`・ブランド欄 `MRG(エムアールジー)`・容量 600ml・材質 シリコン/ステンレス鋼/PP・**18.5／14.5 の寸法と「最短4分」「110V」が dp にも印字**・単一変種・**¥2,490＝`price_gap` -7.1%**・出荷元 Amazon／販売元 ラッシュモール＝`seller_type=marketplace`・在庫あり・購入ボックスあり）。
+  - **スロットの役割（最安＋収納性＋本記事最大の600ml）は完全に維持**（¥2,680 でも5製品中の最安）。CLAUDE.md「Amazon二重掲載の優先ルール」に沿い、無名OEM（SHIMC は Amazon に存在しないブランド）から**ブランド名が商品名・ブランド欄の両方に出る MRG へ寄せた**のが選定理由。
+  - 価格が +17.5%（¥2,280→¥2,680・§2c の +20% の内側）になったので、見出し／`name`／`description`／`price`／`image`／`affiliateUrl`／`amazonAsin`／`badge`（「最安・折りたたみ600ml」は据え置き＝依然最安）、本文2段落（収納・展開サイズ・500g・600W・最短4分を追記し、第3位の300W機より大きな出力が必要な点を明記）、比較表（`name`／`電源` AC（ポータブル電源）→AC100V（600W）／`特徴` つぶして収納→収納時 高さ10cm／`価格帯` 約2,200円台→約2,600円台）、まとめ表（2,200円台→2,600円台）、frontmatter `description`（2,280円→2,680円・実勢レンジ 2,280〜5,980→2,680〜5,980）、FAQ「安いモデルと高いモデルの違い」（価格差 2,280〜5,980円 約2.6倍→2,680〜5,980円 約2.2倍）をすべて新商品に揃えた。レビューは★4.32/59件＝30件以上なので `rakutenRating`／`rakutenReviewCount` を設置した。
+- **台帳**: `_file/amazon-backfill-no-amazon.tsv` を 33行→30行（一意キー 32→29枚・slug 23→21記事）。`_file/article-fix-backlog.tsv`・`docs/判定基準.md` は変更なし。`_file/amazon-asin-check.tsv` は `--static` で再生成（Amazon リンクあり 1173→1176枚・`link_form=none` 32→29）し、dp を実取得した3枚は `--judge … =ok --seller …` で verdict・seller_type を記録した（M03 申し送り6 の提案を適用）。
+
+---
+
 ## 2026-10-19 Amazon無しカード解消：camp-cooler-soft 3枚／day-camp-cooler-box 1枚（campkit-20261019-M03）
 
 - **背景・方針**: `_file/amazon-backfill-no-amazon.tsv` の先頭2記事（M01 の guy-rope-recommend／cooler-stand、M02 の camp-coffee-dripper／group-camp-tent を除く上から2本）を `result-POLICY-20261013-no-amazon-zero.md` の方針2に沿って処理。**4枚のうち1枚はルートa（同一商品の Amazon 再設置＝色の振り直し）、3枚は商品差し替え**で解消。Amazon リクエストは `/s` 3本・`/dp` 5本＝計8本（`bm-verify` による拒否1回→間隔を90秒→150/180秒へ延長し短いクエリに言い換えて再試行し成功。以後の7本は拒否0回）。楽天は 商品検索API 16本・item ページ 9本（別途 `check-card-name-vs-sku.cjs` が 5本取得）。
