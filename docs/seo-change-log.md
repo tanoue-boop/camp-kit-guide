@@ -4,6 +4,23 @@
 
 ---
 
+## 2026-10-20 Amazon無しカード解消 M02：`naturehike-tent` / `car-camp-lighting` の4枚を商品差し替え（campkit-20261020-M02）
+
+**狙い**: `_file/amazon-backfill-no-amazon.tsv` の登録カードをゼロにする POLICY の遂行。4枚すべて「楽天側に識別子が無い（型II）／ブランドは Amazon にあるがそのモデルの出品が無い」型で、同じ商品を探し直しても完成の定義に届かないため、最初からルートb（記事に合う別商品への差し替え）で閉じた。差し替え先は**ブランド名＋型番が商品名に明記され、楽天（在庫あり）と Amazon（購入ボックス生存）の両方で同一品が買えるもの**に限定した。
+
+| 記事 | 旧 | 新 | 理由（issue_type） |
+|---|---|---|---|
+| `naturehike-tent` 第4位（id: `nh-lodge-13`） | Naturehike Village 13.0 Pro ベーシック版 CNH22ZP004（楽天 naturehike-direct `cnh22zp004` ¥75,990・Amazon リンクなし） | **Naturehike Village 13 neo ベーシック**（楽天 naturehike-direct `cnk2550ws045` / SKU `wuji13neo` ¥72,990・qty=12 ／ `amazonAsin=B0GTTHXXWK` ¥72,990・Naturehike 公式ショップ） | `product_swap`。Village 13.0 **Pro** に対応する Amazon 出品が Naturehike 公式ファミリー（変種9件）に存在しなかった。後継の **neo** は楽天の SKU の JAN と Amazon の メーカー型番がともに `6927595764411` で完全一致し、**両モール ¥72,990（price_gap 0%）**。価格帯（7万円台）・ロッジ型・大人数という記事内の役割をそのまま維持できた |
+| `car-camp-lighting` 第1位（id: `sbn21-led-1000`） | SBN21 充電式LEDランタン ¥1,000（楽天 sbn `cn-2022080902`・ブランド名 LINGJING／型番＝店舗管理番号の型I-b） | **GENTOS エクスプローラー EX-200PB**（楽天 to-rulease `1-240001019200` ¥2,500・qty=11 ／ `amazonAsin=B0C32HKH4P` ¥2,180・メーカー型番 EX-200PB 完全一致） | `product_swap`。LINGJING 名義の出品が Amazon に0件。差し替え後は High580lm／Eco点灯111時間／IP66・IP68準拠1m防水／2m落下耐久と**スペックが公表された国内ブランド品**になり、記事内で最も安い枠（コスパ・安さ重視）も維持 |
+| `car-camp-lighting` 第3位（id: `zashbear-led-1000`） | ZASHBEAR LEDランタン 1000ルーメン ¥3,390（楽天 scandinavie `00031`） | **クレイモア CLAYMORE ULTRA MINI CLC-401 DARK GRAY**（楽天 naturum `3421271` ¥7,507・qty=30 ／ `amazonAsin=B09FSSQQQB` ¥6,578・メーカー型番 CLC-401DG） | `product_swap`。ZASHBEAR 名義の出品が Amazon に0件。役割を「レビュー数・実績重視」から**「調色・光の質重視」**（30〜500lm 無段階調光＋昼光色6500K／昼白色4200K／電球色3000K）へ振り直し、記事内の価格最上位枠にした |
+| `car-camp-lighting` 第5位（id: `fukubook-magnet-led`） | 福book マグネット充電式LEDランタン ¥2,980（楽天 fukubookstore `chu-led-l-01`・ブランド名 komakusa） | **Ledlenser ML4 Warm 43130**（楽天 himaraya `0000000951159` ¥5,910 ★4.76/66件・qty=22 ／ `amazonAsin=B08FBFPVRT` ¥5,986・販売元 Amazon.co.jp） | `product_swap`。komakusa 名義の商品出品が Amazon に0件。Ø29×97mm・約71g で**5製品中もっとも小さい**ため「コンパクトなデザイン重視」の役割をそのまま継承。専用充電池と市販の単3電池を兼用できる点を車中泊の利点として本文に追加 |
+
+**価格帯の記述を直した箇所**: `naturehike-tent` は frontmatter `description` の実勢レンジ（14,990〜75,990円 → **14,990〜72,990円**）・まとめ表（75,000円台 → 72,000円台）・FAQ「価格が安いモデルと高いモデルの違いは？」（約76,000円 → 約73,000円・3〜4人 → 2〜4人）。`car-camp-lighting` は第1位見出しの「（1,000円）」撤去・比較表5行のうち3行（価格／明るさ／電源／マグネット）・まとめ表3行・FAQ2問（「1,000円の安いランタンでも実用的か」→「2,000円台の安いランタンでも実用的か」、初心者向け推奨モデル）・まとめ締めパラグラフ。`car-camp-lighting` の frontmatter `description` は商品名・価格を含まないため変更なし。
+
+**マグネット軸の扱い**: 差し替えた3枚はいずれもマグネット台座を持たない（EX-200PB＝ビルトインカラビナで逆さ吊り／ULTRA MINI＝ランタンハンガー2個＋カラビナ／ML4 Warm＝カラビナ、マグネットは充電用）。比較表のマグネット列は実測どおり `×` にし、まとめの締めを「鉄板がある車種はマグネット、使えない車種は吊り下げ型」という選び分けに書き換えた。`updatedAt` / `date` / `thumbnail` は両記事とも据え置き。
+
+---
+
 ## 2026-10-20 冬物更新 W01：冬に検索が増える既存6記事を一括で最新化（campkit-20261020-W01）
 
 **狙い**: 冬の需要期（11月〜）に間に合わせる。期限 2026-10-31。対象は `iwatani-stove` / `camp-hot-carpet` / `camp-electric-grill` / `hot-water-bottle` / `camp-electric-heater` / `sleeping-bag-temperature-guide` の6記事（カード計32枚。更新前は28枚）。
