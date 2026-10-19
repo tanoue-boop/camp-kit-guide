@@ -4,6 +4,15 @@
 
 ---
 
+## 2026-10-19 付随是正4件（campkit-20261019-02 §A）
+
+- **`outdoor-coffee-mill`**: `updatedAt` を `2026-10-19` → `2026-09-21` に戻した。差し替え回（`campkit-20261019-01`）で `updatedAt` を更新したのは恒久ルール（更新してよいのはリライト回だけ）に反するため。`updatedAt` 以外は不変更。
+- **`camp-dust-stand`**: 同じ理由で `updatedAt` を `2026-10-19` → `2026-08-20` に戻した。`updatedAt` 以外は不変更。
+- **`guy-rope-recommend`**: frontmatter `description` の「太さ3〜5mm」を「太さ2〜5mm」に訂正（記事内5枚の実値は #1 5mm／#2 2mm／#3 5mm／#4 4mm／#5 3mm で、#2 の 2mm が宣言範囲の外だった）。#2 の 2mm は `campkit-20261019-M01` の差し替え以前から記事にあった値＝差し替えが作った食い違いではなく元からあった記述の不備の是正。`description` 以外は不変更（`updatedAt` も据え置き）。
+- **`_file/article-fix-backlog.tsv`**: `camp-dust-stand#4`（id: trashbox-30l）の `name_fix` 行（L587）を `pending` → `done`。`campkit-20261019-01` の `product_swap` で対象商品（トラッシュボックス 30L）が記事から消え、「name の容量を 37L に合わせる」という起票が実行不能になったため無効化した。
+
+---
+
 ## 2026-10-19 新規公開：mammut-backpack（マムートのリュックおすすめ11選）（campkit-20261019-N01）
 
 - **狙いKW**: 「マムート リュック」（月間1万〜10万）／副KW「マムート リュック おすすめ」。公開日 2026-10-19（`date` = `updatedAt` = 2026-10-19）。集中カテゴリ「バックパック・リュック」の強化で、**サイトにマムートのブランド軸記事が1本も無かった**（全267記事のうちマムートに言及しているのは `mountain-backpack-30l` の第1位カードのみ）という穴を埋める。
