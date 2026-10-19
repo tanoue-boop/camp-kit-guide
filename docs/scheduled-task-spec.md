@@ -129,3 +129,15 @@ const hb = (itemUrl) =>
 - デプロイ手順（手動で回す場合）: `docs/deploy-note.md`（一括: `node scripts/deploy.cjs "msg"`）
 - 検証: `scripts/verify-deploy.cjs`（200/title/アフィリリンク/PR表記/og:image、20回×15秒リトライ）
 - 記事・商品・KWのルール: `CLAUDE.md`
+
+---
+
+## A8.net 再認証画面の扱い（2026-10-19 追加）
+
+過去の実行で「A8未ログイン」と誤判定した原因：再認証画面（`media-console.a8.net/common/re-authentication`）が出た時点で、`get_page_text` だけで「ID/パスは空」と判断してスキップしていた。Chromeの自動入力はDOMテキストに現れず、スクリーンショットでしか見えない。実際は入力済みで、ボタンを押せば通る状態だった。
+
+手順（Claude側）：
+1. 再認証画面が出たら、必ずスクリーンショットで入力欄を目視確認する（`get_page_text` だけで判断しない）。
+2. ログインID欄・パスワード欄（●表示）が埋まっていれば、「ログインする」ボタンのみクリックする。ID・パスワードの文字入力は一切しない。
+3. ログイン後、`/program/list/partnered`（参加中）と `/program/list/applying`（申込中）を読み、`_file/asp-programs.tsv` の提携状況・最終確認日を更新する。一覧は描画待ち（数秒）が必要で、直後は「該当なし」と出ることがある。
+4. 欄が空・自動入力が効いていない・二段階認証が出た場合のみスキップし、報告に「提携状況は未確認（台帳の最終確認日は◯◯）」と明記する。
