@@ -4,6 +4,18 @@
 
 ---
 
+## 2026-10-20 Amazon無しカード解消：winter-camp-gloves の #3 を差し替え（campkit-20261020-M01）
+
+- **対象記事**: `content/posts/winter-camp-gloves.mdx`（キャンプ用防寒グローブおすすめ5選）。理由は `product_swap`（Amazon無しカードの解消）。`_file/amazon-backfill-no-amazon.tsv` の `winter-camp-gloves#3#boukan-uragebana`（`judged_task=campkit-20260921-86`）1行を削除し、同記事の例外をゼロにした（台帳 23行/23キー/16記事 → 22行/22キー/15記事）。
+- **旧 → 新**: 第3位「防寒手袋 スマホ対応 撥水 裏起毛 保温 防風 すべり止め 裏フリース ブラック」（ノーブランド・楽天 ASKRTECH `askrtech/fhst`・¥2,680・★4.44/237件・`amazonAsin` なし） → **「ザ・ノース・フェイス イーチップグローブ NN62344 PO ミッドナイトペトロール L」**（楽天 AXAS Co. ONLINE COLLECTION `axas-co/atok-4582738038174`・¥3,280・採用SKU `atok-4582738038204`／在庫 qty=21／`amazonAsin=B0CP3XNF28`）。
+- **差し替えた理由（ルートb）**: 旧カードは楽天側に brand・メーカー型番・JAN のいずれも無い**型II（識別子ゼロ）**で、過去タスク 82／84／86 が `/s` と保存プールを投じても Amazon 側の同一商品を一意に特定できなかった（`§4-2 追補1 条文9` により探索を重ねても「完成の定義」に到達しない）。そのため同一商品の再探索は行わず、記事の役割（普段使い兼用・操作性・それほど冷えない時期メイン）に合う**ブランド名＋型番が商品名に明記された商品**へ差し替えた。
+- **同一性の根拠**: 楽天の採用店（AXAS Co. ONLINE COLLECTION）と Amazon の出荷元/販売元（アクサスオンラインコレクション）が**同一事業者**で、価格も ¥3,280 で一致（`price_gap=0%`）。dp の商品モデル番号 `NN62344`・メーカー GOLDWIN（ゴールドウイン＝国内正規代理店）・変種 `B0CP3XNF28=["L","ミッドナイトペトロール"]` が楽天の採用SKU（PO ミッドナイトペトロール／L）と一致。購入ボックスも正常（`unqualifiedBuyBox` 0／`outOfStockBuyBox` 0／`add-to-cart-button` 1／`corePrice_feature_div` 2・在庫あり）。
+- **価格帯の扱い**: ¥2,680 → ¥3,280（+22.4%＝±20% の外）。2026-10-19 POLICY① §3 に従い、記事が宣言している価格帯の記述を同じタスクで直した（まとめ表「2,680円台」→「3,280円前後」／本文「約2,680円」→「約3,280円」／比較表 `price` 2680→3280）。**frontmatter `description` の「実勢1,480〜3,800円」は、差し替え後も5枚の最小 ¥1,480・最大 ¥3,800（第5位 テムレス02WINTER）が変わらないため数字を触っていない**（旧商品名も description には入っていなかった）。
+- **変更した箇所**: 第3位の見出し／`ProductCardMdx`（`name`・`description`・`price`・`image`・`affiliateUrl`・`badge`・`rakutenRating`・`rakutenReviewCount` を新商品の実値に入れ替え、`amazonAsin="B0CP3XNF28"` を新設。`rank`・`id`・`source="rakuten"` は不変）／カード直後の本文2段落と「向いている人」行／`ComparisonTableMdx` の `id":"uragebana"` 行（`name`・`waterproof`・`warmth`・`price`・`affiliateUrl`。**レビュー1件＝30件未満なので `rating` キーは置かず「—」表示にした**）／まとめ表の第3位行。**他4商品・選び方の本文・FAQ・Tips・`thumbnail`・`date`・`updatedAt`（2026-06-08）は一切変更していない。**
+- **旧商品の痕跡検査**: 本文・比較表・まとめ表・frontmatter `description`・FAQ・Tips を `防寒手袋 スマホ対応`／`楽天1位`／`askrtech`／`2,680`／`237件` で全文検査し**残存0件**。残った `裏起毛` 3件は「ポイント2：保温力（中綿・裏起毛）」など**カテゴリの一般説明**で旧商品固有の記述ではない。
+- **検査結果**: `check-affiliate-links.cjs --all` PASS（268ファイル）／`check-card-name-vs-sku.cjs --only winter-camp-gloves#3 --recheck` が `flags=OK`・`sku_selected=atok-4582738038204/PO ミッドナイトペトロール/L`・`current_price=3280`・`stock=qty=21`／`check-amazon-asin.cjs` の `verdict=ok`・`price_gap=0%`・`seller_type=marketplace`。
+---
+
 ## 2026-10-20 新規公開：arcteryx-backpack（アークテリクスのリュックおすすめ9選）（campkit-20261020-N02）
 
 - **狙いKW**: 「アークテリクス リュック」「アークテリクス リュック おすすめ」（月間1万〜10万）。集中カテゴリ「バックパック・リュック」の銘柄別記事の拡充。**公開日 2026-10-20**（`date` / `updatedAt` ともに同値）。
