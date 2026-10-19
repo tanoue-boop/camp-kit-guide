@@ -64,13 +64,15 @@
 
 ---
 
-## 記事数（2026-10-01 時点）
+## 記事数（2026-10-19 時点）
 
-- **総記事数: 266記事**（`ls content/posts/*.mdx | wc -l` と `check-amazon-asin.cjs --static` の「記事 266 本」で実測。本日の新規2本＝**sleeping-bag-recommend**〔寝袋おすすめ総合ハブ・campkit-20261001-R02〕と**air-mat**〔エアマットおすすめ11選・campkit-20261001-R04〕を配置した時点の値）
+- **総記事数: 267記事**（`ls content/posts/*.mdx | wc -l` ＝267、`check-amazon-asin.cjs --static` の「記事 267 本」で実測。2026-10-19 の新規1本＝**mammut-backpack**〔マムートのリュックおすすめ11選・campkit-20261019-N01・category `backpack`〕を配置した時点の値）
+- 前回（2026-10-01）は **266記事**（新規2本＝**sleeping-bag-recommend**〔寝袋おすすめ総合ハブ・campkit-20261001-R02〕と**air-mat**〔エアマットおすすめ11選・campkit-20261001-R04〕を配置した時点の値）
 - 内訳の推移: `a45a1e5`=212 → `6ebde0f`=215（前バッチ3本＝camp-air-pump／disaster-camp-gear／trekking-pole）→ `7f9b41f`=218（3本＝solar-lantern／disaster-radio／solo-gear-rental）→ 2026-09-04時点=231 → 2026-09-07時点=234 → 2026-09-08時点=237 → 2026-09-09時点=240 → 2026-09-10時点=243 → 2026-09-11時点=247 → 2026-09-14時点=250 → 2026-09-15時点=254 → 2026-09-16時点=258 → 2026-09-17時点=262 → 2026-10-01時点=265（R02 sleeping-bag-recommend）→ **2026-10-01時点=266（R04 air-mat）**
   - ⚠️ 262→264 の2本は 2026-09-18〜09-30 のバッチで追加されたもので、本ファイルの記事数セクションが更新されていなかった（09-17 のまま据え置かれていた）。2026-10-01 に全カテゴリを `grep -h "^category:" content/posts/*.mdx` で再集計し、実測値へ補正した。
+  - 2026-10-01時点=266 → **2026-10-19時点=267（N01 mammut-backpack）**
 
-### カテゴリ別内訳（frontmatter `category` を集計・2026-10-01 実測）
+### カテゴリ別内訳（frontmatter `category` を集計・2026-10-19 実測）
 
 | slug | 表示名 | 記事数 |
 |------|--------|-------:|
@@ -81,11 +83,13 @@
 | lighting | 照明・ランタン | 18 |
 | power | 電源・バッテリー | 25 |
 | bonfire | 焚き火台 | 31 |
-| backpack | バックパック | 20 |
+| backpack | バックパック | 21 |
 | clothing | ウェア・装備 | 3 |
-| **合計** | | **266** |
+| **合計** | | **267** |
 
-> 直近: 2026-10-01（チャット側からの直接投入タスク campkit-20261001-R04＝**新規記事 air-mat**〔エアマットおすすめ11選・sleeping-bag〕を作成。狙いKW「エアマット」（月間1万〜10万・GSC関連クエリ平均25.6位）で、空気だけでふくらませるタイプの専用記事がサイトに無かったため `inflatable-mat`（自動膨張）と狙いを分けた。採用11製品はすべて**楽天 hb.afl ＋ amazonAsin の両リンクを両モールの在庫実確認のうえ設置**＝スノーピーク TM-089／WAQ UL AirMat／OneTigris OBSIDIAN／Bestway AlpineLite／VASTLAND 400g／サーマレスト ネオエアーXサーモ NXT R／ニーモ テンサー オールシーズン RWR／OneTigris NOBLEJADE／WAQ AIR BED セット／INTEX ダウニー／コールマン コンフォートエアーマットレス/W。モンベル・シートゥサミット・クライミット・7Gadget は「両モールで在庫あり」を満たせず不採用。あわせて `inflatable-mat` に本記事への内部リンクを1本追加（商品・価格は不変更）。記事数265→266、sleeping-bag 29→30）
+> 直近: 2026-10-19（チャット側からの直接投入タスク campkit-20261019-N01＝**新規記事 mammut-backpack**〔マムートのリュックおすすめ11選・backpack〕を作成。狙いKW「マムート リュック」（月間1万〜10万）で、サイトにマムートのブランド軸記事が無かった穴を埋めた。採用11製品はすべて**楽天 hb.afl ＋ amazonAsin の両リンクを両モールの在庫実照合のうえ設置**＝リチウム 20／25／30・セオン トランスポーター 15／25・セオン 3-ウェイ 20・エクセロン 2.0 JE 25・デュカン 22／32・トリオン 28・ネオン ライト 12。価格帯13,534〜22,288円（1.65倍）、容量12〜32Lで分散。差別化点は「レインカバーとPC収納が両立しない」「背面長はM（46cm）の1サイズ公表」「並行輸入品が国内正規の3倍以上で並ぶ」の3点。内部リンク7本＋既存3記事（mountain-backpack-30l／camp-backpack-capacity-guide／camp-backpack-beginner）から被リンク1本ずつを追記。リチウム 30 は `mountain-backpack-30l` が使っている `amazonAsin=B09YCQ6WBK` が並行輸入品の出品だと dp 照合で判明したため、両モールを sapphire-black でそろえ（楽天 linkfast ¥18,480 ＋ `B09KZHN7K1`）、既存記事側は `article-fix-backlog.tsv` に `asin_mismatch` で起票（記事は未変更）。記事数266→267、backpack 20→21）
+
+> 前回: 2026-10-01（チャット側からの直接投入タスク campkit-20261001-R04＝**新規記事 air-mat**〔エアマットおすすめ11選・sleeping-bag〕を作成。狙いKW「エアマット」（月間1万〜10万・GSC関連クエリ平均25.6位）で、空気だけでふくらませるタイプの専用記事がサイトに無かったため `inflatable-mat`（自動膨張）と狙いを分けた。採用11製品はすべて**楽天 hb.afl ＋ amazonAsin の両リンクを両モールの在庫実確認のうえ設置**＝スノーピーク TM-089／WAQ UL AirMat／OneTigris OBSIDIAN／Bestway AlpineLite／VASTLAND 400g／サーマレスト ネオエアーXサーモ NXT R／ニーモ テンサー オールシーズン RWR／OneTigris NOBLEJADE／WAQ AIR BED セット／INTEX ダウニー／コールマン コンフォートエアーマットレス/W。モンベル・シートゥサミット・クライミット・7Gadget は「両モールで在庫あり」を満たせず不採用。あわせて `inflatable-mat` に本記事への内部リンクを1本追加（商品・価格は不変更）。記事数265→266、sleeping-bag 29→30）
 
 > 前回: 2026-09-09（日次タスク＝商品5選2本＋ASP専用1本＋既存記事リライト1本の4枠。既存記事修正キューpendingなしのため商品5選は2本のまま：car-camp-mat＝車中泊マットのおすすめ5選（sleeping-bag・既存6記事とのカニバリ懸念を「車中泊専用・厚み/R値/車種別サイズ」に角度を絞って回避）／inner-tent-kangaroo＝カンガルースタイル用インナーテント5選（tent・楽天供給薄のためAmazon源へ切替）／camp-rental-hygiene＝レンタル用品の衛生事情（sleeping-bag・hinataレンタル・variant=rental）／electric-blanket-campリライト（lever=cannibal-check、camp-hot-carpetとの重複を調査し非カニバリと結論、論点はneeds-humanへ）。記事数237→240、tent 64→65・sleeping-bag 24→26。Amazonリンクは新規カード10枚中7件set／3件no-amazon）
 
