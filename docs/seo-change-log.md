@@ -4,6 +4,93 @@
 
 ---
 
+## 2026-10-20 冬物更新 W01：冬に検索が増える既存6記事を一括で最新化（campkit-20261020-W01）
+
+**狙い**: 冬の需要期（11月〜）に間に合わせる。期限 2026-10-31。対象は `iwatani-stove` / `camp-hot-carpet` / `camp-electric-grill` / `hot-water-bottle` / `camp-electric-heater` / `sleeping-bag-temperature-guide` の6記事（カード計32枚。更新前は28枚）。
+
+### 変更前の順位・クリック・表示（GSC 直近28日・2026-09-19〜2026-10-16／`node scripts/fetch-gsc-query-page.mjs --tag W01-1020` で取得）
+
+効果測定用のベースライン。ページ単位の実測値（アンカー付きURLは除く）。
+
+| 記事 | クリック | 表示 | CTR | 平均順位 | 主要クエリ（28日の最大表示） |
+|---|---|---|---|---|---|
+| `sleeping-bag-temperature-guide` | 48 | 2,387 | 2.01% | **12.1** | 寝袋 快適温度（67／13.9位）・快適温度 シュラフ（41／23.9位）・シュラフ 快適温度 10度（36／15.1位） |
+| `iwatani-stove` | 19 | 212 | 8.96% | **6.7** | イワタニ バーナー 違い（11／5.7位）・イワタニ ガスバーナー 違い（5／9.4位）・イワタニ トーチ バーナー おすすめ（4／5.3位） |
+| `camp-electric-grill` | 7 | 137 | 5.11% | **7.3** | キャンプ ホットプレート（2／8.0位）・ポータブル電源 ホットプレート（2／23.0位） |
+| `camp-electric-heater` | 6 | 28 | 21.43% | **6.2** | （クエリ単位の記録が28日では0行＝表示が少なくクエリが匿名化されている） |
+| `camp-hot-carpet` | 5 | 103 | 4.85% | **7.3** | （同上・クエリ単位0行） |
+| `hot-water-bottle` | 2 | 82 | 2.44% | **13.2** | 寝袋 湯たんぽ（28／20.1位）・湯たんぽ 選び（2／8.5位） |
+
+→ 効果測定は2〜3週間後の `campkit-seo-competitor-scan`（金）で、同じ `fetch-gsc-query-page.mjs` の28日データと突き合わせて行う。
+
+### 商品データの再確認（手順2）
+
+全32枚について楽天 item ページ（`check-card-name-vs-sku.cjs --only`・計37リクエスト）と Amazon dp（`check-amazon-asin.cjs --only`・計38リクエスト）を実取得して照合した。結果は **32枚すべて `flags=OK`・`verdict=ok`・`in_stock(cart)`**。
+
+**差し替えた商品（4枚）**
+
+| 記事 | 旧 | 新 | 理由（issue_type） |
+|---|---|---|---|
+| `camp-electric-heater` 第4位 | atRise パネルヒーター 折りたたみ式 160W（楽天 auc-risecreation `y0721` ¥7,980／`amazonAsin=B0G18S8GF2`） | **TOKAIZ パネルヒーター TPH-002S スモーキーグレー 160W 3面発熱**（楽天 TOKAIZ公式店 `stravel/80001837` ¥5,980 ★4.44/99件／`amazonAsin=B0FP4PJ8XB` ¥5,980・TOKAIZ公式ストア） | `product_swap`。Amazon 出品が**購入ボックスなし**（約28,000円・4〜5週間以内に発送）で導線が死んでいた。楽天側も同じ商品ページが《2026-2027》最新モデル（145W）へ入れ替わっており、記事の記述と商品が一致しなくなっていた。差し替え後は**両モールともに ¥5,980（price_gap 0%）** |
+| `sleeping-bag-temperature-guide` 第1位 | Camdoor 冬用 -25℃ 封筒型シュラフ（楽天 luxim647 `3sd05` ¥3,980／`amazonAsin=B0CSFNZHVR`） | **Bears Rock -15度 封筒型 洗える寝袋 FX-403 モカライン**（楽天 gorilla55 `fx-403` ¥8,900 ★4.48/1,304件／`amazonAsin=B0GMYSFXLR` ¥9,450） | `product_swap`。name が名指しする -25℃（2200g）SKU が**全3色 qty=0**で買えず、カード price ¥3,980 は現在「フリースのみ(寝袋本体なし)」SKU の価格になっていた。Amazon 側も `B0CSFNZHVR` が別仕様（人工ダウン320T・¥9,951）へ `redirected_to` していた |
+| `sleeping-bag-temperature-guide` 第2位（旧 第4位から繰り上げ） | ねぶくろん 230T 厚手封筒型シュラフ（楽天 artpiece `sd` ¥2,780／`amazonAsin=B079YGPQYQ`） | **HAWK GEAR マミー型 -15℃（ブラック）** を第2位へ移動（¥2,780 → **¥4,990** に価格修正・name にカラー ブラックを明記） | `product_swap`。ねぶくろんの `B079YGPQYQ` は dp が **別商品**（Bears Rock ねぶくろん®「来客用 布団セット TX-701」¥12,950・`redirected_to=B0DG5F7MCB`）に着地し `price_gap +366%`。楽天側も ¥2,780 → ¥3,580（タイプA 1kg）で、冬用の厚手は タイプC 1.8kg ¥4,380 と価格も仕様もずれていた |
+| `sleeping-bag-temperature-guide` 第5位 | Soomloom ダウンマミー 650FP 0〜-20℃（楽天 yiprefer `outdoor-023` ¥15,980／`amazonAsin=B07JMFSP1K`） | **ナンガ オーロラテックス 600DX オールブラック レギュラー ニッチエディション（快適使用温度-6℃）**（楽天 mitsuyoshi `nng00000004464` ¥41,900 ★4.83/6件／`amazonAsin=B0FPQKVRPJ` ¥41,900） | `product_swap`。Amazon `B07JMFSP1K` が**購入ボックスなし**。楽天側も name が羽毛量を名指ししていないため着地SKU（400g）が `soldout` だった。差し替え後は**両モール ¥41,900（price_gap 0%）**で、本記事で唯一「快適温度（コンフォート）」が公表されているモデルになり、記事前半の温度表記解説と直結する |
+
+**新規追加（4枚・`iwatani-stove` を 3製品 → 7製品へ）**: 第4位 イワタニ カセットフー タフまる CB-ODX-1-BK（楽天 ddps1975 `10000385` ¥6,950 ★4.61/233件／`amazonAsin=B09N8M294G` ¥7,300＝+5%）／第5位 タフまるジュニア CB-ODX-JR-BK（楽天 ddps1975 `010412050` ¥6,941 ★4.75/149件／`B09HGDZPNG` ¥6,780＝-2%）／第6位 風まるIII CB-KZ-3（楽天 world-free-store `c4901140905797` ¥5,280 ★4.4/20件／`B0B8NC5CQP` ¥5,200＝-2%）／第7位 炉ばた焼器 炙りやII CB-ABR-2（楽天 ddps1975 `010412026` ¥6,220 ★4.51/185件／`B099JRRP59` ¥6,775＝+9%）。タフまる系は**冬のCB缶の火力低下に対する機構（ヒートパネル＋ダブル風防）を持つ**ため冬の検索意図に直結し、風まるIIIは5,000円台の風防付き枠、炙りやIIは網焼き・串焼き専用枠として役割を分けた。同じイワタニでも `cassette-gas-heater`（デカ暖3・風暖・デカ暖2・イザまる・マイ暖III＝暖房専用機）とは製品群が重ならないのでカニバリしない。**価格帯は 2,640〜7,040円（最高÷最低 2.67倍）でKW整合性チェックの5倍以内を満たす。**
+
+→ `iwatani-stove` は本タスク唯一の「製品数7未満」の記事（3枚）だったので、手順3の指示に従い **7製品まで増やした**（ジュニアバーナー CB-JRB-2 は楽天API 0件＝流通終了のため不採用）。他5記事はいずれも5製品で、上位記事も5〜8製品のため現状維持とした（無理に水増ししていない）。
+
+**価格の最新化（手順3・7枚）**: `iwatani-stove` 第2位 P-153 ¥5,980→**¥7,040**・第3位 トーチバーナーII ¥2,520→**¥2,640** ／ `camp-hot-carpet` 第1位 SUT-102 ¥6,980→**¥7,980**・第5位 NA-171TM ¥6,580→**¥6,980** ／ `camp-electric-grill` 第5位 YHL-S100 ¥3,980→**¥4,840** ／ `sleeping-bag-temperature-guide` HAWK GEAR ¥2,780→**¥4,990**。レビュー件数・評点も全31枚で楽天APIの実値に更新（例 CB-JCB 616→637件・SUT-102 1,400→1,402件・モダンデコ 14,733→14,740件）。**冬の需要期で暖房・バーナー系が一様に値上がりしている**ため、該当記事の本文に「早い時期が有利」と買い時の注記を入れた。
+
+**スペックの訂正**: `camp-electric-heater` 第4位は販売ページが「消費電力 160W は誤りで正は 145W」と訂正告知を出していたが、差し替え後の TOKAIZ TPH-002S はメーカー公表 **160W・1.55kg・収納 400×500×50mm** なので、記事の「今回の5台で最少」という位置づけは維持される（稼働時間の計算を 1,000Wh で約5時間／冬は約3.5時間に書き換え）。`hot-water-bottle` 第5位 melket は「約2〜6H保温」→**「約8H保温・20分急速蓄熱」**（販売ページの公表値）に修正し、name の `SHS5601WH` を実SKUのメーカー型番 `SHS5601` に合わせて `model_mismatch` を解消。
+
+### title・description（手順4）
+
+既存の「〈主題〉おすすめN選【2026年版】〈補足〉」形式を保ち、主題を先頭30字以内に収めたまま冬の季節語を補った。
+
+| 記事 | 変更後 title |
+|---|---|
+| `iwatani-stove` | イワタニのバーナー・**カセットコンロ**おすすめ**7選**【2026年版】**冬キャンプの火力で選ぶ** |
+| `camp-hot-carpet` | キャンプ用ホットカーペットおすすめ5選【2026年版】**冬キャンプの底冷え対策**を消費電力で選ぶ |
+| `camp-electric-grill` | キャンプ用電気グリル・ホットプレートおすすめ5選【2026年版】**冬キャンプの鍋・焼肉に** |
+| `hot-water-bottle` | キャンプ用湯たんぽおすすめ5選【2026年版】**冬キャンプの足元の冷え対策** |
+| `camp-electric-heater` | キャンプ用電気ヒーターおすすめ5選【2026年版】**冬キャンプの寒さ対策に使える**小型暖房 |
+| `sleeping-bag-temperature-guide` | 寝袋・シュラフの快適温度と最低使用温度 完全ガイド【2026年版】**冬キャンプの寒さ対策まで** |
+
+description は6本すべて冬の用途で書き直し、実勢価格のレンジを現値に更新（例 `camp-electric-heater` は「実勢4,280〜7,980円」→「実勢4,280〜5,999円」）。tags に `冬キャンプ` / `寒さ対策` を追加（既にある記事は維持）。
+
+### 冬キャンプの注意点セクション（手順5・6記事すべてに新設／既存は最新化）
+
+「一酸化炭素・電源容量・低温時の性能低下」の3点を記事ごとの文脈で書いた。共通して入れた事実は (a) **氷点下ではリチウムイオン電池の実効容量が2〜3割落ちる**ので稼働時間は表示容量の7割で見積もる、(b) 容量（Wh）とは別に**AC定格出力（W）が製品の定格を上回る**必要がある、(c) 燃焼式と併用する幕内では一酸化炭素チェッカーと上下2か所の換気が必須で**就寝中は燃焼式を消す**、の3つ。記事固有の論点は、`iwatani-stove`＝CB缶（ブタン）の沸点約-0.5度と気化の鈍り／ヒートパネル・寒冷地用ボンベ・OD缶の3つの対策・ボンベを直火やストーブのそばに置かない、`camp-electric-grill`＝電源サイトの契約アンペア（10A≒1000W）と1000〜1300Wの衝突・調理中の水蒸気で結露が増える、`camp-hot-carpet`＝カーペット下にグランドシートを1枚入れて地面の湿気を遮る、`hot-water-bottle`＝蓄熱式の公表保温時間は室温での値／低温やけど（同じ場所に当て続けない・寝袋の予熱に使う）、`sleeping-bag-temperature-guide`＝寝袋のスペックを下げて電気で埋めると朝方に電源が尽きる。すべてメーカー公表値・販売ページ・レビュー傾向を根拠として明示し、実機検証に関する表現は一切使っていない。
+
+### 内部リンク（手順6・全記事2本以上）
+
+| 記事 | 追加・維持したリンク先（slug） |
+|---|---|
+| `iwatani-stove` | cassette-gas-heater / camp-oil-stove / winter-camp-guide / camp-electric-grill ＋既存4本（camp-burner-beginner・camp-cooker-beginner・soto-burner・coleman-two-burner） |
+| `camp-hot-carpet` | camp-electric-heater / cassette-gas-heater / hot-water-bottle / sleeping-bag-temperature-guide / winter-camp-guide / camp-gear-sale-timing ＋既存2本（electric-blanket-camp・portable-power-large） |
+| `camp-electric-grill` | portable-power-guide / portable-power-large / cassette-gas-heater / winter-camp-guide / camp-hot-carpet / hot-water-bottle / camp-electric-heater / camp-gear-sale-timing（更新前は内部リンク**0本**） |
+| `hot-water-bottle` | sleeping-bag-temperature-guide / electric-blanket-camp / camp-hot-carpet / camp-electric-heater / winter-camp-guide / camp-electric-grill / iwatani-stove（更新前は内部リンク**0本**） |
+| `camp-electric-heater` | camp-electric-grill / iwatani-stove / hot-water-bottle / sleeping-bag-temperature-guide / winter-camp-guide ＋既存4本（cassette-gas-heater・tent-wood-stove・portable-power-guide・camp-hot-carpet） |
+| `sleeping-bag-temperature-guide` | camp-hot-carpet / hot-water-bottle / camp-electric-heater / winter-camp-guide / electric-blanket-camp / rectangle-sleeping-bag / mummy-sleeping-bag / washable-sleeping-bag / nanga-sleeping-bag ＋既存の目的別8本 |
+
+リンク先はすべて `content/posts` に実在する slug であることを機械確認済み（6記事78本・uniq 57本・不在0）。
+
+### 台帳への起票（4行・`_file/article-fix-backlog.tsv` 601→605行）
+
+| status/priority | 対象 | issue_type | 要点 |
+|---|---|---|---|
+| pending / B | `camp-hot-carpet` 第2位 YZD-101FL | `price_unconfirmed` | Amazon（Amazon.co.jp 直販 ¥15,800）が楽天 ¥12,800 より **+23%**。同一型番・両モール在庫ありなので差し替えず、本文に価格差を明記した |
+| pending / B | `hot-water-bottle` 第5位 melket | `price_unconfirmed` | Amazon ¥2,920 が楽天 ¥2,085 より **+40%**。同上の扱い |
+| pending / B | `sleeping-bag-winter-beginner` 第4位 FX-403 | `asin_mismatch` | `B0GQDW6V52` が失効し `redirected_to=B0GMYSFXLR`。`B0GMYSFXLR` へ差し替えるだけでよい（本タスクの新カードは最初から `B0GMYSFXLR`） |
+| pending / A | `sleeping-bag-winter-beginner` 第2位 Camdoor | `product_swap` | -25℃ SKU が全色欠品・ASIN が別商品へ着地・price ¥3,980 がフリース単品の価格。本記事と同じ事情で、同記事側は未処置 |
+
+### 検査結果
+
+`check-affiliate-links.cjs`（6ファイル）PASS ／ `check-card-name-vs-sku.cjs --only`（32枚）全件 `flags=OK` ／ `check-amazon-asin.cjs --only`（32枚）全件 `verdict=ok`・`in_stock(cart)` ／ `lint-bold.cjs` PASS（268ファイル）／ `validate-backlog-tsv.cjs` すべて PASS ／ `npm run build` 成功（284ページ）。
+
+---
+
 ## 2026-10-20 Amazon無しカード解消：sleeping-bag-temperature-guide の #3 を差し替え（campkit-20261020-M01）
 
 - **対象記事**: `content/posts/sleeping-bag-temperature-guide.mdx`（寝袋・シュラフの快適温度と最低使用温度 完全ガイド）。理由は `product_swap`（Amazon無しカードの解消）。`_file/amazon-backfill-no-amazon.tsv` の `sleeping-bag-temperature-guide#3#mthappy-down-mummy-25`（`judged_task=campkit-20260930-124`）1行を削除し、同記事の例外をゼロにした（台帳 22行/22キー/15記事 → 21行/21キー/14記事）。
