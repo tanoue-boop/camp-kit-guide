@@ -4,6 +4,20 @@
 
 ---
 
+## 2026-10-20 Amazon無しカード解消：sleeping-bag-temperature-guide の #3 を差し替え（campkit-20261020-M01）
+
+- **対象記事**: `content/posts/sleeping-bag-temperature-guide.mdx`（寝袋・シュラフの快適温度と最低使用温度 完全ガイド）。理由は `product_swap`（Amazon無しカードの解消）。`_file/amazon-backfill-no-amazon.tsv` の `sleeping-bag-temperature-guide#3#mthappy-down-mummy-25`（`judged_task=campkit-20260930-124`）1行を削除し、同記事の例外をゼロにした（台帳 22行/22キー/15記事 → 21行/21キー/14記事）。
+- **旧 → 新**: 第3位「Mt.happy 寝袋 マミー型 ダウン -25度」（楽天 Mt.HAPPY `mthappy/0003-066`・¥6,980・★4.58/24件・`amazonAsin` なし） → **「Fengzel Outdoor 寝袋 マミー型 ダウンシュラフ 90%ダックダウン ミリタリー 1000gダックダウン充填(冬用)」**（楽天 Fengzel楽天市場店 `fengzel/10000134`・¥12,380・採用SKU `r-sku00000004`／在庫 qty=97／`amazonAsin=B07V1YFH7Q`）。
+- **差し替えた理由（ルートb）**: 旧カードは楽天側が ブランド名=マウントハッピー・メーカー型番=「-」の**型I-b**で、`campkit-20260930-124` が「マウントハッピー 寝袋 マミー型」の `/s`（organic 48件）を投じてもブランド語を印字した候補が0件、軸も「品番:1|カラー:2」で容量・サイズ軸を持たなかった。加えてカード name 先頭の `Mt.happy` は店舗コード `mthappy`／店舗名 `Mt.HAPPY` と同形のため検索語に使えない（§11-11・§4-2 追補3 条文6）。そのため同一商品の再探索は行わず、記事の役割（ダウン×マミー型・軽量コンパクト・荷物を減らしたい冬キャンプ）に合い、**ブランド名とメーカー型番が楽天のSKU属性に入る商品**へ差し替えた。
+- **同一性の根拠**: dp `B07V1YFH7Q` の `dimensionValuesDisplayData["B07V1YFH7Q"]=["ミリタリー","冬用（1000ｇダウン詰め）"]` が楽天の採用SKU（ミリタリー／1000gダックダウン充填(冬用)）と同一構成。dp の productOverview は ブランド Fengzel Outdoor／形状 マミー／中身の素材 ダウン／材質 ナイロン／定員 1人用 で、楽天の 90%ダックダウン・400Tナイロン・210×80(50)cm・マミー型・連結可能と一致（§4-2 の ②③ で充足）。**メーカー型番 `FZYRSD036` は Amazon 側に印字がないため自動判定は `unverifiable` になるが、ブランド＋色軸＋充填量軸＋構成の一致をもって `--judge … =ok` で人手判定した。** 購入ボックスも正常（`unqualifiedBuyBox` 0／`outOfStockBuyBox` 0／`add-to-cart-button` 1／`corePrice_feature_div` 2・在庫あり）。出荷元/販売元 Fengzel＝ブランド公式のため `seller_type=official`。
+- **価格帯の扱い**: ¥6,980 → ¥12,380（+77.4%＝±20% の外）。2026-10-19 POLICY① §3 に従い、記事が宣言している価格帯の記述を同じタスクで直した（まとめ表「6,000円台」→「12,000円台」／本文「7,000円以下という価格帯でダウン×マミー型を実現しているのは希少」→「12,000円台という価格は本記事の5製品では2番目に高い水準」／比較表「6,980」→「12,380」）。**frontmatter `description` は温度表記の読み方を説明する文で商品名も価格も含まないため変更なし。** 第5位 Soomloom ¥15,980 が引き続き最高価格なので「5製品中もっとも高価」という第5位の本文も有効のまま（＝他カードの本文に触っていない）。
+- **ブランド品の下限という市場制約（判断の記録）**: ダウン×マミー型でブランド名＋型番が明記され、かつ楽天（在庫あり）とAmazon（購入ボックスあり）の両方で買える商品は、楽天API 22クエリ＋Amazon `/s` 1本の棚卸しの範囲では **¥12,000 台が下限**だった（¥6,000〜9,000 帯はノーブランド／OEM品ばかりで、選べば再び型IIの行き詰まりを作る）。¥6,570 の BUNDOK BDK-61（適正温度-5度）・¥7,298 の YOGOTO 320t（快適温度0〜5℃・総重量2.3kg）は価格帯は合うが**冬用マミー型・軽量コンパクトという役割に合わない**ため採らなかった。Bears Rock の -15度 マミー型（¥10,350）は第4位 HAWK GEAR（-15℃・化繊・マミー型）と役割が重なるため不採用。
+- **変更した箇所**: 第3位の見出し／`ProductCardMdx`（`name`・`description`・`price`・`image`・`affiliateUrl`・`rakutenRating`・`rakutenReviewCount` を新商品の実値に入れ替え、`amazonAsin="B07V1YFH7Q"` を新設。`badge="ダウン×マミー型"` は新商品にもそのまま当てはまるため据え置き。`rank`・`id`・`source="rakuten"` は不変）／カード直後の本文3段落／`ComparisonTableMdx` の `id":"mthappy-down-mummy-25"` 行／まとめ表の第3位行。**他4商品・温度表記の解説（EN13537・早見表・季節別・3シーズンの絞り込み）・FAQ・お手入れ・`thumbnail`・`date`・`updatedAt`（2026-09-21）は一切変更していない。**
+- **「対応温度」列の書き方（判断の記録）**: 楽天の製品仕様は 羽毛充填量 5値（400/1000/1500/2000/2500g）に対して 快適温度 4値・最低使用温度 4値しか印字がなく、**1000g充填SKUの温度値を一意に確定できない**。そのため比較表の `対応温度` は数値を書かず「冬用(1000g充填)」とし、本文もメーカーが印字している等級名（1000g=冬用／1500g=真冬用／2000g以上=厳冬用）だけを根拠に書いた（実測で取れなかった値は書かない）。
+- **旧商品の痕跡検査**: 本文・比較表・まとめ表・frontmatter `description`・FAQ・お手入れを `Mt.happy`／`マウントハッピー`／`6,980`／`-25度`／`24件`／`7,000円` で全文検査し**残存0件**。残った `mthappy` 2件は**カード `id` と比較表の行キー**（アンカーを壊さないため意図的に不変）。FAQ の「対応温度が-25℃の寝袋でも…」は第1位 Camdoor（-25℃）が引き続き該当するため変更不要。
+- **検査結果**: `check-affiliate-links.cjs --all` PASS（268ファイル）／`check-card-name-vs-sku.cjs --only sleeping-bag-temperature-guide#3 --recheck` が `flags=OK`・`sku_selected=r-sku00000004/ミリタリー/1000gダックダウン充填(冬用)`・`brand=Fengzel Outdoor`・`maker_model=FZYRSD036`・`current_price=12380`・`stock=qty=97`／`check-amazon-asin.cjs` の `verdict=ok`（人手）・`price_gap=-30%`・`seller_type=official`。
+---
+
 ## 2026-10-20 Amazon無しカード解消：winter-camp-gloves の #3 を差し替え（campkit-20261020-M01）
 
 - **対象記事**: `content/posts/winter-camp-gloves.mdx`（キャンプ用防寒グローブおすすめ5選）。理由は `product_swap`（Amazon無しカードの解消）。`_file/amazon-backfill-no-amazon.tsv` の `winter-camp-gloves#3#boukan-uragebana`（`judged_task=campkit-20260921-86`）1行を削除し、同記事の例外をゼロにした（台帳 23行/23キー/16記事 → 22行/22キー/15記事）。
