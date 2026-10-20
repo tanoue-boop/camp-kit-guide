@@ -4,6 +4,29 @@
 
 ---
 
+## 2026-10-21 Amazon無しカード解消：portable-power-vehicle-camp#3／snowpeak-tent#4 を商品差し替え（campkit-20261021-M03）
+
+`_file/amazon-backfill-no-amazon.tsv` の最後の 2 記事を商品差し替え（`product_swap`）で解消し、**同台帳のデータ行を 0 行にした**回。どちらも「カードがセット構成を名指ししているのに同梱物の一致する ASIN が Amazon に無い」型（§4-1 恒久ルール (A)）で、旧商品は楽天側も 2026-09-21 から在庫切れのまま（`article-fix-backlog` に `out_of_stock` が pending）だった。
+<!-- M03-1021-end -->
+
+### portable-power-vehicle-camp（車中泊向けポータブル電源5選）第3位
+
+| 項目 | 旧 | 新 |
+|---|---|---|
+| 商品 | EcoFlow RIVER 2 Pro 768Wh + 160W ソーラーパネル セット | Anker Solix C800 Plus Portable Power Station 768Wh ブラック（A1754） |
+| 楽天 | `ecoflow/river-pro`（itemName が【売り切れ】始まり・`stock=soldout`・2026-09-21 から継続） | `anker/a1754`（公式 アンカー・ダイレクト楽天市場店・SKU `A1754511`／ブラック・¥109,900・`qty=292`・★4.44/16件） |
+| Amazon | RIVER 2 Pro と 160W パネルのセット ASIN が 0 件（`/s` 2本で確認・`no-amazon` 登録） | `B0CTYBTCH9`（変種「4. ライトあり（ブラック）」・¥63,800・残り3点・購入ボックスあり） |
+| カード `price` | 130,900円 | 109,900円 |
+
+- 差し替えの理由: 第3位の役割は「本体より上の容量帯で、ソーラー充電まで含めた長期の車中泊」。768Wh という容量を変えずに、楽天公式ストアの在庫が厚い（qty=292）Anker Solix C800 Plus へ寄せた。型番 A1754 が Amazon dp に 14 回出現して楽天の `maker_model` と一致する（§4-2 ①）。同一ファミリーのセット変種 `B0DF2G7J28`（C800＋PS100 の 100W ソーラーパネルセット・楽天 `anker/b1753-5` ¥135,900）は**両モールに同一構成が実在してセット構成の役割も保てた**が、楽天が `qty=1`・Amazon が残り2点で、再び `out_of_stock` を作る確率が高いため採らなかった（判断の理由は result に記録）。
+- 色の名指し: 楽天のカラー軸は先頭が ダークグレー（`A17545Z1`）だが `stockCondition=sold-out`・`quantity=0` なので、同価格で在庫のある ブラック（`A1754511`・qty=292）を `name` に書いた（2026-09-22 §B）。`check-card-name-vs-sku` の `sku_selected` は `A1754511/ブラック`・`flags=OK`。Amazon 側もブラック変種を当てている（ダークグレー変種 `B0C6MK4TW4` は `outOfStockBuyBox_feature_div`=2・`add-to-cart`=0 で購入ボックスが死んでおり §12-5-12 条文9 により不採用）。
+- 価格は 130,900 → 109,900（−16.0%）で ±20% 内。比較表の価格を ¥109,900、充電時間を「約1時間」→「約58分」に更新（容量 768Wh とバッテリー種別 リン酸鉄LFP は変わらない）。
+- まとめ表の行は「完全オフグリッド・ソーラー充電 ／ EcoFlow RIVER 2 Pro + Solar」→「高出力で家電も使いたい ／ Anker Solix C800 Plus（768Wh）」へ、まとめの締めパラグラフも「ソーラーセットの RIVER 2 Pro」→「電気ケトルなど高出力の家電も使いたいなら Anker Solix C800 Plus」へ書き替えた（単品になったためセット前提の役割は残していない）。
+- 地の文は新商品の実測値（AC定格1200W／瞬間最大1600W・AC約58分で満充電・リン酸鉄で電池3,000回・対応ソーラーパネル Solix PS100/PS200/PS400 で最大300W入力・約37.1×25.0×20.5cm／約10.9kg・携帯型ライト搭載）で書き替え、旧商品の実値（160Wパネル・2,808件のレビュー）は1つも残していない。**レビュー16件（30件未満）なので地の文・badge ではレビュー件数と評価に触れていない**（この記事の比較表にレビュー列は無い）。
+- frontmatter `description` は旧商品（RIVER 2 Pro・ソーラーセット）への言及が無く価格レンジも書いていないため**変更なし**。この記事には `## よくある質問`・`## お手入れ・使い方Tips` の節自体が無いので、そちらの痕跡検査は対象 0 件。`updatedAt`（2026-09-21）・`date`・`thumbnail` は据え置き。
+
+---
+
 ## 2026-10-21 Amazon無しカード解消：low-style-table#5／outdoor-kitchen-table#3 を商品差し替え（campkit-20261021-M02）
 
 `_file/amazon-backfill-no-amazon.tsv` に登録されていた「楽天では買えるが Amazon に同一品が無いカード」のうち、残っていた 4 記事から 2 記事を商品差し替え（`product_swap`）で解消した回。どちらも旧商品は**楽天側も在庫切れ**で購入導線が死んでおり、`article-fix-backlog` に `out_of_stock` が pending のまま残っていた案件。
