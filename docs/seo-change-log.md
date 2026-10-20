@@ -4,6 +4,98 @@
 
 ---
 
+## 2026-10-21 out_of_stock 棚卸し：在庫回復 40 件を done 化（campkit-20261021-01）
+
+**狙い**: `_file/article-fix-backlog.tsv` の `status=pending` かつ `issue_type=out_of_stock` の行は 2026-09-21 の走査時点の在庫スナップショットで起票されており、その後 (a) 別タスクの商品差し替えでカードごと入れ替わったもの、(b) 楽天側の在庫が自然に回復したもの が `pending` のまま滞留していた。実測で取り直して棚卸しし、消化対象を実在する案件だけに絞る。
+
+**やったこと**: pending × out_of_stock の **85 件（65 記事）** を機械抽出し、`target_slug` ＋ `position` の `（id: …）` をキーに `check-card-name-vs-sku.cjs --only … --recheck` で楽天 item ページを **84 枚再取得**（1 件は後述のとおりカードが現存せず対象外・所要 149.8 秒・`--max-minutes 35` の打ち切りなし）。
+
+| 分類 | 件数 | 対処 |
+|---|---|---|
+| ① 在庫回復（`stock=qty=…`） | 39 | `status=done` |
+| ② 選択SKUのみ欠品（`soldout(others:N)`） | 6 | `pending` 据え置き |
+| ③ 全変種 soldout（`soldout`） | 35 | `pending` 据え置き |
+| ④ 取得失敗（`http=404`） | 4 | `pending` 据え置き・申し送り |
+| ⑤ 対象カードが記事に現存しない | 1 | `status=done` |
+
+⑤ は `camp-lantern-led` 第1位（id: `soomloom-helio5000`）。2026-10-10 の `campkit-20261010-R13` が記事を LED ランタン横断比較に作り直しており、現在の id は `lantern-rank-1〜9`。起票対象のカードが消滅済みのため done にした（この行が pending のままだと、次の消化タスクが `--only` で必ず「見つかりません」で落ちる）。
+
+④ の 4 件は楽天 item ページ自体が 404（= `out_of_stock` より重い `discontinued_404` 相当）。本タスクは行数を 608 で固定する制約があるため `issue_type` の起票変更は行わず pending 据え置きとした: `anker-power#anker-c1000-ps100` / `day-camp-starter-set#starter-rank-3` / `two-room-tent-guide#quickcamp-kurve` / `nanga-down-jacket#nanga-aurora-ladies`。
+
+**done にした 39 件（在庫回復・実測値）**:
+
+| 記事 | カード id | 実測 stock |
+|---|---|---|
+| `attack-pack` | `karrimor-cadet20` | qty=1 |
+| `one-touch-tent` | `fielddoor-onetouch-hexagon` | qty=44 |
+| `mestin-recommend` | `mr250-mestin-set` | qty=30 |
+| `anker-power` | `anker-f1200` | qty=14 |
+| `backpack-rain-cover` | `lama-raincover-2set` | qty=3 |
+| `bonfire-stand-solo` | `mysticridge-solo-takibi` | qty=100 |
+| `camp-fan-summer` | `fan-icarry` | qty=29 |
+| `camp-hot-carpet` | `watanabe-whc-105` | qty=21 |
+| `camp-skillet` | `cs-skillet-frypan25` | qty=1 |
+| `disaster-portable-power` | `ecoflow-river3-maxplus` | qty=5 |
+| `family-camp-summer-tent` | `ratelworks-boden-rws0111` | qty=7 |
+| `family-camp-summer-tent` | `onetouch-family-tent-300` | qty=4 |
+| `fire-tongs` | `zen-camps-tong` | qty=98 |
+| `group-camp-tent` | `tent-rank-3` | qty=20 |
+| `helinox-chair` | `helinox-ground-chair` | qty=4 |
+| `hot-sandwich-maker` | `chums-hot-sandwich` | qty=22 |
+| `low-style-bonfire` | `snowpeak-takibidai-s` | qty=1 |
+| `one-pole-tent` | `onepole-family-4p` | qty=1 |
+| `portable-cooler-aircon` | `tansu-spot-cooler` | qty=64 |
+| `uniflame-burner` | `uniflame-usd2` | qty=1 |
+| `group-camp-table` | `folding-table-180x70` | qty=121 |
+| `portable-electric-kettle` | `ac100-240v-kettle-400` | qty=978 |
+| `sierra-cup` | `campingmoon-seiro` | qty=34 |
+| `titanium-mug` | `tm-pykespeak-junchitan` | qty=93 |
+| `disaster-radio` | `relax-retro-radio` | qty=8 |
+| `nanga-down-jacket` | `nanga-aurora-mens` | qty=25 |
+| `oil-lantern` | `dietz-30` | qty=17 |
+| `petzl-headlight` | `petzl-tikkacore` | qty=1 |
+| `two-room-tent-guide` | `tansu-2room-340` | qty=9999 |
+| `waq-chair` | `waq-rlc1hb` | qty=22 |
+| `captain-stag-bonfire` | `cs-solo-light` | qty=5 |
+| `headlight-rechargeable` | `relief10-3led` | qty=467 |
+| `logos-tent` | `logos-tradcanvas-revival-solo-dome` | qty=1 |
+| `iwatani-stove` | `iwatani-torch-ii` | qty=17 |
+| `petzl-headlight` | `petzl-pixa3` | qty=4 |
+| `solo-camp-cot` | `cot-rank-1` | qty=1 |
+| `torch-burner` | `iwatani-torch-2` | qty=145 |
+| `mountain-camp-lantern` | `lantern-goalzero` | qty=44 |
+| `car-camp-lighting` | `zashbear-led-1000` | qty=30 |
+
+**結果**: `status` 分布は done 211→251／pending 397→357。pending × out_of_stock は **85 → 45 件（35 記事）** に減った（本タスク §B の差し替え分を含めると 44 件／34 記事）。`status` と `notes` 以外の列・行順・行数（608）・列数（10）は変更していない。
+
+---
+
+
+## 2026-10-21 family-camp-summer-tent の第2位を商品差し替え（campkit-20261021-01）
+
+**狙い**: 2026-10-19 の POLICY③（`result-POLICY-20261019-next-after-no-amazon.md`）が「Amazon 無しがゼロになったら次は `out_of_stock` と `asin_mismatch` を、流入の多い記事から」と定めている。`out_of_stock` が pending の記事のうち流入最大（90日 impressions 3,816／clicks 54）の `family-camp-summer-tent` を対象にした。
+
+**理由（issue_type）**: `out_of_stock`。第2位の FIELDOOR お買い得4点セット（`smile88/a18347`）は選択 SKU `a05338/ライトベージュ` を含む全変種が在庫0で、本タスクの再実測でも `stock=soldout` のまま＝購入できないカードだった。
+
+| 項目 | 旧 | 新 |
+|---|---|---|
+| 商品 | FIELDOOR お買い得4点セット（テント＋タープ＋グランドシート＋ポール）4〜6人用 | キャプテンスタッグ エクスギア 2ルームドーム270 UA-0018 ブラウン 4〜5人用 |
+| 楽天 | `smile88/a18347`（`stock=soldout`・全変種在庫0） | `j-shop/p01199`（生活雑貨 Jショッピング・¥27,940・`qty=23`・★4.0/2件・`flags=OK`） |
+| Amazon | `B0B68M969C` | `B01B8EZDIU`（CAPTAIN STAG エクスギア ツールームドーム 270 UA-18・¥19,500・購入ボックス cart・残り2点・販売元 Calm life shop＝marketplace） |
+| カード `price` | 27,830円 | 27,940円 |
+| レビュー属性 | `rakutenRating="4.44"` / `rakutenReviewCount="16"` | 省略（レビュー2件＝30件未満のため §12-5-10 に従い `★ 0.0（0件）` を描画させない） |
+
+**セット品ではなくなった分の手当て（§B-4＝価格・セットの弁）**: 条件8（セット品）を外したので、第2位の役割を書き替えた。まとめ表「セットで手軽に始めたい」→「**2ルームを低予算・軽量で**」、比較表の `形状`「ドーム（4点セット）」→「2ルームドーム（スクリーン前室）」、`cool`「フルクローズ⇔開放で換気を調整／入門向け」→「ベンチレーション＋ノーシームメッシュ／前室を日陰リビングに」。本文の第2位の節（見出し・解説4段落・主なスペック）は Amazon dp と楽天仕様表で一致した実測値（フライ270×490×H155cm／インナー270×270×H150cm／重量6.6kg／耐水圧PU2,000mm／フロアOXF150D／ポール アルミΦ9.5・Φ8.5mm）で書き直した。差別化の軸は「本記事の2ルーム勢で最も安く、約6.6kg＝コールマン大型2ルーム（約21kg）の3分の1以下の軽さ」。
+
+**価格帯**: 新価格 ¥27,940 は旧 ¥27,830 とほぼ同額で、記事内の最低 ¥23,500（Bears Rock）・最高 ¥82,280（コールマン）は不変＝比 3.50 倍で5倍ルール内。frontmatter の「実勢約2.4万〜8.2万円」も範囲の内側なので表記は据え置いたが、`description` が旧商品名「FIELDOOR 4点セット」を名指ししていたため新商品名へ差し替えた（148字）。
+
+**旧商品の痕跡検査**: 本文・比較表・まとめ表に加えて frontmatter `description`・`## よくある質問`・`## お手入れ・使い方Tips`（本記事では `## 夏テントを快適に使うためのTips`）まで対象にして検査し、`FIELDOOR`／`フィールドア`／`4点セット`／`a18347`／`smile88`／`27,830`／`27830`／`4.44`／`16件`／`B0B68M969C`／`お買い得`／`ドーム型`／`フルクローズ` をすべて 0 件にした。残った `グランドシート`（Tips の一般論）・`1年保証`（第5位 WAQ）・`キャノピー`（第3位 コールマンのキャノピーポール）は第2位由来ではないので残置。
+
+**据え置いたもの**: `updatedAt`（2026-09-20）・`date`（2026-04-23）・`thumbnail`（`/images/outdoor-09.png`）・カードの `id`（`fieldoor-4set-family-tent`＝まとめ表のアンカーが参照）・`rank="2"`。第1位 TOMOUNT の `price_mismatch`（33,999 対 39,999）は本タスクのスコープ外。
+
+---
+
+
 ## 2026-10-21 Amazon無しカード解消：portable-power-vehicle-camp#3／snowpeak-tent#4 を商品差し替え（campkit-20261021-M03）
 
 `_file/amazon-backfill-no-amazon.tsv` の最後の 2 記事を商品差し替え（`product_swap`）で解消し、**同台帳のデータ行を 0 行にした**回。どちらも「カードがセット構成を名指ししているのに同梱物の一致する ASIN が Amazon に無い」型（§4-1 恒久ルール (A)）で、旧商品は楽天側も 2026-09-21 から在庫切れのまま（`article-fix-backlog` に `out_of_stock` が pending）だった。
