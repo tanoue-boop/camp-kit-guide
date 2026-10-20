@@ -79,6 +79,8 @@ export default function ProductCard({ product, rank }: ProductCardProps) {
     name: product.name,
     description: product.description || product.name,
     ...(product.image ? { image: product.image } : {}),
+    // brand はカードに明示された場合のみ。name の先頭をブランド名と見なす推測はしない。
+    ...(product.brand ? { brand: { "@type": "Brand", name: product.brand } } : {}),
     offers: {
       "@type": "Offer",
       price: product.price,

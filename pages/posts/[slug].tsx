@@ -21,6 +21,8 @@ import PostNavigation from "../../components/article/PostNavigation";
 import type { PostFrontmatter, Post } from "../../types/post";
 import type { Category } from "../../types/category";
 import type { Heading } from "../../components/article/TableOfContents";
+import { extractRankedCards, extractFaq } from "../../lib/articleSchema";
+import type { RankedCard, FaqPair } from "../../lib/articleSchema";
 import styles from "./post.module.css";
 
 const POSTS_DIR = path.join(process.cwd(), "content/posts");
@@ -96,11 +98,11 @@ function readAllPosts(): Post[] {
 // be passed as string literals from MDX files and coerced here.
 
 function ProductCardMdx({
-  rank, id, name, description, price, rating, reviewCount,
+  rank, id, name, brand, description, price, rating, reviewCount,
   amazonRating, amazonReviewCount, rakutenRating, rakutenReviewCount,
   affiliateUrl, amazonUrl, amazonAsin, source, badge, image,
 }: {
-  rank?: string; id?: string; name: string; description: string;
+  rank?: string; id?: string; name: string; brand?: string; description: string;
   price: string; rating?: string; reviewCount?: string;
   amazonRating?: string; amazonReviewCount?: string;
   rakutenRating?: string; rakutenReviewCount?: string;
@@ -113,6 +115,7 @@ function ProductCardMdx({
         rank={rank ? Number(rank) : undefined}
         product={{
           id: id ?? name, name, description,
+          ...(brand ? { brand } : {}),
           price: Number(price),
           ...(rating ? { rating: Number(rating) } : {}),
           ...(reviewCount ? { reviewCount: Number(reviewCount) } : {}),
@@ -195,12 +198,17 @@ type PostPageProps = {
   prevPost: Post | null;
   nextPost: Post | null;
   categories: Category[];
+  /** ランキング形式の記事のカード（ItemList 用・ランキングでない記事は空配列） */
+  rankedCards: RankedCard[];
+  /** 「よくある質問」のQ&A（FAQPage 用・Q&A形式でない記事は空配列） */
+  faq: FaqPair[];
 };
 
 // ─── component ────────────────────────────────────────────────────────────────
 
 export default function PostPage({
   slug, frontmatter, mdxSource, headings, relatedPosts, recentPosts, sidebarPosts, prevPost, nextPost, categories,
+  rankedCards, faq,
 }: PostPageProps) {
   const catName = ALL_CATEGORIES.find((c) => c.slug === frontmatter.category)?.name ?? frontmatter.category;
   const datePublished = frontmatter.date;
@@ -233,6 +241,37 @@ export default function PostPage({
     },
   };
 
+  // ランキング記事の「何位に何を挙げているか」を機械可読にする（AI検索での引用対象）。
+  // MDX は書き換えず、getStaticProps で集めたカード情報から生成する。
+  const itemListSchema = rankedCards.length > 0
+    ? {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        name: frontmatter.title,
+        url: pageUrl,
+        numberOfItems: rankedCards.length,
+        itemListElement: rankedCards.map((card) => ({
+          "@type": "ListItem",
+          position: card.position,
+          name: card.name,
+          ...(card.id ? { url: `${pageUrl}#${card.id}` } : {}),
+        })),
+      }
+    : null;
+
+  // 本文の「よくある質問」をそのまま FAQPage にする（本文に無い文言は足さない）。
+  const faqSchema = faq.length > 0
+    ? {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: faq.map((pair) => ({
+          "@type": "Question",
+          name: pair.question,
+          acceptedAnswer: { "@type": "Answer", text: pair.answer },
+        })),
+      }
+    : null;
+
   return (
     <>
       <Seo
@@ -250,6 +289,20 @@ export default function PostPage({
           key="ld-blogposting"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(blogPostingSchema) }}
         />
+        {itemListSchema && (
+          <script
+            type="application/ld+json"
+            key="ld-itemlist"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema) }}
+          />
+        )}
+        {faqSchema && (
+          <script
+            type="application/ld+json"
+            key="ld-faqpage"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+          />
+        )}
       </Head>
 
       {/* Eyecatch */}
@@ -358,6 +411,8 @@ export const getStaticProps: GetStaticProps<PostPageProps> = async ({ params }) 
   const { data, content } = matter(raw);
   const mdxSource = await serialize(content, { mdxOptions: { remarkPlugins: [remarkGfm] } });
   const headings = extractHeadings(content);
+  const rankedCards = extractRankedCards(content);
+  const faq = extractFaq(content);
 
   const allPosts = readAllPosts();
   const currentIndex = allPosts.findIndex((p) => p.slug === slug);
@@ -388,6 +443,8 @@ export const getStaticProps: GetStaticProps<PostPageProps> = async ({ params }) 
       prevPost,
       nextPost,
       categories,
+      rankedCards,
+      faq,
     },
   };
 };

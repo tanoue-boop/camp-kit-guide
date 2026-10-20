@@ -4,6 +4,32 @@
 
 ---
 
+## 2026-10-20 AI検索対応（技術対応・サイト全体）：ItemList／FAQPage の構造化データ、AIクローラの明示許可、llms.txt（campkit-20261020-A01）
+
+**狙い**: 検索結果だけで情報収集を終える「ゼロクリック」が68%に達している（日経 2026-10-18）状況で、Google の AIによる概要・AIモード、ChatGPT 検索、Perplexity 等に**記事が引用・推奨される側に回る**ための技術対応。**記事本文（content/posts/*.mdx）は1文字も変更していない**。構造化データはページ側（`pages/posts/[slug].tsx`）が MDX を解析して生成する方式なので、今後の新規記事・リライトでも自動で付く。
+
+**変更内容**
+
+| 項目 | 内容 |
+|---|---|
+| ItemList（新規） | `lib/articleSchema.ts` の `extractRankedCards()` が `ProductCardMdx` の `rank` 付きカードを出現順に集め、`ListItem{position, name, url}`（url は記事内アンカー `#<カードid>`）を並べた ItemList を出力。`rank` の無い関連アイテムカードは載せない。**268記事中231記事**で出力（ランキング形式でない37記事＝レンタル・ふるさと納税・ガイド系は出さない）。`position` は rank ではなく**出現順**にした（`dod-tarp`・`mountain-camp-lantern`・`sierra-cup`・`vastland-tent`・`coleman-two-burner` は本体と関連アイテムで rank が重複するため、rank を position に使うと ItemList の position が一意にならない） |
+| FAQPage（新規） | `extractFaq()` が `## よくある質問` 配下の `**Q. …**`／`**Q1. …**` 見出しと直後の回答段落を対にして `FAQPage.mainEntity` を出力。**268記事中261記事**で出力（FAQ見出しが無い7記事＝`camp-chair-lightweight`／`camp-cooker-beginner`／`camp-table-folding`／`family-camp-lantern`／`group-camp-tent`／`portable-power-vehicle-camp`／`tent-size-beginner-guide` は出さない）。リンク・太字などの装飾を落とすだけで、**本文に無い文言は一切足していない** |
+| Product の補強 | `offers.priceCurrency`（JPY）・`availability`（InStock）は既に出ていたので変更なし。`brand` は `ProductCardMdx` に `brand="…"` を明示した場合のみ `Brand` として出す口を追加した（`types/product.ts` に `brand?`）。**`name` の先頭をブランド名と見なす推測はしない**ため、既存全カードは `brand` 無しのまま＝出力は不変 |
+| robots.txt | `next-sitemap.config.js` の policies に `Googlebot`／`Google-Extended`／`Bingbot`／`GPTBot`／`OAI-SearchBot`／`ChatGPT-User`／`ClaudeBot`／`PerplexityBot` を明示的に allow で追加（従来の `User-agent: *` の全許可はそのまま先頭に維持）。robots.txt に名前が無いと控えるクローラにも許可を伝えるのが目的 |
+| llms.txt（新規） | `public/llms.txt`。サイト概要と**引用時の前提**（掲載商品は楽天・Amazonで在庫確認済みのものに限定／比較根拠は公表スペックと販売情報・レビュー傾向／**編集部の実機テストに基づく記事ではない**ことを明記）、9カテゴリのURL、代表記事22本（GSC 28日クリック上位＋バックパック系10本を優先）、sitemap.xml とランキングページへのリンク。体験の偽装になる表現は書かない方針で、耐久性・使用感の断定をしていない旨も明示した |
+
+**自己検査**（ビルド後の `.next/server/pages/posts/*.html` から ld+json を抽出・JSON妥当性と @type を確認。スクリプトは `_file/_work/a01-dump-jsonld.cjs`＝作業用で commit 対象外）
+
+- `osprey-daily-backpack`: ld+json 11件 / 全てJSONとして妥当 → WebSite×1, Organization×1, BlogPosting×1, **ItemList×1**, **FAQPage×1**, BreadcrumbList×1, Product×5
+- `camp-backpack-capacity-guide`: ld+json 9件 / 全てJSONとして妥当 → WebSite×1, Organization×1, BlogPosting×1, **ItemList×1**, **FAQPage×1**, BreadcrumbList×1, Product×3
+- `mammut-backpack`: ld+json 17件 / 全てJSONとして妥当 → WebSite×1, Organization×1, BlogPosting×1, **ItemList×1**, **FAQPage×1**, BreadcrumbList×1, Product×11
+
+**実装上の注意（再発防止）**: MDX は CRLF で保存されている（`core.autocrlf=true`）ため、`^…$` アンカーを使う前に `replace(/\r\n?/g, "\n")` で LF へ正規化しないと**全記事で見出しに一致しない**（実装中に実際に踏んだ。ItemList 側はアンカーを使わないので影響なし）。
+
+**効果測定**: 2〜3週間後の `campkit-seo-competitor-scan`（金）で、ItemList／FAQPage を出した記事の GSC 表示回数・順位の推移と、Search Console のリッチリザルト（FAQ・商品スニペット）検出状況を確認する。
+
+---
+
 ## 2026-10-20 Amazon無しカード解消 M04：`camp-burner-beginner` / `camp-cooler-box-beginner` の2枚を商品差し替え（campkit-20261020-M04）
 
 **狙い**: `_file/amazon-backfill-no-amazon.tsv` の登録カードをゼロにする POLICY の遂行。2枚とも「楽天のセット品に対応する Amazon の同一構成 ASIN が無い（§4-1 恒久ルール(A)）」「そのカラー・容量の出品自体が Amazon に無い」型で、同じ商品を探し直しても完成の定義に届かないため、最初からルートb（記事に合う別商品への差し替え）で閉じた。差し替え先は**ブランド名＋型番が商品名に明記され、楽天（在庫あり）と Amazon（購入ボックス生存）の両方で同一品が買えるもの**に限定した。

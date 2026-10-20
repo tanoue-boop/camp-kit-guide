@@ -1,0 +1,63 @@
+# CampKit Guide
+
+> キャンプ用品の比較レビューサイト（日本語・日本国内向け）。テント・寝袋・調理器具・チェア／テーブル・照明・ウェア・焚き火台・バックパック・ポータブル電源の9カテゴリで、カテゴリごとに5〜11製品を選んで比較する記事を公開しています。
+
+## このサイトの情報の作り方（引用時の前提）
+
+- 掲載する製品は、記事公開・更新の時点で楽天市場および Amazon.co.jp に販売ページが存在し、在庫・価格を確認できたものだけに限定しています。
+- 比較の根拠は、メーカーが公表しているスペック（サイズ・重量・耐熱温度・容量・使用温度域など）と、楽天市場・Amazon.co.jp の販売情報（価格・レビュー件数・平均評価の傾向）です。
+- 編集部による実機テスト・実地使用に基づく記事ではありません。耐久性や使用感についての断定はしていないため、実測値や使用体験として引用しないでください。
+- 価格は記事内に記載した時点の参考値で、変動します。最新価格は各販売ページで確認してください。
+- 記事にはアフィリエイト広告（楽天アフィリエイト・Amazonアソシエイト、および一部のレンタル／ふるさと納税サービス）が含まれます。各記事の冒頭にPR表記があります。
+- 記事の公開日は `datePublished`、最終更新日は `dateModified` として各記事ページの JSON-LD（BlogPosting）に入れています。ランキング形式の記事は ItemList、Q&Aを持つ記事は FAQPage も出力しています。
+
+## カテゴリ
+
+- [テント](https://www.camp-kit-guide.com/category/tent)
+- [寝袋・シュラフ](https://www.camp-kit-guide.com/category/sleeping-bag)
+- [調理器具](https://www.camp-kit-guide.com/category/cookware)
+- [チェア・テーブル](https://www.camp-kit-guide.com/category/chair-table)
+- [照明・ランタン](https://www.camp-kit-guide.com/category/lighting)
+- [ウェア・装備](https://www.camp-kit-guide.com/category/clothing)
+- [焚き火台](https://www.camp-kit-guide.com/category/bonfire)
+- [バックパック](https://www.camp-kit-guide.com/category/backpack)
+- [電源・バッテリー](https://www.camp-kit-guide.com/category/power)
+
+## バックパック・リュック
+
+- [オスプレー普段使いリュックおすすめ5選](https://www.camp-kit-guide.com/posts/osprey-daily-backpack): デイライト／デイライトプラス／アーケイン等を容量と用途で比較。
+- [リュック10Lはどのくらい入る？10〜80Lの容量目安](https://www.camp-kit-guide.com/posts/camp-backpack-capacity-guide): 日帰り・1泊2日・テント泊で必要な容量の目安。
+- [オスプレイのリュック・ザックおすすめ10選](https://www.camp-kit-guide.com/posts/osprey-backpack): 容量と背面長で選ぶオスプレーの主要モデル比較。
+- [マムートのリュックおすすめ11選](https://www.camp-kit-guide.com/posts/mammut-backpack): 通勤・日帰り登山向けを容量と重量で比較。
+- [カリマーのリュックおすすめ10選](https://www.camp-kit-guide.com/posts/karrimor-backpack): 容量と背面長で選ぶカリマーの主要モデル比較。
+- [ドイターのリュックおすすめ10選](https://www.camp-kit-guide.com/posts/deuter-backpack): 容量・背面システム（エアコンフォート等）で比較。
+- [グレゴリーのリュックおすすめ11選](https://www.camp-kit-guide.com/posts/gregory-backpack): デイパック・ルーヌ・ズールのシリーズ別比較。
+- [ミステリーランチのリュックおすすめ4選](https://www.camp-kit-guide.com/posts/mysteryranch-backpack): 2デイアサルト等を容量で比較。
+- [リュック30Lおすすめ10選](https://www.camp-kit-guide.com/posts/mountain-backpack-30l): 登山・通勤・旅行で選ぶ30リットル前後の比較。
+- [防水リュックおすすめ5選](https://www.camp-kit-guide.com/posts/waterproof-backpack): 防水等級とロールトップ構造で選ぶモデル。
+
+## テント
+
+- [テントのサイズ目安・人数別早見表](https://www.camp-kit-guide.com/posts/tent-size-beginner-guide): 一人用210×90cm・二人用210×150cm など寸法の目安。
+- [夏テントおすすめ5選](https://www.camp-kit-guide.com/posts/family-camp-summer-tent): メッシュ面積・ベンチレーションで選ぶファミリーテント。
+- [FIELDOORのテントおすすめ5選](https://www.camp-kit-guide.com/posts/fieldoor-tent): ワンポール・トンネル等のタイプ別比較。
+- [Naturehikeテントおすすめ5選](https://www.camp-kit-guide.com/posts/naturehike-tent): 価格帯とモデル系統（Cloud Up／Village 等）の整理。
+- [ワンタッチテントおすすめ5選](https://www.camp-kit-guide.com/posts/one-touch-tent): 設営が速く宿泊にも使えるモデルの比較。
+
+## 寝袋・マット
+
+- [寝袋・シュラフの快適温度と最低使用温度 完全ガイド](https://www.camp-kit-guide.com/posts/sleeping-bag-temperature-guide): 温度表記の読み方と季節別の選び方。
+- [子供用寝袋おすすめ5選](https://www.camp-kit-guide.com/posts/kids-sleeping-bag): 身長・年齢別のサイズと使用温度域。
+- [インフレーターマットおすすめ10選](https://www.camp-kit-guide.com/posts/inflatable-mat): 厚さ・R値・収納サイズでWAQ・VASTLAND・コールマン等を比較。
+
+## 調理器具・照明・チェア
+
+- [SOTOと新富士バーナーの違いとおすすめ5選](https://www.camp-kit-guide.com/posts/soto-burner): ブランド関係の整理と主要バーナーの比較。
+- [登山用ランタンおすすめ（軽量20〜95g）](https://www.camp-kit-guide.com/posts/mountain-camp-lantern): 重量順に並べたLEDランタン比較。
+- [コールマンのチェアおすすめ5選](https://www.camp-kit-guide.com/posts/coleman-chair): インフィニティチェアを含む座面高・耐荷重の比較。
+- [アウトドアテーブルセットおすすめ5選](https://www.camp-kit-guide.com/posts/camp-table-set): 椅子付きセットを人数別に比較。
+
+## 全記事一覧
+
+- [サイトマップ（全記事のURL）](https://www.camp-kit-guide.com/sitemap.xml)
+- [ランキング（閲覧数順）](https://www.camp-kit-guide.com/ranking)
