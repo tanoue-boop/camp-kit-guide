@@ -3,6 +3,28 @@
 数値の推移はGAS「SEOレポート」の履歴で追う。本ファイルは「いつ・どの記事を・なぜ・どう変えたか」を記録し、次回レポートで効果を評価するための施策台帳。新しい施策は上に追記する。
 
 ---
+## 2026-10-22 売上取りこぼし解消（mysteryranch-backpack 2枚の在庫切れ／waterproof-backpack 1枚の ASIN 取り違え・campkit-20261022-M01）
+
+**狙い**: 2026-10-19 の POLICY③（`result-POLICY-20261019-next-after-no-amazon.md`）の次フェーズ＝`article-fix-backlog.tsv` の `out_of_stock`／`asin_mismatch` の `pending` 解消。Amazon無しカードが 2026-10-21 にゼロになったため、**「カードはあるが買えない／別商品に飛ぶ」取りこぼし**を記事単位で潰す。本回の対象は 2 記事 3 行（＋同記事の `name_fix` 1 行を同梱）。
+
+### mysteryranch-backpack（第1位・第2位の在庫切れを解消／第4位の name_fix を同梱）
+
+- **第1位 カタリスト22（`mr-catalyst-22`）**: 旧リンク先 `galleria/mtr00117` は本日も全4変種 qty=0（BLACK 01-01 含む）で 2026-09-21 からの売り切れが継続。**同一商品（カタリスト22 ブラック 21L）の在庫あり出品へリンク先を切替**＝`supersportsxebio/108421227011`（単一SKU ブラック／ＦＦ・¥23,100・qty=6・メーカー型番 19761572001000）。レビュー実績のある greenzone（★4.75/8件）・canpanera（★5/1件）・jeans（★5/1件）はいずれも BLACK が qty=0、moonloid（★5/2件）は BLACK qty=2 の薄在庫だったため、**再発防止（単一色SKUページ＋在庫6点）を優先**した。価格 ¥25,300→¥23,100（-8.7%）にあわせ、カード `price`・本文・比較表・まとめ表（25,300円台→23,100円台）・frontmatter `description`（実勢1.2〜4.3万円→1.3〜4.3万円）を整合。`name` の未確認コード「19761572」は実メーカー型番「19761572001000」に改めた。レビュー0件の出品なので `rakutenRating`／`rakutenReviewCount` を省略し、`badge`・本文・比較表 `eval`（→`評価準備中`）から評価数値を外した（判定基準 §12-5-10 条文1・条文5）。`amazonAsin=B0C5VJRVGX`（ブラック）は据え置き。
+- **第2位 ギャラゲーター（`mr-gallagator`）**: 旧リンク先 `onestep/ju1903` も全3変種 qty=0 で継続売り切れ。**同一モデル（ギャラゲーター20）の在庫あり出品**`u-stream/myr-gallagator`（SKU `r-sku00000011`・BLACK/ブラック×S/M・¥13,500・qty=105・★4.85/13件）へ切替。価格は ¥11,970→¥13,500（+12.8%・±20% 枠内）で、まとめ表（11,970円台→13,500円台）と frontmatter `description` を整合。**容量表記を実測の 17L（S/Mサイズ）に統一**（「ギャラゲーター20」の「20」はモデル名で、楽天4店・Amazon いずれも容量は 17L）。見出し・カード `description`・本文・比較表（容量 20L→17L）・frontmatter `description`（20〜45L→17〜45L）を直した。`amazonAsin=B0CQ75SFDT` は据え置きで、2026-09-23 に記録された `no_buybox` は解消（add-to-cart あり・¥14,950）。
+- **第4位 スクリー33（`mr-scree-33`）**: 同じ記事を開く回に同梱して `name` から未確認コード「19761596」を削除。商品・リンク・価格・本文は変更していない（実リンク先 `galleria/mtr00121` は ¥42,900・qty=7 で在庫あり）。
+- **変更していないもの**: `updatedAt`（`2026-09-20`）・`date`・`thumbnail`・第3位（レイディックス47）のカードと本文・選び方のポイント1〜4・はじめに・お手入れTips・FAQ。
+
+### waterproof-backpack（第1位の ASIN 取り違えを解消）
+
+- **第1位 ラドウェザー 絶対に濡れない 防水リュック（`zettai-nurenai`）**: 既設置の `amazonAsin=B07PX8SH28` はカード `name` が名指しする「ブラック×ホワイト」ではなく**別色（ブラック/グレー・型番 ladbag002-bkgy）の変種**を指していた（2026-09-23 に `model_mismatch` 判定）。候補 ASIN `B07PSGYXQR` を dp で照合し、変種一覧6色の着地が「ブラック/ホワイト」・`model=ladbag002`・¥3,980（楽天実リンク先の選択SKU 117053／01.ブラック×ホワイト・qty=27・¥3,980 と一致）・購入ボックスあり・販売元 LAD WEATHER（発送 Amazon）を確認して**`amazonAsin` のみ付け替え**た。`name`／`price`／本文／比較表／まとめ表は 1 文字も変更していない。
+
+**関門**: `check-affiliate-links.cjs --all` PASS（269ファイル・未充足0）／`lint-bold.cjs` PASS／`validate-backlog-tsv.cjs` 全PASS／`npm run build` 成功／`check-card-name-vs-sku.cjs --only`（対象4枚）で**全枚 flags=OK**／`check-amazon-asin.cjs` の対象3行を `verdict=ok` で記録。
+
+**台帳**: `article-fix-backlog.tsv` の該当4行（`out_of_stock` 2・`asin_mismatch` 1・`name_fix` 1）を `done` 化。取りこぼし（`status≠done` かつ `out_of_stock`／`asin_mismatch`）は 68記事106行 → **66記事103行**。
+
+**効果測定**: この記事は GSC 過去28日でクリック17/表示199（2026-09-02 時点の記録）。2〜3週間後の `campkit-seo-competitor-scan`（金）で「ミステリーランチ リュック」「防水リュック」の表示回数・順位と、購入導線が生きたことによるクリック率の変化を確認する。
+
+---
 ## 2026-10-22 新規記事 millet-backpack を公開（campkit-20261022-N03）
 
 **狙いKW**: 「ミレー リュック」（月間1万〜10万）／副: 「ミレー リュック おすすめ」「ミレー クーラ」「ミレー サースフェー」。目標は月間報酬10倍（2027-01-18）で、集中カテゴリ「バックパック・リュック」のブランド軸記事の拡充。**公開日 2026-10-22**（`date`＝`updatedAt`）。
