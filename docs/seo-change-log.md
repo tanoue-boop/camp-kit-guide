@@ -3,6 +3,36 @@
 数値の推移はGAS「SEOレポート」の履歴で追う。本ファイルは「いつ・どの記事を・なぜ・どう変えたか」を記録し、次回レポートで効果を評価するための施策台帳。新しい施策は上に追記する。
 
 ---
+## 2026-10-21 osprey-daily-backpack#4 の amazonAsin を正しい色変種へ付け替え（campkit-20261021-02）
+
+**狙い**: 2026-10-19 の POLICY③（`result-POLICY-20261019-next-after-no-amazon.md`）が「Amazon 無しがゼロになったら次は `out_of_stock` と `asin_mismatch` を、流入の多い記事から」と定めている。`pending` の `asin_mismatch`／`out_of_stock` を 90 日 impressions で並べたとき首位が本記事（**1,256 impressions**・`_file/diagnosis-articles.tsv`）で、しかも候補 ASIN が既に台帳 `detail` にあり探索コストが最小だったため、ここから着手した。
+
+**変更**: 第4位 `osprey-hikelite-26`（`OSPREY（オスプレー）ハイクライト HIKELITE 26L OS57222 カスケードブルー`）の `amazonAsin` を **`B0FGXZ57PD` → `B0FGXZKXJ1`** に付け替え（`issue_type=asin_mismatch`・backlog 物理行 514）。商品そのものの差し替えではなく、**同一商品の正しい変種 ASIN への付け替え**なので `id`／`rank`／`affiliateUrl`／`source`／`image`／`badge`／`rakutenRating`／`rakutenReviewCount`／`amazonRating`／`amazonReviewCount` は据え置き（§11-8）。
+
+**理由（dp 1 本の実取得で確認）**: 旧 `B0FGXZ57PD` の着地変種は `[フリーサイズ。, レイヴンブラック。]` で、カード `name` が名指しする**カスケードブルー**と色軸が食い違っていた（§3-2）。新 `B0FGXZKXJ1` は `dimensionValuesDisplayData` 5 件のうち `[26L, カスケードブルー。]` に着地し、色・容量の名指しと完全一致。`landingAsin`＝`currentAsin`＝hidden `input#ASIN`＝`B0FGXZKXJ1` で着地先のすり替え（`redirected_to`）も後継モデル（`successor`）も無し。`buybox=cart` で購入導線は生きており（§3-4）、中古・アウトレット表記も無い（§11-6）。`t-ブランド名=OSPREY(オスプレー)`・`t-サイズ=26L`・寸法 26.9×30×50cm で `different_product` にも当たらない（§3-3）。価格は ¥17,820 でカード `price` と一致（gap 0%）。
+
+**台帳**: `_file/amazon-asin-check.tsv` の自動判定は `unverifiable` になった（カード `name` の `OS57222` は国内代理店品番で、Amazon 側のメーカー型番は米国品番 `10007544`＝dp に `OS57222` の印字が 0 件）。これは §3-6 後段の「偽の `unverifiable`」で、同記事 #1（`10002925`）・#2（`10002926`）・#3（`1-1000030`）と同型。着地変種の実測で追認できるため人手で `ok` に訂正し、`--judge` で根拠を `note` に全文記録した。`seller_type=marketplace`（Outdoor Style サンデーマウンテン＝販売業者 株式会社カンパネラ・dp ブランド OSPREY と別法人）。
+
+## 2026-10-21 osprey-daily-backpack の価格 3 枚を楽天現行に整合（campkit-20261021-02）
+
+**狙い**: 本記事には `price_unconfirmed` の `pending` が 4 行あり、いずれも 2026-09-21〜09-23 の走査時点の乖離が据え置かれていた。カード `price` は本番の価格表示・比較表・まとめ表・frontmatter `description`・FAQ の価格レンジに波及するので、現行価格に揃えて 4 行をまとめて閉じ、記事の価格表示を実態に合わせる。
+
+**やったこと**: `check-card-name-vs-sku.cjs --only … --recheck` で 5 枚すべての楽天 item ページを再取得（全枚 `http=200`）。`gap = (current_price − card_price) / card_price` で振り分けた。
+
+| 順位 | カード `id` | 旧 `price` | 現行価格 | gap | 分類 | 対処 |
+|---|---|---|---|---|---|---|
+| 第2位 | `osprey-daylite` | 9,999円 | 11,110円 | +11.1% | ② 通常の価格改定 | **更新** |
+| 第3位 | `osprey-arcane-largeday` | 19,835円 | 18,700円 | −5.7% | ② 通常の価格改定 | **更新** |
+| 第4位 | `osprey-hikelite-26` | 17,820円 | 17,820円 | 0% | ① 起票閾値未満 | 更新せず |
+| 第5位 | `osprey-ul-stuffpack` | 6,930円 | 7,700円 | +11.1% | ② 通常の価格改定 | **更新** |
+
+第1位 `osprey-daylite-plus` は ¥12,760 で乖離なし（backlog に行も無い）ため対象外。③（`gap ≤ −30%` の一時セール疑い）・④（取得失敗）に入った枚は **0 枚**。
+
+**①に入れた理由（第4位）**: 09-21 時点の ¥19,800（+11.1%）は解消しており、現行は ¥17,820 でカード `price` と完全一致。§5-2 の起票閾値（±3% 未満なら起票しない）を下回るので `price` は更新していない。`itemName` に【SALE 10%OFF】があり ¥19,800 の 10% 引きがカード価格と一致する形なので、セール終了後に +11.1% へ戻る可能性は残る（次回の価格走査で再確認）。
+
+**③に入れなかった理由（第3位）**: 09-23 に記録された ¥9,350（−52.9%）は再現せず、現行は ¥18,700・`stock=qty=7`。`itemName` に【SALE Max50%OFF】の表記は残るが、実測 gap は −5.7% で ③ の閾値（−30%）に当たらないため ② として確定更新した。
+
+**揃えた箇所**: ②の3枚について、カードの `price` 属性／比較表 `ComparisonTableMdx` の `kakaku`／まとめ表の価格帯セル／第5位カードの `description` と本文の価格表記、および frontmatter `description` と FAQ の価格レンジ（`実勢6,930〜19,835円` → `実勢7,700〜18,700円`）を更新。更新後の記事内 最低 ¥7,700・最高 ¥18,700 ＝ **2.43 倍**で 5 倍ルール内。①の第4位（¥17,820・`実勢1.7万円台`）と第1位（¥12,760）の価格表記は 1 文字も変更していない。`updatedAt`（2026-08-07）は本タスクがリライト回でないため据え置き。
 
 ## 2026-10-21 out_of_stock 棚卸し：在庫回復 40 件を done 化（campkit-20261021-01）
 
