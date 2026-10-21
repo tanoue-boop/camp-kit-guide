@@ -3,6 +3,19 @@
 数値の推移はGAS「SEOレポート」の履歴で追う。本ファイルは「いつ・どの記事を・なぜ・どう変えたか」を記録し、次回レポートで効果を評価するための施策台帳。新しい施策は上に追記する。
 
 ---
+## 2026-10-21 article-fix-backlog の失効 pending 行を整理（campkit-20261021-03）
+
+**狙い**: 2026-10-19 の POLICY③（`result-POLICY-20261019-next-after-no-amazon.md`）が定める次フェーズ＝「`out_of_stock` と `asin_mismatch` の `pending` を流入の多い記事から流入順に処理する」にあたり、**母数そのものの衛生**を先に整えた。`article-fix-backlog.tsv` の `pending` 行は起票時点のカードを `position` 列で名指ししているが、その後のリライト・商品差し替えで記事側のカードが消えたり別商品に入れ替わった行が残っており、**実在しない作業が母数を水増ししていた**。次便が存在しないカードを拾って空振りするのを止めるのが目的。
+
+**§A: 失効行の `done` 化（27 件）**。`content/posts/*.mdx` 全 268 本の `<ProductCardMdx>` から `slug#id → name` の辞書を作り（突合キーは `slug#id`＝判定基準 §8。`rank` 属性を持たないカードが実在するため `slug#rank#id` では落ちる）、`pending` 351 行の `position` 内の `（id: …）` と機械的に突合した。内訳は **型①（カード `id` が mdx に現存しない）7 件**＝`coleman-two-burner`／`camp-lantern-led`／`headlight-rechargeable`／`northface-backpack`／`portable-power-large`（2 件）／`sleeping-bag-temperature-guide`、**型②（`id` はあるが別商品に入れ替わっている）20 件**＝`backpack-large`／`camp-fan-summer`／`car-shade`／`cooler-ice-pack`／`family-camp-tent`／`family-summer-large-tent`／`fire-tongs`／`group-camp-table`（2 件）／`mobile-battery-camp`／`mountain-backpack-30l`（4 件）／`rectangle-sleeping-bag`／`sleeping-bag-temperature-guide`（2 件）／`solar-lantern`（2 件）／`titanium-mug`。いずれもブランドも型番も別の商品に替わっており「同一商品の表記違い」ではないため、`status` を `done` にして `notes` に失効の理由を追記した。**`done` は差し替えを実行したという意味ではなく行の失効**である旨を各行の `notes` に明記している（判定基準 §5-3）。**据え置き 0 件。**
+
+**§B: 実測 404 の `issue_type` 是正（3 件）**。楽天の掲載ページが消えているのに `issue_type=out_of_stock`（在庫0）のままだった行について、台帳の `http` 列（スナップショットなので古くなる＝判定基準 §8）を根拠にせず検出器で現 `affiliateUrl` を 4 枚再取得した。`anker-power`／`day-camp-starter-set`／`two-room-tent-guide` の 3 枚が実測 `http=404` だったため `discontinued_404` へ是正（`status` は `pending` のまま・差し替えは未実施）。`nanga-down-jacket` の 1 枚は **`http=200`・在庫 qty=47 で復旧していた**ため是正せず据え置いた。
+
+**結果**: `pending` 351 → 324（`price_unconfirmed` 195→174／`asin_mismatch` 68→66／`out_of_stock` 44→40／`name_fix` 34→31／`product_swap` 10 不変／`discontinued_404` 0→3）。POLICY③ の次の対象選定に使う実数は **`asin_mismatch` 66 件・`out_of_stock` 40 件**。
+
+**記事（mdx）は 1 バイトも変更していない。** 本件は台帳の衛生作業のみで、商品・価格・リンク・本文には一切触れていない。
+
+---
 ## 2026-10-21 osprey-daily-backpack#4 の amazonAsin を正しい色変種へ付け替え（campkit-20261021-02）
 
 **狙い**: 2026-10-19 の POLICY③（`result-POLICY-20261019-next-after-no-amazon.md`）が「Amazon 無しがゼロになったら次は `out_of_stock` と `asin_mismatch` を、流入の多い記事から」と定めている。`pending` の `asin_mismatch`／`out_of_stock` を 90 日 impressions で並べたとき首位が本記事（**1,256 impressions**・`_file/diagnosis-articles.tsv`）で、しかも候補 ASIN が既に台帳 `detail` にあり探索コストが最小だったため、ここから着手した。
