@@ -22,6 +22,8 @@
 
 **台帳**: `article-fix-backlog.tsv` の該当4行（`out_of_stock` 2・`asin_mismatch` 1・`name_fix` 1）を `done` 化。取りこぼし（`status≠done` かつ `out_of_stock`／`asin_mismatch`）は 68記事106行 → **66記事103行**。
 
+**本番反映の追補（同日）**: `waterproof-backpack` の commit（`1554b3b`）は push 済みだが、push 後 38 分の時点で本番 HTML が旧 ASIN（`B07PX8SH28`）のまま `x-vercel-cache=HIT` を返し続け、`verify-deploy.cjs` の href 照合が反映待ちで FAIL した。直前の `mysteryranch-backpack`（`119f6a7`）は反映済みでパイプライン自体は正常なので、`1554b3b` の Vercel ビルドが失敗した疑い（ローカルでも 1 回目のビルドが `next/font/google` の Jost 取得失敗で落ちている）。**記事側に直すところは無い**ため、mdx を触らずに再ビルドを発生させて反映を取り直した。
+
 **効果測定**: この記事は GSC 過去28日でクリック17/表示199（2026-09-02 時点の記録）。2〜3週間後の `campkit-seo-competitor-scan`（金）で「ミステリーランチ リュック」「防水リュック」の表示回数・順位と、購入導線が生きたことによるクリック率の変化を確認する。
 
 ---
