@@ -3,6 +3,30 @@
 数値の推移はGAS「SEOレポート」の履歴で追う。本ファイルは「いつ・どの記事を・なぜ・どう変えたか」を記録し、次回レポートで効果を評価するための施策台帳。新しい施策は上に追記する。
 
 ---
+## 2026-10-22 売上取りこぼし解消（torch-burner 第5位の楽天在庫切れ＋第3位の型番誤記／portable-electric-kettle 第4位の ASIN 色違い・campkit-20261022-M03）
+
+**位置づけ**: 2026-10-19 の POLICY（next-after-no-amazon）の遂行。`_file/article-fix-backlog.tsv` の取りこぼし行（status≠done かつ issue_type が out_of_stock / asin_mismatch）を記事2本分まとめて解消した。本回で done にしたのは out_of_stock 1行・asin_mismatch 1行・name_fix 1行の計3行。**どちらの記事も商品そのものの差し替えは不要**で、楽天の店舗付け替えと Amazon ASIN の変種訂正、カード name の型番訂正で閉じた。
+
+### torch-burner（第5位＝楽天の在庫ありの店へ付け替え／第3位＝型番の誤記修正）
+
+- **第5位 イワタニ 炙りの達人II CB-TC-CKWHP（iwatani-aburi-2）**: 旧リンク先 `rcmdse/fc-4901140904929` は 2026-09-21 の起票時から **stock=soldout** のままで（本日の再取得でも soldout）、Amazon 側も当時 no_buybox で両モールの導線が死んでいた。本日の再確認で **Amazon B0F28JL356（変種「本体」）は購入ボックスが復活**（add-to-cart=2・unqualified=0・outOfStock=0・残り16点・¥3,770）していたため、ASIN は据え置き、楽天だけ**同一商品の在庫ありの公式店**＝イワタニアイコレクト楽天市場店 `i-collect/2000007805`（¥3,278・★4.8/5件・qty=351）へ付け替えた。
+  - カード: `price` 3,280→**3,278**円（−0.06%）・`rakutenRating` 4.5→4.8・`rakutenReviewCount` 18→5・`image` と `affiliateUrl` を公式店へ。**商品は同一（CB-TC-CKWHP）なので name・見出し・本文2段落は1文字も変えていない。**
+  - 比較表: 価格 3,280円→**3,278円**、評価列は新リンク先のレビューが**5件（30件未満）**なので「**評価準備中**」に（2026-10-22 の既定ルール）。まとめ表の価格帯は 3,280円台→**3,278円台**。
+  - frontmatter `description` の「実勢2,750〜3,290円」と FAQ の「2,750〜3,290円」は、5枚の price の最小（2,750）・最大（3,290）が変わらないため**不変**（実測で確認）。
+- **第3位 SOTO フィールドチャッカー（soto-fieldchucker-760）**: カード name の型番「**ST-760**」は SOTO の**ガスボンベ**の型番で、本体の型番ではなかった（name_fix）。実リンク先 `e-kurashi/q4x77` を再取得して **maker_model=ST-451**・itemName に「ST-451」・¥3,290（カードと 0.0%）・在庫 qty=25 を実測し、**ST-760 → ST-451** に訂正した。見出し・本文・比較表・まとめ表の表記も同時に統一（**アンカー id `soto-fieldchucker-760` は不変**＝まとめ表のリンクを壊さないため）。既設置の `amazonAsin=B0GMPYGJJY` は dp 仕様欄も ST-451 で、2026-09-23 の判定どおり据え置き。
+- `updatedAt`（2026-08-07）・`date`・`thumbnail`・第1位／第2位／第4位のカードは変更していない。**よくある質問・お手入れTips の実測**: 旧リンク先の店舗・レビュー件数に依存した記述は0件（型番 ST-760 の言及も0件）だった。
+
+### portable-electric-kettle（第4位＝ASIN を同 dp の正しい色の変種へ）
+
+- **第4位 ポータブル電気ケトル 400ml ベージュ（ac100-240v-kettle-400）**: 既設置 `amazonAsin=B0DXFBSMPG` は同一ファミリーの**グリーン**の変種に着地しており、カード name が名指しする**ベージュ**と色が食い違っていた（asin_mismatch）。台帳の候補 **B0DXFBND8T** の dp を実取得し、変種一覧 `{B0DXFBND8T=ベージュ, B0DXFBSMPG=グリーン}` のうち **[ベージュ]** であること・landing=current=hidden=B0DXFBND8T・在庫あり（add-to-cart=1・unqualified=0・outOfStock=0）・ブランド Aliliy を確認してから差し替えた。
+- 楽天側（`snailax-shop/24010`）は**在庫が回復**しており（選択SKU ベージュ・¥4,380・カードと 0.0%・qty=975）、同カードの out_of_stock 行は 2026-10-21 の棚卸しで既に done。したがって本回は **`amazonAsin` の1属性だけの変更**で、name・price・description・本文・比較表・まとめ表・frontmatter はすべて不変。
+- Amazon 側の ¥5,980（price_gap +37%・販売元 SUUYI＝marketplace）はカード price の根拠ではないため据え置いた（カード price は楽天実価）。
+- `updatedAt`（2026-08-14）・`date`・`thumbnail` は動かしていない。
+
+**関門**: `check-affiliate-links.cjs --all` PASS（270ファイル・未充足0）／`check-card-name-vs-sku.cjs --only` は torch-burner#3・torch-burner#5・portable-electric-kettle#4 の**3枚すべて flags=OK**（#3 は model_mismatch→OK、#5 は price_mismatch→OK）／`validate-backlog-tsv.cjs` 全PASS。
+
+**効果測定**: 2〜3週間後の `campkit-seo-competitor-scan`（金）で「トーチバーナー」「炙りの達人」「ポータブル電気ケトル 車中泊」系クエリの順位と、付け替えた第5位カード・第4位カードのクリック率を確認する。
+---
 ## 2026-10-22 売上取りこぼし解消（group-camp-tent 2枚の ASIN 取り違え＋価格不一致／mountain-tent-cheap 1枚の商品差し替え・campkit-20261022-M02）
 
 **位置づけ**: 2026-10-19 の POLICY（next-after-no-amazon）の遂行。`_file/article-fix-backlog.tsv` の取りこぼし行（status≠done かつ issue_type が out_of_stock / asin_mismatch）を記事2本分まとめて解消した。本回で done にしたのは asin_mismatch 3行・price_unconfirmed 2行・name_fix 1行の計6行。
