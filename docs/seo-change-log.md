@@ -3,6 +3,29 @@
 数値の推移はGAS「SEOレポート」の履歴で追う。本ファイルは「いつ・どの記事を・なぜ・どう変えたか」を記録し、次回レポートで効果を評価するための施策台帳。新しい施策は上に追記する。
 
 ---
+## 2026-10-22 mountain-backpack-30l#1 を国内正規 ASIN へ付け替え・失効 pending 行と在庫回復行を整理（campkit-20261022-01）
+
+**位置づけ**: 2026-10-19 の POLICY（next-after-no-amazon）の遂行。`_file/article-fix-backlog.tsv` の取りこぼし行（status≠done かつ issue_type が out_of_stock / asin_mismatch）を1枚解消し、あわせて台帳の衛生作業（失効 pending 行 2 件・在庫回復行 1 件）を行った。**記事ファイルを変更したのは `mountain-backpack-30l.mdx` の1本だけ**で、商品そのものの差し替えは不要。楽天リンクを同一モデルの別カラー（国内正規在庫のある色）へ付け替え、Amazon を並行輸入品の出品から国内正規へ替えて閉じた。本回で done にしたのは asin_mismatch 1行・price_unconfirmed 2行・out_of_stock 1行の計4行（取りこぼしは 95行/60記事 → **93行/59記事**）。
+
+### mountain-backpack-30l 第1位 マムート Lithium 30（bp-rank-1）＝並行輸入 ASIN から国内正規へ
+
+- **起票理由**: 既設置の `amazonAsin=B09YCQ6WBK` は dp title に `[並行輸入品]` が入る出品だった。国内正規の Lithium 30（2530-03152）の Amazon 在庫は **sapphire-black=`B09KZHN7K1`** と **dark marsh-black=`B0D8VFZ23P`** の2色のみで、旧カードの楽天リンク（`lbreath/107941885011` ＝ 色コード `0001` ブラック）に対応する国内正規のブラック ASIN が存在しなかった。
+- **処置（対処案 (a)）**: 楽天リンクを **`linkfast/mammut-2530-03152-50430`**（`ブランド名=MAMMUT（マムート）`・型番 `2530-03152-50430`・サファイア/ブラック・単品・**¥18,480**・`qty=2`・`InStock`・SKU 1件）へ付け替え、`amazonAsin` を **`B09KZHN7K1`** に差し替えた。`amazonAsin` を除去して楽天のみにする案は POLICY-20261013（no-amazon-zero）に反するため採らなかった。
+- **§11-3 の段判定**: 同一商品（型番 `2530-03152-50430`）の在庫あり出品は楽天に5件で、母数最安は `linkfast` の ¥18,480。**段① メーカー公式店 `mammut/fa5377` は ¥23,100 ＝ 母数最安の +25.0% で +20% を超えるため飛ばした。段② 大手 `himaraya/0000001043102` は item ページ実測でカラー軸 `ＳＰ／５０４３０` が `qty=0`**（在庫があるのは `ＢＫ／０００１` のみ）**で在庫あり出品に当たらない。** よって段③ の最安＝`linkfast` を採用した。棄却した他の3件は `e-lodge` ¥18,499／`spg-sports` ¥18,700／`sportsaomori` ¥18,779／`store-megasports` ¥23,100（いずれも母数最安より高い）。
+- **§4-2 の採否**: dp を実取得し、**①ブランド欄一致**（dp `ブランド名=MAMMUT(マムート)` ↔ 楽天 `ブランド名=MAMMUT（マムート）`・全角半角のみの正規化で一致）と**③名指し一致**（dp `カラー=sapphire-black`・`サイズ=30L`・`商品の重量=930 グラム` ↔ カード name の サファイア／ブラック・30L・単品）が成立。②は楽天の `メーカー型番=Lithium 30` と dp の `メーカー型番=mu-2530-03152-50430-1030` が字面不一致のため不成立だが、①③のいずれかで足りる（型I なので ±3% の dp 開放条件は当てない）。dp は `landingAsin=currentAsin=B09KZHN7K1`・`¥18,499`・在庫あり・購入ボックス生存（add-to-cart 2件／unqualifiedBuyBox 0件）・変種一覧は2件のみ（`B09KZHN7K1`=sapphire-black／`B0D8VFZ23P`=dark marsh-black）・販売元 山とアウトドアの店 山気分。**title に `[並行輸入品]` の印字が無いことを確認した。**
+- **カードの変更点**: `amazonAsin` B09YCQ6WBK→**B09KZHN7K1**／`name` の型番サフィックスと色を `2530-03152-0001 ブラック`→**`2530-03152-50430 サファイア／ブラック`**／`price` 17998→**18480**（+2.68%）／`affiliateUrl` と `image` を `linkfast` へ（画像は HTTP 200・`Content-Type: image/jpeg` を実取得で確認）。**採用店のレビューが0件のため `rakutenRating="5"`／`rakutenReviewCount="4"` は両属性ごと削除**し、代わりに dp 実測の `amazonRating="4.6"`／`amazonReviewCount="70"` を置いた。`description`・`badge`（色・価格・レビューを含まない）は据え置き。
+- **価格表記の追随**: 冒頭の結論表 `17,998円`→**`18,480円`**／10製品スペック比較表の `"実勢価格":"¥17,998"`→**`¥18,480`**（同表の `affiliateUrl` も新店へ）／まとめ表 `17,000円台`→**`18,000円台`**。frontmatter `description` の価格レンジ `5,490〜28,050円` は採用価格 ¥18,480 が内側に収まるため**1バイトも変更していない**。
+- **実測で確認した非該当**: 第1位の解説2段落・`## よくある質問`（5問）・`## お手入れ・使い方Tips`（5項目）・frontmatter `description` に、旧商品固有の色・価格・レビュー件数・店舗名を前提にした記述は**0件**。`updatedAt`（2026-10-09）・`date`・`thumbnail`・`tags`・`title` は据え置き（リンク修正回であってリライト回ではない）。
+
+### 台帳の衛生作業（mdx は1バイトも変更していない）
+
+- **失効 pending 行 2 件を done 化**（`camp-hammock`・いずれも `price_unconfirmed`）。カード `adepeche-3way-set` は現在「シフラス Sifflus 3WAY自立式ポータブルハンモック SFF-04」・`marz-3way-long` は現在「キャプテンスタッグ スチールポール 3WAYハンモックセット グリーン・ブルー UD-2019」で、行が指す a.depeche `SHP-3WHMK`／marz のロングは既に記事から消えている（商品が差し替え済み）。**差し替えを実行したという意味ではなく行の失効**なので `notes` に「失効」と明記した（判定基準 §5-3）。第186回の失効行27件からの取りこぼし分。
+- **`nanga-down-jacket` 第5位（`nanga-aurora-ladies`）の `out_of_stock` を done 化**。起票時は記事が名指しする ブラック が WS／WM／WL の全サイズ `qty=0` だったが、本日の再取得（`http=200`）で選択SKU `39934/WS/ブラック` が **`qty=47`**・現行価格 ¥46,200（カード price と 0%）・`flags=OK` となり在庫が回復していた。**台帳の `stock` 列のスナップショットではなく現 `affiliateUrl` の実取得で確認した**（判定基準 §8 (c)）。カードは変更していない。
+
+**関門**: 停止ゲート `check-affiliate-links.cjs content/posts/mountain-backpack-30l.mdx` PASS／`check-affiliate-links.cjs --all` PASS／`validate-backlog-tsv.cjs` 全PASS／`npm run build` 成功／`check-card-name-vs-sku.cjs --only mountain-backpack-30l#1 --recheck` は **flags=OK**（選択SKU `54380/50430/sapphire-black/約30リットル`・`current_price=18480`＝カード price と一致）。`amazon-asin-check.tsv` は保存 dp から `--cached`（Amazon アクセス0回）で `amazon_title`／`amazon_price`／`amazon_stock` を揃えたうえで `verdict=ok`・`seller_type=marketplace` を人手確定。`B09KZHN7K1` は `mammut-backpack.mdx` 第5位でも使っているため `static_flags` の `shared_asin` が 272→**274** に増えるのが正常。
+
+**効果測定**: 2〜3週間後の `campkit-seo-competitor-scan`（金）で「リュック 30L」「マムート リチウム30」系クエリの順位と、第1位カードのクリック率・Amazon ボタンの成果発生を確認する。
+---
 ## 2026-10-22 売上取りこぼし解消（duo-tent 第1位の楽天在庫切れ＋価格2枚／logos-sleeping-bag 第3位のセット着地と ASIN 温度帯・第5位の ASIN 温度帯・campkit-20261022-M04）
 
 **位置づけ**: 2026-10-19 の POLICY（next-after-no-amazon）の遂行。`_file/article-fix-backlog.tsv` の取りこぼし行（status≠done かつ issue_type が out_of_stock / asin_mismatch）を記事2本分まとめて解消した。本回で done にしたのは out_of_stock 1行・asin_mismatch 2行に加え、同じ記事を開いたついでの price_unconfirmed 4行・product_swap 1行の計8行。**どちらの記事も別商品への差し替えは不要**で、楽天の店舗付け替え・変種SKUの固定・Amazon ASIN の温度帯訂正・価格の実測反映で閉じた。
