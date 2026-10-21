@@ -3,6 +3,27 @@
 数値の推移はGAS「SEOレポート」の履歴で追う。本ファイルは「いつ・どの記事を・なぜ・どう変えたか」を記録し、次回レポートで効果を評価するための施策台帳。新しい施策は上に追記する。
 
 ---
+## 2026-10-22 新規記事 millet-backpack を公開（campkit-20261022-N03）
+
+**狙いKW**: 「ミレー リュック」（月間1万〜10万）／副: 「ミレー リュック おすすめ」「ミレー クーラ」「ミレー サースフェー」。目標は月間報酬10倍（2027-01-18）で、集中カテゴリ「バックパック・リュック」のブランド軸記事の拡充。**公開日 2026-10-22**（`date`＝`updatedAt`）。
+
+**既存記事の確認**: 着手前に `content/posts` を grep し、ミレー専用記事が無いことを確認した（言及のみ＝`camp-backpack-beginner` 第4位にサースフェー NX 40+5、`mountain-backpack-30l` 第2位にクーラ 30／第5位にサースフェー NX 30+5）。したがって**新規記事**として作成（リライトではないため「リライト前の順位」は無し）。
+
+**上位記事の調査（WebSearch）**: hinata／yamahack（15シリーズ・19モデル）／BE-PAL（10選）／CAMP HACK（13選）／heim（10選）／ハピキャン（レディース軸）／tottio（用途別15選）。比較軸はいずれも**シリーズ別の用途割り**（サースフェー＝本格登山／クーラ＝山街兼用／マルシェ・プラトー＝普段使い／スイウ＝ウィメンズ／EXP＝ビジネス）と**容量帯**（〜20L／25〜35L／40L〜）。製品数は10〜19。背面長を選び方の軸に据えている記事は少なかったため、**「全モデルで背面長が公表されている」ことを差別化軸**にして、36〜51cmの対応表と実測手順を独自に入れた。
+
+**掲載12モデル（容量12〜45L・重量200〜1,560g・実勢5,390〜29,700円）**: クーラ 30（MIS0545）／クーラ 20（MIS0623）／マルシェ NX 20（MIS0761）／サースフェー NX 30+5（MIS0756）／EXP 17（MIS0725）／クーラ 40（MIS0629）／サースフェー NX 40+5（MIS0754）／スイウ 18（MIS0718）／ウェルキン 30（MIS0747）／プラトー 20（MIS0765）／デフィ 16（MIS0790）／プラトー 12（MIS0766）。**全12枚で楽天（hb.afl・ミレー公式ストア楽天市場店）と Amazon（`amazonAsin`）の両リンクを設置**し、採用前に楽天側 SKU の在庫数（qty）と Amazon dp の購入ボックス・在庫文言・変種（色／背面長サイズ）を1件ずつ実取得で確認した。既存記事と重なる2モデル（クーラ 30・サースフェー NX 40+5）は CLAUDE.md の表記統一ルール(f)に従い**同じ SKU・同じ ASIN・同じ `name` 表記**にそろえた（サースフェー NX 30+5 も `mountain-backpack-30l` と同じ SAPHIR／Lサイズ・`B0C6Y1353T`）。
+
+**AI検索対応（campkit-aio-spec）**: 冒頭に数値入りの「結論」3文（クーラ 30＝30L・860g・17,600円／マルシェ NX 20＝20L・570g・9,790円／サースフェー NX 30+5＝30+5L・1,500g・28,050円）、容量・重量・実寸・背面長・PC収納・レインカバー・価格の数値列を持つ12モデル比較表（単位を統一・公表が無い項目は「記載なし」）、見出し＝質問形のFAQ 6問、情報源と選定基準の明示（ミレー公式オンラインストアの公表値／楽天・Amazonの価格とレビュー件数・確認日 2026-10-22）。
+
+**内部リンク（新→既存・10本）**: `camp-gear-sale-timing`／`osprey-daily-backpack`／`mountain-backpack-30l`（2箇所）／`camp-backpack-capacity-guide`（2箇所）／`arcteryx-backpack`／`mammut-backpack`／`karrimor-backpack`／`backpack-rain-cover`／`waterproof-backpack`／`camp-backpack-beginner`／`deuter-backpack`／`gregory-backpack`。
+
+**被リンク（既存→新・3本）**: `mountain-backpack-30l`（ブランド別の選び方＝マムート・ミレー・ドイターの節）／`camp-backpack-beginner`（まとめ末尾のブランド横断の節）／`camp-backpack-capacity-guide`（容量を決めた後のサイズ合わせの節）。
+
+**関門**: `check-affiliate-links.cjs` PASS（12枚すべて両リンク）／`lint-bold.cjs` PASS（269ファイル）／`validate-backlog-tsv.cjs` 全PASS／`npm run build` 成功／`check-card-name-vs-sku.cjs --only`（新12枚）で**全枚 flags=OK**（`name`・`price` が実リンク先 SKU と一致）／`check-amazon-asin.cjs --test` 164 passed / 0 failed（`--static` でカード台帳を 1234→1246 に更新）。
+
+**効果測定**: 2〜3週間後（11月第2週目安）の `campkit-seo-competitor-scan`（金）で「ミレー リュック」「ミレー クーラ」「ミレー サースフェー」の表示回数・順位を確認する。
+
+---
 ## 2026-10-21 article-fix-backlog の失効 pending 行を整理（campkit-20261021-03）
 
 **狙い**: 2026-10-19 の POLICY③（`result-POLICY-20261019-next-after-no-amazon.md`）が定める次フェーズ＝「`out_of_stock` と `asin_mismatch` の `pending` を流入の多い記事から流入順に処理する」にあたり、**母数そのものの衛生**を先に整えた。`article-fix-backlog.tsv` の `pending` 行は起票時点のカードを `position` 列で名指ししているが、その後のリライト・商品差し替えで記事側のカードが消えたり別商品に入れ替わった行が残っており、**実在しない作業が母数を水増ししていた**。次便が存在しないカードを拾って空振りするのを止めるのが目的。
