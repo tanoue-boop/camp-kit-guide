@@ -3,6 +3,37 @@
 数値の推移はGAS「SEOレポート」の履歴で追う。本ファイルは「いつ・どの記事を・なぜ・どう変えたか」を記録し、次回レポートで効果を評価するための施策台帳。新しい施策は上に追記する。
 
 ---
+## 2026-10-22 helinox-chair#2 を在庫あり店（camp-link）へ付け替え・4枚のレビュー属性を削除（campkit-20261022-04）
+
+**位置づけ**: `_file/article-fix-backlog.tsv` の物理行 243（`helinox-chair` 第2位 `helinox-chair-one-home`・`issue_type=out_of_stock`・priority B）を**同一商品の在庫あり店への付け替え**で解消した回。旧リンク先はページが生きているのに全変種が在庫0という型で、商品差し替えではなく店の付け替えが第一の対処になった。あわせて同記事 4 枚すべてがレビュー 30 件未満だったため、§12-5-10 条文5 にもとづきレビュー属性を全削除した。**`content/posts/` で変更したのは `helinox-chair.mdx` の1本だけ。**
+
+### helinox-chair 第2位 ＝ Helinox チェアワン ホーム（商品は同一・楽天の店だけ付け替え）
+
+- **付け替えの理由**: 旧リンク先 `item.rakuten.co.jp/daily-3/hlx0010/` は **HTTP 200** だが、実取得で `<meta itemprop="availability">` が `http://schema.org/OutOfStock`・ページ内の `"quantity"` 14 個すべてが `0`・`"purchaseCondition"` は `sold-out` のみ・`在庫切れ` を 8 回印字で、**3 変種（Black／Gravel／Pelican）すべてが在庫0**だった。台帳スナップショット（`card-name-check.tsv` の `stock=soldout`・2026-10-20 時点）ではなく現 `affiliateUrl` の実取得で確かめている（§8）。Amazon 側 `B0BSFFDVH6` は `in_stock(cart)` で健全だったため、**Amazon リンクは触っていない**。
+- **採用した楽天出品**: `item.rakuten.co.jp/camp-link/cl-8809759236089/`（キャンプリンク楽天市場店・**§11-2 段③ 個人店**）。`itemName`「ヘリノックス ファニチャー チェアワン ホーム マスタード Helinox」・`ブランド名=Helinox`・`メーカー型番=-`・**軸 0 個の単独出品**（`sku_selected=cl-8809759236089`・`axis_count` 空）・**¥13,900**・`availability=InStock`・`qty=2`・`purchaseCondition=enabled`・レビュー 0 件。`【中古】``アウトレット``訳あり``並行輸入` の印字はいずれも 0 件。
+- **同一商品の根拠（§11-1）**: `ブランド名=Helinox` が一致し、商品説明に「**Helinox チェアワン Home** は…DAC社が作った」と主要スペック **幅52.5cm×奥行き51cm×高さ65cm／総重量 約1050g** が印字されている。店の商品管理番号 `cl-8809759236089` の一致は **§11-11 により同一性の根拠にしていない**（タイブレーク用の参考にとどめた）。
+- **§11-3 の段判定**: 母数は「チェアワン ホーム**本体**と確定した在庫あり出品」。レインカバー・【中古】・チェアワンホーム XL・タクティカルチェア・サンセットチェア Home は母数外。**母数最安 ¥13,900（`camp-link`・段③）／+20% 上限 ¥16,680**。**段①（メーカー公式 `helinoxjapan` ¥18,480）は +32.9%、段②（大手 `alpen` ¥18,480 が最安・`naturum`／`naturum-outdoor` ¥18,999・`kojitu` ¥20,900）は +32.9% でいずれも +20% を超えるため飛ばし**、段③ の最安 `camp-link` ¥13,900 を採用した。段① は検索結果に現れたので §11-3 追補2 の段①専用クエリは投げていない。
+- **§11-6 の判定**: `axisName` が **0 個**（`variantSelectors` 自体が無く SKU は `cl-8809759236089` の 1 件）なので、バリエーション選択式に当たらない。追補 (b) も ★追補2 も使う必要がない型である。
+- **mdx の編集箇所**: カードの `price`（13990→**13900**）・`affiliateUrl`・`badge`（`自宅兼用・★4.83(29件)`→`自宅兼用・座面広め`）・`image`（`daily-3/…/hlx0010-.jpg`→`camp-link/…/cl-8809759236089.jpg`）／カード `description` の末尾一文（レビュー数値）を削除／地の文 第1段落の末尾一文（`今回の4モデルで最多のレビュー29件・★4.83と…`）を削除／比較表 `home` 行の `price`・`eval`・`affiliateUrl`／まとめ表の価格帯セル（`13,990円台`→`13,900円台`）／frontmatter `description` の実勢レンジ下限（`13,990`→`13,900`＝4枚の `price` の最小値）。**`rank`・`id`・`name`・`amazonAsin`・見出し・比較表の `"id":"home"`・まとめ表のアンカー `#helinox-chair-one-home` は据え置き**（§12-5-9 条文2）。比較表の `columns` にキーの新設・削除はしていない。
+- **`affiliateUrl` は §11-7 第3条**（差し替える行は新規発行扱い）により `.env.local` の `NEXT_PUBLIC_RAKUTEN_AFFILIATE_ID` で作り直し、旧世代ID・`&m=`・`&rafcid=` を落とした。第1位・第3位・第4位の旧世代ID形は §11-7 第2条により触っていない（§12-5-9 条文3 の正常な併存。編集後も `rafcid=` は 6 回残る）。
+- **`updatedAt` は据え置き**（`2026-06-15`）。本回は差し替え回でリライト回ではないため（§6 追補）。`date`／`thumbnail`／`tags`／`title`／`category` も byte 不変。
+
+### 付随作業 ＝ 4 枚すべてのレビュー属性を削除（§12-5-10 条文5）
+
+- **この記事は 4 枚すべてがレビュー 30 件未満**だった（第1位 13 件／第2位 29 件→付け替え先は 0 件／第3位 19 件／第4位 3 件）。`★ 4.9（13件）` のような印字は訴求材料にできる母数ではないため、**4 枚の `rakutenRating`／`rakutenReviewCount` を両属性とも削除**した（計 8 行）。編集後の `helinox-chair.mdx` に `rakutenRating=`／`rakutenReviewCount=` は **0 回**。
+- **`badge`**: 第1位 `軽量の定番・★4.92(13件)` → **`軽量の定番`**。第3位 `ロースタイル・低座面`・第4位 `ハイバック・ゆったり大型` はレビュー数値を含まないので据え置き。
+- **比較表の `eval`**: 4 行すべてを **`"評価準備中"`** にした（`評価準備中` は 4 回）。**`columns` の `{"key":"eval","label":"評価"}` は削除していない**（列ごと落とすと他 3 行の描画も変わるため。§12-5-10 条文2・3 のうち「`eval` に `評価準備中` を入れる」を採用）。
+- **地の文**: 第4位の地の文に `レビュー件数は3件とまだ少なめですが、評価は★5と上々です。` が**実在した**ので削除した。削除後は `…リラックスしたいときに真価を発揮します。` で段落が自然に終わる。第1位・第3位の地の文にレビュー数値は 0 件だった。
+- 第1位・第3位・第4位の他の属性（`rank`・`id`・`amazonAsin`・`name`・`description`・`price`・`affiliateUrl`・`source`・`image`）・まとめ表・台帳行は 1 文字も変えていない。
+
+### 検出器と検査
+
+- `check-card-name-vs-sku.cjs --only helinox-chair#2 --recheck` → **`flags=OK`**・**`stock=qty=2`**（`soldout` から回復）・`card_price=13900` = `current_price=13900`・`axis_count` 空。旧 `flags=color_unspecified` は、付け替え先に色の軸が無くなったため消えた。
+- `check-amazon-asin.cjs --only helinox-chair#2 --cached` は auto が `unverifiable`（§12-5-3 の抽出条件の外）を出したため、ASIN が判定時点から不変であることを根拠に **§8 追補1 条文1 により人手 `verdict=ok` を書き戻した**（`price_gap` は `+17%`・`card_price` を 13900 に同期）。Amazon へのアクセスは 0 回。
+- `check-affiliate-links.cjs` は当該記事・全記事ともに PASS。`validate-backlog-tsv.cjs` も PASS。
+- **台帳**: `article-fix-backlog.tsv` 物理行 243 を `status=pending` → **`done`** にし、空だった `notes` に実測を記録した。`position`・`priority`・`issue_type`・`target_slug`・`detail`・`rakuten_url`・`source`・`added_date` は不変。データ行 610・列 10 は不変。同記事の物理行 244（第3位 `out_of_stock`・既に `done`）には触っていない。
+
+---
 ## 2026-10-22 day-camp-starter-set#3 をコールマン ツーリングドームLX へ差し替え（campkit-20261022-03）
 
 **位置づけ**: `_file/article-fix-backlog.tsv` の priority A 行（物理行 159・`day-camp-starter-set` 第3位 `starter-rank-3`・`issue_type=discontinued_404`）を**商品差し替えで解消**した回。前便 `campkit-20261022-02` が旧枠条件（テント同梱＋マット/シート同梱＋3〜4人＋定番ブランド＋¥15,246〜¥42,640）で 8 本のクエリを投げて不成立に終わったため、**監督が枠条件を再設計**（①テント本体を含む ②2〜4人相当 ③ブランドは Coleman・ogawa・DOD・LOGOS・Naturehike のいずれか ④マット/シート同梱は不要 ⑤価格 ¥18,000〜¥35,000 は目安 ⑥楽天在庫あり＋Amazon dp あり ⑦§11-6 に当たらない）したのが本回。**`content/posts/` で変更したのは `day-camp-starter-set.mdx` の1本だけ。**
