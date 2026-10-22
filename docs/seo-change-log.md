@@ -3,6 +3,21 @@
 数値の推移はGAS「SEOレポート」の履歴で追う。本ファイルは「いつ・どの記事を・なぜ・どう変えたか」を記録し、次回レポートで効果を評価するための施策台帳。新しい施策は上に追記する。
 
 ---
+## 2026-10-23 売上の取りこぼし解消 その5 camp-cooker-beginner（campkit-20261023-M03）
+
+2026-10-19 POLICY（`result-POLICY-20261019-next-after-no-amazon.md`）の遂行。`_file/article-fix-backlog.tsv` の `out_of_stock` 行を解消した。対象記事は取りこぼし記事を GSC 28日クリック順に並べ、本日の他タスク（M01・M02・N05・R16）が触った記事を除いた最上位2本（camp-cooker-beginner・captain-stag-table＝ともにクリック2）。
+
+### camp-cooker-beginner 第4位（id: coleman-packaway-cookset）— out_of_stock
+
+- 旧 → 新（楽天リンク先の付け替え）: `store-megasports/32380560`（¥6,160・全変種 soldout）→ `supersportsxebio/100889335011`（SuperSportsXEBIO楽天市場支店・¥6,800・qty=39・★5/1件）。**商品は同一**（Coleman パックアウェイクッカーセット 2000010530）。
+- 理由（issue_type: out_of_stock）: 旧リンク先は HTTP200 だが選択SKU を含む全変種が在庫0のまま（2026-10-23 に検出器で再確認し `stock=soldout`）。楽天で同一型番の在庫あり出品を棚卸しし、最安かつ大手（ゼビオグループ）で在庫の厚い XEBIO 店を採用した。
+- カード `price` 6160 → 6800（+10.4%）。本文の価格帯の記述「価格は6,000円台」は枠内のため維持し、冒頭の一覧表・`ComparisonTableMdx` の価格を ¥6,800 に更新。
+- Amazon は `amazonAsin="B006WBD0M6"` のまま（2026-10-23 に dp を実取得し購入ボックス生存を確認＝¥6,000・残り1点・発送元 Amazon・販売元 COZY.CONTENTS）。
+- あわせて**実態と食い違っていた記述を訂正**した。楽天店の仕様欄から実測した構成は「フライパン 約φ16.5×4cm ／ 片手鍋 約φ15.3×9cm・約1.7L ／ 収納時 約φ18.5×14cm ／ 約480g ／ アルミ（ノンスティック加工）＋ステンレス＋シリコン ／ メッシュポーチ付き」で、**ソロ〜デュオ向けの2点セット**である。旧本文は「ファミリークックウェア」「複数人での調理を前提」「人数が多いキャンプでも」と書いており誤りだったため、カード `name`・`description`・本文4段落・一覧表・比較表（容量・素材・セット内容）・まとめの推奨文を実測値に沿って書き替えた。
+- `updatedAt`（2026-06-29）・`date`・`thumbnail`・他4カードの商品／価格／リンクは未変更。「初心者がよくやるクッカーの失敗と対策」「クッカーと一緒に揃えたいアイテム」を実測し、旧商品固有の言及は **0件**。
+- 既知の検出器の偽陽性: 新店の SKU 軸が `カラー:無／サイズ:ＦＦ` というダミー1値軸で、NONE 値「無」がセット軸と判定されるため `check-card-name-vs-sku.cjs` が `set_mismatch` を返す。商品の正式名が「クッカーセット」でカード `name` は正しいため、`name` から「セット」を削る対処はしない（台帳 notes に記録済み）。
+
+---
 ## 2026-10-23 売上の取りこぼし解消 その3 sleeping-bag-liner（campkit-20261023-M02）
 
 2026-10-19 POLICY（`result-POLICY-20261019-next-after-no-amazon.md`）の遂行。`_file/article-fix-backlog.tsv` の `asin_mismatch` 行を解消した。対象記事は取りこぼし記事を GSC 28日クリック順に並べ、本日の他タスク（M01・N05・R16）が触った記事を除いた最上位2本（sleeping-bag-liner・one-touch-tent＝ともにクリック3）。
