@@ -7,6 +7,20 @@
 
 2026-10-19 POLICY（`result-POLICY-20261019-next-after-no-amazon.md`）の遂行。`_file/article-fix-backlog.tsv` の `asin_mismatch` 行を解消した。対象記事は取りこぼし記事を GSC 28日クリック順に並べ、本日の他タスク（M01・M02・M03・N05・R16）が触った記事を除いた最上位2本（nanga-down-jacket・nanga-sleeping-bag＝ともにクリック2）。
 
+### nanga-sleeping-bag 第5位（id: ns-original-schlaf-460）— asin_mismatch ＋ price_unconfirmed
+
+- 旧 → 新（`amazonAsin`）: `B0FTF56XDR`（GREY）→ `B09572G1JQ`（BEIGE）。**商品は同一ファミリー**（NANGA 別注 Original Schlaf 460 オリジナルシュラフ レギュラー）で、色だけが食い違っていた。
+- 理由（issue_type: asin_mismatch）: カード `name` と楽天実SKU はいずれも BEIGE（`snb-shop/nanga-122` の `2921251/BEIGE/OneSize`）だが、旧 ASIN の dp は色欄・カラー欄とも GREY だった（2026-09-23 の `campkit-20260921-72` 判定）。旧 dp は `dimensionValuesDisplayData` の無い単一SKU ページで BEIGE の候補が載っていなかったが、**兄弟 ASIN の dp（`B0956LY9N1`／`B0956STYXJ`）には変種宣言があり**、`B0FTF56XDR=GREY`／`B0956DNVJ8=ALLBLACK`／`B09572G1JQ=BEIGE`／`B0956LY9N1=COYOTE`／`B0956STYXJ=OLIVE` と確定できた（＝`amazonAsin` の除去は不要だった）。
+- 新 ASIN の実測根拠: 「この ASIN の変種=`[BEIGE]`」・購入ボックス生存（`corePrice_feature_div=2`・`add-to-cart=1`・`submit.add-to-cart=1`・`buy-now=2`・`unqualifiedBuyBox=0`・`outOfStockBuyBox=0`・`oosText=false`）・在庫あり・¥36,800・販売元/出荷元 SNB-SHOP（楽天の採用店と同一事業者）・★4.1/44件。
+- 価格の整合（issue_type: price_unconfirmed・同カードの別行）: 楽天の BEIGE は ¥36,800・qty=39（全6色とも ¥36,800）で、カード `price` の ¥32,500 とは +13.2% 乖離していたため **`price` 32500 → 36800** に更新。あわせて比較表（¥32,500→¥36,800）・まとめ表（¥32,000台→¥36,000台）・本文（約¥32,500→約¥36,800）・frontmatter `description`（¥32,500→¥36,800）・はじめに（価格帯 約¥32,500〜¥59,400 → 約¥36,800〜¥59,400）を直した。¥36,800 でも記事内最安（次点が第1位 ¥39,800）なので `badge`「最安・ナンガ入門に」と本文「最も手頃」の位置づけは変わらない。
+
+### nanga-sleeping-bag 第1位（id: ns-aurora-light-450dx）— price_unconfirmed（同じ記事を開く回で併せて解消）
+
+- `price` 41800 → 39800。実リンク先 `sakaiya/10096359` の選択SKU `4938101036764/GLD/NVY(ゴールド/ネイビー)/レギュラー` が ¥39,800・qty=12（2026-10-23 実測。他3色は qty=0 だが既定の採用SKU は在庫あり）。
+- あわせて比較表（¥41,800→¥39,800）・まとめ表（¥41,000台→¥39,000台）・本文（約¥41,800→約¥39,800）を整合させた。`amazonAsin`（`B07W4Z8V2Z`）・`name`・`affiliateUrl`・レビュー値は未変更。
+- 第2位〜第4位のカード・価格・リンクは1バイトも変更していない。`updatedAt`（2026-06-29）・`date`・`thumbnail` も未変更。お手入れTips・FAQ・まとめ締めパラグラフを実測し、旧価格に固有の言及は上記以外 **0件**（FAQ は温度帯・形状の話のみで価格に触れていない）。
+- 検出器: `check-card-name-vs-sku.cjs --only nanga-sleeping-bag#1 / #5 --recheck` はいずれも `flags=OK`・`card_price=current_price`。
+
 ### nanga-down-jacket 第5位（id: nanga-aurora-ladies）— asin_mismatch（Amazon 側の変種が色・サイズとも食い違っていた）
 
 - 旧 → 新（`amazonAsin` のみ）: `B0DJNTY9WD` → `B0D93CPVYQ`。**商品は同一ファミリー**（NANGA AURORA TEX DOWN JACKET W／カタログ型番 ND2442-1A005-A）。
