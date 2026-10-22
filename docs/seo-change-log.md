@@ -3,6 +3,18 @@
 数値の推移はGAS「SEOレポート」の履歴で追う。本ファイルは「いつ・どの記事を・なぜ・どう変えたか」を記録し、次回レポートで効果を評価するための施策台帳。新しい施策は上に追記する。
 
 ---
+## 2026-10-23 売上の取りこぼし解消 その6 captain-stag-table（campkit-20261023-M03）
+
+### captain-stag-table 第1位（id: cs-roll-table-m3713）— out_of_stock（楽天・Amazon の両側で購入不可だった priority A 案件）
+
+- 旧 → 新（楽天リンク先の付け替え）: `farson/et003082`（¥2,509・全変種 soldout）→ `naturum/570317`（ナチュラム 楽天市場支店・¥2,538・qty=7・★4.48/295件）。**商品は同一**（キャプテンスタッグ アルミロールテーブル〈コンパクト〉M-3713）。
+- 理由（issue_type: out_of_stock）: 旧リンク先は 2026-10-23 の再確認でも `stock=soldout`。楽天で同一型番の在庫あり出品を棚卸しし、カード price に最も近く（+1.2%）レビュー実績が最大の大手アウトドア専門店を採用した。
+- **Amazon 側の `no_buybox`（2026-09-23 実測）は解消済み**。2026-10-23 に dp を実取得し、`B000AR4TJQ` のまま購入ボックス生存（¥1,999・在庫あり・`add-to-cart=1`／`unqualified=0`／`outOfStock=0`・販売元 アイルズストアオンライン）、着地変種は「幅400×奥行290×高さ120 mm／マルチ」でカード name と一致（Amazon限定マットブラック `B0B2NZJB6Q`・2個組 `B0H5QWJCN8` には着地しない）。**ASIN は変更なし。**
+- 価格・レビュー表記の整合: カード `price` 2509 → 2538、`rakutenRating` 4.67 → 4.48、`rakutenReviewCount` 6 → 295、`badge`「定番ロール・約2,509円」→「約2,538円」。あわせて本文（「約2,509円」「★4.67（6件）と件数は控えめ」）・比較表（price・eval・affiliateUrl・天板サイズ）・まとめ表（2,509円台 → 2,538円台）・FAQ「価格が安いものと高いもので何が違いますか？」（約2,509円／最安2,509円〜最高8,380円 → 2,538円。価格差は約3.3倍のまま）・frontmatter `description`（実勢2,509〜8,380円 → 2,538〜8,380円）を更新。
+- カード `name` に実測の天板サイズ `400×290×120mm` を追記し、楽天の `itemName` と同じ表記に揃えた（`check-card-name-vs-sku.cjs` は `flags=OK`／`sku_selected=570317`）。本文にも天板サイズを追記。
+- `updatedAt`（2026-06-08）・`date`・`thumbnail`・他4カードの商品／価格／リンクは未変更。お手入れTips・他のFAQ を実測し、旧店舗・旧価格に固有の言及は上記以外 **0件**。
+
+---
 ## 2026-10-23 売上の取りこぼし解消 その5 camp-cooker-beginner（campkit-20261023-M03）
 
 2026-10-19 POLICY（`result-POLICY-20261019-next-after-no-amazon.md`）の遂行。`_file/article-fix-backlog.tsv` の `out_of_stock` 行を解消した。対象記事は取りこぼし記事を GSC 28日クリック順に並べ、本日の他タスク（M01・M02・N05・R16）が触った記事を除いた最上位2本（camp-cooker-beginner・captain-stag-table＝ともにクリック2）。
