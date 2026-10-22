@@ -1899,6 +1899,29 @@ description は6本すべて冬の用途で書き直し、実勢価格のレン�
 - カード名がセット構成を名乗るため単品ASINは採用不可。Amazon `/s` 2本（1本目はbm-verifyブロック、2本目はHTTP200・organic 21件）でセットASINが0件だったため `amazon-backfill-no-amazon.tsv` に登録。楽天側も `ecoflow/river-pro` が【売り切れ】のままで、両導線が死んでいることが確定したため、`article-fix-backlog.tsv` の `out_of_stock` 行を priority C→A に引き上げ、在庫のあるEcoFlow公式店セット（例: DELTA 3 Classic 1024Wh+160W ¥160,300・★4.65/948件）を差し替え候補として記録した。記事は変更していない。
 
 ---
+## 2026-10-22：技術SEO監査（campkit-technical-seo-audit／月次）
+
+GSC取得は成功（tanoue@mjo-style.com、URLプレフィックスプロパティ）。実行した是正は**0件**——代表3ページに「機械的に確実で安全」な欠陥がなかったため（content/posts等の変更なし。本エントリのみ追記）。
+
+### 点検結果（前回2026-10-16比）
+
+- **GSCインデックス作成レポート**: 登録済み **215**（前回215、±0）／未登録 **79**（前回79、±0）。内訳: 404 **11**／リダイレクト **3**／代替canonical **1**／クロール済み-未登録 **64**／検出-未登録 **0**（すべて前回同数）。
+- **GSC Core Web Vitals**: モバイル・PCとも「過去90日間にトラフィックが十分にありません」（変化なし）。
+- **PageSpeed Insights API**: 429（Queries per day、quota_limit_value=0＝プロジェクトの日次クォータが0）。**5ヶ月連続ラボデータ未取得**。再試行では解消しない。
+- **robots.txt**: 正常（User-agent * / Googlebot等 Allow: /）。**sitemap**: 子サイトマップ1本（`/sitemap-0.xml`）に**284 URL**（前回280、+4）。lastmodは2種類のみ（ビルド時刻 2026-10-21T22:31Z 系）で記事ごとの個別化はされていない（既知課題が継続）。
+- **代表3ページ**: soto-burner / osprey-backpack は canonical正／h1×1／JSON-LD（BlogPosting+author／ItemList／FAQPage／BreadcrumbList／Product）正常／og:imageは自社ホスト絶対URL（outdoor-02 / outdoor-06）／SNSシェアurlは自記事URLで非空／alt属性欠落0／H1直下にPR・アフィリエイト表記あり（soto-burnerで文言確認）／商品カード画像は楽天外部直リンク（想定どおり）。トップは canonical正／h1×1／WebSite+Organization／og:imageは自社ホスト（og-default.png）。title実長は54〜55文字（サフィックス込み）、descriptionは145〜149文字（全角90目安を超過する既知傾向。コンポーネント側の設計のため提案のまま）。
+- **auto-deploy**: `logs/auto-deploy-status.json` の最新結果は `deploy-failed`（2026-10-22 08:56）。原因は10/08から指摘済みの未追跡ファイル `result-campkit-20260926-104.md`（84KB）を「その他1件」として拾い、ステージ対象外で中止している状態が継続していること。公開内容への実害なし。
+
+### 実行した是正：0件
+
+### 未解決の提案（人間判断待ち）
+
+1. `result-campkit-20260926-104.md` の削除または `.gitignore` 追加（deploy-failedの繰り返しを止める）。
+2. クロール済み-未登録64件・404 11件: 品質/重複シグナルとURL特定が必要。`campkit-seo-competitor-scan`/rewriteで対処。
+3. PSI APIキー発行（クォータ0のため）。sitemap lastmod個別化・description超過傾向はコンポーネント/設定変更のため提案のまま。
+
+---
+
 ## 2026-10-16：技術SEO監査（campkit-technical-seo-audit／月次）
 
 GSC取得は成功（tanoue@mjo-style.com、URLプレフィックスプロパティ）。実行した是正は**0件**——代表3ページに「機械的に確実で安全」な欠陥がなかったため（content/posts等の変更なし。本エントリのみ追記）。
