@@ -3,6 +3,26 @@
 数値の推移はGAS「SEOレポート」の履歴で追う。本ファイルは「いつ・どの記事を・なぜ・どう変えたか」を記録し、次回レポートで効果を評価するための施策台帳。新しい施策は上に追記する。
 
 ---
+## 2026-10-22 day-camp-starter-set#3 をコールマン ツーリングドームLX へ差し替え（campkit-20261022-03）
+
+**位置づけ**: `_file/article-fix-backlog.tsv` の priority A 行（物理行 159・`day-camp-starter-set` 第3位 `starter-rank-3`・`issue_type=discontinued_404`）を**商品差し替えで解消**した回。前便 `campkit-20261022-02` が旧枠条件（テント同梱＋マット/シート同梱＋3〜4人＋定番ブランド＋¥15,246〜¥42,640）で 8 本のクエリを投げて不成立に終わったため、**監督が枠条件を再設計**（①テント本体を含む ②2〜4人相当 ③ブランドは Coleman・ogawa・DOD・LOGOS・Naturehike のいずれか ④マット/シート同梱は不要 ⑤価格 ¥18,000〜¥35,000 は目安 ⑥楽天在庫あり＋Amazon dp あり ⑦§11-6 に当たらない）したのが本回。**`content/posts/` で変更したのは `day-camp-starter-set.mdx` の1本だけ。**
+
+### day-camp-starter-set 第3位 ＝ スノーピーク アメニティドームL マットシートセット → コールマン ツーリングドームLX
+
+- **差し替えの理由**: 旧リンク先 `item.rakuten.co.jp/mitsuyoshi/spk00000000360/` は **http=404**、旧 `amazonAsin=B01H4OPQ76` は dp が **出品ゼロ**で、楽天・Amazon の両導線が死んでいた。さらに前便の実測で、楽天側の実商品が `SET-121H`（アメニティドームL 用マットシートセット**単体**）である一方 Amazon 側はテント本体を含むセットで、**§4-1 違反の疑い**があった。新商品では楽天・Amazon が同一商品・同一同梱構成であることを実測して解消した。
+- **採用した楽天出品**: `item.rakuten.co.jp/naturum/3176400/`（ナチュラム 楽天市場支店・**§11-2 段② 大手**）。`itemName`「Coleman(コールマン) ツーリングドームLX 2000038142」・`ブランド名=Coleman(コールマン)`・`メーカー型番=2000038142`・**バリエーション軸なしの単一SKU**（`sku_selected=3176400`・`axis_count` 空）・¥20,785・在庫 `qty=15`・`availability=InStock`。`【中古】``アウトレット``訳あり``並行輸入` の印字はいずれも 0 件。
+- **§11-3 の段判定**: 母数は「型番 2000038142 の本体単品と確定した在庫あり出品」。母数最安は `lbreath` ¥19,800 と `supersportsxebio` ¥19,800。**段①（コールマン公式店 `coleman/col8106` の LX SKU ¥24,970）は +26.1% で +20% を超えるため飛ばし**、段②（大手）の最安 `naturum` ¥20,785 が **+4.97%** で採用。同額の `naturum-outdoor` とは §11-4 によりレビューを合算せず、タイブレーク②レビュー件数（19 件 > 5 件）で `naturum` を採った。
+- **採用した Amazon ASIN**: `B08P589XPT`。変種一覧のうち **LX(2~3人用)** 本体で（ST=`B08P5811G7`／SDX=`B0HDY2G8JH`／LDX=`B0FVDRPB5N`）、`landingAsin`=`currentAsin`=`hiddenAsin`=`B08P589XPT` と着地のすり替えなし。購入ボックスは `id="add-to-cart-button"` 1件・`name="submit.add-to-cart"` 1件・`id="buy-now-button"` 2件・`id="unqualifiedBuyBox_feature_div"` 0件・`id="outOfStockBuyBox_feature_div"` 0件（§12-5-12）で `availability`「在庫あり。」。¥19,800（`price_gap=-5%`）・販売元「365日発送！ Victoria L-Breath（ヴィクトリア エルブレス） アウトドア用品」→ `seller_type=marketplace`。
+- **§4-2 の成立ゲートは ①②③ の全て**: ①ブランド欄が両側で完全一致（楽天 `ブランド名=Coleman(コールマン)` ↔ dp `ブランド名=Coleman(コールマン)`）。②メーカー型番が両側一致（楽天 `2000038142` ↔ dp `メーカー型番=2000038142` かつ `品番・型番=2000038142`。`製品型番` は `NOT_PRESENT` で §4-3 追補3 条文3 の食い違いなし）。③カードが名指しする サイズ `LX` と構成が dp で確認できる（dp `サイズ=LX(2~3人用)`・`付属コンポーネント=ペグ、ロープ、収納ケース`）。
+- **mdx の編集箇所（8 箇所＋属性削除）**: カード全文（`amazonAsin`・`name`・`description`・`price`・`affiliateUrl`・`badge`・`image`／`rank` と `id` は据え置き）／見出し `### 第3位：コールマン ツーリングドームLX`／地の文 2 段落／比較表の行（`対象人数` 3〜4人→2〜3人・`セット内容` テント+マット+シート→テント本体+ペグ+ロープ+ケース・`価格` ¥19,600→¥20,785・`特徴` 定番ブランドテント→定番ブランドテント・前室付き。`"id"` は据え置き・**キーは新設していない**）／まとめ表の右セル（左セル「長く使えるブランドテント」は据え置き）／frontmatter `description`（`スノーピークのアメニティドームLセット` → `コールマンのツーリングドームLX、スノーピークの…`。採用価格 ¥20,785 は既記の実勢レンジ 15,246〜42,640円の内側なので**レンジは変更不要**）。
+- **`affiliateUrl` は §11-7 第3条**（差し替える行は新規発行扱い）により `.env.local` の `NEXT_PUBLIC_RAKUTEN_AFFILIATE_ID` で作り直し、旧世代ID・`&m=`・`&rafcid=` を落とした。第4位・第5位の旧世代ID形は §11-7 第2条により触っていない（§12-5-9 条文3 の正常な併存）。
+- **レビュー表記（§12-5-10 条文5）**: 採用店のレビューは 19 件＝30 件未満なので、カードの `rakutenRating`／`rakutenReviewCount` を**両属性とも削除**し、本文・`badge`・まとめ表でもレビュー件数と評価の数値に触れていない。比較表の `columns` に `rating` キーが無いため比較表側の細工は不要（`source`・`affiliateUrl` キーも無いのでキーを新設していない）。
+- **付随作業**: 同記事の第4位 `starter-rank-4`（`rakutenRating="5"`／`rakutenReviewCount="1"`）と第5位 `starter-rank-5`（同 `"0"`／`"0"`）の**両属性も削除**した。`★ 5.0（1件）``★ 0.0（0件）` の描画は読者に誤った確度を与えるため。カード `id` でブロックを特定して行ごと削除しており、両カードの他の属性・地の文・比較表・まとめ表・台帳行は1文字も変えていない。編集後の `day-camp-starter-set.mdx` に残る `rakutenRating=`／`rakutenReviewCount=` は各 **1 回**（第1位の `"4.17"`／`"444"`）だけ。
+- **検出器**: `check-card-name-vs-sku.cjs --only day-camp-starter-set#3 --recheck` → **`flags=OK`**（`card_price=20785` = `current_price=20785`・`stock=qty=15`）。`check-amazon-asin.cjs --only day-camp-starter-set#3 --cached` → **`verdict=ok`**（`price_gap=-5%`）。`check-affiliate-links.cjs` は当該記事・全記事ともに PASS。
+- **台帳**: `article-fix-backlog.tsv` 物理行 159 を `status=pending` → **`done`** にし、`notes` に末尾追記（既存 2,883 字は1文字も削っていない）。`position`・`priority`・`issue_type`・`target_slug`・`detail`・`rakuten_url`・`source`・`added_date` は不変。同記事の物理行 160（第5位 `price_unconfirmed`）・533（第4位 `out_of_stock`）には触っていない。
+- **申し送り**: 同一 ASIN `B08P589XPT`・同一楽天URL `naturum/3176400` を `duo-tent#4#dt-coleman-lx`（`price="19799"`）と `tent-size-beginner-guide#2#ts-coleman-touring-dome-lx`（同）が既に使っており、現行価格 ¥20,785 に対して約 **+5.0%** の乖離がある（`price_unconfirmed` の起票候補。本タスクの射程外なので mdx は触っていない）。
+
+---
 ## 2026-10-22 day-camp-starter-set#3 の404を探索結果として起票・判定基準に条文2件を追記（campkit-20261022-02）
 
 **位置づけ**: `_file/article-fix-backlog.tsv` の priority A 行（物理行 159・`day-camp-starter-set` 第3位 `starter-rank-3`・`issue_type=discontinued_404`）の解消を試みた回。**楽天・Amazon の両導線が死んでいる**枚で、対処案 (a)（同一商品の在庫ある別店舗へ付け替え）・(b)（枠条件を満たす別商品へ差し替え）をいずれも実測で追ったが**どちらも成立せず**、タスク定義 §A-3 の「どちらも不成立のとき」に従い **`affiliateUrl` を1文字も変えずに据え置き、`status` は `pending` のまま**とした。**`content/posts/` は1バイトも変更していない。**
