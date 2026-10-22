@@ -3,6 +3,33 @@
 数値の推移はGAS「SEOレポート」の履歴で追う。本ファイルは「いつ・どの記事を・なぜ・どう変えたか」を記録し、次回レポートで効果を評価するための施策台帳。新しい施策は上に追記する。
 
 ---
+## 2026-10-23 売上の取りこぼし解消 その1 guy-rope-recommend（campkit-20261023-M01）
+
+2026-10-19 POLICY（`result-POLICY-20261019-next-after-no-amazon.md`）の遂行。`_file/article-fix-backlog.tsv` の `asin_mismatch` 行を解消した。
+
+### guy-rope-recommend 第2位（id: soomloom-guyrope-50m）— asin_mismatch
+
+- 旧 → 新: `amazonAsin="B07WX7S936"` → `amazonAsin="B07WP2RMLG"`
+- 理由（issue_type: asin_mismatch）: 旧 ASIN は失効しており、dp は同一ファミリーの **2mmブラック50M（B07WRXS5DV）** へ黙って着地していた（カード name は 2mm **レッド**）。dp を実取得し、変種一覧の `"B07WP2RMLG":["2mmレッド50M"]` と商品情報の色欄・ブランド Soomloom・型番 windrope で同一性を確定、購入ボックスの生存も確認して差し替えた。
+- 楽天側は変更なし（`yiprefer/outdoor-015` の 2mm/レッド SKU 39825 が qty=19 在庫あり・¥1,580 でカード price と一致）。`name`／`price`／本文／`updatedAt`／`thumbnail` は未変更。
+- frontmatter `description` の価格帯（「1,000円台のセット品から」）と太さ（「太さ2〜5mm」）を実測で再確認し、現行5枚（¥1,370〜¥2,750／2・3・4・5mm）と整合していたため変更していない（2026-10-19 POLICY supervisor-rules §4 の持ち越し分はこれで解消）。
+
+---
+## 2026-10-23 売上の取りこぼし解消 その2 air-frame-tent（campkit-20261023-M01）
+
+### air-frame-tent 第1位・第4位・第5位 — asin_mismatch ＋ 在庫・価格の整合
+
+- 第1位 Coleman ツーリングドームエアー DARKROOM ST+: `amazonAsin` を LX+ 変種 `B0BHHBZTN8` → ST+ 変種 **`B0BHHK24KM`**（型番 2000039086 を dp で確認）。あわせて楽天リンク先 `takeda-sports/0005100002405` が **売り切れ**になっていたため、ST+ SKU が在庫あり（qty=5・¥26,400）の `vision-stores` へ付け替え、`price` 25,960 → 26,400・`image` も同店のものへ変更した。
+- 第4位 スノーピーク ファル Pro.air 3: `amazonAsin` を 2人用 `B01N1RE1QO` → 3人用 **`B01MRWIJAF`**（dp 実取得で 型番 SSD-703・サイズ 3人用・対応人数3名を確認）。
+- 第5位 Coleman タフスクリーン2ルームエアー DARKROOM LDX+: `amazonAsin` を MDX+ `B09W5262RF` → LDX+ **`B09W4GR15S`**（型番 2000039083 を dp で確認）。楽天 LDX+ SKU の現価に合わせて `price` 87,800 → 94,400。
+- 第3位 TOMOUNT（price_unconfirmed・同記事なので同時に解消）: `price` 74,499 → 79,999（楽天公式店の TC SKU の現価）。比較表の `source` も実リンク先に合わせて `amazon` → `rakuten` に訂正。
+- 上記の価格更新にあわせて、frontmatter `description`・導入文・比較表・まとめ表の価格帯を「実勢23,600〜87,800円」から **「実勢26,400〜94,400円」** へ引き直した（2026-10-19 POLICY supervisor-rules §3・§4）。`updatedAt`／`date`／`thumbnail` は未変更。
+
+### ⚠️ 併せて発見した記事全体の実態不一致（別タスクへ起票）
+
+dp の実測で、本記事の5枚のうち **4枚（第1・2・4・5位）は空気注入式（インフレータブル）ではない**ことが確定した。コールマンの「エアー」は空気循環（ベンチレーション）を指し、第1位は `ポール/(メイン)FRP 約φ8.5mm`、第5位は `ポール素材タイプ: アルミニウム, 合金鋼`＋dp タイトルに「空気循環」。スノーピークの「Pro.air」も軽量生地の名称で、第4位は `フレーム/ジュラルミンA7001(φ9mm)`、第2位も過去タスクの実測でクロスフレーム同梱。**真のエアフレームテントは第3位の TOMOUNT だけ**である。4枚の差し替え（または記事の再スコープ）は1枚単位のリンク修正では収まらないため、`article-fix-backlog.tsv` に `product_swap`（priority A）で4行起票した。
+
+---
 ## 2026-10-23 gregory-daypack 新規公開（グレゴリーのデイパック10選・AI検索対応構成）（campkit-20261023-N05）
 
 **狙いKW**: 「グレゴリー デイパック」「グレゴリー リュック 普段使い」「グレゴリー デイパック 比較」「グレゴリー デイパック おすすめ」（月間検索数 1,000〜1万）。
