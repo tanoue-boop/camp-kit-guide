@@ -3,6 +3,39 @@
 数値の推移はGAS「SEOレポート」の履歴で追う。本ファイルは「いつ・どの記事を・なぜ・どう変えたか」を記録し、次回レポートで効果を評価するための施策台帳。新しい施策は上に追記する。
 
 ---
+## 2026-10-23 売上の取りこぼし解消 その3 sleeping-bag-liner（campkit-20261023-M02）
+
+2026-10-19 POLICY（`result-POLICY-20261019-next-after-no-amazon.md`）の遂行。`_file/article-fix-backlog.tsv` の `asin_mismatch` 行を解消した。対象記事は取りこぼし記事を GSC 28日クリック順に並べ、本日の他タスク（M01・N05・R16）が触った記事を除いた最上位2本（sleeping-bag-liner・one-touch-tent＝ともにクリック3）。
+
+### sleeping-bag-liner 第2位（id: liner-rank-2）— asin_mismatch
+
+- 旧 → 新: `amazonAsin="B0DFW2BH1Y"` → `amazonAsin="B0BZRMZQPK"`
+- 理由（issue_type: asin_mismatch）: 旧 ASIN は失効しており、dp は同一ファミリーの **カシスピンク（B0DFW1PLD4）** へ黙って着地していた（カード name は **ライトピンク**）。dp を実取得し、変種一覧の `B0BZRMZQPK=ライトピンク` と `landing=current=hidden=B0BZRMZQPK`（redirect なし）、価格 ¥1,298（楽天 SKU 21970/ライトピンク と同額・gap 0%）、購入ボックスの生存（`add-to-cart=1`／`unqualified=0`／`outOfStock=0`）を確認して差し替えた。
+- 楽天側は変更なし（`ishi0424/k-innershruff01` の ライトピンク SKU 21970 が qty=80 在庫あり・¥1,298 でカード price と一致）。`name`／`price`／本文／比較表／まとめ表／`updatedAt`／`date`／`thumbnail` は未変更。
+- FAQ・お手入れTips を実測し、旧 ASIN・旧変種に固有の記述は **0件**（価格に触れる Q2「1,300円前後の薄手シーツ」は現行 price ¥1,298 と整合）。
+
+---
+## 2026-10-23 売上の取りこぼし解消 その4 one-touch-tent（campkit-20261023-M02）
+
+### one-touch-tent 第1位（id: fielddoor-onetouch-200）— asin_mismatch ＋ price_unconfirmed ＋ 商品の取り違えを同時解消
+
+- 旧 → 新: 楽天リンク先 `maxshare/max-a09177`（**フルクローズ サンシェードテント 200cm**・ポップアップ式・幅200×奥行180×高さ135cm・4.2kg）→ `maxshare/a07577`（**FIELDOOR ワンタッチテント200**・紐を引くだけ公称15秒・200×200×120cm・3.7kg）。`amazonAsin="B0DNQ11CMZ"`（サンシェード ポップアップ テントのライトベージュ単品）→ **`B0CS27H2PB`**（ワンタッチテント200 グレー/テント単品）。`price` 7,920 → **7,370**、`rakutenRating` 4.22 → 4.54、`rakutenReviewCount` 6,161 → 233、`badge`・`image`・`name`・`description` も新リンク先の実値へ。
+- 理由（issue_type: asin_mismatch／price_unconfirmed）: このカードは **name・description・本文が指す商品（ワンタッチテント200・紐を引く構造・スクエア型）と、リンク先の商品（ポップアップ式のサンシェードテント）が食い違っていた**。しかも旧リンク先のグレー単品 SKU `a07579` は qty=0（売り切れ）で、Amazon 側にもグレー単品の子ASINが存在しない（グレーはグランドシート同梱のみ＝構成違い）。色を動かしてライトベージュに寄せる手もあるが、リンク先がポップアップ式のままだと本記事の FAQ「ワンタッチテントとポップアップテントは違いますか？」の回答（宿泊目的ならワンタッチ式）と記事内で矛盾する。そこで **カードが元から説明していた a07577 側へリンクを正す**ことを選び、楽天（qty=171・¥7,370）と Amazon（¥8,300・gap +13%・購入ボックス生存）の両方が在庫ありの同一構成（テント単品）で揃えた。
+- 商品性能はリンク先を正しても落ちない（遮光率100%・UV遮蔽率99.8%・耐水圧16,000mm・グラスファイバーポール）ため、選び方ポイント2「FIELDOOR の2モデルが耐水圧16,000mm」と FAQ「FIELDOOR 2モデルは16,000mm」はそのまま成立する。
+- 記事側の修正: 第1位見出しを「レビュー6,000件超のオールラウンダー」→「完全遮光と耐水圧16,000mmを7,000円台で」、本文2段落をレビュー母数訴求から遮光・耐水圧・設営15秒・重量3.7kg・同梱品（ペグ8本／ロープ4本／ハンマー）訴求へ、比較表（対応人数 2〜4人→3〜4人／サイズ→200×200cm スクエア／遮光→完全遮光／価格→7,370円／評価→★4.54（233件）／楽天リンク）、まとめ表（行の見出しと価格帯 7,370円台）、まとめ締めパラグラフ、frontmatter `description`（7,920円→7,370円）を更新。
+- FAQ の価格レンジ「今回の5点は6,998〜14,250円」は第2位 ¥6,998・第5位 ¥14,250 のまま変化しないため未変更。
+
+### one-touch-tent 第5位（id: bearsrock-hayabusa-ts201h）— asin_mismatch
+
+- 旧 → 新: `amazonAsin="B0CZCXDYG7"`（【スカート付き】タン）→ **`B074FVFZCF`**（カーキ・スカート無し）
+- 理由（issue_type: asin_mismatch）: カード name は「TS-201H カーキ」と色を名指しし、楽天実リンク先の選択SKU も `ts-201_kh/カーキ`（スカート無し）だが、旧 ASIN は色とスカートの有無の両方が食い違っていた。dp を実取得して変種一覧 4件 [タン／カーキ／【スカート付】カーキ／【スカート付き】タン] の **カーキ** を特定し、¥14,800（gap +4%）・購入ボックス生存（残り19点）・redirect なしを確認して差し替えた。同一 ASIN は `solo-tent-beginner#4`・`solo-tent-lightweight#9`・`solo-tent-overall#2` が同じ name で既に使っており、サイト内の表記も揃った。
+- 楽天側・`name`・`price`・本文は変更なし。`updatedAt`／`date`／`thumbnail` は未変更。
+
+### 同記事で未解消のまま残した行（理由）
+
+- 第2位 モダンデコ（`price_unconfirmed`・カード ¥6,998 → 現行 ¥7,999）と第4位 DOD（`price_unconfirmed`・カード ¥11,029 → 現行 ¥14,299）は **pending のまま残した**。価格を現行へ直すと第2位の「今回の5点で最も手頃」「予算7,000円以内」「完全遮光・7,000円以下」という訴求と第4位の「価格は中位」という位置づけが崩れ、順位構成・まとめ表・FAQ の価格レンジまで連鎖的に書き替える必要があるため、リンク修正の範囲を超える（リライト枠で扱うのが適切）。
+
+---
 ## 2026-10-23 売上の取りこぼし解消 その1 guy-rope-recommend（campkit-20261023-M01）
 
 2026-10-19 POLICY（`result-POLICY-20261019-next-after-no-amazon.md`）の遂行。`_file/article-fix-backlog.tsv` の `asin_mismatch` 行を解消した。
