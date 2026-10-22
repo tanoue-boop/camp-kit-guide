@@ -3,6 +3,44 @@
 数値の推移はGAS「SEOレポート」の履歴で追う。本ファイルは「いつ・どの記事を・なぜ・どう変えたか」を記録し、次回レポートで効果を評価するための施策台帳。新しい施策は上に追記する。
 
 ---
+## 2026-10-23 売上の取りこぼし解消 その8 washable-sleeping-bag / anker-power（campkit-20261023-M05）
+
+2026-10-19 POLICY（`result-POLICY-20261019-next-after-no-amazon.md`）の遂行。`_file/article-fix-backlog.tsv` の `asin_mismatch` ＋ `out_of_stock` 行を解消した。対象記事は取りこぼし記事を GSC 28日クリック順に並べ、本日の他タスク（M01〜M04・N05・R16）が触った記事を除いた最上位2本（washable-sleeping-bag＝クリック2・anker-power＝クリック1）。
+
+### washable-sleeping-bag 第1位（id: logos-slumber-washable）— asin_mismatch ＋ price_unconfirmed を1手で解消
+
+- 旧 → 新（`amazonAsin`）: `B07956Y179`（適正温度0℃まで）→ `B079572465`（適正温度2℃まで）。**商品は同一ファミリー**（ロゴス 丸洗いスランバーシュラフ）で、温度帯だけが食い違っていた。
+- 台帳の差し替え候補は `B079567M81`（-2℃）だったが**採らなかった**。楽天 `a-price/4981325499778` は温度帯3変種がすべて在庫ありで（-2℃ ¥8,800 qty=107／0℃ ¥7,920 qty=104／**2℃ ¥6,930 qty=171**）、**カード `price` ¥6,930 と完全に一致するのは 2℃ 変種**だったため。CLAUDE.md（`campkit-20260921-31` ②「カード price と一致する変種があればそちらを優先」）に従い、カード `name` に「適正温度2℃」を明記して選択SKUを `4981325499778/2℃`（`maker_model` 72602010）に固定した。
+- この1手で**同カードの `price_unconfirmed`（カード ¥6,930 vs 既定SKU -2℃ ¥8,800＝+27.0%）も同時に解消**した。価格そのものを動かしていないので、比較表・まとめ表・frontmatter `description`・はじめに の価格はすべて不変更（-2℃ を採ると ¥8,800 へ上げて記事の価格レンジ最小値 6,930 を書き換える必要があり、変更範囲が広がる）。
+- 新 ASIN の実測根拠: 「この ASIN の変種=`[適正温度2℃まで]`」・¥6,930（`price_gap` 0%）・購入ボックス生存（`corePrice_feature_div=2`・`add-to-cart=1`・`submit.add-to-cart=1`・`buy-now=2`・`unqualifiedBuyBox=0`・`outOfStockBuyBox=0`・`oosText=false`・在庫あり。）・**販売元/出荷元 XPRICE＝楽天の採用店（XPRICE楽天市場店）と同一事業者**。
+
+### washable-sleeping-bag 第3位（id: logos-fluffy-washable）— asin_mismatch
+
+- 旧 → 新（`amazonAsin`）: `B08BX7K3HY`（2℃まで使用/単品）→ `B08BX7ZQ6K`（マイナス2℃まで使用/単品）。台帳の候補どおり。
+- 理由: 楽天 `a-price/4981325534561` の既定選択SKU は `4981325534554/-2℃`（`maker_model` 72683060・¥9,790・qty=81）で、カード `price` ¥9,790 もこれに一致する。旧 ASIN は 2℃（72683062・¥9,350）を指していた。カード `name` に「適正温度-2℃」を明記。
+- 新 ASIN の実測根拠: 変種一覧（`B08BX7K3HY=2℃/単品`・`B08BX78S1J=0℃/単品`・`B0GHG825NP=0℃/単品(SNOOPY)`・`B0FPXF6X1V=0℃/2個セット`・`B0FPXFB4HF=-2℃/2個セット`・`B08BX7ZQ6K=-2℃/単品`）から**単品かつ -2℃** を選別。¥9,700（`price_gap` -1%）・購入ボックス生存（`add-to-cart=1`・`unqualified=0`・`outOfStock=0`・通常3〜4日以内に発送します。）。2026-10-22 に `logos-sleeping-bag#5`（同一商品）が同じ ASIN を採用した先例と整合。
+
+### washable-sleeping-bag 第5位（id: nanga-zzz-bag-10）— price_unconfirmed（同じ記事を開く回で併せて解消）
+
+- `price` 11190 → 12650。実リンク先 `naturum-outdoor/4037543`（NANGA ZZZ BAG 10 REGULAR FGY）の現行価格 ¥12,650・qty=3 を 2026-10-23 に実測。
+- あわせて比較表（11190→12650）・まとめ表（11,190円台→12,650円台）を整合。frontmatter `description` と はじめに の価格レンジ「実勢6,930〜18,150円」は最小（第1位 ¥6,930）・最大（第4位 ¥18,150）が動かないため不変更。本文の「1万円台から」も ¥12,650 で成立する。
+- 第2位・第4位のカードは1バイトも変更していない。`updatedAt`（2026-09-15）・`date`・`thumbnail` も未変更。FAQ・Tips を実測し、差し替えた商品に固有の言及は **0件**（FAQ が触れる価格は ¥14,278 と ¥6,930 でいずれも変更していないカード）。
+
+### anker-power 第2位（id: anker-c800）— out_of_stock ＋ asin_mismatch を1手で解消（素の C800 が両モールで買えない）
+
+- 旧 → 新（商品の寄せ替え）: `Anker Solix C800`（楽天公式 `anker/a1753`・A17535Z1 ダークグレー・¥104,900） → **`Anker Solix C800 Plus`**（楽天公式 `anker/a1754`・**A1754511 ブラック・¥109,900・qty=286**）。`amazonAsin` は `B0CTYBTCH9` のまま（これが C800 Plus「4. ライトあり（ブラック）」で、**寄せ替えによって ASIN 不一致も同時に解消**）。
+- 理由（issue_type: out_of_stock）: 旧リンク先は 2026-10-23 の再取得でも `stock=soldout`・`deliveryMessage`「一時的に在庫切れ 入荷時期は未定です」・`quantity:0`（唯一のSKU）。Amazon 側も同ファミリー dp の変種一覧が `B0DF2G7J28=2. ライトなし（ダークグレー）+100Wソーラー`／`B0CTYBTCH9=4. ライトあり（ブラック）`／`B0C6MK4TW4=3. ライトあり（ダークグレー）` で、**「1.（素の C800 単品）」が消えている**。素の C800 は両モールで買えない状態と判断した。
+- 理由（issue_type: asin_mismatch）: 既設置 `B0CTYBTCH9` は以前から C800 Plus を指しており（2026-09-22 `campkit-20260921-36` 判定）、カードを C800 Plus に寄せることで `name`・楽天SKU・ASIN の3者が揃う。容量 768Wh・定格1200W は素の C800 と同じで、記事の「コンパクトな768Wh」という枠は保てる。
+- 新 ASIN の実測根拠: 「この ASIN の変種=`[4. ライトあり（ブラック）]`」・¥63,800・購入ボックス生存（`corePrice_feature_div=2`・`add-to-cart=1`・`submit.add-to-cart=1`・`buy-now=2`・`unqualifiedBuyBox=0`・`outOfStockBuyBox=0`・残り3点）・販売元 サカツクストア／出荷元 Amazon（`seller_type=marketplace`）。`price_gap` -42% は公式より安いマーケットプレイス出品のため（`reseller_markup` は立たない）。
+- 楽天側の色の決め方: カラー軸は `ダークグレー`（軸先頭・qty=0）／`ブラック`（qty=286）で、**同価格（ともに ¥109,900）・同構成で在庫のある `ブラック` を `name` に明記**した（CLAUDE.md `campkit-20260921-31` ②後段／`-32` §B）。Amazon の採用変種も「ブラック」なので色が揃う。
+- 価格と記述の整合: `price` 104900 → 109900（+4.8%）。あわせて比較表（商品名 `Solix C800（本体）`→`Solix C800 Plus（本体）`・`price` 104900→109900・`affiliateUrl`）・まとめ表（`[Solix C800]`→`[Solix C800 Plus]`・104,900円台→109,900円台）・frontmatter `description`（「768WhのC800」→「768WhのC800 Plus」・**「実勢99,990〜169,900円」→「実勢109,900〜169,900円」**＝旧記述は当時のカード5枚の最小値 ¥104,900 とも合っていなかったので引き直した）・はじめに・選び方ポイント1〜3・お手入れTips・FAQ 3問・まとめ締めパラグラフの「C800」表記を「C800 Plus」へ統一した。
+- レビューの扱い: 楽天 `anker/a1754` は ★4.44/**16件**で 30件未満のため、判定基準 §12-5-10 条文5 に従い **`rakutenRating`／`rakutenReviewCount` を両属性とも省略**し、本文・`badge` からもレビュー件数・評価の数値を外し、比較表の `eval` セルは **`評価準備中`** とした（コンポーネント側の `—` ガードには委ねていない）。
+- `affiliateUrl` の形式: 新リンクは CLAUDE.md が定める標準形（`scripts/rakuten-search.mjs` が `NEXT_PUBLIC_RAKUTEN_AFFILIATE_ID` で出力する `hb.afl/hgc/5318aefd.9830f687.5318aefe.625ac0b1/?pc=…`）を使った。この記事の他4枚は作成当時の別ID（`g00rr09n…`）のままで**未変更**。
+- 第1位・第3位〜第5位のカードは1バイトも変更していない。`updatedAt`（2026-09-16）・`date`・`thumbnail` も未変更。
+- 検出器: `check-card-name-vs-sku.cjs --only washable-sleeping-bag#1 / #3 / #5 / anker-power#2 --recheck` はいずれも `flags=OK`・`card_price=current_price`。`check-amazon-asin.cjs` は3枚とも `verdict=ok`（washable の2枚は auto が型番トークン不在で `unverifiable` のため人手判定）。
+- 持ち越し: `anker-power` 第5位（id: anker-c1000-ps100）は `discontinued_404`（楽天ページ消滅）で pending のまま。本タスクの対象 issue_type（out_of_stock / asin_mismatch）外のため未着手。
+
+---
 ## 2026-10-23 売上の取りこぼし解消 その7 nanga-down-jacket（campkit-20261023-M04）
 
 2026-10-19 POLICY（`result-POLICY-20261019-next-after-no-amazon.md`）の遂行。`_file/article-fix-backlog.tsv` の `asin_mismatch` 行を解消した。対象記事は取りこぼし記事を GSC 28日クリック順に並べ、本日の他タスク（M01・M02・M03・N05・R16）が触った記事を除いた最上位2本（nanga-down-jacket・nanga-sleeping-bag＝ともにクリック2）。
