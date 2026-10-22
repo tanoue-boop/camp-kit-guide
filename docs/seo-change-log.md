@@ -3,6 +3,20 @@
 数値の推移はGAS「SEOレポート」の履歴で追う。本ファイルは「いつ・どの記事を・なぜ・どう変えたか」を記録し、次回レポートで効果を評価するための施策台帳。新しい施策は上に追記する。
 
 ---
+## 2026-10-23 売上の取りこぼし解消 その7 nanga-down-jacket（campkit-20261023-M04）
+
+2026-10-19 POLICY（`result-POLICY-20261019-next-after-no-amazon.md`）の遂行。`_file/article-fix-backlog.tsv` の `asin_mismatch` 行を解消した。対象記事は取りこぼし記事を GSC 28日クリック順に並べ、本日の他タスク（M01・M02・M03・N05・R16）が触った記事を除いた最上位2本（nanga-down-jacket・nanga-sleeping-bag＝ともにクリック2）。
+
+### nanga-down-jacket 第5位（id: nanga-aurora-ladies）— asin_mismatch（Amazon 側の変種が色・サイズとも食い違っていた）
+
+- 旧 → 新（`amazonAsin` のみ）: `B0DJNTY9WD` → `B0D93CPVYQ`。**商品は同一ファミリー**（NANGA AURORA TEX DOWN JACKET W／カタログ型番 ND2442-1A005-A）。
+- 理由（issue_type: asin_mismatch）: 旧 ASIN の着地変種は `[L-LL, Mグレー]` で、カード `name` が名指しする「ブラック WS」と色軸・サイズ軸の両方が食い違っていた（2026-09-23 の `campkit-20260921-68` 判定）。旧 dp は単一変種で同ページ内に差し替え候補が無かったため、本タスクで Amazon 検索 1 本（`ナンガ オーロラダウンジャケット レディース ブラック`・organic 39件）を投じて正しい変種を特定した。
+- 新 ASIN の実測根拠: dp title「NANGA ナンガ オーロラテックス ダウンジャケット ウィメンズ AURORA TEX DOWN JACKET W **BLK WS** ND2442-1A005-A N0001565」。`BLK` 24回・`WS` 13回・`ND2442-1A005` 21回が literal 印字され、detailBullets の メーカー=NANGA／部門=レディース／商品モデル番号 N0001565。購入ボックス生存（`corePrice_feature_div=2`・`add-to-cart=1`・`submit.add-to-cart=1`・`buy-now=2`・`unqualifiedBuyBox=0`・`outOfStockBuyBox=0`・`oosText=false`）、Amazon ¥36,360（`price_gap` -21%・販売元 XPRICE＝`marketplace`）。
+- 楽天側は 2026-10-23 の実測で `daigochi/12912` の選択SKU `39934/WS/ブラック` が qty=47・¥46,200（カード `price` と 0%）で在庫あり。先行する `out_of_stock` 行（2026-10-22 に在庫回復で done）の結論どおり、色はブラック据え置きとした。
+- **`name`・`price`・`description`・`image`・`affiliateUrl`・本文・比較表・まとめ表・frontmatter `description`・FAQ・Tips は1バイトも変更していない**（旧 ASIN に固有の言及は記事内に 0件）。`updatedAt`（2026-09-14）・`date`・`thumbnail` も未変更。
+- 検出器: `check-card-name-vs-sku.cjs --only nanga-down-jacket#5 --recheck` は `flags=OK`。`check-amazon-asin.cjs` は `verdict=ok`（auto は型番トークン不在で `unverifiable` のため §12-5-8 条文1 により人手判定）。
+
+---
 ## 2026-10-23 売上の取りこぼし解消 その6 captain-stag-table（campkit-20261023-M03）
 
 ### captain-stag-table 第1位（id: cs-roll-table-m3713）— out_of_stock（楽天・Amazon の両側で購入不可だった priority A 案件）
