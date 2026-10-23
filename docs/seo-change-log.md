@@ -3,6 +3,23 @@
 数値の推移はGAS「SEOレポート」の履歴で追う。本ファイルは「いつ・どの記事を・なぜ・どう変えたか」を記録し、次回レポートで効果を評価するための施策台帳。新しい施策は上に追記する。
 
 ---
+
+## 2026-10-23 売上の取りこぼし解消 その9 anker-power 第5位（campkit-20261023-01）
+
+`_file/article-fix-backlog.tsv` 物理行 54（`pending` / `priority B` / `issue_type=discontinued_404`）の消化。**楽天・Amazon の両導線が死んでいた二重の取りこぼし**を1枚の差し替えで閉じた。
+
+### anker-power 第5位（id: anker-c1000-ps100）— discontinued_404
+
+- **旧**: Anker Solix C1000 ＋ PS100 Compact ソーラーパネル 100W セット（1056Wh・¥146,900）／楽天 `anker/b1761-4`／ASIN `B0DF2CH2PV`
+- **新**: Anker Solix C1000 Gen 2 ＋ Anker Solix C1000 / C800 専用防塵・防水バッグ セット（1024Wh・定格1550W・¥133,890）／楽天 `anker/b1763`（アンカー・ダイレクト楽天市場店・`B17635Z4/ダークグレー`・qty=437）／ASIN `B0GFM3CXM4`
+- **理由（`discontinued_404`）**: 楽天の掲載ページ `item.rakuten.co.jp/anker/b1761-4/` が **HTTP 404**（本タスクで再取得して確認）。Amazon 側の既設置 `B0DF2CH2PV` も `successor=B0F2HXR2ZS` 付きで再入荷の見込みがなく、**両モールで買えない状態**だった。
+- **採用根拠**: 楽天は Anker 公式店の在庫あり出品（meta `InStock`・`qty=437`・買い物かご実在）。Amazon `B0GFM3CXM4` は購入ボックス生存（`id="unqualifiedBuyBox_feature_div"` 0 件・`id="outOfStockBuyBox_feature_div"` 0 件・`id="add-to-cart-button"` 1 件・`name="submit.add-to-cart"` 1 件・`id="corePrice_feature_div"` 2 件）で、販売元は **AnkerDirect**（`seller_type=official`）。**価格は両モールとも ¥133,890 で `price_gap` 0%**。構成一致の決め手は Amazon 側の `モデル名 = Anker Solix C1000 Gen 2 Portable Power Station with Anker Solix C1000 / C800 専用防塵 & 防水バッグ` が楽天 `itemName` と一致すること、および twister の着地変種が `グレー+バッグ付`・`付属品総数 = 2` であること。
+- **記事上の役割の付け替え**: 旧第5位は「発電力を高めた構成（ソーラー）」だったが、新商品はパネルを含まないため **「持ち運びと保管時の保護を重視する構成」** に書き換えた。第4位（C1000 ＋ ソーラーセット）との役割の違いを本文で1文明示し、比較表の `solar` 列を `100W` → `なし`、`cap` を `1056Wh` → `1024Wh` に、まとめ表の列1を「発電力を高めたセット」→「持ち運び・保管で本体を守りたい」に直した。
+- **レビューの扱い**: 採用先の楽天レビューは **7 件（30 件未満）** なので `rakutenRating`／`rakutenReviewCount` を**両属性とも省略**し、比較表の `eval` を `評価準備中` にした（判定基準 §12-5-10 条文5）。本文・`badge`・まとめ表でもレビュー件数と評価の数値には触れていない。
+- **据え置いたもの**: `rank="5"`／カード `id="anker-c1000-ps100"`／比較表の `"id":"c1000ps100"`／まとめ表のアンカー `#anker-c1000-ps100`（本文アンカー参照とリンクを壊さず、台帳の行キー `slug＋rank＋id` も動かさないため）。frontmatter の `updatedAt`（2026-09-16）・`date`・`thumbnail`・`category`・`tags`・`description` も不変更（¥133,890 は `description` の帯「実勢109,900〜169,900円」の内側のため数字の是正が不要）。第1位〜第4位のカード・本文・比較表の該当行・「選び方の4ポイント」・「お手入れ・活用Tips」・「よくある質問」は 1 バイトも変更していない。
+- **申し送り（起票はしない）**: 同 dp の twister 一覧から、第4位 `anker-c1000-solar`（楽天 `anker/b1761-1` = `PS100 Dual Portable Solar Panel`）に設置済みの `B0F2HXR2ZS` は Amazon 側の変種名が `グレー+軽量ソーラー`（`amazon_title` は `100W Compactソーラーパネルセット`）であり、同ファミリーには別途 `B0FR4GSV8G`（`グレー+100Wソーラー`）・`B0FR4TD24N`（`グレー+200Wソーラー`）・`B0FR4GS4L9`（`グレー+400Wソーラー`）が存在する。**パネルの型（Dual か Compact か）が食い違っている可能性がある**ため、次に第4位を触る回で構成を照合すること。
+
+---
 ## 2026-10-23 売上の取りこぼし解消 その8 washable-sleeping-bag / anker-power（campkit-20261023-M05）
 
 2026-10-19 POLICY（`result-POLICY-20261019-next-after-no-amazon.md`）の遂行。`_file/article-fix-backlog.tsv` の `asin_mismatch` ＋ `out_of_stock` 行を解消した。対象記事は取りこぼし記事を GSC 28日クリック順に並べ、本日の他タスク（M01〜M04・N05・R16）が触った記事を除いた最上位2本（washable-sleeping-bag＝クリック2・anker-power＝クリック1）。
