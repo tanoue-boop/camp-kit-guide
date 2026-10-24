@@ -4,6 +4,21 @@
 
 ---
 
+## 2026-10-25 取りこぼし解消（campkit-20261025-M02）
+
+`_file/article-fix-backlog.tsv` の `asin_mismatch` 行を2記事ぶん（2カード）解消し、同じ記事の `price_unconfirmed` 5行も同時に閉じた。対象は GSC 28日クリック順（`data-campkit-gsc-page-28d-20261013.tsv`）でクリック1の記事のうち、M01 が触った family-camp-lantern・mobile-battery-camp を除く pup-tent・rectangle-sleeping-bag。
+
+### pup-tent
+
+| 位置 | issue_type | 旧 → 新 | 理由 |
+|---|---|---|---|
+| 第1位 OneTigris SOLO HOMESTEAD CE-BHS06-TC-A ブラウン（`onetigris-solo-homestead`） | `asin_mismatch` | `amazonAsin` B0CRH9L939（ブラック・CE-BHS06-BK-A・「黒TCテント アップグレード版」・¥50,600） → B0963BHF7M（ブラウン・¥46,200） | 台帳の「候補 ASIN なし」に対し `/s` 1本「OneTigris SOLO HOMESTEAD テント」で親の色軸2件（B0B1H7K61K=アーミーグリーン／B0963BHF7M=ブラウン）を特定し、ブラウン側 dp を実取得。カラー欄ブラウン・ブランド ONETIGRIS・400×240×160cm・ポール＋専用TCグランドシート付属・購入ボックス正常（add-to-cart 1件／unqualified 0件／outOfStock 0件・在庫あり）。楽天の選択SKU CE-BHS06-TC-A／-ブラウン ¥46,200 と同額で `price_gap` 0% |
+| 同上 | `price_unconfirmed` | `price` 33,600→46,200 | 楽天 `onetigris/ce-bhs06-tc` の選択SKU の現行価格（qty=20） |
+| 第2位 TOMOUNT パップテント TC クールブラック（`tomount-pup-tc`） | `price_unconfirmed` | `price` 18,999→23,999 | 楽天 `tomount/10000076` の クールブラック（sku `BK`）の現行価格（qty=7）。カード `description` と地の文の「2万円以下／2万円を切る」を「2万4千円を切る」に書き換え |
+| 第5位 GOGlamping G・G PUP 2.0 サンドベージュ（`goglamping-gg-pup`） | `price_unconfirmed` | `price` 17,982→20,280 | 楽天 `goglamping/nmt1-341` の `NMT1-341-KI`／サンドベージュ の現行価格（qty=20・全3色同額） |
+
+比較表の `price` 3枚・まとめ表の価格帯3行・frontmatter `description` の実勢レンジ（17,982〜34,100円 → 20,280〜46,200円）を整合させた。記事内の価格は ¥20,280〜¥46,200（2.28倍）で5倍ルール内。`## よくある質問`・`## お手入れ・使い方Tips` を実測したところ価格・旧商品固有スペックへの言及は0件で変更不要。カード `name`／`description`（#1・#5）／`badge`／`image`／`affiliateUrl`／`rakutenRating`／`rakutenReviewCount`、見出し、`updatedAt`／`date`／`thumbnail` は動かしていない。
+
 ## 2026-10-25 取りこぼし解消（campkit-20261025-M01）
 
 `_file/article-fix-backlog.tsv` の `out_of_stock` / `asin_mismatch` 行を2記事ぶん（2カード）解消し、同じ記事の `price_unconfirmed` 3行も同時に閉じた。対象は GSC 28日クリック順（`data-campkit-gsc-page-28d-20261013.tsv`）でクリック1の記事のうち slug 順の先頭2本。
