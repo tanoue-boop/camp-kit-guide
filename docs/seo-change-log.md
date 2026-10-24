@@ -4,6 +4,31 @@
 
 ---
 
+## 2026-10-24 取りこぼし解消（campkit-20261024-M01）
+
+`_file/article-fix-backlog.tsv` の `out_of_stock` / `asin_mismatch` 行（＝購入導線が死んでいるカード）を2記事ぶん解消した。対象の選定は GSC 28日クリック順（`data-campkit-gsc-page-28d-20261013.tsv`）で、本日 N06・N07 が触った記事を除いた最上位2本。
+
+### osprey-backpack
+
+| 位置 | issue_type | 旧 → 新 | 理由 |
+|---|---|---|---|
+| 第9位 ケストレル LT 35（`osprey-kestrel-lt-35`） | `out_of_stock` | 楽天 `canpanera/o09392`（全カラー qty=0） → `kompas/10100608`（アウトドアーズ・コンパス・ブラック qty=1・¥28,600） | 同一商品（OS50159 ブラック）の在庫あり正規取扱店への付け替え。商品・`amazonAsin`（B0G6GG93WZ）・`price` は不変で `image` のみ付け替え先に合わせた |
+| 第4位 ストラトス 36（`osprey-stratos-36`） | `price_unconfirmed` | `price` 22,999円 → 23,999円（7箇所） | 楽天 `glv/opy-96` の現行価格が上がったため。国内正規店（¥37,400）への差し替えは「30L台を価格重視で」という第4位の役割を壊すので採らなかった |
+
+### gregory-backpack
+
+| 位置 | issue_type | 旧 → 新 | 理由 |
+|---|---|---|---|
+| 第7位 カジュアルデイ V2（`gregory-casualday`） | `out_of_stock` | 楽天 `hypermarket/casual-day-bk`（全7色 qty=0） → `hikyrm/gre1444331041`（¥10,560・在庫あり）／`amazonAsin` B0CBV5TJ6J（在庫切れ・並行輸入） → B0B58K14CJ（¥10,998・在庫あり） | 両モールとも在庫切れだったため同一商品（1444331041 ブラック）の在庫ありの出品へ付け替え。`gregory-daypack#6` と同じ組み合わせにそろえ、重量・寸法もメーカー公表値（400g・42.5×30.0×18.5cm）へ統一 |
+| 第6位 イージーピージーデイ（`gregory-easypeasy`） | `asin_mismatch` | `amazonAsin` B0FSD1YYBD（EASY DAY＝別モデル・並行輸入） → B084SMT44H（型番 103868-1041・BLACK・18L・¥12,480・在庫あり） | ASIN の差し替えのみ。`name`・`price`・本文は不変 |
+| 第4位 ルーヌ22／第7位 カジュアルデイ V2 | `price_unconfirmed`（スペック表記ずれ） | ルーヌ22 925g → 880g、カジュアルデイ V2 370g → 400g・寸法も公式値へ | gregory.jp 公式の公表値に合わせ、`gregory-daypack` 側の数値と一致させた |
+
+価格帯の記述（用途別早見表・比較表・まとめ表・カード description・本文・FAQ）はすべて新しい実勢価格に整合させた。`updatedAt` / `date` / `thumbnail` は動かしていない（差し替え回のため）。
+
+残した案件: gregory-backpack 第11位 スタウト45 の `price_unconfirmed` は、国内正規のサンドストーン出品が公式ストア（`gregory-japan/n21-2038`・¥33,000）の **qty=1** しか無く、在庫リスクを負って +27% の価格改訂を記事全体に波及させる価値が無いと判断して保留した（現行の `onestep/ju2682` は ¥25,990・在庫ありでカード price と一致）。台帳に再実測を追記して `pending` のまま残した。
+
+---
+
 ## 2026-10-24 backpack-40l 新規公開（campkit-20261024-N07）
 
 容量35〜45Lだけに絞った新規記事を公開した。**新規記事のため変更前順位は該当なし**（同slugの既存記事は無く、リライトではない）。
