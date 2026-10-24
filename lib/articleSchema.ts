@@ -59,7 +59,9 @@ export function extractRankedCards(content: string): RankedCard[] {
 }
 
 /**
- * 「## よくある質問」配下の `**Q. …**` ＋ 直後の `A. …` 段落を対にして返す。
+ * 「## よくある質問」配下の Q&A を対にして返す。対応する書き方は2つ。
+ *   1. `**Q. …**` ＋ 直後の `A. …` 段落（既存記事の形式）
+ *   2. `### …？` の見出し ＋ 直後の段落（campkit-aio-spec の推奨形式・2026-10-24 追加）
  * Q&A の形になっていない記事では空配列（＝FAQPage を出さない）。
  */
 export function extractFaq(content: string): FaqPair[] {
@@ -90,6 +92,14 @@ export function extractFaq(content: string): FaqPair[] {
 
   for (const rawLine of section.split("\n")) {
     const line = rawLine.trim();
+    // 見出し形式の質問（`### 〜ですか？`）。疑問符で終わる h3〜h6 だけを質問として扱い、
+    // それ以外の見出しは従来どおり「回答の終わり」として処理する（既存記事への影響なし）。
+    const qh = line.match(/^#{3,6}[ \t]+(.+?)[ \t]*$/);
+    if (qh && /[?？]$/.test(qh[1])) {
+      flush();
+      question = toPlainText(qh[1]);
+      continue;
+    }
     // `**Q. …**` と `**Q1. …**` の両方（既存記事に両形式がある）
     const q = line.match(/^\*\*[ \t]*Q\d*[.．:：][ \t]*(.+?)[ \t]*\*\*$/);
     if (q) {
