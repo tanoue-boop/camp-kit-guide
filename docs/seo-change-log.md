@@ -4,6 +4,33 @@
 
 ---
 
+## 2026-10-25 取りこぼし解消（campkit-20261025-M01）
+
+`_file/article-fix-backlog.tsv` の `out_of_stock` / `asin_mismatch` 行を2記事ぶん（2カード）解消し、同じ記事の `price_unconfirmed` 3行も同時に閉じた。対象は GSC 28日クリック順（`data-campkit-gsc-page-28d-20261013.tsv`）でクリック1の記事のうち slug 順の先頭2本。
+
+### family-camp-lantern
+
+| 位置 | issue_type | 旧 → 新 | 理由 |
+|---|---|---|---|
+| 第4位 Soomloom Helio5000（`lantern-rank-4`） | `out_of_stock` | 楽天 `yiprefer/outdoor-158-a`（全8変種 qty=0） → `yiprefer/outdoor-345` Soomloom Lumina5000（`outdoor-345-01` ランタンのみ/単品・¥2,450・qty=131・★4.6/460件）／`amazonAsin` B0FKT4CV7Z → B0DQPL15JH／`price` 2,970→2,450 | 2026-10-25 に再取得して在庫切れ継続を確認（`meta availability=OutOfStock`）。楽天で在庫のある Helio5000 本体は転売型1件（¥9,555・+222%・レビュー0件）だけなので、同ブランドの在庫あり後継 Lumina5000 へ `product_swap`。5000mAh・IPX4・USB Type-C・懐中電灯2Way という記事上の役割（子ども用サブランタン／モバイルバッテリー兼用）はそのまま引き継げる |
+| 第3位 MTK 1600lm（`lantern-rank-3`） | `price_unconfirmed` | `price` 3,580→4,480 | 楽天 `mtkshop/ml31-wh` の選択SKU `ml31-wh`（リモコン機能付タイプ/ホワイト）の現行価格。比較表も整合 |
+| 第5位 LACITA（`lantern-rank-5`） | `price_unconfirmed` | `price` 9,980→11,000 | 楽天 `c-c-s/cl1` の選択SKU `r-sku00000003`（ブラック/ラッピング不要/不要）の現行価格。比較表も整合 |
+
+見出し・カード `name`／`description`／`badge`／`image`／`affiliateUrl`、地の文2段落（約φ37.6×H101mm・約114g・10の点灯モード・連続点灯8〜50時間）、比較表（明るさ欄は実測できた仕様が「無段階調光（10モード）」のため lm 表記をやめた）、まとめ表・まとめ締め、frontmatter `description` の「Soomloom Helio5000の2Wayモデル」を更新。記事内の価格は ¥2,450〜¥11,000（4.49倍）で5倍ルール内。この記事には FAQ・Tips セクションが無いため旧商品固有の言及は0件。
+
+### mobile-battery-camp
+
+| 位置 | issue_type | 旧 → 新 | 理由 |
+|---|---|---|---|
+| 第1位 FleekFit P60 ホワイト（`furumiya-23600`） | `asin_mismatch` | `amazonAsin` B0FQMRXK8H（ブラック） → B0FQM3SLMB（ホワイト） | dp を実取得し、カラー欄ホワイト・型番 P60・203g・購入ボックスあり（¥2,538）を確認。楽天の選択SKU `CDB26P60BA`／ホワイト（ブランド名 FleekFit・メーカー型番 P60）と色・型番が一致 |
+| 同上 | `price_unconfirmed` | `price` 2,680→3,080／`rakutenRating` 4.52→4.51／`rakutenReviewCount` 3,505→6,763 | 楽天 `furumiyashop/cdb00p60` の現行値（qty=5,459）。まとめ表の価格帯 2,600円台→3,000円台、地の文の「2,600円台」→「3,000円台」、badge・カード `description`・地の文の「楽天22冠・レビュー3,500件超」→「楽天26冠・レビュー6,700件超」、比較表の price／rating／reviews も整合させた |
+
+Amazon 側の dp ブランドは Ｏｐｉｔｉｏｎ でカード／楽天の FleekFit と食い違うが、型番 P60・23600mAh・22.5W・4本ケーブル内蔵・203g が一致する同一 OEM の別ラベルなので、`affiliateUrl` の着地先である楽天側の表記 FleekFit をカード `name` に残した（campkit-20260921-67 の申し送りへの回答）。frontmatter `description` の実勢レンジ「2,100〜7,400円台」は5枚の最小 ¥2,180／最大 ¥7,490 で変わらないため据え置き。
+
+両記事とも `updatedAt` / `date` / `thumbnail` は動かしていない（差し替え回のため）。`check-card-name-vs-sku.cjs` は対象2枚とも `flags=OK`、`check-affiliate-links.cjs --all` は PASS（273ファイル）。
+
+---
+
 ## 2026-10-24 取りこぼし解消（campkit-20261024-M03）
 
 `_file/article-fix-backlog.tsv` の `out_of_stock` / `asin_mismatch` 行を2記事ぶん（5カード）解消し、同じ記事の `price_unconfirmed` 4行・`name_fix` 1行も同時に閉じた。対象は GSC 28日クリック順（`data-campkit-gsc-page-28d-20261013.tsv`）で、本日 M01・M02・N06・N07 が触った記事を除いた上位2本。
