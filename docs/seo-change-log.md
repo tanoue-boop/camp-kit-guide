@@ -4,6 +4,32 @@
 
 ---
 
+## 2026-10-25 取りこぼし解消（campkit-20261025-M04）
+
+`_file/article-fix-backlog.tsv` の `out_of_stock` 行を2記事ぶん（2カード）解消し、同じ2記事の `price_unconfirmed` 2行も同時に閉じた。対象記事は、取りこぼし記事の GSC 28日クリック（`data-campkit-gsc-page-28d-20261013.tsv`）が残り全記事0のため POLICY どおり slug 順の先頭2本（bonfire-sheet・camp-bbq-grill。M01〜M03 が使った記事は除外）。
+
+### bonfire-sheet
+
+| 位置 | issue_type | 旧 → 新 | 理由 |
+|---|---|---|---|
+| 第2位 山麓工房 焚き火シート 耐熱5層構造（`sanroku-sheet`） | `out_of_stock` | カード `name` に **ブラック 50×50cm** を名指し（選択SKU `black/ブラック 95×60cm` → `black50-50/ブラック 50×50cm`・qty=39・¥2,980）／比較表の サイズ 「記載なし」→「50×50cm」 | 楽天 `sanrokukobo/fire-sheet` を再取得すると カラー軸5値のうち 95×60cm（黒・銀）と 70×70cm（黒・銀）は全て qty=0 で、**在庫があるのは ブラック 50×50cm の1値だけ**（¥2,980＝カード `price` と同額）。CLAUDE.md 31 ②後段・32 §B(1) に従い、構成と色（ブラック）を保ったまま軸順で最初に在庫のある値へ寄せた。見出し・地の文・比較表・まとめ表はサイズを名指ししていなかったので §34(d) の制約に当たらない |
+| 同上 | — | `amazonAsin` B0CTG77JXB（失効 ASIN） → **B0DP4RHFZ7**（着地先の実 ASIN・色=ブラック50×50cm・¥3,180・在庫あり） | 旧 ASIN は `landingAsin=B0CTG77JXB` / `currentAsin=B0DP4RHFZ7` で別 ASIN へ着地していた。着地先を直打ちして `landingAsin=currentAsin=input#ASIN=B0DP4RHFZ7`（redirect なし）・購入ボックス生存（`unqualifiedBuyBox` 0／`outOfStockBuyBox` 0／`add-to-cart` 1）・販売元「【インボイス対応可】山麓工房 公式」を確認。dp の着地変種の色が楽天の在庫ありSKUと一致（§4-2 ゲート③） |
+| 第1位 ZEN Camps 焚き火シート 95×60cm（`zen-camps-sheet`） | `price_unconfirmed` | `price` 3,582 → **3,980**／比較表 3,582 → 3,980／まとめ表「3,500円台」→「3,900円台」 | 楽天 `zen-camps/black-sheet` の選択SKU `black-sheet/単品` の現行価格が ¥3,980（在庫あり）。§11-8 の ±3% を超える乖離だったため更新した |
+
+`price`（#2）・`rakutenRating`・`rakutenReviewCount`・`badge`・`image` は §11-8 により据え置き（同一商品・同一店舗のSKU移動のため、評価値の出所が消えていない）。#2 の地の文には採用サイズ（ブラックの50×50cm）を1文で追記し、カード `description` にも反映した。frontmatter `description` の「実勢840〜3,980円」は5枚の `price` の最小・最大が変わらないため不変。`## よくある質問`・`## お手入れ・使い方Tips` を実測したところ旧SKU固有のサイズ・価格への言及は0件で変更不要。
+
+なお 山麓工房 の層数表記が販路間で食い違う（楽天は商品名・商品説明本文とも「耐熱5層構造」／Amazon dp は同じ公式販売元で「極厚仕様 3層構造」・楽天の商品画像 alt も「3層構造」）。記事は主リンク先である楽天側の印字に沿って「5層」を据え置き、`article-fix-backlog.tsv` に `name_fix`（priority C）で起票した。
+
+### camp-bbq-grill
+
+| 位置 | issue_type | 旧 → 新 | 理由 |
+|---|---|---|---|
+| 第3位（`grill-rank-3`） | `out_of_stock` | **Gaobabu コンパクトA4焚き火台（脚付き焼き網付き）¥5,280** → **ガオバブ(Gaobabu) Gグリルmini（タレ皿付きBBQコンロ・収納バッグ付き）¥4,886**／楽天 `aorinetshop/10018962` → `gaobabushop/10012728`（公式店・★4.00/4件・qty=20）／`amazonAsin` B0CQT95CM3 → **B08724WNGL**（¥3,990・残り20点・販売元 Gaobabuショップ） | 旧商品は両モールで購入不可を実測確認（楽天 `meta availability=OutOfStock`・在庫切れ／Amazon dp は `outOfStockBuyBox` 2件・「現在在庫切れです。この商品の再入荷予定は立っておりません。」／楽天APIで「ガオバブ 焚き火台 A4」「Gaobabu コンパクトA4焚き火台」ともに0件＝公式 ガオバブSHOP にも出品なし）。**同ブランドで最も価格帯が近い（-7.5%）本体モデル**へ差し替え、frontmatter `description`・FAQ・比較表・まとめ表で名指ししている「Gaobabu」をそのまま活かした。同一性は §4-2 ゲート③で確定（dp の feature-bullets と楽天の商品説明が「使用時 約30×21×高さ13.5〜16.5／収納時 約21×21×5／重量 約1.65／取扱説明＆1年間の保証書付き」まで字面一致・両者とも単一変種） |
+| 第4位 尾上製作所 EV-65HL（`grill-rank-4`） | `price_unconfirmed` | `price` 12,389 → **13,289**／比較表「¥12,389」→「¥13,289」 | 楽天 `yuzuriha-shop/20250505160912_163` の現行価格（2026-09-21 走査時の ¥14,010 から下落）。§11-8 の ±3% を超える乖離だったため更新した |
+
+第3位は見出し（「Gaobabu コンパクトA4焚き火台（脚付き焼き網付き）」→「Gaobabu Gグリルmini（タレ皿付きBBQコンロ）」）・カード8属性・本文2段落・比較表 row3（`name`／`対象人数` ソロ〜グループ→ソロ〜2人／`特徴`／`価格`）・まとめ表（「ソロ〜グループ汎用」→「ソロ・デュオで焼肉」）・FAQ Q1（「Gaobabu」→「Gaobabu Gグリルmini」）を新商品に揃え、旧商品固有の記述（A4用紙サイズ・脚付き焼き網付属・一部地域を除き送料無料・誤字「BBYグリル」）を1つも残していない。frontmatter `description` の商品名列はブランド名「Gaobabu」のみで新商品にも当てはまるため不変。`## お手入れ・使い方Tips` は製品固有の記述が0件、FAQ Q2 の「A4〜A3サイズ程度」は網面積の一般的な目安で、Gグリルmini の使用時 約30×21cm とも整合するため変更不要。レビューは4件（30件未満）なので §12-5-10 条文5 に従い本文・比較表・まとめ表ではレビュー件数・評価に触れていない。記事内の価格は ¥2,886〜¥13,289（4.60倍）で5倍ルール内。
+
+---
 ## 2026-10-25 取りこぼし解消（campkit-20261025-M03）
 
 `_file/article-fix-backlog.tsv` の `asin_mismatch` / `out_of_stock` 行を2記事ぶん（3カード）解消し、同じ記事の `price_unconfirmed` 1行も同時に閉じた。対象記事は、取りこぼし記事の GSC 28日クリック（`data-campkit-gsc-page-28d-20261013.tsv`）が残り全記事0のため POLICY どおり slug 順の先頭2本（backpack-large・barebones-light。M01・M02 が使った記事は除外）。
