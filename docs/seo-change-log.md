@@ -4,6 +4,32 @@
 
 ---
 
+## 2026-10-25 取りこぼし解消（campkit-20261025-M03）
+
+`_file/article-fix-backlog.tsv` の `asin_mismatch` / `out_of_stock` 行を2記事ぶん（3カード）解消し、同じ記事の `price_unconfirmed` 1行も同時に閉じた。対象記事は、取りこぼし記事の GSC 28日クリック（`data-campkit-gsc-page-28d-20261013.tsv`）が残り全記事0のため POLICY どおり slug 順の先頭2本（backpack-large・barebones-light。M01・M02 が使った記事は除外）。
+
+### backpack-large
+
+| 位置 | issue_type | 旧 → 新 | 理由 |
+|---|---|---|---|
+| 第3位 HAWK GEAR 防水バックパック 80L（`hawkgear-80l`） | `asin_mismatch` | `amazonAsin` B06WLP7B8N（モスグリーン変種） → B01HPEV51G（ジェットブラック・¥6,990）／楽天リンク `mamesshop/backpack01` → `ymbstore/backpack01`／カード `name` の ブラック → ジェットブラック | 台帳は「ブラックは Amazon の変種一覧に無いので候補 ASIN なし」としていたが、2026-10-25 に dp を再取得すると親 B07BNWH9DR の変種は コヨーテ B08463DV7Z／モスグリーン B06WLP7B8N／ジェットブラック B01HPEV51G／コバルトブルー（紺） B01AKAAK2C の4色でジェットブラックが存在した。あわせて楽天の `mamesshop` が店舗解消（item URL が `www.rakuten.co.jp/mamesshop/kaiso.html` へリダイレクト）していたため、同一商品の `ymbstore/backpack01`（★4.57/90件・ジェットブラック SKU 4112 qty=10・¥7,080）へ付け替えた。第1位の55Lと同じ店舗・同じシリーズに揃う |
+| 同上 | — | `rakutenRating` 4.5→4.57／`rakutenReviewCount` 16→90／`image` を ymbstore のものへ | §11-8 は同一商品の楽天URL差し替えで評価・画像を据え置くと定めるが、旧店舗が解消して旧値の出所そのものが消滅したため実値へ更新した（§12-5-9 条文1 の「記事の記述が実物と食い違う状態を作らない」に寄せた判断）。`price` 6,990 は楽天現価 7,080 と +1.29% で §11-8 の ±3% 内なので据え置き |
+| 第5位 M-STYLE ミリタリーバッグ 90L 3WAY（`mstyle-90l-3way`） | `asin_mismatch` | `amazonAsin` B00T47R65W（失効→ACU迷彩 B092CRTLS4 へ着地） → B00T47R5SK（カーキ・¥8,980）／カード `name` の ブラック → カーキ | Amazon の変種一覧（カーキ／ACU迷彩／グリーン）にブラックが無く、楽天 `auc-r-style/04-10-03-01` のブラック SKU 19875 も qty=0 だったため、軸順で最初に在庫のある カーキ SKU 19876（qty=13）へ寄せた。採用 ASIN の メーカー型番 `04-10-03-01Khaki` が楽天カーキ変種の メーカー型番 と完全一致（§4-2 ゲート②）。記事の見出し・地の文・比較表・まとめ表は色を名指ししていないため色の付け替えが可能（CLAUDE.md 34 (d)） |
+| 同上 | `price_unconfirmed` | `price` 8,082→8,980 | 楽天カーキ SKU の現行価格。Amazon も同額で `price_gap` 0% |
+
+比較表の `rating`／`reviews`／`affiliateUrl`（#3）と `price`（#5）、まとめ表の価格帯（8,082円→8,980円）、frontmatter `description` の実勢レンジ（4,980〜8,082円台 → 4,980〜8,980円台）を整合させた。記事内の価格は ¥4,980〜¥8,980（1.80倍）で5倍ルール内。地の文は #3 に実測スペック（約75×35cm・約2.3kg・レインカバーは底ポケット収納・極厚ショルダーキルト・選べる4色）とレビュー実績（90件・★4.57）を反映し、#5 に在庫のあるカラー（カーキ／アーミーグリーン／ACU迷彩）を追記した。`## よくある質問`・`## お手入れ・使い方Tips` を実測したところ価格・旧商品固有スペックへの言及は0件で変更不要。
+
+### barebones-light
+
+| 位置 | issue_type | 旧 → 新 | 理由 |
+|---|---|---|---|
+| 第3位 ベアボーンズ ビーコンライト LED 2.0 20230005（`barebones-beacon`） | `out_of_stock` | 楽天リンク `niche-express/blg00000000049` → `kojitu/0819665012958`（好日山荘Webショップ・ブロンズ・qty=10・¥8,800）／カード `name` に ブロンズ を追記 | 旧リンク先は 2026-10-25 時点でも `meta availability=OutOfStock` で全5色 qty=0。同一商品で在庫のある楽天店へ付け替えた。`kojitu` は色軸のない単独SKUで価格もカード `price` と同額（gap 0%）、かつ Amazon 側の唯一の変種（アンティークブロンズ）と色が揃う。候補の比較: `himaraya/0000000856362`（¥8,470・★4.75/16件）は在庫が Ｓグレー のみで Amazon の色と食い違い新たな色不一致を作るため不採用／`plywood/24383238`（¥5,280・★4.67/24件）は -40% で記事の価格帯の序列（ビーコンが最上位）と FAQ「レイルロードやビーコンは…価格も上がります」が崩れるため不採用 |
+| 同上 | — | `amazonAsin` B07D2JVK39（失効 ASIN） → B07D2JN939（着地先の実 ASIN・同一商品・アンティークブロンズ） | 失効 ASIN のリダイレクト頼みを解消した。ただし Amazon 側は 2026-10-25 時点でビーコンライト LED 2.0 の全 ASIN が購入不可（B07D2JN939 は購入ボックスなし／B07DB6ZQSL は再入荷予定なし／B09B9DKSZ2 はマーケットプレイス出品のみ）。楽天で買える状態は回復したが Amazon 在庫は戻っていないため、`amazon-asin-check.tsv` の `verdict` は `out_of_stock` のまま残した |
+
+`price`／`rakutenRating`／`rakutenReviewCount`／`badge`／`image` は §11-8 により据え置き（旧店舗 `niche-express` は健在で在庫切れだけのため、評価の出所が消えていない）。カード `description` と地の文から、付け替え先ページに印字がない「国内正規品」の表記を外し、実在の訴求（調光対応）に差し替えた。比較表は `affiliateUrl` のみ更新。第4位 ミニエジソンの `price_unconfirmed` 行は Amazon の色違い ASIN 差し替えが同時に必要で本タスクの Amazon 予算内に収まらないため、実測結果（既定SKU 1413529 は ¥4,565 かつ qty=0／カード price ¥3,300 と一致して在庫のある SKU は スレートグレー 1413533 qty=5・オリーブドラブ 1413532 qty=2／Amazon 候補 B092QRXX4B）を台帳 `notes` に残して pending のまま次便へ送った。
+
+両記事とも `updatedAt` / `date` / `thumbnail` は動かしていない（差し替え回のため）。`check-card-name-vs-sku.cjs` は対象3枚すべて `flags=OK`（選択SKU はいずれも在庫あり）、`check-affiliate-links.cjs --all` は PASS（273ファイル）。
+
 ## 2026-10-25 取りこぼし解消（campkit-20261025-M02）
 
 `_file/article-fix-backlog.tsv` の `asin_mismatch` 行を2記事ぶん（2カード）解消し、同じ記事の `price_unconfirmed` 5行も同時に閉じた。対象は GSC 28日クリック順（`data-campkit-gsc-page-28d-20261013.tsv`）でクリック1の記事のうち、M01 が触った family-camp-lantern・mobile-battery-camp を除く pup-tent・rectangle-sleeping-bag。
