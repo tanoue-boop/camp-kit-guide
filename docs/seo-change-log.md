@@ -4,6 +4,36 @@
 
 ---
 
+## 2026-10-24 取りこぼし解消（campkit-20261024-M03）
+
+`_file/article-fix-backlog.tsv` の `out_of_stock` / `asin_mismatch` 行を2記事ぶん（5カード）解消し、同じ記事の `price_unconfirmed` 4行・`name_fix` 1行も同時に閉じた。対象は GSC 28日クリック順（`data-campkit-gsc-page-28d-20261013.tsv`）で、本日 M01・M02・N06・N07 が触った記事を除いた上位2本。
+
+### coleman-lantern
+
+| 位置 | issue_type | 旧 → 新 | 理由 |
+|---|---|---|---|
+| 第2位 ハンギングEライト 2000037352（`coleman-hanging-elight`） | `out_of_stock` | 楽天 `himaraya/0000000972440`（OutOfStock） → `naturum/3176384`（ナチュラム 楽天市場支店・¥3,180・qty=14）／`price` 3,819→3,180 | 同一品（型番 2000037352）の在庫あり店への付け替え。候補の WHATNOT（¥3,439・★4.85/13件）は qty=1 の薄在庫だったため、在庫切れの再発を避けて qty=14 のナチュラムを採った。レビュー 7 件（<30）なので §12-5-10 条文5 により `rakutenRating`／`rakutenReviewCount` を省略し、badge・本文・まとめ表からレビュー数値を外し、比較表 `eval` は `評価準備中` にした |
+| 第4位 リチャージブルマルチランタン 2000038857（`coleman-rechargeable`） | `out_of_stock` | 楽天 `himaraya/0000001028971`（OutOfStock） → `naturum/3264354`（¥6,660・qty=11）／`price` 6,563→6,660／商品名「リチャージャブルランタン」→「リチャージブルマルチランタン」 | 同一品の在庫あり店への付け替え。あわせて正式名称が誤っていたので見出し・カード `name`・比較表・まとめ表・本文を実商品名に直し、最大800ルーメン・USB給電という実スペックを本文に反映した。レビュー 2 件（<30）なので上と同じ扱い |
+| 第3位 ルミエールランタン 205588（`coleman-lumiere`） | `price_unconfirmed` | `price` 4,461→4,518円 | 起票時の実リンク先（純正ガスセット）は campkit-20260921-63 以降に単品 `naturum/974490` へ変わっており、2026-10-24 実測の現行価格は ¥4,518（qty=29・レビュー 30 件）。比較表・まとめ表も整合させた |
+| 第5位 ラギッド パッカウェイ 2000036871（`coleman-rugged-packaway`）※台帳外 | — | 楽天 `himaraya/0000000972439`（OutOfStock） → `store-megasports/66243957`（¥4,928）／`price` 4,999→4,928 | 同じ記事を開いた際に**新たに在庫切れを発見**したため同時に付け替えた。比較表の `affiliateUrl` が 404 の旧 URL（`lbreath/107688221011`）のまま残っていたのも同時に修正。レビュー 0 件なので評価系の記述を外した |
+
+frontmatter `description` の価格帯「実勢3,819〜9,900円」→「実勢3,180〜9,900円」。第1位 2500ノーススターは `store-megasports/36819357` が ¥9,900・★4.61/33件・在庫ありで現状維持（実測で確認）。
+
+### ground-sheet
+
+| 位置 | issue_type | 旧 → 新 | 理由 |
+|---|---|---|---|
+| 第2位 TRIWONDER（`triwonder-groundsheet`） | `asin_mismatch` ＋ `price_unconfirmed` | `amazonAsin` B019U1OV6I（失効・S 220x150 へ着地） → B01E3ZDI3S（01グリーン／220x180 CM）／`price` 1,680→2,351／`name` にサイズ「グリーン M(220×180cm)」を追記 | 「記事がどちらのサイズを紹介しているか」は楽天実リンク先の SKU（メーカー型番 OS1614GR-M＝M 220x180 CM・¥2,351）に合わせると決め、Amazon も同寸の変種にそろえた |
+| 第3位 ZEN Camps 帆布（`zencamps-groundsheet`） | `asin_mismatch` | `amazonAsin` B0DGX6GWV2（オリーブ） → B0D37XH8BN（ブラック・¥5,780）／`price` 5,485→5,780 | カード `name` が名指しするブラックに合わせた。楽天の既定SKU もブラック ¥5,780（qty=1 の薄在庫だが 0 ではないので据え置き） |
+| 第4位 GOGlamping 420D（`goglamping-groundsheet`） | `asin_mismatch` ＋ `price_unconfirmed` | `amazonAsin` B0DB5WVRMX（XS 210*90cm） → B09NVVYDVD（ブラックM 215*180cm）／`price` 1,504→2,380／badge「最安・軽量420D」→「軽量420D・コンパクト」 | カード `name` の M(215*180cm) に合わせた。価格を実勢に直した結果、記事最安が第5位（¥2,300）に移ったため「最安」の訴求を外した |
+| 第5位 Clostnature（`clostnature-groundsheet`） | `name_fix` ＋ `price_unconfirmed` | `name`「2/4/6人用」→「2人用 220*150cm」／`price` 1,899→2,300 | 楽天 style 軸の全選択肢を範囲で書いていたのを既定SKU の1仕様に絞り、カード `description`・本文も実SKU に合わせた。既設置 `amazonAsin` B0CLLX2YQB は 220*150cm に正しく着地しており据え置き |
+
+frontmatter `description` の価格帯「実勢1,504〜5,485円」→「実勢2,300〜5,780円」、FAQ「実勢1,504円と5,485円クラス」→「2,300円と5,780円クラス」、比較表・まとめ表の価格帯5行も実勢に更新した。
+
+両記事とも `updatedAt` / `date` / `thumbnail` は動かしていない（差し替え回のため）。`check-card-name-vs-sku.cjs` は対象8枚すべて `flags=OK`、`check-affiliate-links.cjs --all` は PASS（273ファイル）。
+
+---
+
 ## 2026-10-24 取りこぼし解消（campkit-20261024-M02）
 
 `_file/article-fix-backlog.tsv` の `asin_mismatch` 行を2記事ぶん（3カード）解消した。対象は GSC 28日クリック順（`data-campkit-gsc-page-28d-20261013.tsv`）で、本日 M01・N06・N07 が触った記事を除いた上位2本。
