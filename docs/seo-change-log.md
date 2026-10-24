@@ -19,6 +19,18 @@
 
 比較表の `price` 3枚・まとめ表の価格帯3行・frontmatter `description` の実勢レンジ（17,982〜34,100円 → 20,280〜46,200円）を整合させた。記事内の価格は ¥20,280〜¥46,200（2.28倍）で5倍ルール内。`## よくある質問`・`## お手入れ・使い方Tips` を実測したところ価格・旧商品固有スペックへの言及は0件で変更不要。カード `name`／`description`（#1・#5）／`badge`／`image`／`affiliateUrl`／`rakutenRating`／`rakutenReviewCount`、見出し、`updatedAt`／`date`／`thumbnail` は動かしていない。
 
+### rectangle-sleeping-bag
+
+| 位置 | issue_type | 旧 → 新 | 理由 |
+|---|---|---|---|
+| 第1位 Bears Rock ふわ暖 MX-604（`bearsrock-mx604`） | `asin_mismatch` | `amazonAsin` B0CPLRCPRH（ゴリラブラック） → B0B17P4VG1（スモーキーネイビー）／カード `name` の色 モカライン → スモーキーネイビー | 台帳の候補 B096NGF3PJ（モカライン）は dp を実取得して不採用＝購入ボックスが無い（`unqualifiedBuyBox_feature_div` 2件・`add-to-cart-button` 0件・`corePrice_feature_div` 0件・価格表示なし）。代わりに同一商品を載せる sleeping-bag-summer-cospa#2 と同じ SKU・同じ表記・同じ ASIN に揃えた（CLAUDE.md 35 (f)）。楽天の選択SKU も `mx-604_dbl`／スモーキーネイビー（¥4,580・モカラインと同額・qty=247）へ移動。記事の見出し・地の文・比較表・まとめ表は色を名指ししていないため CLAUDE.md 34 (d) に抵触しない |
+| 第4位 ロゴス 丸洗いスランバーシュラフ・2（`aiflycy-2nin`） | `price_unconfirmed` | `price` 6,380→6,930 | 楽天 `a-price/4981325499778` の選択SKU（2℃）の現行価格（qty=170）。kids-sleeping-bag#7・logos-sleeping-bag#4 と同額に揃った |
+| 第5位 MERMONT 選べる4タイプ -5℃/1.35kg ブラック（`erabu-4type`） | `price_unconfirmed` | `price` 1,750→2,580 | 楽天 `weiwei/odsbps` の `ODSBPS13BK` の現行価格（qty=174。9月走査時の ¥2,340 から値上がり）。Amazon 側 B0GJR8P4MY も ¥2,580 で `price_gap` 0% になった |
+
+比較表の `price` 2枚・まとめ表の価格帯2行、カード `description` と地の文の「約1,750円と本記事最安」→「約2,580円」を整合させた。#5 は値上がり後も本記事最安（次に安い #3 VASTLAND ¥3,780）で役割は変わらない。記事内の価格は ¥2,580〜¥6,930（2.69倍）で5倍ルール内。frontmatter `description` は価格に言及していないため据え置き。`## よくある質問`・`## お手入れ・活用Tips` を実測したところ価格・旧商品固有スペックへの言及は0件で変更不要。
+
+両記事とも `updatedAt` / `date` / `thumbnail` は動かしていない（差し替え回のため）。`check-card-name-vs-sku.cjs` は対象6枚すべて `flags=OK`、`check-affiliate-links.cjs --all` は PASS（273ファイル）。
+
 ## 2026-10-25 取りこぼし解消（campkit-20261025-M01）
 
 `_file/article-fix-backlog.tsv` の `out_of_stock` / `asin_mismatch` 行を2記事ぶん（2カード）解消し、同じ記事の `price_unconfirmed` 3行も同時に閉じた。対象は GSC 28日クリック順（`data-campkit-gsc-page-28d-20261013.tsv`）でクリック1の記事のうち slug 順の先頭2本。
