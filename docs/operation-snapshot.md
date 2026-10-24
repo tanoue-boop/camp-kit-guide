@@ -66,7 +66,8 @@
 
 ## 記事数（2026-10-24 時点）
 
-- **総記事数: 272記事**（`check-amazon-asin.cjs --static` の「記事 272 本」で実測。2026-10-24 の新規1本＝**northface-commute-backpack**〔ノースフェイスの通勤リュックおすすめ11選・campkit-20261024-N06・category `backpack`〕を配置した時点の値）
+- **総記事数: 273記事**（`check-amazon-asin.cjs --static` の「記事 273 本」で実測。2026-10-24 の新規2本目＝**backpack-40l**〔リュック40Lおすすめ11選・campkit-20261024-N07・category `backpack`〕を配置した時点の値）
+- 前回（同日 2026-10-24・1本目）は **272記事**（新規1本＝**northface-commute-backpack**〔ノースフェイスの通勤リュックおすすめ11選・campkit-20261024-N06・category `backpack`〕を配置した時点の値）
 - 前回（2026-10-23）は **271記事**（`check-amazon-asin.cjs --static` の「記事 271 本」で実測。2026-10-23 の新規1本＝**gregory-daypack**〔グレゴリーのデイパックおすすめ10選・campkit-20261023-N05・category `backpack`〕を配置した時点の値）
 - 前回（2026-10-22・2本目）は **270記事**（`check-amazon-asin.cjs --static` の「記事 270 本」で実測。2026-10-22 の新規2本目＝**outdoor-commute-backpack**〔アウトドアブランドの通勤リュックおすすめ11選・campkit-20261022-N04・category `backpack`〕を配置した時点の値）
 - 前回（同日 2026-10-22・1本目）は **269記事**（新規1本＝**millet-backpack**〔ミレーのリュックおすすめ12選・campkit-20261022-N03・category `backpack`〕を配置した時点の値）
@@ -75,9 +76,9 @@
 - 前回（2026-10-01）は **266記事**（新規2本＝**sleeping-bag-recommend**〔寝袋おすすめ総合ハブ・campkit-20261001-R02〕と**air-mat**〔エアマットおすすめ11選・campkit-20261001-R04〕を配置した時点の値）
 - 内訳の推移: `a45a1e5`=212 → `6ebde0f`=215（前バッチ3本＝camp-air-pump／disaster-camp-gear／trekking-pole）→ `7f9b41f`=218（3本＝solar-lantern／disaster-radio／solo-gear-rental）→ 2026-09-04時点=231 → 2026-09-07時点=234 → 2026-09-08時点=237 → 2026-09-09時点=240 → 2026-09-10時点=243 → 2026-09-11時点=247 → 2026-09-14時点=250 → 2026-09-15時点=254 → 2026-09-16時点=258 → 2026-09-17時点=262 → 2026-10-01時点=265（R02 sleeping-bag-recommend）→ **2026-10-01時点=266（R04 air-mat）**
   - ⚠️ 262→264 の2本は 2026-09-18〜09-30 のバッチで追加されたもので、本ファイルの記事数セクションが更新されていなかった（09-17 のまま据え置かれていた）。2026-10-01 に全カテゴリを `grep -h "^category:" content/posts/*.mdx` で再集計し、実測値へ補正した。
-  - 2026-10-01時点=266 → 2026-10-19時点=267（N01 mammut-backpack）→ 2026-10-20時点=268（N02 arcteryx-backpack）→ 2026-10-22時点=269（N03 millet-backpack）→ 2026-10-22時点=270（N04 outdoor-commute-backpack）→ 2026-10-23時点=271（N05 gregory-daypack）→ **2026-10-24時点=272（N06 northface-commute-backpack）**
+  - 2026-10-01時点=266 → 2026-10-19時点=267（N01 mammut-backpack）→ 2026-10-20時点=268（N02 arcteryx-backpack）→ 2026-10-22時点=269（N03 millet-backpack）→ 2026-10-22時点=270（N04 outdoor-commute-backpack）→ 2026-10-23時点=271（N05 gregory-daypack）→ 2026-10-24時点=272（N06 northface-commute-backpack）→ **2026-10-24時点=273（N07 backpack-40l）**
 
-### カテゴリ別内訳（frontmatter `category` を集計・2026-10-24 実測）
+### カテゴリ別内訳（frontmatter `category` を集計・2026-10-24 実測／N07 反映後）
 
 | slug | 表示名 | 記事数 |
 |------|--------|-------:|
@@ -88,9 +89,11 @@
 | lighting | 照明・ランタン | 18 |
 | power | 電源・バッテリー | 25 |
 | bonfire | 焚き火台 | 31 |
-| backpack | バックパック | 26 |
+| backpack | バックパック | 27 |
 | clothing | ウェア・装備 | 3 |
-| **合計** | | **272** |
+| **合計** | | **273** |
+
+> 直近: 2026-10-24・2本目（チャット側からの直接投入タスク campkit-20261024-N07＝**新規記事 backpack-40l**〔リュック40Lおすすめ11選・backpack〕を作成。狙いKW「リュック 40l」「リュック 40l おすすめ」「40l バックパック」「40リットル リュック」（月間100〜1,000）。容量35〜45Lだけに絞り、既存の `mountain-backpack-30l`（30L前後）・`camp-backpack-beginner`（キャンプ初心者向け5製品）・`backpack-large`（60L前後の低価格帯）・`camp-backpack-capacity-guide`（容量の選び方ガイド）とは容量帯で役割を分けた。製品11＝ミレー2／カリマー2／グレゴリー2／オスプレー1／マムート1／ドイター1／tomtoc1／アディダス1（同一ブランド最大2本）。価格6,190〜34,100円（5.51倍。容量で絞る比較型KWのため価格帯の幅は許容）、重量950〜1,840g。差別化は①公表寸法を国内線の機内持ち込み基準（55×40×25cm・3辺合計115cm以内）に機械的に当て、3辺すべて収まるのが tomtoc T66 Navigator 40L の1本だけだと示した点、②容量表記が「40L／40+5L／サイズで容量が変わる（オスプレー ケストレル 38 は S／M=36L）」の3種あることを明示した点、③背面長を実測で合わせられるのは公表＋サイズ展開のある6モデルだけと整理した点、④ヒップベルトを固定／取り外し／なしの3分類にした点。全11カードに楽天 hb.afl ＋ `amazonAsin` を設置し、両モールで同型番・同カラー・同サイズの在庫を1枚ずつ実取得で照合。並行輸入品と中古品は不採用（ノースフェイス ROUTER 40L・テルス45・オスプレー ストラトス 36・グレゴリー スタウト45の廉価出品を除外し、スタウト45はブランド公式ストアの国内正規品へ差し替え）。被リンクは camp-backpack-beginner／mountain-backpack-30l／camp-backpack-capacity-guide の3本を追記のみで設置。記事数272→273、backpack 26→27。副産物として `article-fix-backlog` に4件起票〔osprey-backpack ストラトス36＝価格22,999→23,999＋並行輸入／camp-backpack-capacity-guide の同一SKU／gregory-backpack スタウト45＝並行輸入出品／osprey-backpack ケストレル LT 35＝楽天の全カラー在庫切れ〕。サムネイルはフォールバック `/images/outdoor-01.png`）
 
 > 直近: 2026-10-24（チャット側からの直接投入タスク campkit-20261024-N06＝**新規記事 northface-commute-backpack**〔ノースフェイスの通勤リュックおすすめ11選・backpack〕を作成。狙いKW「ノースフェイス リュック 通勤」「ノースフェイス 通勤 リュック おすすめ」「ノースフェイス ビジネスリュック」（月間100〜1,000）。既存の `northface-backpack`（ブランド総合・容量16〜33L）と `outdoor-commute-backpack`（通勤を7ブランド横断）とは役割を分け、**ノースフェイスの通勤・ビジネス・PC収納・日常使いのみ（容量20〜33L）** に限定。採用11製品（シャトルデイパック 28L／BCヒューズボックス2 30L／ホットショット 27L／ピボター 26L／ボストーク26／ボルダーデイパック 24L／ジェミニ22／ボルダートートパック 22L／VAULT／シングルショット 20L／ビッグショット 33L）はすべて楽天 hb.afl ＋ `amazonAsin` の両リンクを設置し、楽天SKUの在庫とAmazon dpの購入ボックス・販売元・カラー変種を1枚ずつ実取得で照合。既存2記事に無い3モデル（ピボター 26L・ボストーク26・ジェミニ22）を加え、対応PCインチ（13/15/17）→容量→奥行の3段で絞らせる構成にしてカニバリを避けた。両モールで揃わないシャトルライト 23L・テルス25（Amazon出品0）、ローマーデイ／ローマースリムデイ（楽天は中古のみ）は不採用で、理由を記事本文に明記。内部リンクは本記事→既存11記事、既存3記事（northface-backpack／outdoor-commute-backpack／gregory-daypack）→本記事。あわせて `lib/articleSchema.ts` の `extractFaq` に見出し形式（`### 〜ですか？`）の FAQ を FAQPage の材料として拾う分岐を追加（既存記事への影響なし）。記事数271→272、backpack 25→26。サムネイルは生成環境が無いためフォールバック `/images/outdoor-09.png`）
 
