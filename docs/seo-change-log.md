@@ -4,6 +4,33 @@
 
 ---
 
+## 2026-10-26 取りこぼし解消（campkit-20261026-M02）
+
+`_file/article-fix-backlog.tsv` の取りこぼし行（`out_of_stock`／`asin_mismatch`）を2記事ぶん（3行）解消し、同じ記事の `price_unconfirmed` 1行も同時に閉じた。対象記事は、取りこぼし記事の GSC 28日クリック（`data-campkit-gsc-page-28d-20261013.tsv`）が残り全記事0のため POLICY どおり slug 順の先頭2本（camp-gift・camp-grill-plate。本日 M01 で使った camp-chair-lightweight・camp-fan-summer を除く）。着手時 HEAD `ddab945` で他タスクとの衝突なし。
+
+### camp-gift
+
+| 位置 | issue_type | 旧 → 新 | 理由 |
+|---|---|---|---|
+| 第5位 Soomloom 2Wayランタン Helio5000（`gift-lantern`） | `out_of_stock` | **コールマン クアッドマルチパネルランタンplus 2218364 グリーン**（楽天 `himaraya/0000001237400` ¥10,800／`amazonAsin` B0FKT4CV7Z → **B0DMVCXD39**）へ商品差し替え。`price` 2,970 → **10,800**／比較表「Soomloom 2Wayランタン ¥2,970」→「コールマン クアッドマルチパネルランタンplus ¥10,800」 | 楽天 `yiprefer/outdoor-158-a` を再取得し `OutOfStock`（全変種 soldout）を再確認。同一品の在庫あり出品は転売型1件（商品コードが ASIN 文字列・★0/0件）だけで §11-6 に該当するため採らず、商品差し替えを選択。差し替え先は 楽天 `himaraya`（段② 大手・母数最安と同額＝+0%）が InStock・qty=31・`axisName` 0個・型番 2218364、Amazon B0DMVCXD39 が 在庫あり・¥10,349・メーカー型番 2218364・カラー グリーン で**両モールの型番と色が一致**。**この枠は見出しが「予算1万円前後」なのに旧カードが ¥2,970 で価格帯と食い違っていたので、差し替えで帯も是正した**（同じ帯の第6位 OneTigris ¥9,559 と並ぶ）。記事の「複数灯あっても困らない」「2wayで懐中電灯としても使え」という論旨は、4枚の発光パネルが取り外せてフラッシュライトになる構造でそのまま成立する |
+| 第2位 ラドウェザー 防寒手袋（`gift-gloves`） | `asin_mismatch` | `amazonAsin` B09MQ8PWMJ（M・dp は B09MQ8Z9XC へ `redirected_to`） → **B09MQ9YC1N**（S・ブラック） | dp を2本実取得し、変種一覧が **S=B09MQ9YC1N／M=B09MQ8PWMJ／L=B09MQ8Z9XC／XL=B09MQ94NLX の4件に戻っている**ことを確認。台帳の推奨は着地先の L だったが、楽天 `vanilla-vague/ladgloves009` の**既定SKU が `01bk-s/Sサイズ`（qty=937・¥1,480）**なので、CLAUDE.md 31 ②（色・サイズは着地時既定に固定）に従い S を採った。B09MQ9YC1N は 在庫あり・メーカー型番 ladgloves009・販売元 LAD WEATHER（ブランド直営）／出荷元 Amazon・redirect なし。`name`／`price`／本文／店舗は不変（§11-8） |
+| 第1位 スノーピーク チタンシェラカップ E-104（`gift-sierra-cup`） | （起票なし・同記事の実測で発見） | 採用店 `snowpeak-official/e-104`（**全SKU soldout**） → **`himaraya/0003104001011`**（¥2,508・qty=191・★4.84/194件）／`rakutenRating` 4.7 → **4.84**・`rakutenReviewCount` 37 → **194**・本文「レビュー評価4.7」→「4.84」・`image` を新店のキャビネットURLへ | `check-card-name-vs-sku.cjs` の再走で `stock=soldout` を実測（**第1位カードの購入導線が死んでいた**）。段①（Snow Peak 公式）に残る在庫あり出品は別型番の **E-104-EC（オンライン限定）¥3,960** だけなので同一商品の段①は該当出品なし → §11-3 追補2 条2 で段②へ。段②（大手）の最安は複数店が同額 ¥2,508 で、§11-3 のタイブレーク②「レビュー件数が多い」により `himaraya`（194件）を採用。価格はカード `price` と同額なので価格の記述は1箇所も動かしていない。採用店が変わった回なので §11-8 追補 条文1・条文2 に従い `image` とレビュー値を新店の実測値へ揃えた |
+
+`updatedAt`（`2026-09-21`）・`date`・`thumbnail`・`badge`・比較表の他6行・frontmatter `description`・`## 贈るときのTips`・`## よくある質問`（5問）・まとめ表は不変更。まとめ表の「1万円前後｜LEDランタン・ダウンブランケット」は差し替え後も成立する。旧商品の痕跡は `Soomloom`／`Helio5000`／`2,970`／`1,905`／`B0FKT4CV7Z`／`yiprefer`／`snowpeak-official` すべて **0件**。
+
+### camp-grill-plate
+
+| 位置 | issue_type | 旧 → 新 | 理由 |
+|---|---|---|---|
+| 第2位 キャプテンスタッグ ラウンドグリルプレート 30cm UG-1592（`grill-captainstag`） | `out_of_stock` | 採用店 `tuhan-ya-2/1986417`（通販奉行・**soldout**） → **`naturum-outdoor/9947696`**（ナチュラム キャンプ専門店・¥3,581・qty=5）／`price` 3,958 → **3,581**／見出しの店名・`name` の【送料無料】削除／比較表 ¥3,958 → ¥3,581 | 楽天を再取得し `OutOfStock` を再確認。UG-1592 は在庫あり出品が多数あるので**商品は差し替えず採用店を付け替えた**。段①はクエリ「キャプテンスタッグ 公式 UG-1592」が **0件**＝該当出品なしのため §11-3 追補2 条2 で +20% 判定を掛けず段②へ。母数最安 ¥3,580 に対し段② 大手の最安 `naturum-outdoor` ¥3,581 は **+0.03%** で +20% 以内なので段②を採用（`axisName` 0個・メーカー品番 UG-1592）。価格乖離 −9.5% が ±3% を超えるため `price`・比較表を実勢へ。新店はレビュー0件なので §11-8 追補 条文2 に従い `rakutenRating`／`rakutenReviewCount` を削除し、`image` も新店のキャビネットURLへ付け替えた（HTTP 200 を実取得で確認） |
+| 同上 | — | 比較表の素材「鉄」→ **「アルミ（ふっ素加工）」**／カード `description` と本文に公表スペックを追記 | 楽天の材質欄が「本体：アルミニウム合金（表面加工＝ふっ素樹脂塗膜加工）、はり底：ステンレス鋼」、Amazon の title も「アルミ製 ふっ素加工」で、**比較表の「鉄」は実物と食い違っていた**ので是正。本文に「幅360×奥行300×高さ30mm・重量530g・本体はアルミニウム合金（表面はふっ素樹脂塗膜加工）／はり底はステンレス鋼」を公表値として明記 |
+| 第5位 笑's B-GO 3点セット（`grill-shos-bgo`） | `price_unconfirmed` | `price` 11,000 → **14,190**／比較表 ¥11,000 → ¥14,190／まとめ表 11,000円台 → **14,000円台**／frontmatter `description`「実勢2,310〜11,000円」→「実勢2,310〜14,190円」 | 楽天 `heimat-berg/10005816` を再取得し 選択SKU `18922/ONE/ONE` の現価 ¥14,190（qty=19）を再確認（+29.0%）。店舗は不変なのでレビュー値・`image` は据え置き（§11-8）。FAQ の「2,000〜4,000円台でも実用的なモデルは多い」は変更後の分布でも成立するので不変 |
+| 第4位 Bush Craft 焚き火グリルプレート Sx（`grill-bushcraft`） | （台帳の `verdict` 更新のみ・mdx 不変更） | `amazon-asin-check.tsv` の `verdict` `out_of_stock`（`no_buybox`・2026-09-21） → **`ok`** | dp を再取得したら**購入ボックスが復活**していた（在庫あり・¥2,398・`unqualifiedBuyBox` 0・`outOfStockBuyBox` 0・販売元 Victoria L-Breath＝`marketplace`）。記事側は1バイトも変えていない |
+
+`updatedAt`（`2026-05-26`）・`date`・`thumbnail`・第1位/第3位/第4位のカードと比較表行・`## お手入れ・使い方Tips`・`## よくある質問`（5問）は不変更。旧商品・旧店舗の痕跡は `tuhan-ya-2`／`1986417`／`3,958`／`通販奉行`／`【送料無料】`／`11,000` すべて **0件**。
+
+---
+
 ## 2026-10-26 取りこぼし解消（campkit-20261026-M01）
 
 `_file/article-fix-backlog.tsv` の `asin_mismatch` 行を2記事ぶん（3カード）解消し、同じ記事の `price_unconfirmed` 2行も同時に閉じた。対象記事は、取りこぼし記事の GSC 28日クリック（`data-campkit-gsc-page-28d-20261013.tsv`）が残り全記事0のため POLICY どおり slug 順の先頭2本（camp-chair-lightweight・camp-fan-summer）。着手時 HEAD `3784193` で他タスクとの衝突なし。
