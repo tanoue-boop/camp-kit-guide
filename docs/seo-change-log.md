@@ -4,6 +4,37 @@
 
 ---
 
+## 2026-10-26 取りこぼし解消（campkit-20261026-M01）
+
+`_file/article-fix-backlog.tsv` の `asin_mismatch` 行を2記事ぶん（3カード）解消し、同じ記事の `price_unconfirmed` 2行も同時に閉じた。対象記事は、取りこぼし記事の GSC 28日クリック（`data-campkit-gsc-page-28d-20261013.tsv`）が残り全記事0のため POLICY どおり slug 順の先頭2本（camp-chair-lightweight・camp-fan-summer）。着手時 HEAD `3784193` で他タスクとの衝突なし。
+
+### camp-chair-lightweight
+
+| 位置 | issue_type | 旧 → 新 | 理由 |
+|---|---|---|---|
+| 第1位 YMBSTORE NAZEAM LOW（`ymbstore-ultralight-chair`） | `asin_mismatch` | `amazonAsin` B08L4LCF56（失効・`redirected_to=B0B4S7N65F`＝トープ（ハイバック）¥4,980） → **B0BKZSBWP9**／カード `name` の色 ニューコヨーテ → **リアルツリー** | B0BKZSBWP9 の dp は 色=リアルツリー・サイズ=54.5×61×28cm・重量=1kg・同梱=収納袋・¥3,980・販売元 YMBSTORE・残り7点 で、楽天 `ymbstore/outdoor-chair` の仕様表「NAZEAM LOW／座面 横54.5cm 縦61cm・座面までの高さ28cm・収納時 横34.5/縦13/マチ8cm／重さ1.0kg（ケース含む）」と寸法・重量・付属が一致＝**LOW タイプ本体**（ハイバックは 55×105cm・座面高45cm・1.3kg・¥4,980 で別物）。Amazon の LOW 変種は リアルツリー のみ（変種一覧 B0BKZSBWP9=リアルツリー／B0HMRFGNMX=ツバ付キャップ4個）なので、記事の「ロータイプ」を保つために色を寄せた。台帳 `campkit-20260921-52` の「候補 ASIN なし」は、検索語を `YMB STORE NAZEAM LOW` から `YMBSTORE アウトドアチェア ロータイプ 超軽量` に変えた再探索で覆った |
+| 第4位 Moon Lence CH-7 ブラック（`moon-lence-ch7`） | `asin_mismatch` | `amazonAsin` B0788F6Z6Z（オレンジ変種） → **B0C3QN6G8S** | 台帳の候補を dp で照合。親 B0HFWSD8FG の変種一覧で B0C3QN6G8S=「ブラック/1」・¥3,399・販売元/出荷元ともに Amazon.co.jp・在庫あり。楽天 `airkey/2017jpchair`（MOON LENCE公式 楽天市場店）の ブラック SKU 59 ¥3,799 qty=10 と色・単品構成が一致（カード `price` と同額）。「沈み込み防止・ブラック」B0C3QPQMM4 は別仕様なので採らない |
+| 第5位 山善 ディレクターチェア DD-02WT（`yamazen-director-dd02wt`） | （起票なし・同記事の実測で発見） | `price` 5,800 → **5,990**／冒頭の一覧表・比較表 ¥5,800 → ¥5,990 | `check-card-name-vs-sku.cjs` が `price_mismatch` を返した（選択SKU `T4P22/1脚/チャコールグレー`・qty=496・現価 ¥5,990）。+3.3% で ±3% の外なので記事側を実勢に合わせた。本文・まとめはこの価格に触れていないため波及なし |
+
+`updatedAt`（`2026-06-29`）・`date`・`thumbnail`・`image`・レビュー値は不変更。第2位・第3位（ポンコタン）は台帳に `out_of_stock` 起票は無いが、2026-10-20 時点の `card-name-check.tsv` では `soldout(others:N)` だったので再取得したところ**両方とも在庫が戻っていた**（#2 qty=9・#3 qty=24）ので起票はしていない。
+
+### camp-fan-summer
+
+| 位置 | issue_type | 旧 → 新 | 理由 |
+|---|---|---|---|
+| 第2位 hagoogi 扇風機（`fan-hagoogi`） | `asin_mismatch` | `amazonAsin` B0BYYTZHNL（型番 OT-F12OG／品番 OT-F12BZ・ブロンズ・最大35h・同梱に収納ケースなし・販売元 SUBODI ¥5,421） → **B0DZ29355C**／カード `name` に **オリーブグリーン** を追記 | B0DZ29355C は dp の「商品のハイライト=1台5役【卓上・吊り下げ・スタンド式・壁掛け・挿入式】 10000mAh リモコン付き 専用収納ケース付き LEDライト…」「付属品=リモコン, 専用収納ケース」・販売元 HAGOOGI 直営店-TJC・¥6,990・在庫あり・★4.2(1,145)。変種は B0CY1XSQ77=ブロンズ／B0DZ29355C=オリーブグリーン の2色で、兄弟変種 B0CY1XSQ77 の「品番・型番=OT-F12-BZ」から**楽天と同一モデル OT-F12** と確定（旧 B0BYYTZHNL の dp 自身が `newerVersionFeature` で B0CY1XSQ77 を案内していた）。楽天は `campkit-20260924-98` が `hagoogi/ot-f13`（404） → `hagoogi/ot-f12-01`（itemNumber=OT-F12・¥8,980・Hagoogi公式 楽天市場店）へ付け替え済みで、その既定SKU＝色軸の先頭値 `456/オリーブグリーン`（qty=115）と色を揃えた |
+| 同上 | — | 比較表 ¥15,980 → **¥8,980**／まとめ表 15,000円台 → **8,000円台**／`rakutenRating` 4.62 → **4.63**・`rakutenReviewCount` 885 → **1,801**・本文「885件のレビューで評価4.62」→「1,801件のレビューで評価4.63」 | 2026-09-24 の店舗付け替え（`price` 15,980→8,980）で**比較表・まとめ表・レビュー値だけが旧 `ot-f13` のまま取り残されていた**。採用店が変わった回なので `docs/判定基準.md` §11-8 追補 条文2・条文3（`campkit-20261025-03`）に従い、今回の実取得値（楽天 `ratingValue` 4.63・レビュー 1,801件）へ揃えた |
+| 第4位 PSE認証 アウトドア扇風機（`fan-pse`） | `price_unconfirmed` | `price` 7,780 → **5,480**／本文「7,780円で」→「5,480円で」／比較表 ¥7,780 → ¥5,480／まとめ表 7,000円台 → 5,000円台／`name` に **グリーン** を追記 | 楽天 `variety-world/electric-fan` を再取得し全3色 ¥5,480 を再確認（乖離 −29.6% は `campkit-20260921-84` の計測どおり不変）。あわせて既定SKU `electric-fan1/ブラック` が **qty=0** だったので、CLAUDE.md 31 ②後段・32 §B(1) に従い同価格・qty=124 の `electric-fan2/グリーン` を名指し（カード `image` も `main-green.jpg` でグリーン・記事本文は色を名指ししていない） |
+| 第5位 marz サーキュレーター扇風機（`fan-marz`） | `price_unconfirmed` | `price` 6,480 → **7,980**／カード `description`・本文の「6,480円と手頃」→「7,980円」／比較表 ¥6,480 → ¥7,980／まとめ表 6,000円台 → 7,000円台 | 楽天 `marz-shop/independencefan001` を再取得し、選択SKU `independencefan002-bk`（ブラック／ラッピングなし／ヤマト）の現価 ¥7,980・qty=8 を再確認（ホワイトは全SKU qty=0 のまま）。値上がり方向なので「手頃」という評価語は落とし、価格を事実として書くだけにした |
+
+frontmatter `description` の「5,478円〜の人気モデル」は、5枚の `price` の最小が `fan-soppy` ¥5,478 のままなので不変。`## よくある質問`（「5,000〜7,000円台でも…1万円以上のモデルは…」）・`## 扇風機を使った夏キャンプの暑さ対策Tips` を実測し、旧価格・旧商品固有のスペックへの言及は**0件**で変更不要。`updatedAt`（`2026-06-29`）・`date`・`thumbnail`・`image`・`affiliateUrl` は不変更。
+
+### 検査
+
+5カードすべて `check-card-name-vs-sku.cjs` が `flags=OK`、`check-amazon-asin.cjs` の `verdict` は3枚とも `ok`（`price_gap` 0%／−11%／−22%・`seller_type` official／amazon／official）。`check-affiliate-links.cjs --all` は PASS（273ファイル）。取りこぼしは **35記事（58行） → 33記事（55行）**。
+
+---
+
 ## 2026-10-25 air-frame-tent の空気注入式の不整合を是正（campkit-20261025-01）
 
 `air-frame-tent`（「エアーテント（エアフレームテント）おすすめ5選」）は、タイトルと本文で「ポール不要・空気注入式」をうたいながら、**5枚のうち4枚がポール式**だった。コールマンの「エアー」は空気循環（ベンチレーション）、スノーピークの「Pro.air」は軽量生地シリーズの名称で、どちらも空気注入式ではない。購入導線は4枚とも生きていたので売上の取りこぼしではなく、**記事が読者に誤った説明をしている品質の案件**。`article-fix-backlog.tsv` の `product_swap` 4行（第1・2・4・5位・priority A）を4枚とも差し替えて解消した。真に空気注入式だった第3位 TOMOUNT は不変更。
