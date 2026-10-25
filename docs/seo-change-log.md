@@ -4,6 +4,29 @@
 
 ---
 
+## 2026-10-26 取りこぼし解消（campkit-20261026-M04）
+
+`_file/article-fix-backlog.tsv` の取りこぼし行（`out_of_stock`）を2記事ぶん（2行）解消した。対象記事は、取りこぼし記事の GSC 28日クリック（`data-campkit-gsc-page-28d-20261013.tsv`）が残り全記事0のため POLICY どおり slug 順の先頭2本（coleman-tent・coleman-two-burner。本日 M01〜M03 で使った camp-chair-lightweight・camp-fan-summer・camp-gift・camp-grill-plate・captain-stag-chair・coleman-bonfire を除く）。着手時 HEAD `76883fa` で他タスクとの衝突なし。
+
+### coleman-tent
+
+| 位置 | issue_type | 旧 → 新 | 理由 |
+|---|---|---|---|
+| 第2位 コールマン ツーリングドームST 2000038141（`coleman-touring-dome-st`） | `out_of_stock` | 採用店 `alpen/7005103511`（アルペン・**選択SKU soldout 継続**） → **`victoria-online/107688202011`（Victoria Surf＆Snow 楽天市場支店・¥15,720・qty=122・InStock）**／`rakutenRating`・`rakutenReviewCount` を削除・比較表 `eval` ★4.6（90件）→ **評価準備中**／`badge` ソロ定番・レビュー90件 → **ソロ定番・前室付き**／`image` を採用店の `og:image` へ | 検出器で `alpen` を再取得し `stock=soldout` を再確認。同一品 2000038141 は在庫あり出品が多数あるので**商品は差し替えず採用店を付け替えた**。段①（メーカー公式店）は専用クエリ「コールマン公式 2000038141」が **0件**＝該当出品なしのため +20% 判定を掛けず段②へ（§11-3 追補2 条文2）。母数（同一品・単品・新品・`availability=1`）の最安 **¥15,720** は段②最安と一致（+0%）、同額3店のタイブレークはレビュー件数（victoria-online 3件 > sports-bazaar 1件 > supersportsxebio 0件）。`price` 15,730 は現価 15,720 と **−0.06%＝±3%以内なので据え置き**（§11-8）。新店はレビュー3件（5件未満）なので §11-8 追補 条文2 に従い評価2属性を削除し、本文の「レビュー90件と実績も豊富です」を採用店の公表値（インナーテント約210×120×100(h)cm・収納時約φ19×49cm・重量4kg・耐水圧約1500mm・横幅210cm）に置き換えた。`amazonAsin` B08P5811G7（`verdict=ok`）は不変 |
+| 第1位 コールマン BCクロスドーム/270 2000038429（`coleman-bc-crossdome`） | 既存 `discontinued_404`（`done`）へ追記 | 採用店 `himaraya/0000000972452`（**今回の実取得で soldout**） → **`naturum/2566580`（ナチュラム 楽天市場支店・¥23,250・qty=10・InStock）**／`price` 22,708 → **23,250**／比較表 `price` 19,980 → **23,250**・`affiliateUrl` を **HTTP404 の `lbreath/107688211011` から**新URLへ・`eval` ★4.64（14件）→ **評価準備中**／本文・まとめ表 19,980円 → **23,250円**／`image` を**死んだ lbreath のキャビネットURL**から採用店の `og:image` へ | 対象行ではないが**購入導線が死んでいた**（楽天 soldout・比較表リンクは 404）ため同時に解消した。段①は専用クエリ 0件＝該当出品なし→段②へ。母数最安 ¥23,250 ＝段②最安（+0%）、タイブレークはレビュー件数（naturum 17件 > naturum-outdoor 2件）。凍結期（2026-09-24）に `price` だけを更新したため記事内に**3つの価格が併存**（カード22,708／比較表19,980／本文・まとめ表19,980）していた不整合も、全箇所を採用店の現価 ¥23,250 に揃えて解消。レビュー17件（30件未満）なので §12-5-10 条文5 に従い評価2属性を削除し、本文の「レビュー★4.64と高評価」を公表値（使用サイズ約270×270×175(h)cm・収納時約直径25×75cm・重量10kg・定員4〜5人用・耐水圧約1500mm・キャノピーポール／ペグ／ロープ／ハンマー／キャリーバッグ付属）に置き換えた。`amazonAsin` B08QS2P24F（`verdict=ok`）は不変 |
+
+同記事で第3位 ポップアップシェード ダークルーム（`coleman-popup-shade`）の `price_unconfirmed` を **新規起票**した（カード ¥16,749 → 実勢 ¥17,620・+5.2%・在庫 qty=29 で導線は生存）。第4位 クイックアップシェードは 8,900 → 8,999（+1.1%・±3%以内）で起票不要。
+
+### coleman-two-burner
+
+| 位置 | issue_type | 旧 → 新 | 理由 |
+|---|---|---|---|
+| 第4位（台帳の `position` は第5位） Coleman パワーハウス LPツーバーナーストーブII（`cb-coleman-powerhouse2`） | `out_of_stock` | 採用店 `store-megasports/30602403`（メガスポーツ・**選択SKU soldout 継続**） → **`himaraya/0000000322553`（ヒマラヤ楽天市場店・¥13,140・qty=5・InStock・★4.35/40件）**／`price` 11,858 → **13,140**／`rakutenRating` 4.65 → **4.35**・`rakutenReviewCount` 20 → **40**／`badge` 最安・高評価★4.65 → **★4.35**／比較表 ★4.65（20件）・¥11,858 → **★4.35（40件）・¥13,140**／frontmatter `description`・はじめにの価格帯・本文・FAQ Q4／Q5・まとめ表（¥11,000台 → **¥13,000台**）も実勢へ／`image` を採用店の `og:image` へ | 検出器で `store-megasports` を再取得し `stock=soldout` を再確認。同一品（メーカー型番 2000006707）の在庫あり出品は多数あるので**商品は差し替えず採用店を付け替えた**。段①は専用クエリ「コールマン公式 2000006707」0件＝該当出品なし→段②へ。母数最安は `rugia/rg76249a928e` ¥11,834（★0/0・段③）で、**段②最安 ヒマラヤ ¥13,140 は +11.05%＝+20% 以内**なので §11-3 追補どおり段②を採用（わずかな差額で無レビューの個人店へ落とさない）。価格乖離 +10.8% が ±3% を超えるため価格記述を7箇所そろえた。**¥13,140 < 第2位バターナッツ ¥13,970** なので「最安」の名乗りは維持できる。レビュー40件（30件以上）なので評価2属性は新店の実測値に更新。本文に採用店の公表値（最高時約7,000kcal/h＝約3,500kcal/h×2・使用時約64×32.5×52(h)cm・収納時約54×32.5×7(h)cm・約4.2kg）を追記。`amazonAsin` B004IWR3Z6 は dp 実取得で title の 2000006707 が楽天メーカー型番と一致・販売元 Amazon.co.jp・在庫あり・購入ボックス生存を確認し §12-5-8 により `verdict` を `unverifiable` → **`ok`** に人手確定 |
+
+両記事とも `updatedAt`（coleman-tent `2026-09-21`／coleman-two-burner `2026-10-14`）・`date`・`thumbnail`・`title`・`category`・`tags`・カード `id`／`rank`／`source`／`amazonAsin`、および対象外カード（coleman-tent 第3位・第4位、coleman-two-burner 第1位・第2位・第3位・関連アイテム）は不変更。旧店舗・旧価格の痕跡は `lbreath`／`7005103511`／`107688211011`／`19,980`／`22708`／`4.64`／`90件`／`30602403`／`11,858`／`4.65` すべて **0件**（coleman-tent の `alpen` 10件は在庫ありのまま据え置いた第3位・第4位のぶん）。
+
+---
+
 ## 2026-10-26 取りこぼし解消（campkit-20261026-M03）
 
 `_file/article-fix-backlog.tsv` の取りこぼし行（`out_of_stock`／`asin_mismatch`）を2記事ぶん（2行）解消した。対象記事は、取りこぼし記事の GSC 28日クリック（`data-campkit-gsc-page-28d-20261013.tsv`）が残り全記事0のため POLICY どおり slug 順の先頭2本（captain-stag-chair・coleman-bonfire。本日 M01・M02 で使った camp-chair-lightweight・camp-fan-summer・camp-gift・camp-grill-plate を除く）。着手時 HEAD `34b10a8` で他タスクとの衝突なし。
