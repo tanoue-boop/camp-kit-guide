@@ -4,6 +4,27 @@
 
 ---
 
+## 2026-10-26 取りこぼし解消（campkit-20261026-M03）
+
+`_file/article-fix-backlog.tsv` の取りこぼし行（`out_of_stock`／`asin_mismatch`）を2記事ぶん（2行）解消した。対象記事は、取りこぼし記事の GSC 28日クリック（`data-campkit-gsc-page-28d-20261013.tsv`）が残り全記事0のため POLICY どおり slug 順の先頭2本（captain-stag-chair・coleman-bonfire。本日 M01・M02 で使った camp-chair-lightweight・camp-fan-summer・camp-gift・camp-grill-plate を除く）。着手時 HEAD `34b10a8` で他タスクとの衝突なし。
+
+### coleman-bonfire
+
+| 位置 | issue_type | 旧 → 新 | 理由 |
+|---|---|---|---|
+| 第2位 コールマン ファイアーディスク ソロ 2000037404（`coleman-firedisk-solo`） | `out_of_stock` | 採用店 `alpen/7422105501`（アルペン・**全変種 soldout**） → **`coleman/col1166`（コールマン公式 楽天市場店・¥5,390・qty=1・InStock）**／`price` 4,480 → **5,390**／比較表 ¥4,480 → ¥5,390・`eval` ★4.64（25件）→ **評価準備中**／まとめ表 4,480円台 → **5,390円台**／`image` を公式店の `og:image` へ | 検出器で `alpen` を再取得し `stock=soldout` を再確認。同一品 2000037404 は在庫あり出品が多数あるので**商品は差し替えず採用店を付け替えた**。母数（同一品・単品・`availability=1`）の最安は `shomarket/sh07f9e1da00` ¥4,947 で、**段①（メーカー公式店）`coleman/col1166` ¥5,390 は +8.95%＝+20% 以内**なので §11-2 の段①を採用（§11-3 を飛ばす必要がない）。item ページ実取得で `InStock`・`axisName` 0個・`attributes` ブランド名 コールマン／メーカー型番 2000037404／代表カラー シルバー・`itemprop price` 5390 を確認。価格乖離 +20.3% が ±3% を超えるため価格の記述4箇所を実勢へ。新店はレビュー **0件**なので §11-8 追補 条文2 に従い `rakutenRating`／`rakutenReviewCount` を削除し比較表 `eval` を「評価準備中」に。本文の「レビュー★4.64・25件と評価も安定」は旧店の集計なので落とし、公式店ページの公表値（使用サイズ約Φ30×16cm・収納サイズ約Φ32×10cm・本体重量約620g／焼き網込み約900g・耐荷重約25kg・焼き網と収納ケース付属）に置き換えた。`amazonAsin` B08P58X27Z（`verdict=ok`・Amazon 在庫あり）は不変 |
+
+`updatedAt`（`2026-10-13`）・`date`・`thumbnail`・`badge`・第1位/第4位/第5位のカードと比較表行・frontmatter `description`（実勢3,026〜16,419円は ¥5,390 が内側）・`## お手入れ・活用Tips`・`## よくある質問`（5問）は不変更。旧店舗・旧価格の痕跡は `alpen`／`7422105501`／`4,480`／`4.64`／`25件` すべて **0件**。
+
+### captain-stag-chair
+
+| 位置 | issue_type | 旧 → 新 | 理由 |
+|---|---|---|---|
+| 第3位 （`cs-lounge-green`） | `asin_mismatch` | **mdx は不変更**（台帳行のみ `done`） | 起票時（2026-09-22）の案件は「UC-1676 CS ラウンジチェア グリーン 単品の ASIN が無い」だったが、当該カードは既に **50周年限定 棚モック付リラックスラウンジチェア ブラック UC-1712**（楽天 `captainstagstore/4560464301632`・`amazonAsin` B0GRGQ8L86）へ差し替わっており、不一致は解消済みだった。楽天は `flags=OK`・maker_model UC-1712・qty=27・価格一致、Amazon dp を実取得して **t-メーカー型番 UC-1712・t-カラー ブラック・幅820×奥行530×高さ790mm・2.4kg・耐荷重80kg・単一変種・在庫あり・¥2,974（gap 0%）・販売元 Amazon.co.jp・redirect なし**を確認した |
+
+同記事で `price_unconfirmed` を2件 **新規起票**した（第1位 UC-1826 ¥2,844 → 実勢 ¥3,028／第4位 UC-1647 ¥6,460 → 実勢 ¥6,768）。第1位は価格を直すと第3位（¥2,970）が最安になり「最安」の名乗り（見出し・`badge`・本文・まとめ表・frontmatter `description`）が崩れるため、記事の構成に及ぶ判断を含む案件として起票に留めた。
+---
+
 ## 2026-10-26 取りこぼし解消（campkit-20261026-M02）
 
 `_file/article-fix-backlog.tsv` の取りこぼし行（`out_of_stock`／`asin_mismatch`）を2記事ぶん（3行）解消し、同じ記事の `price_unconfirmed` 1行も同時に閉じた。対象記事は、取りこぼし記事の GSC 28日クリック（`data-campkit-gsc-page-28d-20261013.tsv`）が残り全記事0のため POLICY どおり slug 順の先頭2本（camp-gift・camp-grill-plate。本日 M01 で使った camp-chair-lightweight・camp-fan-summer を除く）。着手時 HEAD `ddab945` で他タスクとの衝突なし。
