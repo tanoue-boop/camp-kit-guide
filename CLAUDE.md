@@ -220,7 +220,26 @@ OK: 「**充電を忘れても電池を買えばすぐ復帰できる**」とい
 
 - `columns` と `rows` は**シングルクォートで囲んだJSON文字列**
 - `name` キーは必須（第1列に表示）
-- `price` / `rating` / `source` キーは特殊レンダリングあり。数値として扱われるため、価格は `"価格"` などの別キーを使うこと
+- `price` / `rating` / `source` / `buy` キーは特殊レンダリングあり。数値として扱われるため、価格は `"価格"` などの別キーを使うこと
+- ⚠️ **購入列は `{"key":"buy","label":"購入"}` を使う（2026-10-27 追加・campkit-20261027-C01）**。行の `affiliateUrl`（楽天 hb.afl）と `amazonAsin` から**1行に楽天・Amazon の2ボタン**を描く。旧 `{"key":"source"}` は `source` の値で「楽天」か「Amazon」の**どちらか1本**しか出せず、`source` と `affiliateUrl` が食い違うと「Amazon と書いて楽天へ飛ぶ」事故になる（osprey-daily-backpack で実在した）。**新規・改修では `buy` を使い、`source` 列は新しく書かない。**
+  - 行に入れる `affiliateUrl`・`amazonAsin` は**必ず同じ記事の該当 `ProductCardMdx` と同じ値**にする（手打ちせずカードから写す）
+  - `verify-deploy.cjs` は購入列（`source`／`buy`）を持つ表について「本番の比較表 hb.afl リンク数＝mdx の期待数」と「全行が空でない `affiliateUrl` を持つ」を検査する。**対応カードが無い行がある表（＝リンクを作れない行がある表）には購入列を足さない**（検査2 で落ちる。例: mountain-camp-lantern の軽量ランキング比較表）
+
+#### QuickPickMdx（「迷ったらこれ」ボックス／2026-10-27 追加・campkit-20261027-C01）
+
+```mdx
+<QuickPickMdx
+  lead='5モデルを比べた結論です。'
+  items='[{"label":"まず1本","name":"ブランド 商品名","spec":"20L／0.59kg／12,760円","reason":"選ぶ理由を1行","anchor":"card-id","affiliateUrl":"https://hb.afl.rakuten.co.jp/...","amazonAsin":"B0XXXXXXXX"}]'
+/>
+```
+
+- **記事冒頭の結論（結論の節が無ければリード文）の直後**に置く送客導線。本文を読み進めなくても購入ボタンに届くようにするのが目的
+- `items` は**シングルクォートで囲んだJSON文字列**（`ComparisonTableMdx` と同じ約束）。1〜3商品
+- 商品は**その記事の既存 `ProductCardMdx` から選ぶ**。`affiliateUrl`・`amazonAsin` はそのカードと同じ値、`anchor` はカードの `id`（詳細へ飛ばす）
+- `spec` は記事内に既にある公表値（重量・容量・温度・価格など）だけを書く。**ここで新しい価格・在庫を断定しない**
+- `title` 省略時は「迷ったらこれ」。h2/h3 は使わないので目次（TOC）には出ない＝既存の見出し構成を変えない
+- ボタンのクラス名は `ProductCard` と衝突させていないので、`verify-deploy.cjs` のカードのボタン枚数・href 照合には影響しない（ボックスのボタンは期待値に数えない）。クリック計測は `AffiliateClickTracker` が自動で拾う
 
 ---
 

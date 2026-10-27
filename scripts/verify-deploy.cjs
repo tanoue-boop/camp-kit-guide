@@ -62,9 +62,13 @@
  *      ★旧実装の穴: カード（ProductCardMdx）しか合否に使っておらず、比較表の行は 1 行も見ていなかった
  *      （rakutenTableHb は数えていたが「合否対象外」と明記して捨てていた）。そのため「カードの href を
  *      1 文字も変えず比較表だけを変える回」は、本番が旧キャッシュのままでも PASS した。
- *      - 検査1（回帰検知）: columns に {"key":"source"} を含む比較表ブロックの行のうち affiliateUrl が
- *        hb.afl で始まる本数（mdx 由来の期待値）と、本番の比較表リンク（<a class="…ComparisonTable…__link">の
- *        hb.afl）の本数が【一致】すること。期待 0 は実測 0 で PASS。
+ *      - 検査1（回帰検知）: columns に {"key":"source"} または {"key":"buy"} を含む比較表ブロックの行のうち
+ *        affiliateUrl が hb.afl で始まる本数（mdx 由来の期待値）と、本番の比較表リンク
+ *        （<a class="…ComparisonTable…__link">の hb.afl）の本数が【一致】すること。期待 0 は実測 0 で PASS。
+ *        ・2026-10-27（campkit-20261027-C01）に購入列 {"key":"buy"} を追加した。buy 列は 1 行から
+ *          楽天（hb.afl・class に __link を含む）と Amazon（amazonAsin から組む dp URL）の 2 本を描く。
+ *          楽天ボタンは source 列と同じ __link クラスなので実測側の数え方は変えず、期待側だけ
+ *          「リンクを描く列（source / buy）の数 × hb.afl 行数」にした（両方を持つブロックは 1 行 2 本になる）。
  *        ・比較表の行の affiliateUrl は全てが楽天とは限らない（charcoal-starter の 5 行は Amazon の dp URL）。
  *          したがって「行数＝hb.afl 数」ではなく「hb.afl で始まる行数＝hb.afl 数」で見る。
  *        ・ComparisonTable がリンクを描くのは source 列のセルだけなので、source 列を持つブロックが
@@ -209,7 +213,7 @@ function parseLocal(src) {
 
 // 比較表（ComparisonTableMdx）から購入先リンクの期待値を算出する（campkit-20261006-01）。
 //   tableBlocks               : 比較表ブロックの総数（参考値）
-//   tableSourceBlocks         : columns に {"key":"source"} を含むブロック数。0 なら検査1・検査2 の対象外
+//   tableSourceBlocks         : 購入リンクを描く列（source / buy）を含むブロック数。0 なら検査1・検査2 の対象外
 //   tableRowsTotal            : 上記ブロックの行の総数（参考値）
 //   tableRakutenExpected      : 上記ブロックの行のうち affiliateUrl が hb.afl で始まる本数（検査1 の期待値）
 //   tableRowsWithoutAffiliate : 上記ブロックの行のうち affiliateUrl が無い／空の本数（検査2）
@@ -239,14 +243,17 @@ function parseComparisonTables(src) {
       tableParseFailed++;
       continue;
     }
-    // ComparisonTable がリンクを描くのは source 列のセルだけなので、source 列を持つブロックだけを対象にする
-    if (!cols.some((c) => c && c.key === 'source')) continue;
+    // ComparisonTable が購入リンクを描くのは source 列と buy 列のセルだけなので、
+    // そのどちらかを持つブロックだけを対象にする（campkit-20261027-C01 で buy 列を追加）。
+    // 両方を持つブロックは 1 行から hb.afl が 2 本出るので、列の数ぶん期待値を積む。
+    const linkCols = cols.filter((c) => c && (c.key === 'source' || c.key === 'buy')).length;
+    if (!linkCols) continue;
     tableSourceBlocks++;
     tableRowsTotal += rows.length;
     for (const row of rows) {
       const aff = row && typeof row.affiliateUrl === 'string' ? row.affiliateUrl : '';
       if (!aff) tableRowsWithoutAffiliate++;
-      else if (aff.startsWith(HB_AFL_PREFIX)) tableRakutenExpected++;
+      else if (aff.startsWith(HB_AFL_PREFIX)) tableRakutenExpected += linkCols;
     }
   }
   return {
@@ -699,20 +706,20 @@ async function verify(slug, deployedAt) {
   );
 
   // 3d. 比較表（ComparisonTableMdx）の購入先リンク（campkit-20261006-01・ファイル冒頭コメント 3d）
-  //   検査1: 比較表リンクの hb.afl 数が mdx 由来の期待数と一致（source 列を持つブロックが無い記事は対象外）
-  //   検査2: source 列を持つブロックの全行が空でない affiliateUrl を持つ（既知例外は免除）
+  //   検査1: 比較表リンクの hb.afl 数が mdx 由来の期待数と一致（購入列 source/buy を持つブロックが無い記事は対象外）
+  //   検査2: 購入列を持つブロックの全行が空でない affiliateUrl を持つ（既知例外は免除）
   const tableRakutenOk = judgeTableRakuten(local, links);
   const tableAff = judgeTableAffiliate(local, slug);
   const tableOk = tableRakutenOk && tableAff.ok;
   results.push(tableOk);
   console.log(
     `  ${tableOk ? 'PASS' : 'FAIL'}  比較表の購入先リンク` +
-      `  source列ブロック${local.tableSourceBlocks}/${local.tableBlocks}件・行${local.tableRowsTotal}` +
+      `  購入列(source/buy)ブロック${local.tableSourceBlocks}/${local.tableBlocks}件・行${local.tableRowsTotal}` +
       (local.tableParseFailed ? `（JSON parse失敗${local.tableParseFailed}件は母数外）` : '') +
       (local.tableSourceBlocks
         ? ` / 比較表hb.afl 期待${local.tableRakutenExpected}→実${links.rakutenTableHb}${tableRakutenOk ? '' : ' ✖不一致'}` +
           ` / 比較表affiliateUrl欠落${tableAff.missing}行${tableAff.missing === 0 ? '' : tableAff.exempt ? '（既知例外）' : ' ✖'}`
-        : ' / source列なし＝対象外')
+        : ' / 購入列なし＝対象外')
   );
 
   // 3b. Amazonタグ健全性: 空タグ / プレースホルダは成果が計上されないため FAIL
@@ -1313,6 +1320,9 @@ async function runTests() {
   // mdx 側のフィクスチャ。columns / rows はシングルクォート囲みの JSON 文字列（実記事と同じ形）。
   const TBL_COLS_SOURCE = [{ key: 'name', label: '商品名' }, { key: '価格', label: '価格' }, { key: 'source', label: '購入先' }];
   const TBL_COLS_NO_SOURCE = [{ key: 'name', label: '商品名' }, { key: '価格', label: '価格' }];
+  // 購入列 buy（campkit-20261027-C01）。1 行から楽天（hb.afl・__link クラス）と Amazon を描く
+  const TBL_COLS_BUY = [{ key: 'name', label: '商品名' }, { key: '価格', label: '価格' }, { key: 'buy', label: '購入' }];
+  const TBL_COLS_SOURCE_AND_BUY = [...TBL_COLS_SOURCE, { key: 'buy', label: '購入' }];
   // mode: 'hb'（楽天 hb.afl）／'amazon'（Amazon dp・charcoal-starter 型）／'none'（affiliateUrl キーなし）
   const tblRows = (n, mode) =>
     Array.from({ length: n }, (_, i) => {
@@ -1408,6 +1418,24 @@ async function runTests() {
     eq(und.length, 1); eq(und[0].needle, '>undefined<');
     // 裸の undefined（__NEXT_DATA__ 等）は数えない／null・Infinity は検査語にしない
     eq(findForbiddenText('{"a":"undefined","b":null,"c":"Infinity"}').length, 0);
+  });
+  t('F-11 比較表: 購入列 buy あり・全行 hb.afl 5行 → 期待5・実5 で PASS（source列と同じ扱い）', () => {
+    const local = parseLocal(buildMdxTables([buildTableBlock(TBL_COLS_BUY, tblRows(5, 'hb'))]));
+    eq(local.tableBlocks, 1); eq(local.tableSourceBlocks, 1, 'buy 列も購入列として対象にする');
+    eq(local.tableRowsTotal, 5); eq(local.tableRakutenExpected, 5); eq(local.tableRowsWithoutAffiliate, 0);
+    const links = countAffiliateLinks(buildHtmlCards([], { tableRakutenLinks: 5 }));
+    eq(judgeTableRakuten(local, links), true, '検査1');
+    eq(judgeTableAffiliate(local, 'x').ok, true, '検査2');
+    // 旧HTML（buy 列が無く hb.afl が 0 本）は反映待ち＝FAIL になる
+    eq(judgeTableRakuten(local, countAffiliateLinks(buildHtmlCards([], { tableRakutenLinks: 0 }))), false);
+  });
+  t('F-12 比較表: buy列で affiliateUrl 欠落は検査2 で FAIL／source列と buy列の併存は 1行2本', () => {
+    const miss = parseLocal(buildMdxTables([buildTableBlock(TBL_COLS_BUY, tblRows(3, 'none'))]));
+    eq(miss.tableSourceBlocks, 1); eq(miss.tableRowsWithoutAffiliate, 3);
+    eq(judgeTableAffiliate(miss, 'x').ok, false);
+    const both = parseLocal(buildMdxTables([buildTableBlock(TBL_COLS_SOURCE_AND_BUY, tblRows(4, 'hb'))]));
+    eq(both.tableSourceBlocks, 1); eq(both.tableRakutenExpected, 8, 'source＋buy＝1行から hb.afl が2本');
+    eq(judgeTableRakuten(both, countAffiliateLinks(buildHtmlCards([], { tableRakutenLinks: 8 }))), true);
   });
   t('F-10 既存のカード判定は比較表の追加で不変（カード期待一致・比較表も一致で PASS）', () => {
     // mdx: カード2枚（hb.afl＋amazonAsin）＋ source 列の比較表 2 行 → カード期待2/2・比較表期待2

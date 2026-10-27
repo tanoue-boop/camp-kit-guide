@@ -109,6 +109,33 @@
 }
 .link:hover { text-decoration: underline; }
 
+/* ── 購入列（key: "buy"）: 1行から楽天・Amazon の両方へ ── */
+.buyCell {
+  display: inline-flex;
+  gap: 0.35rem;
+  white-space: nowrap;
+}
+
+.buyRakuten,
+.buyAmazon {
+  display: inline-block;
+  padding: 0.28rem 0.55rem;
+  border-radius: 5px;
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: #fff !important;
+  text-decoration: none;
+}
+
+.buyRakuten:hover,
+.buyAmazon:hover {
+  text-decoration: none;
+  filter: brightness(0.92);
+}
+
+.buyRakuten { background: #bf0000; }
+.buyAmazon  { background: #ff9900; }
+
 .check {
   display: inline-flex;
   align-items: center;

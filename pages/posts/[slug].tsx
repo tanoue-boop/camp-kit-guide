@@ -14,6 +14,7 @@ import ProductCard from "../../components/article/ProductCard";
 import ComparisonTable from "../../components/article/ComparisonTable";
 import ArticleImage from "../../components/article/ArticleImage";
 import CalloutCta from "../../components/article/CalloutCta";
+import QuickPick from "../../components/article/QuickPick";
 import Sidebar from "../../components/article/Sidebar";
 import InlineTOC from "../../components/article/InlineTOC";
 import ShareButtons from "../../components/article/ShareButtons";
@@ -143,6 +144,19 @@ function ComparisonTableMdx({ rows, columns }: { rows: string; columns?: string 
   }
 }
 
+// 「迷ったらこれ」ボックス（campkit-20261027-C01）。
+// ComparisonTableMdx と同じく、属性はシングルクォート囲みの JSON 文字列で受ける
+// （MDX v3 は JSX 式の props を黙って落とすため）。parse に失敗したら何も描かない。
+function QuickPickMdx({ items, title, lead }: { items: string; title?: string; lead?: string }) {
+  try {
+    const parsed = JSON.parse(items);
+    if (!Array.isArray(parsed)) return null;
+    return <QuickPick items={parsed} {...(title ? { title } : {})} {...(lead ? { lead } : {})} />;
+  } catch {
+    return null;
+  }
+}
+
 function CalloutCtaMdx({
   title, body, linkText, href, note, variant,
 }: {
@@ -181,6 +195,7 @@ const mdxComponents = {
   ProductCardMdx,
   ComparisonTableMdx,
   CalloutCtaMdx,
+  QuickPickMdx,
   h2: H2,
   h3: H3,
 };

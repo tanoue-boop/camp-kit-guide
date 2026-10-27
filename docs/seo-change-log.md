@@ -4,6 +4,39 @@
 
 ---
 
+## 2026-10-27 送客導線の強化：クリック上位10記事に「迷ったらこれ」ボックスと購入ボタンを追加（campkit-20261027-C01）
+
+**狙い**: 検索クリックは直近28日で949（前の28日比 +32%）に伸びているのに、アフィリエイトのクリック（Amazon 831・楽天 329）がほぼ横ばいで送客率が伸びていない。そこでクリック上位10記事の「購入ボタンまでの距離」を縮め、同じ流入でも商品ページへ進む人を増やす。**本文の流れ・見出し構成・カード内容・価格・`updatedAt` は一切変更していない（導線の追加だけ）**。
+
+**やったこと（全10記事共通）**
+
+1. 記事冒頭の結論（結論の節が無い記事はリード文）の直後に **`<QuickPickMdx>`「迷ったらこれ」ボックス（3商品）** を新設。商品は同じ記事の既存 `ProductCardMdx` から選び、**楽天ボタン（そのカードと同じ hb.afl リンク）と Amazon ボタン（同じカードの `amazonAsin` から生成）** を各商品に付けた＝1記事あたり追加ボタン6本。
+2. 比較表（`ComparisonTableMdx`）に **購入列 `{"key":"buy","label":"購入"}`** を追加し、各行に楽天・Amazon の購入ボタンを置いた。既存の `source` 列（「楽天」1本のみ）がある表はこの購入列に置き換えたので、楽天リンクは同じ href のまま Amazon ボタンが増えている。
+3. 新規部品は `components/article/QuickPick.tsx`（＋CSS Module）。`ComparisonTable.tsx` に `buy` 列、`verify-deploy.cjs` に `buy` 列の期待値計算（購入列＝`source`/`buy`）とテスト2件（F-11／F-12）を追加（`--test` 57/57 PASS）。
+
+**効果測定**: 14日後（2026-11-10）・28日後（2026-11-24）に、下表の「変更前クリック・順位」と GSC のページ別クリック＋GA4 `affiliate_click`（`article_slug` 別）を比較する。追加ボタンは `AffiliateClickTracker` のクリック委譲で自動計測され、ボックスは `data-product-name` で商品名も載る。
+
+| # | 対象記事 | 変更前 28日クリック | 変更前 平均順位 | 追加した「迷ったらこれ」の商品（3点） | 追加ボタン数 |
+|---|---|---|---|---|---|
+| 1 | `osprey-daily-backpack` | 101 | 5.1 | OSPREY デイライトプラス 20L／アーケイン ラージデイ／ULスタッフパック 18L | ボックス6本＋比較表5行×2＝16本 |
+| 2 | `camp-backpack-capacity-guide` | 71 | 7.3 | OSPREY デイライトプラス／ストラトス 36／HAWK GEAR 80L | ボックス6本（比較表コンポーネントなし） |
+| 3 | `osprey-backpack` | 49 | 8.5 | OSPREY ケストレル 38／デイライトプラス 20L／タロン 22 | ボックス6本＋比較表10行×2＝26本 |
+| 4 | `sleeping-bag-temperature-guide` | 42 | 13.7 | Bears Rock FX-403／HAWK GEAR マミー型 -15℃／ナンガ オーロラテックス 600DX | ボックス6本＋比較表5行×2＝16本 |
+| 5 | `mountain-camp-lantern` | 35 | 8.3 | Goal Zero ライトハウス マイクロ フラッシュ／キャリーザサン ミディアム／スノーピーク RBたねほおずき ES-141 | ボックス6本＋比較表5行×2＝16本 |
+| 6 | `naturehike-tent` | 27 | 6.3 | Naturehike Cloud up2 Pro／Dune7.6／ビレッジ13 | ボックス6本＋比較表5行×2＝16本 |
+| 7 | `mysteryranch-backpack` | 25 | 7.9 | カタリスト22／ギャラゲーター20／レイディックス47 | ボックス6本＋比較表4行×2＝14本 |
+| 8 | `deuter-backpack` | 24 | 7.1 | フューチュラ 32／オルチャ 25／エアコンタクト コア 60+10 | ボックス6本＋比較表10行×2＝26本 |
+| 9 | `kids-sleeping-bag` | 23 | 21.9 | ロゴス キッズスランバー・10／Bears Rock 子ぐま MX-604J／Naturehike ファミリー封筒型寝袋 | ボックス6本＋比較表9行×2＝24本 |
+| 10 | `car-camp-lighting` | 18 | 9.4 | GENTOS EX-200PB／MTK SHOP 1600ルーメン／レッドレンザー ML4 Warm | ボックス6本＋比較表5行×2＝16本 |
+
+- クリック・順位の出典は `_tasks/data-campkit-gsc-page-28d-20261013.tsv`（直近28日・ページ別）。比較表の「×2」は1行あたり楽天＋Amazon の2本。
+- 上位11位の `tent-size-beginner-guide`（18クリック・順位7.0）は `car-camp-lighting` と同クリック数で、商品カードが3枚とも容量・サイズ解説用の参考掲載である質問型の情報記事のため、タスク定義の優先順（比較・ブランド記事を優先）に従って `car-camp-lighting` を10本目に採った。
+- `mountain-camp-lantern` の「軽量ランキング比較表」（重量順・5行）だけは購入列を入れていない。1行目の 5050WORKSHOP マイクロライトは記事に商品カードが無くアフィリエイトリンクが存在せず、**新商品を足さない**制約下では全行を埋められないため（`verify-deploy.cjs` の比較表検査2は購入列を持つ表の全行に `affiliateUrl` を要求する）。同じ記事の「5製品スペック比較表」には購入列を入れた。
+- `osprey-backpack` の比較表10行は、これまで `source` 列に「楽天」の文字だけが出てリンクが無かった（`verify-deploy.cjs` の `TABLE_AFFILIATE_EXEMPT` の既知例外）。今回10行すべてに `affiliateUrl`＋`amazonAsin` を入れたので実質解消したが、例外セット自体は `--test` の F-6（免除経路のテスト）が参照しているため残してある（いまは空振りの登録）。
+- `osprey-daily-backpack` の比較表5行は `source` が `"amazon"` なのに `affiliateUrl` が楽天の hb.afl で、表示ラベル「Amazon」から楽天へ飛ぶ状態だった。購入列化に合わせて `source` を `"rakuten"` に直し、ラベルと遷移先を一致させた（href は変更なし）。
+
+---
+
 ## 2026-10-27 取りこぼし解消（campkit-20261027-M01）
 
 `_file/article-fix-backlog.tsv` の取りこぼし行（`out_of_stock`／`asin_mismatch`）を2記事ぶん（5行）解消し、同じ記事を開いたついでに `price_unconfirmed` 2行も同時に解消した（計7行）。対象記事は、取りこぼし記事の GSC 28日クリック（`data-campkit-gsc-page-28d-20261013.tsv`）が残り全記事0のため POLICY どおり slug 順で選定。先頭の cooler-box-day-camp・day-camp-cooler-box は 10/26 の `campkit-20261026-03` が「容量5〜12L × 税込6,500〜12,000円」の積集合が空で無変更 DONE にした記事なので同条件での再投入を避けて後回しにし、次の day-camp-starter-set・ecoflow-power を採用した。着手時 HEAD `948528b` で他タスクとの衝突なし。

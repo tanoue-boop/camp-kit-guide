@@ -1,5 +1,6 @@
 import type { Product } from "../../types/product";
 import styles from "./ComparisonTable.module.css";
+import { buildAmazonUrl } from "@/lib/amazon";
 
 type Column = {
   key: keyof Product | string;
@@ -20,6 +21,24 @@ const defaultColumns: Column[] = [
 
 const CHECK_VALUES = new Set(["○", "✓", "◎", "yes", "true", "✔"]);
 
+const HB_AFL_PREFIX = "https://hb.afl.rakuten.co.jp/";
+
+/**
+ * 購入列（key: "buy"）の行ごとのリンク（campkit-20261027-C01）。
+ * 既存の source 列は「楽天」か「Amazon」の1本しか出せないため、
+ * 1行から楽天・Amazon の両方へ進めるようにした購入導線。
+ * 値は行の affiliateUrl（楽天 hb.afl）と amazonAsin から組み、推測はしない。
+ */
+function resolveBuyUrls(product: Product): { rakuten: string; amazon: string } {
+  const aff = String((product as Record<string, unknown>).affiliateUrl ?? "");
+  const asin = String((product as Record<string, unknown>).amazonAsin ?? "");
+  const rakuten = aff.startsWith(HB_AFL_PREFIX) ? aff : "";
+  let amazon = asin ? buildAmazonUrl(asin) : "";
+  // charcoal-starter 型（affiliateUrl 自体が Amazon の dp URL）の行も Amazon として出す
+  if (!amazon && /^https?:\/\/(?:www\.)?amazon\.co\.jp\//.test(aff)) amazon = aff;
+  return { rakuten, amazon };
+}
+
 function renderCell(col: Column, product: Product, isFirst: boolean) {
   const val = (product as Record<string, unknown>)[col.key];
   const strVal = String(val ?? "");
@@ -39,6 +58,39 @@ function renderCell(col: Column, product: Product, isFirst: boolean) {
     return (
       <td key={col.key} className={`${styles.td} ${isFirst ? styles.tdFirst : ""}`}>
         {hasRating ? <span className={styles.rating}>★ {num.toFixed(1)}</span> : <span>—</span>}
+      </td>
+    );
+  }
+  if (col.key === "buy") {
+    const { rakuten, amazon } = resolveBuyUrls(product);
+    return (
+      <td key={col.key} className={`${styles.td} ${isFirst ? styles.tdFirst : ""}`}>
+        {rakuten || amazon ? (
+          <span className={styles.buyCell}>
+            {rakuten && (
+              <a
+                href={rakuten}
+                target="_blank"
+                rel="sponsored nofollow noopener noreferrer"
+                className={`${styles.link} ${styles.buyRakuten}`}
+              >
+                楽天
+              </a>
+            )}
+            {amazon && (
+              <a
+                href={amazon}
+                target="_blank"
+                rel="sponsored nofollow noopener noreferrer"
+                className={`${styles.link} ${styles.buyAmazon}`}
+              >
+                Amazon
+              </a>
+            )}
+          </span>
+        ) : (
+          <span>—</span>
+        )}
       </td>
     );
   }

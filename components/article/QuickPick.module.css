@@ -1,0 +1,157 @@
+/* 「迷ったらこれ」ボックス（campkit-20261027-C01）
+   記事冒頭の結論の直後に置く送客導線。ProductCard より軽く、
+   1〜3製品の楽天／Amazon ボタンだけを最短距離で出す。 */
+
+.box {
+  position: relative;
+  margin: 1.5rem 0 2rem;
+  padding: 1rem 1.1rem 0.9rem;
+  background: #f7fdf9;
+  border: 1px solid #bbf7d0;
+  border-left: 4px solid #16a34a;
+  border-radius: 10px;
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.prTag {
+  flex-shrink: 0;
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: #fff;
+  background: #16a34a;
+  padding: 0.12rem 0.4rem;
+  border-radius: 4px;
+  line-height: 1.5;
+}
+
+.title {
+  margin: 0;
+  font-size: 1.02rem;
+  font-weight: 800;
+  color: #14532d;
+  line-height: 1.4;
+}
+
+.lead {
+  margin: 0 0 0.7rem;
+  font-size: 0.85rem;
+  color: #4b5563;
+  line-height: 1.7;
+}
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.item {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 0.75rem 0.85rem 0.8rem;
+}
+
+.label {
+  margin: 0 0 0.25rem;
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: #15803d;
+  line-height: 1.4;
+}
+
+.name {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #1a3c34;
+  line-height: 1.45;
+}
+
+.anchor {
+  color: #1a3c34;
+  text-decoration: none;
+  border-bottom: 1px dotted #9ca3af;
+}
+.anchor:hover { border-bottom-style: solid; }
+
+.spec {
+  margin: 0.25rem 0 0;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #16a34a;
+  line-height: 1.5;
+}
+
+.reason {
+  margin: 0.3rem 0 0;
+  font-size: 0.82rem;
+  color: #6b7280;
+  line-height: 1.65;
+}
+
+/* ── 購入ボタン ───────────────────────────────── */
+.buttons {
+  margin-top: 0.65rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.6rem 0.5rem;
+  border-radius: 7px;
+  font-size: 0.86rem;
+  font-weight: 800;
+  text-decoration: none;
+  color: #fff !important;
+  transition: filter 0.15s;
+}
+
+.btn:hover {
+  filter: brightness(0.92);
+  color: #fff !important;
+}
+
+.btnIcon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  stroke: #fff;
+  color: #fff;
+}
+
+.btnRakuten { background: #bf0000 !important; }
+.btnAmazon  { background: #ff9900 !important; }
+
+.note {
+  margin: 0.75rem 0 0;
+  font-size: 0.72rem;
+  color: #9ca3af;
+  line-height: 1.6;
+}
+
+/* ── Mobile ───────────────────────────────────── */
+@media (max-width: 600px) {
+  .box {
+    padding: 0.9rem 0.85rem 0.8rem;
+  }
+
+  .buttons {
+    grid-template-columns: 1fr;
+  }
+}
