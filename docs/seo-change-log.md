@@ -4,6 +4,29 @@
 
 ---
 
+## 2026-10-28 取りこぼし解消：naturehike-mat・naturehike-sleeping-bag の在庫切れと Amazon 導線を是正（campkit-20261028-M02）
+
+**狙い**: `article-fix-backlog.tsv` の取りこぼし（`out_of_stock`／`asin_mismatch`）を解消する。どちらも「記事は読まれてカードまで到達しているのに、楽天の採用SKUが売り切れている／Amazon ボタンが別の型番・別の色に着地する」型で、クリックが購入につながらない。対象は 2 記事・取りこぼし 2 行（＋同じ記事を開いたので `name_fix` 2 行も同時に処置）。
+
+**変更内容（対象記事・旧→新・理由）**:
+
+| 記事 | 位置 | 旧 | 新 | 理由（issue_type） |
+|---|---|---|---|---|
+| naturehike-mat | 第2位 | 厚手5cm ベージュ ¥5,990（楽天 5cm 全SKU qty=0）／amazonAsin B09K4ZPQJ3 | 厚手10cm グリーン ¥8,590（qty=7）／amazonAsin B0D54KTTSY | `out_of_stock`。同一出品 nh20dz03 の在庫ある変種へ寄せた |
+| naturehike-sleeping-bag | 第2位 | CNK2550WS028 ブルー 快適-1.3〜8.5℃ ¥6,480／amazonAsin B0DK7SXJW9（失効・別色へ着地） | U450 ブラウン 快適-1.3〜3.9℃ ¥7,980（qty=13）／amazonAsin B0G7GZZHN4 | `asin_mismatch`。あわせて記事の温度表記の誤りを是正 |
+| naturehike-mat | 第4位・第5位 | name が軸の全選択肢を並記（1/2/3人用） | 採用 1 仕様（厚さ25cm・一人用）に固定 | `name_fix` |
+
+**本文・表まで直した箇所**:
+
+- **naturehike-mat 第2位**: 楽天 `naturehike-direct/nh20dz03` の 5cm 系 5 SKU がすべて在庫 0 のままで、同一商品を在庫ありで出す別店舗も楽天API 2 クエリで 0 件だったため、同一出品の 10cm/グリーン へ寄せた。見出し「厚手5cm/10cm」→「厚手10cm」、カード name・description・price（5,990→8,590）、本文の価格と厚み、比較表（厚み 5cm/10cm→10cm・価格）、まとめ表（5,990円台→8,590円台・行ラベルを「手軽さ・コスパ重視」→「手軽さ・設営のラクさ重視」＝最安枠は第4位の 7,990円に移るため）、frontmatter `description` の価格帯（実勢5,990〜→7,990〜）を整合させた。
+- **naturehike-sleeping-bag 第2位**: 楽天の商品仕様が「U250：快適4〜8.5℃／限界-9.4〜4℃、U450：快適-1.3〜3.9℃／限界-17.1〜-1.3℃」と印字しており、**記事が掲げる「極限-17℃」は U450 の値なのにカードは U250（¥6,480）を指していた**＝記事側の誤りだったので、カードを U450 へ寄せた。カード name の温度（快適-1.3〜8.5℃→-1.3〜3.9℃）・price（6,480→7,980）、本文の快適温度と価格、比較表の使用温度と価格、まとめ表の価格帯を整合。見出しの「極限-17℃対応」は U450 では正しいのでそのまま残した。
+- **naturehike-mat 第4位**: name の「自動膨張」は実体（電動ポンプ内蔵）と違うため除去。見出し・カード description・本文・比較表（厚み「記載なし」→「25cm」）も 1 仕様に揃えた。
+
+**触っていないもの**: `updatedAt`・`date`・`thumbnail`・カード `id`・他 3 枠（第1位・第3位・第5位の商品）・両記事の `title`・`tags`。naturehike-sleeping-bag は採用店・item URL が変わらないので `affiliateUrl`・`image`・レビュー値は据え置き（§11-8）。naturehike-mat 第2位は出品が同じなので `affiliateUrl`・レビュー値は据え置き、`image` だけ name が色を名指しするため当該 variant の画像（HTTP 200 実測）へ付け替えた。
+
+**効果測定**: 2〜3週間後の `campkit-seo-competitor-scan`（金）で、両記事のアフィリクリック率（`AffiliateClickTracker`）と GSC のクリック数を確認する。価格帯の表記が変わった 2 記事はタイトル・ディスクリプションの CTR も併せて見る。
+
+---
 ## 2026-10-28 取りこぼし解消：moraknife・mountain-camp-mat の Amazon 導線を是正（campkit-20261028-M01）
 
 **狙い**: `article-fix-backlog.tsv` の取りこぼし（`asin_mismatch`／`out_of_stock`）を解消し、Amazon ボタンの着地先をカードが名指しする変種に合わせる。クリックは発生していても着地先が別の色・別の形状だと購入に至らないため、売上の取りこぼしになる。対象は 2 記事・取りこぼし 4 行（＋同カードの `price_unconfirmed` 1 行）。
