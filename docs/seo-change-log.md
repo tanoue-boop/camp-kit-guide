@@ -4,6 +4,27 @@
 
 ---
 
+## 2026-10-29 取りこぼし解消：thermal-bottle・stylish-camp-tent の Amazon 導線と在庫切れを是正（campkit-20261029-M01）
+
+**狙い**: 本文・見出しの検索シグナルは動かさず、購入導線（楽天 hb.afl ／ Amazon）の「飛び先が違う・買えない」を解消して取りこぼしを止める。`_file/article-fix-backlog.tsv` の取りこぼし行（out_of_stock / asin_mismatch）5行＋同じ記事の price_unconfirmed 2行・name_fix 1行＝計8行を done 化した。
+
+**旧→新・理由（issue_type）**
+
+| 記事 | 位置 | issue_type | 旧 | 新 | 理由 |
+|---|---|---|---|---|---|
+| thermal-bottle | 第1位 サーモス 2way | asin_mismatch | `B0DTYDK7JM`（800ml ブラックイエロー） | **`B0DTY13ZCZ`**（600ml パープルピンク FJJ-602WF） | 台帳の候補を dp 実取得で照合。容量・色がカード name の名指しと一致 |
+| thermal-bottle | 第2位 タイガー SAHARA | asin_mismatch | `B013OKS0M2`（A系列 MMJ-A048KA ブルーブラック） | **`B0GP9GGB9C`**（MMJ-S048WJ パールホワイト） | Amazon 検索の再探索1本で S系列の親 dp を見つけ、変種一覧から特定。あわせて price 2,280→2,480円（楽天現価）に整合 |
+| thermal-bottle | 第4位 アトラス TEMPEAK | asin_mismatch | `B09QM4DSPP`（1200ml） | **`B08WJ5FZZY`**（530ml ブラック ATPB-530BK） | 台帳の候補を dp 実取得で照合。価格差 0% |
+| thermal-bottle | 第5位 スタンレー クラシック 1.9L | out_of_stock | `B000FZX93U`（出品ゼロ） | **`B08632V8N7`**（10-07934-003 ハンマートーングリーン） | 購入ボックス不在が継続。台帳の後継 ASIN は +194% の転売出品だったので採らず、再探索1本でブランド欄・色・容量が一致する出品へ差し替え |
+| stylish-camp-tent | 第3位 | out_of_stock | LOWYA ポップアップテント（楽天 全変種 soldout ／ `B0BS5FL3XN`） | **山善 キャンパーズコレクション SCOS-6SUV(EB) エクルベージュ**（楽天 e-kurashi/qj412 ¥6,990 ／ `B0DWDVT7SG`） | 在庫ありの同一品は +121% の転売出品だけだったので、記事テーマ（ポップアップ・フルクローズ・4人用）と価格帯を保つ商品へ差し替え |
+| stylish-camp-tent | 第2位 | name_fix ／ price_unconfirmed | 楽天の商品名そのまま・選択SKUが軸先頭のオリーブグリーン（¥7,999）に落ちていた | **モダンデコ ワンタッチテント … レギュラータイプ アースブラウン**（SKU 174918・¥6,998） | name にブランドと2軸を明記して選択SKUをカード価格と一致させた。あわせて「完全遮光」表記を実SKUの仕様（UVカット率最大100%）に是正 |
+| stylish-camp-tent | 第5位 | price_unconfirmed | ¥7,999 | **¥6,999** | 楽天現価に整合（カード・比較表・本文の「8,000円以下」→「7,000円以下」） |
+
+**順位への影響の見立て**: thermal-bottle は frontmatter description と導入文の価格レンジ（2,280→2,480円）だけが変わり、title・見出し・本文の主旨は不変。stylish-camp-tent は第3位の商品が入れ替わったため見出し・本文2段落・比較表の商品名・まとめ表・結びの段落が変わるが、記事の軸（デザインタイプ×素材×サイトレイアウトの4条件）と他4製品は不変。どちらも更新日は据え置き（リライト回ではなく差し替え回のため）。
+
+**効果測定**: 2〜3週間後の campkit-seo-competitor-scan（金）で、thermal-bottle は「保温ボトル おすすめ」系、stylish-camp-tent は「おしゃれ テント」「ポップアップテント フルクローズ」系の順位・CTR を確認する。導線の是正が主目的なので、評価はクリック数よりアフィリエイトのクリック率（計測コンポーネント側）で見る。
+
+---
 ## 2026-10-29 northface-hotshot 新規／狙いKW ノースフェイス ホットショット／新規のため基準なし（campkit-20261029-N11）
 
 **狙い**: 「ノースフェイス ホットショット」（月間1,000〜1万）のブランド＋モデル名の購入直前検索。バックパック領域はサイト全体クリックの約4割で、同クラスターの northface-backpack／northface-commute-backpack／northface-fusebox に続くモデル軸記事の4本目。新規記事のため比較基準となる順位データはなし。
