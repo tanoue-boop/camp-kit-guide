@@ -4,6 +4,32 @@
 
 ---
 
+## 2026-10-29 取りこぼし解消：sleeping-bag-winter-beginner・winter-camp-guide の購入導線を是正（campkit-20261029-M02）
+
+**狙い**: 本文・見出しの検索シグナルは必要最小限しか動かさず、購入導線（楽天 hb.afl ／ Amazon）の「飛び先の色・仕様が違う・買えない・価格が合わない」を解消して取りこぼしを止める。`_file/article-fix-backlog.tsv` の取りこぼし行（asin_mismatch 6・product_swap 2）＋同じ記事の price_unconfirmed 2行・name_fix 1行＝**計11行**を done 化した。
+
+**旧→新・理由（issue_type）**
+
+| 記事 | 位置 | issue_type | 旧 | 新 | 理由 |
+|---|---|---|---|---|---|
+| sleeping-bag-winter-beginner | 第1位 Bears Rock FX-503W | asin_mismatch | name「…FX-503W **チョコブラウン**」／`B081ZPJP4T` | name「…FX-503W **ブラック**」／`B081ZPJP4T`（据え置き） | Amazon の FX-503W は ブラック と「【限定】チョコブラウン(すき間風ガード付)」の2変種のみで、楽天の無印チョコブラウン(¥17,250)に当たる変種が無い。記事は色を名指ししていないので、両モールで同価格・在庫ありの ブラック に寄せた |
+| sleeping-bag-winter-beginner | 第2位 CAMDOOR 3sd05 | product_swap / asin_mismatch / price_unconfirmed | 2200g(-25℃)/ベージュ・¥3,980（＝実はフリース単品の価格）／`B0CSFNZHVR`（クリーム3.0kg） | **1800g(28℃～0℃～-16℃)/ベージュ・¥6,980**／`B0CCTMSX4D`（ベージュ1.8kg） | 2200g は楽天で ベージュ qty=6 のみ・¥7,480、かつ Amazon のサイズ軸に 2.2kg が無い。3条件（楽天在庫・Amazon一意・価格整合）が同時に成立するのは 1800g/ベージュ だけ。見出し・本文・主な特徴・比較表・まとめ表・description の「-25℃」「¥3,980」を -16℃／¥6,980 に整合 |
+| sleeping-bag-winter-beginner | 第3位 Bears Rock FX-453G | asin_mismatch | `B0CNYCXRMC`（オールブラック） | **`B0828HRVS9`**（シルキーブラウン） | カード name とリンク先SKUが名指しする シルキーブラウン に一致する変種へ。dp 実測で ¥17,800・在庫あり |
+| sleeping-bag-winter-beginner | 第4位 Bears Rock FX-403 | asin_mismatch | `B0GQDW6V52`（失効・黙示着地） | **`B0GMYSFXLR`**（【モカライン】） | 失効 ASIN を着地先の正規 ASIN に置換。sleeping-bag-temperature-guide#1 と同じ ASIN に揃った |
+| sleeping-bag-winter-beginner | 第5位 | product_swap | **AIFLYCY 3sd01**（セール統合ページ・49SKU）・¥4,780／`B0CY4S11P3` | **Naturehike 封筒型 幅広シュラフ 200×115cm `cnk2300019` グリーン**・¥7,990／`B0CSWFGKD2` | 楽天リンク先が単一商品ページでなく、読者が着地して選ぶ商品が name と一致する保証が無い。同枠（幅広・連結で複数人）を両モール公式店・同価格(¥7,990)・在庫ありのブランド品へ差し替え。見出し・本文3段落・主な特徴・比較表・まとめ表・description を更新 |
+| winter-camp-guide | 第8位 Bears Rock FX-503W | asin_mismatch | name「…チョコブラウン」 | name「…ブラック」 | 上の第1位と同一商品の shared_asin 参照側。2記事の name・ASIN を同一に揃えた |
+| winter-camp-guide | 第10位 ラドウェザー 防寒手袋 | asin_mismatch | `B09MQ8PWMJ` | `B09MQ8PWMJ`（**変更なし**） | dp 実測で失効が解消（変種一覧に `B09MQ8PWMJ=M` が復帰・redirected_to 無し）。カードはサイズを名指ししていないため整合。mdx は1バイトも変えず台帳のみ done |
+| winter-camp-guide | 第3位 ALPACA TS-77NC | name_fix | name「…TS-77NC」／リンク先の既定SKUは 専用バッグ付き/サンドベージュ ¥28,930 **qty=0** | name「…TS-77NC **専用バッグ付き/ブラック**」／affiliateUrl に `?variantId=47083022ZZ` を付与 | 単品/セット・色を1仕様に固定。この軸はセット軸で name では選択SKUが動かないため variantId で在庫100・¥29,920（カード price と一致）の変種を指した |
+| winter-camp-guide | 第7位 山善 SUT-102 | price_unconfirmed | price ¥6,980 | price **¥7,980** | 実リンク先の選択SKU（T0M59/1畳・qty=84）の現価に合わせた |
+
+**検索シグナルに関わる変更**: sleeping-bag-winter-beginner の frontmatter `description` で「オールシーズン対応のAiflycyモデル」→「Camdoor・Naturehikeの封筒型モデル」、第2位の見出しの温度表記「-25℃」→「-16℃」、第5位の見出しを「AIFLYCY 封筒型 3.5シーズン 寝袋（2人用・幅広）」→「Naturehike 封筒型 幅広シュラフ（200×115cm・連結で1〜4人）」に変更。**title・date・updatedAt・thumbnail・カテゴリ・内部リンクは一切動かしていない。** winter-camp-guide は本文を1文字も変えていない（カード属性のみ）。
+
+**価格帯の整合**: sleeping-bag-winter-beginner の5製品は ¥17,250／**¥6,980**／¥17,250／¥8,900／**¥7,990** になり、最高÷最低は 4.33倍 → **2.47倍**（KW整合性ルールの5倍以内を維持）。¥6,980 の Camdoor が引き続き5製品中の最安なので「とにかく低価格で冬を試す」枠の位置づけは保てている。
+
+**効果測定**: 購入導線の修正が主目的なので、順位ではなく**アフィリエイトクリック率と成約**で見る。2〜3週間後の campkit-seo-competitor-scan（金）で「冬キャンプ 寝袋」「寝袋 冬用 おすすめ」「冬キャンプ 装備」の順位が落ちていないこと（第2位・第5位の商品入れ替えによるリグレッションが無いこと）を確認する。
+
+---
+
 ## 2026-10-29 mysteryranch-backpack リライト／狙いKW ミステリーランチ リュック／リライト前の関連順位 6.5（GSC 直近30日・表示597）（campkit-20261029-R17）
 
 **リライト前の状態**: 4製品（カタリスト22・ギャラゲーター20・レイディックス47・スクリー33）。GSC 直近30日で表示597・平均6.5位と順位は取れているのに製品数が薄く、比較表に購入列がなく、第3位のレイディックス47は楽天の全SKUが完売（`article-fix-backlog.tsv` に起票済み）。
