@@ -4,6 +4,23 @@
 
 ---
 
+## 2026-10-29 取りこぼし解消：naturehike-mat 第4位を在庫ある変種へ・solar-portable-power 第4位を商品差し替え（campkit-20261029-M04）
+
+**狙い**: 購入導線（楽天 hb.afl ／ Amazon）が「買えない・構成が違う」状態になっていた取りこぼし2行（`out_of_stock` 1・`asin_mismatch` 1）と、同一カードの `price_unconfirmed` 1行を解消する。本文の検索シグナル（title・見出し構成・順位の並び）は動かさず、該当カードと、その商品に紐づく価格・スペック記述だけを実測値に揃えた。
+
+**旧→新・理由（issue_type）**
+
+| 記事 | 位置 | issue_type | 旧 | 新 | 理由 |
+|---|---|---|---|---|---|
+| naturehike-mat | 第4位 Naturehike 電動エアーベッド（`naturehike-airbed-electric`） | out_of_stock | 厚さ25cm 一人用／`price="7990"`／`amazonAsin="B0F24F4T3Q"` | 厚さ45cm 一人用／`price="10990"`／`amazonAsin="B0G7GZHBRP"` | 楽天 `naturehike-direct/cnh23dz10001` の 25cm/一人用（¥7,990）は 2026-10-28 に続き 10-29 も `quantity=0` で在庫が戻らず、同価格帯（¥7,000台）の代替は無レビューの転売系出品（タイトルが「1/2/3人用」併記で1仕様を特定できない）しか無かった。同一出品の在庫ある変種のうち、Amazon 側に同構成の公式 ASIN が実在して価格も一致する 45cm/一人用（¥10,990・qty=40）へ寄せた。Amazon も 25cm ファミリーから 45cm ファミリー（着地変種「1人用（190x100x45cm）」・¥10,990・gap 0%・販売元 Naturehike Store）へ差し替え |
+| solar-portable-power | 第4位 FOSSiBOT F2400 3点セット（`sp-fossibot-f2400`） | asin_mismatch ＋ price_unconfirmed | FOSSiBOT F2400 3点セット 200W×2／`price="127990"`／`amazonAsin="B0FGWJN4XM"`／楽天 `heystop/f2400-sp200-2` | Anker Solix C2000 Gen 2 ＋ PS200 Dual 2点セット／`price="279900"`／`amazonAsin="B0FR4GT3R7"`／楽天 `anker/b1783-2` | ①カードが名指しする「200Wパネル2枚」の構成が Amazon に存在せず（変種は SP200W／SP420W／本体のみ の6件）、再探索1回でも 0 件 ②楽天の採用店 heystop が同出品の価格を ¥145,900 → ¥369,990 に改定し、記事が宣言する価格帯の枠外かつ「本記事中で最も手頃」という第4位の役割と両立しなくなった。両モールとも在庫あり・公式販売元・価格 ¥279,900 で完全一致する Anker の 2048Wh セットへカードごと差し替えた |
+
+**価格帯記述の扱い**: `solar-portable-power` は第4位が最安枠（¥127,990）だったため、frontmatter `description` の「FOSSiBOT 2048Whセット（¥127,990）から」を「EcoFlow DELTA 3 Classicセット（¥143,700）から」へ、冒頭の「価格帯は約¥127,990〜¥296,400」を「約¥143,700〜¥296,400」へ付け替え、まとめ表の行ラベルを「大容量をコスパ重視で」→「大容量をコンパクトに持ち運びたい」に改めた。FAQ の「大容量を安く狙うならFOSSiBOT（第4位）」「FOSSiBOTのように大容量でも価格を抑えたモデル」、ポイント2の定格出力の例示、ポイント4とFAQのサイクル回数の例示も新商品の実測値（定格2000W・4,000回以上）に揃えた。`naturehike-mat` は第4位が最安枠だったため frontmatter `description` の「実勢7,990〜19,990円」を「実勢8,590〜19,990円」へ、ポイント2とFAQの厚み列挙に 45cm を追加した。
+
+**触っていないもの**: 両記事の `updatedAt`・`date`・`thumbnail`、第4位以外の全カード、`naturehike-mat` 第4位の `affiliateUrl`・`image`・`rakutenRating`／`rakutenReviewCount`・`badge`（採用店・出品が同一のため §11-8 により据え置き）。`solar-portable-power` 第4位は別商品への差し替えなので `rakutenRating`／`rakutenReviewCount` は楽天レビュー8件（30件未満）により両属性とも省略し、本文・`badge`・まとめ表でもレビュー数値に触れていない。
+
+---
+
 ## 2026-10-29 取りこぼし解消：trekking-pole・winter-camp-gloves の購入導線を実測で再確認（campkit-20261029-M03）
 
 **狙い**: 本文・見出しの検索シグナルは動かさず、購入導線（楽天 hb.afl ／ Amazon）が「買えない・価格が合わない」状態になっていた取りこぼし2行を解消する。`_file/article-fix-backlog.tsv` の取りこぼし行（`out_of_stock` 1・`asin_mismatch` 1）を done 化した。**両方とも起票時点の不具合が実測で解消していたため、商品差し替え・採用店付け替え・ASIN 差し替えはいずれも不要だった。**
