@@ -4,6 +4,19 @@
 
 ---
 
+## 2026-10-27 patagonia-backpack 新規（campkit-20261027-N08）
+
+**2026-10-27 patagonia-backpack 新規／狙いKW「パタゴニア リュック」（月間1万〜10万）／新規のため基準なし**
+
+- 新規記事 `content/posts/patagonia-backpack.mdx` を作成。製品10モデル（容量20〜36L・重量420〜1,290g・実勢15,500〜31,980円）、全カード・全比較表行に楽天 hb.afl と Amazon `amazonAsin` の両リンクを設置。
+- 狙いKW: 「パタゴニア リュック」「パタゴニア バックパック おすすめ」。購入直前のブランド名検索を取りにいく。バックパック領域はサイト全体クリックの約4割。
+- 構成（AI検索対応仕様）: 結論3行（数値入り）→ QuickPickMdx（迷ったらこれ・3製品）→ 用途・容量別おすすめ早見表 → 10モデル スペック比較表（容量・重量・実寸・素材・PC収納・価格＋購入列 `buy`）→ 選び方6ポイント → 各製品 → ブランド別・用途別ガイド導線 → お手入れTips → FAQ6問（見出し形式）→ 選定基準と情報源 → まとめ表。
+- 採用シリーズ: レフュジオ（26L／30L）・ブラックホール（25L／32L／マイクロMLC 22L／ミニMLC 30L）・テラヴィア（トート24L／36L）・アトム（トート20L）・フィールドスミス（リッド28L）。
+- 内部リンク: 同クラスター既存記事17本へ発リンク（camp-backpack-beginner／arcteryx-backpack／mammut-backpack／osprey-backpack／gregory-backpack／deuter-backpack／millet-backpack／northface-backpack／outdoor-commute-backpack／northface-commute-backpack／camp-backpack-capacity-guide／mountain-backpack-30l／backpack-40l／backpack-large／backpack-rain-cover／waterproof-backpack／camp-gear-sale-timing）。被リンクは camp-backpack-beginner（ブランド別に選ぶ）・arcteryx-backpack（まとめ）・outdoor-commute-backpack（まとめ）の3本を1文追加のみで設置（他本文と updatedAt は不変更）。
+- 注記: パタゴニアは国内正規流通に Amazon を含めないため、Amazon 側は10モデルすべて並行輸入表記だった。販売元が Amazon.co.jp 本体か楽天市場でも同一商品を扱う日本の販売店で、新品・在庫あり・楽天と同水準価格のものに限定し、その事実を記事の「選定基準と情報源」に明記した。
+
+---
+
 ## 2026-10-27 取りこぼし解消（campkit-20261027-M03）
 
 `_file/article-fix-backlog.tsv` の取りこぼし行（`asin_mismatch`）を2記事ぶん（2行）解消し、同じ記事を開いたついでに `price_unconfirmed` 2行も同時に解消した（計4行）。対象記事は、取りこぼし記事の GSC 28日クリック（`data-campkit-gsc-page-28d-20261013.tsv`）が残り全記事0のため POLICY どおり slug 順で選定。先頭の cooler-box-day-camp は 10/26 に無変更 DONE、day-camp-cooler-box・day-camp-starter-set・ecoflow-power・family-camp-cot・family-camp-mat は本日の M01・01・M02 で処理済みのため、次の **group-camp-table・lightweight-mountain-tent** を採用した。着手時 HEAD `1971227` で他タスク（C01・H01 を含む）との衝突なし。
