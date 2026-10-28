@@ -4,6 +4,28 @@
 
 ---
 
+## 2026-10-28 取りこぼし解消：one-touch-tarp・screen-tarp の在庫切れと Amazon 導線を是正（campkit-20261028-M03）
+
+**狙い**: `article-fix-backlog.tsv` の取りこぼし（`out_of_stock`／`asin_mismatch`）を解消する。どちらも「カードまで到達しているのに、楽天の採用SKUが売り切れている／Amazon ボタンが別の色・別のコーティングに着地する」型で、クリックが購入につながらない。対象は 2 記事・取りこぼし 4 行（＋同じカードの `price_unconfirmed` 1 行も同時に処置）。
+
+**変更内容（対象記事・旧→新・理由）**:
+
+| 記事 | 位置 | 旧 → 新 | 理由（issue_type） |
+|---|---|---|---|
+| `one-touch-tarp` | 第3位 モダンデコ 3m テラコッタ | `amazonAsin` B08YNB5WZJ → **B0C65FSK3F** | `asin_mismatch`。旧 ASIN の着地変種が [オリーブグリーン／シルバーコーティング, 3m] で、カードが名指しする テラコッタ と色が食い違っていた。dp 実取得で [テラコッタ／シルバーコーティング, 3m]・¥11,999・在庫あり を確認 |
+| `one-touch-tarp` | 第4位 クイックキャンプ 2.5m | name QC-TPI250 サンド ブラックコーティング インフレーム ¥10,780 → **QC-TP250 サンド シルバーコーティング アウトフレーム ¥8,980** | `asin_mismatch`＋`price_unconfirmed`。Amazon 側に インフレーム 軸が存在せず、楽天の インフレーム SKU は ¥17,990（カード比 +66.9%）で記事の価格帯を壊すため、同一出品内の購入可能SKU（¥8,980・qty=1071）へ寄せた。`amazonAsin` B07P5HZTH5 は据え置きで price_gap 0% に |
+| `one-touch-tarp` | 第5位 モダンデコ 2.5m グレージュ | `amazonAsin` B088R5SQRG → **B0C61CKD64** | `asin_mismatch`。旧 ASIN の着地変種が [サンドベージュ／シルバーコーティング, 2.5m] で色が食い違っていた。dp 実取得で [グレージュ／シルバーコーティング, 2.5m]・¥10,999・残り3点 を確認 |
+| `screen-tarp` | 第2位 FIELDOOR ワンタッチスクリーンテント 285cm | ダークブラウン：標準タイプ／日よけシート2枚付き ¥16,940・`amazonAsin` B0861XRCWS → **グレー：遮光高耐水タイプ／日よけシート2枚付き ¥18,700・B0D4P8VRK4** | `out_of_stock`。楽天 9SKU のうち 8SKU が qty=0 で、購入できるのは a07237（グレー遮光高耐水／2枚付き ¥18,700 qty=7）だけだった。smile88 も在庫が同一で店舗付け替えでは解決しないため、カードを唯一買える構成へ寄せ、Amazon も同一構成（dp メーカー型番=a07237・¥19,700・残り7点）へ差し替えた |
+
+**価格帯の整合**: `one-touch-tarp` は第4位が最高価格枠だったため、frontmatter `description`・はじめに・FAQ の「実勢8,800〜10,780円」を **「8,800〜10,499円」** に直し、比較表 `price`・まとめ表「10,780円台→8,980円台」・本文「約10,780円と本記事ではやや上位の価格帯」→「約8,980円と本記事でも手に取りやすい価格帯」まで揃えた。`screen-tarp` は宣言レンジ（9,460〜25,980円）の内側なので範囲表記は変えず、比較表「16,940円→18,700円」・まとめ表「16,900円台→18,700円台」・第2位の見出しと本文（遮光高耐水タイプ・約7kg）・はじめにの実データ日付（2026-10-14→2026-10-28）を直した。
+
+**触っていないもの**: `updatedAt`・`date`・`thumbnail`・`title`・`category`・`tags`・カード `id`・比較表の `rows[].id`・`affiliateUrl`（採用店・item URL は両記事とも不変）・`rakutenRating`／`rakutenReviewCount`／`image`／`badge`（採用店を変えていないので §11-8 により据え置き）。`one-touch-tarp` 第1位・第2位の `product_swap` 2 行（セール統合ページへのリンク）は別案件なので `pending` のまま残した。
+
+**副次効果**: `one-touch-tarp#4` が `day-camp-tarp-cheap#4` と同一SKU・同一表記になり、`amazon-asin-check.tsv` の `static_flags` の `inconsistent_shared` が 6 → 4 に減った。あわせて `day-camp-tarp-cheap#4`（カード ¥9,980 vs 実測 ¥8,980・-10.0%）の `price_unconfirmed` を新規起票した。
+
+**効果測定**: 2〜3週間後の `campkit-seo-competitor-scan`（金）で、両記事のアフィリエイトクリックが購入に繋がるようになったか（在庫切れ・別商品着地の解消）を確認する。
+
+---
 ## 2026-10-28 取りこぼし解消：naturehike-mat・naturehike-sleeping-bag の在庫切れと Amazon 導線を是正（campkit-20261028-M02）
 
 **狙い**: `article-fix-backlog.tsv` の取りこぼし（`out_of_stock`／`asin_mismatch`）を解消する。どちらも「記事は読まれてカードまで到達しているのに、楽天の採用SKUが売り切れている／Amazon ボタンが別の型番・別の色に着地する」型で、クリックが購入につながらない。対象は 2 記事・取りこぼし 2 行（＋同じ記事を開いたので `name_fix` 2 行も同時に処置）。
