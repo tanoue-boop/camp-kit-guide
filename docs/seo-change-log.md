@@ -4,6 +4,27 @@
 
 ---
 
+## 2026-10-28 取りこぼし解消：moraknife・mountain-camp-mat の Amazon 導線を是正（campkit-20261028-M01）
+
+**狙い**: `article-fix-backlog.tsv` の取りこぼし（`asin_mismatch`／`out_of_stock`）を解消し、Amazon ボタンの着地先をカードが名指しする変種に合わせる。クリックは発生していても着地先が別の色・別の形状だと購入に至らないため、売上の取りこぼしになる。対象は 2 記事・取りこぼし 4 行（＋同カードの `price_unconfirmed` 1 行）。
+
+**変更内容（対象記事・旧→新・理由）**:
+
+| 記事 | 位置 | 旧 → 新 | 理由（issue_type） |
+|---|---|---|---|
+| `moraknife` | 第4位 コンパニオン スパーク（`companion-spark`） | `amazonAsin` B07RP4C84N → **B07TFS681G** ／ カード `name` の型番 1535 → **13567** | `asin_mismatch`。旧 ASIN は同 dp の [ブラック] 変種に着地しており、カード `name` の「ブルー」と楽天の選択SKU 1537-1/ブルーに食い違っていた。型番は dp の メーカー型番=13567 を根拠に訂正（1535 は dp・楽天のどちらにも印字が無い値） |
+| `moraknife` | 第5位 エルドリス（`eldris-stainless`） | `amazonAsin` B0GVSZYL4W → **B01MECL1EP** | `asin_mismatch`。旧 ASIN は [2026 Limited Color]（型番 14813・¥5,940）に着地。Amazon 検索の再探索 1 回で標準モデルの Eldris Standard (Black)（メーカー型番 12647・¥4,620）を発見し差し替え。カード `name`・`price` は不変 |
+| `mountain-camp-mat` | 第3位 VASTLAND 8cm（`mat-rank-3`） | `amazonAsin` B09F2ZNC93 → **B09F2RVRZM** | `asin_mismatch`。旧 ASIN は [オリーブ] に着地。カード `name` が名指しする「ブラック」の変種へ差し替え。他は不変 |
+| `mountain-camp-mat` | 第5位 CAMDOOR R値6.8（`mat-rank-5`） | `amazonAsin` B0GWPWG823 → **B0GVSZVBKW** ／ `name` の色 ブルー → **ブラック** ／ **厚さ 10cm → 7cm**（`name`・カード `description`・見出し・本文・比較表）／ `price` 9,980 → **11,980**（比較表の価格列も） | `asin_mismatch` ＋ `price_unconfirmed`。旧 ASIN は [スクエア単品（Grey）] に着地。楽天 item ページの【商品仕様】が「封筒型 190×63.5×厚さ10cm／マミー型 195×65×厚さ7cm」と印字しており、マミー型を名指ししながら厚さ10cmと書いていた記事側の誤記が判明したため是正した |
+
+**本文の記述を直した箇所（`mountain-camp-mat` のみ）**: 見出し「第5位：CAMDOOR エアーマット（R値6.8・厚さ10cm）」→「（R値6.8・厚さ7cm）」／本文「厚さ10cmで地面からの凹凸を…」→「厚さ7cmで地面からの凹凸を…本体約590gの超軽量…」／比較表の厚さ列 10cm → 7cm・特徴列「超軽量」→「約590g」・価格列 ¥9,980 → ¥11,980。選び方ポイント3の「登山なら5〜10cm厚」は 7cm が範囲内なので変更していない。まとめ表・frontmatter `description`・FAQ・Tips には厚さ・価格の記述が無いため変更なし。
+
+**触っていないもの**: 両記事の `title`・frontmatter `description`・`date`・`updatedAt`・`thumbnail`・`tags`、楽天 `affiliateUrl`（採用店は変えていないので `image`・`rakutenRating`・`rakutenReviewCount` も据え置き＝判定基準 §11-8）、対象外のカード。
+
+**効果測定**: 両記事は `data-campkit-gsc-page-28d-20261013.tsv` の 28日クリックが 0 のため順位での測定はできない。測るのは Amazon 側の発生（着地先が名指しの変種に揃ったことによる成約）で、次回の収益確認時に moraknife・mountain-camp-mat からの Amazon 発生があるかを見る。
+
+---
+
 ## 2026-10-28 northface-fusebox 新規／狙いKW ノースフェイス ヒューズボックス／新規のため基準なし（campkit-20261028-N10）
 
 **狙い**: 「ノースフェイス ヒューズボックス」（月間1,000〜1万）のブランド＋モデル名の購入直前検索。既存の `northface-backpack`／`northface-commute-backpack` はブランド全体・通勤用途の横断記事で、ヒューズボックス系のモデル別（新旧・容量・サイズ違い）を横並びにした記事が無かった。バックパック領域はサイト全体クリックの約4割。
