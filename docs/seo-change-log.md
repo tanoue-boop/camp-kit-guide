@@ -4,6 +4,27 @@
 
 ---
 
+## 2026-10-28 取りこぼし解消：sierra-cup・solo-camp-cot の在庫切れと Amazon 導線を是正（campkit-20261028-M04）
+
+**狙い**: `article-fix-backlog.tsv` の取りこぼし（`out_of_stock`／`asin_mismatch`）を解消する。対象は 2 記事・取りこぼし 3 行（＋同じ記事の `price_unconfirmed` 1 行も同時に処置）。`solo-camp-cot` は 3 製品のうち 2 製品が 5 週間以上「楽天の採用店で全変種売り切れ」のままで、記事に到達した読者が 1 人も買えない状態だった。
+
+**変更内容（対象記事・旧→新・理由）**:
+
+| 記事 | 位置 | 旧 → 新 | 理由（issue_type） |
+|---|---|---|---|
+| `sierra-cup` | 第3位 キャンピングムーン シェラせいろ S362-MG | `amazonAsin` B0CG4GLZKB → **B0C9Z3J964** | `asin_mismatch`。旧 ASIN の着地変種は 2段（S-362-2P-SG）で段数が食い違い、台帳が候補にしていた B0CG4H42L1 も dp 実測で「蓋材＝ステンレス鋼・品番 S362-SG」＝カード name の「木製蓋付き」と構成が違った。Amazon 検索で MG 系（ウッドコースター＝木製蓋付き）を発見し、着地変種 [1段 / 単品, S362-MG / シルバー]・¥3,380・在庫あり を dp で確認。変種一覧 6 件が楽天の 6 SKU と 1:1 対応 |
+| `solo-camp-cot` | 第2位 Coleman コンバータコット2 ラウンジャー | 楽天 `blueplanet-colore/ou-1112`（全変種 soldout）¥10,990 → **`monoworld/compass1779365078` ¥7,595（quantity=100）** | `out_of_stock`。同一商品（寸法 193.8×64×32.5cm・耐荷重 102.1kg・ブランド Coleman／コールマン が一致）の在庫ありの店へ付け替え。段①メーカー公式店は 0 件のため段②へ、段② 大手も 0 件のため段③の最安（＝母数最安）を採用 |
+| `solo-camp-cot` | 第3位 DOD ワイドキャンピングベッド CB1-100-BK | 楽天 `auc-gion/cb1-100-bk`（soldout）¥7,898 → **`a-price/4589946138962`（XPRICE楽天市場店）¥8,470 ★4.4/85件** | `out_of_stock`。母数最安 `fishingmax-webshop` ¥7,980 に対し段② 大手 `a-price` は +6.14% ≤ +20% のため段②を採用（§11-3）。同額の `premoa` とはレビュー件数（85 > 12）でタイブレーク |
+| `solo-camp-cot` | 第1位 LOGOS Tradcanvas コンフォートベッド | `price` 13,365 → **11,000**（採用店は据え置き） | `price_unconfirmed`。実リンク先の現価 ¥11,000 と -17.7% 乖離していたので本文・比較表・まとめ表まで整合。あわせて Amazon 側の購入ボックス復活（残り8点・¥10,240）を実測し台帳 `verdict` を `out_of_stock` → `ok` に更新 |
+
+**価格帯の整合**: `solo-camp-cot` は 3 製品の価格が 13,365／10,990／7,898 円 → **11,000／7,595／8,470 円** に動き、価格順が入れ替わった。第3位 DOD の本文「7,898円という3製品中で最も手頃な価格ながら」は成立しなくなったので「8,470円という手頃な価格ながら」に書き換え、比較表 `価格`（3 行）・まとめ表の価格帯（13,000→11,000／10,000→7,000／7,000→8,000 円台）・第1位と第2位の本文の価格・第3位の `description` も揃えた。最高/最低 = 1.45 倍で `CLAUDE.md` の整合性チェック（5 倍以内）を満たす。frontmatter `description`・FAQ・Tips は価格に触れていないので不変。`sierra-cup` は価格が 1 円も動いていない（楽天 ¥3,380＝Amazon ¥3,380＝カード `price`）ので範囲表記も不変。
+
+**触っていないもの**: `updatedAt`・`date`・`thumbnail`・`title`・`category`・`tags`・カード `id`・比較表の `rows[].id`・各記事の他カード。`sierra-cup` は `amazonAsin` 1 属性だけの変更で `name`／`price`／`description`／`image`／`affiliateUrl`／本文／比較表／まとめ表は 1 バイトも変えていない。`solo-camp-cot` 第2位・第3位は採用店を変えたので §11-8 ★追補どおり `image`（新店のキャビネットURL・HTTP 200 を実取得で確認）とレビュー値（第2位は新店 0 件なので 2 属性を削除、第3位は 3.4/5件 → 4.4/85件）も新店に揃えたが、`badge` は商品特性なので据え置いた。比較表に購入列（`source`／`buy`）が無い記事なので `rows[].affiliateUrl` は対象外。
+
+**効果測定**: 2〜3週間後の `campkit-seo-competitor-scan`（金）で、`solo-camp-cot` のアフィリエイトクリックが購入につながるようになったか（在庫切れの解消）と、`sierra-cup` の Amazon ボタンが木製蓋モデルに着地するようになったかを確認する。
+
+---
+
 ## 2026-10-28 取りこぼし解消：one-touch-tarp・screen-tarp の在庫切れと Amazon 導線を是正（campkit-20261028-M03）
 
 **狙い**: `article-fix-backlog.tsv` の取りこぼし（`out_of_stock`／`asin_mismatch`）を解消する。どちらも「カードまで到達しているのに、楽天の採用SKUが売り切れている／Amazon ボタンが別の色・別のコーティングに着地する」型で、クリックが購入につながらない。対象は 2 記事・取りこぼし 4 行（＋同じカードの `price_unconfirmed` 1 行も同時に処置）。
