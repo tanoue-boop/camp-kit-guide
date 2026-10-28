@@ -4,6 +4,29 @@
 
 ---
 
+## 2026-10-29 arcteryx-arro22 新規／狙いKW アークテリクス アロー22／新規のため基準なし（campkit-20261029-N12）
+
+**狙い**: 「アークテリクス アロー22」（月間1,000〜1万）のブランド＋モデル名の購入直前検索を取りにいく。バックパック領域はサイト全体クリックの約4割で、既存の `arcteryx-backpack`（ブランド総合記事・9モデル・用途別）とカニバらせないため、**アロー 22を中心としたモデル軸**に限定した。新規記事のため比較対象となるリライト前の順位はなし。
+
+**上位記事との差**: 上位は (1) アロー22の単品実機レビュー（yamahack・my-best・BE-PAL・個人ブログ多数）、(2) アロー22 vs アロー16 の2モデル定性比較、(3) ブランドまとめ（hinata・CAMP HACK）の3型。製品数は1〜4、比較軸はポケット構成・シルエット・使用感といった定性評価が中心で、数値を同一単位でそろえた横並び表は見当たらなかった。
+
+**差別化として入れた4点**
+
+1. **アロー22の「メーカー品番が2系統」**という事実を表で提示。`X000010706`＝55×30×25cm／1,080g、`X000007969`＝53.3×35.5×18cm／950g。同じ商品名で公表重量が130g・奥行が7cm違う。上位記事はどれも片方の数値だけを単独で載せており、この食い違いに触れたものは無い。
+2. **カラー別の両モール在庫表**（Black／Lampyre／Cloud／Void・Cloud／Aquaculture・Black）。両モールで同じカラーを選べるのは Black と Lampyre の2色だけで、残り3色は楽天のみという状況を確認日つきで明示。
+3. **容量1Lあたりの重量**で9モデルを並べ、アロー系が約49〜53g/L でシリーズ最重量側だと数値で示した（マンティス26・アルファFL20は約32g/L）。「アロー22は重い」という検索者の不満に数値で答える節を独立させた。
+4. **アークテリクスの国内正規流通品は両モールで価格が完全一致**（9モデルすべてで楽天＝Amazon）という発見を、並行輸入品・転売出品の見分け方の根拠として使った。
+
+**構成**: 結論3文（22L・1,080g・37,400円） → QuickPickMdx 3商品 → 用途別おすすめ早見（購入列 `buy`） → 9モデルスペック比較表（品番・容量・重量・実寸・素材・PC収納・価格・購入列） → 品番2系統と新旧の見分け方 → カラー別入手状況 → 選び方7ポイント → アロー系3モデル → よく比較される3モデル → 軽量3モデル → お手入れTips → ガイド導線 → FAQ6問（見出し形式） → 選定基準と情報源 → まとめ表（3列9行）。
+
+**製品**: 9モデル（アロー22 Black／アロー22 Lampyre／アロー16 Lampyre／マンティス26／マンティス16／グランヴィル16／アルファFL20／アクシオス10／ヒリアド15）。全9モデルで楽天 hb.afl と `amazonAsin` を設置し、Amazon は dp を実取得して購入ボックス・価格・販売元・並行輸入表記を確認した。グランヴィル25・マイコン37・エアリオス18・ブレード20/28・コンシール15・インデックス15 と、アロー22の Cloud／Void・Cloud／Aquaculture・Black は両モールで新品が揃わず不採用（理由を本文に明記）。
+
+**内部リンク**: 新記事 → 既存16本（arcteryx-backpack／outdoor-commute-backpack／northface-commute-backpack／northface-hotshot／mammut-backpack／patagonia-backpack／osprey-daily-backpack／gregory-daypack／karrimor-backpack／camp-backpack-capacity-guide／camp-backpack-beginner／mountain-backpack-30l／backpack-40l／backpack-rain-cover／waterproof-backpack／camp-gear-sale-timing）。既存 → 新記事3本（arcteryx-backpack 導入部／outdoor-commute-backpack 背面長の節／camp-backpack-beginner ガイド導線。いずれもリンク1文のみ追加・`updatedAt` 不変）。
+
+**起票**: `article-fix-backlog.tsv` に arcteryx-backpack 第6位 グランヴィル25 の `discontinued_404`（楽天 beacle/531-07099 が HTTP 404・amazonAsin B0H8NZDX84 が並行輸入品）、`rewrite-backlog.tsv` に arcteryx-backpack の `freshness`（グランヴィル16 が Amazon で買えるようになった）を各1行。本タスクでは修正しない。
+
+---
+
 ## 2026-10-29 取りこぼし解消：sleeping-bag-winter-beginner・winter-camp-guide の購入導線を是正（campkit-20261029-M02）
 
 **狙い**: 本文・見出しの検索シグナルは必要最小限しか動かさず、購入導線（楽天 hb.afl ／ Amazon）の「飛び先の色・仕様が違う・買えない・価格が合わない」を解消して取りこぼしを止める。`_file/article-fix-backlog.tsv` の取りこぼし行（asin_mismatch 6・product_swap 2）＋同じ記事の price_unconfirmed 2行・name_fix 1行＝**計11行**を done 化した。
