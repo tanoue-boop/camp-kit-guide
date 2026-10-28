@@ -4,6 +4,20 @@
 
 ---
 
+## 2026-10-28 coleman-backpack 新規（campkit-20261028-N09）
+
+**狙いKW**: 「コールマン リュック」「コールマン リュック おすすめ」「コールマン バックパック」（月間1万〜10万）。**新規記事のため比較基準なし**（効果測定は2〜3週間後の `campkit-seo-competitor-scan` で、`coleman-backpack` の対象クエリ順位を初回測定する）。
+
+- **追加記事**: `content/posts/coleman-backpack.mdx`（category: backpack・11製品・全カードに楽天 hb.afl ＋ `amazonAsin`）
+- **狙いと差別化**: 上位10記事（hinata 20モデル／OCEANS 12モデル／funq 17選／マイナビ 15選／オリコン 5選／ハピキャン 16選）は**いずれも比較表を持たず、シリーズ別のリスト紹介**だった。数値の記載も容量と重量までで、実寸・素材・PC対応インチを横並びにしたものが無い。そこで本記事は「容量・重量・実寸（W×H×D）・素材・PC端末収納・価格」の6列比較表＋用途別早見表＋購入列（`buy`）を差別化軸にした。
+- **採用11モデル**（容量15〜50L・重量410g〜1.1kg・実勢3,980〜10,728円）: ウォーカー15／25／33、ウォーカースクエアバックパック、シールド25／30／35、エスリア30、アウトビズバックパック／同スリム、トレックパック
+- **AI検索対応（campkit-aio-spec）**: 冒頭に数値入り「結論」3文 → `QuickPickMdx`（ウォーカー25／シールド35／ウォーカー15）→ 用途別早見 → 数値比較表 → 選び方6点 → 各製品 → 導線節 → FAQ6問を**見出し形式** → 「この記事の選定基準と情報源」
+- **内部リンク**: 新記事 → 既存13記事（camp-backpack-beginner／camp-backpack-capacity-guide／outdoor-commute-backpack／northface-backpack／northface-commute-backpack／gregory-backpack／deuter-backpack／osprey-backpack／millet-backpack／karrimor-backpack／patagonia-backpack／arcteryx-backpack／mammut-backpack／mountain-backpack-30l／backpack-40l／backpack-large／backpack-rain-cover／waterproof-backpack／coleman-tent／coleman-chair／coleman-sleeping-bag／camp-gear-sale-timing）。既存 → 新記事は3本（camp-backpack-beginner の「ブランド別に選ぶ」リスト／patagonia-backpack の同リスト／outdoor-commute-backpack の末尾導線。いずれもリンク1文のみの追加で `updatedAt` は変更していない）
+- **情報源**: 容量・重量・実寸・素材・PC対応はコールマン公式オンラインショップ（ec.coleman.co.jp）の公表値。価格・レビューは2026-10-28 の楽天市場（ヒマラヤ楽天市場店・アルペン楽天市場店）とAmazonの表示値
+- **不採用と理由を本文に明記**: アメリカンクラシック25／33（Amazon側が「TR25／TR35」の別型番体系で同一モデルと確定できない）、JNデイパック（楽天の単一カラーSKUとAmazon.co.jp出品のカラーが不一致）、フラッシュパック30／40（楽天に新品在庫なし）、アトラス25（楽天は中古のみ）
+
+---
+
 ## 2026-10-28 取りこぼし解消（campkit-20261027-M04）
 
 `_file/article-fix-backlog.tsv` の取りこぼし行（`asin_mismatch`）を2記事ぶん（2行）解消し、同じ記事を開いたついでに `name_fix` 1行も解消した（計3行）。対象記事は、取りこぼし記事の GSC 28日クリック（`data-campkit-gsc-page-28d-20261013.tsv`）が残り全記事0のため POLICY どおり slug 順で選定。先頭の cooler-box-day-camp・day-camp-cooler-box は 10/26・10/27 に処理済み（前者は条件の積集合が空で無変更 DONE）、day-camp-starter-set・ecoflow-power・family-camp-cot・family-camp-mat・group-camp-table・lightweight-mountain-tent は 10/27 の M01・01・M02・M03 で処理済みのため、次の **log-carrier・low-style-chair** を採用した。着手時 HEAD `1f9f541` で他タスク（C01・H01・N08 を含む）との衝突なし。
