@@ -4,6 +4,23 @@
 
 ---
 
+## 2026-10-29 取りこぼし解消：trekking-pole・winter-camp-gloves の購入導線を実測で再確認（campkit-20261029-M03）
+
+**狙い**: 本文・見出しの検索シグナルは動かさず、購入導線（楽天 hb.afl ／ Amazon）が「買えない・価格が合わない」状態になっていた取りこぼし2行を解消する。`_file/article-fix-backlog.tsv` の取りこぼし行（`out_of_stock` 1・`asin_mismatch` 1）を done 化した。**両方とも起票時点の不具合が実測で解消していたため、商品差し替え・採用店付け替え・ASIN 差し替えはいずれも不要だった。**
+
+**旧→新・理由（issue_type）**
+
+| 記事 | 位置 | issue_type | 旧 | 新 | 理由 |
+|---|---|---|---|---|---|
+| trekking-pole | 第3位 DABADA 3段折りたたみ式トレッキングポール カーキ（`dabada-folding-pole`） | out_of_stock | `price="5500"`／比較表 `約5,500円`／まとめ表 `5,500円台`／末尾 `3,000〜6,000円帯` | `price="6300"`／比較表 `約6,300円`／まとめ表 `6,300円台`／末尾 `3,000〜6,500円帯` | 楽天 `dabada/new-a-pole` は 2026-09-21 の走査では全6変種 soldout だったが、実取得で `InStock`・全6変種が在庫あり（カーキ系 qty=236／チタングレー系 qty=206）に復帰。Amazon `B0H6W6JDRF` も在庫切れ・出品ゼロから DABADA公式ストア・在庫あり・¥6,300 に復帰。両モールが ¥6,300 で一致したため、在庫0を理由とした差し替えはせず、カード価格と記事内の価格表記だけを実勢に揃えた。採用店・`affiliateUrl`・`image`・レビュー値・`amazonAsin` は不変 |
+| winter-camp-gloves | 第1位 ラドウェザー 防寒手袋（`lad-weather-main`） | asin_mismatch | `amazonAsin="B09MQ8PWMJ"` | `amazonAsin="B09MQ8PWMJ"`（据え置き・**mdx 不変更**） | 起票根拠は「`B09MQ8PWMJ` が親の変種一覧から消え、dp が `B09MQ8Z9XC`（L）へ黙示着地する」だったが、dp 実取得で `landingAsin=currentAsin=input#ASIN=B09MQ8PWMJ`・変種一覧に `B09MQ8PWMJ=M` が実在・`redirected_to` なし・購入ボックスありを確認。カードはサイズを名指ししていないので既設置 ASIN のまま整合する |
+
+**価格帯記述の扱い**: `trekking-pole` 末尾の「LAD WEATHERやDABADAのような3,000〜6,000円帯で必要十分」は、第1位の DABADA カーボン（¥6,380）の時点で既に枠を外れていた。第3位が ¥6,300 になったことで2モデルとも枠外になるため、**価格帯の記述側を `3,000〜6,500円帯` に広げて実勢に合わせた**。frontmatter `description` の価格レンジ（3,280〜17,500円）とFAQの「3,280円〜17,500円と5倍以上」「3,000〜9,000円帯」は ¥6,300 でも成立するので触っていない。
+
+**触っていないもの**: 両記事の `updatedAt`・`date`・`thumbnail`、全カードの `affiliateUrl`・`image`・`amazonAsin`・`rakutenRating`／`rakutenReviewCount`・`badge`、`winter-camp-gloves` の mdx 全体。
+
+---
+
 ## 2026-10-29 arcteryx-arro22 新規／狙いKW アークテリクス アロー22／新規のため基準なし（campkit-20261029-N12）
 
 **狙い**: 「アークテリクス アロー22」（月間1,000〜1万）のブランド＋モデル名の購入直前検索を取りにいく。バックパック領域はサイト全体クリックの約4割で、既存の `arcteryx-backpack`（ブランド総合記事・9モデル・用途別）とカニバらせないため、**アロー 22を中心としたモデル軸**に限定した。新規記事のため比較対象となるリライト前の順位はなし。
