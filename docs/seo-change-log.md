@@ -4,6 +4,30 @@
 
 ---
 
+## 2026-10-28 取りこぼし解消（campkit-20261027-M04）
+
+`_file/article-fix-backlog.tsv` の取りこぼし行（`asin_mismatch`）を2記事ぶん（2行）解消し、同じ記事を開いたついでに `name_fix` 1行も解消した（計3行）。対象記事は、取りこぼし記事の GSC 28日クリック（`data-campkit-gsc-page-28d-20261013.tsv`）が残り全記事0のため POLICY どおり slug 順で選定。先頭の cooler-box-day-camp・day-camp-cooler-box は 10/26・10/27 に処理済み（前者は条件の積集合が空で無変更 DONE）、day-camp-starter-set・ecoflow-power・family-camp-cot・family-camp-mat・group-camp-table・lightweight-mountain-tent は 10/27 の M01・01・M02・M03 で処理済みのため、次の **log-carrier・low-style-chair** を採用した。着手時 HEAD `1f9f541` で他タスク（C01・H01・N08 を含む）との衝突なし。
+
+### log-carrier 第5位（ZUKK 薪バッグ ZKPB-FOB2 オリーブブラウン）
+
+| 項目 | 変更前 | 変更後 | 理由 |
+|---|---|---|---|
+| `amazonAsin` | `B0D8VHYH1K` | **`B0D8VG95DG`** | 旧 ASIN の着地変種が [コヨーテブラウン×ダークブラウン] で、カード name と楽天の選択SKU（`ZKPB-FOB2/オリーブブラウン`・¥5,800・qty=3）が名指しするオリーブブラウンと食い違っていた（`issue_type=asin_mismatch`・campkit-20260921-67 起票）。dp を1件実取得し、変種一覧3件のうち [オリーブブラウン×ダークブラウン]（カラー欄・容量50L・ブランド名 ZUKK・¥5,800・在庫あり）を確認して差し替え |
+
+`price`（5,800）・`name`・`description`・本文・比較表・まとめ表・`image`・`badge`・レビュー属性・`updatedAt` は不変更。
+
+### low-style-chair（キャンプ用ローチェア5選）
+
+| 箇所 | 変更前 | 変更後 | 理由 |
+|---|---|---|---|
+| 第5位 `amazonAsin` | `B06Y3WWX2S` | **`B08P43XLQJ`** | 旧 ASIN の着地変種が [カーキ色] で、カード name と楽天の選択SKU（`278/ブラック`・¥8,680・qty=8）が名指しするブラックと食い違っていた（campkit-20260921-67 起票）。dp を1件実取得し、変種一覧5件のうち [ブラック]（メーカー型番 F-1003C-BK・￥8,689＝gap 0%・残り4点）を確認して差し替え |
+| 第3位 `affiliateUrl` | `kompas/10028815` | **`snowpeak-official/lv-091`** | 採用店 kompas の実取得で**全変種が quantity=0（sold-out・meta OutOfStock・「お取り寄せ」表記）＝購入不可**になっていた。楽天API（「スノーピーク ローチェア30 LV-091」・availability=1）で在庫ありの出品を洗い、§11-2 段①のメーカー公式店（¥17,600＝カード price と同額・ブラウン quantity=29）へ付け替え |
+| 第3位 `image` | `thumbnail.image.rakuten.co.jp/@0_mall/kompas/...lv-091_01.jpg` | **`shop.r10s.jp/snowpeak-official/cabinet/newthumb202403/lv-091_2403.jpg`** | 採用店を変えた回は image も新しい店のキャビネットURLへ付け替える（判定基準 §11-8 追補 条文1）。HTTP 200 を実取得で確認 |
+| 第3位 `rakutenRating`／`rakutenReviewCount` と本文 | 4.77／43・「評価★4.8と満足度は非常に高い水準」 | **4.93／40**・「評価★4.9と満足度は非常に高い水準」 | レビューは店ごとの別集計なので、採用店を変えたら新しい店の実測値に揃える（同 条文2）。公式店の実測は ★4.93／40件 |
+
+第3位の `name`（スノーピーク ローチェア30 LV-091 ブラウン）は変更不要で、付け替え後の検出器では選択SKU が `264/ブラウン`（qty=29）になり `name_fix` の起票理由（選択SKU がカーキだった）も解消した。比較表は購入列・評価列を持たないため不変。`price`（17,600）・`badge`・`thumbnail`・`updatedAt` は不変更。
+
+---
 ## 2026-10-27 patagonia-backpack 新規（campkit-20261027-N08）
 
 **2026-10-27 patagonia-backpack 新規／狙いKW「パタゴニア リュック」（月間1万〜10万）／新規のため基準なし**
