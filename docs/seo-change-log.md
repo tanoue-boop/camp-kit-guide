@@ -4,6 +4,26 @@
 
 ---
 
+## 2026-10-29 northface-hotshot 新規／狙いKW ノースフェイス ホットショット／新規のため基準なし（campkit-20261029-N11）
+
+**狙い**: 「ノースフェイス ホットショット」（月間1,000〜1万）のブランド＋モデル名の購入直前検索。バックパック領域はサイト全体クリックの約4割で、同クラスターの northface-backpack／northface-commute-backpack／northface-fusebox に続くモデル軸記事の4本目。新規記事のため比較基準となる順位データはなし。
+
+**上位記事との差（WebSearch で確認）**: 上位は①1モデルの実機レビュー（くまトリップ・のんびりブログ・bag103island 等）と②ホットショット／ビッグショット／シングルショットの3モデル比較（hiker-h・shino-chan・goodsinformation）に二分される。モデル別の容量・重量・実寸・素材・対応PCを**同一単位で10モデル横並びにした数値表はなく、価格の確認日を書いた記事もない**。
+
+**差別化として入れた切り口**:
+1. ショットシリーズ4モデル（ホットショット27L／ビッグショット33L／シングルショット20L／ホットショットミニ13L）＋同容量帯のノースフェイス6モデルを、容量13〜33L・重量約380〜1,000g・実勢6,556〜28,699円で横並び（9列・確認日つき）
+2. **ホットショットCL（NM72006）・ホットショットSE（NF0A3KYJ）・エクストラショット（NM72300）が「今どのモールで新品で買えるか」の供給状況を表で明示**（上位記事に無い切り口。CL＝Amazon が実勢を大きく上回る出品のみ／SE＝Amazon が並行輸入のみ／エクストラショット＝Amazon に対応出品なし）
+3. 新旧の見分け方を「型番の桁」で示す（現行は NM72302・容量表記は販売ページで26L/27Lに分かれるので容量では判定しない）
+4. 「ホットショット27Lとビッグショット33Lの価格差は100円」という、価格では選べない事実からの選び分け（本体の高さ50cm/54cmと対応PC 15/17インチで決める）
+
+**構成**: 結論3行 → QuickPickMdx（迷ったらこれ・3商品）→ モデル別おすすめ早見（購入列つき）→ 10モデル比較表（型番・容量・重量・実寸・素材・PC収納・価格・購入列）→ 選び方7項目 → CL/SE/エクストラショットの供給状況 → ショットシリーズ4モデル → 比較枠6モデル → お手入れTips → ガイド導線 → FAQ 6問（見出し形式）→ 選定基準と情報源 → まとめ表。
+
+**内部リンク**: 新記事から northface-backpack／northface-commute-backpack／northface-fusebox／camp-backpack-beginner／camp-backpack-capacity-guide／mountain-backpack-30l／backpack-40l／outdoor-commute-backpack／coleman-backpack／gregory-daypack／osprey-daily-backpack／karrimor-backpack／backpack-rain-cover／waterproof-backpack／camp-gear-sale-timing へ15本。既存記事からの被リンクは northface-backpack（導入）・northface-commute-backpack（導入）・northface-fusebox（ガイド導線）・camp-backpack-beginner（ガイド導線）の4本を1文ずつ追加（他の本文と updatedAt は不変）。
+
+**全10製品に楽天 hb.afl ＋ amazonAsin を設置**。楽天・Amazon 両方で新品・在庫ありを実物で確認（Amazon は dp ページで title／価格／購入ボックスを実測）。並行輸入・中古・転売系の出品は採用せず、該当するCL・SE・エクストラショットは本文での供給状況の説明にとどめた。
+
+---
+
 ## 2026-10-28 取りこぼし解消：sierra-cup・solo-camp-cot の在庫切れと Amazon 導線を是正（campkit-20261028-M04）
 
 **狙い**: `article-fix-backlog.tsv` の取りこぼし（`out_of_stock`／`asin_mismatch`）を解消する。対象は 2 記事・取りこぼし 3 行（＋同じ記事の `price_unconfirmed` 1 行も同時に処置）。`solo-camp-cot` は 3 製品のうち 2 製品が 5 週間以上「楽天の採用店で全変種売り切れ」のままで、記事に到達した読者が 1 人も買えない状態だった。
