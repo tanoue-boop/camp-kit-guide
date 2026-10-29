@@ -4,6 +4,29 @@
 
 ---
 
+## 2026-10-29：技術SEO監査（campkit-technical-seo-audit／月次）
+
+GSC取得は成功（tanoue@mjo-style.com、URLプレフィックスプロパティ）。実行した是正は**0件**——代表3ページに「機械的に確実で安全」な欠陥がなかったため（content/posts等の変更なし。本エントリのみ追記）。
+
+### 点検結果（前回2026-10-22比）
+
+- **GSCインデックス作成レポート**: 登録済み **220**（前回215、+5）／未登録 **81**（前回79、+2）。内訳: 404 **13**（前回11、+2）／リダイレクト **3**（同）／代替canonical **0**（前回1）／クロール済み-未登録 **64**（同）／検出-未登録 **1**（前回0、+1）。
+- **GSC Core Web Vitals**: モバイル・PCとも「過去90日間にトラフィックが十分にありません」（変化なし）。
+- **PageSpeed Insights API**: 429（Queries per day 超過）。**6ヶ月連続ラボデータ未取得**。
+- **robots.txt**: 正常・変更なし。**sitemap**: 子サイトマップ1本（`/sitemap-0.xml`）に**292 URL**（前回284、+8）。lastmodは全件ビルド時刻（2026-10-28T21:07Z）で同一（既知課題が継続）。
+- **代表3ページ**: soto-burner / osprey-backpack は canonical正／h1×1／JSON-LD（BlogPosting+author／ItemList／FAQPage／BreadcrumbList／Product）正常／og:imageは自社ホスト（outdoor-02 / outdoor-06）／SNSシェアurlは記事URLで非空／`alt=""` は各11件＝装飾SVGアイコンのみ／H1直下に日付表示（PR表記は本文冒頭4000字内に存在）／商品カード画像は楽天外部直リンク（想定どおり）。トップは canonical正／h1×1／WebSite+Organization／og:imageは自社ホスト（og-default.png）。title実長54〜55字（サフィックス込み）、descriptionはsoto 145字／osprey 149字で規定超過傾向（既知）。
+- **auto-deploy**: `logs/auto-deploy-status.json` は `deploy-failed`（2026-10-29 08:56）。原因は未追跡の `result-campkit-20260926-104.md` を「その他1件」として拾う状態の継続（10/08から指摘済み）。公開内容への実害なし。
+
+### 実行した是正：0件
+
+### 未解決の提案（人間判断待ち）
+
+1. `result-campkit-20260926-104.md` の削除または `.gitignore` 追加（deploy-failed の繰り返しを止める）。
+2. クロール済み-未登録64件・404 13件（+2）: 品質/重複シグナルとURL特定が必要。
+3. PSI APIキー発行、sitemap lastmod個別化、description超過傾向はコンポーネント/設定変更のため提案のまま。
+
+---
+
 ## 2026-10-29 取りこぼし解消：naturehike-mat 第4位を在庫ある変種へ・solar-portable-power 第4位を商品差し替え（campkit-20261029-M04）
 
 **狙い**: 購入導線（楽天 hb.afl ／ Amazon）が「買えない・構成が違う」状態になっていた取りこぼし2行（`out_of_stock` 1・`asin_mismatch` 1）と、同一カードの `price_unconfirmed` 1行を解消する。本文の検索シグナル（title・見出し構成・順位の並び）は動かさず、該当カードと、その商品に紐づく価格・スペック記述だけを実測値に揃えた。
