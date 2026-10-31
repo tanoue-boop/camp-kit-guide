@@ -4,6 +4,26 @@
 
 ---
 
+## 2026-11-01 取りこぼし解消：デイライトプラスの再入荷ウォッチを終了／`attack-pack` のカリマー2枚を在庫のある色・現行価格へ（campkit-20261101-M01）
+
+**狙い**: `article-fix-backlog.tsv` の `status≠done` かつ `asin_mismatch`／`out_of_stock` を 0 行にする。対象は `osprey-daily-backpack` 第1位の `asin_mismatch`（M02 が残した再入荷ウォッチ）1行。あわせて同クラスターで前日に起票された `attack-pack` の `name_fix` 2行（名指し色が楽天で売切・価格が +25% 乖離＝実質的な取りこぼし）も消化した。`title`・`updatedAt`・`thumbnail`・カテゴリ・記事構成は動かしていない。
+
+**旧→新・理由（issue_type）**
+
+| 記事／位置 | issue_type | 旧 | 新 | 理由 |
+|---|---|---|---|---|
+| `osprey-daily-backpack` 第1位（`osprey-daylite-plus`）ほか同一商品の計6枚 | `asin_mismatch` | `amazonAsin="B0FW3N286W"` | **変更なし（B0FW3N286W を正式採用として確定）** | 国内正規 `B08LP1WWPT` の購入ボックスは戻っていない（`no_buybox`＝add-to-cart／buy-now いずれも無し。ページ内に出る ¥20,868 は購入できない参考値）。代替候補も `B019TQPL4A` ¥21,165（+66%）／`B0BLHR6GLB`・`B0C62HPQTX` ¥19,427（+52%）／`B0BKQLCWMS` ¥31,932／`B0BKQHD4WX` ¥33,017 と全てカード price 12,760円 に対し +40% 超で不採用。現行 `B0FW3N286W` は 販売元 Amazon.co.jp・購入ボックスあり・¥10,208（-20%）で導線が生きているため、ウォッチを打ち切ってこれを採用と確定した |
+| `attack-pack` 第1位（`karrimor-tatra20`） | `name_fix`（実態は `out_of_stock`） | name「…20L **ダークチャコール** …」／`price="14850"`／`amazonAsin="B0D6GC7CWT"`／比較表 14,850円 | name「…20L **ブラック** …」／`price="11870"`／`amazonAsin="B0D6GCYJRL"`／比較表 11,870円 | 楽天 `canpanera/k03014` の実測は ダークチャコール **qty=0**／ミッドナイト qty=2／ブラック qty=19（全色 ¥11,870）。名指し色が売切なので CLAUDE.md §B(1)＋33(c) に従い、薄在庫のミッドナイトを飛ばして ブラック に移した。Amazon 側も同色（`B0D6GCYJRL`＝[カリマー] tatra 20 ブラック・¥11,860・購入ボックスあり・株式会社ヒマラヤ）に合わせ、両モールのボタンが同じ色に着地する状態にした |
+| `attack-pack` 第5位（`karrimor-cadet20`） | `name_fix` | name に色の名指しなし（既定の ペールカーキ2 qty=1 に着地）／`price="8800"`／`amazonAsin="B0FGNG35FC"`／badge「小柄な体格向け・8,800円」 | name「…20L **ミッドナイト** レディース・ジュニア向け」／`price="11000"`／`amazonAsin="B0FGND8VS8"`／badge「小柄な体格向け・11,000円」 | 楽天 `canpanera/k03199` の実測は ペールカーキ2 qty=1／F.グリーン qty=1／ミッドナイト qty=5（全色 ¥11,000）。軸の先頭値が薄在庫なので 33(c) に従い qty=5 の ミッドナイト を名指しし、Amazon も同色（`B0FGND8VS8`＝[カリマー] cadet 20 Midnight・¥9,900・購入ボックスあり・Lafitte ラフィートスポーツ）に合わせた。カード価格は店側の値上げで 8,800→11,000 円（+25%）になっていたため現行価格へ更新 |
+
+**`attack-pack` 本文の整合（価格が2枚とも動いたため）**: `description` のタトラ20 14,850円→11,870円／第1位本文「約14,850円と価格は中〜上位ですが」→「約11,870円で今回の5点では2番目に手頃ですが」／第5位本文「約8,800円」→「約11,000円」（5点で最も手頃という位置づけは維持）／向いている人「予算を1万円以内に抑えたい方」→「予算をできるだけ抑えたい方」／FAQ の価格帯「8,800〜15,299円」→「11,000〜15,299円」／まとめ表のタトラ20 14,850円台→11,870円台・カデット20 行の見出し「小柄な体格・予算1万円以内」→「小柄な体格・5点で最も手頃」＋8,800円台→11,000円台。商品・順位・アフィリリンク・`thumbnail` は変更していない。
+
+**デイライトプラス6枚を触らなかった理由**: `verdict=ok`／`price_gap=-20%`／`seller_type=amazon` で6枚とも導線が生きており、楽天側も `check-card-name-vs-sku.cjs` で6枚 flags=OK（`locondo/os5352am000016`・ブラック・¥12,760）を再実測した。M02 が書いた「国内正規が戻ったら 4.6/1,827件 の評価表記ごと戻す」手順は、戻り先が無いまま台帳に残すと再入荷ウォッチが永続するため、**ウォッチを終了して現状を正式採用に確定**した（再入荷すれば `check-amazon-asin.cjs` の定期照合で `price_gap` 側から拾える）。
+
+**台帳**: `article-fix-backlog.tsv` の3行を `done`（`status≠done` の `out_of_stock`／`asin_mismatch` は **0行**になった。残るのは `price_unconfirmed` 137／`name_fix` 32／`product_swap` 10／`discontinued_404` 2）。`amazon-asin-check.tsv` は対象6枚を `--judge … =ok --seller amazon` で再判定、`attack-pack` の2枚を `--only` で再照合（`verdict=ok`・`price_gap` 0%／-10%・`seller_type=marketplace`）。
+
+---
+
 ## 2026-11-01 新規：`salomon-backpack`（サロモン リュックおすすめ10選）を追加（campkit-20261101-N21）
 
 **狙いKW**: 「サロモン リュック」「サロモン リュック おすすめ」「サロモン バックパック 通勤」「サロモン トレラン リュック」。**新規のため比較基準なし**（効果測定は2〜3週間後の `campkit-seo-competitor-scan` で初計測）。10/13 取得の GSC で「サロモン」を含むリュック系クエリは未出＝新規領域。既存の `osprey-backpack`／`gregory-backpack` 等のブランド軸記事と商材の重複は無い。
