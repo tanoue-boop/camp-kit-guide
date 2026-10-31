@@ -4,6 +4,38 @@
 
 ---
 
+## 2026-10-31 取りこぼし解消：オスプレー3記事の売切リンク付け替え＋ULスタッフパックを商品差し替え（campkit-20261031-M01）
+
+**狙い**: `article-fix-backlog.tsv` の `out_of_stock`／`asin_mismatch` 4行（対象記事 `osprey-daily-backpack`・`osprey-backpack`）を消化する。あわせて同一商品を載せる他記事を棚卸しし、売切URLを共有していた `camp-backpack-capacity-guide` も同じ付け替えを行った。`title`・`updatedAt`・`thumbnail`・カテゴリは一切動かしていない。
+
+**旧→新・理由（issue_type）**
+
+| 記事／位置 | issue_type | 旧 | 新 | 理由 |
+|---|---|---|---|---|
+| `osprey-daily-backpack` 第1位（`osprey-daylite-plus`） | `out_of_stock` | 楽天 `canpanera/o09039`（★4.63/19件） | 楽天 `rakuzanso/os57176`（レビュー0件のため評価属性を削除） | 指定色ブラックの SKU 587890 が qty=0（他5色は在庫あり）。同型番・同額 ¥12,760 でブラックに在庫のある国内正規取扱店は `rakuzanso/os57176`（qty=1）のみ。`kompas/10094602`・`p2chiba/os57176` もブラック売切を実測 |
+| `osprey-backpack` 第2位（`osprey-daylite-plus`） | `out_of_stock` | 同上 | 同上（`badge`「最軽量0.59kg・★4.63(19件)」→「最軽量0.59kg・10モデル最安12,760円」） | 同一URLを共有していたため同時に付け替え。本文の「楽天のレビューは19件・★4.63と最多」は、採用ページにレビューが無い第9位・第10位と同じ書き方へ統一 |
+| `camp-backpack-capacity-guide` 第1位（`cap-osprey-daylite-plus`） | `out_of_stock`＋`price_unconfirmed` | 同上・`price="11484"` | 同上・`price="12760"` | 手順4の棚卸しで同じ売切URLを共有していたことが判明。価格も実リンク先と +11.1% 乖離していたので同時に是正し、`name` に「20L …ブラック」を入れて SKU を固定（`color_unspecified` 解消） |
+| `osprey-daily-backpack` 第5位（`osprey-ul-stuffpack` → `osprey-daylite-cinch`） | `asin_mismatch`（＋楽天も全変種売切） | OSPREY ULスタッフパック 18L OS58830 タンドラグリーン／楽天 `basecamp-saga/10008osp2501`／`price="7700"`／`amazonAsin="B0DSGGKSH4"` | OSPREY デイライトシンチ 15L OS57178 ブラック／楽天 `mitsuyoshi/osp00000000314`／`price="9350"`／`amazonAsin="B08LNYHJWQ"` | 旧リンク先は `stock=soldout`（全変種欠品）。代替の `rakuzanso/os58830` もタンドラグリーン qty=0。Amazon 側は国内出品 `B0BKQH39BJ`（ブラック）が購入ボックスなし・`B0BKQKCMWG`（ブルー）が ¥10,876（+41%）・既設置 `B0DSGGKSH4` が Amazon Global Store ¥10,935（+42%）で、両モールを正価でそろえられないため商品差し替え。新商品は楽天・Amazon ともに ¥9,350・在庫あり（Amazon の販売元は国内小売のロッジ プレミアムショップ） |
+| `osprey-daily-backpack` 第3位（`osprey-arcane-largeday`） | `asin_mismatch` | `amazonAsin="B07Z9X4CB5"` | **据え置き** | 国内正規品の ASIN が 2026-10-31 時点で存在しないことを実確認（Amazon 検索3回＋dp照合3件: `B0BTTSF6MH`＝購入ボックスなし／`B0G1TD8WX3`＝¥27,888 のアースムーンベージュ変種／`B09JX2T6RH`・`B093R8J1BX` は機械翻訳タイトルの並行輸入）。既設置 ASIN は**同一商品・購入ボックスあり・残り8点・¥19,115（カード価格 +2%）**で取りこぼしは発生しておらず、楽天 `canpanera/o09165` は国内正規取扱・¥18,700・qty=7。差し替えは「通勤特化・PC収納」枠（選び方ポイント2・FAQ2問・まとめ表で計5箇所参照）を崩すうえ、同じ ASIN を使う `outdoor-commute-backpack` 第6位が残るため実施しなかった |
+| `osprey-daily-backpack` 第3位の容量表記 | `name_fix` | 「アーケイン ラージデイ **28L**」 | 「アーケイン ラージデイ **20L**」 | オスプレー公表値および正規取扱店の表記はいずれも20L。見出し・比較表（`name`・容量列）・まとめ表・QuickPick の `spec` を統一し、FAQ「通勤・通学に最適な容量」も20L前提に書き換え。2026-10-22 公開の `outdoor-commute-backpack` との数値の食い違いも解消 |
+| `camp-backpack-capacity-guide` 第2位（`cap-osprey-stratos-36`） | `price_unconfirmed` | `price="22999"`／★4.67/9件 | `price="23999"`／★4.7/10件 | 実リンク先 `glv/opy-96` の現行価格（qty=24）。`name` に「シテシアンブルー」を追加して SKU を固定し、`osprey-backpack` 第4位の同一SKUと表記がそろった |
+
+**SEO的な狙いと整合**: 差し替えた第5位が記事内で担う役割は「軽さ・サブバッグ優先」の枠で、デイライトシンチ 15L（15L・0.34kg・9,350円）も**5モデル中の最軽量かつ最安**なので枠の意味は維持される。一方で価格帯の下限が ¥7,700→¥9,350 に上がるため、`frontmatter description`（「実勢7,700〜18,700円」→「実勢9,350〜18,700円」）・FAQ Q4（価格差の説明）・まとめ表の価格帯を同じタスクで更新した（監督方針 `result-POLICY-20261019-supervisor-rules.md` §3）。「パッカブル／畳める」の訴求は新商品に当てはまらないため、本文・比較表・まとめ表・QuickPick から全削除し、代わりに「巾着型（ドローコード開閉）・0.34kg・奥行19cm」という実スペックで差別化した（第2位のデイライト 13L＝0.46kg・ジッパー開閉との違いを数値で明示）。
+
+**レビュー表記**: `rakuzanso/os57176` はレビュー0件のため、デイライトプラスの3枚から `rakutenRating`／`rakutenReviewCount` を省略し、`badge`・本文・description でも楽天のレビュー件数に触れないよう書き換えた（Amazon の ★4.6/1,761件 は `osprey-daily-backpack` 側で維持）。新規採用のデイライトシンチは楽天 ★3.0/1件・Amazon ★4.6/536件を両方記載した（`osprey-womens-backpack` 第9位と同じ扱い）。
+
+**今回の棚卸しで新たに起票した3件（`article-fix-backlog.tsv`・pending）**
+
+- `camp-backpack-capacity-guide` 第3位 HAWK GEAR 80L（`discontinued_404`・priority A）: 楽天 `mamesshop/backpack01` が HTTP 404。購入導線が死んでいるので 65〜80L 枠の商品差し替えが必要
+- `attack-pack` 第3位 デイライトプラス（`out_of_stock`・priority B）: 同じ `canpanera/o09039` のブラック売切。対象記事外のため未変更
+- `osprey-daily-backpack` 第1位 デイライトプラスの Amazon 側（`out_of_stock`・priority C）: `B08LP1WWPT` の購入ボックスが作業中に消えた（12:36 UTC は ¥12,760・販売元 楽山荘 で購入可 → 12:55 以降は購入ボックスなし。3回取得で再現）。代替 ASIN はいずれも並行輸入の +42〜+66% なので据え置き、再入荷待ちとして起票。同 ASIN は6記事6枚で共有
+
+**確認した結果（手順4）**: `osprey-womens-backpack` 第5位は既に `rakuzanso/os57176`（ブラック qty=1）で付け替え不要。`camp-backpack-beginner` 第1位は `canpanera/o09039` の タンコンクリート（qty=1）で在庫があるため変更不要。
+
+**関門**: `check-affiliate-links.cjs --all` PASS（284ファイル）／`lint-bold.cjs` PASS（284ファイル）／`validate-backlog-tsv.cjs` 全PASS／`npm run build` 成功。
+
+---
+
 ## 2026-10-31 osprey-womens-backpack 新規／狙いKW オスプレー リュック レディース・オスプレー レディース 通勤／新規のため基準なし（campkit-20261031-N18B）
 
 **狙いKW**: 「オスプレー リュック レディース」「オスプレー レディース 通勤」「オスプレー 女性 リュック おすすめ」「オスプレー テンペスト」。GSC 28日で「オスプレー リュック」系の表示が多い領域に、女性向けの購入直前検索を足す。**新規記事なので比較基準なし**（効果測定は2〜3週間後の `campkit-seo-competitor-scan` で実施）。バックパック領域はサイト全体クリックの約4割。
