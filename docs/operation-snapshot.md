@@ -64,9 +64,10 @@
 
 ---
 
-## 記事数（2026-10-31 時点）
+## 記事数（2026-11-01 時点）
 
-- **総記事数: 284記事**（`check-amazon-asin.cjs --static` の「記事 284 本」で実測。2026-10-31 の新規＝**osprey-womens-backpack**〔オスプレー リュック レディースおすすめ9選・campkit-20261031-N18B・category `backpack`〕を配置した時点の値）
+- **総記事数: 286記事**（`check-amazon-asin.cjs --static` の「記事 286 本」で実測。2026-11-01 の新規2本＝**backpack-20l**〔リュック20Lおすすめ11選・campkit-20261101-N19・category `backpack`〕と**northface-borealis**〔ノースフェイス ボレアリスの違いと代替モデル10選・campkit-20261101-N20・category `backpack`〕を配置した時点の値。N19 の時点では本セクションが未更新だったため N20 で両方を反映した）
+- 前回（2026-10-31）は **284記事**（`check-amazon-asin.cjs --static` の「記事 284 本」で実測。2026-10-31 の新規＝**osprey-womens-backpack**〔オスプレー リュック レディースおすすめ9選・campkit-20261031-N18B・category `backpack`〕を配置した時点の値）
 - ⚠️ **273→283 の10本（campkit-20261024-N08 〜 campkit-20261031-N17B）は本ファイルの記事数セクションが更新されていなかった**（2026-10-24 の N07 のまま据え置かれていた）。2026-10-31 に `grep -h "^category:" content/posts/*.mdx` で全カテゴリを再集計し、実測値へ補正した（カテゴリ別内訳も同時に補正。増えた11本はすべて category `backpack` で、backpack 27→38）。各記事の内容は `docs/seo-change-log.md` の該当日セクションに記録されている。
 - 前回（2026-10-24・2本目）は **273記事**（`check-amazon-asin.cjs --static` の「記事 273 本」で実測。2026-10-24 の新規2本目＝**backpack-40l**〔リュック40Lおすすめ11選・campkit-20261024-N07・category `backpack`〕を配置した時点の値）
 - 前回（同日 2026-10-24・1本目）は **272記事**（新規1本＝**northface-commute-backpack**〔ノースフェイスの通勤リュックおすすめ11選・campkit-20261024-N06・category `backpack`〕を配置した時点の値）
@@ -78,9 +79,9 @@
 - 前回（2026-10-01）は **266記事**（新規2本＝**sleeping-bag-recommend**〔寝袋おすすめ総合ハブ・campkit-20261001-R02〕と**air-mat**〔エアマットおすすめ11選・campkit-20261001-R04〕を配置した時点の値）
 - 内訳の推移: `a45a1e5`=212 → `6ebde0f`=215（前バッチ3本＝camp-air-pump／disaster-camp-gear／trekking-pole）→ `7f9b41f`=218（3本＝solar-lantern／disaster-radio／solo-gear-rental）→ 2026-09-04時点=231 → 2026-09-07時点=234 → 2026-09-08時点=237 → 2026-09-09時点=240 → 2026-09-10時点=243 → 2026-09-11時点=247 → 2026-09-14時点=250 → 2026-09-15時点=254 → 2026-09-16時点=258 → 2026-09-17時点=262 → 2026-10-01時点=265（R02 sleeping-bag-recommend）→ **2026-10-01時点=266（R04 air-mat）**
   - ⚠️ 262→264 の2本は 2026-09-18〜09-30 のバッチで追加されたもので、本ファイルの記事数セクションが更新されていなかった（09-17 のまま据え置かれていた）。2026-10-01 に全カテゴリを `grep -h "^category:" content/posts/*.mdx` で再集計し、実測値へ補正した。
-  - 2026-10-01時点=266 → 2026-10-19時点=267（N01 mammut-backpack）→ 2026-10-20時点=268（N02 arcteryx-backpack）→ 2026-10-22時点=269（N03 millet-backpack）→ 2026-10-22時点=270（N04 outdoor-commute-backpack）→ 2026-10-23時点=271（N05 gregory-daypack）→ 2026-10-24時点=272（N06 northface-commute-backpack）→ 2026-10-24時点=273（N07 backpack-40l）→ **2026-10-31時点=284（N08〜N17B の10本＋N18B osprey-womens-backpack。N08〜N17B 分は本ファイル未更新だったため 10-31 に再集計で補正）**
+  - 2026-10-01時点=266 → 2026-10-19時点=267（N01 mammut-backpack）→ 2026-10-20時点=268（N02 arcteryx-backpack）→ 2026-10-22時点=269（N03 millet-backpack）→ 2026-10-22時点=270（N04 outdoor-commute-backpack）→ 2026-10-23時点=271（N05 gregory-daypack）→ 2026-10-24時点=272（N06 northface-commute-backpack）→ 2026-10-24時点=273（N07 backpack-40l）→ 2026-10-31時点=284（N08〜N17B の10本＋N18B osprey-womens-backpack。N08〜N17B 分は本ファイル未更新だったため 10-31 に再集計で補正）→ **2026-11-01時点=286（N19 backpack-20l＋N20 northface-borealis。N19 分は本ファイル未更新だったため N20 で合わせて反映）**
 
-### カテゴリ別内訳（frontmatter `category` を集計・2026-10-31 実測／N18B 反映後）
+### カテゴリ別内訳（frontmatter `category` を集計・2026-11-01 実測／N20 反映後）
 
 | slug | 表示名 | 記事数 |
 |------|--------|-------:|
@@ -91,9 +92,9 @@
 | lighting | 照明・ランタン | 18 |
 | power | 電源・バッテリー | 25 |
 | bonfire | 焚き火台 | 31 |
-| backpack | バックパック | 38 |
+| backpack | バックパック | 40 |
 | clothing | ウェア・装備 | 3 |
-| **合計** | | **284** |
+| **合計** | | **286** |
 
 > 直近: 2026-10-31（チャット側からの直接投入タスク campkit-20261031-N18B＝**新規記事 osprey-womens-backpack**〔オスプレー リュック レディースおすすめ9選・backpack〕を作成。狙いKW「オスプレー リュック レディース」「オスプレー レディース 通勤」「オスプレー 女性 リュック おすすめ」。既存の `osprey-kestrel-stratos`（レディース登山ライン＝シラス／カイトを含む容量24〜48L）と `osprey-daily-backpack`（男女兼用の街用5モデル）とは役割を分け、**通勤・普段使い・日帰りのレディース軸のみ（容量13〜33L）** に限定。シラス／カイトは商品として採らず `osprey-kestrel-stratos` へ導線のみ置いた。採用9製品（テンペストベロシティ 20 M／L・テンペスト 22・テンペストベロシティ 30 XS／S・テンペスト 33・デイライトプラス 20L・ハイクライト 26・ハイクライト 18・デイライト 13L・デイライトシンチ 15L）はすべて楽天 hb.afl ＋ `amazonAsin` の両リンクを設置し、楽天SKUの在庫・価格とAmazon dpの購入ボックス・販売元・カラー変種を1枚ずつ実取得で照合（`check-card-name-vs-sku.cjs` 全9枚 flags=OK）。差別化は①最初の分岐を容量ではなく「ヒップベルトの有無」に置いて 0.34〜0.59kg の街用3本と 0.73〜1.2kg の山用6本に分けた点、②背面長34〜53cmを5段階の帯に割って各帯で選べるモデルを列挙した点、③テンペストベロシティは XS／S を選ぶと実容量が 18L／28L になる（モデル名の数字はM／L基準）と明示した点、④レインカバー標準装備がハイクライト 18／26 の2モデルだけだと価格比較に織り込んだ点。並行輸入・Amazon Global Store・出品者不明の再販は不採用（テンペスト 26／アーケイン ラージデイ／ULスタッフパック 18L／ハイクライト 32／ダイナ・ミラ・スキマー・ソプリス・コメット・クエーサー）。被リンクは camp-backpack-beginner／osprey-backpack／osprey-daily-backpack の3本を各1文の追記のみで設置。記事数283→284、backpack 37→38。副産物として `article-fix-backlog` に5件起票〔osprey-daily-backpack・osprey-backpack のデイライトプラス 20L＝楽天の指定色ブラック売切／osprey-daily-backpack のアーケイン ラージデイ・ULスタッフパック＝Amazon が Global Store／同記事の見出し「アーケイン ラージデイ 28L」＝公表容量は20L〕。サムネイルは生成環境が無いためフォールバック `/images/outdoor-09.png`）
 
