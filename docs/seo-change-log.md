@@ -4,6 +4,42 @@
 
 ---
 
+## 2026-10-31 取りこぼし解消：デイライトプラスを6記事そろえて在庫のある導線へ／HAWK GEAR 80L の404を同一商品の生きた店へ（campkit-20261031-M02）
+
+**狙い**: `article-fix-backlog.tsv` の `out_of_stock` 2行（`attack-pack`・`osprey-daily-backpack`）と、M01 が起票した `discontinued_404` 1行（`camp-backpack-capacity-guide` 第3位）を消化する。`title`・`updatedAt`・`thumbnail`・カテゴリは一切動かしていない。
+
+**旧→新・理由（issue_type）**
+
+| 記事／位置 | issue_type | 旧 | 新 | 理由 |
+|---|---|---|---|---|
+| `attack-pack` 第3位（`osprey-daylite-plus`） | `out_of_stock` | 楽天 `canpanera/o09039`（★4.72/18件） | 楽天 `locondo/os5352am000016`（レビュー0件のため評価属性を削除） | 指定色ブラックの SKU 587890 が qty=0。**M01 が付け替え先に使った `rakuzanso/os57176` も本日ブラック qty=0 になっていた**（ナイトシフトのみ qty=2）ため、ブラックの在庫がある ロコンド公式ストア（¥12,760・qty=69）を採った |
+| `osprey-daily-backpack` 第1位／`osprey-backpack` 第2位／`camp-backpack-capacity-guide` 第1位／`camp-backpack-beginner` 第1位／`osprey-womens-backpack` 第5位（同一商品の残り5枚） | `out_of_stock`（Amazon側） | `amazonAsin="B08LP1WWPT"`／楽天 `rakuzanso/os57176`・`canpanera/o09039` | `amazonAsin="B0FW3N286W"`／楽天 `locondo/os5352am000016` | `B08LP1WWPT`（OS57176・国内正規）は再入荷せず「おすすめ出品はありません」のまま（10/31 に3回取得）。国内正規の代替 ASIN は存在せず（Amazon 検索4回で OS57176 の国内出品はこの1件のみ）、`B0C62J8WL6` ¥18,084／`B0C62HPQTX` ¥19,427／`B019TQPL4A` ¥21,165 の並行輸入（+42〜+66%）は不採用。同一商品（20L・縦46×横26×奥24cm）で購入ボックスのある出品は **`B0FW3N286W`＝出荷元/販売元 Amazon.co.jp・¥10,208（国内希望小売 ¥12,760 に対し -20%）・返品無料** のみだったのでこれに統一した |
+| `camp-backpack-capacity-guide` 第3位（`cap-hawkgear-80l`） | `discontinued_404` | 楽天 `mamesshop/backpack01`（HTTP 404）／`price="6990"`／★4.5/16件／`amazonAsin="B06WLP7B8N"`（モスグリーン） | 楽天 `ymbstore/backpack01` ジェットブラック（qty=10・¥7,080・★4.57/90件）／`price="7080"`／`amazonAsin="B01HPEV51G"`（ジェットブラック） | **商品差し替えは不要だった**。同一商品を扱う生きた販売ページが `backpack-large` 第3位で既に採用済みの `ymbstore/backpack01` にあり、同店の色軸（ジェットブラック／コヨーテ／モスグリーン／コバルトブルー）が Amazon の変種名と1対1で対応し4色すべて qty=9〜10。楽天の採用色に合わせて ASIN もジェットブラックへ変更（¥6,990・購入ボックスあり・販売元 五星館株式会社／出荷元 Amazon・HAWKGEAR ブランドストア表示） |
+
+**色を変えずに店を変えた理由**: OS57176 のブラックは楽天の国内正規取扱店7店（`canpanera`／`rakuzanso`／`sundaymountain`／`kompas`／`p2chiba`／`yoshikip2`／`e-lodge-2`）すべてで qty=0 を実測した。一方 `locondo/os5352am000016`（Osprey Lifestyle ライン「1-052」・BLACK・20L）は ¥12,760・qty=69 で、Amazon 側の `B0FW3N286W` も同じ「1-052」のブラックなので、**両モールのボタンが同じ色に着地する**状態を保てる。ナイトシフトへ色を変える案は、Amazon 側に非ブラックの国内出品が1つも無く色が食い違うため採らなかった。
+
+**商品を差し替えなかった理由（6記事の構成を守る判断）**: デイライトプラス 20L は `camp-backpack-capacity-guide` の「20L前後」枠・`attack-pack` の「大型ザック連結」枠・`osprey-womens-backpack` の「13インチPCスリーブを備える唯一のモデル」など、各記事の骨格に組み込まれている（`osprey-womens-backpack` だけで本文・FAQ・Tips・比較表の計10箇所が参照）。両モールで実際に買える導線を確保できたので、6記事の構成を崩す商品差し替えは行わなかった。
+
+**レビュー表記の是正（新 ASIN にレビューが無いため）**: `amazonRating="4.6"`／`amazonReviewCount="1761"` を3枚（`osprey-daily-backpack`・`camp-backpack-beginner`・`camp-backpack-capacity-guide`）から削除し、`rakutenRating`／`rakutenReviewCount` も2枚（`attack-pack` ★4.72/18件・`camp-backpack-beginner` ★4.63/19件）から削除した。あわせて次を書き換えた。
+
+- `badge`: 「普段使いの定番・★4.6(1761件)」→「普段使いの定番・20L／590g」／「20L最軽量級・★4.6(1761件)」→「20L最軽量級・590g」
+- 本文: `osprey-daily-backpack` 第1位「レビュー1,761件・★4.6と、今回の5モデルで圧倒的な支持」→ 20L・590g の軽さで表現／`camp-backpack-beginner`「Amazonのレビューは1,761件・★4.6と本記事で最多」「カラーは7色展開で…タンコンクリートを指定」→ 流通量とブラック指定に書き換え／`attack-pack`「レビューは18件と母数は少なめですが★4.72」→ 採用ページにレビューが無い旨へ／`osprey-backpack`「採用した国内正規取扱店の販売ページには…」→「採用した販売ページには…」
+- 比較表の評価列: `attack-pack`・`osprey-daily-backpack` の該当行を「レビューなし」に
+- `name` から `OS57176` を削除（6枚）: 採用した販売ページの表記が Lifestyle ラインの「1-052」で、`OS57176` を残すと実リンク先と型番が食い違うため。`osprey-womens-backpack` の**型番一覧表の `OS57176` は公表スペックの転記なので維持**した
+
+**`osprey-womens-backpack` の採用基準の注記を更新**: 同記事は「楽天市場とAmazonの両方で新品・国内正規品・在庫ありを確認できたモデルに限り、並行輸入は採用していない」と明記し、実際に テンペスト 26／アーケイン／ULスタッフパック／ハイクライト 32 を同じ理由で落としている。今回 Amazon 側を Amazon.co.jp 販売の並行輸入出品に差し替えたので、**この1モデルだけが例外であることと、その理由（国内正規出品が在庫切れでおすすめ出品を失った／価格は国内希望小売の -20%／返品無料）を基準の段落に明記**した。在庫注記の「デイライトプラス 20Lの採用ページは在庫1点」も qty=69 の店へ移ったので書き換えた。
+
+**価格の整合**: デイライトプラスは ¥12,760 で変化なし（記事の価格帯の記述に手を入れる必要なし）。HAWK GEAR 80L は ¥6,990→¥7,080（+1.3%）で、QuickPick 3本目の `spec` を「80L／7,080円」に更新。記事が宣言している「連泊・防災向けの大容量を低予算で」「65〜80L」の枠は維持されるため、本文・まとめ表の容量帯の記述は変更不要だった。
+
+**今回の棚卸しで新たに起票した2件（`article-fix-backlog.tsv`・pending）**
+
+- `backpack-large` 第3位 HAWK GEAR 80L（`price_unconfirmed`・priority C）: カード `price="6990"` が `ymbstore/backpack01` の現行 ¥7,080 と不一致（+1.3%）。同一商品を ¥6,990・★4.57/135件 で出す `selectshoptks/backpack01` もあるが、色名が Amazon の変種名と1対1で対応せずブラックは在庫1点。同記事 第1位（HAWK GEAR 55L・`price="5980"`）の現行価格も未確認
+- `osprey-daily-backpack` 第1位 デイライトプラスの Amazon 側（`asin_mismatch`・priority C）: 再入荷ウォッチ。国内正規出品 `B08LP1WWPT`（★4.6/1,827件）の購入ボックスが戻ったら6枚を戻し、レビュー属性・badge・本文・`osprey-womens-backpack` の例外注記も元に戻す
+
+**関門**: `check-affiliate-links.cjs --all` PASS（284ファイル）／`lint-bold.cjs` PASS（284ファイル）／`validate-backlog-tsv.cjs` 全4台帳 PASS／`npm run build` 成功／`check-card-name-vs-sku.cjs` 変更7枚すべて `flags=OK`（price も現行価格と一致・在庫 qty=69／qty=10）。
+
+---
+
 ## 2026-10-31 取りこぼし解消：オスプレー3記事の売切リンク付け替え＋ULスタッフパックを商品差し替え（campkit-20261031-M01）
 
 **狙い**: `article-fix-backlog.tsv` の `out_of_stock`／`asin_mismatch` 4行（対象記事 `osprey-daily-backpack`・`osprey-backpack`）を消化する。あわせて同一商品を載せる他記事を棚卸しし、売切URLを共有していた `camp-backpack-capacity-guide` も同じ付け替えを行った。`title`・`updatedAt`・`thumbnail`・カテゴリは一切動かしていない。
