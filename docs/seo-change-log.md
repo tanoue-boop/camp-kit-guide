@@ -4,6 +4,22 @@
 
 ---
 
+## 2026-11-01 新規：`backpack-20l`（リュック20Lおすすめ11選）を追加（campkit-20261101-N19）
+
+**狙いKW**: 「リュック 20l おすすめ」「20l リュック 通勤」「20リットル リュック 日帰り登山」「リュック 20l ブランド」。**新規のため比較基準なし**（効果測定は2〜3週間後の `campkit-seo-competitor-scan` で初計測）。
+
+**位置づけ**: 容量別クラスターの小容量側。`backpack-40l`（40L軸）・`mountain-backpack-30l`（30L軸）と並び、`camp-backpack-capacity-guide`（容量の目安解説＝質問系）とは役割を分けて「買う人向けの数値比較」に寄せた。GSC では「20l」系クエリの表示が各1と極小のため、タイトル・見出しに「通勤」「日帰り登山」「サブバッグ」「デイパック」とブランド名を併記して購入直前の語を拾う構成にしている。
+
+**差別化**: 上位記事（my-best 20Lランキング／hinata 29選／grn-outdoor 8選／mountaincarry 10選／ruidento 15選）は製品数が多い一方で、容量・重量・寸法・価格を同じ単位でそろえた横並び表と、腰ベルト・背面長・対応PCインチの公表状況の整理が無い。本記事は11モデルを**容量18〜20L／重量450〜740g／価格7,040〜19,800円**で表にし、「腰ベルトが公表されているのは4モデル」「背面長が数値で公表されているのは2モデルだけ」「レインカバーが付くのは3モデル」という切り口で差別化した。
+
+**採用11モデル**（全カード 楽天 hb.afl ＋ Amazon `amazonAsin` の両リンク／両モールで新品・在庫ありを 11/1 に実測）: ミレー マルシェ NX 20・カリマー タトラ20・オスプレー デイライトプラス 20L・コロンビア キャッスルロック20LバックパックII・グレゴリー ナノ20・マムート リチウム 20・ミレー クーラ 20・ザ・ノース・フェイス シングルショット 20L・チャムス リサイクルハリケーンデイパック・カリマー カデット20・フェールラーベン カンケン ラップトップ15。
+
+**AI検索対応**: 冒頭に数値入りの結論3行＋`QuickPickMdx`（通勤／日帰り登山／価格優先の3枠）、用途別早見と11モデル比較表の両方に購入列 `buy`、FAQ を6問の見出し形式、末尾に選定基準と情報源の節を置いた。
+
+**内部リンク**: 新記事から同クラスター13記事へ（`camp-backpack-capacity-guide`／`mountain-backpack-30l`／`backpack-40l`／`attack-pack`／`outdoor-commute-backpack`／`camp-backpack-beginner`／`backpack-rain-cover`／`osprey-daily-backpack`／`osprey-backpack`／`gregory-daypack`／`karrimor-backpack`／`millet-backpack`／`mammut-backpack`／`northface-backpack`／`northface-commute-backpack`／`chums-backpack`／`fjallraven-kanken`）。被リンクは `camp-backpack-capacity-guide`（20〜30Lの節）と `backpack-40l`（はじめに）に1文ずつ追加（他の本文と `updatedAt` は不変）。
+
+---
+
 ## 2026-10-31 取りこぼし解消：デイライトプラスを6記事そろえて在庫のある導線へ／HAWK GEAR 80L の404を同一商品の生きた店へ（campkit-20261031-M02）
 
 **狙い**: `article-fix-backlog.tsv` の `out_of_stock` 2行（`attack-pack`・`osprey-daily-backpack`）と、M01 が起票した `discontinued_404` 1行（`camp-backpack-capacity-guide` 第3位）を消化する。`title`・`updatedAt`・`thumbnail`・カテゴリは一切動かしていない。
