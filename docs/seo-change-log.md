@@ -4,6 +4,30 @@
 
 ---
 
+## 2026-11-01 リンク整合：`fire-tongs` 第2位（DOD フツーノトング）の採用店を再選定・比較表と画像を追随・価格とレビュー値を実測に整合（campkit-20261101-M02）
+
+**狙い**: 第2位 `dod-futsuno-tong` は、カードの楽天リンク（`naturum/9906265`）と比較表のリンク（`premoa/4580742231352`・旧アカウントID＋`&m=`/`&rafcid=` 付き）が別の店を指し、価格もカード 1,650円／本文 ¥2,420／比較表 2,420／まとめ表 2,400円台／description 下限 1,780円 と割れていた。楽天の出品を棚卸しして採用店を決め直し、カード・本文・比較表・まとめ表・description を実測1値に揃える。`title`・`updatedAt`・`thumbnail`・順位・商品・`amazonAsin`・他の4商品は変更していない。
+
+**採用店の選定（判定基準 §11-2・§11-3）**: 楽天API 3本（JAN `4580742231352`／`DOD フツーノトング TG1-899-BK`／`DOD 公式 TG1-899-BK`）。段①（メーカー公式店）は公式クエリ 0件＝該当出品なし。在庫あり（`availability=1`）の同一商品は `naturum` ¥1,550（段②）・`naturum-outdoor` ¥1,550（段②）・`fishingmax-webshop` ¥1,900・`alpen` ¥1,980（段②）・`gramsky`／`cycleconnection`（ASIN由来コード）・`luminous81023` ¥3,841。母数最安 ¥1,550 に対し段②最安 ¥1,550 は +0% で段②を採用。同額の `naturum`／`naturum-outdoor` はタイブレーク①（型(a)＝現採用店）とレビュー件数（2件 vs 0件）で `naturum` を採用＝**採用店は据え置き**。item ページ実測: HTTP 200・`InStock`・`"quantity":6`・`"taxIncludedPrice":1550`・軸 0個・`gtin13`=4580742231352・メーカー型番 TG1-899-BK。比較表側の `premoa/4580742231352` は **HTTP 404**（死んでいた）。
+
+| 箇所 | 旧 | 新 |
+|---|---|---|
+| カード `price` | 1650 | 1550 |
+| カード `rakutenRating`／`rakutenReviewCount` | 4.67／18 | 削除（採用店の実測は2件＝30件未満・§12-5-10 条文5） |
+| カード `image` | premoa キャビネット | `naturum/cabinet/goods/099062/65_1.jpg`（主画像＝`presentation.images[0]`＝`og:image`・HTTP 200 image/jpeg） |
+| 本文 | 「¥2,420という手頃な価格と、レビュー★4.67の安定した評価でコスパも良好。」 | 「¥1,550という手頃な価格に加え、クセのない扱いやすさと定番ブランドの安心感でコスパも良好。」 |
+| 比較表 `dod` 行 | `price` 2420／`rating` 4.67／`affiliateUrl`＝premoa（404・旧ID・`&m=`/`&rafcid=`） | `price` 1550／`rating` キー削除（`ComparisonTable.tsx` のガードで「—」）／`affiliateUrl`＝カードと同じ naturum の hb.afl（env ID・`&m=`/`&rafcid=` なし） |
+| まとめ表 | 2,400円台 | 1,500円台 |
+| `description` 価格帯 | 実勢1,780〜7,632円 | 実勢1,550〜7,632円（最安が DOD の 1,550円になったため下限を修正。上限 7,632円＝ZEN Camps は不変） |
+
+**レビュー属性の扱い**: 採用店 `naturum` の実測は `itemReviewCount` 2（API `reviewAverage` 3.5）で30件未満のため、カードの2属性を削除し本文の評価訴求を商品特性（扱いやすさ・定番ブランド）に置き換えた。`badge="定番ブランド・扱いやすい"` は評価の数値を含まないので据え置き。
+
+**検出器**: `card-name-check.tsv` の当該行が `http=404`／`flags=404` → `http=200`／`flags=OK`（`qty=6`・`current_price=1550`）。`amazon-asin-check.tsv` は `--cached`（Amazon アクセス 0回）で `card_price` 1650→1550・`price_gap` -2%→+5%。
+
+**残件**: なし（`amazon-asin-check.tsv` 当該行の `note` が自動判定文に置き換わった点は report に記載）。
+
+---
+
 ## 2026-11-01 取りこぼし解消：デイライトプラスの再入荷ウォッチを終了／`attack-pack` のカリマー2枚を在庫のある色・現行価格へ（campkit-20261101-M01）
 
 **狙い**: `article-fix-backlog.tsv` の `status≠done` かつ `asin_mismatch`／`out_of_stock` を 0 行にする。対象は `osprey-daily-backpack` 第1位の `asin_mismatch`（M02 が残した再入荷ウォッチ）1行。あわせて同クラスターで前日に起票された `attack-pack` の `name_fix` 2行（名指し色が楽天で売切・価格が +25% 乖離＝実質的な取りこぼし）も消化した。`title`・`updatedAt`・`thumbnail`・カテゴリ・記事構成は動かしていない。
