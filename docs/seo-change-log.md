@@ -4,6 +4,22 @@
 
 ---
 
+## 2026-11-02 新規：`backpack-50l-60l`（リュック50L・60Lおすすめ10選）を追加（campkit-20261102-N24）
+
+**2026-11-02 backpack-50l-60l 新規／狙いKW リュック 50l・リュック 60l・50リットル リュック／新規のため基準なし**（効果測定は2〜3週間後の `campkit-seo-competitor-scan` で初計測）。補助KW「50リットル リュック テント泊」「60l リュック おすすめ」「50l 60l 登山 リュック」。需要確認: GSC（_tasks の qp-90d-20261013）で「50l リュック」表示9・クリック1・平均4.0位、「50リットル リュック」表示9・平均4.4位、「リュック 60リットル」「70l リュック」「グレゴリー リュック 50l」「登山リュック 50l おすすめ」「ソロキャンプ バック パック 60l」等が各表示1〜2（いずれも `camp-backpack-capacity-guide` に着地）。
+
+**差別化**: 上位記事（hinata の個別商品ページ群／tacklenote「登山リュック50L」10選／yamahack／dime／smartlog／ランク王／my-best）は50〜70Lを広く扱うか個別紹介が中心で、**50〜60Lに絞って重量・背面長・耐荷重・レインカバー・価格を同じ単位で並べた表が無い**。本記事は①10モデルを容量・重量960〜2,360g・背面長・耐荷重の目安・レインカバー・税込価格（11/2）で1表に並べ、②小屋泊／テント泊1泊／2泊以上／重装備の山行型別早見に購入ボタンを付け、③背面長の合わせ方を「サイズ展開／無段階調整／範囲非公表」の3型に分けた。`backpack-large`（1万円以下の大容量・HAWK GEAR等）とは価格帯・商品が重ならず、`backpack-40l`（35〜45L）・`gregory-zulu-baltoro`・`osprey-kestrel-stratos`（ブランド軸）とも容量帯・切り口で分けた。
+
+**採用10モデル**（全カード 楽天 hb.afl ＋ Amazon `amazonAsin` の両リンク／両モールで新品・正規取扱い・在庫ありを 11/2 に実測／両モール同色・同サイズ／`check-card-name-vs-sku.cjs` 全10枚 flags=OK）: マムート リチウム 50（25,579円）／カリマー クーガーエーペックス-G 60+ K.Orange（41,998円）／オスプレー エクソスプロ55 S/M（49,500円）／ドイター エアコンタクト ライト 50+10（38,500円）／ドイター エアコンタクト コア 60+10（38,395円）／グレゴリー ズール55 SM/MD（41,800円）／グレゴリー スタウト55（37,400円）／ミレー サースフェー NX 50+ M（39,600円）／マムート トリオン 50（32,799円）／ブラックダイヤモンド ミッション55 M/L（44,330円）。価格比 1.94倍。
+
+**不採用**: オスプレー ケストレル 58・アトモス AG 50（楽天が海外取り寄せのみ）、グレゴリー バルトロ65（65L・楽天に国内正規の新品なし）、グレゴリー カトマイ 55（Amazon に55Lなし）、コールマン トレックパック（林間学校向け・テント泊の用途と不一致）。
+
+**AI検索対応**: 冒頭に数値入りの結論3行＋`QuickPickMdx`（迷ったら／60L本命／軽さ優先の3枠）、用途別早見と10モデル比較表の両方に購入列 `buy`、FAQ 6問の見出し形式、末尾に選定基準と情報源の節。
+
+**内部リンク**: 新記事から同クラスター17本（backpack-40l／mountain-backpack-30l／backpack-25l／backpack-large／camp-backpack-capacity-guide／camp-backpack-beginner／backpack-rain-cover／lightweight-mountain-tent／gregory-zulu-baltoro／osprey-kestrel-stratos／deuter-futura-aircontact／mammut-backpack／karrimor-backpack／millet-backpack／osprey-backpack／deuter-backpack／gregory-backpack）。被リンク2本（`backpack-40l` の導入段落の直後、`camp-backpack-capacity-guide` の50L以上導線の直後に各1文。他の本文・updatedAt は不変）。
+
+---
+
 ## 2026-11-02 新規：`backpack-25l`（リュック25Lおすすめ9選）を追加（campkit-20261102-N23）
 
 **2026-11-02 backpack-25l 新規／狙いKW リュック 25l・リュック 25l おすすめ・25リットル リュック／新規のため基準なし**（効果測定は2〜3週間後の `campkit-seo-competitor-scan` で初計測）。補助KW「25l リュック 通勤」「25l リュック 登山」。需要確認: GSC（_tasks の qp-90d-20261013）に「リュックサック 25リットル」1件（表示1・`camp-backpack-capacity-guide` に着地・平均2.0位）のみ。page-28d／qp-28d には該当なし。
