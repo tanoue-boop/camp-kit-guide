@@ -2,8 +2,9 @@
 
 サイトの現状（記事数・カテゴリ構成・GAS/インフラ構造）を記録するスナップショット。記事追加・カテゴリ変更・GAS構造変更のたびに最新化する（→ 運用ルールは CLAUDE.md「記録更新ルール」を参照）。
 
-- **最終更新: 2026-11-03（campkit-20261103-N26：新規記事 `thule-backpack`〔スーリーのリュックおすすめ10選・category=backpack〕を追加。content/posts の記事数 291→292、category=backpack は 46本。カテゴリ・GAS構造の変更なし。既存の `outdoor-commute-backpack`・`camp-backpack-beginner` に被リンク1文／1行ずつ追加）**
-- 同日の前回: campkit-20261103-N25：新規記事 `deuter-commute-daypack`〔ドイターのリュック 普段使い・通勤おすすめ10選・category=backpack〕を追加。記事数 290→291、category=backpack は 45本。既存の `deuter-backpack`・`deuter-futura-aircontact` に被リンク1文ずつ追加
+- **最終更新: 2026-11-03（campkit-20261103-N27：新規記事 `osprey-exos-eja`〔オスプレー エクソス・イーゾ（エイジャ）おすすめ8選・category=backpack〕を追加。content/posts の記事数 292→293、category=backpack は 47本。カテゴリ・GAS構造の変更なし。既存の `osprey-kestrel-stratos`・`camp-backpack-beginner` に被リンク1行ずつ追加）**
+- 同日の前回: campkit-20261103-N26：新規記事 `thule-backpack`〔スーリーのリュックおすすめ10選・category=backpack〕を追加。記事数 291→292、category=backpack は 46本。既存の `outdoor-commute-backpack`・`camp-backpack-beginner` に被リンク1文／1行ずつ追加
+- 同日の前々回: campkit-20261103-N25：新規記事 `deuter-commute-daypack`〔ドイターのリュック 普段使い・通勤おすすめ10選・category=backpack〕を追加。記事数 290→291、category=backpack は 45本。既存の `deuter-backpack`・`deuter-futura-aircontact` に被リンク1文ずつ追加
 - 前回: 2026-11-02（campkit-20261102-N24：新規記事 `backpack-50l-60l`〔リュック50L・60Lおすすめ10選・category=backpack〕を追加。content/posts の記事数 289→290、category=backpack は 44本。カテゴリ・GAS構造の変更なし。既存の `backpack-40l`・`camp-backpack-capacity-guide` に被リンク1行ずつ追加）
 - 同日の前回: campkit-20261102-N23：新規記事 `backpack-25l`〔リュック25Lおすすめ9選・category=backpack〕を追加。記事数 288→289、category=backpack は 43本。既存の `backpack-20l`・`mountain-backpack-30l`・`camp-backpack-capacity-guide` に被リンク1行ずつ追加
 - 同日の前々回: campkit-20261102-N22：新規記事 `kelty-backpack`〔ケルティ リュックおすすめ9選・category=backpack〕を追加。記事数 287→288、category=backpack は 42本。既存の `camp-backpack-beginner`・`coleman-backpack` に被リンク1行ずつ追加
