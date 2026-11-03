@@ -4,6 +4,20 @@
 
 ---
 
+## 2026-11-04 新規：`columbia-backpack`（コロンビアのリュックおすすめ10選）（campkit-20261104-N29）
+
+**2026-11-04 columbia-backpack 新規／狙いKW コロンビア リュック／新規のため基準なし**
+
+- **狙い**: 「コロンビア リュック」「コロンビア リュック 通学」「コロンビア リュック 通勤」「コロンビア バックパック」の購入直前ブランド検索。既存のバックパック記事（kelty-backpack・coleman-backpack・outdoor-commute-backpack・backpack-25l 等）とは、コロンビアのモデル軸（キャッスルロック／パナシーア／スターレンジ／ペッパーロック／LBフローレス）で役割を分ける。
+- **需要確認**: リポジトリに GSC データなし。_tasks の `data-campkit-gsc-qp-90d-20261013.tsv`／`data-campkit-gsc-page-28d-20261013.tsv` に「コロンビア」「columbia」を含むクエリは0件。需要は直接確認できず、タスク指示どおり購入直前ブランド検索の新規記事として作成。
+- **差別化**: 検索上位（ランク王・ねとらぼ・hinata・CAMP HACK・Smartlog 等）はブランド紹介や数モデルの用途別紹介が中心で、10モデルを容量・重量・PC収納インチ・税込価格の数値で横並びにした記事は見当たらなかった → 10モデルを容量15〜33L・重量540〜1,010g・税込6,104〜17,600円で1表に並べ、通勤／通学／日帰りハイク／サブバッグの用途別早見（購入ボタン付き）を置いた。
+- **採用10モデル**: パナシーア25L・30L・33L、キャッスルロック15L・20L・25L、スターレンジ16L・23L、ペッパーロック30L、LBフローレス25L（全モデル国内型番 PU・楽天 hb.afl＋Amazon amazonAsin・Amazon は楽天±15%以内）。
+- **AI検索対応**: 冒頭の結論（3行・数値入り）→ QuickPickMdx（3枠）→ 用途別早見（buy 列）→ 比較表（型番・容量・重量・サイズ・PC収納・税込価格・buy）→ 選び方4ポイント → 10カード → FAQ 6問（見出し形式）→ 選定基準と情報源 → まとめ。
+- **内部リンク**: 新記事 → camp-backpack-capacity-guide／backpack-20l／backpack-25l／mountain-backpack-30l／backpack-rain-cover／outdoor-commute-backpack／northface-commute-backpack／deuter-commute-daypack／kelty-backpack／coleman-backpack／camp-backpack-beginner。既存 → 新: camp-backpack-beginner（ブランド別リストに1行）・outdoor-commute-backpack（スターレンジ23L節の末尾に1文）。
+- **効果測定**: 公開後2〜3週間の `campkit-seo-competitor-scan` で「コロンビア」を含むクエリの表示・順位を初計測する。
+
+---
+
 ## 2026-11-04 新規：`blackdiamond-backpack`（ブラックダイヤモンドのリュックおすすめ10選）（campkit-20261104-N28B）
 
 **2026-11-04 blackdiamond-backpack 新規／狙いKW ブラックダイヤモンド リュック／新規のため基準なし**
