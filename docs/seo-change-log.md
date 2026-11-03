@@ -15,6 +15,7 @@
 - **AI検索対応**: 冒頭の結論（3行・数値入り）→ QuickPickMdx（3枠）→ 用途別早見 → 比較表（型番・容量・重量・サイズ展開・生地・税込価格・buy）→ 選び方4ポイント → 10カード → FAQ 6問（見出し形式）→ 選定基準と情報源。
 - **内部リンク**: 新記事 → camp-backpack-capacity-guide／mountain-backpack-30l／backpack-20l／backpack-25l／backpack-40l／backpack-50l-60l／backpack-rain-cover／mammut-backpack／arcteryx-backpack／osprey-backpack／outdoor-commute-backpack／camp-backpack-beginner。既存 → 新記事: camp-backpack-beginner（ブランド別リストに1行）・mammut-backpack（まとめ末尾に1文）。両記事の updatedAt は不変。
 - **効果測定**: 公開後2〜3週間の `campkit-seo-competitor-scan` で「ブラックダイヤモンド」を含むクエリの表示・順位を初計測する。
+- **デプロイ記録**: 記事コミット `a9f015c` は push 後約40秒で Vercel のビルドが failure（GitHub commit status: `Deployment has failed`・ログは Vercel ダッシュボードのみで未確認。ローカルの `npm run build` は成功）。本番は旧デプロイのまま新記事 404 だったため、2026-10-22 M01 の前例どおり記事を含まない追記コミット（本行の追記のみ）で再ビルドを起こした。
 
 ---
 
