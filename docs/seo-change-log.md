@@ -4,6 +4,20 @@
 
 ---
 
+## 2026-11-04 新規：`blackdiamond-backpack`（ブラックダイヤモンドのリュックおすすめ10選）（campkit-20261104-N28B）
+
+**2026-11-04 blackdiamond-backpack 新規／狙いKW ブラックダイヤモンド リュック／新規のため基準なし**
+
+- **狙い**: 「ブラックダイヤモンド リュック」「ブラックダイヤモンド バックパック」「ブラックダイヤモンド リュック 通勤」「ブラックダイヤモンド 30L」の購入直前ブランド検索。既存のバックパック記事（osprey・gregory・mammut・arcteryx 等）と重ならないよう、ブラックダイヤモンドのモデル軸で作成。
+- **需要確認**: リポジトリに GSC データなし。_tasks の `data-campkit-gsc-qp-90d-20261013.tsv`／`data-campkit-gsc-page-28d-20261013.tsv` に「ブラックダイヤモンド」「black diamond」を含むクエリは0件。需要は直接確認できず、タスク指示どおり購入直前ブランド検索の新規記事として作成。
+- **差別化**: 検索上位はランク王の8選（登山向け中心）程度で、モデルを容量・重量・税込価格で数値横並びにした日本語記事・用途別（クライミング／日帰りハイク／通勤）の早見は見当たらなかった → 10モデルを容量15〜45L・重量330〜955g・税込13,640〜68,200円で1表に並べ、用途別早見（buy 列つき）を冒頭近くに置いた。
+- **採用10モデル**: パーシュート30・ストリートクリーク24・ロックブリッツ15・ストリートクリーク30 RT・クラッグ40・パーシュート15・ディスタンス15・ディスタンス22・ベータライト30・ベータライト45（全モデル楽天＝Amazon 同額・同サイズ同色）。不採用: ドーンパトロール（Amazon 並行輸入のみ）・ディスタンス8（両モールでサイズが揃わず）・ブリッツ20／28（Amazon 国内正規の在庫なし）・ストリートクリーク24 旧型 BD55016（Amazon が楽天−20%）。
+- **AI検索対応**: 冒頭の結論（3行・数値入り）→ QuickPickMdx（3枠）→ 用途別早見 → 比較表（型番・容量・重量・サイズ展開・生地・税込価格・buy）→ 選び方4ポイント → 10カード → FAQ 6問（見出し形式）→ 選定基準と情報源。
+- **内部リンク**: 新記事 → camp-backpack-capacity-guide／mountain-backpack-30l／backpack-20l／backpack-25l／backpack-40l／backpack-50l-60l／backpack-rain-cover／mammut-backpack／arcteryx-backpack／osprey-backpack／outdoor-commute-backpack／camp-backpack-beginner。既存 → 新記事: camp-backpack-beginner（ブランド別リストに1行）・mammut-backpack（まとめ末尾に1文）。両記事の updatedAt は不変。
+- **効果測定**: 公開後2〜3週間の `campkit-seo-competitor-scan` で「ブラックダイヤモンド」を含むクエリの表示・順位を初計測する。
+
+---
+
 ## 2026-11-03 修正：`lightweight-mountain-tent` 第1位（OneTigris Hillridge 軽量テント 2人用）の採用店を再判定・画像を採用店に追随（campkit-20261103-M04）
 
 **2026-11-03 lightweight-mountain-tent#1 修正／狙い: カード画像の店と購入リンクの店の整合（順位・見出し・商品・価格は不変）**
