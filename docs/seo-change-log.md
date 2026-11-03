@@ -4,6 +4,17 @@
 
 ---
 
+## 2026-11-03 修正：`lightweight-mountain-tent` 第1位（OneTigris Hillridge 軽量テント 2人用）の採用店を再判定・画像を採用店に追随（campkit-20261103-M04）
+
+**2026-11-03 lightweight-mountain-tent#1 修正／狙い: カード画像の店と購入リンクの店の整合（順位・見出し・商品・価格は不変）**
+
+- **背景**: カード `ul-tent-rank-1` の楽天リンクは `netclickstore-r/4950537466434`（2026-11-02 に同一商品の `mountain-tent-cheap#onetigris-hillridge` で再選定済み）だが、カード `image` だけ公式店 `onetigris` のキャビネット（`onetigris/cabinet/06888715/10022891/9.jpg`）で店が食い違っていた。
+- **実測（2026-11-03）**: 楽天 API 4 本（JAN `4950537466434`／`OneTigris Hillridge`／段①専用 `OneTigris 公式 Hillridge`＝0 件／`ワンティグリス ヒルリッジ テント`＝0 件）。在庫あり出品は `netclickstore-r/4950537466434` の 1 件のみ（HTTP 200・`InStock`・SKU 1 件 qty=5・`axisName` 0・「2～5営業日で発送」・`taxIncludedPrice` 25,256・レビュー 0 件）。公式店の旧画像の商品ページ `onetigris/10022891` は 404。
+- **変更**: 採用店は `netclickstore-r` のまま据え置き（母数 1 件＝11-2／11-3 で他店に負けない）。`affiliateUrl` は不変。カード `image` を item ページの主画像（`og:image`／`presentation.images[0]` が `r_1738762529/4950537466434.jpg` で一致・HTTP 200 `image/jpeg`）の `thumbnail.image.rakuten.co.jp/@0_mall/netclickstore-r/cabinet/r_1738762529/4950537466434.jpg` に付け替え。価格 25,256 はカード・比較表とも実測と一致で不変。カード・比較表とも評価値を持たず（レビュー 0 件・12-5-10 条文5）、書き足していない。`badge`・他順位・`updatedAt` は不変。
+- **効果測定**: 2〜3 週間後の `campkit-seo-competitor-scan` で第1位の楽天クリック（`AffiliateClickTracker`）を確認する。
+
+---
+
 ## 2026-11-03 修正：`fireproof-chair` 第4位（BUNDOK 焚き火チェア BD-111）の採用店を再選定・比較表と価格・レビュー値を実測に整合（campkit-20261103-M03）
 
 **2026-11-03 fireproof-chair#4 修正／狙い: 購入導線と表示価格・評価の整合（順位・見出し・商品は不変）**
