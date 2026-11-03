@@ -4,6 +4,21 @@
 
 ---
 
+## 2026-11-04 新規：`lowealpine-backpack`（ロウアルパインのリュックおすすめ3選）（campkit-20261104-N30）
+
+**2026-11-04 lowealpine-backpack 新規／狙いKW ロウアルパイン リュック／新規のため基準なし**
+
+- **狙い**: 「ロウアルパイン リュック」「ロウアルパイン バックパック」「Lowe Alpine リュック」「ロウアルパイン エアゾーン」の購入直前ブランド検索。既存のバックパック記事（osprey-backpack・osprey-kestrel-stratos・deuter-futura-aircontact・mountain-backpack-30l・backpack-40l 等）とは、ロウアルパインのモデル軸（エアゾーントレイル／エアゾーントレック／シラック）で役割を分ける。
+- **需要確認**: リポジトリに GSC データなし。_tasks の `data-campkit-gsc-qp-90d-20261013.tsv`／`data-campkit-gsc-page-28d-20261013.tsv` に「ロウアルパイン」「lowe alpine」を含むクエリは0件。需要は直接確認できず、タスク指示どおり購入直前ブランド検索の新規記事として作成。
+- **製品数3（下限7未満）**: 楽天の新品は Victoria L-Breath・好日山荘・ウィンズ・パドルクラブ系の数店のみで、Amazon は輸入販売店（楽天や国内店の1.5〜2倍の価格）が大半。両モールで新品・日本の販売店・同色・±15%以内がそろったのは3モデルだけだったので、タスクの許可（揃った数で公開）に従って3製品で公開。選外モデルと理由は本文「選定基準と情報源」に明記。
+- **差別化**: 検索上位（hinata の7モデル紹介・yamahack 等）はブランド紹介＋モデル紹介型で、旧モデル（イクリプス・ネクサス・エイペックス等）が中心。今買える新品に絞って容量・背面長・重量・税込価格を横並びにした記事は見当たらなかった → 3モデルを容量30〜40L・背面長（固定48cm／43〜48cm調整／調整式）・重量1.25〜1.77kg・税込26,400〜31,900円で1表に並べ、日帰りハイク／小屋泊／女性向けの用途別早見（buy 列）を置いた。
+- **採用3モデル**: エアゾーントレイル30 FTF-36 ブラック・シラック40 FMQ-28 ネイビー・エアゾーントレック ND33:40 FTE-91 ネイビー S-M（全モデル楽天＝Amazon 同額・同じ販売店／同じ会社）。
+- **AI検索対応**: 冒頭の結論（3行・数値入り）→ QuickPickMdx（3枠）→ 用途別早見（buy 列）→ 比較表（型番・容量・背面長・重量・サイズ・レインカバー・税込価格・buy）→ 選び方4ポイント → 3カード → FAQ 6問（見出し形式）→ 選定基準と情報源 → まとめ。
+- **内部リンク**: 新記事 → outdoor-commute-backpack／camp-backpack-capacity-guide／mountain-backpack-30l／backpack-40l／deuter-futura-aircontact／osprey-kestrel-stratos／backpack-rain-cover／camp-backpack-beginner／karrimor-backpack。既存 → 新: camp-backpack-beginner（ブランド別リストに1行）・mountain-backpack-30l（ブランド別の選び方に1文）。両記事の updatedAt は不変。
+- **効果測定**: 公開後2〜3週間の `campkit-seo-competitor-scan` で「ロウアルパイン」「lowe alpine」を含むクエリの表示・順位を初計測する。楽天の在庫が3モデルとも残り2点のため、次回の価格チェックで在庫切れ・差し替えの要否を見る。
+
+---
+
 ## 2026-11-04 新規：`columbia-backpack`（コロンビアのリュックおすすめ10選）（campkit-20261104-N29）
 
 **2026-11-04 columbia-backpack 新規／狙いKW コロンビア リュック／新規のため基準なし**
