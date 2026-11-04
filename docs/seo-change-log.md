@@ -4,6 +4,17 @@
 
 ---
 
+## 2026-11-05 tent-size-beginner-guide#3 の採用店を再選定・画像と価格とレビュー値を実測に整合（campkit-20261105-M01）
+
+- **対象**: `tent-size-beginner-guide` 第3位 `ts-coleman-bc-crossdome-270`（コールマン BCクロスドーム/270 2000038429）。商品は替えず、楽天の採用店だけを見直した。
+- **狙い**: 現リンクの `himaraya/0000000972452` が `OutOfStock`・`purchaseCondition=sold-out`・`deliveryMessage=売り切れ` で買えなくなっており、画像も無関係の `lbreath`（item は404）のままだったため、購入できる店へ導線を戻す。
+- **採用店**: `himaraya/0000000972452` → `naturum/2566580`（¥23,250・qty=5・発送予定1～2日・`InStock`）。母数最安は `takeda-sports` ¥21,890、段①公式 `coleman/col4610` は sold-out で母数外、段②最安 ¥23,250 は +6.21% で +20% 以内。段②同額の `naturum-outdoor` とはレビュー件数（17 件 vs 2 件）で決着。
+- **カードの変更**: `affiliateUrl` を naturum へ、`image` を `lbreath` → `naturum/cabinet/goods/025665/80_1.jpg`、`price` 22708→23250。採用店のレビューが 17 件（30 件未満）なので `rakutenRating`／`rakutenReviewCount` は削除（判定基準 12-5-10 条文5）。
+- **触っていないもの**: 他順位のカード・`badge`・本文（第3位の価格・評価に触れる文は無し）・`updatedAt`（2026-09-20 据え置き）。
+- **効果測定**: 検索順位を狙った変更ではない。購入導線の復旧なので、楽天クリック／成果の推移で見る。
+
+---
+
 ## 2026-11-05 llbean-backpack 新規／狙いKW L.L.Bean リュック／新規のため基準なし（campkit-20261105-N33）
 
 - **狙い**: 「L.L.Bean リュック」「エルエルビーン リュック」「LLビーン バックパック」「L.L.Bean ブックパック」「LLBean デイパック」などブランド名＋リュックの購入直前検索。
