@@ -4,6 +4,18 @@
 
 ---
 
+## 2026-11-05 llbean-backpack 新規／狙いKW L.L.Bean リュック／新規のため基準なし（campkit-20261105-N33）
+
+- **狙い**: 「L.L.Bean リュック」「エルエルビーン リュック」「LLビーン バックパック」「L.L.Bean ブックパック」「LLBean デイパック」などブランド名＋リュックの購入直前検索。
+- **需要確認**: GSC（data-campkit-gsc-qp-90d／page-28d-20261013）で「L.L.Bean」「LLビーン」「エルエルビーン」を含むクエリは0件。サイト内に実績は無く、タスク指示どおり購入直前ブランド検索の新規記事として作成した。
+- **製品**: L.L.Bean 7モデル（比較枠なし）。デラックス・ブック・パック 37L／コンフォート・キャリー・ラップトップ・パック 32L／ストアウェイ・パック／ストアウェイ・デイ・パック 28L／ビニロン/コットン・デイ・パック／コンチネンタル・リュックサック カラーブロック／ウォータープルーフ・ストアウェイ・デイ・パック。楽天・Amazonとも公式の販売先で同色を確認。
+- **差別化**: 上位はブランド通販の一覧や単品紹介が中心で、モデルを数値で横並びにした記事が少ない。本記事は容量・重量・サイズ・PC収納・腰ベルト・税込価格（楽天／Amazon）・レビュー件数を横並びにし、通勤／通学／日帰りハイク／旅行の用途別早見と、カード外8モデルの販売先一覧を載せた。
+- **AI検索対応**: 冒頭の結論（数値入り）、QuickPickMdx 3枠、比較表2本（buy 列）、FAQ 6問（見出し形式）、選定基準と情報源。
+- **内部リンク**: 新記事→既存（camp-backpack-beginner／outdoor-commute-backpack／backpack-20l／backpack-25l／mountain-backpack-30l／camp-backpack-capacity-guide／backpack-rain-cover／waterproof-backpack／fjallraven-kanken／kelty-backpack／columbia-backpack／marmot-backpack）。既存→新記事は camp-backpack-beginner と outdoor-commute-backpack に1文ずつ追加（updatedAt 不変更）。
+- **効果測定**: 公開2〜3週間後に「L.L.Bean」「LLビーン」「エルエルビーン」を含むクエリの表示回数・順位を確認する（基準値なし）。
+
+---
+
 ## 2026-11-05 marmot-backpack 新規／狙いKW マーモット リュック／新規のため基準なし（campkit-20261105-N32）
 
 - **狙い**: 「マーモット リュック」「マーモット バックパック」「Marmot リュック」「マーモット リュック 通勤」「マーモット デイパック」などブランド名＋リュックの購入直前検索。
