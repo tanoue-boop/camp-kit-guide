@@ -2,7 +2,8 @@
 
 サイトの現状（記事数・カテゴリ構成・GAS/インフラ構造）を記録するスナップショット。記事追加・カテゴリ変更・GAS構造変更のたびに最新化する（→ 運用ルールは CLAUDE.md「記録更新ルール」を参照）。
 
-- **最終更新: 2026-11-04（campkit-20261104-N30：新規記事 `lowealpine-backpack`〔ロウアルパインのリュックおすすめ3選・category=backpack〕を追加。content/posts の記事数 295→296、category=backpack は 50本。カテゴリ・GAS構造の変更なし。既存の `camp-backpack-beginner`・`mountain-backpack-30l` に被リンク1行／1文ずつ追加）**
+- **最終更新: 2026-11-05（campkit-20261105-N31：新規記事 `haglofs-backpack`〔ホグロフスのリュックおすすめ9選・category=backpack〕を追加。content/posts の記事数 296→297、category=backpack は 50→51）**
+- 前回: 2026-11-04（campkit-20261104-N30：新規記事 `lowealpine-backpack`〔ロウアルパインのリュックおすすめ3選・category=backpack〕を追加。content/posts の記事数 295→296、category=backpack は 50本。カテゴリ・GAS構造の変更なし。既存の `camp-backpack-beginner`・`mountain-backpack-30l` に被リンク1行／1文ずつ追加）**
 - 同日の前回: campkit-20261104-N29：新規記事 `columbia-backpack`〔コロンビアのリュックおすすめ10選・category=backpack〕を追加。記事数 294→295、category=backpack は 49本。既存の `camp-backpack-beginner`・`outdoor-commute-backpack` に被リンク1行／1文ずつ追加
 - 同日の前回: campkit-20261104-N28B：新規記事 `blackdiamond-backpack`〔ブラックダイヤモンドのリュックおすすめ10選・category=backpack〕を追加。記事数 293→294、category=backpack は 48本。既存の `camp-backpack-beginner`・`mammut-backpack` に被リンク1行／1文ずつ追加
 - 前回: 2026-11-03（campkit-20261103-N27：新規記事 `osprey-exos-eja`〔オスプレー エクソス・イーゾ（エイジャ）おすすめ8選・category=backpack〕を追加。content/posts の記事数 292→293、category=backpack は 47本。カテゴリ・GAS構造の変更なし。既存の `osprey-kestrel-stratos`・`camp-backpack-beginner` に被リンク1行ずつ追加）**

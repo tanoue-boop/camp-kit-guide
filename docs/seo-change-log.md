@@ -4,6 +4,18 @@
 
 ---
 
+## 2026-11-05 haglofs-backpack 新規／狙いKW ホグロフス リュック／新規のため基準なし（campkit-20261105-N31）
+
+- **狙い**: 「ホグロフス リュック」「ホグロフス バックパック」「Haglofs リュック」「ホグロフス コーカー」などブランド名＋リュックの購入直前検索。
+- **需要確認**: GSC（data-campkit-gsc-qp-90d／page-28d-20261013）で「ホグロフス」「haglofs」を含むクエリは0件。サイト内に実績は無く、タスク指示どおり購入直前ブランド検索の新規記事として作成した。
+- **製品**: 9モデル（ホグロフス7＋比較枠2）。コーカー ミディアム／コーカー ラージ／ヤーベマルチ22／ヤーベマルチ28／L.I.M Trail 15／ラティニャ 18／センセイト プロ 32＋ドイター フューチュラ Pro 36／カリマー リッジ40+。ホグロフスは最大32Lなので、小屋泊の容量帯だけ比較枠で補った。
+- **差別化**: 上位記事（hinata・BE-PAL・ねとらぼ・YAMA HACK）は数年前のモデル紹介型が中心で、並行輸入の多いタイト・ヴィデが主役。本記事は「両モールで同じ色の新品が日本の販売店から買えるモデル」に絞り、容量・重量・サイズ・背面長・PC収納・税込価格の数値を横並びにし、通勤兼用／日帰りハイク／雪山／小屋泊の用途別早見と、外したモデルの理由を載せた。
+- **AI検索対応**: 冒頭の結論（数値入り）、QuickPickMdx 3枠、比較表2本（buy 列）、FAQ 6問（見出し形式）、選定基準と情報源。
+- **内部リンク**: 新記事→既存11本（camp-backpack-beginner／mountain-backpack-30l／backpack-40l／backpack-20l／backpack-25l／camp-backpack-capacity-guide／outdoor-commute-backpack／deuter-futura-aircontact／backpack-rain-cover／lowealpine-backpack／karrimor-backpack）。既存→新記事は camp-backpack-beginner と mountain-backpack-30l に1行ずつ追加（updatedAt 不変更）。
+- **効果測定**: 公開2〜3週間後に「ホグロフス」「haglofs」を含むクエリの表示回数・順位を確認する（基準値なし）。
+
+---
+
 ## 2026-11-04 修正：`low-style-chair` 第4位（BUNDOK BD-111）の採用店を再選定（campkit-20261104-M01）
 
 - **対象・狙い**: `low-style-chair#lc-bundok-bd111`。楽天リンクの採用店（`naturum-outdoor`）と画像の店（`jism`）が食い違い、ページ内の価格表記も揃っていなかったのを、実測で整合させる。順位狙いの変更ではないので `updatedAt` は据え置き。
