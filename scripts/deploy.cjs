@@ -16,7 +16,7 @@
  *   - .env* / node_modules が変更・ステージに混入していたら中止（誤コミット防止）
  *   - 変更された記事のカードに楽天 or Amazon のリンクが欠けていれば中止（check-affiliate-links.cjs・手順1.4）
  *   - ビルド失敗なら push せず中止
- *   - 本番検証(verify-deploy.cjs)が FAIL なら exit 1
+ *   - 本番検証(verify-deploy.cjs)が FAIL なら、空コミットで Vercel を1回だけ再ビルドして再検証し、それでも FAIL なら exit 1
  */
 
 const { execSync } = require('child_process');
@@ -286,14 +286,42 @@ run('git push origin main');
 // このコミットに記事（content/posts/*.mdx）が1件も無いと verify-deploy.cjs は検証対象なしで exit 0 する
 // （＝本番HTML検証は実質スキップ）。挙動はそのままに、最終表示だけ実態に合わせる（2026-09-21）。
 const stagedArticles = staged.split('\n').filter((f) => f.startsWith('content/posts/') && f.endsWith('.mdx'));
-console.log('\n■ 6. 本番検証 (verify-deploy.cjs)' + (stagedArticles.length ? '' : ' ※記事の変更なし → 検証対象なし'));
+// 検証対象の slug は常に明示して渡す（campkit-20261105-F01）。
+//  - `--` で指定した記事は、差分が無くても検証する（未反映コミットの本番反映を確かめる回のため）。
+//  - verify-deploy.cjs は slug 省略時に HEAD~1..HEAD から対象を探すので、下の空コミット後に省略すると
+//    「検証対象なし」で exit 0＝偽の PASS になる。
+const verifySlugs = [
+  ...new Set(
+    [...stagedArticles, ...scopedFiles.filter((f) => f.endsWith('.mdx'))].map((f) => path.basename(f, '.mdx'))
+  ),
+];
+const verifyCmd = (at) => ['node scripts/verify-deploy.cjs', `--deployed-at=${at}`, ...verifySlugs].join(' ');
+console.log('\n■ 6. 本番検証 (verify-deploy.cjs)' + (verifySlugs.length ? '' : ' ※記事の変更なし → 検証対象なし'));
 try {
-  run(`node scripts/verify-deploy.cjs --deployed-at=${deployedAt}`);
+  run(verifyCmd(deployedAt));
 } catch {
-  abort('本番検証で FAIL。Vercel のデプロイログを確認し、反映後に `node scripts/verify-deploy.cjs` を再実行してください。');
+  if (!verifySlugs.length) {
+    abort('本番検証で FAIL。Vercel のデプロイログを確認し、反映後に `node scripts/verify-deploy.cjs` を再実行してください。');
+  }
+  // 6.1 自動再ビルド（1回だけ）: Vercel のビルドが一時的な外部要因で落ちると本番が旧版のまま止まるため、
+  // 空コミットで作り直して検証をやり直す。再度 FAIL したらループせず中止する（campkit-20261105-F01）。
+  const failedHead = cap('git rev-parse --short HEAD');
+  console.log(`\n■ 6.1 本番検証 FAIL → 自動再ビルド（1回のみ・元コミット ${failedHead}）`);
+  try {
+    waitGitIndexLock();
+    run(`git commit --allow-empty -m ${JSON.stringify(`chore: Vercel 再ビルド（${failedHead} の本番未反映のため）`)}`);
+    const rebuiltAt = Math.floor(Date.now() / 1000);
+    run('git push origin main');
+    run(verifyCmd(rebuiltAt));
+  } catch {
+    abort(
+      `本番検証が自動再ビルド後も FAIL（元コミット ${failedHead}）。Vercel のデプロイログを確認し、` +
+        `反映後に \`node scripts/verify-deploy.cjs ${verifySlugs.join(' ')}\` を再実行してください。`
+    );
+  }
 }
 
-if (stagedArticles.length) {
+if (verifySlugs.length) {
   console.log('\n✅ デプロイ完了（build → commit → push → verify すべて通過）');
 } else {
   console.log('\n✅ デプロイ完了（build → commit → push 通過 ／ 本番検証はスキップ（記事の変更なし））');

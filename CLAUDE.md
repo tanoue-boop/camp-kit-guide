@@ -472,6 +472,9 @@ git push origin main
 `main` ブランチに push するだけで Vercel が自動的にビルド・デプロイを実行する。
 Vercel のダッシュボードでデプロイログを確認できる。
 
+**自動再ビルド（2026-11-05・campkit-20261105-F01）**: `deploy.cjs` は本番検証が FAIL すると、空コミット（`chore: Vercel 再ビルド（<短縮ハッシュ> の本番未反映のため）`）を push して再検証を1回だけ行い、それでも FAIL なら「自動再ビルド後も FAIL」で中止する。
+検証対象は slug を明示して渡すので、`--` で指定した記事は差分が無くても検証される（検証対象の記事が無い回は再ビルドしない）。
+
 ### ⚠️ Claude Code へのデプロイ受け渡しルール（確認プロンプト削減／2026-08-12）
 
 Cowork の穴埋め等を Claude Code に渡してデプロイする際、**Claude Code 側で独自の検証bashを生成しないこと**。`git diff`＋`grep`／`awk`／`for`ループ／`exec`／`$(...)` を含む照合ワンライナーは、command-substitution を含むため許可リストでも毎回「Do you want to proceed?」が出て手間になる（`Bash(*)` 許可や bypass でも `exec`/`$()` は確認対象）。

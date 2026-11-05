@@ -6,18 +6,28 @@ import AffiliateClickTracker from "../components/AffiliateClickTracker";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { pageview, GA_TRACKING_ID } from "../lib/gtag";
-import { Noto_Sans_JP, Jost } from "next/font/google";
+import localFont from "next/font/local";
 
-const notoSansJp = Noto_Sans_JP({
-  weight: ["400", "500", "700", "800", "900"],
-  subsets: ["latin"],
+// フォントはリポジトリ内の woff2 を使う（ビルド時に Google Fonts へ取りに行かない）。
+// Google Fonts の取得失敗で Vercel ビルドごと落ちたため置き換えた（campkit-20261105-F01）。
+const notoSansJp = localFont({
+  src: [
+    { path: "../styles/fonts/noto-sans-jp-latin-400-normal.woff2", weight: "400", style: "normal" },
+    { path: "../styles/fonts/noto-sans-jp-latin-500-normal.woff2", weight: "500", style: "normal" },
+    { path: "../styles/fonts/noto-sans-jp-latin-700-normal.woff2", weight: "700", style: "normal" },
+    { path: "../styles/fonts/noto-sans-jp-latin-800-normal.woff2", weight: "800", style: "normal" },
+    { path: "../styles/fonts/noto-sans-jp-latin-900-normal.woff2", weight: "900", style: "normal" },
+  ],
   variable: "--font-noto-sans-jp",
   display: "swap",
 });
 
-const jost = Jost({
-  weight: ["400", "500", "700"],
-  subsets: ["latin"],
+const jost = localFont({
+  src: [
+    { path: "../styles/fonts/jost-latin-400-normal.woff2", weight: "400", style: "normal" },
+    { path: "../styles/fonts/jost-latin-500-normal.woff2", weight: "500", style: "normal" },
+    { path: "../styles/fonts/jost-latin-700-normal.woff2", weight: "700", style: "normal" },
+  ],
   variable: "--font-jost",
   display: "swap",
 });
