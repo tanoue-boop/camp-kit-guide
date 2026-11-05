@@ -2,7 +2,8 @@
 
 サイトの現状（記事数・カテゴリ構成・GAS/インフラ構造）を記録するスナップショット。記事追加・カテゴリ変更・GAS構造変更のたびに最新化する（→ 運用ルールは CLAUDE.md「記録更新ルール」を参照）。
 
-- **最終更新: 2026-11-05（campkit-20261105-N33：新規記事 `llbean-backpack`〔L.L.Bean リュックおすすめ7選・category=backpack〕を追加。content/posts の記事数 298→299、category=backpack は 52→53）**
+- **最終更新: 2026-11-06（campkit-20261106-N34：新規記事 `outdoorproducts-backpack`〔アウトドアプロダクツ リュックおすすめ11選・category=backpack〕を追加。content/posts の記事数 299→300、category=backpack は 53→54）**
+- 前回: 2026-11-05（campkit-20261105-N33：新規記事 `llbean-backpack`〔L.L.Bean リュックおすすめ7選・category=backpack〕を追加。content/posts の記事数 298→299、category=backpack は 52→53）**
 - 前回: 2026-11-05（campkit-20261105-N32：新規記事 `marmot-backpack`〔マーモットのリュックおすすめ・category=backpack〕を追加。content/posts の記事数 297→298、category=backpack は 51→52）**
 - 前回: 2026-11-05（campkit-20261105-N31：新規記事 `haglofs-backpack`〔ホグロフスのリュックおすすめ9選・category=backpack〕を追加。content/posts の記事数 296→297、category=backpack は 50→51）**
 - 前回: 2026-11-04（campkit-20261104-N30：新規記事 `lowealpine-backpack`〔ロウアルパインのリュックおすすめ3選・category=backpack〕を追加。content/posts の記事数 295→296、category=backpack は 50本。カテゴリ・GAS構造の変更なし。既存の `camp-backpack-beginner`・`mountain-backpack-30l` に被リンク1行／1文ずつ追加）**

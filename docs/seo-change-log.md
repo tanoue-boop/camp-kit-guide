@@ -4,6 +4,18 @@
 
 ---
 
+## 2026-11-06 outdoorproducts-backpack 新規／狙いKW アウトドアプロダクツ リュック／新規のため基準なし（campkit-20261106-N34）
+
+- **狙い**: 「アウトドアプロダクツ リュック」「アウトドア プロダクツ リュック 通学」「OUTDOOR PRODUCTS デイパック」「アウトドアプロダクツ バックパック」などブランド名＋リュックの購入直前検索。
+- **需要確認**: GSC（data-campkit-gsc-qp-90d／page-28d-20261013）で「アウトドアプロダクツ」「outdoor products」を含むクエリは0件。サイト内に実績は無く、タスク指示どおり購入直前ブランド検索の新規記事として作成した。
+- **製品**: アウトドアプロダクツ 11モデル（比較枠なし）。452U／クラシック 12409043／4052EXPT／ルミナス 22469003／コーデュラ アーバン 22469087／スクールリュック OD-11192／OD-11142／タワー 22469164／452T 62393／4053EXPT 62394／ドットロゴ 22469025。楽天5,390〜9,680円。Amazonは本体販売7モデル、メーカー公式2モデル、国内販売店2モデル。
+- **差別化**: 検索上位はモール一覧・口コミ記事・単品紹介が中心で、型番ごとに数値で横並びにした記事が見当たらない。本記事は容量・重量・サイズ・PC収納・税込価格（楽天／Amazon）・レビュー件数を型番つきで並べ、通学／普段使い／日帰りハイクの用途別早見と、カード外8モデルの販売先一覧を載せた。
+- **AI検索対応**: 冒頭の結論（数値入り）、QuickPickMdx 3枠、比較表2本（buy 列）、FAQ 6問（見出し形式）、選定基準と情報源。
+- **内部リンク**: 新記事→既存（camp-backpack-beginner／outdoor-commute-backpack／backpack-20l／backpack-25l／mountain-backpack-30l／camp-backpack-capacity-guide／backpack-rain-cover／waterproof-backpack／coleman-backpack／columbia-backpack／kelty-backpack／llbean-backpack／fjallraven-kanken）。既存→新記事は camp-backpack-beginner と outdoor-commute-backpack に1文ずつ追加（updatedAt 不変更）。
+- **効果測定**: 公開2〜3週間後に「アウトドアプロダクツ」「outdoor products」を含むクエリの表示回数・順位を確認する（基準値なし）。
+
+---
+
 ## 2026-11-05 tent-size-beginner-guide#3 の採用店を再選定・画像と価格とレビュー値を実測に整合（campkit-20261105-M01）
 
 - **対象**: `tent-size-beginner-guide` 第3位 `ts-coleman-bc-crossdome-270`（コールマン BCクロスドーム/270 2000038429）。商品は替えず、楽天の採用店だけを見直した。
