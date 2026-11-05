@@ -4,6 +4,18 @@
 
 ---
 
+## 2026-11-06 hellyhansen-backpack 新規／狙いKW ヘリーハンセン リュック／新規のため基準なし（campkit-20261106-N36）
+
+- **狙い**: 「ヘリーハンセン リュック」「ヘリーハンセン バックパック」「Helly Hansen リュック」「ヘリーハンセン デイパック」などブランド名＋リュックの購入直前検索。単価1〜2万円台の高単価枠。
+- **需要確認**: GSC（data-campkit-gsc-qp-90d-20261013／page-28d-20261013）で「ヘリーハンセン」「helly hansen」を含むクエリは0件。Webでは BE-PAL（11製品）・hinata（8製品）・ITmedia のランキングなどがあり、タスク指示どおり購入直前ブランド検索の新規記事として作成した。
+- **製品**: ヘリーハンセン 11モデル（比較枠なし）。フィヨルドランド28 HY92323／ステティンド30 HY92330／フィヨルドランド20 HY92324／ステティンド20 HY92331／オルスタッドデイパック HY92305／タクティシャンパック HY92473／コーデュラデイパックM HY92563／コーデュラデイパックL HY92550／ルスラデイパック HY92363／ダガリ35 HY92555／WPロールパック HY92471。楽天9,680〜30,667円。Amazonは本体販売3モデル、国内販売店8モデル。
+- **差別化**: BE-PAL は用途別の紹介、hinata は容量と重量の一覧があるが重量が空欄のモデルがある。本記事は容量・重量・サイズ・PC収納・レインカバー・税込価格（楽天／Amazon）・レビュー件数を型番つきで並べ、通勤／日帰りハイク／旅行の用途別早見と、カード外モデルの販売先一覧を載せた。Amazon のタイトルと実容量が違うコーデュラ（30→26L・40→33L）も型番で明記した。
+- **AI検索対応**: 冒頭の結論（数値入り）、QuickPickMdx 3枠、比較表2本（buy 列）、FAQ 6問（見出し形式）、選定基準と情報源。
+- **内部リンク**: 新記事→既存（camp-backpack-beginner／outdoor-commute-backpack／backpack-20l／backpack-25l／mountain-backpack-30l／camp-backpack-capacity-guide／llbean-backpack／marmot-backpack／snowpeak-backpack／haglofs-backpack／backpack-rain-cover／waterproof-backpack）。既存→新記事は camp-backpack-beginner と outdoor-commute-backpack に1文ずつ追加（updatedAt 不変更）。
+- **効果測定**: 公開2〜3週間後に「ヘリーハンセン」「helly hansen」を含むクエリの表示回数・順位を確認する（基準値なし）。
+
+---
+
 ## 2026-11-06 snowpeak-backpack 新規／狙いKW スノーピーク リュック／新規のため基準なし（campkit-20261106-N35）
 
 - **狙い**: 「スノーピーク リュック」「スノーピーク バックパック」「snow peak リュック」「スノーピーク デイパック」などブランド名＋リュックの購入直前検索。単価1〜2万円台の高単価枠。
