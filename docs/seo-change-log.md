@@ -4,6 +4,18 @@
 
 ---
 
+## 2026-11-06 snowpeak-backpack 新規／狙いKW スノーピーク リュック／新規のため基準なし（campkit-20261106-N35）
+
+- **狙い**: 「スノーピーク リュック」「スノーピーク バックパック」「snow peak リュック」「スノーピーク デイパック」などブランド名＋リュックの購入直前検索。単価1〜2万円台の高単価枠。
+- **需要確認**: GSC（data-campkit-gsc-qp-90d-20261013）で「スノーピーク」「snow peak」を含むクエリは3件（ランタン／レンタル／インフレーターマット）のみで、リュック関連は0件。Webでは hinata・ORICON などの記事があり、タスク指示どおり購入直前ブランド検索の新規記事として作成した。
+- **製品**: スノーピーク 8モデル（比較枠なし）。Everyday Use Backpack AC-25SU402／Recycled Cordura Backpack BB-26SU001／Everyday Use 3Way Business Bag AC-25SU401／Active Field Light Backpack AC-25SU412／Dual Tech Classic Backpack 22L GS-S26SUFBP36／Double Face Mesh Backpack AC-25SU407／New Standard Packable Backpack NSD-AC-25AU005／Cample Mini Backpack 9L GS-S26ZWCBP13。楽天7,700〜24,200円。Amazonは本体販売7モデル、国内販売店1モデル。
+- **差別化**: 検索上位（hinata・ORICON ほか）は6製品前後の紹介が中心で、容量・重量の数値が揃っていない。本記事は容量・重量・サイズ・PC収納・税込価格（楽天／Amazon）・レビュー件数を型番つきで並べ、キャンプ／通勤／日帰りハイクの用途別早見と、カード外7モデルの販売先一覧を載せた。
+- **AI検索対応**: 冒頭の結論（数値入り）、QuickPickMdx 3枠、比較表2本（buy 列）、FAQ 6問（見出し形式）、選定基準と情報源。
+- **内部リンク**: 新記事→既存（camp-backpack-beginner／outdoor-commute-backpack／backpack-25l／backpack-40l／camp-backpack-capacity-guide／mountain-backpack-30l／haglofs-backpack／llbean-backpack／backpack-rain-cover／waterproof-backpack／snowpeak-tent／snowpeak-bonfire／snowpeak-lantern）。既存→新記事は camp-backpack-beginner と outdoor-commute-backpack に1文ずつ追加（updatedAt 不変更）。
+- **効果測定**: 公開2〜3週間後に「スノーピーク リュック」「snow peak」を含むクエリの表示回数・順位を確認する（基準値なし）。
+
+---
+
 ## 2026-11-06 outdoorproducts-backpack 新規／狙いKW アウトドアプロダクツ リュック／新規のため基準なし（campkit-20261106-N34）
 
 - **狙い**: 「アウトドアプロダクツ リュック」「アウトドア プロダクツ リュック 通学」「OUTDOOR PRODUCTS デイパック」「アウトドアプロダクツ バックパック」などブランド名＋リュックの購入直前検索。
