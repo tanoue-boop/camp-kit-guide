@@ -4,6 +4,16 @@
 
 ---
 
+## 2026-11-09 arcteryx-backpack 第5位 グランヴィル 25 の Amazon リンクを国内流通の出品へ差し替え（campkit-20261109-M01）
+
+- **対象**: `content/posts/arcteryx-backpack.mdx` の第5位カード `arcteryx-granville-25`（article-fix-backlog 物理行635・priority A・discontinued_404）。
+- **理由**: 2026-10-29 に楽天リンク（beacle/531-07099）が HTTP 404、amazonAsin B0H8NZDX84 が並行輸入品（meta title に「[並行輸入品]」・販売元サカゼンマーケットプレイス・¥44,000）と検出された。記事の方針「楽天・Amazon 両方で国内正規の在庫を確認できたモデルだけ」と食い違っていた。
+- **実測（2026-11-09）**: 楽天 beacle/531-07099 は復帰（HTTP 200・InStock・X000010385 Black/ONESIZE qty=14・¥39,600・タイトルに「アークテリクス正規代理店」）→ 楽天リンク・image・評価は据え置き。Amazon は B0H8NZDX84 が引き続き [並行輸入品]。B0FBZ8QM7M（メーカー型番 X000010385・Black・¥39,600・購入ボックスあり残り2点・販売元アシーズブリッジ・並行輸入表記なし）を確認。
+- **変更**: amazonAsin B0H8NZDX84 → B0FBZ8QM7M。本文（第5位の説明）の「Amazon側は楽天の正規代理店より1割ほど高い価格で並んでいます。」を「Amazon側も楽天の正規代理店と同じ39,600円で並んでいます。」に修正。商品・価格・まとめ表・比較表・description・updatedAt は不変（同一商品の Amazon 出品の付け替えのため）。
+- **効果測定**: SEO 施策ではなく送客導線の是正。Amazon ボタンのクリックが並行輸入品（+11%）ではなく定価の出品へ送られることの確認のみ。
+
+---
+
 ## 2026-11-09 osprey-travel-backpack 新規／狙いKW オスプレー 旅行 リュック／新規のため基準なし（campkit-20261109-N45）
 
 - **対象**: `content/posts/osprey-travel-backpack.mdx`（新規・10製品）。関連KW: オスプレー 旅行 リュック／オスプレー 機内持ち込み／オスプレー ファーポイント／オスプレー トランスポーター／オスプレー バックパック 旅行。
