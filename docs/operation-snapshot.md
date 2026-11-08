@@ -2,7 +2,8 @@
 
 サイトの現状（記事数・カテゴリ構成・GAS/インフラ構造）を記録するスナップショット。記事追加・カテゴリ変更・GAS構造変更のたびに最新化する（→ 運用ルールは CLAUDE.md「記録更新ルール」を参照）。
 
-- **最終更新: 2026-11-08（campkit-20261108-N42：新規記事 `camera-backpack`〔カメラリュックおすすめ10選・category=backpack〕を追加。content/posts の記事数 307→308、category=backpack は 61→62。既存の `thule-backpack`・`outdoor-commute-backpack` に被リンク1文ずつ追加）**
+- **最終更新: 2026-11-09（campkit-20261109-N43：新規記事 `bergans-backpack`〔ベルガンスのリュックは国内で買える？北欧ブランドの代わり10選・category=backpack〕を追加。content/posts の記事数 308→309、category=backpack は 62→63。既存の `camp-backpack-beginner`・`mammut-backpack` に被リンク1行／1文ずつ追加）**
+- 前回: 2026-11-08（campkit-20261108-N42：新規記事 `camera-backpack`〔カメラリュックおすすめ10選・category=backpack〕を追加。content/posts の記事数 307→308、category=backpack は 61→62。既存の `thule-backpack`・`outdoor-commute-backpack` に被リンク1文ずつ追加）
 - 同日の前回: campkit-20261108-N41：新規記事 `trailrun-pack`〔トレイルランニング ザックおすすめ9選・category=backpack〕を追加。content/posts の記事数 306→307、category=backpack は 60→61。既存の `salomon-backpack`・`backpack-20l` に被リンク1文／1行ずつ追加
 - 前回: 2026-11-08（campkit-20261108-N40：新規記事 `backpack-45l`〔リュック45Lおすすめ10選・category=backpack〕を追加。content/posts の記事数 305→306、category=backpack は 59→60）
 - 前回: 2026-11-07（campkit-20261107-N39：新規記事 `herschel-backpack`〔ハーシェル リュックおすすめ9モデル比較・category=backpack〕を追加。content/posts の記事数 304→305、category=backpack は 58→59）
