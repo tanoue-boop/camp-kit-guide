@@ -4,6 +4,17 @@
 
 ---
 
+## 2026-11-08 mysteryranch-backpack 在庫切れ・404カード3枚の是正（campkit-20261108-M01）
+
+- **対象**: `content/posts/mysteryranch-backpack.mdx`（GSC でクリックのある記事）。L01 巡回点検の起票（article-fix-backlog 物理行683・684）と、未起票だった Amazon 在庫切れ1枚。
+- **第6位 ウィメンズ レイディックス47（mr-radix-47）**: 楽天リンク先 crosscamper/19761593121003 が 404 → 同一商品（19761593121003・ブラック／サンセット S・¥38,500）を moderate（TAMAYA-GROUP）へ付け替え（判定基準 11-1 型(b)）。Amazon B0CQJ42BKL は購入ボックスあり（¥38,500）で据え置き。カード・比較表2つの affiliateUrl と image を更新。商品・価格は不変。
+- **第8位 スリーウェイ18（mr-3way-18）**: バックスキンが楽天（toppin 売切・他変種も在庫0）・Amazon（B0DT7LF28Y 在庫切れ）とも購入不可、他店・別 ASIN にも両モールで買えるバックスキンが無い → 同モデルのポンデローサへ差し替え（楽天 functionjunctiontokyo/1789890517 ¥34,100・Amazon B0DT7J4YYV ¥33,000）。name・price・rows（価格・Amazon価格・型番）・本文・モール価格差（900円→1,100円）・まとめ表価格帯（35,000→34,100円台）を揃えた。
+- **第10位 イン＆アウト18（mr-inout-18）**: Amazon B0DTB4WN99（ワイルドフラワー）が在庫切れ・再入荷予定なし、楽天 canpanera のワイルドフラワーSKUも在庫0 → 同じ楽天ページで在庫のあるサングローへ（¥13,860・判定基準 11-6 追補(b)）、Amazon は B0DTB5TNNG（Sunglow ¥13,860）。価格は不変なので description・まとめ表・最安の記述は不変。
+- **updatedAt**: 2026-10-29 → 2026-11-08（商品の色を2枠で差し替えたため）。title・description・tags・他7枚のカードは不変。
+- **効果測定**: 購入導線の回復が目的。2〜3週間後に GSC のクリック数と、アフィリエイトのクリック計測で mr-3way-18／mr-inout-18／mr-radix-47 のボタンのクリックを確認する。
+
+---
+
 ## 2026-11-08 camera-backpack 新規／狙いKW カメラリュック おすすめ／新規のため基準なし（campkit-20261108-N42）
 
 - **対象**: `content/posts/camera-backpack.mdx`（新規・10製品）。関連KW: カメラリュック おすすめ／カメラバッグ リュック／カメラ リュック 一眼／カメラリュック 登山／カメラリュック PC収納／ミラーレス リュック。
