@@ -4,6 +4,17 @@
 
 ---
 
+## 2026-11-10 backpack-rain-cover リライト／狙いKW リュック レインカバー／リライト前の順位 8.8（GSC ページ28日・表示4）（campkit-20261110-N46）
+
+- **対象**: `content/posts/backpack-rain-cover.mdx`（slug 不変・5製品→10製品の作り直し）。関連KW: リュック レインカバー／ザックカバー おすすめ／バックパック レインカバー／リュックカバー 防水 登山。
+- **リライト前の順位**: ページ単位で平均8.8位・表示4・クリック0（_tasks の data-campkit-gsc-page-28d-20261109.tsv）。クエリ単位では「ザックカバー おすすめ」平均26.0位・表示1（qp-90d-20261109）。
+- **リライトの理由**: 旧版は5製品（mitas・キャプテンスタッグ2点・ウミネコ・エツミ）で、結論・数値の比較表・見出し形式FAQ・迷ったらこれボックスが無く、Amazon評価も未掲載だった。上位記事（マイナビ16選・BE-PAL12選・my-best 等）はモンベル・グレゴリー・ノースフェイス・コールマン・ミステリーランチなどブランド品が中心。
+- **変更**: title を「リュック レインカバー・ザックカバーおすすめ10選【2026年版】20L〜90Lを容量別に比較」、description を135字（対応容量20〜90L・税込1,419〜7,700円入り）に変更。結論3行→QuickPick（ドイター レインカバーI／オスプレー ULレインカバーL／ウミネコ）→容量別早見（〜20L／20〜35L／35〜50L／50L〜・購入列 buy）→比較表（対応容量・重量・素材・固定方法・楽天/Amazon税込価格・Amazon評価・buy）→選び方4点（容量の合わせ方・固定方法・反射材・リュック本体の防水との違い）→10製品→Tips→FAQ 6問（見出し形式）→選定基準と情報源→まとめ。採用はドイター2・オスプレー2・ノースフェイス2・グレゴリー・ミレー・ウミネコ・キャプテンスタッグ。updatedAt 2026-11-10。thumbnail は不変。
+- **内部リンク**: 本記事→camp-backpack-capacity-guide／deuter-backpack／osprey-backpack／gregory-backpack／backpack-40l／backpack-50l-60l／camp-backpack-beginner／mountain-backpack-30l／waterproof-backpack。被リンク追加: osprey-backpack（Tipsのレインカバー項に1文）・gregory-backpack（Tipsの保管項に1文）・camp-backpack-capacity-guide（関連記事リストに1行）。他の本文・updatedAt は不変。
+- **効果測定**: 2〜3週間後に GSC で「レインカバー」「ザックカバー」「リュックカバー」を含むクエリの表示・順位を確認する（基準: ページ28日 平均8.8位・表示4）。
+
+---
+
 ## 2026-11-09 bluetti-power 第2位 AC180・第5位 EB3A を同ブランド別モデルへ差し替え（campkit-20261109-M03）
 
 - **対象**: `bluetti-power` 第2位カード `bluetti-ac180`（article-fix-backlog 物理行692・priority A・out_of_stock）と第5位カード `bluetti-eb3a`（物理行693・priority A・discontinued_404）。
