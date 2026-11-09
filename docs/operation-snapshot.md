@@ -2,7 +2,8 @@
 
 サイトの現状（記事数・カテゴリ構成・GAS/インフラ構造）を記録するスナップショット。記事追加・カテゴリ変更・GAS構造変更のたびに最新化する（→ 運用ルールは CLAUDE.md「記録更新ルール」を参照）。
 
-- **最終更新: 2026-11-10（campkit-20261110-N48：新規記事 `kids-hiking-backpack`〔キッズリュック 遠足・ハイキングおすすめ10選・category=backpack〕を追加。content/posts の記事数 312→313、category=backpack は 66→67。既存の `camp-backpack-beginner`・`kids-sleeping-bag` に被リンク1行／1文ずつ追加）**
+- **最終更新: 2026-11-10（campkit-20261110-N49：新規記事 `mountainhardwear-backpack`〔マウンテンハードウェアのリュックはどこで買える？代わりの登山・通勤リュック10選・category=backpack〕を追加。content/posts の記事数 313→314、category=backpack は 67→68。既存の `camp-backpack-beginner`・`columbia-backpack` に被リンク1行ずつ追加）**
+- 同日の前回: campkit-20261110-N48：新規記事 `kids-hiking-backpack`〔キッズリュック 遠足・ハイキングおすすめ10選・category=backpack〕を追加。content/posts の記事数 312→313、category=backpack は 66→67。既存の `camp-backpack-beginner`・`kids-sleeping-bag` に被リンク1行／1文ずつ追加
 - 同日の前回: campkit-20261110-N47：新規記事 `ladies-hiking-backpack`〔レディース登山リュックおすすめ10選・category=backpack〕を追加。content/posts の記事数 311→312、category=backpack は 65→66。既存の `osprey-womens-backpack`・`camp-backpack-beginner` に被リンク1行ずつ追加
 - 前回: 2026-11-09（campkit-20261109-N45：新規記事 `osprey-travel-backpack`〔オスプレーの旅行リュック・機内持ち込みおすすめ10選・category=backpack〕を追加。content/posts の記事数 310→311、category=backpack は 64→65。既存の `osprey-backpack`・`osprey-daily-backpack` に被リンク1文ずつ追加）
 - 同日の前回: campkit-20261109-N44：新規記事 `northface-bigshot`〔ノースフェイス ビッグショットの容量・サイズ・価格 3色＋代わり7モデル・category=backpack〕を追加。content/posts の記事数 309→310、category=backpack は 63→64。既存の `northface-hotshot`・`northface-backpack` に被リンク1行／1文ずつ追加

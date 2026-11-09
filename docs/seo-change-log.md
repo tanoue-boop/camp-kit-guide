@@ -4,6 +4,18 @@
 
 ---
 
+## 2026-11-10 mountainhardwear-backpack 新規／狙いKW マウンテンハードウェア リュック／新規のため基準なし（campkit-20261110-N49）
+
+- **対象**: `content/posts/mountainhardwear-backpack.mdx`（新規・10製品・category=backpack）。関連KW: マウンテンハードウェア リュック／マウンテンハードウェア バックパック／マウンテンハードウェア リュック おすすめ／マウンテンハードウェア 30L。
+- **狙い**: ブランド＋リュックの購入直前検索。GSC（_tasks の qp-90d／page-28d 20261109）に「マウンテンハードウェア」「mountain hardwear」を含むクエリは0件。検索上位（rank-king・smartlog・hinata・BE-PAL・YAMA HACK・roomie）はアルパインライト・スクランブラー・フィールドデイなど型落ちを含む個別モデル紹介が中心で、国内の買える場所・税込価格・容量／重量の横並びと用途別の早見が無い。
+- **本体の扱い**: 楽天に国内正規品5モデル（UL20・フィールドデイ22L／28L・スクランブラー35・カザム60L）、Amazonは輸入品のみ（楽天比+40%以上）で、両モール条件を満たす本体は0モデル。bergans-backpack（N43）と同じく、冒頭で「国内で何モデル買えるか」に答え、比較枠10製品で構成。title も「どこで買える？」型。
+- **構成**: 結論3行（数値入り）→ QuickPick（ハイクライト 18／ホットショット／ケストレル 38）→ 国内で買えるモデルの表 → 用途別早見（日帰りハイキング／通勤・普段使い／テント泊・縦走・buy列・9行）→ 比較表（容量・重量・背面長・サイズ・レインカバー・PC収納・楽天/Amazon税込・buy列）→ 選び方4ポイント（容量帯／背面システム／レインカバー／PC収納）→ 10製品 → Tips → FAQ 5問（見出し形式）→ 選定基準と情報源 → まとめ。
+- **商品**: オスプレー ハイクライト 18・タロン 22・ケストレル 38／ブラックダイヤモンド パーシュート30・クラッグ40・ロックブリッツ15／ノースフェイス ホットショット・テルス35／コロンビア スターレンジ23L／グレゴリー スタウト45（楽天 13,640〜34,100円）。全カードに楽天 hb.afl＋amazonAsin。
+- **内部リンク**: 本記事→12本（camp-backpack-capacity-guide・mountain-backpack-30l・backpack-rain-cover・outdoor-commute-backpack・osprey-backpack・northface-backpack・blackdiamond-backpack・backpack-35l・columbia-backpack・gregory-backpack・camp-backpack-beginner・backpack-20l）。既存→本記事: camp-backpack-beginner のブランド別記事一覧に1行、columbia-backpack の関連記事リストに1行（updatedAt 不変）。
+- **効果測定**: 新規のため基準なし。2〜3週間後に上記KWの表示・順位を確認する。
+
+---
+
 ## 2026-11-10 kids-hiking-backpack 新規／狙いKW キッズ リュック 遠足／新規のため基準なし（campkit-20261110-N48）
 
 - **対象**: `content/posts/kids-hiking-backpack.mdx`（新規・10製品・category=backpack）。関連KW: キッズ リュック 遠足／子供 リュック ハイキング／キッズ リュック 登山／子供用 リュック 10L／キッズ バックパック チェストストラップ。
