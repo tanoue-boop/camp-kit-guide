@@ -4,6 +4,23 @@
 
 ---
 
+## 2026-11-09 冬物と流入上位6記事に「迷ったらこれ」ボックス（QuickPickMdx）を追加（campkit-20261109-C03）
+
+- **狙い**: 冬物の送客強化（11-18 の月間報酬3万円目標に向けた緊急施策）。GSC 28日（2026-10-12〜11-08）で流入のある6記事に、本文を読まなくても購入ボタン（楽天 hb.afl＋Amazon dp）に届く導線を記事冒頭に置く。高単価の冬物（ストーブ・テント・ダウン寝袋）を優先して各ボックスに含めた。
+- **配置**: 結論（sleeping-bag-recommend は「用途別おすすめ早見表」）の直後、結論の節が無い記事はリード文の直後。商品は各記事の既存 ProductCardMdx から選び、name・affiliateUrl・amazonAsin はカードから機械的に写した（`_file/_work/c03-quickpick.cjs`）。spec は記事内の公表値のみ。`_file/card-name-check.tsv` で soldout のカードは無し。
+- **置いた商品**:
+  - `camp-rice-cooker`（40／1,248）: yamazen-yje-m150（5,480円）／jpn-takerukun（5,980円）／kumazaki-mc-107（7,678円）
+  - `cassette-gas-heater`（12／609）: iwatani-dekadan3（22,800円）／iwatani-kazedan-gfh5（29,980円）／iwatani-izamaru（14,850円）
+  - `stove-fan`（10／263）: fieldoor-normal-4blade（2,970円）／fieldoor-swing-19cm（6,490円）／regear-heatwavy2（9,980円）
+  - `winter-camp-tent`（11／128）: onetigris-solo-homestead-tc（46,200円）／tentmark-circustc-dxplus（36,080円）／onetigris-raven-nest（40,590円）。TOMOUNT ベルテントは article-fix-backlog に price_unconfirmed（pending）があるため外した
+  - `nanga-sleeping-bag`（8／271）: ns-auroratex-600dx（41,900円）／ns-auroratex-750dx（43,800円）／ns-aurora-light-800dx-sq（59,400円）
+  - `sleeping-bag-recommend`（10／197）: coleman-performer3-c5（5,350円）／coleman-tasman-l15（15,180円）／nanga-aurora-light-450dx（46,200円）
+- **内部導線**: nanga-sleeping-bag・sleeping-bag-recommend の「まとめ」直前に「寝袋と一緒に揃えたい冬の暖房」として cassette-gas-heater／electric-blanket-camp／stove-fan への文脈内リンクを1段落追加（商品ボタンなし）。
+- **不変**: 既存の見出し・ProductCard・比較表・まとめ表・title・description・updatedAt・thumbnail。
+- **効果測定**: 11-18 時点と次回 SEO レポートで、6記事の楽天・Amazon クリック数（AffiliateClickTracker）と成約を C03 前の28日と比較する。
+
+---
+
 ## 2026-11-09 arcteryx-backpack 第5位 グランヴィル 25 の Amazon リンクを国内流通の出品へ差し替え（campkit-20261109-M01）
 
 - **対象**: `content/posts/arcteryx-backpack.mdx` の第5位カード `arcteryx-granville-25`（article-fix-backlog 物理行635・priority A・discontinued_404）。
