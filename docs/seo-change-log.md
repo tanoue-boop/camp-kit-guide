@@ -4,6 +4,16 @@
 
 ---
 
+## 2026-11-09 barebones-light 第1位 エジソン ライトスティックの在庫切れを是正（campkit-20261109-M02）
+
+- **対象**: `barebones-light` 第1位カード `barebones-edison-stick`（article-fix-backlog 物理行691・priority A・out_of_stock）。
+- **理由（issue_type=out_of_stock）**: 楽天 `glv/brs-00015-00` が再取得でも売切（OutOfStock・quantity 0・変種なし）。
+- **旧→新**: 楽天 `glv/brs-00015-00`（¥6,999・売切）→ `naturum/3468253`（エジソンライトスティック LED 2.0 ブラス 20230038000000・¥9,329・在庫3・発送予定1～2日）。同一型番 LIV-145（ブラス）の在庫あり出品から判定基準 §11-2／§11-3 で選定（段①公式は該当出品なし／母数最安 rarabell ¥7,480 はバリエーション選択式で §11-6 不採用／取寄の個人店は在庫未確認で不採用）。
+- **連動して直した箇所**: カード name（型番を採用店の印字 20230038000000 に揃えブラス・LED 2.0 を明記）・description（レビュー件数の記述を外す）・price 9329・rakutenRating/rakutenReviewCount 削除（新店レビュー0件・§11-8 追補条文2）・badge の★を外す・image を naturum キャビネットへ・比較表 rows（price・eval=評価準備中・affiliateUrl）・まとめ表「9,329円台」・本文2箇所（レビュー件数の文を削除／価格表記）・frontmatter description の価格帯「3,300〜9,329円」。updatedAt は同一型番の店付け替えのため据え置き。
+- **未了**: Amazon `B0BBV1T6X3` は dp が HTTP 404（ページ消滅）。Amazon 検索が bm-verify で2本とも弾かれ代替 ASIN を特定できず据え置き（判定基準 §12-5-2）。次便で代替 ASIN の探索が必要。
+
+---
+
 ## 2026-11-09 表示上位の検索語に合わせて4記事の title・description・冒頭・FAQ を改善（campkit-20261109-T02）
 
 - **狙い**: 表示回数が大きいのに10位前後で止まっている購入意図の強い検索語で 10位以内／CTR 改善を狙う（11-18 の月間報酬3万円目標に向けた緊急施策）。基準データは GSC 28日（2026-10-12〜11-08）。
