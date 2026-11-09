@@ -4,6 +4,16 @@
 
 ---
 
+## 2026-11-09 bluetti-power 第2位 AC180・第5位 EB3A を同ブランド別モデルへ差し替え（campkit-20261109-M03）
+
+- **対象**: `bluetti-power` 第2位カード `bluetti-ac180`（article-fix-backlog 物理行692・priority A・out_of_stock）と第5位カード `bluetti-eb3a`（物理行693・priority A・discontinued_404）。
+- **理由**: 楽天 `bluettijapan/bluettijapan_ac180` は売切（OutOfStock・quantity 0）、`bluettijapan/copybluettijapan_eb3a_b` は HTTP 404 のまま。Amazon `B0BZZ616G2`（AC180）・`B09XWNYZFG`（EB3A）も dp が「現在在庫切れ・再入荷予定なし」。楽天で同一型番（AC180 1152Wh／EB3A 本体のみ）の正規・新品・在庫ありの出品は見つからなかった（EB3A は転売系 ¥75,000 と中古のみ）。
+- **旧→新**: 第2位 AC180 1152Wh（¥109,800）→ **AORA 200 V2 2080Wh**（楽天 `bluettijapan/el200v2-jp-gy-bl-rktjp-00` 公式・¥238,000／Amazon `B0HLDX2J94`）。第5位 EB3A 268Wh 本体のみ（¥32,900）→ **AORA 10 128Wh ミントグリーン**（楽天 `bluettijapan/aora10-jp-eg-rktjp-00` 公式・¥22,500／Amazon `B0FXQ89GKY`）。楽天・Amazon の両方で在庫があることを条件に選んだ（AC180P・AC70P は Amazon で該当なし、AC240 も Amazon で該当なし、AORA100（1152Wh）と AORA 30 mini は記事内の AORA 100 V2・AORA 30 V2 と名前が重なるため不採用）。
+- **連動して直した箇所**: 2枚のカード（name・description・price・amazonAsin・affiliateUrl・badge・image。rakutenRating/rakutenReviewCount はレビュー30件未満のため削除）・見出し2本・各カードの本文・比較表 rows（name・容量・出力・price・eval=評価準備中・affiliateUrl）・まとめ表2行・frontmatter description（容量と価格帯「22,500〜238,000円」）・選び方（容量帯 128〜2080Wh・出力・充電時間・ソーラーセットの例）・BLUETTI の立ち位置の段落・お手入れTips 3項目・FAQ 4問・締めの段落。カード id・比較表 rows の id・アンカーは据え置き（判定基準 §12-5-9 条文2）。商品を差し替えたため updatedAt を 2026-11-09 へ。
+- **SEO 上の狙い**: 在庫切れ・404 のリンクを残さず、記事の「容量別に比較」の軸（小型〜大容量）を保ったまま購入できる現行モデルへ置き換える。
+
+---
+
 ## 2026-11-09 barebones-light 第1位 エジソン ライトスティックの在庫切れを是正（campkit-20261109-M02）
 
 - **対象**: `barebones-light` 第1位カード `barebones-edison-stick`（article-fix-backlog 物理行691・priority A・out_of_stock）。
