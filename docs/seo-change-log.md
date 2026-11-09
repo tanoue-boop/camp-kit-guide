@@ -4,6 +4,17 @@
 
 ---
 
+## 2026-11-10 ladies-hiking-backpack 新規／狙いKW レディース 登山 リュック／新規のため基準なし（campkit-20261110-N47）
+
+- **対象**: `content/posts/ladies-hiking-backpack.mdx`（新規・10製品・category=backpack）。関連KW: レディース 登山 リュック／女性 登山 ザック／登山 リュック 女性 おすすめ／レディース ザック 30L／登山 リュック 小柄。
+- **狙い**: 性別＋用途で絞った購入直前検索。サイト内の女性向けはオスプレー限定の `osprey-womens-backpack` だけで、複数ブランド横断の記事が無かった。検索上位（hinata・マイナビ・BE-PAL・nap-camp・tacklenote・rank-king）は製品名と選び方の文章が中心で、容量・重量・背面長の数値横並びと、背面長の下限（38cm〜）から小柄な方の候補を絞る切り口が薄い。
+- **構成**: 結論3行（数値入り）→ QuickPick（フューチュラ 25 SL／ジェイド33／テンペスト 22）→ 用途別早見（buy列・8行）→ 比較表（型番・容量・重量・背面長・サイズ展開・楽天/Amazon税込・buy列）→ 選び方4ポイント（女性用表記の見分け方の表／背面長の測り方とサイズ式・調整式／容量／ヒップベルト・チェストストラップ）→ 10製品 → Tips → FAQ 5問（見出し形式）→ 選定基準と情報源 → まとめ。
+- **商品**: グレゴリー ジェイド33・ジェイド28 LT／ドイター フューチュラ 25 SL・トレイル 22 SL／ミレー サースフェー NX 30+5 W／カリマー リッジ30プラス S／オスプレー テンペスト 22・シラス 24／マムート リチウム 25 ウィメンズ／ミステリーランチ ウィメンズ レイディックス31（楽天 12,980〜33,000円）。全カードに楽天 hb.afl＋amazonAsin。
+- **内部リンク**: 本記事→10本（camp-backpack-capacity-guide・osprey-womens-backpack・mountain-backpack-30l・gregory-zulu-baltoro・deuter-futura-aircontact・millet-backpack・karrimor-backpack・mysteryranch-backpack・backpack-rain-cover・camp-backpack-beginner）。既存→本記事: osprey-womens-backpack・camp-backpack-beginner の関連記事リストに1行ずつ（updatedAt 不変）。
+- **効果測定**: 新規のため基準なし。2〜3週間後に上記KWの表示・順位を確認する。
+
+---
+
 ## 2026-11-10 backpack-rain-cover リライト／狙いKW リュック レインカバー／リライト前の順位 8.8（GSC ページ28日・表示4）（campkit-20261110-N46）
 
 - **対象**: `content/posts/backpack-rain-cover.mdx`（slug 不変・5製品→10製品の作り直し）。関連KW: リュック レインカバー／ザックカバー おすすめ／バックパック レインカバー／リュックカバー 防水 登山。
