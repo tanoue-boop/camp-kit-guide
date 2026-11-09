@@ -4,6 +4,17 @@
 
 ---
 
+## 2026-11-10 kids-hiking-backpack 新規／狙いKW キッズ リュック 遠足／新規のため基準なし（campkit-20261110-N48）
+
+- **対象**: `content/posts/kids-hiking-backpack.mdx`（新規・10製品・category=backpack）。関連KW: キッズ リュック 遠足／子供 リュック ハイキング／キッズ リュック 登山／子供用 リュック 10L／キッズ バックパック チェストストラップ。
+- **狙い**: 子供＋用途で絞った購入直前検索。サイト内のキッズ向けは `kids-sleeping-bag`（GSC 90日で「子供 寝袋」「キッズ シュラフ」など各60〜80表示）だけで、リュックの記事は無かった。GSC（_tasks の qp-90d-20261109）に「キッズ」「子供」「遠足」を含むリュックのクエリは無く、需要は外部の検索上位で確認した。上位（my-best・HugKum・hinata・BE-PAL・暮らしニスタ系ランキング）は通園・遠足兼用の製品紹介と「容量の目安」が中心で、容量・重量・対象年齢の数値横並びと、チェストストラップ（ホイッスル・セーフティバックル・面ファスナー）・反射材・ウエストベルトの有無を製品ごとに見分ける切り口が薄い。
+- **構成**: 結論3行（数値入り）→ QuickPick（オスプレー ジェット 12／ノースフェイス スモールデイ／コールマン ウォーカーミニ）→ 年齢・用途別早見（幼児／小学生の遠足／高学年のハイキング・buy列・8行）→ 比較表（容量・重量・対象年齢・背面長・サイズ・装備・楽天/Amazon税込・buy列）→ 選び方4ポイント（年齢別の容量の表／チェストストラップのホイッスル・外れ方／背面パッドとウエストベルト／反射材とレインカバー）→ 10製品 → Tips → FAQ 5問（見出し形式）→ 選定基準と情報源 → まとめ。
+- **商品**: オスプレー ジェット 12・ジェット 18／ノースフェイス スモールデイ・ホームスライス／グレゴリー ワンダー8・ワンダー12／コールマン ウォーカーミニ・ウォーカー15／カリマー ステップ10／コロンビア プライスストリームユース 12L（楽天 3,980〜13,200円）。全カードに楽天 hb.afl＋amazonAsin。
+- **内部リンク**: 本記事→10本（kids-sleeping-bag・camp-backpack-capacity-guide・backpack-rain-cover・osprey-backpack・northface-backpack・coleman-backpack・karrimor-backpack・columbia-backpack・gregory-backpack・camp-backpack-beginner）。既存→本記事: camp-backpack-beginner の関連記事リストに1行、kids-sleeping-bag の末尾段落に1文（updatedAt 不変）。
+- **効果測定**: 新規のため基準なし。2〜3週間後に上記KWの表示・順位を確認する。
+
+---
+
 ## 2026-11-10 ladies-hiking-backpack 新規／狙いKW レディース 登山 リュック／新規のため基準なし（campkit-20261110-N47）
 
 - **対象**: `content/posts/ladies-hiking-backpack.mdx`（新規・10製品・category=backpack）。関連KW: レディース 登山 リュック／女性 登山 ザック／登山 リュック 女性 おすすめ／レディース ザック 30L／登山 リュック 小柄。
