@@ -4,6 +4,18 @@
 
 ---
 
+## 2026-11-11 ultralight-backpack 新規／狙いKW ウルトラライト バックパック／新規のため基準なし（campkit-20261111-N50）
+
+- **対象**: `content/posts/ultralight-backpack.mdx`（新規・11製品・category=backpack）。関連KW: ウルトラライト バックパック／ウルトラライト リュック／軽量 ザック おすすめ／軽量 バックパック 登山／UL バックパック。
+- **狙い**: 縦走・テント泊の高単価枠の購入直前検索。GSC（_tasks の qp-90d／qp-28d 20261109）では「オスプレー 軽量ザック」（osprey-backpack・12表示・8.8位）、「ul ザック 30l おすすめ」「軽量ザック 30l」（mountain-backpack-30l・各1表示）だけで、受け皿の記事が無かった。検索上位（rank-king・my-best・YAMA HACK・マイナビおすすめナビ・sakidori・BE-PAL・hinata）は山と道・モンベル・ゴッサマーギア・グラナイトギア・トレイルバムなどの個別紹介が中心で、重量あたり容量の数値横並び・荷重の目安（ベースウェイトと最大積載量）・用途別早見が無い。
+- **差別化**: 1kgあたり容量（容量÷本体重量）のランキング表、ベースウェイトと最大積載量・推奨荷重の見方の表、日帰り〜小屋泊／テント泊1〜2泊／長期縦走の用途別早見（buy列）、本体重量順の比較表（容量・重量・L/kg・背面長・荷重・背面の作り・楽天/Amazon税込・buy列）。
+- **構成**: 結論3行（数値入り）→ QuickPick（ステディ スペクトラ／トレイルブレイザー 30／エクソスプロ 55）→ はじめに → 用途別早見 → 比較表＋価格帯の区切り（最高÷最低 約5.4倍）→ 選び方4ポイント（L/kg／荷重の目安／背面システムとフレーム／割り切るポイント）→ 11製品 → Tips → FAQ 5問（見出し形式）→ 選定基準と情報源 → まとめ。
+- **商品**: トレイルバム ステディ スペクトラ／ゴッサマーギア クモ 36 R・ゴリラ 50 R／ブラックダイヤモンド パーシュート30・ベータライト30・45／サロモン トレイルブレイザー 30／オスプレー エクソスプロ 55／ミレー プロライター 30+10・ウェルキン 30／アークテリクス アルファ FL 30（楽天 12,650〜68,200円・512〜1,000g）。全カードに楽天 hb.afl＋amazonAsin。
+- **内部リンク**: 本記事→12本（camp-backpack-beginner・backpack-rain-cover・camp-backpack-capacity-guide・backpack-40l・backpack-45l・blackdiamond-backpack・mountain-backpack-30l・osprey-exos-eja・millet-backpack・arcteryx-backpack・backpack-50l-60l・backpack-35l）。既存→本記事: camp-backpack-beginner のブランド別記事一覧に1行、backpack-40l の冒頭の関連記事案内に1文（updatedAt 不変）。
+- **効果測定**: 新規のため基準なし。2〜3週間後に上記KWの表示・順位を確認する。
+
+---
+
 ## 2026-11-10 mountainhardwear-backpack 新規／狙いKW マウンテンハードウェア リュック／新規のため基準なし（campkit-20261110-N49）
 
 - **対象**: `content/posts/mountainhardwear-backpack.mdx`（新規・10製品・category=backpack）。関連KW: マウンテンハードウェア リュック／マウンテンハードウェア バックパック／マウンテンハードウェア リュック おすすめ／マウンテンハードウェア 30L。
