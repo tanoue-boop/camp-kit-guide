@@ -140,6 +140,14 @@ bergans-backpack	7	bg-hh-fjordland28	0	amazonAsin	B0B2P3W48N	https://www.amazon.
 bergans-backpack	8	bg-fr-raven28	0	amazonAsin	B0B5P9J35Q	https://www.amazon.co.jp/dp/B0B5P9J35Q	フェールラーベン Raven 28 23345 Black(550) 28L	フェールラーベン		20900	OK									
 bergans-backpack	9	bg-fr-kanken-laptop15	0	amazonAsin	B0B6PKLCZ9	https://www.amazon.co.jp/dp/B0B6PKLCZ9	フェールラーベン カンケン ラップトップ15 23524 Navy ネイビー 18L	フェールラーベン		19800	OK									
 bergans-backpack	10	bg-fr-kanken-no2-laptop15	0	amazonAsin	B0C2QNN31L	https://www.amazon.co.jp/dp/B0C2QNN31L	フェールラーベン カンケン No.2 ラップトップ 15 23803 ネイビー 18.0L	フェールラーベン		26400	OK									
+bike-backpack	1	bk-deuter-raceair14	0	amazonAsin	B0B21S2HH6	https://www.amazon.co.jp/dp/B0B21S2HH6	ドイター レースエアー 14+3 RACE AIR 14+3 D3204423 1374 アトランティック×インク 14+3L	ドイター		14199	OK									
+bike-backpack	2	bk-deuter-bike1-20	0	amazonAsin	B0D5R6HPPZ	https://www.amazon.co.jp/dp/B0D5R6HPPZ	ドイター バイク I 20 D3202125 7000 ブラック	ドイター		16830	shared_asin									
+bike-backpack	3	bk-ortlieb-velocity17	0	amazonAsin	B085HPD14W	https://www.amazon.co.jp/dp/B085HPD14W	オルトリーブ ヴェロシティ 17L R4302 ペトロール	オルトリーブ		18700	OK									
+bike-backpack	4	bk-deuter-raceair10	0	amazonAsin	B0B21QMTJR	https://www.amazon.co.jp/dp/B0B21QMTJR	ドイター レースエアー 10 RACE AIR 10 D3204323 7000 ブラック 10L	ドイター		11550	OK									
+bike-backpack	5	bk-deuter-transalpine24	0	amazonAsin	B0C8236V76	https://www.amazon.co.jp/dp/B0C8236V76	ドイター トランスアルパイン 24 TRANS ALPINE 24 D3200124 7000 ブラック 24L	ドイター		19690	OK									
+bike-backpack	6	bk-deuter-race8	0	amazonAsin	B0D4VTFKW3	https://www.amazon.co.jp/dp/B0D4VTFKW3	ドイター レース 8 RACE 8 D3204023 5598 チェリー×マサラ 8L	ドイター		9240	OK									
+bike-backpack	7	bk-camelbak-mule12	0	amazonAsin	B09Z1X5P86	https://www.amazon.co.jp/dp/B09Z1X5P86	キャメルバック ミュール 12 M.U.L.E. 12 CRUXリザーバー3L付き 013983 ブラック	キャメルバック	013983	23760	OK									
+bike-backpack	8	bk-osprey-talon22	0	amazonAsin	B0DSCQGTJ8	https://www.amazon.co.jp/dp/B0DSCQGTJ8	OSPREY タロン 22 TALON 22 OS52466 ブラックコーラルグレー バックパック	OSPREY	OS52466	27500	shared_asin									
 blackdiamond-backpack	1	bd-pursuit30	0	amazonAsin	B0DKJY26K3	https://www.amazon.co.jp/dp/B0DKJY26K3	Black Diamond パーシュート30 BD56509 カーボン×モアブブラウン M	Black	BD56509	30690	shared_asin									
 blackdiamond-backpack	2	bd-streetcreek24	0	amazonAsin	B0HMRB92Y9	https://www.amazon.co.jp/dp/B0HMRB92Y9	Black Diamond ストリートクリーク24 BD5J001 ブラック	Black	BD5J001	20790	OK									
 blackdiamond-backpack	3	bd-rockblitz15	0	amazonAsin	B0DKJXTBZG	https://www.amazon.co.jp/dp/B0DKJXTBZG	Black Diamond ロックブリッツ15 BD54089 カーボン	Black	BD54089	13640	shared_asin									
@@ -585,7 +593,7 @@ deuter-commute-daypack	5	dcd-switchback	0	amazonAsin	B0GJCRN6SF	https://www.amaz
 deuter-commute-daypack	6	dcd-orcha25	0	amazonAsin	B0CVS7K23R	https://www.amazon.co.jp/dp/B0CVS7K23R	ドイター オルチャ 25 D6810124-7000 ブラック	ドイター	D6810124-7000	9979	shared_asin									
 deuter-commute-daypack	7	dcd-vista	0	amazonAsin	B0CPYR4V4Q	https://www.amazon.co.jp/dp/B0CPYR4V4Q	ドイター ヴィスタ D3812025-6613 デザート×ボーン	ドイター	D3812025-6613	13585	OK									
 deuter-commute-daypack	8	dcd-lugano20	0	amazonAsin	B0FNC23LMC	https://www.amazon.co.jp/dp/B0FNC23LMC	ドイター ルガーノ 20 D6810024-3074 アトランティック	ドイター	D6810024-3074	10194	shared_asin									
-deuter-commute-daypack	9	dcd-bike1-20	0	amazonAsin	B0D5R6HPPZ	https://www.amazon.co.jp/dp/B0D5R6HPPZ	ドイター バイク I 20 D3202125 7000 ブラック	ドイター		16830	OK									
+deuter-commute-daypack	9	dcd-bike1-20	0	amazonAsin	B0D5R6HPPZ	https://www.amazon.co.jp/dp/B0D5R6HPPZ	ドイター バイク I 20 D3202125 7000 ブラック	ドイター		16830	shared_asin									
 deuter-commute-daypack	10	dcd-strasse25	0	amazonAsin	B08YD46PW2	https://www.amazon.co.jp/dp/B08YD46PW2	ドイター ストラーセ 25 D6810421 7000 ブラック	ドイター		7700	OK									
 deuter-futura-aircontact	1	deuter-futura-32	0	amazonAsin	B0FHK82JPG	https://www.amazon.co.jp/dp/B0FHK82JPG	ドイター フューチュラ 32 D3400826-1013 ナイトブルー×バルチック	ドイター	D3400826-1013	25300	shared_asin									
 deuter-futura-aircontact	2	deuter-futura-27	0	amazonAsin	B0FHKWGD68	https://www.amazon.co.jp/dp/B0FHKWGD68	ドイター フューチュラ 27 D3400326-1013 ナイトブルー×バルチック	ドイター	D3400326-1013	22440	OK									
