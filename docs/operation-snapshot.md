@@ -2,7 +2,8 @@
 
 サイトの現状（記事数・カテゴリ構成・GAS/インフラ構造）を記録するスナップショット。記事追加・カテゴリ変更・GAS構造変更のたびに最新化する（→ 運用ルールは CLAUDE.md「記録更新ルール」を参照）。
 
-- **最終更新: 2026-11-11（campkit-20261111-N50：新規記事 `ultralight-backpack`〔ウルトラライト バックパックおすすめ11選・category=backpack〕を追加。content/posts の記事数 314→315、category=backpack は 68→69。既存の `camp-backpack-beginner`（ブランド別記事一覧に1行）・`backpack-40l`（冒頭の関連記事案内に1文）に被リンクを追加）**
+- **最終更新: 2026-11-11（campkit-20261111-N51：新規記事 `packable-backpack`〔折りたたみ リュックおすすめ9選・category=backpack〕を追加。content/posts の記事数 315→316、category=backpack は 69→70。既存の `backpack-20l`（関連記事一覧に1行）・`osprey-travel-backpack`（サブバッグの節に1文）に被リンクを追加）**
+- 同日の前回: campkit-20261111-N50：新規記事 `ultralight-backpack`〔ウルトラライト バックパックおすすめ11選・category=backpack〕を追加。content/posts の記事数 314→315、category=backpack は 68→69。既存の `camp-backpack-beginner`（ブランド別記事一覧に1行）・`backpack-40l`（冒頭の関連記事案内に1文）に被リンクを追加
 - 前回: 2026-11-10（campkit-20261110-N49：新規記事 `mountainhardwear-backpack`〔マウンテンハードウェアのリュックはどこで買える？代わりの登山・通勤リュック10選・category=backpack〕を追加。content/posts の記事数 313→314、category=backpack は 67→68。既存の `camp-backpack-beginner`・`columbia-backpack` に被リンク1行ずつ追加）
 - 同日の前回: campkit-20261110-N48：新規記事 `kids-hiking-backpack`〔キッズリュック 遠足・ハイキングおすすめ10選・category=backpack〕を追加。content/posts の記事数 312→313、category=backpack は 66→67。既存の `camp-backpack-beginner`・`kids-sleeping-bag` に被リンク1行／1文ずつ追加
 - 同日の前回: campkit-20261110-N47：新規記事 `ladies-hiking-backpack`〔レディース登山リュックおすすめ10選・category=backpack〕を追加。content/posts の記事数 311→312、category=backpack は 65→66。既存の `osprey-womens-backpack`・`camp-backpack-beginner` に被リンク1行ずつ追加
