@@ -4,6 +4,15 @@
 
 ---
 
+## 2026-11-11 air-mat 第7位 ニーモ テンサー オールシーズン RWR の楽天採用店を付け替え（out_of_stock・campkit-20261111-M06）
+
+- **対象**: `content/posts/air-mat.mdx` の第7位カード（id: nemo-tensor-allseason）のみ。他10枚・本文・比較表・まとめ表・description・updatedAt は不変。
+- **理由（issue_type=out_of_stock・priority A）**: 楽天 `m-outdoor/nm-tsras-rwr` が OutOfStock（quantity 0）で、読者を在庫のない店へ送っていた（L06 巡回点検で検出）。
+- **変更**: `affiliateUrl` を `stridelab/tsras-rw`（STRIDE LAB・InStock・quantity 42・¥35,200・軸なし・530g/64×183×9cm/R値5.4）の hb.afl へ。§11-8 追補に従い `image` を新店キャビネット（HTTP 200 確認）、`rakutenReviewCount` を 1→6（★5.00）に揃えた。価格は 35,200円で不変のため早見表・まとめ表・比較表の数値は触っていない。Amazon `B0CS6587Z1` は在庫あり（残り5点・¥35,200）で据え置き。
+- **狙い**: GSC クリックのある記事の購入導線の欠損解消（順位施策ではない）。
+
+---
+
 ## 2026-11-11 bike-backpack 新規／狙いKW 自転車 リュック／新規のため基準なし（campkit-20261111-N52）
 
 - **対象**: `content/posts/bike-backpack.mdx`（新規・8製品・category=backpack）。関連KW: 自転車 リュック／自転車 リュック おすすめ／サイクリング バックパック／ロードバイク リュック／自転車通勤 リュック。
