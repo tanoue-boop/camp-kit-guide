@@ -22,6 +22,18 @@
 
 ---
 
+## 2026-11-12 backpack-15l 新規／狙いKW リュック 15l／新規のため基準なし（campkit-20261112-N54）
+
+- **対象**: `content/posts/backpack-15l.mdx`（新規・10製品・category=backpack）。関連KW: リュック 15l／リュック 15リットル／リュック 15l おすすめ／15L リュック 登山／15L ザック。
+- **狙い**: 容量軸シリーズ（backpack-20l／25l／35l／40l／45l／50l-60l）で空いていた20Lの下を埋める購入直前検索。camp-backpack-capacity-guide（10L・容量目安）とは分離し、13〜18Lの実売モデルを数値で横並びにした。GSC（_tasks の qp-90d 20261109）では「15l リュック」1表示・2.0位（camp-backpack-capacity-guide）、「オスプレイ リュック 15l」3表示・8.7位（osprey-daily-backpack）の2件のみ。検索上位（hinata・tacklenote・yamahack・マイナビ・rank-king・BE-PAL）は20L以下をまとめて扱うか20L前後のモデル紹介が中心で、15L前後の製品を数値で並べた記事は見当たらない。
+- **差別化**: 容量・用途別早見（13L〜18L・buy列・10行）、比較表（容量・重量・サイズ・背面長・背面構造・ウエストベルト・チェストストラップ・ハイドレーション・レインカバー・楽天/Amazon税込・buy列）、15Lに入る荷物の目安、10L／12〜14L／15〜16L／17〜18L／20Lの使い分け表、背面長とベルト、ハイドレーション対応。
+- **構成**: 結論3行（数値入り）→ QuickPick（リチウム 15／デイライト 13L／ウォーカー15）→ はじめに → 容量・用途別早見 → 比較表＋価格帯（3区分）→ 選び方4ポイント → 10製品 → Tips 5項目 → FAQ 5問（見出し形式）→ 選定基準と情報源 → まとめ（3列6行）。
+- **商品**: マムート リチウム 15、オスプレー デイライト 13L／ハイクライト18、カリマー cot 18、グレゴリー ナノ14／ナノ18、ドイター スピードライト 17、コロンビア キャッスルロック15L バックパックII、コールマン ウォーカー15、アークテリクス マンティス 16（楽天 3,980〜22,000円・330〜730g）。全カードに楽天 hb.afl＋amazonAsin。
+- **内部リンク**: 本記事→16本（camp-backpack-capacity-guide・backpack-20l・backpack-25l・camp-backpack-beginner・hydration-pack・backpack-rain-cover・mammut-backpack・osprey-backpack・karrimor-backpack・bike-backpack・deuter-backpack・columbia-backpack・kids-hiking-backpack・coleman-backpack・gregory-daypack・arcteryx-backpack）。既存→本記事3本: backpack-20l（「容量で比べる」一覧に1行）・camp-backpack-capacity-guide（10Lの節の案内文に1文）・camp-backpack-beginner（FAQ「何リットルから」に1文）。いずれも updatedAt 不変。
+- **効果測定**: 新規のため基準なし。2〜3週間後に上記KWの表示・順位を確認する。
+
+---
+
 ## 2026-11-12 hydration-pack 新規／狙いKW ハイドレーション パック／新規のため基準なし（campkit-20261112-N53）
 
 - **対象**: `content/posts/hydration-pack.mdx`（新規・10製品・category=backpack）。関連KW: ハイドレーション／ハイドレーション パック／ハイドレーションバッグ おすすめ／ハイドレーション 登山／ハイドレーションシステム／プラティパス ハイドレーション。
