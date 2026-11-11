@@ -4,6 +4,15 @@
 
 ---
 
+## 2026-11-11 mammut-backpack 第3位 マムート リチウム 25 の楽天採用店を付け替え（out_of_stock・campkit-20261111-M07）
+
+- **対象**: `content/posts/mammut-backpack.mdx` の第3位カード（id: mammut-lithium-25）と、それに連動する早見表（33行目）・比較表 rows の当該行・本文1文・まとめ表の当該行。他10枚・description・updatedAt は不変。
+- **理由（issue_type=out_of_stock・priority B）**: 楽天 `himaraya/0000001043103` の着地 SKU が カラー:ＷＢＫ（woods-black）で soldout、カード price 16,830円も楽天表示と乖離し、Amazon `B09KZPHC2Q`（black）とも色が揃っていなかった（campkit-20261102-N23 で検出）。
+- **変更**: `affiliateUrl` と比較表 rows の `affiliateUrl` を `alpen/7205520035`（アルペン楽天市場店・ブラック 0001・25L・税込15,990円・SKU 1件 qty=5）の hb.afl へ。name に「0001 black」、price を 16,830→15,990円（早見表・まとめ表「15,990円台」・rows も追随）。判定基準 §11-8 ★追補に従い `image` を新店キャビネット（HTTP 200 確認）へ、新店レビューが1件のため `rakutenRating`／`rakutenReviewCount` を削除し、badge と本文からも旧店の「★4.89（19件）」表記を外した。Amazon `B09KZPHC2Q` は dp 実取得で black・Amazon.co.jp 販売・在庫あり（¥14,861）を確認し据え置き。
+- **狙い**: 在庫切れ店への送客と、楽天・Amazon の色不一致の解消（順位施策ではない）。
+
+---
+
 ## 2026-11-11 air-mat 第7位 ニーモ テンサー オールシーズン RWR の楽天採用店を付け替え（out_of_stock・campkit-20261111-M06）
 
 - **対象**: `content/posts/air-mat.mdx` の第7位カード（id: nemo-tensor-allseason）のみ。他10枚・本文・比較表・まとめ表・description・updatedAt は不変。
