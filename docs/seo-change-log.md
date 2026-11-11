@@ -4,6 +4,15 @@
 
 ---
 
+## 2026-11-12 camp-cooler-box-overall 第2位 コールマン エクストリームクーラー/52QT の楽天リンクを alpen → naturum へ付け替え（out_of_stock→§11-1(b)・campkit-20261112-M09）
+
+- **対象**: `content/posts/camp-cooler-box-overall.mdx` の第2位カード（id: cooler-coleman-extreme52）と、それに連動する早見表の当該行（30行目）・比較表 rows の当該行・本文2段落・まとめ表の当該行。他10枚のカード・title・description（frontmatter）・FAQ・updatedAt は不変（店の付け替えのみで商品は同一のため）。
+- **理由（issue_type=out_of_stock・priority B）**: 楽天 `alpen/7632109562` は 2026-11-12 再取得でも `"quantity":0`・`"isSoldOut":true`（¥9,240）。同一商品（メーカー型番 2000037237・52QT・エバーグリーン）が他店に在庫ありで出ていたため §11-1(b) を適用。段① 公式 `coleman/col7203` は 28QT/52QT のサイズ選択式（§11-6）で不採用、段② 大手の最安 `naturum/3264367` ¥10,800 は母数最安 `fishingmax-webshop` ¥9,257 比 +16.67%（§11-3 の +20% 以内）で採用。`naturum-outdoor` と同額のためレビュー件数（2件 vs 0件）でタイブレーク。
+- **変更**: affiliateUrl を `naturum/3264367` の hb.afl に、image を新店キャビネット（HTTP 200 確認）に、price 9,240→10,800円。新店のレビューが2件（5件未満）のため rakutenRating／rakutenReviewCount を削除し、比較表 rating を「評価準備中」に（§11-8 追補）。価格に連動して description（カード）「1万円を切る」→「1万円前後」・badge「大容量・1万円以下」→「大容量・1万円前後」・本文「実勢9,240円」→「実勢10,800円」・「レビュー件数は10件（★3.8）」→「レビュー件数はまだ少なめ」・早見表 9,240円→10,800円・まとめ表「大容量を1万円以下で揃える／9,000円台」→「大容量を1万円前後で揃える／10,000円台」。Amazon `B09HBV3SPR` は型番 2000037237・52QT・¥9,771・Amazon.co.jp 出荷・在庫ありを確認して据え置き。
+- **狙い**: 在庫切れの店への送客の解消（順位施策ではない）。
+
+---
+
 ## 2026-11-12 camp-chair-highback 第5位 LAD WEATHER を VASTLAND アウトドアチェア ハイバック（タン）へ差し替え（out_of_stock→product_swap・campkit-20261112-M08）
 
 - **対象**: `content/posts/camp-chair-highback.mdx` の第5位カード（id: ladweather-highback・id は据え置き）と、それに連動する見出し・本文2段落・早見表2行（66・68行目）・比較表 rows の当該行・まとめ表の当該行・updatedAt（2026-06-29→2026-11-12）。他4枚のカード・title・description・FAQ は不変。
