@@ -4,6 +4,15 @@
 
 ---
 
+## 2026-11-12 camp-chair-highback 第5位 LAD WEATHER を VASTLAND アウトドアチェア ハイバック（タン）へ差し替え（out_of_stock→product_swap・campkit-20261112-M08）
+
+- **対象**: `content/posts/camp-chair-highback.mdx` の第5位カード（id: ladweather-highback・id は据え置き）と、それに連動する見出し・本文2段落・早見表2行（66・68行目）・比較表 rows の当該行・まとめ表の当該行・updatedAt（2026-06-29→2026-11-12）。他4枚のカード・title・description・FAQ は不変。
+- **理由（issue_type=out_of_stock・priority B）**: 楽天 `vanilla-vague/ladchair001`（LAD WEATHER 公式）は全13色 quantity=0・isSoldOut=true（2026-11-12 再取得）。楽天で在庫のある他店はレビュー0件の転記タイトル出品で、実測した2件は13色のバリエーション選択式（判定基準 §11-6）だったため、同一商品の店付け替え（§11-1(b)）は不成立。Amazon `B09BF5HLRY` もブラックではなくマスタード（B0CDFQB9NK）へ着地していた。
+- **変更**: 楽天 `vastland/vl0124-1`（VASTLAND DIRECT STORE・タン CHR-HI-TAN・税込3,980円・qty=33・★4.0/25件）の hb.afl、Amazon `B09FPT7GJC`（型番 VL0189＝楽天タン SKU と同一・販売元 VASTLAND DIRECT STORE・在庫あり）へ差し替え。name／description／price 2,980→3,980円／rakutenRating・ReviewCount／image（新店キャビネット・HTTP 200 確認）を新商品に揃え、まとめ表の価格帯を「2,000円台」→「3,000円台」に。記事内の最安枠（badge「最安・入門向けコスパ」）の役割は維持（他4枚は4,982円〜）。早見表「小柄・ロー」行は座面高約35cmのため VASTLAND を入れず ポンコタン のみに、「車中泊のサブ・予備」行は VASTLAND／ポンコタン に。
+- **狙い**: 在庫切れ商品への送客の解消（順位施策ではない）。
+
+---
+
 ## 2026-11-11 mammut-backpack 第3位 マムート リチウム 25 の楽天採用店を付け替え（out_of_stock・campkit-20261111-M07）
 
 - **対象**: `content/posts/mammut-backpack.mdx` の第3位カード（id: mammut-lithium-25）と、それに連動する早見表（33行目）・比較表 rows の当該行・本文1文・まとめ表の当該行。他10枚・description・updatedAt は不変。
