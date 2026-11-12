@@ -4,6 +4,15 @@
 
 ---
 
+## 2026-11-13 camp-windscreen 第1位 CAMP GREEB リフレクターの Amazon ASIN を在庫のある同一商品へ差し替え（campkit-20261113-M14）
+
+- **対象**: `camp-windscreen` 第1位（id: windscreen-pineagle-reflector）。article-fix-backlog の asin_mismatch「Amazon在庫切れ」（priority A・campkit-20261112-L08 起票）。
+- **理由**: 旧 `amazonAsin` B076B85VWP は /dp 再取得で「現在在庫切れです。この商品の再入荷予定は立っておりません。」・カートボタンなし・新品の他出品なし（在庫復帰なし）。
+- **処置（ASIN 差し替えのみ）**: Amazon /s 1 本で同ブランドの変種ファミリーを見つけ、シルバー 60cm の **B0B71W9HSX**（キャンプグリーブ 大型風防板 横幅120cm 高さ60cm・在庫あり・¥3,980＝カード price と一致・販売元 CAMP GREEB 公式ストア）へ差し替え。楽天リンク（jupino3965/10000027・ページ InStock・¥3,980）・name・price・本文・比較表・まとめ表・description・updatedAt は不変更。
+- **SEO上の狙い**: 第1位の Amazon 導線が在庫切れページを指したままだと CV が落ちるため、記事の記述を変えずに購入可能な同一商品へ付け替える。
+
+---
+
 ## 2026-11-12 fieldoor-tent 第1位をワンタッチテント300 → トンネルテント620へ商品差し替え（campkit-20261112-M13）
 
 - **対象**: `fieldoor-tent` 第1位（id: fieldoor-onetouch-300）。article-fix-backlog の out_of_stock（priority A・campkit-20261110-L02 起票）。
