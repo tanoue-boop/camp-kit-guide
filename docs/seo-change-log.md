@@ -4,6 +4,16 @@
 
 ---
 
+## 2026-11-12 cassette-gas-heater 第5位 マイ暖III（iwatani-maidan3）の楽天リンクを在庫あり店へ付け替え（campkit-20261112-M12）
+
+- **対象**: `cassette-gas-heater` 第5位「イワタニ カセットガスストーブ マイ暖III CB-STV-MYD3」（id: iwatani-maidan3）。article-fix-backlog の out_of_stock（priority A・campkit-20261110-L02 起票）。
+- **理由**: 旧店 `murphyshop/cassette-mydan-3` は 11-10 時点で売切、11-12 の再取得では HTTP404（ページ消滅）＝購入導線が死んでいた。
+- **処置（§11-1(b) 店の付け替え・商品は不変）**: 同一型番 CB-STV-MYD3 の在庫あり出品 `asahiprocureace/683-3240`（プロキュアエース・税込 ¥13,063・InStock）へ付け替え。段①公式（i-collect）に MYD3 の出品なし、段② ksdenki ¥17,380 は楽天最安比 +33.05% のため飛ばし、段③の最安を採用（§11-2・§11-3 追補／追補2）。
+- **連動して変えた記述**: カード price 13800→13063・image を新店のキャビネット画像へ・新店レビュー0件のため `rakutenRating`／`rakutenReviewCount` を削除（§11-8 追補 条文2）・比較表の当該行 `kakaku` 約13,800円→約13,063円／`eval` ★4.67（3件）→評価準備中／`affiliateUrl` を新店へ（条文3）・description と導入文の「13,800」→「13,063」。まとめ表「13,000円台」と badge は不変。updatedAt は店の付け替えのみのため据え置き（2026-11-09）。
+- **Amazon**: `amazonAsin` B0DBV3BYP1 は購入ボックスあり（残り7点・¥13,300）で据え置き。
+
+---
+
 ## 2026-11-12 セール検索の受け皿：camp-gear-sale-timing をブラックフライデー2026向けに更新（campkit-20261112-S03）
 
 - **新規か更新か**: 同じ趣旨の既存記事 `camp-gear-sale-timing`（キャンプ用品のセール時期）があったため、タスク定義に従って**新規（black-friday-camp-gear）は作らず既存記事を更新**した（カニバリ回避）。thumbnail・date・category は不変。
