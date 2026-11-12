@@ -4,6 +4,15 @@
 
 ---
 
+## 2026-11-12 tent-waterproof-spray 第3位 YAZAWA 防水スプレー 420ml の楽天リンクを yazawa → sokunou へ付け替え（out_of_stock→§11-1(b)・campkit-20261112-M10）
+
+- **対象**: `content/posts/tent-waterproof-spray.mdx` の第3位カード（id: yazawa-waterproof-spray）と、それに連動する frontmatter description の価格帯・本文1文・比較表 rows の当該行・まとめ表の当該行。他4枚のカード・title・FAQ・updatedAt は不変（店の付け替えのみで商品は同一のため）。
+- **理由（issue_type=out_of_stock・priority A）**: 楽天 `yazawa/4947237830160` は 2026-11-12 再取得でも `OutOfStock`・`"quantity":0`・`"purchaseCondition":"sold-out"`（¥2,200）。同一商品（JAN 4947237830160・矢澤 YAZAWA 防水スプレー 420mL 1本）が他店に在庫ありで出ていたため §11-1(b) を適用。段① は公式クエリ0件・yazawa 店の1本出品は売切、段② 大手 `biccamera` ¥1,980 は母数最安 `sokunou` ¥1,028 比 +92.61% で §11-3 により飛ばし、段③ の最安 `sokunou/4947237830160` ¥1,028（InStock・単一SKU）を採用。
+- **変更**: affiliateUrl を `sokunou/4947237830160` の hb.afl に、image を新店キャビネット（HTTP 200 確認）に、price 2,200→1,028円。新店のレビューが0件（5件未満）のため rakutenRating／rakutenReviewCount を削除し、比較表は rating を外して reviews を「評価準備中」に（§11-8 追補）。旧店の評価を述べていたカード description・本文の「レビュー18件・★4.5」を削除。まとめ表 2,200円台→1,000円台、frontmatter description「実勢1,375〜2,970円台」→「実勢1,028〜2,970円台」。Amazon `B00KBNUSI0` は「[ヤザワ] シューケア製品 防水スプレー スプレー 420ml」・在庫あり・¥1,782 を確認して据え置き。
+- **狙い**: 在庫切れの店への送客の解消（順位施策ではない）。
+
+---
+
 ## 2026-11-12 camp-cooler-box-overall 第2位 コールマン エクストリームクーラー/52QT の楽天リンクを alpen → naturum へ付け替え（out_of_stock→§11-1(b)・campkit-20261112-M09）
 
 - **対象**: `content/posts/camp-cooler-box-overall.mdx` の第2位カード（id: cooler-coleman-extreme52）と、それに連動する早見表の当該行（30行目）・比較表 rows の当該行・本文2段落・まとめ表の当該行。他10枚のカード・title・description（frontmatter）・FAQ・updatedAt は不変（店の付け替えのみで商品は同一のため）。
