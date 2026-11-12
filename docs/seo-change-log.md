@@ -4,6 +4,14 @@
 
 ---
 
+## 2026-11-12 fieldoor-tent 第1位をワンタッチテント300 → トンネルテント620へ商品差し替え（campkit-20261112-M13）
+
+- **対象**: `fieldoor-tent` 第1位（id: fieldoor-onetouch-300）。article-fix-backlog の out_of_stock（priority A・campkit-20261110-L02 起票）。
+- **理由**: FIELDOOR ワンタッチテント300 は楽天 maxshare/a16078 が全SKU在庫0（OutOfStock・sold-out）、同一商品の別店 smile88／happy11 も売切。Amazon B081RKMZM4 も購入ボックスなし（outOfStock）＝同一商品は楽天・Amazon とも購入不可。
+- **処置（product_swap）**: ブランド軸記事（「FIELDOORのテント」）のため、他ブランドではなく記事内未使用の FIELDOOR 別モデル **トンネルテント620**（楽天 maxshare/a16865・ダークブラウン：標準タイプ／基本セット/インナーテント×1・¥28,710・在庫24／Amazon B0861ZTY7B・在庫あり）へ差し替え。同額3店からレビュー件数最多の maxshare を採用。カード id・アンカーは据え置き（§12-5-9）。完全遮光ヘキサゴンは第3位ヘキサゴンと同寸の遮光版のため不採用。
+- **連動して変えた記述**: 見出し・カード（name／description／price／rating／review数／affiliateUrl／amazonAsin／badge／image）・本文とスペック・比較表の当該行・まとめ表の当該行・選び方ポイント1/2/4・はじめに（価格帯「2万円弱」→「3万円弱」）・Tips のグランドシート記述・FAQ（「300とヘキサゴン」→「620と480」の比較）・締めの段落・description（「9,790〜19,800円」→「9,790〜28,710円」）。updatedAt 2026-09-21→2026-11-12。
+- **SEO上の狙い**: 第1位が購入不可のままだと CV 導線が死ぬため、ブランド KW の整合を保ったまま在庫のある大型モデルで「大人数・2ルーム」の検索意図を受ける。効果測定は2〜3週間後の定期スキャンで行う。
+
 ## 2026-11-12 cassette-gas-heater 第5位 マイ暖III（iwatani-maidan3）の楽天リンクを在庫あり店へ付け替え（campkit-20261112-M12）
 
 - **対象**: `cassette-gas-heater` 第5位「イワタニ カセットガスストーブ マイ暖III CB-STV-MYD3」（id: iwatani-maidan3）。article-fix-backlog の out_of_stock（priority A・campkit-20261110-L02 起票）。
