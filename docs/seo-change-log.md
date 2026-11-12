@@ -113,6 +113,18 @@ C04 の続き。GSC 28日（2026-10-12〜11-08）のクリック上位4記事を
 - **内部リンク**: 本記事→15本（mountain-backpack-30l・backpack-35l・backpack-40l・camp-backpack-beginner・lowealpine-backpack・karrimor-backpack・backpack-50l-60l・waterproof-backpack・outdoor-commute-backpack・ladies-hiking-backpack・haglofs-backpack・bergans-backpack・mammut-backpack・blackdiamond-backpack・climbing-backpack）。既存→本記事3本: lowealpine-backpack・haglofs-backpack・bergans-backpack（いずれも「他ブランドと比べる」の一覧に1行・updatedAt 不変）。
 - **効果測定**: 新規のため基準なし。2〜3週間後に上記KWの表示・順位を確認する。
 
+---
+
+## 2026-11-13 hiking-hip-bag 新規／狙いKW 登山 ウエストポーチ／新規のため基準なし（campkit-20261113-N58）
+
+- **対象**: `content/posts/hiking-hip-bag.mdx`（新規・10製品・category=backpack）。関連KW: 登山 ウエストポーチ／ヒップバッグ 登山／ウエストバッグ ハイキング／登山 ヒップバッグ おすすめ／ウエストポーチ アウトドア。
+- **狙い**: ザック購入者の同時購入を狙う周辺枠（リュックと併用する行動食・スマホ・地図入れ）の購入直前検索。GSC（_tasks の qp-90d／qp-28d／page-28d 20261109）に「ウエストポーチ」「ヒップバッグ」「ウエストバッグ」を含むクエリは0件（需要は未確認のまま作成）。検索上位（yamahack・BE-PAL・hinata・camphack・sakidori ほか）はブランド混在の7〜9選が中心で、ザック併用時の容量の決め方・チェストポーチとの違いを数値で整理した記事は見当たらない。
+- **差別化**: 用途別早見（ザック併用／日帰り単体／トレラン・ファストハイク／街〜低山・buy列・10行）、比較表（容量・重量・サイズ・ベルト対応（適合ウエスト）・ボトルホルダー・撥水/防水・楽天/Amazon税込・buy列）、容量の決め方（ザック併用2〜4L・単体5〜8L）、チェストポーチ・スリングバッグとの違い（本記事＝腰ベルト型、斜め掛け型は後続 N63）、ザックのウエストベルトとの干渉を避ける付け方。
+- **構成**: 結論3行（数値入り）→ QuickPick（スウィープ／テールメイトS／リチウム ウエストパック）→ はじめに → 用途別早見 → 比較表＋価格帯（3区分）→ 選び方4ポイント → 10製品 → Tips 5項目 → FAQ 6問（見出し形式）→ 選定基準と情報源 → まとめ（3列5行）。
+- **商品**: ザ・ノース・フェイス スウィープ／ペーサーベルト／メイフライヒップポーチ、グレゴリー テールメイトS／テールランナーV2、マムート リチウム ウエストパック／セオン ウエストパック、カリマー VTヒップバッグR、アークテリクス マンティス2、ミレー ミニ パッカブル ウエストポーチ（楽天 3,630〜13,200円・50〜410g・楽天とAmazonの差は最大約12%）。全カードに楽天 hb.afl＋amazonAsin。ノースフェイス3製品は用途が異なるため（本文に理由を記載）。
+- **内部リンク**: 本記事→8本（camp-backpack-capacity-guide・backpack-15l・backpack-20l・trailrun-pack・hydration-pack・camp-backpack-beginner・ultralight-backpack・mountain-backpack-30l）。既存→本記事3本: trailrun-pack・backpack-20l・camp-backpack-beginner（いずれも関連記事の一覧に1行・updatedAt 不変）。
+- **効果測定**: 新規のため基準なし。2〜3週間後に上記KWの表示・順位を確認する。
+
 ## 2026-11-13 backcountry-backpack 誤記修正（M-ホワイト32の1kg未満の断定をデイハイカー30L=730gと整合）（campkit-20261113-N56）
 
 - 第5位 ミレー M-ホワイト 32 の本文「30L台で1kgを切るのは本記事でこのモデルだけ」→「BC用の装備を持つ30L台で1kgを切るのは本記事でこのモデルだけ（装備の少ないバートン デイハイカー 30Lは730g）」、badge「32Lで1kgを切るスキーツアー用」→「BC装備付きの30L台で1kg未満」。他の「だけ／最も」系の記述（デイハイカーのみショベル収納なし・チュガッチ35が最重量・デイハイカーが最安最軽量）は比較表の数値と一致したため不変。updatedAt 2026-11-12→2026-11-13。
