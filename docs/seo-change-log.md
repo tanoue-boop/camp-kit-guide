@@ -4,6 +4,15 @@
 
 ---
 
+## 2026-11-13 camp-oil-stove 第2位 トヨトミ レインボー RL-2524 の楽天リンクを在庫のある同一商品（ホワイト）へ付け替え（campkit-20261113-M15）
+
+- **対象**: `camp-oil-stove` 第2位（id: toyotomi-rainbow-rl2524）。article-fix-backlog の out_of_stock（priority A・campkit-20261112-L09 起票）。
+- **理由**: 旧楽天リンク dantotsu-online/3002000430 は item ページ再取得で `availability=OutOfStock`・両 SKU（グリーン／ホワイト）とも `quantity:0`・「メーカー取り寄せ」で、在庫復帰なし。
+- **処置（§11-1(b) 店の付け替え）**: 同一商品 RL-2524-W ホワイト（JAN 4963505100957）の楽天在庫あり出品から、段①公式 toyotomi-homeplus ¥39,380（母数最安 ¥31,500 比 +25.0%）を §11-3 で飛ばし、段②大手 **a-price/4963505100957（XPRICE）¥35,800**（+13.65%・InStock・在庫72・単一SKU）を採用。Amazon `amazonAsin` B0C5DDYDSL（RL-2524(W) ホワイト・在庫あり ¥32,700）は据え置き、楽天側の色をこれに合わせて name を「RL-2524-W ホワイト」に固定。price 32800→35800、image を新店のキャビネットURLへ、新店はレビュー0件のため rakutenRating/rakutenReviewCount を削除（§11-8 追補 条文2）。比較表の行（name・価格・eval=評価準備中・affiliateUrl）とまとめ表（名称・35,000円台）を連動修正。description・本文・updatedAt は不変更。
+- **SEO上の狙い**: 第2位の楽天導線が売切ページを指したままだと CV が落ちるため、記事の記述を変えずに購入可能な同一商品へ付け替え、両ボタンの色を一致させる。
+
+---
+
 ## 2026-11-13 camp-windscreen 第1位 CAMP GREEB リフレクターの Amazon ASIN を在庫のある同一商品へ差し替え（campkit-20261113-M14）
 
 - **対象**: `camp-windscreen` 第1位（id: windscreen-pineagle-reflector）。article-fix-backlog の asin_mismatch「Amazon在庫切れ」（priority A・campkit-20261112-L08 起票）。
