@@ -2,7 +2,8 @@
 
 サイトの現状（記事数・カテゴリ構成・GAS/インフラ構造）を記録するスナップショット。記事追加・カテゴリ変更・GAS構造変更のたびに最新化する（→ 運用ルールは CLAUDE.md「記録更新ルール」を参照）。
 
-- **最終更新: 2026-11-13（campkit-20261113-N56：新規記事 `climbing-backpack`〔クライミング ザックおすすめ10選・category=backpack〕を追加。content/posts の記事数 320→321、category=backpack は 74→75。既存の `backcountry-backpack`（FAQ に1文＋M-ホワイト32の誤記修正・updatedAt 2026-11-13）・`blackdiamond-backpack`（クライミング向けの説明に1文）・`mammut-backpack`（トリオン 28 の節に1文）に被リンクを追加）**
+- **最終更新: 2026-11-13（campkit-20261113-N57：新規記事 `montane-rab-backpack`〔モンテイン・ラブ（Rab）リュックおすすめ10選・category=backpack〕を追加。content/posts の記事数 321→322、category=backpack は 75→76。既存の `lowealpine-backpack`・`haglofs-backpack`・`bergans-backpack`（いずれも「他ブランドと比べる」一覧に1行）に被リンクを追加）**
+- 同日の前回: campkit-20261113-N56：新規記事 `climbing-backpack`〔クライミング ザックおすすめ10選・category=backpack〕を追加。content/posts の記事数 320→321、category=backpack は 74→75。既存の `backcountry-backpack`（FAQ に1文＋M-ホワイト32の誤記修正・updatedAt 2026-11-13）・`blackdiamond-backpack`（クライミング向けの説明に1文）・`mammut-backpack`（トリオン 28 の節に1文）に被リンクを追加
 - 前回: 2026-11-12（campkit-20261112-N55：新規記事 `backcountry-backpack`〔バックカントリー ザックおすすめ9選・category=backpack〕を追加。content/posts の記事数 319→320、category=backpack は 73→74。既存の `mammut-backpack`（トリオン 28 の節に1文）・`backpack-35l`（容量表の案内文に1文）・`winter-camp-guide`（冒頭の案内文に1文）に被リンクを追加）
 - 同日の前回: campkit-20261112-N54：新規記事 `backpack-15l`〔リュック15Lおすすめ10選・category=backpack〕を追加。content/posts の記事数 318→319、category=backpack は 72→73。既存の `backpack-20l`（「容量で比べる」一覧に1行）・`camp-backpack-capacity-guide`（10Lの節の案内文に1文）・`camp-backpack-beginner`（FAQ に1文）に被リンクを追加
 - 同日の前回: campkit-20261112-N53：新規記事 `hydration-pack`〔ハイドレーション パックおすすめ10選・category=backpack〕を追加。content/posts の記事数 317→318、category=backpack は 71→72。既存の `trailrun-pack`（FAQ に1文）・`bike-backpack`（ハイドレーション対応の説明に1文）・`ultralight-backpack`（サロモン 30L の節に1文）・`camp-backpack-beginner`（ケストレル 38 の節に括弧書き1つ）に被リンクを追加

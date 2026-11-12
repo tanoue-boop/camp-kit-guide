@@ -101,6 +101,18 @@ C04 の続き。GSC 28日（2026-10-12〜11-08）のクリック上位4記事を
 - **内部リンク**: 本記事→13本（camp-backpack-capacity-guide・mountain-backpack-30l・backpack-35l・camp-backpack-beginner・blackdiamond-backpack・mammut-backpack・gregory-backpack・millet-backpack・arcteryx-backpack・deuter-backpack・karrimor-backpack・backcountry-backpack・ultralight-backpack）。既存→本記事3本: backcountry-backpack（FAQ に1文）・blackdiamond-backpack（クライミング向けの説明に1文）・mammut-backpack（トリオン 28 の節に1文）。blackdiamond・mammut は updatedAt 不変。
 - **効果測定**: 新規のため基準なし。2〜3週間後に上記KWの表示・順位を確認する。
 
+---
+
+## 2026-11-13 montane-rab-backpack 新規／狙いKW モンテイン リュック／新規のため基準なし（campkit-20261113-N57）
+
+- **対象**: `content/posts/montane-rab-backpack.mdx`（新規・10製品・category=backpack）。関連KW: モンテイン リュック／ラブ リュック／Rab リュック／モンテイン バックパック／ラブ バックパック。
+- **狙い**: 英国ブランド（モンテイン／ラブ）＋リュックの購入直前検索。GSC（_tasks の qp-90d／qp-28d／page-28d 20261109）に「モンテイン」「Montane」「Rab」「ラブ リュック」を含むクエリは0件（需要は未確認のまま作成）。検索上位は汎用のリュック特集（BE-PAL 等）や販売店の特集ページ（楽天 OutdoorStyle サンデーマウンテンの Rab 特集）が中心で、両ブランドを「国内で買えるか」で整理し数値で横並びにした記事は見当たらない。
+- **差別化**: 「国内の両モールで買えるモデル」の整理（ラブ10・モンテイン0／モンテインは楽天が取寄表記の輸入販売店のみ・Amazon は楽天に無いモデルか約1.8倍の出品のみ）、用途別早見（日帰りハイク／縦走・テント泊／小屋泊／アルパイン／通勤・普段使い・buy列・10行）、比較表（容量・重量・サイズ・背面長・背面構造・開口と雨対策・ハイドレーション・楽天/Amazon税込・buy列）、シリーズ別の背面構造の違い（プロティウム／ニトロン／ムオン／サイクロンXP／ベイルXP）。
+- **構成**: 結論3行（数値入り）→ QuickPick（プロティウム27／ニトロン18／ムオン50）→ はじめに → 用途別早見 → 比較表＋価格帯（3区分）→ 選び方4ポイント（容量の決め方・シリーズ別の背面・雨対策・日本でモンテインを買うには）→ 10製品 → 他ブランドと比べる → Tips 5項目 → FAQ 6問（見出し形式）→ 選定基準と情報源 → まとめ（3列5行）。
+- **商品**: ラブ プロティウム27／20、ニトロン18／25、ムオン50／40、ベイルXP 30／20、サイクロンXP 30／38ND（楽天 17,600〜38,500円・463〜1,060g・全モデル楽天=Amazon同価格）。全カードに楽天 hb.afl＋amazonAsin。同一ブランド10製品はブランド記事のため（本文に理由を記載）。
+- **内部リンク**: 本記事→15本（mountain-backpack-30l・backpack-35l・backpack-40l・camp-backpack-beginner・lowealpine-backpack・karrimor-backpack・backpack-50l-60l・waterproof-backpack・outdoor-commute-backpack・ladies-hiking-backpack・haglofs-backpack・bergans-backpack・mammut-backpack・blackdiamond-backpack・climbing-backpack）。既存→本記事3本: lowealpine-backpack・haglofs-backpack・bergans-backpack（いずれも「他ブランドと比べる」の一覧に1行・updatedAt 不変）。
+- **効果測定**: 新規のため基準なし。2〜3週間後に上記KWの表示・順位を確認する。
+
 ## 2026-11-13 backcountry-backpack 誤記修正（M-ホワイト32の1kg未満の断定をデイハイカー30L=730gと整合）（campkit-20261113-N56）
 
 - 第5位 ミレー M-ホワイト 32 の本文「30L台で1kgを切るのは本記事でこのモデルだけ」→「BC用の装備を持つ30L台で1kgを切るのは本記事でこのモデルだけ（装備の少ないバートン デイハイカー 30Lは730g）」、badge「32Lで1kgを切るスキーツアー用」→「BC装備付きの30L台で1kg未満」。他の「だけ／最も」系の記述（デイハイカーのみショベル収納なし・チュガッチ35が最重量・デイハイカーが最安最軽量）は比較表の数値と一致したため不変。updatedAt 2026-11-12→2026-11-13。
