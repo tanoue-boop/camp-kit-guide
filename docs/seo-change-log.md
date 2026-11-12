@@ -4,6 +4,19 @@
 
 ---
 
+## 2026-11-12 セール検索の受け皿：camp-gear-sale-timing をブラックフライデー2026向けに更新（campkit-20261112-S03）
+
+- **新規か更新か**: 同じ趣旨の既存記事 `camp-gear-sale-timing`（キャンプ用品のセール時期）があったため、タスク定義に従って**新規（black-friday-camp-gear）は作らず既存記事を更新**した（カニバリ回避）。thumbnail・date・category は不変。
+- **狙ったクエリ**: 「ブラックフライデー キャンプ用品」「ブラックフライデー ポータブル電源」「ブラックフライデー 寝袋」等のセール検索。30日窓 11/18〜12/17 にブラックフライデーと楽天スーパーSALEが入るため、今のうちに受け皿を索引させて 12-18 の月間報酬目標へ送客する。
+- **title**: 「…楽天スーパーセールの買い時カレンダー」→「…楽天スーパーセール**で狙う物と**買い時カレンダー」。description を「Amazonは11月開催と発表済み（期間は11月19日発表予定）＋5カテゴリの狙い目」に更新。tags に ポータブル電源・冬用寝袋 を追加。updatedAt 2026-10-21→2026-11-12。
+- **日程**: Amazon は「2026年は11月開催と発表済み・期間の詳細は11月19日に発表予定」とし、日付欄は「発表後に追記」（11/19 以降に別タスクで更新）。楽天ブラックフライデーは公式ページ（event.rakuten.co.jp/campaign/blackfriday/）が 2026-11-12 時点で 404 のため日程を書かず「例年11月下旬」のみ。楽天スーパーSALE の公式ページは「終了しました」表示のみで未発表のまま。推測の日付・割引率・セール価格は書いていない。
+- **追加した見出し**: 結論直後に `QuickPickMdx`（jackery-2000-new-v2／nanga-aurora-light-450dx／toyotomi-ks67h）。h2「カテゴリ別：セールで狙う価値が高いモデル」と h3 5本（ポータブル電源／冬用寝袋／石油・ガスストーブ／テント／バックパック）、`ProductCardMdx` 9枚＝jackery-2000-new-v2・ecoflow-delta3-plus（portable-power-large）／nanga-aurora-light-450dx・bundok-bdk61（sleeping-bag-recommend）／toyotomi-ks67h（camp-oil-stove）・iwatani-izamaru（cassette-gas-heater）／onetigris-solo-homestead-tc（winter-camp-tent）／osprey-stratos-36（osprey-backpack）／gregory-daypack（gregory-backpack）。affiliateUrl・amazonAsin・price・評価は元記事のカードの値をそのまま写した（description は文脈に合わせて言い回しのみ調整）。`_file/card-name-check.tsv` で soldout・404 のカードは除外。
+- **内部リンク（文脈内）**: portable-power-large／jackery-power-station／ecoflow-power／sleeping-bag-recommend／camp-oil-stove／cassette-gas-heater／winter-camp-tent／osprey-backpack／gregory-backpack／camp-table-set。
+- **準備リスト**: 項目3に「お買い物マラソン等と期間が重なっていないかの確認」を追記。FAQ の日程2問と、まとめ表・情報源の確認日を 2026-11-12 に更新。
+- **効果測定**: 12月の `campkit-seo-competitor-scan` で「ブラックフライデー」系クエリの表示回数と、カード経由のクリックを確認する。
+
+---
+
 ## 2026-11-12 送客導線の強化：流入上位の残り4記事に「迷ったらこれ」ボックス（campkit-20261112-C05）
 
 C04 の続き。GSC 28日（2026-10-12〜11-08）のクリック上位4記事を対象に、冒頭の結論の直後に `QuickPickMdx` を置いた。商品は記事内の既存 `ProductCardMdx` から、楽天 hb.afl と `amazonAsin` の両方があり `_file/card-name-check.tsv` の stock が在庫あり（qty≥1）のカードだけを選び、affiliateUrl・amazonAsin はカードの値をそのまま写した。spec は記事内の公表値・実勢価格だけで、新しい価格・在庫は書いていない。
