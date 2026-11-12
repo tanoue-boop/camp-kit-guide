@@ -4,6 +4,17 @@
 
 ---
 
+## 2026-11-12 送客導線の強化：流入上位の残り4記事に「迷ったらこれ」ボックス（campkit-20261112-C05）
+
+C04 の続き。GSC 28日（2026-10-12〜11-08）のクリック上位4記事を対象に、冒頭の結論の直後に `QuickPickMdx` を置いた。商品は記事内の既存 `ProductCardMdx` から、楽天 hb.afl と `amazonAsin` の両方があり `_file/card-name-check.tsv` の stock が在庫あり（qty≥1）のカードだけを選び、affiliateUrl・amazonAsin はカードの値をそのまま写した。spec は記事内の公表値・実勢価格だけで、新しい価格・在庫は書いていない。
+
+- **gregory-backpack**（クリック43／表示1,562）: 「用途・容量別おすすめ早見」表の直後に3商品。`gregory-daypack`（迷ったらまず定番・29,700円台）／`gregory-rhune22`（通勤・PC収納・30,800円台＝本記事の街向け最高価格帯）／`gregory-allday`（機能とコスパ・16,399円台）。早見表の「迷ったらまずこれ」と本文の「機能と価格のバランスの最適解」に合わせた。
+- **karrimor-backpack**（39／566）: 「用途・容量別おすすめ早見（まず結論）」の結論段落の直後に3商品。`karrimor-eclipse27`（迷ったら基準の1つ・17,600円）／`karrimor-ridge40`（泊まりも背負う・28,517円）／`karrimor-vt-daypack-f`（もっと小さく軽く・11,000円）。結論段落の「基準はイクリプス27、小さくならVTデイパックF、泊まりならリッジ40+」の3分岐をそのまま箱にした。
+- **sleeping-bag-temperature-guide**（50／4,089）・**car-camp-lighting**（36／2,310）: 既設（2026-10-27 campkit-20261027-C01 で設置済み）のため触っていない。
+- **狙い**: 検索流入の多い記事で、本文を読み進めなくても購入ボタンに届く導線を冒頭に置き、送客率を上げる。見出し構成・title・description は不変（h2/h3 を使わない部品なので TOC にも影響しない）。
+
+---
+
 ## 2026-11-12 tent-waterproof-spray 第3位 YAZAWA 防水スプレー 420ml の楽天リンクを yazawa → sokunou へ付け替え（out_of_stock→§11-1(b)・campkit-20261112-M10）
 
 - **対象**: `content/posts/tent-waterproof-spray.mdx` の第3位カード（id: yazawa-waterproof-spray）と、それに連動する frontmatter description の価格帯・本文1文・比較表 rows の当該行・まとめ表の当該行。他4枚のカード・title・FAQ・updatedAt は不変（店の付け替えのみで商品は同一のため）。
