@@ -4,6 +4,15 @@
 
 ---
 
+## 2026-11-13 ogawa-tent 第4位 ogawa アポロンS の楽天リンクを在庫のある同一商品の別店へ付け替え（campkit-20261113-M17）
+
+- **対象**: `ogawa-tent` 第4位（id: ogawa-apollon-s）。article-fix-backlog の out_of_stock（priority A・campkit-20261112-L09 起票）。
+- **理由**: 旧楽天リンク mitsuyoshi/cjp00000000402 は item ページ再取得で `availability=OutOfStock`・`quantity:0`・`purchaseCondition:sold-out`（¥113,520）で、在庫復帰なし。Amazon `amazonAsin` B09QZ3P8B8 は在庫あり（カート有・残り2点・¥99,000）。
+- **処置（§11-1(b) 店の付け替え）**: 同一商品（ogawa・メーカー型番 2777・JAN 4909232277708）の楽天在庫あり出品9件（母数最安 ¥99,330）から、段①公式は「ogawa 公式 アポロンS」で 0 件、段②大手 **kojitu/4909232277708 ¥99,330**（母数最安と同額・InStock・SKU 1件 qty 2・軸 サイズ=S／カラー=- 各1値＝§11-6 追補2）を採用（biccamera ¥141,900 は +42.9%）。price 70950→99330、image を新店のキャビネットURLへ（新店はレビュー0件。カードには元から rakutenRating/rakutenReviewCount 無し）。比較表の参考価格（約¥99,330）・まとめ表（99,000円台）・description の実売幅（3.6万〜7.9万円→3.6万〜9.9万円）・導入文の価格幅（8万円近く→10万円近く）を連動修正。name・badge・本文の商品記述・updatedAt・Amazon ASIN は不変更。
+- **SEO上の狙い**: 第4位の楽天導線が売切ページを指したままだと CV が落ちるため、記事の記述を変えずに購入可能な同一商品へ付け替え、価格表記を実勢に合わせる。
+
+---
+
 ## 2026-11-13 ogawa-tent 第1位 ogawa ヴィガス2 の楽天リンクを在庫のある同一商品の別店へ付け替え（campkit-20261113-M16）
 
 - **対象**: `ogawa-tent` 第1位（id: ogawa-vigas2）。article-fix-backlog の out_of_stock（priority A・campkit-20261112-L09 起票）。
