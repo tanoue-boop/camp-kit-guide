@@ -170,6 +170,18 @@ C04 の続き。GSC 28日（2026-10-12〜11-08）のクリック上位4記事を
 - **内部リンク**: 本記事→8本（camp-backpack-capacity-guide・backpack-15l・backpack-20l・trailrun-pack・hydration-pack・camp-backpack-beginner・ultralight-backpack・mountain-backpack-30l）。既存→本記事3本: trailrun-pack・backpack-20l・camp-backpack-beginner（いずれも関連記事の一覧に1行・updatedAt 不変）。
 - **効果測定**: 新規のため基準なし。2〜3週間後に上記KWの表示・順位を確認する。
 
+---
+
+## 2026-11-14 jackwolfskin-backpack 新規／狙いKW ジャックウルフスキン リュック／新規のため基準なし（campkit-20261114-N59）
+
+- **対象**: `content/posts/jackwolfskin-backpack.mdx`（新規・8製品＝ジャックウルフスキン本体3＋比較枠5・category=backpack）。関連KW: ジャックウルフスキン リュック／ジャックウルフスキン リュック おすすめ／ジャックウルフスキン バックパック／ジャックウルフスキン リュック 通勤／ジャックウルフスキン 登山 リュック。
+- **狙い**: ブランド＋リュックの購入直前検索（通勤・通学・登山・旅行、1万〜3万円台）。GSC（_tasks の qp-90d／qp-28d／page-28d 20261109）に「ジャックウルフスキン」「Jack Wolfskin」を含むクエリは0件（「ジャック」で当たるのはジャックリーのみ）。需要は未確認のまま作成。検索上位（BE-PAL の新作紹介・hinata・camphack・yamahack ほか）はバークレー・ジャックポット・モアブジャム等の単発紹介が中心で、国内で今買えるモデルを数値で横並びにした記事は見当たらない。
+- **差別化**: 「国内の楽天・Amazonの両方で新品が買えるジャックウルフスキンは3モデル」という整理（取り寄せ品・価格差の大きい出品を除外した理由つき）、用途別早見（通勤・通学／日帰りハイク／旅行・サブバッグ／軽量パッカブル・buy列・8行）、比較表（容量・重量・サイズ・背面構造・PC収納・楽天/Amazon税込・buy列）、容量帯の選び方（通勤15〜25L／日帰り20〜30L／小屋泊30L以上）、通勤用と登山用の背面構造の違い（表）。
+- **構成**: 結論3行（数値入り・本体3モデルと明記）→ QuickPick（FL HIKER SACK V2／プレライトベント30／マルチフィールド クーラーデイバッグ）→ はじめに → 用途別早見 → 比較表＋価格帯（3区分）→ 選び方4ポイント → 8製品 → Tips 5項目 → FAQ 6問（見出し形式）→ 選定基準と情報源 → まとめ（3列5行）。
+- **商品**: ジャックウルフスキン JP FL HIKER SACK V2／プレライトベント30／マルチフィールド クーラーデイバッグ（いずれも楽天・Amazon とも Victoria L-Breath の出品で同価格）、比較枠 カリマー タトラ25・コロンビア スターレンジ23L・ミレー クーラ20・ケルティ デイパック 18L・チャムス パッカブルデイパック（楽天 7,998〜17,600円・235〜1,200g）。全カードに楽天 hb.afl＋amazonAsin。ケルティ（約24%）・ミレー（約21%）は Amazon.co.jp 販売のほうが安く、本文に差を明記。
+- **内部リンク**: 本記事→13本（camp-backpack-capacity-guide・backpack-20l・backpack-25l・backpack-35l・outdoor-commute-backpack・columbia-backpack・mountainhardwear-backpack・kelty-backpack・chums-backpack・karrimor-backpack・camp-backpack-beginner・mountain-backpack-30l・packable-backpack）。既存→本記事3本: outdoor-commute-backpack（ブランド別の案内文に1文）・columbia-backpack（関連記事の一覧に1行）・camp-backpack-beginner（ブランド別記事一覧に1行）。いずれも updatedAt 不変。
+- **効果測定**: 新規のため基準なし。2〜3週間後に上記KWの表示・順位を確認する。
+
 ## 2026-11-13 backcountry-backpack 誤記修正（M-ホワイト32の1kg未満の断定をデイハイカー30L=730gと整合）（campkit-20261113-N56）
 
 - 第5位 ミレー M-ホワイト 32 の本文「30L台で1kgを切るのは本記事でこのモデルだけ」→「BC用の装備を持つ30L台で1kgを切るのは本記事でこのモデルだけ（装備の少ないバートン デイハイカー 30Lは730g）」、badge「32Lで1kgを切るスキーツアー用」→「BC装備付きの30L台で1kg未満」。他の「だけ／最も」系の記述（デイハイカーのみショベル収納なし・チュガッチ35が最重量・デイハイカーが最安最軽量）は比較表の数値と一致したため不変。updatedAt 2026-11-12→2026-11-13。

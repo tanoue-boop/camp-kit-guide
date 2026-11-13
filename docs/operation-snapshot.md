@@ -2,7 +2,8 @@
 
 サイトの現状（記事数・カテゴリ構成・GAS/インフラ構造）を記録するスナップショット。記事追加・カテゴリ変更・GAS構造変更のたびに最新化する（→ 運用ルールは CLAUDE.md「記録更新ルール」を参照）。
 
-- **最終更新: 2026-11-13（campkit-20261113-N58：新規記事 `hiking-hip-bag`〔登山用ウエストポーチ・ヒップバッグおすすめ10選・category=backpack〕を追加。content/posts の記事数 322→323、category=backpack は 76→77。既存の `trailrun-pack`・`backpack-20l`・`camp-backpack-beginner`（いずれも関連記事の一覧に1行・updatedAt 不変）に被リンクを追加）**
+- **最終更新: 2026-11-14（campkit-20261114-N59：新規記事 `jackwolfskin-backpack`〔ジャックウルフスキン リュックおすすめ8選・category=backpack〕を追加。content/posts の記事数 323→324、category=backpack は 77→78。既存の `outdoor-commute-backpack`（ブランド別の案内文に1文）・`columbia-backpack`（関連記事の一覧に1行）・`camp-backpack-beginner`（ブランド別記事一覧に1行）に被リンクを追加・いずれも updatedAt 不変）**
+- 前回: 2026-11-13（campkit-20261113-N58：新規記事 `hiking-hip-bag`〔登山用ウエストポーチ・ヒップバッグおすすめ10選・category=backpack〕を追加。content/posts の記事数 322→323、category=backpack は 76→77。既存の `trailrun-pack`・`backpack-20l`・`camp-backpack-beginner`（いずれも関連記事の一覧に1行・updatedAt 不変）に被リンクを追加）
 - 同日の前回: campkit-20261113-N57：新規記事 `montane-rab-backpack`〔モンテイン・ラブ（Rab）リュックおすすめ10選・category=backpack〕を追加。content/posts の記事数 321→322、category=backpack は 75→76。既存の `lowealpine-backpack`・`haglofs-backpack`・`bergans-backpack`（いずれも「他ブランドと比べる」一覧に1行）に被リンクを追加
 - 同日の前回: campkit-20261113-N56：新規記事 `climbing-backpack`〔クライミング ザックおすすめ10選・category=backpack〕を追加。content/posts の記事数 320→321、category=backpack は 74→75。既存の `backcountry-backpack`（FAQ に1文＋M-ホワイト32の誤記修正・updatedAt 2026-11-13）・`blackdiamond-backpack`（クライミング向けの説明に1文）・`mammut-backpack`（トリオン 28 の節に1文）に被リンクを追加
 - 前回: 2026-11-12（campkit-20261112-N55：新規記事 `backcountry-backpack`〔バックカントリー ザックおすすめ9選・category=backpack〕を追加。content/posts の記事数 319→320、category=backpack は 73→74。既存の `mammut-backpack`（トリオン 28 の節に1文）・`backpack-35l`（容量表の案内文に1文）・`winter-camp-guide`（冒頭の案内文に1文）に被リンクを追加）
