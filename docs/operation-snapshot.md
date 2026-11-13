@@ -2,7 +2,8 @@
 
 サイトの現状（記事数・カテゴリ構成・GAS/インフラ構造）を記録するスナップショット。記事追加・カテゴリ変更・GAS構造変更のたびに最新化する（→ 運用ルールは CLAUDE.md「記録更新ルール」を参照）。
 
-- **最終更新: 2026-11-14（campkit-20261114-N60：新規記事 `naturehike-backpack`〔ネイチャーハイク リュックおすすめ9選・category=backpack〕を追加。content/posts の記事数 324→325、category=backpack は 78→79。既存の `backpack-50l-60l`（関連記事の一覧に1行）・`naturehike-sleeping-bag`・`naturehike-tent`・`ultralight-backpack`（各1文）に被リンクを追加・いずれも updatedAt 不変）**
+- **最終更新: 2026-11-14（campkit-20261114-N61：新規記事 `ortlieb-backpack`〔オルトリーブ リュックおすすめ9選・完全防水バックパック・category=backpack〕を追加。content/posts の記事数 325→326、category=backpack は 79→80。既存の `waterproof-backpack`（防水方式の節に1文）・`backpack-rain-cover`（防水リュックとの違いの段落に1文）・`outdoor-commute-backpack`（FAQ に1文）・`bike-backpack`（ヴェロシティの節に1文）に被リンクを追加・いずれも updatedAt 不変）**
+- 同日の前回: campkit-20261114-N60：新規記事 `naturehike-backpack`〔ネイチャーハイク リュックおすすめ9選・category=backpack〕を追加。content/posts の記事数 324→325、category=backpack は 78→79。既存の `backpack-50l-60l`（関連記事の一覧に1行）・`naturehike-sleeping-bag`・`naturehike-tent`・`ultralight-backpack`（各1文）に被リンクを追加・いずれも updatedAt 不変
 - 同日の前回: campkit-20261114-N59：新規記事 `jackwolfskin-backpack`〔ジャックウルフスキン リュックおすすめ8選・category=backpack〕を追加。content/posts の記事数 323→324、category=backpack は 77→78。既存の `outdoor-commute-backpack`（ブランド別の案内文に1文）・`columbia-backpack`（関連記事の一覧に1行）・`camp-backpack-beginner`（ブランド別記事一覧に1行）に被リンクを追加・いずれも updatedAt 不変
 - 前回: 2026-11-13（campkit-20261113-N58：新規記事 `hiking-hip-bag`〔登山用ウエストポーチ・ヒップバッグおすすめ10選・category=backpack〕を追加。content/posts の記事数 322→323、category=backpack は 76→77。既存の `trailrun-pack`・`backpack-20l`・`camp-backpack-beginner`（いずれも関連記事の一覧に1行・updatedAt 不変）に被リンクを追加）
 - 同日の前回: campkit-20261113-N57：新規記事 `montane-rab-backpack`〔モンテイン・ラブ（Rab）リュックおすすめ10選・category=backpack〕を追加。content/posts の記事数 321→322、category=backpack は 75→76。既存の `lowealpine-backpack`・`haglofs-backpack`・`bergans-backpack`（いずれも「他ブランドと比べる」一覧に1行）に被リンクを追加
