@@ -4,6 +4,15 @@
 
 ---
 
+## 2026-11-14 co-checker 第2位 PTTech PT002（楽天全店売切）を FieldNew FN047A へ商品差し替え（campkit-20261114-M20）
+
+- **対象**: `co-checker` 第2位（id: co-checker-next-light）。article-fix-backlog の out_of_stock（priority A・campkit-20261110-L04 起票）。
+- **理由**: 旧楽天リンク ptandkey/4580058988353 は再取得でも `availability=OutOfStock`・`quantity:0`・`isSoldOut:true`（¥2,680・カラー2SKUとも）。楽天 API「PTTech PT002」「PT002B」で見つかった他の出品は honda-walk の pt002b／pt002w（いずれも OutOfStock・quantity 0）と、商品コードが ASIN 由来（b0bb58bfmy）の3店だけで、同一品の付け替え先が無い。Amazon B0BB58BFMY は在庫ありだが、楽天と揃えるため §0-7 手順4（product_swap・§12-5-9）を適用。
+- **処置**: 記事内未使用の **FieldNew 一酸化炭素チェッカー FN047A カーキグリーン**（楽天メーカー公式店 fieldnew-store/fn047a・単一SKU・InStock qty 268・¥5,980・★4.56/43件／Amazon B0FSRZMF83・型番 FN047A・在庫あり・¥5,980・販売元 測定器のFieldNew）へ差し替え。カードの name・description・price・rakutenRating・rakutenReviewCount・affiliateUrl・amazonAsin・badge・image、比較表の当該行（name・disp・tokucho・kakaku 約5,980円・eval ★4.56（43件）・affiliateUrl）、まとめ表の行（「とにかく小さく軽く備えたい｜PTTech PT002（本体45g）｜2,700円台」→「警報が鳴る濃度を自分で決めたい｜FieldNew FN047A（アラーム濃度自由設定）｜5,900円台」）、締めの段落、description の該当句（45gのミニ認証モデル→警報濃度を設定できるFieldNew）を更新し、updatedAt を 2026-11-14 に。カード id・比較表 rows の id は §12-5-9-2 で据え置き。記事の実勢価格幅（2,384〜5,980円）は不変。
+- **SEO上の狙い**: 第2位の楽天導線が売切ページを指したままだと CV が落ちるため、楽天・Amazon の両方で在庫のあるブランド品へ差し替える。「警報濃度を自分で設定できる」という比較軸を加え、5台の役割の違いを保つ。
+
+---
+
 ## 2026-11-13 cassette-gas-heater 第3位 デカ暖2（楽天404・実質廃番）をイワタニ ポータブルタイプ CB-CGS-PTB へ商品差し替え（campkit-20261113-M18）
 
 - **対象**: `cassette-gas-heater` 第3位（id: iwatani-dekadan2）。article-fix-backlog の discontinued_404（priority A・campkit-20261110-L02 起票）。
