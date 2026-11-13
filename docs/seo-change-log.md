@@ -172,6 +172,18 @@ C04 の続き。GSC 28日（2026-10-12〜11-08）のクリック上位4記事を
 
 ---
 
+## 2026-11-14 naturehike-backpack 新規／狙いKW ネイチャーハイク リュック／新規のため基準なし（campkit-20261114-N60）
+
+- **対象**: `content/posts/naturehike-backpack.mdx`（新規・9製品＝ネイチャーハイク本体5＋比較枠4・category=backpack）。関連KW: ネイチャーハイク リュック／ネイチャーハイク バックパック／ネイチャーハイク リュック おすすめ／ネイチャーハイク 登山 リュック／ネイチャーハイク 60L。
+- **狙い**: ブランド＋リュックの購入直前検索（ソロキャンプ・テント泊・登山、1万円前後のコスパ帯）。GSC（_tasks の qp-90d／qp-28d 20261109）ではネイチャーハイク／Naturehike のクエリは naturehike-tent 向け（「ネイチャーハイク テント」「naturehike テント 評判」等）のみで、リュックのクエリは0件。ブランドの指名需要はテントで確認できたので、横展開として作成。検索上位（lifehacker のセール紹介・BE-PAL の汎用リュック特集・公式ブログ・海外販売店）はネイチャーハイクのリュックを数値で横並びにした日本語記事が見当たらない。
+- **差別化**: 「国内の楽天・Amazonの両方で公式ショップの新品が買えるネイチャーハイクは5モデル」という整理（Amazon Global Store の出品・片方にしか無い容量/色を除外した理由つき）、用途別早見（日帰り・通勤／ソロキャンプ・小屋泊／テント泊の大型／軽量パッカブル・buy列・9行）、比較表（容量・重量・サイズ・背面構造・耐水性・楽天/Amazon税込・buy列）、容量帯の選び方（表）、「＋5L」とM/Lサイズの読み方、コスパ品の確認点（表）、他ブランドとの価格差（40Lで約2.2倍・30Lでは国内定番のほうが安い）。
+- **構成**: 結論3行（数値入り・本体5モデルと明記）→ QuickPick（40L+5L／60L Mサイズ／折りたたみ18L）→ はじめに（テント・寝袋・マット記事への導線）→ 用途別早見 → 比較表＋価格帯（3区分）→ 選び方4ポイント → 9製品 → Tips 5項目 → FAQ 6問（見出し形式）→ 選定基準と情報源 → まとめ（3列5行）。
+- **商品**: ネイチャーハイク 登山リュック 40L+5L（NH20BB113）／登山リュック 60L Mサイズ／折りたたみバックパック 18L／大容量ザック 70L+5L／ロールトップ バックパック 30L+5L（楽天 Naturehike 楽天市場店・Amazon Naturehike 公式直営店）、比較枠 コールマン ウォーカー33・コロンビア パナシーア 30L・ミレー クーラ40・チャムス パッカブルデイパック（楽天 2,990〜22,000円・110g〜1.87kg）。全カードに楽天 hb.afl＋amazonAsin。70L+5L（公式同士で約22%）・クーラ40（Amazon.co.jp で約19%）は Amazon のほうが安く、本文に差を明記。
+- **内部リンク**: 本記事→11本（naturehike-tent・naturehike-sleeping-bag・naturehike-mat・camp-backpack-capacity-guide・backpack-40l・backpack-50l-60l・ultralight-backpack・packable-backpack・columbia-backpack・camp-backpack-beginner・mountain-backpack-30l）。既存→本記事4本: backpack-50l-60l（関連記事の一覧に1行）・naturehike-sleeping-bag・naturehike-tent・ultralight-backpack（各1文）。いずれも updatedAt 不変。
+- **効果測定**: 新規のため基準なし。2〜3週間後に上記KWの表示・順位を確認する。
+
+---
+
 ## 2026-11-14 jackwolfskin-backpack 新規／狙いKW ジャックウルフスキン リュック／新規のため基準なし（campkit-20261114-N59）
 
 - **対象**: `content/posts/jackwolfskin-backpack.mdx`（新規・8製品＝ジャックウルフスキン本体3＋比較枠5・category=backpack）。関連KW: ジャックウルフスキン リュック／ジャックウルフスキン リュック おすすめ／ジャックウルフスキン バックパック／ジャックウルフスキン リュック 通勤／ジャックウルフスキン 登山 リュック。
