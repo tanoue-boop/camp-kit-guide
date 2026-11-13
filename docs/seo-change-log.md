@@ -4,6 +4,15 @@
 
 ---
 
+## 2026-11-14 closed-cell-mat 第5位 Soomloom アルミマット（楽天・Amazon とも在庫切れ）を FIELDOOR 折りたたみレジャーマットへ商品差し替え（campkit-20261114-M21）
+
+- **対象**: `closed-cell-mat` 第5位（id: soomloom-alumi-mat）。article-fix-backlog の out_of_stock（priority A・campkit-20261110-L04 起票）。
+- **理由**: 旧楽天リンク yiprefer/outdoor-028 は再取得でも `availability=OutOfStock`・`purchaseCondition=sold-out`・全8SKU（シングル/ダブル×4色）quantity 0。Amazon B07YBY4GKZ も「現在在庫切れです。この商品の再入荷予定は立っておりません。」でカート無し。楽天 API「Soomloom マット」「Soomloom アルミマット IXPE」で見つかった同系統の在庫ありの出品は hiro-shop01（¥4,044・レビュー0件・色の記載なし・ランダムな商品コード）だけで同一性を確定できないため、§0-7 手順4（product_swap・§12-5-9）を適用。
+- **処置**: 記事内未使用の **FIELDOOR 折りたたみレジャーマット 180×60cm 厚さ2cm ターコイズ**（楽天 smile88/a11327・品番 a06850・InStock qty 106・¥1,870・★4.46/899件／Amazon B0DL9BPM4L・メーカー型番 a06850・在庫あり・¥2,180）へ差し替え。maxshare/a11327 も同額 ¥1,870 だったため §11-3 のタイブレーク（レビュー件数 899件＞349件）で smile88 を採用。カードの name・description・price・rakutenRating・rakutenReviewCount・affiliateUrl・amazonAsin・badge・image、見出し、本文2段落、比較表の当該行（name・size 180×60cm・thick 2cm・insul 発泡PE（ディンプル加工）・cost 約1,870円・eval ★4.46（899件））、まとめ表の行（「Soomloom シングル ブルー｜2,000円台」→「FIELDOOR 折りたたみレジャーマット ターコイズ｜1,000円台」）、description と導入文の実勢価格幅（2,590〜11,550円→1,870〜11,550円）を更新し、updatedAt を 2026-11-14 に。カード id・比較表 rows の id・まとめ表のアンカーは §12-5-9-2 で据え置き。
+- **SEO上の狙い**: 最安枠の購入導線が楽天・Amazon とも売切ページを指したままだと CV が落ちるため、両方で在庫があり型番まで一致するブランド品へ差し替える。「とにかく安く1枚確保したい」という役割は維持し、価格の下限をさらに下げる。
+
+---
+
 ## 2026-11-14 co-checker 第2位 PTTech PT002（楽天全店売切）を FieldNew FN047A へ商品差し替え（campkit-20261114-M20）
 
 - **対象**: `co-checker` 第2位（id: co-checker-next-light）。article-fix-backlog の out_of_stock（priority A・campkit-20261110-L04 起票）。
