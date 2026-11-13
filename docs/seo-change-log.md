@@ -4,6 +4,15 @@
 
 ---
 
+## 2026-11-13 ogawa-tent 第1位 ogawa ヴィガス2 の楽天リンクを在庫のある同一商品の別店へ付け替え（campkit-20261113-M16）
+
+- **対象**: `ogawa-tent` 第1位（id: ogawa-vigas2）。article-fix-backlog の out_of_stock（priority A・campkit-20261112-L09 起票）。
+- **理由**: 旧楽天リンク alpen/7015934152 は item ページ再取得で `availability=OutOfStock`・`quantity:0`・`isSoldOut:true`（¥97,900）で、在庫復帰なし。Amazon `amazonAsin` B09QZ3VJ1M は在庫あり（カート有・¥58,909・販売 Amazon.co.jp）。
+- **処置（§11-1(b) 店の付け替え）**: 同一商品（Ogawa・メーカー型番 2653・JAN 4909232265309・サンドベージュ×ダークブラウン）の楽天在庫あり出品から、段①公式は「ogawa 公式 ヴィガス」で 0 件、段②大手 biccamera ¥97,900 は母数最安 ¥67,712 比 +44.6% で §11-3 により飛ばし、段③のうち ASIN 由来コード（`*-09qz3vj1m`）を除く最安 **gourdsports/gr-e902fxs6uo ¥70,174**（InStock・在庫3・axisName 0）を採用。price 78573→70174、image を新店のキャビネットURLへ、新店はレビュー0件のため rakutenRating/rakutenReviewCount を削除（§11-8 追補 条文1・2）。比較表の参考価格（約¥70,174）とまとめ表（70,000円台）を連動修正。name・badge・description・本文・updatedAt・Amazon ASIN は不変更。
+- **SEO上の狙い**: 第1位の楽天導線が売切ページを指したままだと CV が落ちるため、記事の記述を変えずに購入可能な同一商品へ付け替える。
+
+---
+
 ## 2026-11-13 camp-oil-stove 第2位 トヨトミ レインボー RL-2524 の楽天リンクを在庫のある同一商品（ホワイト）へ付け替え（campkit-20261113-M15）
 
 - **対象**: `camp-oil-stove` 第2位（id: toyotomi-rainbow-rl2524）。article-fix-backlog の out_of_stock（priority A・campkit-20261112-L09 起票）。
