@@ -4,6 +4,15 @@
 
 ---
 
+## 2026-11-13 cassette-gas-heater 第3位 デカ暖2（楽天404・実質廃番）をイワタニ ポータブルタイプ CB-CGS-PTB へ商品差し替え（campkit-20261113-M18）
+
+- **対象**: `cassette-gas-heater` 第3位（id: iwatani-dekadan2）。article-fix-backlog の discontinued_404（priority A・campkit-20261110-L02 起票）。
+- **理由**: 旧楽天リンク airhope/0140-0000000098 は再取得でも http=404。楽天 API「CB-STV-DKD2」で注文可能（availability=1）な新品は TalesStore（JAN 4901140905728・¥44,162＝カード比+103%・色表記クリームでカードのダークブラウンと不一致）だけで、他は中古・ASIN由来コード・売切。PC FREAK ¥22,980 は初代 CB-STV-DKD（JAN 4901140898204）で別商品。Amazon B0B7B6559B は購入可能だが ¥29,205・残り1点。同一商品の適正な付け替え先が無いため §0-7 手順4（product_swap・§12-5-9）を適用。
+- **処置**: 記事内未使用のイワタニ製 **カセットガスストーブ ポータブルタイプ CB-CGS-PTB**（楽天公式 i-collect/0003193・SKU 2000002502「単品」¥13,080・在庫1411・★4.52/123件／Amazon B01KZ7CS16・販売元イワタニ アイコレクト・¥13,090・在庫あり）へ差し替え。カードの name・description・price・rakutenRating・rakutenReviewCount・affiliateUrl・amazonAsin・badge・image、比較表の当該行（type=対流式・kakaku 約13,080円・eval ★4.52（123件）・affiliateUrl）、まとめ表の行（「輻射式をもう一つの選択肢で｜デカ暖2｜21,000円台」→「対流式でまわりをやわらかく暖めたい｜ポータブルタイプ CB-CGS-PTB｜13,000円台」）を更新し、updatedAt を 2026-11-13 に。カード id・比較表 rows の id は §12-5-9-2 で据え置き。description（実勢13,063〜29,980円の幅に収まる）・導入文・FAQ は デカ暖2 に触れていないため不変更。
+- **SEO上の狙い**: 第3位の楽天導線が 404 のままだと CV が落ちるため、公式店で安定在庫のあるイワタニ製品に差し替え、輻射式・温風式・2WAY に「対流式」の選択肢を加えて比較の幅を保つ。
+
+---
+
 ## 2026-11-13 ogawa-tent 第4位 ogawa アポロンS の楽天リンクを在庫のある同一商品の別店へ付け替え（campkit-20261113-M17）
 
 - **対象**: `ogawa-tent` 第4位（id: ogawa-apollon-s）。article-fix-backlog の out_of_stock（priority A・campkit-20261112-L09 起票）。
