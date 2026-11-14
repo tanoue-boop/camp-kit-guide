@@ -4,6 +4,15 @@
 
 ---
 
+## 2026-11-15 solo-tent-lightweight 第7位 BUNDOK ソロティピー 1（楽天売切）を同一商品のコジマ出品へ付け替え（campkit-20261115-M26）
+
+- **対象**: `solo-tent-lightweight` 第7位（id: bundok-solo-tipi1）。article-fix-backlog の out_of_stock（priority A・campkit-20261111-L05 起票）。
+- **理由**: 旧楽天リンク senichi/10004163 は 2026-11-15 の再取得で http=200 だが `OutOfStock`・quantity=0・`purchaseCondition=sold-out`。Amazon B08VN99N8L は在庫あり（B.ベージュ／テント単品・カート有・残り1点・¥7,090）で問題なし。楽天 API「BUNDOK BDK-75B」「バンドック ソロティピー」で同一商品（BUNDOK ソロティピー 1 サンドベージュ BDK-75B・JAN 4955985196254）の在庫ありの出品が見つかったため §11-1(b)（店の付け替え）を適用。段①公式は「BUNDOK 公式 ソロティピー」で0件＝該当出品なし。母数最安 ¥12,990 が段②大手 r-kojima（コジマ楽天市場店・InStock・qty=24・軸0個の単独出品）で、これを採用。
+- **処置**: affiliateUrl を r-kojima/4955985196254 の hb.afl（env の ID）へ、image を同店キャビネット画像（HTTP 200 確認済み）へ（§11-8 追補 条文1）。新店のレビューは0件のため rakutenRating／rakutenReviewCount の2属性を削除（同 条文2。比較表に eval・affiliateUrl 列は無い）。price は 7980 → 12990（+62.8%・±3% 超）。連動して早見表（¥12,990）、比較表 rows の参考価格、カード description、本文「¥12,990という価格で」、FAQ（Q「¥8,000台と¥50,000台」→「¥12,000台と¥50,000台」・A の「¥12,990のBUNDOK ソロティピー 1」）を更新。name・badge・amazonAsin・amazonRating/amazonReviewCount・updatedAt（店の付け替えのみのため）は据え置き。
+- **SEO上の狙い**: 「ワンポールの開放感がほしい」枠の楽天購入導線が売切ページを指したままだと CV が落ちるため、同一商品の在庫ありの大手出品へ付け替えて導線を復旧する。価格は実勢に合わせて上方修正（読者に旧価格で誤認させない）。
+
+---
+
 ## 2026-11-14 sleeping-bag-recommend 第3位 イスカ アルファライト500X（楽天リンク先404）を同一商品の lbreath 出品へ付け替え（campkit-20261114-M25）
 
 - **対象**: `sleeping-bag-recommend` 第3位（id: isuka-alphalight-500x）。article-fix-backlog の discontinued_404（priority A・campkit-20261111-L05 起票）。
