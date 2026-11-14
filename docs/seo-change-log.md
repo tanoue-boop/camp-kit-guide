@@ -4,6 +4,15 @@
 
 ---
 
+## 2026-11-14 sleeping-bag-recommend 第3位 イスカ アルファライト500X（楽天リンク先404）を同一商品の lbreath 出品へ付け替え（campkit-20261114-M25）
+
+- **対象**: `sleeping-bag-recommend` 第3位（id: isuka-alphalight-500x）。article-fix-backlog の discontinued_404（priority A・campkit-20261111-L05 起票）。
+- **理由**: 旧楽天リンク naturum/2915912 は 2026-11-14 の再取得でも http=404（【楽天市場】エラー）。Amazon B07DL7MH3C は在庫あり（カート有・残り4点・¥18,700・メーカー型番 111618）で問題なし。楽天 API「イスカ 111618」で同一商品（ISUKA アルファライト 500X イエロー 111618・JAN 4988998111624）の在庫ありの出品が多数見つかったため §11-1(b)（店の付け替え）を適用。段①公式店は「イスカ 公式 アルファライト」で0件＝該当出品なし。母数最安 ¥14,950（lbreath／supersportsxebio。いずれもスポーツ量販チェーンの楽天支店で §11-2 追補の victoria-online と同型＝段②。kojitu・a-price 等の ¥18,700 は母数最安比 +25.08%）。同額2店はレビュー0件同士でタイブレーク不成立のため、楽天 API 標準順で上位の lbreath/107731216011（InStock・qty=1・カラー=イエロー／サイズ=ＦＦ の各軸1値・SKU 1件）を採用。
+- **処置**: affiliateUrl を lbreath/107731216011 の hb.afl（env の ID）へ、image を同店キャビネット画像（HTTP 200 確認済み）へ（§11-8 追補 条文1）。カードは楽天レビュー属性を持たず（Amazon 側 4.0/44 を表示）、新店も0件なので追加しない。price は 18700 → 14950（-20.1%・±3% 超）。連動して早見表（最低使用0℃／14,950円）、比較表 rows の当該行 price、本文「価格は14,950円で本記事の中位」「イスカが14,950円」、まとめ表（18,000円台 → 14,000円台）を更新。name・description・badge・amazonAsin・amazonRating/amazonReviewCount・updatedAt（店の付け替えのみのため）は据え置き。比較表 rows に affiliateUrl は無い（§11-8 追補 条文3 の対象なし）。
+- **SEO上の狙い**: 「3シーズンを軽量な化繊で済ませる」枠の楽天購入導線が 404 を指したままだと CV が落ちるため、同一商品の在庫ありの出品へ付け替えて導線を復旧する。
+
+---
+
 ## 2026-11-14 titanium-cooker 第5位 Ti マグポット900（楽天リンク先404）を同一商品の naturum 出品へ付け替え（campkit-20261114-M23）
 
 - **対象**: `titanium-cooker` 第5位（id: evernew-mugpot-900）。article-fix-backlog の discontinued_404（priority A・campkit-20261110-L03 起票）。
