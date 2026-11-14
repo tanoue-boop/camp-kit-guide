@@ -4,6 +4,15 @@
 
 ---
 
+## 2026-11-14 titanium-cooker 第5位 Ti マグポット900（楽天リンク先404）を同一商品の naturum 出品へ付け替え（campkit-20261114-M23）
+
+- **対象**: `titanium-cooker` 第5位（id: evernew-mugpot-900）。article-fix-backlog の discontinued_404（priority A・campkit-20261110-L03 起票）。
+- **理由**: 旧楽天リンク field-seven/eca539 は 2026-11-14 の再取得でも http=404。Amazon B09TNTZV8S は在庫あり（カート有・残り3点・¥6,860・メーカー型番 ECA539）で問題なし。楽天 API「エバニュー ECA539」で同一商品（EVERNEW Ti Mug pot 900 950ml ECA539）の在庫ありの出品が多数見つかったため §11-1(b)（店の付け替え）を適用。段①公式店は「エバニュー 公式 ECA539」で0件＝該当出品なし。母数最安 ¥6,650（naturum／naturum-outdoor／atbousai／mitsuyoshi／niche-express）。段② 大手の同額2店のうちレビュー件数の多い naturum/3292860（InStock・qty=27・軸0・SKU 1件・★5.00/2件）を採用。
+- **処置**: affiliateUrl を naturum/3292860 の hb.afl（env の ID）へ、image を同店の og:image（HTTP 200 確認済み）へ。新店のレビューが5件未満のため rakutenRating/rakutenReviewCount を削除し、比較表 eval を「評価準備中」に（§11-8 追補 条文2・§12-5-10 条文5）。price は 7260 → 6650（-8.4%・±3% 超）。連動して比較表の当該行（price・eval・affiliateUrl）、まとめ表（7,260円台 → 6,650円台）を更新。name・description（価格帯 3,401〜10,428円の範囲内）・badge・amazonAsin・本文・updatedAt（店の付け替えのみのため）は据え置き。
+- **SEO上の狙い**: 「道具点数を減らしたい」枠の楽天購入導線が 404 を指したままだと CV が落ちるため、同一商品の大手在庫ありの出品へ付け替えて導線を復旧する。
+
+---
+
 ## 2026-11-14 coleman-sleeping-bag 第3位 コージーII/C5（楽天リンク先404）を同一商品の himaraya 出品へ付け替え（campkit-20261114-M22）
 
 - **対象**: `coleman-sleeping-bag` 第3位（id: coleman-sb-cozy2-c5）。article-fix-backlog の discontinued_404（priority A・campkit-20261110-L02 起票）。
