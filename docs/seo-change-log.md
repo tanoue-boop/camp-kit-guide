@@ -4,6 +4,15 @@
 
 ---
 
+## 2026-11-14 coleman-sleeping-bag 第3位 コージーII/C5（楽天リンク先404）を同一商品の himaraya 出品へ付け替え（campkit-20261114-M22）
+
+- **対象**: `coleman-sleeping-bag` 第3位（id: coleman-sb-cozy2-c5）。article-fix-backlog の discontinued_404（priority A・campkit-20261110-L02 起票）。
+- **理由**: 旧楽天リンク lbreath/106901011011 は 2026-11-14 の再取得でも http=404（【楽天市場】エラー）。Amazon B07HRKNWWT は在庫あり（カート有・¥5,926・品番 2000034772）で問題なし。楽天 API「コージーII 2000034772」で同一商品（Coleman コージーII/C5 オレンジ 2000034772・JAN 4536952544744）の在庫ありの出品が多数見つかったため §11-1(b)（店の付け替え）を適用。段①公式店は「コールマン 公式 2000034772」で0件＝該当出品なし。母数最安 ¥6,644（alpen／himaraya／himarayaod）。段② 大手の同額2店のうち、alpen はサイズ軸が「FREE／選択してください」の2値で §11-6 追補2 の条件1を厳密に満たさないため保守側で見送り、軸0・InStock・qty=11 の himaraya/0000000846756（★4.63/19件）を採用。
+- **処置**: affiliateUrl を himaraya/0000000846756 の hb.afl（env の ID）へ、image を同店キャビネット画像（HTTP 200 確認済み）へ、rakutenRating/rakutenReviewCount を 4.33/27 → 4.63/19 へ（§11-8 追補 条文1・2）。price は 5920 → 6644（+12.2%・±3% 超）。連動して本文「価格は5,920円」「27件・評価4.33」、比較表の当該行（レビュー ★4.63（19件）・価格 ¥6,644）、まとめ表（5,900円台 → 6,600円台）を更新。name・description・badge・amazonAsin・updatedAt（店の付け替えのみのため）は据え置き。比較表に購入列は無い（§11-8 追補 条文3 の対象なし）。
+- **SEO上の狙い**: 「ゆったり寝たい・抗菌がほしい」枠の楽天購入導線が 404 を指したままだと CV が落ちるため、同一商品の大手在庫ありの出品へ付け替えて導線を復旧する。
+
+---
+
 ## 2026-11-14 closed-cell-mat 第5位 Soomloom アルミマット（楽天・Amazon とも在庫切れ）を FIELDOOR 折りたたみレジャーマットへ商品差し替え（campkit-20261114-M21）
 
 - **対象**: `closed-cell-mat` 第5位（id: soomloom-alumi-mat）。article-fix-backlog の out_of_stock（priority A・campkit-20261110-L04 起票）。
