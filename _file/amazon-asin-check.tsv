@@ -844,19 +844,30 @@ gregory-daypack	1	gregory-daypack-26	0	amazonAsin	B08TH8FNN9	https://www.amazon.
 gregory-daypack	2	gregory-halfday-v2	0	amazonAsin	B0C5C1W8XV	https://www.amazon.co.jp/dp/B0C5C1W8XV	GREGORY ハーフデイ V2 HALF DAY V2 146490-1041 ブラック	GREGORY		18700	OK									
 gregory-daypack	3	gregory-sketch22	0	amazonAsin	B0F1D21758	https://www.amazon.co.jp/dp/B0F1D21758	GREGORY スケッチ22 SKETCH 22 142631-2480 ユニバースブラック	GREGORY		24200	OK									
 gregory-daypack	4	gregory-nano20	0	amazonAsin	B0DY5DHC6H	https://www.amazon.co.jp/dp/B0DY5DHC6H	GREGORY ナノ20 NANO 20 1530588885 スパークネイビー	GREGORY	1530588885	12155	shared_asin									
-gregory-daypack	5	gregory-fineday-v2	0	amazonAsin	B0C2YQP684	https://www.amazon.co.jp/dp/B0C2YQP684	GREGORY ファインデイ V2 FINE DAY V2 18L 137539-0440 コーデュラバリスティックブラック	GREGORY		18700	OK									
+gregory-daypack	5	gregory-fineday-v2	0	amazonAsin	B0C2YQP684	https://www.amazon.co.jp/dp/B0C2YQP684	GREGORY ファインデイ V2 FINE DAY V2 18L 137539-0440 コーデュラバリスティックブラック	GREGORY		18700	shared_asin									
 gregory-daypack	6	gregory-casualday-v2	0	amazonAsin	B0B58K14CJ	https://www.amazon.co.jp/dp/B0B58K14CJ	GREGORY カジュアルデイ V2 CASUAL DAY V2 1444331041 ブラック	GREGORY	1444331041	10560	shared_asin									
 gregory-daypack	7	gregory-border25	0	amazonAsin	B0CKL53PWP	https://www.amazon.co.jp/dp/B0CKL53PWP	GREGORY ボーダー25 BORDER 25 1040894869 コヨーテブラウン	GREGORY	1040894869	20113	OK									
-gregory-daypack	8	gregory-compass30	0	amazonAsin	B0F59WK7P7	https://www.amazon.co.jp/dp/B0F59WK7P7	GREGORY コンパス30 COMPASS 30 1426342480 ユニバースブラック	GREGORY	1426342480	19360	OK									
+gregory-daypack	8	gregory-compass30	0	amazonAsin	B0F59WK7P7	https://www.amazon.co.jp/dp/B0F59WK7P7	GREGORY コンパス30 COMPASS 30 1426342480 ユニバースブラック	GREGORY	1426342480	19360	shared_asin									
 gregory-daypack	9	gregory-rhune22	0	amazonAsin	B09VS9CSQL	https://www.amazon.co.jp/dp/B09VS9CSQL	GREGORY ルーヌ22 RHUNE 22L カーボンブラック	GREGORY		30800	shared_asin									
 gregory-daypack	10	gregory-halfdaymini	0	amazonAsin	B07N8B7R65	https://www.amazon.co.jp/dp/B07N8B7R65	GREGORY ハーフデイミニ HALF DAY MINI 16L 3.ガーデンタペストリー	GREGORY		13200	OK									
-gregory-zulu-baltoro	1	gregory-zulu35	0	amazonAsin	B0BWHBJ8Q6	https://www.amazon.co.jp/dp/B0BWHBJ8Q6	GREGORY ズール35 ZULU 35 1466700527 SM/MD ハローブルー バックパック	GREGORY	1466700527	33000	OK									
+gregory-size-comparison	1	gsc-zulu35	0	amazonAsin	B0BWHBJ8Q6	https://www.amazon.co.jp/dp/B0BWHBJ8Q6	グレゴリー ズール35 ZULU 35 1466700527 SM/MD ハローブルー	グレゴリー	1466700527	28050	shared_asin									
+gregory-size-comparison	2	gsc-daypack26	0	amazonAsin	B08TH8FNN9	https://www.amazon.co.jp/dp/B08TH8FNN9	GREGORY デイパック DAY PACK 26L ブラックJP	GREGORY		29700	shared_asin									
+gregory-size-comparison	3	gsc-zulu28lt	0	amazonAsin	B0CT9L65V2	https://www.amazon.co.jp/dp/B0CT9L65V2	グレゴリー ズール28 LT ZULU 28 LT 1493170662 ボルケニックブラック	グレゴリー	1493170662	22737	shared_asin									
+gregory-size-comparison	4	gsc-stout45	0	amazonAsin	B0CZDJFSR9	https://www.amazon.co.jp/dp/B0CZDJFSR9	グレゴリー スタウト45 STOUT 45 1493752038 ブラウン	グレゴリー	1493752038	29998	shared_asin									
+gregory-size-comparison	5	gsc-zulu55	0	amazonAsin	B0BSLX9TX6	https://www.amazon.co.jp/dp/B0BSLX9TX6	グレゴリー ズール55 ZULU 55 1456720527 SM/MD ハローブルー	グレゴリー	1456720527	38500	shared_asin									
+gregory-size-comparison	6	gsc-jade33	0	amazonAsin	B0BVHJYZDX	https://www.amazon.co.jp/dp/B0BVHJYZDX	グレゴリー ジェイド33 JADE 33 1466621552 SM/MD ミッドナイトネイビー レディース	グレゴリー	1466621552	25900	shared_asin									
+gregory-size-comparison	7	gsc-nano20	0	amazonAsin	B0DY5DHC6H	https://www.amazon.co.jp/dp/B0DY5DHC6H	GREGORY ナノ20 NANO 20 1530588885 スパークネイビー	GREGORY	1530588885	12155	shared_asin									
+gregory-size-comparison	8	gsc-zulu30	0	amazonAsin	B0BSLWP6SY	https://www.amazon.co.jp/dp/B0BSLWP6SY	グレゴリー ズール30 ZULU 30 1456640527 SM/MD ハローブルー	グレゴリー	1456640527	25245	shared_asin									
+gregory-size-comparison	9	gsc-compass30	0	amazonAsin	B0F59WK7P7	https://www.amazon.co.jp/dp/B0F59WK7P7	GREGORY コンパス30 COMPASS 30 1426342480 ユニバースブラック	GREGORY	1426342480	19360	shared_asin									
+gregory-size-comparison	10	gsc-fineday-v2	0	amazonAsin	B0C2YQP684	https://www.amazon.co.jp/dp/B0C2YQP684	GREGORY ファインデイ V2 FINE DAY V2 18L BLACK BALLISTIC	GREGORY		13780	shared_asin									
+gregory-size-comparison	11	gsc-zulu24lt	0	amazonAsin	B0CT96YKYW	https://www.amazon.co.jp/dp/B0CT96YKYW	グレゴリー ズール24 LT ZULU 24 LT 1493160662 ボルケニックブラック	グレゴリー	1493160662	21320	shared_asin									
+gregory-zulu-baltoro	1	gregory-zulu35	0	amazonAsin	B0BWHBJ8Q6	https://www.amazon.co.jp/dp/B0BWHBJ8Q6	GREGORY ズール35 ZULU 35 1466700527 SM/MD ハローブルー バックパック	GREGORY	1466700527	33000	shared_asin									
 gregory-zulu-baltoro	2	gregory-zulu45	0	amazonAsin	B0GH6C226L	https://www.amazon.co.jp/dp/B0GH6C226L	GREGORY ズール45 ZULU 45 145292D436 MD/LG デザートタン バックパック	GREGORY	145292D436	35200	shared_asin									
-gregory-zulu-baltoro	3	gregory-zulu30	0	amazonAsin	B0BSLWP6SY	https://www.amazon.co.jp/dp/B0BSLWP6SY	GREGORY ズール30 ZULU 30 1456640527 SM/MD ハローブルー バックパック	GREGORY	1456640527	29700	OK									
+gregory-zulu-baltoro	3	gregory-zulu30	0	amazonAsin	B0BSLWP6SY	https://www.amazon.co.jp/dp/B0BSLWP6SY	GREGORY ズール30 ZULU 30 1456640527 SM/MD ハローブルー バックパック	GREGORY	1456640527	29700	shared_asin									
 gregory-zulu-baltoro	4	gregory-stout45	0	amazonAsin	B0CZDJFSR9	https://www.amazon.co.jp/dp/B0CZDJFSR9	GREGORY スタウト45 STOUT 45 1493752038 サンドストーン バックパック	GREGORY	1493752038	33000	shared_asin									
 gregory-zulu-baltoro	5	gregory-zulu55	0	amazonAsin	B0BSLX9TX6	https://www.amazon.co.jp/dp/B0BSLX9TX6	GREGORY ズール55 ZULU 55 1456720527 SM/MD ハローブルー バックパック	GREGORY	1456720527	41800	shared_asin									
-gregory-zulu-baltoro	6	gregory-zulu28lt	0	amazonAsin	B0CT9L65V2	https://www.amazon.co.jp/dp/B0CT9L65V2	GREGORY ズール28 LT ZULU 28 LT 1493170662 ボルケニックブラック バックパック	GREGORY	1493170662	28600	OK									
-gregory-zulu-baltoro	7	gregory-zulu24lt	0	amazonAsin	B0CT96YKYW	https://www.amazon.co.jp/dp/B0CT96YKYW	GREGORY ズール24 LT ZULU 24 LT 1493160662 ボルケニックブラック バックパック	GREGORY	1493160662	26400	OK									
+gregory-zulu-baltoro	6	gregory-zulu28lt	0	amazonAsin	B0CT9L65V2	https://www.amazon.co.jp/dp/B0CT9L65V2	GREGORY ズール28 LT ZULU 28 LT 1493170662 ボルケニックブラック バックパック	GREGORY	1493170662	28600	shared_asin									
+gregory-zulu-baltoro	7	gregory-zulu24lt	0	amazonAsin	B0CT96YKYW	https://www.amazon.co.jp/dp/B0CT96YKYW	GREGORY ズール24 LT ZULU 24 LT 1493160662 ボルケニックブラック バックパック	GREGORY	1493160662	26400	shared_asin									
 gregory-zulu-baltoro	8	gregory-jade33	0	amazonAsin	B0GH6P87GZ	https://www.amazon.co.jp/dp/B0GH6P87GZ	GREGORY ジェイド33 JADE 33 146662A792 SM/MD アーティチョークグリーン レディース バックパック	GREGORY	146662A792	33000	OK									
 gregory-zulu-baltoro	9	gregory-jade43	0	amazonAsin	B0GH6WMS7K	https://www.amazon.co.jp/dp/B0GH6WMS7K	GREGORY ジェイド43 JADE 43 145296A792 SM/MD アーティチョークグリーン レディース バックパック	GREGORY	145296A792	35200	shared_asin									
 gregory-zulu-baltoro	10	gregory-jade28lt	0	amazonAsin	B0GH6LYY2D	https://www.amazon.co.jp/dp/B0GH6LYY2D	GREGORY ジェイド28 LT JADE 28 LT 149320A792 アーティチョークグリーン レディース バックパック	GREGORY	149320A792	28600	shared_asin									
