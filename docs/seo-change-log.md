@@ -4,6 +4,15 @@
 
 ---
 
+## 2026-11-16 iwatani-stove 第2位 イワタニプリムス P-153（楽天売切→復帰）の価格表記を実勢 8,800円に是正（campkit-20261116-M34）
+
+- **対象**: `iwatani-stove` 第2位（id: iwatani-primus-p153）。article-fix-backlog の out_of_stock（priority A・campkit-20261113-L11 起票）。
+- **理由**: 楽天リンク niche-express/p-153-iwataniprimus は 2026-11-16 の再取得で http=200・`InStock`・quantity=5・税込 8,800円（単一SKU）＝在庫復帰。ただしカード price 7,040円より +25% 高く、§11-8 の ±3% を超える。Amazon B000AQXZME は dp 再取得でも購入ボックス無し（no_buybox）で、/s の再探索（1本目 bm-verify・言い換え1本）でも P-153 本体の別 ASIN は見つからなかった。§11-8・§12-5-2 を適用。
+- **処置**: 復帰した楽天リンク（店・URL・image・rakutenRating 4.67／24件＝ページ実測と一致・badge）は据え置き。price を 7040 → 8800 とし、連動する description（実勢2,640〜8,800円）・第2位本文（8,800円まで上がっている）・比較表 rows の price・FAQ「価格の安いモデルと高いモデルの違い」（2,640〜8,800円／8,800円のP-153）・まとめ表（7,000円台→8,800円台）を揃えた。amazonAsin は据え置き（除去しない）、台帳は Amazon 未解消のため pending のまま。updatedAt は商品を替えていないため据え置き。
+- **SEO上の狙い**: 読者が楽天で目にする価格と記事表記の乖離（+25%）を解消し、価格比較記事としての信頼性を保つ。
+
+---
+
 ## 2026-11-15 camp-hot-carpet 第3位 ワタナベ工業 WHC-105 1畳（楽天売切）を同一商品の DENDEN 出品へ付け替え（campkit-20261115-M33）
 
 - **対象**: `camp-hot-carpet` 第3位（id: watanabe-whc-105）。article-fix-backlog の out_of_stock（priority A・campkit-20261113-L10 起票）。
