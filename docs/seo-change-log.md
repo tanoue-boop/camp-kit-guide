@@ -4,6 +4,15 @@
 
 ---
 
+## 2026-11-15 sleeping-bag-recommend 第9位 Snugpak ベースキャンプ スリープシステム（楽天売切）を同一商品の GLAGH グラフ出品へ付け替え（campkit-20261115-M30）
+
+- **対象**: `sleeping-bag-recommend` 第9位（id: snugpak-basecamp-square）。article-fix-backlog の out_of_stock（priority A・campkit-20261111-L05 起票）。
+- **理由**: 旧楽天リンク snb-shop/1366-0002 は 2026-11-15 の再取得で http=200 だが SKU 1366-0002 の quantity=0（在庫切れ・¥18,150）。Amazon B0FQ55RGHB は購入ボックスあり（カート有・残り2点・¥16,713・変種グレー×ブラック）で問題なし。楽天 API「SP14715GB」（在庫あり1件）「Snugpak 公式 ベースキャンプ」（0件＝段①該当出品なし）「スナグパック ベースキャンプ スクエア」で同一商品（Snugpak SP14715GB グレー×ブラック・JAN 5056694914715）を探したところ、在庫ありの GB SKU は全店 ¥18,150 の個人店（heimat-berg／field-seven／canpanera／sundaymountain）。後3店はカラー選択式のため、軸1値・SKU 1件の単独出品 heimat-berg/sng259001（InStock・qty=7・SPEC 3,200g／快適-12℃／下限-17℃ 一致）を採用。§11-1(b)（店の付け替え）・§11-6 追補2 を適用。
+- **処置**: affiliateUrl を heimat-berg/sng259001 の hb.afl（env の ID）へ、image を同店のキャビネット画像（HTTP 200 確認済み）へ（§11-8 追補 条文1）。新店のレビューは0件のため rakutenRating／rakutenReviewCount を削除（同 条文2・§12-5-10 条文5）。比較表 rows には affiliateUrl・評価キーが無いため変更なし。price（18,150円）は新店と同額のため据え置き、本文・早見表・まとめ表・description・name・badge・amazonAsin・updatedAt（店の付け替えのみのため）も据え置き。
+- **SEO上の狙い**: 「1本でオールシーズン対応」枠の楽天購入導線が売切ページを指したままだと CV が落ちるため、同一商品・同価格の在庫ありの出品へ付け替えて導線を復旧する。
+
+---
+
 ## 2026-11-15 mountain-tent-cheap 第2位 GEERTOP テント 2人用（楽天売切）を同一商品の ESSライフスタイル出品へ付け替え（campkit-20261115-M29）
 
 - **対象**: `mountain-tent-cheap` 第2位（id: geertop-tent）。article-fix-backlog の out_of_stock（priority A・campkit-20261114-L17 起票）。
