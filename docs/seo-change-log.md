@@ -4,6 +4,15 @@
 
 ---
 
+## 2026-11-16 logos-tent 第5位 ロゴス ROSY ドゥーブルXL グレー（楽天404）の楽天リンクを同一商品の別店へ付け替え（campkit-20261116-M35）
+
+- **対象**: `logos-tent` 第5位（id: logos-rosy-double-xl-gray）。article-fix-backlog の discontinued_404（priority A・campkit-20261113-L11 起票）と price_unconfirmed（priority B・campkit-20260921-26 起票）。
+- **理由**: 楽天リンク nafco/n20278410 は 2026-11-16 の再取得でも HTTP 404。楽天 API で同一商品（ブランド ロゴス・メーカー型番 71301000＝ROSY ドゥーブルXL-BB）の新品在庫あり出品を探したところ angle/4981325503673（税込 34,760円・`InStock`・quantity=2・単一SKU）の1店のみ（ロゴス公式店は該当出品なし。他は【中古】か別型番 71805561／71805022）。§11-1(b)・§11-2・§11-3 追補2・§11-8 追補を適用。Amazon B09QPZKT94 は dp 再取得で購入ボックスあり・残り2点・20,500円・型番 71301000 一致で据え置き。
+- **処置**: affiliateUrl を angle へ付け替え、image を angle のキャビネット画像（HTTP 200 確認）へ変更（新店レビュー 0 件のため rakutenRating／rakutenReviewCount は従来どおり無し）。price を 17900 → 34760（+94%）とし、連動する description（約11,000〜35,000円）・第5位本文の「2万円を切る価格で」の記述・比較表 rows の priceText（約34,800円）・まとめ表（17,000円台→34,000円台）を揃えた。amazonAsin・badge・name は据え置き。updatedAt は商品を替えていないため据え置き。
+- **SEO上の狙い**: 死んだ楽天リンク（404）を解消して購入導線を復旧し、記事の価格表記を実リンク先の価格に一致させる。
+
+---
+
 ## 2026-11-16 iwatani-stove 第2位 イワタニプリムス P-153（楽天売切→復帰）の価格表記を実勢 8,800円に是正（campkit-20261116-M34）
 
 - **対象**: `iwatani-stove` 第2位（id: iwatani-primus-p153）。article-fix-backlog の out_of_stock（priority A・campkit-20261113-L11 起票）。
