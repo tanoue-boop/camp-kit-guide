@@ -4,6 +4,15 @@
 
 ---
 
+## 2026-11-15 osprey-backpack 第9位 OSPREY ケストレル LT 35（楽天売切）を同一商品のさかいや出品へ付け替え（campkit-20261115-M28）
+
+- **対象**: `osprey-backpack` 第9位（id: osprey-kestrel-lt-35）。article-fix-backlog の out_of_stock（priority A・campkit-20261114-L17 起票）。
+- **理由**: 旧楽天リンク kompas/10100608 は 2026-11-15 の再取得で http=200 だが `OutOfStock`・ブラック／オリーブタンとも quantity=0・`purchaseCondition=sold-out`。Amazon B0G6GG93WZ は在庫あり（カート有・残り7点・¥28,600・変種「ブラック／35リットル。」・1.45kg）で問題なし。楽天 API「OS50159」「オスプレー ケストレルLT35」「ケストレル LT 35」「Kestrel LT 35」で同一商品（オスプレー OS50159 ブラック・JAN 0810165746640）を探し、在庫ありは さかいや（sakaiya/202603271930・InStock・ブラック qty=1 即納・¥28,600）の1店のみ。段①公式は「オスプレー 公式 ケストレルLT35」で0件＝該当出品なし。e-shopsmart（¥30,500）は全色 qty=0 のメーカー取り寄せ、worldselect は ASIN 由来コードかつ別色のため不採用。§11-1(b)（店の付け替え）を適用。
+- **処置**: カードと比較表 rows の当該行の affiliateUrl を sakaiya/202603271930 の hb.afl（env の ID）へ（§11-8 追補 条文3）、image を同店のブラック画像（HTTP 200 確認済み）へ（同 条文1）。カードは楽天レビュー属性を持たず、新店も0件なので追加しない（同 条文2）。price（28,600円）は新店と同額のため据え置き、本文・早見表・まとめ表・FAQ・description・name・badge・amazonAsin・updatedAt（店の付け替えのみのため）も据え置き。
+- **SEO上の狙い**: ブランド軸記事の「日帰り〜小屋泊を35Lで1本」枠の楽天購入導線が売切ページを指したままだと CV が落ちるため、同一商品・同価格の在庫ありの出品へ付け替えて導線を復旧する。
+
+---
+
 ## 2026-11-15 solo-tent-lightweight 第7位 BUNDOK ソロティピー 1（楽天売切）を同一商品のコジマ出品へ付け替え（campkit-20261115-M26）
 
 - **対象**: `solo-tent-lightweight` 第7位（id: bundok-solo-tipi1）。article-fix-backlog の out_of_stock（priority A・campkit-20261111-L05 起票）。
