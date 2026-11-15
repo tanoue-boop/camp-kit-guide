@@ -4,6 +4,15 @@
 
 ---
 
+## 2026-11-15 camp-hot-carpet 第3位 ワタナベ工業 WHC-105 1畳（楽天売切）を同一商品の DENDEN 出品へ付け替え（campkit-20261115-M33）
+
+- **対象**: `camp-hot-carpet` 第3位（id: watanabe-whc-105）。article-fix-backlog の out_of_stock（priority A・campkit-20261113-L10 起票）。
+- **理由**: 旧楽天リンク life-inc/100930-1500-0001 は 2026-11-15 の再取得で http=200 だが `OutOfStock`・quantity=0・「入荷・発送・納期未定」。Amazon B0B4ZS2SHR は購入ボックスあり（カート有・¥6,082）で問題なし。楽天 API「ワタナベ工業 WHC-105」「WHC-105 電気カーペット」「ワタナベ工業 公式 WHC-105」（0件＝段①該当出品なし）で同一商品（ワタナベ工業 WHC-105・幅約88×奥行約176cm・220W・日本製）を探したところ、母数最安 ¥5,157 の yamakishi は item ページ実測で OutOfStock・qty=0・お取り寄せ（§11-5 追補で母数外）。残る最安 ¥5,480 が多数店で同額のため、§11-3 のタイブレーク（レビュー件数）で kadenrand/7108166（DENDEN・InStock・qty=36・単一SKU・レビュー11件）を採用。§11-1(b)（店の付け替え）・§11-2・§11-3・§11-5 追補・§11-6 を適用。
+- **処置**: affiliateUrl を kadenrand/7108166 の hb.afl（env の ID・&m=／&rafcid= なし）へ、image を同店のキャビネット画像（HTTP 200 確認済み）へ（§11-8 追補 条文1）。新店のレビューは11件（30件未満）のため rakutenRating／rakutenReviewCount を削除（§11-8 追補 条文2・§12-5-10 条文5）。比較表 rows の同 id は rating を削除・reviews を「評価準備中」・affiliateUrl を新店に揃えた（§11-8 追補 条文3）。price（5,480円）は新店と同額のため据え置き、本文・まとめ表・description・name・badge・amazonAsin・updatedAt（店の付け替えのみのため）も据え置き。
+- **SEO上の狙い**: 「まず安く1枚試したい」最安枠の楽天購入導線が売切ページを指したままだと CV が落ちるため、同一商品・同価格の在庫ありの出品へ付け替えて導線を復旧する。
+
+---
+
 ## 2026-11-15 ogawa-tent 第5位 ogawa オーナーロッジ タイプ52R 2252（楽天 404）を同一商品のショップアンドアンド出品へ付け替え（campkit-20261115-M32）
 
 - **対象**: `ogawa-tent` 第5位（id: ogawa-ownerlodge52r）。article-fix-backlog の discontinued_404（priority A・campkit-20261112-L09 起票）。
