@@ -4,6 +4,15 @@
 
 ---
 
+## 2026-11-15 ogawa-tent 第5位 ogawa オーナーロッジ タイプ52R 2252（楽天 404）を同一商品のショップアンドアンド出品へ付け替え（campkit-20261115-M32）
+
+- **対象**: `ogawa-tent` 第5位（id: ogawa-ownerlodge52r）。article-fix-backlog の discontinued_404（priority A・campkit-20261112-L09 起票）。
+- **理由**: 旧楽天リンク winkstore/269903 は 2026-11-15 の再取得でも http=404。Amazon B0843MPRQ2 は購入ボックスあり（カート有・残り18点・¥73,991）で問題なし。楽天 API「ogawa オーナーロッジ 2252」「オーナーロッジ タイプ52R」「ogawa 公式 2252」（0件＝段①該当出品なし）で同一商品（Ogawa・メーカー型番 2252）を探したところ、新品の在庫あり出品は ¥87,670〜¥113,300 の 8 店。大手に当たる店は母数最安比 +20% 以内に無く（store-megasports ¥113,300 は +29.2%）、段③個人店の最安 shop-and-und/gr-e9thxo5c2q（InStock・qty=3・単独出品・ブランド Ogawa／型番 2252）を採用。§11-1(b)（店の付け替え）・§11-2・§11-3 追補・§11-6 を適用。中古（2nd STREET）と T/C 版 2253 は対象外。
+- **処置**: affiliateUrl を shop-and-und/gr-e9thxo5c2q の hb.afl（env の ID・&m=／&rafcid= なし）へ。price は 79180 → 87670（±3% 超・§11-8）。連動して比較表 rows の参考価格（約¥87,670）、まとめ表の価格帯（87,000円台）、FAQ「安いモデルと高いモデル」の「7万円台」→「8万円台」を更新。image は Amazon 画像のため据え置き（タスク指示）、rakutenRating／rakutenReviewCount は元から無し（新店レビュー0件）。name・description・badge・amazonAsin・本文の仕様記述・updatedAt（店の付け替えのみのため）は据え置き。
+- **SEO上の狙い**: ロッジ型枠の楽天購入導線が 404 を指したままだと CV が落ちるため、同一商品の在庫ありの出品へ付け替えて導線を復旧し、価格表記を実勢に合わせる。
+
+---
+
 ## 2026-11-15 sleeping-bag-recommend 第9位 Snugpak ベースキャンプ スリープシステム（楽天売切）を同一商品の GLAGH グラフ出品へ付け替え（campkit-20261115-M30）
 
 - **対象**: `sleeping-bag-recommend` 第9位（id: snugpak-basecamp-square）。article-fix-backlog の out_of_stock（priority A・campkit-20261111-L05 起票）。
