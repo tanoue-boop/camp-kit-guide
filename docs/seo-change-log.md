@@ -4,6 +4,15 @@
 
 ---
 
+## 2026-11-15 mountain-tent-cheap 第2位 GEERTOP テント 2人用（楽天売切）を同一商品の ESSライフスタイル出品へ付け替え（campkit-20261115-M29）
+
+- **対象**: `mountain-tent-cheap` 第2位（id: geertop-tent）。article-fix-backlog の out_of_stock（priority A・campkit-20261114-L17 起票）。
+- **理由**: 旧楽天リンク makanamall/gttent-2p は 2026-11-15 の再取得で http=200 だが `OutOfStock`・SKU 265/グリーン・266/イエロー とも quantity=0・`purchaseCondition=sold-out`。Amazon B07X38Y39Y は在庫あり（カート有・残り16点・¥12,599・変種アーミーグリーン）で問題なし。楽天 API「GEERTOP テント 2人用」「GEERTOP テント アーミーグリーン」で同一商品（Geer Top・2人用・210×140cm・約3kg・アーミーグリーン）を探したところ、在庫ありの出品は全て個人店（Amazon 出品の再販）。ASIN 由来コード（b07x38y39y 等）は不採用、putera はカラー5択のバリエーション選択式で §11-6 不採用。残る単独出品の最安 ess-lifestyle/20261023230709_118（InStock・qty=10・¥19,509）を採用（母数最安 ¥17,499 比 +11.5%・§11-3 の範囲内）。§11-1(b)（店の付け替え）を適用。
+- **処置**: affiliateUrl を env の ID の hb.afl で作り直し（旧 URL の別 ID・&m=・&rafcid= は除去。§11-7）、image を新店画像（HTTP 200 確認済み）へ（§11-8 追補 条文1）。新店のレビューは0件のため rakutenRating／rakutenReviewCount を削除し、本文の「評価4.67という高評価が…」の一文も削除（同 条文2・§12-5-10 条文5）。price は 11780 → 19509（±3% 超）。連動して比較表 rows の価格（¥19,509）とまとめ表（19,000円台）を更新（比較表に affiliateUrl・eval 列は無い）。name・description・badge・amazonAsin・updatedAt（店の付け替えのみのため）は据え置き。
+- **SEO上の狙い**: 「4シーズン対応が欲しい」枠の楽天購入導線が売切ページを指したままだと CV が落ちるため、同一商品の在庫ありの出品へ付け替えて導線を復旧する。楽天側は再販価格で Amazon（¥12,599）より高く、枠の「コスパ」訴求が弱まった点は監督に申し送る。
+
+---
+
 ## 2026-11-15 osprey-backpack 第9位 OSPREY ケストレル LT 35（楽天売切）を同一商品のさかいや出品へ付け替え（campkit-20261115-M28）
 
 - **対象**: `osprey-backpack` 第9位（id: osprey-kestrel-lt-35）。article-fix-backlog の out_of_stock（priority A・campkit-20261114-L17 起票）。
