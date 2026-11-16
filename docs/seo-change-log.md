@@ -4,6 +4,14 @@
 
 ---
 
+## 2026-11-16 deuter-commute-daypack 第4位ギガントの楽天リンク先を付け替え（campkit-20261116-M37）
+
+- **対象**: `deuter-commute-daypack` 第4位 ドイター ギガント D3812721 7000 ブラック（id: dcd-gigant）。issue_type=discontinued_404（L17 検出）。
+- **処置**: 旧リンク先 `sakaiya/202607011743` は再取得でも 404。楽天で同一商品（ブランド deuter・メーカー型番 D3812721-7000・ブラック）を在庫ありで扱うのは `wild-1/4046051116617` の1店のみ（¥14,520・qty=17）だったので §11-1(b) で付け替え。price 10,725→14,520、image を新店へ、レビュー0件のため rakutenRating／rakutenReviewCount を省略。比較表 rows 2か所（affiliateUrl・price・サイズ）、本文（サイズ 50.5×30×19.5cm→約50×33×22cm＝新店・Amazon の表記、楽天とAmazonの価格差 約3,500円→約110円、アウトレット価格の記述削除）、価格帯の段落、FAQ、まとめ表（10,000円台→14,000円台・行順を価格順に移動）を揃えた。Amazon `B08HT4RLFF` は在庫あり（¥14,632・販売元 WILD-1 オンラインストア）で据え置き。updatedAt は据え置き（店の付け替えのみ）。
+- **狙い**: 404 の楽天ボタンによる送客損失の解消と、価格・寸法の記述をリンク先の実態に合わせること。
+
+---
+
 ## 2026-11-16 Jackery・BLUETTI のカードに公式ストアボタン（A8・購入4%）を追加（campkit-20261116-C06）
 
 - **対象**: 12記事・33か所（ProductCardMdx 32枚＋QuickPickMdx 1件）。bluetti-power（5枚）／camp-gear-sale-timing（カード1＋QuickPick1）／camp-gift（1）／camp-portable-power-beginner（3）／compact-portable-power（4）／disaster-portable-power（3）／jackery-power-station（5）／portable-power-guide（2）／portable-power-large（4）／portable-power-vehicle-camp（1）／solar-panel-folding（1）／solar-portable-power（2）。Jackery 22枚＋QuickPick1、BLUETTI 10枚。
