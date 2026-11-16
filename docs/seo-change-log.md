@@ -4,6 +4,18 @@
 
 ---
 
+## 2026-11-17 osprey-talon-tempest 新規／狙いKW オスプレー タロン・テンペスト／新規のため基準なし（GSC の _tasks 20261116 版 page-28d・qp-90d・qp-28d に「タロン」「テンペスト」を含むクエリは0件＝需要はサイト内では未確認。Web 検索では販売店・メディアの単品紹介が上位）（campkit-20261117-N69）
+
+- **対象**: `content/posts/osprey-talon-tempest.mdx`（新規・10製品・全モデル オスプレー・category=backpack）。狙いKW: オスプレー タロン／オスプレー テンペスト／オスプレー タロン 22／オスプレー テンペスト 20／オスプレー タロン テンペスト 違い（購入直前のブランド＋モデル名検索）。
+- **狙い**: タロン・テンペストは osprey-backpack（タロン 22）・osprey-womens-backpack（テンペスト系4モデル）・osprey-exos-eja（タロン 44／プロ 40）に分散して載っているが、シリーズを主題にした記事が無い。検索上位も単品紹介（BE-PAL のタロン44／タロンベロシティ30、山と溪谷の TALON 22、販売店の特集ページ）が中心で、メンズ／ウィメンズの横並びが無い。
+- **差別化**: 冒頭で「日帰りは20〜26L・1泊は30〜33L、タロンとテンペストの違いは背面長（46〜56cm／38〜48cm）」を即答。日帰り・1泊のモデル別早見（使い方×容量×背面長×重量・buy列・10行）、タロンとテンペストの違い（同容量なら重量・装備は同じで背面長・ハーネス・本体の高さが違う）、背面長の測り方とサイズの選び方、旧型テンペスト 20 の扱い（FAQ）。
+- **構成**: 結論3行（数値入り・10モデルと明記）→ QuickPick（タロン 22／テンペスト 22／タロン 33）→ はじめに → 日帰り・1泊のモデル別早見（buy列）→ 比較表（設計・容量・重量・背面長・サイズ展開・サイズ・推奨荷重・楽天/Amazon税込・buy列）→ 選び方4ポイント（容量／背面長／メンズ・ウィメンズ／1泊の荷物量と開き方）→ 10製品 → Tips 5項目 → FAQ 6問（見出し形式）→ 選定基準と情報源 → まとめ（3列5行）。
+- **商品**: タロン 22 OS52466／テンペスト 22 OS52472／タロン 26 OS52465／テンペスト 26 OS52471／タロン 33 OS52464／テンペスト 33 OS52470／タロンベロシティ 20 OS50268（S／M）／テンペストベロシティ 20 OS50270（M／L）／タロンベロシティ 30 OS50267（S／M）／テンペストベロシティ 30 OS50269（XS／S）。全カード 楽天 hb.afl＋amazonAsin・楽天とAmazonの価格差は 0%（7モデル）／-10%（タロン 22・テンペスト 26・テンペスト 33）・check-card-name-vs-sku 10枚 OK（選択SKUも採用色・サイズに着地）。
+- **内部リンク**: 本記事→9本（osprey-backpack・osprey-kestrel-stratos・osprey-daily-backpack・camp-backpack-capacity-guide・backpack-25l・backpack-35l・backpack-rain-cover・osprey-womens-backpack・osprey-business-backpack）。既存→本記事4本: osprey-backpack（ビジネスリュックの案内文の後に1文）・osprey-kestrel-stratos（はじめにの案内文の後に1文）・osprey-womens-backpack（はじめにの案内文の後に1文）・osprey-daily-backpack（ビジネスリュックの案内文の後に1文）。いずれも updatedAt 不変。
+- **効果測定**: 新規のため基準なし。2〜3週間後に「オスプレー タロン」「テンペスト」系クエリの表示・順位・クリックを確認し、osprey-backpack（タロン 22）・osprey-womens-backpack（テンペスト系）とのカニバリ有無を確認する。
+
+---
+
 ## 2026-11-17 osprey-business-backpack 新規／狙いKW オスプレー ビジネスリュック・オスプレー リュック 通勤／新規のため基準なし（関連クエリ28日 合計 表示204・平均4.4位・クリック13）（campkit-20261117-N68）
 
 - **対象**: `content/posts/osprey-business-backpack.mdx`（新規・7製品・全モデル オスプレー・category=backpack）。関連KW: オスプレー ビジネスリュック／オスプレー リュック 通勤／オスプレイ ビジネス／オスプレー PC リュック。
