@@ -33,6 +33,12 @@ export type QuickPickItem = {
   affiliateUrl?: string;
   /** Amazon の ASIN（該当カードと同じもの） */
   amazonAsin?: string;
+  /** メーカー公式ストアのアフィリエイトURL（該当カードの officialUrl と同じもの・任意） */
+  officialUrl?: string;
+  /** 公式ストアボタンの文言（既定「公式ストアで見る」） */
+  officialLabel?: string;
+  /** A8 の計測用画像（任意） */
+  officialPixel?: string;
 };
 
 type QuickPickProps = {
@@ -103,6 +109,20 @@ export default function QuickPick({ items, title = "迷ったらこれ", lead }:
                     <CartIcon className={styles.btnIcon} />
                     Amazonで見る
                   </a>
+                )}
+                {it.officialUrl && (
+                  <a
+                    href={it.officialUrl}
+                    target="_blank"
+                    rel="nofollow sponsored noopener"
+                    className={`${styles.btn} ${styles.btnOfficial}`}
+                  >
+                    <CartIcon className={styles.btnIcon} />
+                    {it.officialLabel || "公式ストアで見る"}
+                  </a>
+                )}
+                {it.officialUrl && it.officialPixel && (
+                  <img src={it.officialPixel} width={1} height={1} alt="" style={{ border: 0, width: 1, height: 1 }} />
                 )}
               </div>
             </li>

@@ -213,6 +213,22 @@
   border-left: 1px solid rgba(255, 255, 255, 0.15);
 }
 
+/* 公式ストアボタン（officialUrl があるカードだけ・campkit-20261116-C06） */
+.officialRow {
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.official {
+  background: #1f2937 !important;
+}
+
+.officialPixel {
+  display: block;
+  width: 1px;
+  height: 1px;
+  border: 0;
+}
+
 /* ── Mobile ───────────────────────────────────────────── */
 @media (max-width: 600px) {
   .inner {

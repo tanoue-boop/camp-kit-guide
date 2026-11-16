@@ -102,6 +102,7 @@ function ProductCardMdx({
   rank, id, name, brand, description, price, rating, reviewCount,
   amazonRating, amazonReviewCount, rakutenRating, rakutenReviewCount,
   affiliateUrl, amazonUrl, amazonAsin, source, badge, image,
+  officialUrl, officialLabel, officialPixel,
 }: {
   rank?: string; id?: string; name: string; brand?: string; description: string;
   price: string; rating?: string; reviewCount?: string;
@@ -109,6 +110,7 @@ function ProductCardMdx({
   rakutenRating?: string; rakutenReviewCount?: string;
   affiliateUrl: string; amazonUrl?: string; amazonAsin?: string; source: "amazon" | "rakuten" | "other"; badge?: string;
   image?: string;
+  officialUrl?: string; officialLabel?: string; officialPixel?: string;
 }) {
   return (
     <div id={id} style={{ scrollMarginTop: "90px" }}>
@@ -128,6 +130,9 @@ function ProductCardMdx({
           ...(amazonUrl ? { amazonUrl } : {}),
           ...(amazonAsin ? { amazonAsin } : {}),
           ...(image ? { image } : {}),
+          ...(officialUrl ? { officialUrl } : {}),
+          ...(officialLabel ? { officialLabel } : {}),
+          ...(officialPixel ? { officialPixel } : {}),
         }}
       />
     </div>

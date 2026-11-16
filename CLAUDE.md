@@ -225,6 +225,12 @@ OK: 「**充電を忘れても電池を買えばすぐ復帰できる**」とい
   - 行に入れる `affiliateUrl`・`amazonAsin` は**必ず同じ記事の該当 `ProductCardMdx` と同じ値**にする（手打ちせずカードから写す）
   - `verify-deploy.cjs` は購入列（`source`／`buy`）を持つ表について「本番の比較表 hb.afl リンク数＝mdx の期待数」と「全行が空でない `affiliateUrl` を持つ」を検査する。**対応カードが無い行がある表（＝リンクを作れない行がある表）には購入列を足さない**（検査2 で落ちる。例: mountain-camp-lantern の軽量ランキング比較表）
 
+#### 公式ストアボタン（`officialUrl`／2026-11-16 追加・campkit-20261116-C06）
+
+- ProductCardMdx と QuickPickMdx の items に任意属性 `officialUrl`（A8 の `https://px.a8.net/svt/ejp?a8mat=…`）・`officialLabel`（既定「公式ストアで見る」）・`officialPixel`（A8 計測用 0.gif）を書くと、楽天・Amazon ボタンの下に3つ目のボタンが出る。**楽天 hb.afl・`amazonAsin` の代わりにはしない（両方必須は不変）**。
+- 現在の対象は **Jackery（a8mat=4BCGFJ+5FA776+4NJ4+5YRHE）と BLUETTI JAPAN（a8mat=4B8B4S+633JEA+4TLQ+60H7M）** のカード。新規記事でこの2ブランドのカードを書くときも付ける（値は既存カードからコピーし、手で打たない）。
+- `verify-deploy.cjs` が本番のボタン href を mdx の `officialUrl` と照合する。
+
 #### QuickPickMdx（「迷ったらこれ」ボックス／2026-10-27 追加・campkit-20261027-C01）
 
 ```mdx

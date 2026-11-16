@@ -4,6 +4,16 @@
 
 ---
 
+## 2026-11-16 Jackery・BLUETTI のカードに公式ストアボタン（A8・購入4%）を追加（campkit-20261116-C06）
+
+- **対象**: 12記事・33か所（ProductCardMdx 32枚＋QuickPickMdx 1件）。bluetti-power（5枚）／camp-gear-sale-timing（カード1＋QuickPick1）／camp-gift（1）／camp-portable-power-beginner（3）／compact-portable-power（4）／disaster-portable-power（3）／jackery-power-station（5）／portable-power-guide（2）／portable-power-large（4）／portable-power-vehicle-camp（1）／solar-panel-folding（1）／solar-portable-power（2）。Jackery 22枚＋QuickPick1、BLUETTI 10枚。
+- **処置**: ProductCardMdx／QuickPickMdx に任意属性 `officialUrl`・`officialLabel`（既定「公式ストアで見る」）・`officialPixel` を新設し、楽天・Amazon ボタンの下に3つ目のボタン（`rel="nofollow sponsored noopener"`）と A8 計測用 1×1 画像を出す。属性の無いカードの描画は不変。楽天 hb.afl・Amazon amazonAsin は全カードで据え置き。portable-power-guide（ポータブル電源の比較記事で GSC 28日クリック最大＝1クリック）の「ブランドで選ぶ」比較表の直後に「公式ストアはセール期間に独自の値引きをすることがある」旨の1行と Jackery／BLUETTI 公式へのテキストリンクを追加（値引き率・価格は書かない）。updatedAt は据え置き。
+- **リンク**: Jackery 公式 a8mat=4BCGFJ+5FA776+4NJ4+5YRHE（s00000021712001・購入4%）／BLUETTI JAPAN 公式 a8mat=4B8B4S+633JEA+4TLQ+60H7M（s00000022499001・注文4%）。
+- **検証**: `verify-deploy.cjs` に公式ストアボタンの href 照合（mdx の officialUrl と本番 `ProductCard…__official` の href を多重集合で比較・反映待ち理由にも追加）を足した。
+- **狙い**: 1台10万円前後の高単価商材で、セール時に値引きの大きい公式ストアへの導線（購入額の4%＝1件約4,000円）をブラックフライデー前に用意し、12/18 の月間報酬8万円目標に寄与させる。
+
+---
+
 ## 2026-11-16 logos-tent 第5位 ロゴス ROSY ドゥーブルXL グレー（楽天404）の楽天リンクを同一商品の別店へ付け替え（campkit-20261116-M35）
 
 - **対象**: `logos-tent` 第5位（id: logos-rosy-double-xl-gray）。article-fix-backlog の discontinued_404（priority A・campkit-20261113-L11 起票）と price_unconfirmed（priority B・campkit-20260921-26 起票）。

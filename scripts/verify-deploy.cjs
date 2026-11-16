@@ -178,7 +178,11 @@ function parseLocal(src) {
   //   Amazon: expectedAmazonHref()（getAmazonUrl() と同じ優先順・dp はタグ無しの正規形）
   const rakutenExpectedHrefs = [];
   const amazonExpectedHrefs = [];
+  // 公式ストアボタン（campkit-20261116-C06）: officialUrl を持つカードの href をそのまま積む（A8 px.a8.net）。
+  const officialExpectedHrefs = [];
   for (const card of cards) {
+    const officialUrl = (card.match(/\bofficialUrl="([^"]*)"/) || [])[1] || '';
+    if (officialUrl) officialExpectedHrefs.push(officialUrl);
     const source = (card.match(/\bsource="([^"]*)"/) || [])[1] || '';
     const aff = (card.match(/\baffiliateUrl="([^"]*)"/) || [])[1] || '';
     if (source === 'rakuten' && aff.startsWith(HB_AFL_PREFIX)) {
@@ -205,6 +209,7 @@ function parseLocal(src) {
     rakutenSearchExpected,
     rakutenExpectedHrefs,
     amazonExpectedHrefs,
+    officialExpectedHrefs,
     dupAsins,
     // 比較表（ComparisonTableMdx）の期待値（campkit-20261006-01・ファイル冒頭コメント 3d）
     ...parseComparisonTables(src),
@@ -363,6 +368,7 @@ function countAffiliateLinks(html) {
   // 値照合用（campkit-20260921-47）: ボタンの href を文書順に積む（HTML エンティティ復号済み。Amazon dp はタグ無しに正規化）。
   const rakutenHbHrefs = [];
   const amazonButtonHrefs = [];
+  const officialButtonHrefs = [];
   for (const tag of html.match(/<a\s[^>]*>/g) || []) {
     const href = decodeHtmlAttr((tag.match(/\bhref="([^"]*)"/) || [])[1] || '');
     const cls = (tag.match(/\bclass="([^"]*)"/) || [])[1] || '';
@@ -376,6 +382,8 @@ function countAffiliateLinks(html) {
       else if (/^https?:\/\/amzn\.to\/[A-Za-z0-9]+/.test(href)) amazonButtonShort++;
       else amazonButtonOther++;
       amazonButtonHrefs.push(normalizeAmazonHref(href));
+    } else if (/ProductCard[^\s"]*__official\b/.test(cls)) {
+      officialButtonHrefs.push(href);
     } else if (/ComparisonTable[^\s"]*__link\b/.test(cls) && href.startsWith(HB_AFL_PREFIX)) {
       rakutenTableHb++;
     }
@@ -405,6 +413,7 @@ function countAffiliateLinks(html) {
     amazonPlaceholderTag,
     rakutenHbHrefs,
     amazonButtonHrefs,
+    officialButtonHrefs,
     // 参考: 47 までは verify() が「ProductCard 件数 ≦ total」を合否に使っていた（混在カウント・現在は合否対象外）
     total: rakutenHb + amazonTag + amznTo,
   };
@@ -471,12 +480,22 @@ function findForbiddenText(html) {
 
 // アフィリリンクの合否をまとめる（verify() の 3 で使う）。
 // 合否＝楽天枚数一致 && Amazon枚数一致 && 楽天値一致 && Amazon値一致（47 で「total ≧ cardCount」を外した）。
+// 公式ストアボタン href の値照合（campkit-20261116-C06）。期待（カードの officialUrl）と
+// 実測（ProductCard の __official ボタンの href・復号済み）を多重集合として比べる。期待 0 は実測 0 で PASS。
+function judgeOfficialHrefs(local, links) {
+  return diffMultiset(local.officialExpectedHrefs || [], links.officialButtonHrefs || []);
+}
+
 function judgeLinks(local, links) {
   const rakutenOk = judgeRakuten(local, links);
   const amazonOk = judgeAmazon(local, links);
   const rakutenHref = judgeRakutenHrefs(local, links);
   const amazonHref = judgeAmazonHrefs(local, links);
-  return { ok: rakutenOk && amazonOk && rakutenHref.ok && amazonHref.ok, rakutenOk, amazonOk, rakutenHref, amazonHref };
+  const officialHref = judgeOfficialHrefs(local, links);
+  return {
+    ok: rakutenOk && amazonOk && rakutenHref.ok && amazonHref.ok && officialHref.ok,
+    rakutenOk, amazonOk, rakutenHref, amazonHref, officialHref,
+  };
 }
 
 // ── 反映待ちの判定 ────────────────────────────────────────────────────────
@@ -517,6 +536,13 @@ function pendingReasons(html, local) {
     const rakutenHref = judgeRakutenHrefs(local, l);
     if (!rakutenHref.ok) {
       reasons.push(`本番の楽天リンク(hb.afl ボタン)の href が期待と不一致です（${describeHrefDiff(rakutenHref)}）`);
+    }
+  }
+  // 公式ストアボタン（campkit-20261116-C06）: ボタン追加だけの回は他の判定では検出できないので反映待ちの理由にする。
+  {
+    const officialHref = judgeOfficialHrefs(local, l);
+    if (!officialHref.ok) {
+      reasons.push(`本番の公式ストアボタンの href が期待と不一致です（${describeHrefDiff(officialHref)}）`);
     }
   }
   // 比較表の購入先リンク（2026-10-06・campkit-20261006-01）: カードの href を 1 文字も変えず比較表だけを変える回は
@@ -704,6 +730,13 @@ async function verify(slug, deployedAt) {
       ` / href照合 楽天${lj.rakutenHref.ok ? 'OK' : `✖(${describeHrefDiff(lj.rakutenHref)})`}` +
       `・Amazon${lj.amazonHref.ok ? 'OK' : `✖(${describeHrefDiff(lj.amazonHref)})`}`
   );
+  // 公式ストアボタン（campkit-20261116-C06）: officialUrl を持つカードがある記事だけ表示（合否は上の linkOk に含む）
+  if ((local.officialExpectedHrefs || []).length || (links.officialButtonHrefs || []).length) {
+    console.log(
+      `        公式ストアボタン 期待${(local.officialExpectedHrefs || []).length}→実${(links.officialButtonHrefs || []).length}` +
+        ` / href照合 ${lj.officialHref.ok ? 'OK：' + [...new Set(links.officialButtonHrefs)].join(' , ') : `✖(${describeHrefDiff(lj.officialHref)})`}`
+    );
+  }
 
   // 3d. 比較表（ComparisonTableMdx）の購入先リンク（campkit-20261006-01・ファイル冒頭コメント 3d）
   //   検査1: 比較表リンクの hb.afl 数が mdx 由来の期待数と一致（購入列 source/buy を持つブロックが無い記事は対象外）

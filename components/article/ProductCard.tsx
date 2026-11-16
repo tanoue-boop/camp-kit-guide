@@ -176,6 +176,21 @@ export default function ProductCard({ product, rank }: ProductCardProps) {
             </span>
           </a>
         </div>
+
+        {/* 公式ストア（A8 等・campkit-20261116-C06）。officialUrl があるカードだけ。無いカードの表示は不変 */}
+        {product.officialUrl && (
+          <div className={styles.officialRow}>
+            <a href={product.officialUrl} target="_blank" rel="nofollow sponsored noopener" className={`${styles.btn} ${styles.official}`}>
+              <CartIcon className={styles.btnIcon} />
+              <span className={styles.btnText}>
+                <span className={styles.btnBrand}>{product.officialLabel || "公式ストアで見る"}</span>
+              </span>
+            </a>
+            {product.officialPixel && (
+              <img src={product.officialPixel} width={1} height={1} alt="" className={styles.officialPixel} />
+            )}
+          </div>
+        )}
       </div>
     </>
   );

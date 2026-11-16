@@ -21,4 +21,13 @@ export type Product = {
   source: "amazon" | "rakuten" | "other";
   image?: string;
   badge?: string;
+  /**
+   * メーカー公式ストアへのアフィリエイトリンク（A8.net の px.a8.net など・campkit-20261116-C06）。
+   * あるときだけ楽天・Amazon ボタンの下に3つ目のボタンを出す。楽天・Amazon のリンクの代わりにはしない。
+   */
+  officialUrl?: string;
+  /** 公式ストアボタンの文言（既定「公式ストアで見る」） */
+  officialLabel?: string;
+  /** A8 の計測用画像（0.gif）。あれば 1×1 の img で出す */
+  officialPixel?: string;
 };
