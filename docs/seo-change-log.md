@@ -4,6 +4,15 @@
 
 ---
 
+## 2026-11-17 family-camp-cot 第2位 DOD バッグインベッド の楽天採用店を付け替え（discontinued_404・campkit-20261117-M39）
+
+- **対象**: `content/posts/family-camp-cot.mdx` の第2位カード（id: logos-comfort-bed・DOD バッグインベッド CB1-510-TN タン）。商品・本文・見出し・updatedAt は不変。
+- **理由**: 楽天リンク先 naturum/3009446 が 404（L14 検出・M39 で再取得しても 404）。
+- **変更**: 同一商品（メーカー型番 CB1-510-TN・JAN 4589946144239）が在庫ありの XPRICE（a-price/4589946144239・税込 ¥13,200・在庫5）へ付け替え（§11-1(b)・段②大手。段①公式店は楽天に出品なし）。カード price 11591→13200、まとめ表「11,591円前後」→「13,200円前後」、比較表 rows の affiliateUrl・price・eval（★4.33（12件）→評価準備中）を揃え、image を新店の画像へ。新店のレビューが15件（30件未満）のため rakutenRating／rakutenReviewCount は省略。
+- **未了**: Amazon（B0822RXWKQ）は購入ボックスが無い状態（すべての出品を見るのみ）。同一商品の別 ASIN は見つからず amazonAsin は据え置き、台帳 #804 は pending のまま。
+
+---
+
 ## 2026-11-17 deuter-speedlite-trailrunning 新規／狙いKW ドイター スピードライト／新規のため基準なし（GSC の _tasks 20261116 版 qp-90d・qp-28d・page-28d に「スピードライト」「speed lite」を含むクエリは0件。「ドイター」を含むクエリは deuter-backpack に集中（例: ドイター リュック 普段使い 69表示・5.6位、deuter リュック 12表示）。Web 検索では「スピードライト」がカメラのストロボ（Canon Speedlite）と同名で、ドイターの日本語比較記事は上位に見当たらなかった）（campkit-20261117-N70）
 
 - **対象**: `content/posts/deuter-speedlite-trailrunning.mdx`（新規・10製品・全モデル ドイター・category=backpack）。狙いKW: ドイター スピードライト／ドイター スピードライト 21／ドイター スピードライト 軽量 リュック／ドイター ライトウェイト（購入直前のブランド＋モデル名検索）。
