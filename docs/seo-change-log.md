@@ -4,6 +4,18 @@
 
 ---
 
+## 2026-11-19 tent-camping-backpack 新規／狙いKW テント泊 ザック おすすめ／新規のため基準なし（GSC の _tasks 20261116 版 qp-90d で「テント泊」×ザック・リュック・バックパックを含むクエリは0件。近いのは「テント泊 何リットル」1表示・18.0位と、50L・55L・60L×リュック・バックパック系19クエリ・計49表示・0クリック〔50l リュック 8表示 4.4位・50リットル リュック 8表示 4.9位・リュック 50l どれくらい 8表示 32.9位 等〕で受け手はいずれも camp-backpack-capacity-guide。WebSearch の上位は my-best・hinata・CAMP HACK・YAMA HACK・rank-king・dime・山と溪谷オンライン・tacklenote 等で、容量（1泊50L・2泊以上60L）と背面長・軽量モデルの注意点が中心。装備の総重量別にザックの重さ・積載上限を合わせる整理と、国内両モールで買えるかの整理は無い）（campkit-20261119-N74）
+
+- **対象**: `content/posts/tent-camping-backpack.mdx`（新規・12製品・category=backpack）。狙いKW: テント泊 ザック おすすめ／テント泊 リュック 50l／テント泊 ザック 60l／テント泊 ザック 軽量（購入直前の用途検索）。
+- **狙い**: 容量50〜65Lのテント泊ザックを「装備の総重量」で3区分（軽量UL＝8kg前後／標準＝10〜13kg／冬季・長期＝15kg以上）し、容量・重量・背面長・積載の目安・税込価格で横並びにする。backpack-50l-60l（容量軸）・gregory-baltoro-size（グレゴリーのサイズ）・backpack-70l-80l（70L以上）・backpack-1night-trip（1泊2日・33〜40L）と役割を分けた。
+- **差別化**: 装備総重量別の早見（積載の目安列・buy列）、ザック本体の重さと積載上限をセットで見る選び方、国内の楽天・Amazonの両方で新品が買えたモデル数（12）を結論に記載、楽天の在庫が少ないモデルと見送ったモデル（ミッション55・サースフェー NX 60+）を明記。
+- **構成**: 結論3行（数値入り・両モールで条件に合った12モデル）→ QuickPick（リチウム 50／エクソスプロ55／クーガーエーペックス-G 60+）→ はじめに → 装備総重量別の早見（buy列）→ 比較表（容量・重量・外寸・背面長・楽天/Amazon税込・buy列）→ 選び方5ポイント（容量・背面長・ヒップベルト・重量と積載上限・レインカバー）→ 区分別の12製品 → Tips 5項目 → FAQ 5問（見出し形式）→ 選定基準と情報源 → まとめ（3列5行）。
+- **商品**: オスプレー エクソスプロ55 S/M OS50380／ラブ ムオン50 QAP-48／ゴッサマーギア ゴリラ50 R M GSCU0072／マムート リチウム 50 2530-00760／グレゴリー スタウト55 149376A266／ドイター エアコンタクト ライト 50+10 D3340323-7403／ミレー サースフェー NX 50+ M MIS0773／グレゴリー ズール55 SM/MD 1456720527／ネイチャーハイク NH20BB113 60+5L／カリマー クーガーエーペックス-G 60+ 501246-0930／ドイター エアコンタクト コア 60+10 D3350526-6216／アコンカグア フィッツロイ 65。全カード 楽天 hb.afl＋amazonAsin・楽天とAmazonの価格差 -12%〜+11%・価格比 4.15倍・check-card-name-vs-sku 12枚 OK。
+- **内部リンク**: 本記事→11本（backpack-1night-trip・backpack-50l-60l・camp-backpack-capacity-guide・backpack-rain-cover・gregory-baltoro-size・gregory-zulu-baltoro・backpack-70l-80l・osprey-exos-eja・ultralight-backpack・deuter-backpack・camp-backpack-beginner）。既存→本記事4本: backpack-50l-60l（「用途で比べる」リストに1行）・gregory-baltoro-size（容量の目安の段落末に1文）・backpack-70l-80l（バルトロのサイズ案内の後に1文）・backpack-1night-trip（まとめの段落末に1文）。いずれも updatedAt 不変。
+- **効果測定**: 新規のため基準なし。2〜3週間後に「テント泊 ザック」「テント泊 リュック」系クエリの表示・順位・クリックを確認し、backpack-50l-60l・camp-backpack-capacity-guide とのカニバリ有無を確認する。
+
+---
+
 ## 2026-11-18 iwatani-stove 第6位・第7位の楽天リンク切れ／売切を同一商品の在庫店へ付け替え（campkit-20261118-M40）
 
 - **対象**: `content/posts/iwatani-stove.mdx` の 第6位 風まるIII CB-KZ-3（id: iwatani-kazemaru3・article-fix-backlog の discontinued_404）と 第7位 炉ばた焼器 炙りやII CB-ABR-2（id: iwatani-aburiya2・同 out_of_stock）。
