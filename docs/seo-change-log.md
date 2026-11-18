@@ -4,6 +4,15 @@
 
 ---
 
+## 2026-11-18 iwatani-stove 第6位・第7位の楽天リンク切れ／売切を同一商品の在庫店へ付け替え（campkit-20261118-M40）
+
+- **対象**: `content/posts/iwatani-stove.mdx` の 第6位 風まるIII CB-KZ-3（id: iwatani-kazemaru3・article-fix-backlog の discontinued_404）と 第7位 炉ばた焼器 炙りやII CB-ABR-2（id: iwatani-aburiya2・同 out_of_stock）。
+- **狙い**: 購入導線の復旧（SEO 施策ではなく商品データの修正）。旧リンク先は風まるIII＝world-free-store が 404、炙りやII＝ddps1975 が売切（quantity 0）のままだった。
+- **変更**: 風まるIII → try3/4901140905797（段③最安・¥6,197）、炙りやII → a-price/4901140905322（段②大手・¥7,230）。同一商品（ブランド・型番一致）の店付け替えのみで商品は変えていない。price（5,280→6,197／6,220→7,230）に合わせて、カードの description・badge・本文の価格記述・比較表 rows（price・eval・affiliateUrl）・FAQ「価格の安いモデルと高いモデルの違い」・まとめ表の価格帯（5,200円台→6,100円台／6,200円台→7,200円台）を揃えた。新店はレビュー 30 件未満（25件・17件）なので rakutenRating／rakutenReviewCount を省略し、炙りやII の badge・本文・description から「レビュー185件・★4.51」を削除、比較表の eval は「評価準備中」。amazonAsin（B0B8NC5CQP／B099JRRP59）は dp 再取得で在庫あり・型番一致のため据え置き。updatedAt（2026-10-20）は店の付け替えのみのため据え置き。
+- **効果測定**: 対象外（リンク修正）。
+
+---
+
 ## 2026-11-18 backpack-30l-35l-womens 新規／狙いKW リュック 30l レディース／新規のため基準なし（GSC の _tasks 20261116 版 qp-90d で女性・レディース×リュック・ザック系クエリは9件・計15表示・1クリック〔登山ザック 30l おすすめ レディース 23.0位（受け手 mountain-backpack-30l）・登山 ザック 女性 おすすめ 12.0位・カリマー リュック レディース 6.7位 等〕、受け手は ladies-hiking-backpack・mountain-backpack-30l・各ブランド記事に分散。「30l レディース」「小柄」を明示したクエリの受け手記事は無し。WebSearch の上位は CAMP HACK・YAMA HACK・hinata・マイナビおすすめナビ・tacklenote 等で、30L前後×背面長XS・S別の早見と国内両モールの購入可否の整理は無い）（campkit-20261118-N73）
 
 - **対象**: `content/posts/backpack-30l-35l-womens.mdx`（新規・9製品・category=backpack）。狙いKW: リュック 30l レディース／女性 登山 リュック 30l／登山 リュック 30l 小柄／レディース 登山 リュック 30l 背面長（購入直前の条件絞り検索）。
