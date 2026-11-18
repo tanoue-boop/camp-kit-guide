@@ -4,6 +4,18 @@
 
 ---
 
+## 2026-11-18 backpack-30l-35l-womens 新規／狙いKW リュック 30l レディース／新規のため基準なし（GSC の _tasks 20261116 版 qp-90d で女性・レディース×リュック・ザック系クエリは9件・計15表示・1クリック〔登山ザック 30l おすすめ レディース 23.0位（受け手 mountain-backpack-30l）・登山 ザック 女性 おすすめ 12.0位・カリマー リュック レディース 6.7位 等〕、受け手は ladies-hiking-backpack・mountain-backpack-30l・各ブランド記事に分散。「30l レディース」「小柄」を明示したクエリの受け手記事は無し。WebSearch の上位は CAMP HACK・YAMA HACK・hinata・マイナビおすすめナビ・tacklenote 等で、30L前後×背面長XS・S別の早見と国内両モールの購入可否の整理は無い）（campkit-20261118-N73）
+
+- **対象**: `content/posts/backpack-30l-35l-womens.mdx`（新規・9製品・category=backpack）。狙いKW: リュック 30l レディース／女性 登山 リュック 30l／登山 リュック 30l 小柄／レディース 登山 リュック 30l 背面長（購入直前の条件絞り検索）。
+- **狙い**: 容量を28〜35Lに限定し、女性用設計または背面長XS・Sのサイズ展開があるモデルだけを、背面長・重量・容量・税込価格で横並びにする。ladies-hiking-backpack（20〜35Lの女性用全般）・osprey-womens-backpack（オスプレー限定）・mountain-backpack-30l（男女兼用30L）・backpack-35l（35L全般）と役割を分け、「30L前後×小柄な人×背面長で選び分ける」軸に絞った。
+- **差別化**: 背面長別の早見（XS・Sサイズの女性用／女性用ワンサイズ〔調整式・固定〕／男女兼用S・buy列）、背面長の数値が非公表のモデルを「非公表」と明記、国内の楽天・Amazonの両方で新品が買えたモデル数（9）を結論に記載、見送ったモデルと理由（シラス 34・ジェイド28 XS/SM・フューチュラ プロ 34 SL・トレイル 28 SL）。
+- **構成**: 結論3行（数値入り・両モールで条件に合った9モデル）→ QuickPick（テンペストベロシティ 30 XS/S／ウェルキン 30 W／リッジ30プラス S）→ はじめに → 背面長別の早見（buy列）→ 比較表（容量・重量・外寸・背面長・楽天/Amazon税込・buy列）→ 選び方4ポイント（背面長・ヒップベルト・重量・容量）→ 9製品（価格の安い順）→ Tips 5項目 → FAQ 5問（見出し形式）→ 選定基準と情報源 → まとめ（3列5行）。
+- **商品**: ミレー ウェルキン 30 W MIS0748／ミレー サースフェー NX 30+5 W S MIS0757-N1546／ドイター フューチュラ 30 SL D3400726-7000／グレゴリー ジェイド33 SM/MD 1466621552／カリマー リッジ30プラス S 501206-9000／グレゴリー ジェイド28 LT 149320A792／オスプレー テンペスト 33 OS52470／ミステリーランチ ウィメンズ レイディックス31 S／オスプレー テンペストベロシティ 30 XS/S OS50269。全カード 楽天 hb.afl＋amazonAsin・楽天とAmazonの価格差 -9%〜+11%・価格比 1.94倍・check-card-name-vs-sku 9枚 OK。
+- **内部リンク**: 本記事→12本（ladies-hiking-backpack・mountain-backpack-30l・backpack-35l・camp-backpack-capacity-guide・millet-backpack・deuter-backpack・gregory-backpack・karrimor-backpack・osprey-womens-backpack・backpack-rain-cover・camp-backpack-beginner・montbell-backpack-alternative）。既存→本記事4本: ladies-hiking-backpack（背面長の測り方と選び方の段落の後に1文）・osprey-womens-backpack（関連記事リストに1行）・mountain-backpack-30l（冒頭の35L案内の後に1文）・backpack-35l（FAQ「何泊できるか」の容量ガイド案内の後に1文）。いずれも updatedAt 不変。
+- **効果測定**: 新規のため基準なし。2〜3週間後に「30l レディース」「女性 30l」「小柄」系クエリの表示・順位・クリックを確認し、ladies-hiking-backpack・mountain-backpack-30l とのカニバリ有無を確認する。
+
+---
+
 ## 2026-11-18 montbell-backpack-alternative 新規／狙いKW モンベル リュック／新規のため基準なし（GSC の _tasks 20261116 版 qp-90d で「モンベル」「mont-bell」を含むリュック系クエリは6件・計7表示・1クリック〔モンベル リュック 10l 5.0位・モンベル ザック 30l 3.0位・モンベル キトラパック50 7.0位 等〕、受け手はいずれも camp-backpack-capacity-guide。WebSearch では上位が BE-PAL・YAMA HACK・CAMP HACK 等のモンベル単体紹介／ブランド一覧で、モンベル容量帯への他ブランド対応表は無い）（campkit-20261118-N72）
 
 - **対象**: `content/posts/montbell-backpack-alternative.mdx`（新規・11製品・category=backpack）。狙いKW: モンベル リュック／モンベル リュック 代わり／モンベル リュック 比較／モンベル ザック 代替（購入直前の比較検索）。
