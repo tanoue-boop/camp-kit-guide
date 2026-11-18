@@ -4,6 +4,18 @@
 
 ---
 
+## 2026-11-19 day-hike-backpack 新規／狙いKW 日帰り登山 リュック おすすめ／新規のため基準なし（GSC の _tasks 20261116 版 qp-90d で「日帰り」を含むクエリは 日帰り登山ザック 30l 5表示 12.8位・日帰り ザック おすすめ 2表示 7.0位・日帰り登山 ザック 容量 2表示 6.0位・日帰り登山 30l 2表示 10.5位〔受け手はいずれも mountain-backpack-30l〕、オスプレー 日帰りザック 25表示 8.3位〔osprey-backpack〕など計十数クエリ・0クリック。「日帰り登山 リュック おすすめ」そのものの表示は無し。WebSearch の上位はマイナビおすすめナビ・hinata・tacklenote・sakidori・ねとらぼ・my-best・CAMP HACK・rank-king・YAMA HACK・BE-PAL 等で、容量（20L＝軽装・25〜30L＝汎用）とフィット感・軽さが中心。装備量別に容量・重量・背面構造を合わせる整理と、国内両モールで買えるかの整理は無い）（campkit-20261119-N75）
+
+- **対象**: `content/posts/day-hike-backpack.mdx`（新規・10製品・category=backpack）。狙いKW: 日帰り登山 リュック おすすめ／日帰り登山 リュック 25l／日帰り登山 リュック 30l／日帰り登山 ザック 軽量（購入直前の用途検索）。
+- **狙い**: 容量20〜30Lの日帰り登山リュックを「装備量」で3区分（軽装＝水・行動食・レイン／標準＝防寒・救急・日帰り装備一式／雨具・防寒込みで余裕）し、容量・重量・背面長・積載の目安・税込価格で横並びにする。backpack-20l・backpack-25l・mountain-backpack-30l（容量軸・通勤兼用を含む）・osprey-talon-tempest（ブランド軸）・camp-backpack-beginner（入門全般）と役割を分けた。
+- **差別化**: 装備量別の早見（背面長列・buy列）、ヒップベルトの有無と本体重量を装備量に合わせる選び方、国内の楽天・Amazonの両方で新品が買えたモデル数（10）を結論に記載、楽天の在庫が少ないモデルと見送ったモデル（メンドーサ II 30）を明記。
+- **構成**: 結論3行（数値入り）→ QuickPick（リチウム 25／リチウム 20／ズール30）→ はじめに → 装備量別の早見（buy列）→ 比較表（容量・重量・外寸・背面長・積載・楽天/Amazon税込・buy列）→ 選び方5ポイント（容量・背面長・ヒップベルト・重量・耐荷重とレインカバー）→ 区分別の10製品 → Tips 5項目 → FAQ 5問（見出し形式）→ 選定基準と情報源 → まとめ（3列5行）。
+- **商品**: オスプレー タロン 22 OS52466／マムート リチウム 20 2530-03172／カリマー タトラ20 501212／マムート リチウム 25 2530-03452／コロンビア キャッスルロック25LバックパックII PU8662 010／サロモン トレイルブレイザー 30 LC2183200／グレゴリー シトロ30 1268807416／グレゴリー ズール30 MD/LG 1452910662／ミレー サースフェー NX 30+5 M MIS0756／カリマー リッジ30プラス M 501206。全カード 楽天 hb.afl＋amazonAsin・楽天とAmazonの価格差 -13%〜0%（例外: サースフェー NX 30+5 は Amazon.co.jp 本体が -24%・本文に明記）・価格比 3.55倍・check-card-name-vs-sku 10枚 OK。
+- **内部リンク**: 本記事→9本（camp-backpack-capacity-guide・camp-backpack-beginner・backpack-20l・backpack-25l・mountain-backpack-30l・ladies-hiking-backpack・backpack-rain-cover・osprey-talon-tempest・backpack-1night-trip）。既存→本記事4本: camp-backpack-beginner（関連記事リストに1行）・mountain-backpack-30l（25L案内の段落末に1文）・backpack-25l（冒頭の容量案内の段落末に1文）・osprey-talon-tempest（容量の目安の段落末に1文）。いずれも updatedAt 不変。
+- **効果測定**: 新規のため基準なし。2〜3週間後に「日帰り登山 リュック／ザック」系クエリの表示・順位・クリックを確認し、mountain-backpack-30l・backpack-25l とのカニバリ有無を確認する。
+
+---
+
 ## 2026-11-19 tent-camping-backpack 新規／狙いKW テント泊 ザック おすすめ／新規のため基準なし（GSC の _tasks 20261116 版 qp-90d で「テント泊」×ザック・リュック・バックパックを含むクエリは0件。近いのは「テント泊 何リットル」1表示・18.0位と、50L・55L・60L×リュック・バックパック系19クエリ・計49表示・0クリック〔50l リュック 8表示 4.4位・50リットル リュック 8表示 4.9位・リュック 50l どれくらい 8表示 32.9位 等〕で受け手はいずれも camp-backpack-capacity-guide。WebSearch の上位は my-best・hinata・CAMP HACK・YAMA HACK・rank-king・dime・山と溪谷オンライン・tacklenote 等で、容量（1泊50L・2泊以上60L）と背面長・軽量モデルの注意点が中心。装備の総重量別にザックの重さ・積載上限を合わせる整理と、国内両モールで買えるかの整理は無い）（campkit-20261119-N74）
 
 - **対象**: `content/posts/tent-camping-backpack.mdx`（新規・12製品・category=backpack）。狙いKW: テント泊 ザック おすすめ／テント泊 リュック 50l／テント泊 ザック 60l／テント泊 ザック 軽量（購入直前の用途検索）。
