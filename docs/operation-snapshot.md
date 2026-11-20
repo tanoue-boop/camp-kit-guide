@@ -2,7 +2,8 @@
 
 サイトの現状（記事数・カテゴリ構成・GAS/インフラ構造）を記録するスナップショット。記事追加・カテゴリ変更・GAS構造変更のたびに最新化する（→ 運用ルールは CLAUDE.md「記録更新ルール」を参照）。
 
-- **最終更新: 2026-11-21（campkit-20261121-N79：新規記事 `osprey-backpack-capacity`〔オスプレーのリュックを10L・20L・30L・40L・50L前後の容量帯別に比較した10モデル・category=backpack〕を追加。content/posts の記事数 343→344、category=backpack は 97→98。既存の `osprey-backpack`・`osprey-daily-backpack`・`backpack-20l` に被リンク1文ずつ追加・いずれも updatedAt 不変）**
+- **最終更新: 2026-11-21（campkit-20261121-N80：新規記事 `osprey-reputation`〔オスプレーの評判（Amazonのレビュー件数・平均）・出身国（アメリカ）と保証・1.3kg以下の軽量11モデルを重さ順に比較・category=backpack〕を追加。content/posts の記事数 344→345、category=backpack は 98→99。既存の `osprey-backpack`・`osprey-daily-backpack`・`osprey-backpack-capacity` に被リンク1文ずつ追加・いずれも updatedAt 不変）**
+- 前回: 2026-11-21（campkit-20261121-N79：新規記事 `osprey-backpack-capacity`〔オスプレーのリュックを10L・20L・30L・40L・50L前後の容量帯別に比較した10モデル・category=backpack〕を追加。content/posts の記事数 343→344、category=backpack は 97→98。既存の `osprey-backpack`・`osprey-daily-backpack`・`backpack-20l` に被リンク1文ずつ追加・いずれも updatedAt 不変）
 - 前回: 2026-11-20（campkit-20261120-N78：新規記事 `peakdesign-backpack`〔ピークデザインのエブリデイバックパック20L・30L、ジップ15L・20L、トラベル20L・30L・45L、アウトドア45Lを容量別（15〜20L／20〜30L／30〜45L）に比較した8モデル・category=backpack〕を追加。content/posts の記事数 342→343、category=backpack は 96→97。既存の `camera-backpack`・`outdoor-commute-backpack`・`travel-backpack-40l` に被リンク1文ずつ追加・いずれも updatedAt 不変）
 - 前回: 2026-11-20（campkit-20261120-N77：新規記事 `arcteryx-mantis-daypack`〔アークテリクスのマンティス16・26を中心に、アロー・グランヴィル・アクシオス・ヒリアドを容量別（10L台／20L台）に比較した8モデル・category=backpack〕を追加。content/posts の記事数 341→342、category=backpack は 95→96。既存の `arcteryx-backpack`・`arcteryx-arro22`・`backpack-20l`・`backpack-25l` に被リンク1文ずつ追加・いずれも updatedAt 不変）
 - 前回: 2026-11-19（campkit-20261119-N76：新規記事 `karrimor-ridge-sector`〔カリマーのリッジ（登山）とセクター（日常）をモデル別に比較した8モデル・category=backpack〕を追加。content/posts の記事数 340→341、category=backpack は 94→95。既存の `karrimor-backpack`・`camp-backpack-beginner`・`day-hike-backpack`・`outdoor-commute-backpack` に被リンク1文ずつ追加・いずれも updatedAt 不変）
