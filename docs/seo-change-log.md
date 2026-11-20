@@ -4,6 +4,19 @@
 
 ---
 
+## 2026-11-21 osprey-backpack-capacity 新規／狙いKW オスプレイ リュック 20l・小さめ／基準: GSC 28日 表示72・10.3位／表示21・11.1位（タスク記載値。osprey-backpack とのカニバリ確認）（campkit-20261121-N79）
+
+- **需要の確認**: _tasks の qp-90d（20261116版）で「オスプレイ リュック 20l」は osprey-backpack が受けて 90日 表示24・クリック2・平均10.0位。「小さめ」「容量」「リットル」を含むオスプレー系クエリは90日版では0件（28日の表示21・11.1位はタスク記載値）。page-28d では osprey-backpack が 表示2,475・9.8位、osprey-daily-backpack が 表示684・5.6位。リポジトリに data/ の GSC ファイルは無い。
+- **カニバリ整理**: osprey-backpack は「オスプレイ リュック」総合、osprey-daily-backpack は普段使い・通勤、シリーズ記事（talon-tempest／kestrel-stratos／exos-eja）は各シリーズ。本記事は「何リットルを選ぶか（10・20・30・40・50L前後）」の横断を受け、各モデルの詳細はシリーズ記事へ誘導する。
+- **対象**: `content/posts/osprey-backpack-capacity.mdx`（新規・10製品・category=backpack）。
+- **差別化**: WebSearch の上位（BE-PAL「オスプレーのリュック用途別10選」・yamahack・マイナビおすすめナビ・All About・hinata）は用途別のモデル紹介が中心で、容量帯（10/20/30/40/50L）ごとにモデルを1表で横断した国内記事と、国内の楽天・Amazonの両方で新品が買えるかの整理は無い。容量帯別の早見（buy列）・比較表（容量・重量・外寸・背面長・楽天/Amazon税込・buy列）・用途別の容量目安表・「モデル名の数字と実容量の違い（S/Mで36L等）」を入れた。
+- **構成**: 結論3行（数値入り・両モールで揃った10モデル）→ QuickPick（デイライトプラス 20L／タロン 22／ケストレル 38）→ はじめに → 容量帯別の早見 → 比較表 → 選び方5ポイント → 10L 1・20L 3・30L 2・40L 2・50L 2製品 → Tips 5項目 → FAQ 5問（見出し形式：20Lは何泊／小さめはどれ／何リットル／数字と実容量／オスプレイ表記）→ 選定基準と情報源 → 他の記事で比べる → まとめ（3列5行）。
+- **商品**: デイライト 13L OS57177 ブラック／ハイクライト 18 OS57223 カスケードブルー／デイライトプラス OS57176 ブラック（国内型番の B08LP1WWPT。並行輸入の B0FW3N286W は不採用）／タロン 22 OS52466／ハイクライト 26 OS57222／タロン 33 OS52464／ケストレル 38 OS50383 S/M／タロン 44 OS52463 S/M／ケストレル 48 OS50382 S/M／エクソス 48 OS50327 S/M ダークチャコール。全カード 楽天 hb.afl＋amazonAsin・check-card-name-vs-sku 10枚 OK・価格比 3.66倍（本文で1万〜4万円台に区切った）。
+- **内部リンク**: 本記事→11本（osprey-backpack・osprey-daily-backpack・osprey-womens-backpack・osprey-talon-tempest・osprey-kestrel-stratos・osprey-exos-eja・camp-backpack-capacity-guide・backpack-20l・backpack-25l・backpack-35l・backpack-45l）。既存→本記事3本: osprey-backpack（ポイント2の段落末尾）・osprey-daily-backpack（ポイント4の後の案内文の後）・backpack-20l（関連記事リスト）。いずれも updatedAt 不変。
+- **効果測定**: 2〜3週間後に「オスプレイ リュック 20l」「オスプレイ リュック 小さめ」「オスプレー リュック 容量／何リットル」の表示・順位・受け手URLを確認し、osprey-backpack（20l クエリ 10.0位）から受け手が移るか・総合KWの順位が落ちていないかを見る。
+
+---
+
 ## 2026-11-20 peakdesign-backpack 新規／狙いKW ピークデザイン リュック／新規のため基準なし（GSC の _tasks 20261116 版 qp-90d・page-28d で「ピークデザイン」「peak design」を含むクエリは0件〔ヒットはスノーピーク・ハイピーク等の別語のみ〕。リポジトリに data/ の GSC ファイルは無い。重なる既存記事は camera-backpack（28日 表示6・平均7.0位・PD 2モデルを掲載）と outdoor-commute-backpack（28日 表示6・平均8.2位・PD 掲載なし）で、いずれもピークデザインの指名クエリは受けていないためカニバリは小さい想定。camera-backpack は「カメラリュック総合」、outdoor-commute-backpack は「アウトドアブランドの通勤」、本記事は「ピークデザインのモデル別（エブリデイ20L/30L・ジップ・トラベル・アウトドア）」の指名検索を受ける役割。WebSearch の上位は BE-PAL（ピークデザインのアウトドアバッグ7選・リュック25選）・my-best・Gizmodo（エブリデイ20L レビュー）・ねとらぼ・海外の 20L vs 30L 比較で、8モデルを容量・重量・PC収納・税込価格で1表に並べた国内記事と、国内両モールで新品が買えるかの整理は無い）（campkit-20261120-N78）
 
 - **対象**: `content/posts/peakdesign-backpack.mdx`（新規・8製品・category=backpack）。狙いKW: ピークデザイン リュック／ピークデザイン エブリデイバックパック／ピークデザイン バックパック 20L 30L（指名検索・購入直前）。
