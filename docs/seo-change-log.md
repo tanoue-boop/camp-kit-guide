@@ -4,6 +4,18 @@
 
 ---
 
+## 2026-11-20 peakdesign-backpack 新規／狙いKW ピークデザイン リュック／新規のため基準なし（GSC の _tasks 20261116 版 qp-90d・page-28d で「ピークデザイン」「peak design」を含むクエリは0件〔ヒットはスノーピーク・ハイピーク等の別語のみ〕。リポジトリに data/ の GSC ファイルは無い。重なる既存記事は camera-backpack（28日 表示6・平均7.0位・PD 2モデルを掲載）と outdoor-commute-backpack（28日 表示6・平均8.2位・PD 掲載なし）で、いずれもピークデザインの指名クエリは受けていないためカニバリは小さい想定。camera-backpack は「カメラリュック総合」、outdoor-commute-backpack は「アウトドアブランドの通勤」、本記事は「ピークデザインのモデル別（エブリデイ20L/30L・ジップ・トラベル・アウトドア）」の指名検索を受ける役割。WebSearch の上位は BE-PAL（ピークデザインのアウトドアバッグ7選・リュック25選）・my-best・Gizmodo（エブリデイ20L レビュー）・ねとらぼ・海外の 20L vs 30L 比較で、8モデルを容量・重量・PC収納・税込価格で1表に並べた国内記事と、国内両モールで新品が買えるかの整理は無い）（campkit-20261120-N78）
+
+- **対象**: `content/posts/peakdesign-backpack.mdx`（新規・8製品・category=backpack）。狙いKW: ピークデザイン リュック／ピークデザイン エブリデイバックパック／ピークデザイン バックパック 20L 30L（指名検索・購入直前）。
+- **狙い**: エブリデイバックパック20L（17〜20L・2,010g）と30L（22〜30L・2,110g）の差（容量約10L・100g・奥行6cm）と、通常版とジップの差（20L同士で460g・5,280円）を軸に、トラベル20L/30L/45L・アウトドア45Lを容量別（15〜20L／20〜30L／30〜45L）に横並びにする。
+- **差別化**: 容量別の早見（buy列）、比較表（容量・重量・外寸・カメラ収納・PC収納・楽天/Amazon税込・buy列）、国内の楽天・Amazonの両方で新品が買えたモデル数（8）を結論に記載、見送ったモデル（アウトドア25L・トートパック20L・エブリデイ30L チャコール・ジップ15L ケルプ）と理由を明記。11/20 の価格はブラックフライデーのセール価格である旨を本文に記載。
+- **構成**: 結論3行（数値入り）→ QuickPick（エブリデイ20L／ジップ20L／トラベル30L）→ はじめに → 容量別の早見（buy列）→ 比較表（buy列）→ 選び方5ポイント（20Lと30L・通常版とジップ・トラベルとカメラキューブ・PCインチ・アウトドア45L）→ 15〜20L 3製品・20〜30L 2製品・30〜45L 3製品 → Tips 5項目 → FAQ 5問（見出し形式）→ 選定基準と情報源 → 他の記事で比べる → まとめ（3列5行）。
+- **商品**: エブリデイ20L BEDB-20-DS-3 オーシャン／ジップ20L BEDBZ-20-KP-3 ケルプ／ジップ15L BEDBZ-15-BK-3 ブラック／エブリデイ30L BEDB-30-CY-3 コヨーテ／トラベル20L BTR-20-BK-2 ブラック／トラベル30L BTR-30-CY-3 コヨーテ／トラベル45L BTR-45-DS-3 オーシャン／アウトドア45L BABP-45-BK-1 ブラック。全カード 楽天 hb.afl＋amazonAsin・楽天とAmazonは全モデル同額（Amazon 販売元は国内代理店の銀一）・価格比 1.81倍・check-card-name-vs-sku 8枚 OK。比較用の他ブランドは不使用（ピークデザインだけで8モデル揃ったため）。
+- **内部リンク**: 本記事→9本（camera-backpack・travel-backpack-40l・camp-backpack-capacity-guide・outdoor-commute-backpack・northface-commute-backpack・arcteryx-mantis-daypack・backpack-25l・backpack-30l-35l-womens・camp-gear-sale-timing）。既存→本記事3本: camera-backpack（はじめにの対象説明の段落末尾に1文）・outdoor-commute-backpack（カメラリュック案内文の末尾に1文）・travel-backpack-40l（はじめにのオスプレー案内文の末尾に1文）。いずれも updatedAt 不変。
+- **効果測定**: 新規のため基準なし。2〜3週間後に「ピークデザイン リュック」「エブリデイバックパック 20L 30L」系クエリの表示・順位・クリックを確認し、camera-backpack（28日 表示6・7.0位）とのカニバリ有無を確認する。
+
+---
+
 ## 2026-11-20 arcteryx-mantis-daypack 新規／狙いKW アークテリクス マンティス／新規のため基準なし（GSC の _tasks 20261116 版 qp-90d で「マンティス」「mantis」を含むクエリは4件・計6表示・0クリック〔マンティス22 3表示 7.7位・マンティス16 通勤 1表示 30.0位・マンティス2 偽物 1表示 3.0位＝受け手 arcteryx-backpack／アロー22 マンティス26 比較 1表示 10.0位＝受け手 arcteryx-arro22〕。page-28d で arcteryx-backpack は28日クリック39・表示915・平均7.3位〔タスク記載の表示960とは集計版の差〕。arcteryx-backpack はブランド総合、arcteryx-arro22 はアロー22軸で、本記事は「マンティス16／26 の容量・重量・価格比較」の指名検索を受ける役割。カニバリは arcteryx-backpack の「マンティス16 通勤」「マンティス22」程度で小さい想定。WebSearch の上位は hinata・CAMP HACK・ねとらぼ・Gizmodo・楽天 canpanera の特集ページ・arcteryx.com で、16と26を個別に紹介する形が中心。16と26を容量・重量・価格の差で直接並べた比較表と、国内両モールで新品が買えるかの整理は無い）（campkit-20261120-N77）
 
 - **対象**: `content/posts/arcteryx-mantis-daypack.mdx`（新規・8製品・category=backpack）。狙いKW: アークテリクス マンティス／アークテリクス マンティス 26／アークテリクス マンティス 16／アークテリクス デイパック（指名検索・購入直前）。
