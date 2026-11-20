@@ -4,6 +4,18 @@
 
 ---
 
+## 2026-11-20 arcteryx-mantis-daypack 新規／狙いKW アークテリクス マンティス／新規のため基準なし（GSC の _tasks 20261116 版 qp-90d で「マンティス」「mantis」を含むクエリは4件・計6表示・0クリック〔マンティス22 3表示 7.7位・マンティス16 通勤 1表示 30.0位・マンティス2 偽物 1表示 3.0位＝受け手 arcteryx-backpack／アロー22 マンティス26 比較 1表示 10.0位＝受け手 arcteryx-arro22〕。page-28d で arcteryx-backpack は28日クリック39・表示915・平均7.3位〔タスク記載の表示960とは集計版の差〕。arcteryx-backpack はブランド総合、arcteryx-arro22 はアロー22軸で、本記事は「マンティス16／26 の容量・重量・価格比較」の指名検索を受ける役割。カニバリは arcteryx-backpack の「マンティス16 通勤」「マンティス22」程度で小さい想定。WebSearch の上位は hinata・CAMP HACK・ねとらぼ・Gizmodo・楽天 canpanera の特集ページ・arcteryx.com で、16と26を個別に紹介する形が中心。16と26を容量・重量・価格の差で直接並べた比較表と、国内両モールで新品が買えるかの整理は無い）（campkit-20261120-N77）
+
+- **対象**: `content/posts/arcteryx-mantis-daypack.mdx`（新規・8製品・category=backpack）。狙いKW: アークテリクス マンティス／アークテリクス マンティス 26／アークテリクス マンティス 16／アークテリクス デイパック（指名検索・購入直前）。
+- **狙い**: マンティス16（16L・700g・22,000円）とマンティス26（26L・840g・27,500円）の差（容量10L・重量140g・価格5,500円）を軸に、同価格帯のアロー22/16・グランヴィル25/16・アクシオス10・ヒリアド15を容量別（10L台／20L台）に横並びにする。
+- **差別化**: 容量別の早見（buy列）、比較表（容量・重量・1Lあたり重量・外寸・PC収納・耐候・楽天/Amazon税込・buy列）、国内の楽天・Amazonの両方で新品が買えたモデル数（8）を結論に記載、見送ったモデル（コンシール15・マンティス30/32・アルファ FL 20）と理由を明記。
+- **構成**: 結論3行（数値入り）→ QuickPick（マンティス26／マンティス16／アロー22）→ はじめに → 容量別の早見（buy列）→ 比較表（buy列）→ 選び方5ポイント（16と26の差・1Lあたり重量・雨・PCインチ・外寸の高さ）→ 20L台3製品・10L台5製品 → Tips 5項目 → FAQ 5問（見出し形式）→ 選定基準と情報源 → 他の記事で比べる → まとめ（3列5行）。
+- **商品**: マンティス26 X000009825 Black／アロー22 X000010706 Black／グランヴィル25 X000010385 Black／マンティス16 Black／アロー16 X000007965 Lampyre／グランヴィル16 X000010715 Black／アクシオス10 X000010707 Black／ヒリアド15 BRACKEN。全カード 楽天 hb.afl＋amazonAsin・楽天とAmazonは全モデル同額・価格比 2.77倍・check-card-name-vs-sku 8枚 OK。
+- **内部リンク**: 本記事→11本（arcteryx-backpack・arcteryx-arro22・mammut-backpack・backpack-20l・backpack-25l・outdoor-commute-backpack・northface-commute-backpack・camp-backpack-beginner・camp-backpack-capacity-guide・backpack-rain-cover・day-hike-backpack）。既存→本記事4本: arcteryx-backpack（はじめにのアロー22案内文の末尾に1文）・arcteryx-arro22（「アークテリクス・他ブランドで選ぶ」リストに1行）・backpack-20l／backpack-25l（「ブランドで比べる」リストに1行）。いずれも updatedAt 不変。
+- **効果測定**: 新規のため基準なし。2〜3週間後に「アークテリクス マンティス」「マンティス 16／26」系クエリの表示・順位・クリックを確認し、arcteryx-backpack（28日クリック39・表示915〜960・7.3位）とのカニバリ有無を確認する。
+
+---
+
 ## 2026-11-20 camp-gear-sale-timing ブラックフライデー2026の公式日程を反映＋高単価記事7本から導線（campkit-20261120-S04b）
 
 - **対象**: `content/posts/camp-gear-sale-timing.mdx`（updatedAt 2026-11-12→2026-11-20）。狙いクエリ: ブラックフライデー 2026 amazon いつ／楽天 ブラックフライデー 2026／キャンプ用品 セール 時期。
