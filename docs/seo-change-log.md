@@ -4,6 +4,14 @@
 
 ---
 
+## 2026-11-21 gregory-30l 新規／狙いKW グレゴリー リュック 30l おすすめ／基準: GSC 28日 表示77・11.2位（gregory-backpack・gregory-size-comparison とのカニバリ確認）（campkit-20261121-N81）
+
+- **需要の確認**: _tasks の qp-28d（20261116版）で「グレゴリー リュック 30l おすすめ」は gregory-backpack が受けている（ページ全体 表示11・10.9位、見出しアンカー別の7行が各 表示9・11.3位、gregory-daypack が表示3・11.0位。合計で表示77前後）。クリック0。gregory-size-comparison はこのクエリを受けていない。
+- **狙い**: 総合記事（gregory-backpack）は8〜45Lの街用中心で、30L前後の登山用（ズール30・シトロ30・ズール28 LT・ジェイド）の選び分けに答えていなかった。30L前後（28〜35L）の9モデルを①重量順の早見、②背面長（サイズ別かワンサイズ調節か）、③最大積載（11.3kg／15.9kg／18.1kg）、④国内の楽天・Amazonの両方で新品が買えるか、で整理して受ける。
+- **構成**: 結論（3行・両モールで揃った9モデル）→ QuickPick（ズール30 MD/LG／シトロ30／コンパス30）→ 30Lの選び方（容量・背面長・重量と最大積載・街用と登山用）→ 重量順の早見（buy列）→ 比較表（容量・重量・外寸・背面長・最大積載・楽天/Amazon税込・buy列）→ 重さ帯別に9製品 → Tips 5 → FAQ 5問（見出し形式）→ 選定基準と情報源 → 他の記事で比べる → まとめ。
+- **役割分担**: ブランド全体は gregory-backpack、シリーズ別の容量と重さは gregory-size-comparison、街用は gregory-daypack、登山用シリーズは gregory-zulu-baltoro へ誘導。gregory-backpack・gregory-daypack・gregory-size-comparison から本記事へ1文ずつリンク。カニバリ判定は rewrite-backlog（gregory-backpack・cannibal-check）に積んだ。
+- **効果測定**: 2〜3週間後に「グレゴリー リュック 30l おすすめ」の受け皿が gregory-30l に移るか、gregory-backpack・gregory-size-comparison の順位が落ちていないかを確認する。
+
 ## 2026-11-21 osprey-reputation 新規／狙いKW オスプレー ザック 評判・軽量ザック／基準: GSC 28日 表示128・9.3位／表示33（osprey-backpack・osprey-backpack-capacity とのカニバリ確認）（campkit-20261121-N80）
 
 - **需要の確認**: _tasks の qp-28d（20261116版）で、「オスプレー ザック 評判」は osprey-backpack が受けて 28日 表示24・8.9位（見出しアンカー別の行を合わせると表示100超）、「オスプレイ リュック どこ の 国」は 表示26・9.5位、「オスプレー 軽量ザック」は 表示12・8.3位（アンカー別を合わせて30台）。いずれもクリック0で、受けているのは総合記事の osprey-backpack。osprey-backpack-capacity（N79）は容量軸で、これらのクエリは受けていない。
