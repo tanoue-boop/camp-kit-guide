@@ -4,6 +4,14 @@
 
 ---
 
+## 2026-11-22 gregory-osprey-comparison 新規／狙いKW グレゴリー リュック 比較／基準: GSC 28日 表示34・10.1位（gregory-backpack・osprey-backpack・gregory-30l・osprey-backpack-capacity とのカニバリ確認）（campkit-20261122-N82）
+
+- **需要の確認**: _tasks の qp-28d（20261116版）で「グレゴリー リュック 比較」は gregory-backpack が受けている（ページ全体 表示6・10.3位＋見出しアンカー別の6行が各 表示4・10.0位＝合計約30）。「グレゴリー オスプレー 比較／どっち」を含むクエリは28日データに無かった（WebSearch では CAMP HACK・sakidori・BE-PAL・rank-king 等がブランド別の紹介記事で受けており、同じ容量帯での1対1比較は見当たらない）。リポジトリに data/ の GSC ファイルは無い。
+- **狙い**: 2ブランドで迷う購入直前の比較クエリを、①同じ容量帯の1対1早見（20L・20L台・30L前後・40L台・50L以上の5組）、②重量・背負える重さ（最大積載／推奨パッキングウェイトの定義差を明記）、③背面長の展開（サイズ分けかワンサイズ調整か）、④税込価格（5帯すべてでグレゴリーが安い）、⑤国内の楽天・Amazonの両方で新品が買えるか、で受ける。
+- **構成**: 結論（3行・数値入り・両モールで揃った10モデル）→ QuickPick（ズール30 MD/LG／タロン33／ナノ20）→ はじめに → 2ブランドの違い（背面システム・背面長の展開・背負える重さ・価格）→ 容量帯別の1対1早見（buy列）→ 比較表（容量・重量・外寸・背面長・背負える重さ・楽天/Amazon税込・buy列）→ 容量帯ごとに10製品 → Tips 5 → FAQ 5問（見出し形式）→ 選定基準と情報源 → 他の記事で比べる → まとめ。
+- **役割分担**: ブランド別の全体は gregory-backpack／osprey-backpack、30L前後のグレゴリーは gregory-30l、オスプレーの容量は osprey-backpack-capacity、評判・出身国は osprey-reputation、サイズ表は gregory-size-comparison へ誘導。gregory-backpack・osprey-backpack・gregory-size-comparison・gregory-30l から本記事へ1文ずつリンク。カニバリ判定は rewrite-backlog（gregory-backpack・cannibal-check）に積んだ。
+- **効果測定**: 2〜3週間後に「グレゴリー リュック 比較」の受け皿が gregory-osprey-comparison に移るか、「グレゴリー オスプレー」を含むクエリの表示が出るか、gregory-backpack の順位が落ちていないかを確認する。
+
 ## 2026-11-21 gregory-30l 新規／狙いKW グレゴリー リュック 30l おすすめ／基準: GSC 28日 表示77・11.2位（gregory-backpack・gregory-size-comparison とのカニバリ確認）（campkit-20261121-N81）
 
 - **需要の確認**: _tasks の qp-28d（20261116版）で「グレゴリー リュック 30l おすすめ」は gregory-backpack が受けている（ページ全体 表示11・10.9位、見出しアンカー別の7行が各 表示9・11.3位、gregory-daypack が表示3・11.0位。合計で表示77前後）。クリック0。gregory-size-comparison はこのクエリを受けていない。
