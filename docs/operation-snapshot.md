@@ -2,7 +2,8 @@
 
 サイトの現状（記事数・カテゴリ構成・GAS/インフラ構造）を記録するスナップショット。記事追加・カテゴリ変更・GAS構造変更のたびに最新化する（→ 運用ルールは CLAUDE.md「記録更新ルール」を参照）。
 
-- **最終更新: 2026-11-22（campkit-20261122-N82：新規記事 `gregory-osprey-comparison`〔グレゴリーとオスプレーを20L・20L台・30L前後・40L台・50L以上の同じ容量帯で1対1比較・10モデル・category=backpack〕を追加。content/posts の記事数 346→347、category=backpack は 100→101。既存の `gregory-backpack`・`osprey-backpack`・`gregory-size-comparison`・`gregory-30l` に被リンク1文ずつ追加・いずれも updatedAt 不変）**
+- **最終更新: 2026-11-22（campkit-20261122-N83：新規記事 `isuka-backpack`〔イスカにリュック本体は無いことを示し、イスカのパックカバー5種（15〜60L用）と容量を合わせる比較枠のリュック5モデル（ミレー・ドイター・カリマー）・category=backpack〕を追加。content/posts の記事数 347→348、category=backpack は 101→102。既存の `millet-backpack`・`backpack-rain-cover`・`isuka-sleeping-bag`・`camp-backpack-capacity-guide` に被リンク1文ずつ追加・いずれも updatedAt 不変）**
+- 前回: 2026-11-22（campkit-20261122-N82：新規記事 `gregory-osprey-comparison`〔グレゴリーとオスプレーを20L・20L台・30L前後・40L台・50L以上の同じ容量帯で1対1比較・10モデル・category=backpack〕を追加。content/posts の記事数 346→347、category=backpack は 100→101。既存の `gregory-backpack`・`osprey-backpack`・`gregory-size-comparison`・`gregory-30l` に被リンク1文ずつ追加・いずれも updatedAt 不変）
 - 前回: 2026-11-21（campkit-20261121-N81：新規記事 `gregory-30l`〔グレゴリーの30L前後（28〜35L）9モデルを重量順・背面長・最大積載で選び分け・category=backpack〕を追加。content/posts の記事数 345→346、category=backpack は 99→100。既存の `gregory-backpack`・`gregory-daypack`・`gregory-size-comparison` に被リンク1文ずつ追加・いずれも updatedAt 不変）
 - 前々回: 2026-11-21（campkit-20261121-N80：新規記事 `osprey-reputation`〔オスプレーの評判（Amazonのレビュー件数・平均）・出身国（アメリカ）と保証・1.3kg以下の軽量11モデルを重さ順に比較・category=backpack〕を追加。content/posts の記事数 344→345、category=backpack は 98→99。既存の `osprey-backpack`・`osprey-daily-backpack`・`osprey-backpack-capacity` に被リンク1文ずつ追加・いずれも updatedAt 不変）
 - 前回: 2026-11-21（campkit-20261121-N79：新規記事 `osprey-backpack-capacity`〔オスプレーのリュックを10L・20L・30L・40L・50L前後の容量帯別に比較した10モデル・category=backpack〕を追加。content/posts の記事数 343→344、category=backpack は 97→98。既存の `osprey-backpack`・`osprey-daily-backpack`・`backpack-20l` に被リンク1文ずつ追加・いずれも updatedAt 不変）
