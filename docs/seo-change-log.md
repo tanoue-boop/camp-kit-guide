@@ -4,6 +4,19 @@
 
 ---
 
+## 2026-11-23 daycamp-backpack 新規／狙いKW キャンプ リュック・デイキャンプ リュック／基準: camp-backpack-beginner・camp-backpack-capacity-guide が受ける28日 「キャンプ リュック」35表示・17.1位ほか（campkit-20261123-N85）
+
+- **需要の確認**: _tasks の qp-28d（20261116版）で「キャンプ リュック」camp-backpack-beginner 34表示・17.6位・6クリック＋capacity-guide 1表示／「キャンプ ザック」beginner 15表示・17.5位＋capacity-guide 1表示／「デイキャンプ リュック」beginner 12表示・16.9位＋capacity-guide 4表示・23.5位／「キャンプバックパック」beginner 10表示・14.9位・3クリック＋capacity-guide 1表示／「デイキャンプ バックパック」beginner 10表示・15.7位。合計約88表示でタスク定義の基準どおり。リポジトリに data/ の GSC ファイルは無い。
+- **狙い**: ハブ（camp-backpack-beginner＝20〜60Lの総合）が15〜18位で受けている「キャンプ リュック／デイキャンプ リュック」系を、日帰り〜キャンプ場への持ち運びに絞った18〜30Lの数値比較で受け直す。
+- **差別化**: 検索上位（hinata・BE-PAL・camphack・yamahack・マイナビ等）はソロキャンプの大型ザック中心か、容量の目安を文章で書くだけ。本記事は ①「キャンプ場で増える荷物」の量で決める容量帯（18〜22L／24〜25L／27〜30L）②容量別早見（buy列）③容量・重量・外寸・PC収納・楽天/Amazon の税込価格を並べた比較表（buy列）④容量1Lあたりの重量表 ⑤両モールの価格差（10モデル中6モデルで差あり）の整理 を主役にした。
+- **商品**: ケルティ デイパック18L／アウトドアプロダクツ クラシック22L／TNF ボルダーデイパック24L／コロンビア パナシーア25L／ドイター オルチャ25／マーモット ハイランダー2 27L／TNF ホットショット27L／スノーピーク Everyday Use Backpack 29L／コールマン ウォーカースクエア30L／ミレー クーラ30。day-hike-backpack・backpack-20l・backpack-25l・camp-backpack-beginner・solo-camp-backpack のカードとは1製品も重ならない。
+- **構成**: 結論3行 → QuickPick（ウォーカースクエア・パナシーア25L・ホットショット）→ はじめに → 容量の選び方4ポイント → 容量別早見 → 比較表 → 10モデル（容量順）→ Tips 5 → FAQ 見出し形式5問（何リットル／リュックとザックの違い／重さ／価格差／楽天とAmazon）→ 選定基準と情報源 → 他の記事で比べる → まとめ。
+- **title**: 「キャンプ用リュック・デイキャンプのリュック【2026年】18〜30Lの10モデルを容量・重さ・価格で比較」。
+- **役割分担**: camp-backpack-beginner＝キャンプ用リュック全体のハブ、camp-backpack-capacity-guide＝容量ごとの中身、solo-camp-backpack＝テント泊の40L以上、day-hike-backpack＝歩く日帰り登山、backpack-20l／25l＝容量別の汎用比較、本記事＝デイキャンプ・キャンプ場への持ち運びの18〜30L。camp-backpack-beginner・camp-backpack-capacity-guide・solo-camp-backpack・backpack-25l から本記事へ1文ずつリンク（updatedAt 不変）。
+- **効果測定**: 2〜3週間後に上記5クエリの着地ページと順位を確認する。camp-backpack-beginner から順位が移るだけなら、beginner 側の冒頭に「デイキャンプなら本記事」の誘導を強める案を rewrite-backlog に積む。
+
+---
+
 ## 2026-11-23 camp-gear-sale-timing 更新（S02）／楽天スーパーSALE直前更新・日程確定値／基準: GSC 28日 クリック13・表示552・平均6.4位（campkit-20261123-S02）
 
 - **基準**: _tasks の data-campkit-gsc-page-28d-20261116.tsv（最新版）で /posts/camp-gear-sale-timing＝クリック13・表示552・CTR 2.36%・平均6.4位。
