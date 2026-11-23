@@ -4,6 +4,43 @@
 
 ---
 
+## 2026-11-24 冬のAI引用上位ページの送客導線（C06）（campkit-20261124-C06）
+
+**狙い**: Bing AI Performance（7日・11/15〜21）で引用の多い冬の暖房・安全ページ7本の送客率と単価を上げる（12/18 の月間8万円・2027-01-18 までに 2026-10-18 比10倍の目標に向けた施策）。AI 検索に引用されやすいよう、冒頭の「結論」3行（誰に・どれが・なぜ＋数値）と選定基準・情報源の明記、購入ボタン付きの比較表をそろえた。
+
+**更新前の基準**（GSC 28日＝`_tasks/data-campkit-gsc-page-28d-20261123.tsv`／Bing AI 引用＝7日 11/15〜21）
+
+| 記事 | GSC クリック | GSC 表示 | 平均順位 | Bing AI 引用 |
+|---|---|---|---|---|
+| `co-checker` | 1 | 38 | 8.0 | 1.1K（「一酸化炭素チェッカー」858・シェア50.8%） |
+| `dutch-oven` | 1 | 16 | 7.0 | 433 |
+| `cassette-gas-heater` | 23 | 860 | 9.6 | 279 |
+| `electric-blanket-camp` | ―（28日データに行なし） | ― | ― | 109 |
+| `stove-fan` | 18 | 608 | 8.6 | 106 |
+| `winter-camp-guide` | 1 | 15 | 8.1 | 94 |
+| `camp-hot-carpet` | 20 | 339 | 7.5 | 43 |
+
+**やったこと**
+
+| 記事 | 結論3行 | 迷ったらこれ（QuickPickMdx）に置いた商品 | 比較表の購入列 | セール一文 | 相互導線 | その他 |
+|---|---|---|---|---|---|---|
+| `co-checker` | 追加 | echlife J108（2,584円）／Monons 3in1（3,383円）／FieldNew FN047A（5,980円） | `source`→`buy`（5行） | 追加 | → cassette-gas-heater・winter-camp-guide | 第1位・第3位の価格を実勢へ（2,384→2,584・3,184→3,383）。選定基準・情報源と第4位の薄在庫（qty=1）を明記 |
+| `dutch-oven` | 追加 | TSBBQ 10インチ（20,900円）／スノーピーク 和鉄26 CS-520（34,100円）／キャプテンスタッグ UG-3048（5,640円） | `source`→`buy`（5行） | 追加 | → co-checker（炭火の CO） | 第2位スノーピークの価格を実勢へ（25,011→34,100・description の価格帯も） |
+| `cassette-gas-heater` | 既設（据え置き） | 既設のため触らず（風暖 29,980円の高価格帯を含む） | `source`→`buy`（5行） | 既存のBF一文を差し替え | → co-checker（「必須」） | 選定基準・情報源を追記 |
+| `stove-fan` | 追加 | 既設のため触らず | 購入列を新設（5行） | 追加 | → co-checker（「必須」） | 選定基準・情報源を追記 |
+| `winter-camp-guide` | 追加 | サーマレスト Zライトソル（11,550円）／Bears Rock FX-503W（17,250円）／アルパカ TS-77NC（29,920円） | 対象なし（予算別セット表は商品行が無い） | 追加 | → co-checker（結論内。本文の既存リンクも維持） | wg-co-checker の価格 2,384→2,584 |
+| `electric-blanket-camp` | 追加 | MORITA TMB-S14KS（2,880円）／Sugibo SB20HW01／めちゃヒート MHB03 | `source`→`buy`（5行） | 追加 | → portable-power-large・camp-portable-power-beginner | **必要Wh早見表**（Sugibo 弱9/中36/強63Wh・MORITA 40W）＋**ポータブル電源比較枠**（Jackery 500 New 69,800円／BLUETTI AORA 100 V2 139,800円／EcoFlow DELTA 3 Plus 149,600円・購入列付き） |
+| `camp-hot-carpet` | 追加 | 山善 SUT-102（7,980円）／アイリスオーヤマ IHC-20-H／山善 YZD-101FL（12,800円） | `source`→`buy`（5行） | 追加 | → portable-power-large | **必要Wh早見表**（NA-171TM 70／SUT-102 100・120／YZD-101FL 160／IHC-20-H 110・215Wh/h）＋**ポータブル電源比較枠**（BLUETTI AORA 100 V2 139,800円／Jackery 1500 New 149,800円／Jackery 2000 New V2 199,800円・購入列付き） |
+
+- 全7本の `updatedAt` を 2026-11-24 に更新。セール一文は camp-gear-sale-timing（S02）の確定値を流用（Amazon BF 11/27〜12/7 は公式確定、楽天スーパーSALE は「例年12月上旬・公式発表後に更新」）。
+- 価格は 2026-11-24 に `check-card-name-vs-sku.cjs` で再取得。**値上がりはカードへ反映し、値下がりは楽天ブラックフライデー（〜11/25 1:59）中の一時的なセール価格の可能性があるため据え置いて** `article-fix-backlog.tsv` に price_unconfirmed で起票（8行）。売切は out_of_stock で起票（デカ暖3 ×2・USB ホットマット）。
+- 電源比較枠の affiliateUrl・amazonAsin は portable-power-large の既存カードからコピー。消費電力は記事掲載商品のメーカー公表値のみ使用（めちゃヒート・USB ホットマット・掛け敷き JET は公表値が記事に無いため早見表に載せていない）。
+- FAQ は全7本とも既存5〜8問（`**Q.**` 形式・FAQPage 出力済み）があるため追加していない。
+
+**効果測定**: C01 と同じく、変更前後28日の `affiliate_click`（GA4・`article_slug` 別、QuickPick と比較表のボタンは `AffiliateClickTracker` で自動計測）と Bing AI 引用数で比較する。電源比較枠は高単価送客の有無（Jackery／BLUETTI／EcoFlow の楽天・Amazon クリック）を別に見る。
+
+---
+
 ## 2026-11-23 mountain-backpack-30l リライト／狙いKW 登山 リュック 30l・リュック 30l／リライト前の関連順位 13.6位（R12 の28日後）・「登山 リュック 30l」24.9位／表示15（GSC 28日）（campkit-20261123-R18）
 
 - **需要の確認**: リポジトリの `_file/gsc-page-query-28d.tsv` で本記事に「登山リュック 30l おすすめ」13表示・19.8位／「富士山 リュック 30l」21表示・11.7位／「登山リュック 30l 普段使い」6表示・11.5位／「登山 ザック 30l」4表示・21.5位／「登山リュック 30l」4表示・29.0位ほか「30l ザック」「軽量ザック 30l」など登山系の30L表記ゆれが約40クエリ。汎用の「リュック 30l」単体は本記事には出ていない（capacity-guide に「30l リュック」1表示）。
