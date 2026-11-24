@@ -4,6 +4,16 @@
 
 ---
 
+## 2026-11-25 gregory-types-guide 新規（campkit-20261125-N87）
+
+- **変更記録（効果測定用）**: 2026-11-25 gregory-types-guide 新規／狙いKW グレゴリー リュック 種類・人気・おすすめ／基準: gregory-backpack 28日「種類」54表示・12.3位／「人気」15表示・15.0位／「おすすめ」25表示・12.8位（タスク定義の値。`_tasks/data-campkit-gsc-qp-28d-20261123.tsv` で再確認した「グレゴリー リュック 種類」は gregory-backpack の URL＋アンカー合算で表示 87・ページ単位 17表示 11.6位、「グレゴリー リュック 人気」はページ単位 16表示 24.6位、「グレゴリー リュック おすすめ」はページ単位 7表示 13.7位＋gregory-daypack 7表示 9.6位）。
+- **狙い**: 上位（BE-PAL 人気10選・ねとらぼ・GetNavi・hinata 等）は人気モデルを10本前後並べる型で、シリーズ（系統）ごとの違いを容量・重量・価格で並べた早見は無い（WebSearch の要約で確認）。そこで「デイ系／トレイル系／ハイク系」の3系統の違い（背面の作り・重さの桁・価格帯）と、モデル名の読み方（数字＝容量・LT・V2・SM/MD・男女ペア）を主役にした。
+- **変更内容**: 10製品（デイ系＝デイパック 26L・ファインデイ V2・カジュアルデイ V2／トレイル系＝ナノ20・コンパス30・ズール24 LT／ハイク系＝ズール35 MD/LG・ジェイド33 SM/MD・スタウト45 フォレストブラック・ズール55 SM/MD）。全製品グレゴリー本体（比較枠なし）・楽天 hb.afl＋Amazon amazonAsin。結論3行＋QuickPickMdx（3商品）、3系統の早見表、モデル名の読み方、容量の目安、比較表（系統・容量・重量・サイズ・楽天/Amazon税込価格・buy列）、見出し形式FAQ5問、選定基準と情報源、他の記事で比べる（8本）。
+- **役割分担**: gregory-backpack（街使い中心の11モデル）・gregory-daypack（デイ系の詳細）・gregory-30l（30L前後）・gregory-size-comparison（容量・背面長）・gregory-osprey-comparison（他ブランド比較）・gregory-zulu-baltoro／gregory-baltoro-size（登山・大型）と重なるモデルはあるが、本記事は「系統の全体像とモデル名の読み方」に絞り、個別比較は各記事へ送る。被リンクは gregory-backpack（関連記事の段落群に1段落）・gregory-daypack（冒頭の案内段落の後に1段落）・gregory-size-comparison（冒頭の案内文の末尾に1文）。いずれも updatedAt 不変。
+- **効果測定**: 2〜3週間後に「グレゴリー リュック 種類」「グレゴリー リュック 人気」「グレゴリー リュック おすすめ」の表示が本記事に移るか（gregory-backpack との食い合いが起きていないか）、順位が10位以内に入るかを確認。
+
+---
+
 ## 2026-11-24 seatosummit-backpack 新規（campkit-20261124-N86）
 
 - **変更記録（効果測定用）**: 2026-11-24 seatosummit-backpack 新規／狙いKW シートゥサミット リュック（副: シートゥサミット バックパック／シートゥサミット デイパック／sea to summit リュック）／基準: 新規のため基準なし（GSC 該当クエリなし＝`_tasks/data-campkit-gsc-qp-28d-20261123.tsv`・`qp-90d-20261115.tsv` とも「シートゥ」「sea to summit」「ウルトラシル」を含むクエリ0件。参考: STS 製品が既出の waterproof-backpack は28日 13クリック・239表示・8.9位、packable-backpack は 4クリック・141表示・8.7位）。

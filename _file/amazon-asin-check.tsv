@@ -932,7 +932,7 @@ gregory-osprey-comparison	3	gvo-zulu24lt	0	amazonAsin	B0CT96YKYW	https://www.ama
 gregory-osprey-comparison	4	gvo-talon22	0	amazonAsin	B0DSCQGTJ8	https://www.amazon.co.jp/dp/B0DSCQGTJ8	OSPREY オスプレー タロン 22 OS52466 ブラックコーラルグレー 22L メンズ	OSPREY	OS52466	27500	shared_asin									
 gregory-osprey-comparison	5	gvo-zulu30	0	amazonAsin	B0BVHK3V9H	https://www.amazon.co.jp/dp/B0BVHK3V9H	グレゴリー ズール30 ZULU 30 1452910662 MD/LG ボルケニックブラック	グレゴリー	1452910662	22950	shared_asin									
 gregory-osprey-comparison	6	gvo-talon33	0	amazonAsin	B0DSCN5QYJ	https://www.amazon.co.jp/dp/B0DSCN5QYJ	OSPREY オスプレー タロン 33 OS52464 グリーンキャノピーパインリーフ 33L メンズ	OSPREY	OS52464	28700	shared_asin									
-gregory-osprey-comparison	7	gvo-stout45	0	amazonAsin	B0CZDDPYFF	https://www.amazon.co.jp/dp/B0CZDDPYFF	GREGORY グレゴリー スタウト45 STOUT 45 149375A266 フォレストブラック ワンサイズ 45L	GREGORY	149375A266	33000	OK									
+gregory-osprey-comparison	7	gvo-stout45	0	amazonAsin	B0CZDDPYFF	https://www.amazon.co.jp/dp/B0CZDDPYFF	GREGORY グレゴリー スタウト45 STOUT 45 149375A266 フォレストブラック ワンサイズ 45L	GREGORY	149375A266	33000	shared_asin									
 gregory-osprey-comparison	8	gvo-talon44	0	amazonAsin	B0DSCQGMNG	https://www.amazon.co.jp/dp/B0DSCQGMNG	OSPREY オスプレー タロン 44 TALON 44 OS52463 ブラックコーラルグレー S/M バックパック	OSPREY	OS52463	37400	shared_asin									
 gregory-osprey-comparison	9	gvo-zulu55	0	amazonAsin	B0BSLX9TX6	https://www.amazon.co.jp/dp/B0BSLX9TX6	グレゴリー ズール55 ZULU 55 1456720527 SM/MD ハローブルー	グレゴリー	1456720527	38500	shared_asin									
 gregory-osprey-comparison	10	gvo-exospro55	0	amazonAsin	B0BTTQPWYG	https://www.amazon.co.jp/dp/B0BTTQPWYG	OSPREY エクソスプロ 55 EXOS PRO 55 OS50380 S／M デールグレー×アーガムブルー バックパック	OSPREY	OS50380	49500	shared_asin									
@@ -947,6 +947,16 @@ gregory-size-comparison	8	gsc-zulu30	0	amazonAsin	B0BSLWP6SY	https://www.amazon.
 gregory-size-comparison	9	gsc-compass30	0	amazonAsin	B0F59WK7P7	https://www.amazon.co.jp/dp/B0F59WK7P7	GREGORY コンパス30 COMPASS 30 1426342480 ユニバースブラック	GREGORY	1426342480	19360	shared_asin									
 gregory-size-comparison	10	gsc-fineday-v2	0	amazonAsin	B0C2YQP684	https://www.amazon.co.jp/dp/B0C2YQP684	GREGORY ファインデイ V2 FINE DAY V2 18L BLACK BALLISTIC	GREGORY		13780	shared_asin									
 gregory-size-comparison	11	gsc-zulu24lt	0	amazonAsin	B0CT96YKYW	https://www.amazon.co.jp/dp/B0CT96YKYW	グレゴリー ズール24 LT ZULU 24 LT 1493160662 ボルケニックブラック	グレゴリー	1493160662	21320	shared_asin									
+gregory-types-guide	1	gt-daypack26	0	amazonAsin	B08TH8FNN9	https://www.amazon.co.jp/dp/B08TH8FNN9	グレゴリー（GREGORY）デイパック DAY PACK 26L ブラックJP	グレゴリー		24354	shared_asin									
+gregory-types-guide	2	gt-fineday18	0	amazonAsin	B0C2YQP684	https://www.amazon.co.jp/dp/B0C2YQP684	グレゴリー（GREGORY）ファインデイ V2 FINE DAY V2 1375390440 コーデュラバリスティックブラック 18L	グレゴリー	1375390440	18700	shared_asin									
+gregory-types-guide	3	gt-casualday	0	amazonAsin	B0B58K14CJ	https://www.amazon.co.jp/dp/B0B58K14CJ	グレゴリー（GREGORY）カジュアルデイ V2 CASUAL DAY V2 1444331041 ブラック 22L	グレゴリー	1444331041	10560	shared_asin									
+gregory-types-guide	4	gt-nano20	0	amazonAsin	B0DY5DHC6H	https://www.amazon.co.jp/dp/B0DY5DHC6H	グレゴリー（GREGORY）ナノ20 NANO 20 1530588885 スパークネイビー	グレゴリー	1530588885	12155	shared_asin									
+gregory-types-guide	5	gt-compass30	0	amazonAsin	B0F59WK7P7	https://www.amazon.co.jp/dp/B0F59WK7P7	グレゴリー（GREGORY）コンパス30 COMPASS 30 1426342480 ユニバースブラック 30L	グレゴリー	1426342480	19360	shared_asin									
+gregory-types-guide	6	gt-zulu24lt	0	amazonAsin	B0CT96YKYW	https://www.amazon.co.jp/dp/B0CT96YKYW	グレゴリー（GREGORY）ズール24 LT ZULU 24 LT 1493160662 ボルケニックブラック 24L	グレゴリー	1493160662	22440	shared_asin									
+gregory-types-guide	7	gt-zulu35	0	amazonAsin	B0BVHHK34Z	https://www.amazon.co.jp/dp/B0BVHHK34Z	グレゴリー（GREGORY）ズール35 ZULU 35 1466710662 MD/LG ボルケニックブラック 35L	グレゴリー	1466710662	26800	shared_asin									
+gregory-types-guide	8	gt-jade33	0	amazonAsin	B0BVHJYZDX	https://www.amazon.co.jp/dp/B0BVHJYZDX	グレゴリー（GREGORY）ジェイド33 JADE 33 1466621552 SM/MD ミッドナイトネイビー レディース 33L	グレゴリー	1466621552	26235	shared_asin									
+gregory-types-guide	9	gt-stout45	0	amazonAsin	B0CZDDPYFF	https://www.amazon.co.jp/dp/B0CZDDPYFF	グレゴリー（GREGORY）スタウト45 STOUT 45 149375A266 フォレストブラック ワンサイズ 45L	グレゴリー	149375A266	33000	shared_asin									
+gregory-types-guide	10	gt-zulu55	0	amazonAsin	B0BSLX9TX6	https://www.amazon.co.jp/dp/B0BSLX9TX6	グレゴリー（GREGORY）ズール55 ZULU 55 1456720527 SM/MD ハローブルー 53L	グレゴリー	1456720527	38500	shared_asin									
 gregory-zulu-baltoro	1	gregory-zulu35	0	amazonAsin	B0BWHBJ8Q6	https://www.amazon.co.jp/dp/B0BWHBJ8Q6	GREGORY ズール35 ZULU 35 1466700527 SM/MD ハローブルー バックパック	GREGORY	1466700527	33000	shared_asin									
 gregory-zulu-baltoro	2	gregory-zulu45	0	amazonAsin	B0GH6C226L	https://www.amazon.co.jp/dp/B0GH6C226L	GREGORY ズール45 ZULU 45 145292D436 MD/LG デザートタン バックパック	GREGORY	145292D436	35200	shared_asin									
 gregory-zulu-baltoro	3	gregory-zulu30	0	amazonAsin	B0BSLWP6SY	https://www.amazon.co.jp/dp/B0BSLWP6SY	GREGORY ズール30 ZULU 30 1456640527 SM/MD ハローブルー バックパック	GREGORY	1456640527	29700	shared_asin									
