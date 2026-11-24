@@ -1547,7 +1547,7 @@ osprey-daily-backpack	5	osprey-daylite-cinch	0	amazonAsin	B08LNYHJWQ	https://www
 osprey-exos-eja	1	oxe-exos48	0	amazonAsin	B09JXJDNG1	https://www.amazon.co.jp/dp/B09JXJDNG1	OSPREY エクソス 48 EXOS 48 OS50327 S/M ブルーリボン バックパック	OSPREY	OS50327	40700	OK									
 osprey-exos-eja	2	oxe-exos38	0	amazonAsin	B0DS6LKQGH	https://www.amazon.co.jp/dp/B0DS6LKQGH	OSPREY エクソス 38 EXOS 38 OS50328 S／M ダークチャコール バックパック	OSPREY	OS50328	37400	shared_asin									
 osprey-exos-eja	3	oxe-exospro55	0	amazonAsin	B0BTTQPWYG	https://www.amazon.co.jp/dp/B0BTTQPWYG	OSPREY エクソスプロ 55 EXOS PRO 55 OS50380 S／M デールグレー×アーガムブルー バックパック	OSPREY	OS50380	49500	shared_asin									
-osprey-exos-eja	4	oxe-eja38	0	amazonAsin	B0DS6MF277	https://www.amazon.co.jp/dp/B0DS6MF277	OSPREY エイジャ 38 EJA 38 OS50340 パープルダスク／M/Lサイズ レディース バックパック	OSPREY	OS50340	37400	OK									
+osprey-exos-eja	4	oxe-eja38	0	amazonAsin	B0DS6MF277	https://www.amazon.co.jp/dp/B0DS6MF277	OSPREY エイジャ 38 EJA 38 OS50340 パープルダスク／M/Lサイズ レディース バックパック	OSPREY	OS50340	37400	shared_asin									
 osprey-exos-eja	5	oxe-ejapro55	0	amazonAsin	B0BTTRJJ88	https://www.amazon.co.jp/dp/B0BTTRJJ88	OSPREY エイジャプロ 55 EJA PRO 55 OS50381 M/L デールグレー×ポインセチアレッド レディース バックパック	OSPREY	OS50381	49500	OK									
 osprey-exos-eja	6	oxe-talon44	0	amazonAsin	B0DSCQGMNG	https://www.amazon.co.jp/dp/B0DSCQGMNG	OSPREY タロン 44 TALON 44 OS52463 ブラックコーラルグレー S/M バックパック	OSPREY	OS52463	37400	shared_asin									
 osprey-exos-eja	7	oxe-talonpro40	0	amazonAsin	B0CPL4CQKV	https://www.amazon.co.jp/dp/B0CPL4CQKV	OSPREY タロンプロ 40 TALON PRO 40 OS50271 シルバーライニング L／XL バックパック	OSPREY	OS50271	44000	OK									
@@ -1574,6 +1574,18 @@ osprey-reputation	8	orep-exos-pro55	0	amazonAsin	B0BTTQPWYG	https://www.amazon.c
 osprey-reputation	9	orep-talon-velocity30	0	amazonAsin	B0CGQ46WN1	https://www.amazon.co.jp/dp/B0CGQ46WN1	オスプレー タロンベロシティ 30 OS50267 S／M ダークC/タンブルウィードY	オスプレー	OS50267	34100	shared_asin									
 osprey-reputation	10	orep-talon22	0	amazonAsin	B0DSCQGTJ8	https://www.amazon.co.jp/dp/B0DSCQGTJ8	オスプレー タロン 22 TALON 22 OS52466 ブラックコーラルグレー	オスプレー	OS52466	27500	shared_asin									
 osprey-reputation	11	orep-exos48	0	amazonAsin	B0DS6LN8C5	https://www.amazon.co.jp/dp/B0DS6LN8C5	オスプレー エクソス 48 EXOS 48 OS50327 ダークチャコール S/M	オスプレー	OS50327	40700	shared_asin									
+osprey-series-guide	1	osg-daylite13	0	amazonAsin	B08LP148YT	https://www.amazon.co.jp/dp/B08LP148YT	オスプレー（OSPREY）デイライト DAYLITE OS57177 13L ブラック(01) 国内正規品	オスプレー	OS57177	11110	shared_asin									
+osprey-series-guide	2	osg-daylite-plus20	0	amazonAsin	B08LP1WWPT	https://www.amazon.co.jp/dp/B08LP1WWPT	オスプレー（OSPREY）デイライトプラス DAYLITE PLUS OS57176 ブラック 20L	オスプレー	OS57176	12760	shared_asin									
+osprey-series-guide	3	osg-arcane-largeday	0	amazonAsin	B0D4QZ97BD	https://www.amazon.co.jp/dp/B0D4QZ97BD	オスプレー（OSPREY）アーケイン ラージデイ ARCANE LARGE DAY OS53161 ブラック 21L	オスプレー	OS53161	18700	shared_asin									
+osprey-series-guide	4	osg-hikelite26	0	amazonAsin	B0FGXZKXJ1	https://www.amazon.co.jp/dp/B0FGXZKXJ1	オスプレー（OSPREY）ハイクライト HIKELITE 26L OS57222 カスケードブルー	オスプレー	OS57222	17820	shared_asin									
+osprey-series-guide	5	osg-talon22	0	amazonAsin	B0DSCQGTJ8	https://www.amazon.co.jp/dp/B0DSCQGTJ8	オスプレー（OSPREY）タロン 22 TALON 22 OS52466 ブラックコーラルグレー 22L	オスプレー	OS52466	27500	shared_asin									
+osprey-series-guide	6	osg-tempest22	0	amazonAsin	B0DSCMYJ51	https://www.amazon.co.jp/dp/B0DSCMYJ51	オスプレー（OSPREY）テンペスト 22 Tempest 22 OS52472 ブラックコーラルグレー レディース 22L	オスプレー	OS52472	27500	shared_asin									
+osprey-series-guide	7	osg-sirrus24	0	amazonAsin	B0G6GD63YS	https://www.amazon.co.jp/dp/B0G6GD63YS	オスプレー（OSPREY）シラス 24 SIRRUS 24 OS50374 パープルダスク レディース 24L	オスプレー	OS50374	27710	shared_asin									
+osprey-series-guide	8	osg-stratos34	0	amazonAsin	B0G6GK631Q	https://www.amazon.co.jp/dp/B0G6GK631Q	オスプレー（OSPREY）ストラトス 34 STRATOS 34 OS50369 ニルヴァーナブルー 34L	オスプレー	OS50369	34100	shared_asin									
+osprey-series-guide	9	osg-kestrel38	0	amazonAsin	B0FGXXCGXS	https://www.amazon.co.jp/dp/B0FGXXCGXS	オスプレー（OSPREY）ケストレル 38 KESTREL 38 OS50383 S／M モスグリーン	オスプレー	OS50383	34100	shared_asin									
+osprey-series-guide	10	osg-kyte48	0	amazonAsin	B0BKQHMP61	https://www.amazon.co.jp/dp/B0BKQHMP61	オスプレー（OSPREY）カイト 48 KYTE 48 OS50135 WXS／S ブラック レディース	オスプレー	OS50135	37400	shared_asin									
+osprey-series-guide	11	osg-eja38	0	amazonAsin	B0DS6MF277	https://www.amazon.co.jp/dp/B0DS6MF277	オスプレー（OSPREY）エイジャ 38 EJA 38 OS50340 パープルダスク／M/Lサイズ レディース	オスプレー	OS50340	37400	shared_asin									
+osprey-series-guide	12	osg-exos48	0	amazonAsin	B0DS6LN8C5	https://www.amazon.co.jp/dp/B0DS6LN8C5	オスプレー（OSPREY）エクソス 48 EXOS 48 OS50327 ダークチャコール S/M	オスプレー	OS50327	40700	shared_asin									
 osprey-talon-tempest	1	ott-talon22	0	amazonAsin	B0DSCQGTJ8	https://www.amazon.co.jp/dp/B0DSCQGTJ8	OSPREY オスプレー タロン 22 OS52466 ブラックコーラルグレー 22L メンズ	OSPREY	OS52466	27500	shared_asin									
 osprey-talon-tempest	2	ott-tempest22	0	amazonAsin	B0DSCMYJ51	https://www.amazon.co.jp/dp/B0DSCMYJ51	OSPREY オスプレー テンペスト 22 OS52472 ブラックコーラルグレー 22L レディース	OSPREY	OS52472	27500	shared_asin									
 osprey-talon-tempest	3	ott-talon26	0	amazonAsin	B0DSCNNYZ2	https://www.amazon.co.jp/dp/B0DSCNNYZ2	OSPREY オスプレー タロン 26 OS52465 ブラックコーラルグレー 26L メンズ	OSPREY	OS52465	28600	OK									
