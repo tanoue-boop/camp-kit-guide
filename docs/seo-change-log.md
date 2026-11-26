@@ -4,6 +4,16 @@
 
 ---
 
+## 2026-11-27 northface-womens-backpack 新規（campkit-20261127-N95）
+
+- **変更記録（効果測定用）**: 2026-11-27 northface-womens-backpack 新規／狙いKW ノースフェイス リュック レディース（ノースフェイス レディース リュック おすすめ・ノースフェイス リュック 女性・ノースフェイス リュック レディース 通勤・ノースフェイス リュック レディース 小さめ）／基準: northface-backpack 28日 クリック2・表示75・平均7.8位（実行側で GSC から取得・`_tasks/data-campkit-gsc-page-28d-20261123.tsv`。参考: northface-commute-backpack クリック3・表示21・5.8位、ladies-hiking-backpack クリック4・表示62・9.9位、northface-capacity-guide は同ファイルに行なし）（カニバリ確認: northface-backpack・northface-commute-backpack・ladies-hiking-backpack・northface-capacity-guide）。GSC 該当クエリ（`_tasks/data-campkit-gsc-qp-28d-20261123.tsv`・data/ に GSC ファイル無し で確認）: 「ノース／north」を含むクエリ15行のうち「レディース」「女性」「ウィメンズ」「小さめ」「通勤」を含む行は0件（既存の該当はビッグショット・ホットショットの容量クエリのみ）＝需要は未計測。
+- **狙い**: 上位（CAMP HACK 4540・13078、hinata、マイナビおすすめナビ、Oggi、ねとらぼ調査隊、ORICON 等）は「ノースフェイスはユニセックス展開が多い」と前置きしてジェミニ22・ホットショット・ボルダーデイパック・ジオフェイスミニパック・海外向けのネバーストップ（ウィメンズ）などを並べる型で、国内の女性専用モデル（フィーカスパック NMW62650・2026秋冬）の有無、女性が背負いやすい高さ・幅の数値比較、両モールで国内正規品が買えるかの整理は無い（WebSearch の要約で確認）。そこで「女性専用はフィーカスパックだけ」「ユニセックスは外寸の高さと幅で選ぶ」を軸に、容量L・重量g・外寸cm・区分（女性専用／ユニセックス）・楽天/Amazon税込・buy列の比較表を主役にした。
+- **変更内容**: 10製品（ジオフェイスミニパック・ワンマイル16・フィーカスパック（レディース）・シングルショット・メイフライパック22・ジェミニ22・ボルダーデイパック・ジェスター・ボストーク26・ホットショット）。全製品 楽天 hb.afl＋Amazon amazonAsin。結論3行＋QuickPickMdx（フィーカスパック・シングルショット・ボルダーデイパック）、女性が選ぶ目安4ポイント（女性専用はフィーカスパックだけ・高さと幅で選ぶ・容量帯×用途の表・重さは4倍以上違う）、比較表、容量帯別の製品解説、Tips5、見出し形式FAQ5問、選定基準と情報源、他の記事で比べる、まとめ。
+- **役割分担**: northface-backpack（ブランド全体）・northface-commute-backpack（通勤）・northface-capacity-guide（容量順の早見）・ladies-hiking-backpack（女性の登山・複数ブランド）と商品は重なるが、本記事は「女性がノースフェイスを選ぶ」に絞り、はじめにで役割分担を明記。被リンクは northface-backpack（容量の節の段落末に1文）・northface-commute-backpack（容量の節の段落末に1文）・ladies-hiking-backpack（導入の段落末に1文）。いずれも updatedAt 不変。
+- **効果測定**: 2〜3週間後に「ノースフェイス リュック レディース」「ノースフェイス リュック 女性」「フィーカスパック」の表示が本記事に出るか、northface-backpack の順位（7.8位）が落ちていないかを確認。
+
+---
+
 ## 2026-11-27 karrimor-capacity-guide 新規（campkit-20261127-N94）
 
 - **変更記録（効果測定用）**: 2026-11-27 karrimor-capacity-guide 新規／狙いKW カリマー リュック 容量（カリマー リュック 何リットル・カリマー リュック 20l・カリマー リュック 30l・カリマー リュック サイズ・カリマー リュック 重さ）／基準: karrimor-backpack 28日 クリック33・表示419・平均7.1位（タスク指定値）。実行側で GSC から取得した値は クリック38・表示515・平均7.9位（`_tasks/data-campkit-gsc-page-28d-20261123.tsv`）（カニバリ確認: karrimor-backpack・karrimor-ridge-sector・camp-backpack-capacity-guide）。karrimor-ridge-sector は同ファイルに行なし（28日の表示0）。GSC 該当クエリ（`_tasks/data-campkit-gsc-qp-28d-20261123.tsv`・data/ に GSC ファイル無し で確認）: 「カリマー／karrimor」を含むクエリのうち「容量」「リットル」「20l／30l」「何」「重さ」を含む行は0件。近いのは「カリマー サイズ 表」3表示・9.3位（karrimor-backpack）のみ＝容量クエリの需要は未計測。
