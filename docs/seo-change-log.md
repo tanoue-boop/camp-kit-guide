@@ -4,6 +4,16 @@
 
 ---
 
+## 2026-11-27 gregory-business-backpack 新規（campkit-20261127-N93）
+
+- **変更記録（効果測定用）**: 2026-11-27 gregory-business-backpack 新規／狙いKW グレゴリー リュック 通勤（グレゴリー リュック ビジネス・グレゴリー ビジネスリュック・グレゴリー ルーヌ・グレゴリー リュック PC 収納）／基準: gregory-backpack 28日 クリック39・表示1,251・平均9.0位（`_tasks/data-campkit-gsc-page-28d-20261123.tsv`。参考: R05 公開後28日 クリック35・表示863・平均8.4位）（カニバリ確認: gregory-backpack・gregory-daypack・gregory-types-guide・osprey-business-backpack）。GSC 該当クエリ（`_tasks/data-campkit-gsc-qp-28d-20261123.tsv`・data/ に GSC ファイル無し で確認）: 「グレゴリー／gregory」を含むクエリ185行のうち、通勤・ビジネス・ルーヌ・PC系は4行のみ＝「グレゴリー スケッチ ルーヌ 違い」2表示・14.5位、「グレゴリー ルーヌ 比較」1表示・8.0位、「ルーヌ30 レビュー」1表示・8.0位（いずれも gregory-backpack）、「グレゴリー ナノ20 通勤」2表示・13.0位（gregory-daypack）。「グレゴリー リュック 通勤」「グレゴリー ビジネスリュック」の行は無し＝需要は未計測。gregory-backpack の「第4位 ルーヌ22 スーツに合うビジネス仕様」節アンカーは28日76表示・11.0位。
+- **狙い**: 上位（hinata・ねとらぼ調査隊・ORICON 等）はブランド横断の通勤リュック紹介か、グレゴリーの人気モデルを数点紹介する型で、PC収納の形（内側スリーブ／外側から出し入れ／専用室）とインチ表記の有無、容量・重量・税込価格を同じ単位で並べた比較と「両モールで国内正規品が買えるか」の整理は無い（WebSearch の要約で確認）。そこで容量18〜30L×PC収納の形の早見表と、インチ表記が無いモデルは「表記なし」と明示する比較表を主役にした。
+- **変更内容**: 10製品（ルーヌ18・コミュートデイ・カバートミッションデイ V4・キャンパスデイM・スケッチ22・ルーヌ22・デイパック・カバートソリッドデイ V4・ルーヌ28・コンパス30）。全製品 楽天 hb.afl＋Amazon amazonAsin。結論3行＋QuickPickMdx（ルーヌ22・カバートソリッドデイ V4・キャンパスデイM）、選び方4ポイント（容量の表・PC収納の3つの形・重量・スーツとの相性）、比較表（容量L・重量g・サイズcm・PC収納の形・PC収納サイズ（インチ）・楽天/Amazon税込・buy列）、容量帯別の製品解説、Tips5、見出し形式FAQ5問、選定基準と情報源、他の記事で比べる、まとめ。
+- **役割分担**: gregory-backpack（用途別の定番）・gregory-types-guide（シリーズ別の違い）・gregory-daypack（日帰りのデイパック）・gregory-30l（30L前後）・osprey-business-backpack／outdoor-commute-backpack（他ブランドの通勤）と商品は一部重なるが、本記事は「通勤・ビジネスでPCが入るグレゴリー」に絞り、はじめにで役割分担を明記。被リンクは gregory-backpack（他記事案内の段落の最後に1文）・gregory-types-guide（関連記事リストに1行）。いずれも updatedAt 不変。
+- **効果測定**: 2〜3週間後に「グレゴリー リュック 通勤」「グレゴリー ビジネスリュック」「グレゴリー ルーヌ」の表示が本記事に出るか、gregory-backpack の順位（9.0位）と第4位ルーヌ22節アンカーの表示が落ちていないかを確認。
+
+---
+
 ## 2026-11-26 deuter-capacity-guide 新規（campkit-20261126-N92）
 
 - **変更記録（効果測定用）**: 2026-11-26 deuter-capacity-guide 新規／狙いKW ドイター リュック 容量（ドイター リュック 何リットル・ドイター リュック 20l・ドイター リュック 30l・ドイター ザック 容量別）／基準: deuter-backpack 28日 クリック28・表示378・平均7.0位（カニバリ確認: deuter-backpack・deuter-commute-daypack・deuter-futura-aircontact・deuter-speedlite-trailrunning）。GSC 該当クエリ（`_tasks/data-campkit-gsc-qp-28d-20261123.tsv`・data/ に GSC ファイル無し で確認）: 「ドイター」「deuter」を含むクエリは29行あるが、「容量」「リットル」「l」「何」を含む行は 0 件（近いのは「ドイター リュック」12表示・15.8位、「ドイター リュック 評判」10表示・6.8位、「ドイター バックパック」8表示・10.5位、「ドイター ザック」5表示・8.4位＝いずれも deuter-backpack に着地）。容量クエリの需要は未計測。
