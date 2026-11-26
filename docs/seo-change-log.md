@@ -4,6 +4,16 @@
 
 ---
 
+## 2026-11-27 karrimor-capacity-guide 新規（campkit-20261127-N94）
+
+- **変更記録（効果測定用）**: 2026-11-27 karrimor-capacity-guide 新規／狙いKW カリマー リュック 容量（カリマー リュック 何リットル・カリマー リュック 20l・カリマー リュック 30l・カリマー リュック サイズ・カリマー リュック 重さ）／基準: karrimor-backpack 28日 クリック33・表示419・平均7.1位（タスク指定値）。実行側で GSC から取得した値は クリック38・表示515・平均7.9位（`_tasks/data-campkit-gsc-page-28d-20261123.tsv`）（カニバリ確認: karrimor-backpack・karrimor-ridge-sector・camp-backpack-capacity-guide）。karrimor-ridge-sector は同ファイルに行なし（28日の表示0）。GSC 該当クエリ（`_tasks/data-campkit-gsc-qp-28d-20261123.tsv`・data/ に GSC ファイル無し で確認）: 「カリマー／karrimor」を含むクエリのうち「容量」「リットル」「20l／30l」「何」「重さ」を含む行は0件。近いのは「カリマー サイズ 表」3表示・9.3位（karrimor-backpack）のみ＝容量クエリの需要は未計測。
+- **狙い**: 上位（CAMP HACK 12912・2895・3382、hinata、YAMA HACK、BE-PAL 等）はブランド横断の容量目安（日常10〜20L・ビジネス20〜25L・連泊50L以上）か、カリマーを数モデル含むN選リストで、カリマーだけを容量順に重量・外寸・税込価格で並べた比較と「両モールで国内正規品が買えるか」の整理は無い（WebSearch の要約で確認）。そこで容量帯×用途の表と、容量L・重量g・1Lあたりg・外寸cm・楽天/Amazon税込・buy列の比較表を主役にした。
+- **変更内容**: 10製品（コット18・VTデイパック F・タトラ20・タトラ25・イクリプス27・ランクス28・クリーブ30・リッジ30プラス・トリビュート40・リッジ40プラス）。全製品 楽天 hb.afl＋Amazon amazonAsin。結論3行＋QuickPickMdx（タトラ20・リッジ30プラス・トリビュート40）、容量で選ぶ目安4ポイント（容量帯×用途の表・20Lと30Lの分かれ目・同じ容量でも重さが違う・背面長と外寸の高さ）、比較表、容量帯別の製品解説、Tips5、見出し形式FAQ5問、選定基準と情報源、他の記事で比べる、まとめ。
+- **役割分担**: karrimor-backpack（ブランド全体の用途別おすすめ）・karrimor-ridge-sector（リッジ／セクターのモデル別）と商品は重なるが、本記事は「容量から選ぶ」に絞り、はじめにで役割分担を明記。被リンクは karrimor-backpack（容量ガイドの案内段落の最後に1文）・karrimor-ridge-sector（関連記事リストに1行）。いずれも updatedAt 不変。
+- **効果測定**: 2〜3週間後に「カリマー リュック 容量」「カリマー リュック 何リットル」「カリマー サイズ 表」の表示が本記事に出るか、karrimor-backpack の順位（7.9位）が落ちていないかを確認。
+
+---
+
 ## 2026-11-27 gregory-business-backpack 新規（campkit-20261127-N93）
 
 - **変更記録（効果測定用）**: 2026-11-27 gregory-business-backpack 新規／狙いKW グレゴリー リュック 通勤（グレゴリー リュック ビジネス・グレゴリー ビジネスリュック・グレゴリー ルーヌ・グレゴリー リュック PC 収納）／基準: gregory-backpack 28日 クリック39・表示1,251・平均9.0位（`_tasks/data-campkit-gsc-page-28d-20261123.tsv`。参考: R05 公開後28日 クリック35・表示863・平均8.4位）（カニバリ確認: gregory-backpack・gregory-daypack・gregory-types-guide・osprey-business-backpack）。GSC 該当クエリ（`_tasks/data-campkit-gsc-qp-28d-20261123.tsv`・data/ に GSC ファイル無し で確認）: 「グレゴリー／gregory」を含むクエリ185行のうち、通勤・ビジネス・ルーヌ・PC系は4行のみ＝「グレゴリー スケッチ ルーヌ 違い」2表示・14.5位、「グレゴリー ルーヌ 比較」1表示・8.0位、「ルーヌ30 レビュー」1表示・8.0位（いずれも gregory-backpack）、「グレゴリー ナノ20 通勤」2表示・13.0位（gregory-daypack）。「グレゴリー リュック 通勤」「グレゴリー ビジネスリュック」の行は無し＝需要は未計測。gregory-backpack の「第4位 ルーヌ22 スーツに合うビジネス仕様」節アンカーは28日76表示・11.0位。
