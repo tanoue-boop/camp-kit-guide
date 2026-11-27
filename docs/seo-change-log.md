@@ -203,6 +203,17 @@
 
 ---
 
+## 2026-11-28 paagoworks-backpack 新規（campkit-20261128-N96・テトンブロスから差し替え）
+
+- **差し替えの理由**: タスク指定はテトンブロス（Teton Bros.）の `tetonbros-backpack`。楽天APIでテトンブロスのリュックは3モデル（アマウティ25L・コマ38L・スクランブリングパック17L、いずれもレビュー0件）、Amazon の `/s`（1本目）ではアマウティ25Lの1モデルのみで、両モールで揃うのは1モデルだけだった。タスクの「ほとんど揃わない場合は他の国内山岳ブランドに差し替えてよい」に従い、両モールで10モデル以上揃う日本のブランド パーゴワークス（PaaGo WORKS）に差し替えた（例示の山と道・ファイントラックは楽天・Amazonでリュックを買えないため不採用）。slug は `paagoworks-backpack`。
+- **変更記録（効果測定用）**: 2026-11-28 paagoworks-backpack 新規／狙いKW パーゴワークス リュック（パーゴワークス ザック・PaaGo WORKS リュック・パーゴワークス バックパック おすすめ・バディ22・ラッシュ30・ゼン35）／基準: 受け手記事の28日 ultralight-backpack クリック3・表示24・平均6.8位、backcountry-backpack 23・122・7.0位、camp-backpack-beginner 17・334・12.5位、mountain-backpack-30l 13・237・12.9位、climbing-backpack 0・1・1.0位、day-hike-backpack は同ファイルに行なし（実行側で GSC から取得・`_tasks/data-campkit-gsc-page-28d-20261123.tsv`）（カニバリ確認: ultralight-backpack・climbing-backpack・backcountry-backpack・day-hike-backpack）。GSC 該当クエリ（`_tasks/data-campkit-gsc-qp-28d-20261123.tsv` と 90日版・data/ に GSC ファイル無し で確認）: 「テトン／ティートン／teton／パーゴ／paago／山と道／ファイントラック」を含む行は0件＝需要は未計測。
+- **狙い**: 上位（BE-PAL 634363・518850・394488、楽天 サンデーマウンテンの ALK 特集、my-best、価格.comマガジン 等）はパーゴワークスのバディ22・33を中心に4〜6モデルを紹介する型で、5シリーズ（バディ・アルク・ラッシュ・ゼン・カーゴ）の容量・重量・1Lあたりの重さ・背面長・税込価格を並べた比較と、両モールで国内正規品が買えるかの整理は無い（WebSearch の要約で確認）。そこで「シリーズで背負い方と用途が分かれる」「軽さは1Lあたりの重さで比べる」を軸に、比較表（容量L・重量g・1Lあたりg・外寸cm・背面長/フィット・税込・buy列）を主役にした。
+- **変更内容**: 10製品（バディ16・アルク16・ラッシュ20・バディ22・アルク24・ゼン25・アルク30・ラッシュ30・ゼン35・カーゴ55）。全製品 楽天 hb.afl（サンデーマウンテン）＋Amazon amazonAsin。結論3行＋QuickPickMdx（バディ22・アルク24・ラッシュ30）、選ぶ目安4ポイント（シリーズ表・用途別容量・背面長の合わせ方・1Lあたりの重さ）、比較表、容量帯別の製品解説、Tips5、見出し形式FAQ5問、選定基準と情報源、他の記事で比べる、まとめ。
+- **役割分担**: camp-backpack-beginner（入口）・day-hike-backpack（20〜30L複数ブランド）・mountain-backpack-30l（30L前後）・ultralight-backpack（1kg以下30〜55L）・trailrun-pack（ラッシュ7R・11R・20を含むトレランベスト）と重なるが、本記事はパーゴワークスに絞り、はじめにで役割分担を明記。ラッシュ20は trailrun-pack と同じ楽天URL・ASIN。被リンクは ultralight-backpack（選定基準の箇条に1行）・camp-backpack-beginner（関連記事リストに1行）・mountain-backpack-30l（関連記事リストに1行）。いずれも updatedAt 不変。
+- **効果測定**: 2〜3週間後に「パーゴワークス リュック」「パーゴワークス バディ」「ラッシュ30」「ゼン35」の表示が本記事に出るか、ultralight-backpack（6.8位）・mountain-backpack-30l（12.9位）の順位が落ちていないかを確認。
+
+---
+
 ## 2026-11-27 northface-womens-backpack 新規（campkit-20261127-N95）
 
 - **変更記録（効果測定用）**: 2026-11-27 northface-womens-backpack 新規／狙いKW ノースフェイス リュック レディース（ノースフェイス レディース リュック おすすめ・ノースフェイス リュック 女性・ノースフェイス リュック レディース 通勤・ノースフェイス リュック レディース 小さめ）／基準: northface-backpack 28日 クリック2・表示75・平均7.8位（実行側で GSC から取得・`_tasks/data-campkit-gsc-page-28d-20261123.tsv`。参考: northface-commute-backpack クリック3・表示21・5.8位、ladies-hiking-backpack クリック4・表示62・9.9位、northface-capacity-guide は同ファイルに行なし）（カニバリ確認: northface-backpack・northface-commute-backpack・ladies-hiking-backpack・northface-capacity-guide）。GSC 該当クエリ（`_tasks/data-campkit-gsc-qp-28d-20261123.tsv`・data/ に GSC ファイル無し で確認）: 「ノース／north」を含むクエリ15行のうち「レディース」「女性」「ウィメンズ」「小さめ」「通勤」を含む行は0件（既存の該当はビッグショット・ホットショットの容量クエリのみ）＝需要は未計測。

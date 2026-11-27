@@ -1711,6 +1711,16 @@ outdoorproducts-backpack	8	op-tower-30l	0	amazonAsin	B0G7H6LBW3	https://www.amaz
 outdoorproducts-backpack	9	op-452t	0	amazonAsin	B0CK487Y87	https://www.amazon.co.jp/dp/B0CK487Y87	OUTDOOR PRODUCTS アウトドアプロダクツ デイパックL 452T 62393 ブラック 35L	OUTDOOR		8580	shared_asin									
 outdoorproducts-backpack	10	op-4053expt	0	amazonAsin	B0CK4DJ8DV	https://www.amazon.co.jp/dp/B0CK4DJ8DV	OUTDOOR PRODUCTS アウトドアプロダクツ デイパック 4053EXPT 62394 10(ブラック) 30L	OUTDOOR	4053EXPT	7850	OK									
 outdoorproducts-backpack	11	op-dotlogo-40l	0	amazonAsin	B0BR3Q6BTN	https://www.amazon.co.jp/dp/B0BR3Q6BTN	OUTDOOR PRODUCTS アウトドアプロダクツ 2ルーム シフティング ドットロゴ デイパック 22469025 AURORA 40L	OUTDOOR	22469025	9680	OK									
+paagoworks-backpack	1	pgw-buddy16	0	amazonAsin	B09ZDNX7KN	https://www.amazon.co.jp/dp/B09ZDNX7KN	パーゴワークス（PaaGo WORKS） バディ16 HP201 アーバングレー 16L	パーゴワークス	HP201	16500	OK									
+paagoworks-backpack	2	pgw-alk16	0	amazonAsin	B0GTXN2KHB	https://www.amazon.co.jp/dp/B0GTXN2KHB	パーゴワークス（PaaGo WORKS） アルク16 HP605 ブラック 16L	パーゴワークス	HP605	19800	OK									
+paagoworks-backpack	3	pgw-rush20	0	amazonAsin	B0GTYNB7L2	https://www.amazon.co.jp/dp/B0GTYNB7L2	パーゴワークス（PaaGo WORKS） ラッシュ20 RP602 ミッドナイト 約20L	パーゴワークス	RP602	26400	shared_asin									
+paagoworks-backpack	4	pgw-buddy22	0	amazonAsin	B09ZDTGXYG	https://www.amazon.co.jp/dp/B09ZDTGXYG	パーゴワークス（PaaGo WORKS） バディ22 HP202 アーバングレー 22L	パーゴワークス	HP202	20900	OK									
+paagoworks-backpack	5	pgw-alk24	0	amazonAsin	B0GTXFW8N6	https://www.amazon.co.jp/dp/B0GTXFW8N6	パーゴワークス（PaaGo WORKS） アルク24 HP604 ブラック 約23.5L	パーゴワークス	HP604	25300	OK									
+paagoworks-backpack	6	pgw-zenn25	0	amazonAsin	B0GTXKS91Q	https://www.amazon.co.jp/dp/B0GTXKS91Q	パーゴワークス（PaaGo WORKS） ゼン25 HP602 グレー 25L	パーゴワークス	HP602	29700	OK									
+paagoworks-backpack	7	pgw-alk30	0	amazonAsin	B0GTXQ75RG	https://www.amazon.co.jp/dp/B0GTXQ75RG	パーゴワークス（PaaGo WORKS） アルク30 HP603 ブラック 約28.5L	パーゴワークス	HP603	33000	OK									
+paagoworks-backpack	8	pgw-rush30	0	amazonAsin	B0GTY74PY1	https://www.amazon.co.jp/dp/B0GTY74PY1	パーゴワークス（PaaGo WORKS） ラッシュ30 RP601 ミッドナイト 約31.5L	パーゴワークス	RP601	30800	OK									
+paagoworks-backpack	9	pgw-zenn35	0	amazonAsin	B0GTXHT15R	https://www.amazon.co.jp/dp/B0GTXHT15R	パーゴワークス（PaaGo WORKS） ゼン35 HP607 グレー 35L	パーゴワークス	HP607	38500	OK									
+paagoworks-backpack	10	pgw-cargo55	0	amazonAsin	B09ZDHZXMJ	https://www.amazon.co.jp/dp/B09ZDHZXMJ	パーゴワークス（PaaGo WORKS） カーゴ55 HP204 ブラック 55L	パーゴワークス	HP204	39600	OK									
 packable-backpack	1	pk-sts-ultrasil20	0	amazonAsin	B0BVW98GTV	https://www.amazon.co.jp/dp/B0BVW98GTV	SEA TO SUMMIT シートゥサミット ウルトラシルデイパック ST83521 ブルーアトール 20L	SEA	ST83521	5720	shared_asin									
 packable-backpack	2	pk-tnf-mayfly22	0	amazonAsin	B0BNDC21X4	https://www.amazon.co.jp/dp/B0BNDC21X4	THE NORTH FACE ザ・ノース・フェイス メイフライパック22 Mayfly Pack 22 NM62376 K ブラック 22L	THE	NM62376	7627	shared_asin									
 packable-backpack	3	pk-naturehike-18l	0	amazonAsin	B09XQJTRCC	https://www.amazon.co.jp/dp/B09XQJTRCC	Naturehike ネイチャーハイク 折りたたみバックパック NH17A012-B ブラック Mサイズ 18L	Naturehike	NH17A012-B	2990	shared_asin									
@@ -2070,7 +2080,7 @@ trailrun-pack	5	trp-adv-skin-12	0	amazonAsin	B0DXPR44K1	https://www.amazon.co.jp
 trailrun-pack	6	trp-rush-11r	0	amazonAsin	B0GTYJKZVF	https://www.amazon.co.jp/dp/B0GTYJKZVF	PaaGo WORKS パーゴワークス ラッシュ11R RUSH 11R RP604 フォギーブルー ベスト型	PaaGo	RP604	26400	OK									
 trailrun-pack	7	trp-distance-15	0	amazonAsin	B0FM4KYQJY	https://www.amazon.co.jp/dp/B0FM4KYQJY	Black Diamond ブラックダイヤモンド ディスタンス15 DISTANCE 15 BD56706 ブラック L	Black	BD56706	29150	OK									
 trailrun-pack	8	trp-ascender-13	0	amazonAsin	B097PYS1K8	https://www.amazon.co.jp/dp/B097PYS1K8	deuter ドイター アセンダー 13 ASCENDER 13 D3100122-7000 ブラック	deuter	D3100122-7000	19294	OK									
-trailrun-pack	9	trp-rush-20	0	amazonAsin	B0GTYNB7L2	https://www.amazon.co.jp/dp/B0GTYNB7L2	PaaGo WORKS パーゴワークス ラッシュ 20 RUSH 20 RP602 ミッドナイト	PaaGo	RP602	26400	OK									
+trailrun-pack	9	trp-rush-20	0	amazonAsin	B0GTYNB7L2	https://www.amazon.co.jp/dp/B0GTYNB7L2	PaaGo WORKS パーゴワークス ラッシュ 20 RUSH 20 RP602 ミッドナイト	PaaGo	RP602	26400	shared_asin									
 travel-backpack-40l	1	osprey-farpoint40	0	amazonAsin	B0FGXYSZBZ	https://www.amazon.co.jp/dp/B0FGXYSZBZ	オスプレー ファーポイント40 トラベルパック OS55342 ワンサイズ ブラック 40L	オスプレー	OS55342	31900	OK									
 travel-backpack-40l	2	cabinzero-classic44	0	amazonAsin	B00T9VGAJQ	https://www.amazon.co.jp/dp/B00T9VGAJQ	キャビンゼロ クラシック 44L CLASSIC 44L CZ06 ABSOLUTE BLACK	キャビンゼロ	CZ06	13750	shared_asin									
 travel-backpack-40l	3	thule-aion40	0	amazonAsin	B09NHW5799	https://www.amazon.co.jp/dp/B09NHW5799	スーリー アイオン トラベルバックパック 40L 3204724 NUTRIA ヌートリア	スーリー	3204724	44550	OK									
