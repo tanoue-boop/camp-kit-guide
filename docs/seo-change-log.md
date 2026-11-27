@@ -203,6 +203,16 @@
 
 ---
 
+## 2026-11-28 northface-boulder-backpack 新規（campkit-20261128-N98）
+
+- **変更記録（効果測定用）**: 2026-11-28 northface-boulder-backpack 新規／狙いKW ノースフェイス ボルダー（ノースフェイス ボルダー デイパック・ノースフェイス ボルダー 容量・ノースフェイス ボルダー ミニ・ボルダー リュック 通勤）／基準: northface-commute-backpack 28日 クリック3・表示21・平均5.8位、northface-capacity-guide は同ファイルに行なし（28日の表示0）（実行側で GSC から取得・`_tasks/data-campkit-gsc-page-28d-20261123.tsv`。data/ に GSC ファイル無し。参考: northface-backpack 2・75・7.8位）（カニバリ確認: northface-capacity-guide・northface-commute-backpack・northface-backpack・northface-womens-backpack）。GSC 該当クエリ（`_tasks/data-campkit-gsc-qp-28d-20261123.tsv`）: 「ボルダー／ボルダ／boulder」を含む行は0件＝需要は未計測。
+- **狙い**: 上位（ORICON 2455813・ねとらぼ調査隊・hinata・OCEANS・CAMP HACK・YAMA HACK 等）はノースフェイスのリュック全体の中でボルダーデイパックを1枠（24L・ガジェットスリーブ・デザイン重視）として触れる型で、ボルダー系3モデル（デイパック・トートパック・ミニショルダー）の容量・PC収納インチ・重量・税込価格の数値比較や、両モールで買えるかの整理は無い（WebSearch の要約で確認）。そこで「ボルダー系は3モデル・PCは13インチまで・15インチなら比較枠」の軸で、比較表（区分・容量L・PC収納・重量g・外寸cm・楽天/Amazon税込・buy列）を主役にした。
+- **変更内容**: 10製品＝ボルダー系3（ボルダーデイパック NM72356・ボルダートートパック NM72357・ボルダーミニショルダー NM72358）＋比較枠7（シングルショット・ジェミニ22・メイフライパック22・ジェスター・ボストーク26・ホットショット・BCヒューズボックス2）。全製品 楽天 hb.afl＋Amazon amazonAsin、色は全件ブラック。結論3行＋QuickPickMdx（ボルダー系3モデル）、選び方3ポイント（用途別容量表・PC収納13インチまで・背面と形）、比較表、ボルダー系／比較枠の製品解説、Tips5、見出し形式FAQ5問、選定基準と情報源（ピボター不採用の理由）、他の記事で比べる、まとめ。
+- **役割分担**: northface-backpack（ブランド全体）・northface-commute-backpack（通勤をPCインチと奥行で絞る）・northface-capacity-guide（16〜35Lの容量早見）・northface-womens-backpack（女性向け）と重なるが、本記事はボルダー系の違いと通勤／街使い／日帰りの選び分けに絞り、はじめにで役割分担を明記。被リンクは northface-commute-backpack・northface-capacity-guide（いずれもボルダーデイパックの解説末に1文）。いずれも updatedAt 不変。
+- **効果測定**: 2〜3週間後に「ノースフェイス ボルダー」「ボルダーデイパック」「ボルダー ミニ」の表示が本記事に出るか、northface-commute-backpack（5.8位）・northface-backpack（7.8位）の順位が落ちていないかを確認。
+
+---
+
 ## 2026-11-28 osprey-aether-ariel 新規（campkit-20261128-N97）
 
 - **変更記録（効果測定用）**: 2026-11-28 osprey-aether-ariel 新規／狙いKW オスプレー イーサー・エアリアル（オスプレー イーサー・オスプレー エアリアル・オスプレー イーサー 70・オスプレー エアリアル 65・イーサー プラス・オスプレー エーリエル）／基準: osprey-backpack 28日 クリック58・表示2,479・平均9.8位、osprey-series-guide は同ファイルに行なし（28日の表示0）（実行側で GSC から取得・`_tasks/data-campkit-gsc-page-28d-20261123.tsv`。data/ に GSC ファイル無し）（カニバリ確認: osprey-kestrel-stratos・tent-camping-backpack・backpack-70l-80l・osprey-series-guide）。GSC 該当クエリ（`_tasks/data-campkit-gsc-qp-28d-20261123.tsv`）: 「イーサー／エーリエル／エアリアル／aether／ariel」を含む行は0件、「オスプレ＋55/65/70/85/テント泊/大型」も0件＝需要は未計測。
