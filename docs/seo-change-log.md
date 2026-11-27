@@ -203,6 +203,16 @@
 
 ---
 
+## 2026-11-28 osprey-aether-ariel 新規（campkit-20261128-N97）
+
+- **変更記録（効果測定用）**: 2026-11-28 osprey-aether-ariel 新規／狙いKW オスプレー イーサー・エアリアル（オスプレー イーサー・オスプレー エアリアル・オスプレー イーサー 70・オスプレー エアリアル 65・イーサー プラス・オスプレー エーリエル）／基準: osprey-backpack 28日 クリック58・表示2,479・平均9.8位、osprey-series-guide は同ファイルに行なし（28日の表示0）（実行側で GSC から取得・`_tasks/data-campkit-gsc-page-28d-20261123.tsv`。data/ に GSC ファイル無し）（カニバリ確認: osprey-kestrel-stratos・tent-camping-backpack・backpack-70l-80l・osprey-series-guide）。GSC 該当クエリ（`_tasks/data-campkit-gsc-qp-28d-20261123.tsv`）: 「イーサー／エーリエル／エアリアル／aether／ariel」を含む行は0件、「オスプレ＋55/65/70/85/テント泊/大型」も0件＝需要は未計測。
+- **狙い**: 上位（GearJunkie・Ridge & River・mountainsforeverybody 等の英語レビュー、マイナビおすすめナビ、ヤマケイオンライン「イーサー？ケストレル？」、モデレート等の販売ページ）は、Aether／Ariel の55・65・プラスを1〜2モデルずつレビューする型か、オスプレー全体の中で1枠として触れる型で、容量・背面長（S/M・L/XL・XS/S・M/L）・重量・税込価格の数値早見と、国内の両モールで国内正規品が買えるかの整理は無い（WebSearch の要約で確認）。そこで「泊数で容量、背面長でサイズ、荷物16kgを境に軽量モデル」の軸で選び分けを作り、比較表（区分・容量L・背面長cm・重量g・外寸cm・推奨荷重kg・税込・buy列）を主役にした。
+- **変更内容**: 8製品＝イーサー／エーリエル本体3モデル4サイズ（イーサー55 S/M・イーサー55 L/XL・イーサープラス85 L/XL・エーリエル55 M/L）＋比較枠4モデル（エクソスプロ55 S/M・エイジャプロ55 M/L・ケストレル48 S/M・カイト48 WXS/S）。全製品 楽天 hb.afl＋Amazon amazonAsin。結論3行＋QuickPickMdx（イーサー55 S/M・エーリエル55 M/L・イーサープラス85）、選び方4ポイント（泊数別容量・背面長の測り方とサイズ表・メンズ/レディースの違い・プラスの違い）、比較表、メンズ/レディース/比較枠別の製品解説、Tips5、見出し形式FAQ5問、選定基準と情報源（不採用モデルと理由）、他の記事で比べる、まとめ。
+- **役割分担**: osprey-backpack（日帰り〜2〜3泊の入口）・osprey-series-guide（シリーズ早見）・osprey-kestrel-stratos（20〜48L）・osprey-exos-eja（軽量）・osprey-womens-backpack（女性向け）・tent-camping-backpack／backpack-50l-60l／backpack-70l-80l（複数ブランドの容量帯）と重なるが、本記事はイーサー／エーリエルの容量×背面長の選び分けに絞り、はじめにで役割分担を明記。比較枠4モデルは osprey-exos-eja／osprey-kestrel-stratos と同じ楽天URL・ASIN（価格も一致）。被リンクは osprey-series-guide（他の記事で比べるに1行）・tent-camping-backpack（他の記事で比べるに1行）・backpack-70l-80l（「70L級はなぜ入っていないのですか」のFAQ末尾に1文）。いずれも updatedAt 不変。
+- **効果測定**: 2〜3週間後に「オスプレー イーサー」「エーリエル／エアリアル」「イーサープラス」の表示が本記事に出るか、osprey-backpack（9.8位）の順位が落ちていないかを確認。
+
+---
+
 ## 2026-11-28 paagoworks-backpack 新規（campkit-20261128-N96・テトンブロスから差し替え）
 
 - **差し替えの理由**: タスク指定はテトンブロス（Teton Bros.）の `tetonbros-backpack`。楽天APIでテトンブロスのリュックは3モデル（アマウティ25L・コマ38L・スクランブリングパック17L、いずれもレビュー0件）、Amazon の `/s`（1本目）ではアマウティ25Lの1モデルのみで、両モールで揃うのは1モデルだけだった。タスクの「ほとんど揃わない場合は他の国内山岳ブランドに差し替えてよい」に従い、両モールで10モデル以上揃う日本のブランド パーゴワークス（PaaGo WORKS）に差し替えた（例示の山と道・ファイントラックは楽天・Amazonでリュックを買えないため不採用）。slug は `paagoworks-backpack`。
