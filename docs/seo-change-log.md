@@ -4,6 +4,16 @@
 
 ---
 
+## 2026-11-27 流入上位30記事にブラックフライデー案内を追加（campkit-20261127-C07）
+
+- **狙い**: Amazonブラックフライデー（先行 11/27〜11/29・本セール 11/30〜12/7）の期間中、検索流入の多い記事の冒頭で「今はセール期間」と伝え、カードの購入ボタンと [camp-gear-sale-timing](/posts/camp-gear-sale-timing) へ送る。S04b（7記事）の横展開。効果の確認は 12-18 を目標に、BF期間中の対象記事のアフィリエイトクリックと camp-gear-sale-timing への内部遷移で見る。
+- **対象の選び方**: `_tasks/data-campkit-gsc-page-28d-20261123.tsv`（最新）のクリック数順に、ProductCardMdx を含む記事を上から30本。除外: S04b 実施済み7記事（今回の範囲では camp-table-set 62・osprey-backpack 58・cassette-gas-heater 23 が該当）と camp-gear-sale-timing（20）。冒頭に「セール時期の目安：Amazonのブラックフライデーは…」の同趣旨行がある camp-hot-carpet（20）・stove-fan（18）は入れずにスキップ。冒頭に汎用の「買う時期で迷っている方は…セール時期カレンダー」の1文しかない記事（osprey-daily-backpack・arcteryx-backpack）は、S04b の portable-power-large・sleeping-bag-recommend と同じく BF 期間の案内ではないため対象に含めた。
+- **変更内容**: 各記事の冒頭（QuickPickMdx の直後／無ければ結論ブロックの直後／無ければリード文（「はじめに」節）の直後）に1行「Amazonブラックフライデー（先行セール 11/27〜11/29、本セール 11/30〜12/7）の期間中は、この記事の商品がセール対象になることがあります。→ [キャンプ用品のセール時期と買い時](/posts/camp-gear-sale-timing)」を追加。割引率・セール価格は書かない。既存の文章・カード・updatedAt は不変。
+- **対象30記事（slug・28日クリック・挿入位置）**: osprey-daily-backpack 90（QuickPick後）／camp-backpack-capacity-guide 84（QuickPick後）／sleeping-bag-temperature-guide 57（QuickPick後）／deuter-backpack 49（QuickPick後）／arcteryx-backpack 44（はじめに後）／camp-rice-cooker 42（QuickPick後）／gregory-backpack 39（QuickPick後）／karrimor-backpack 38（QuickPick後）／mysteryranch-backpack 31（QuickPick後）／nanga-down-jacket 30（はじめに後）／ogawa-tent 29（はじめに後）／car-camp-lighting 28（QuickPick後）／mountain-camp-lantern 28（QuickPick後）／family-camp-cot 27（はじめに後）／iwatani-stove 25（はじめに後）／naturehike-tent 24（QuickPick後）／backcountry-backpack 23（QuickPick後）／gregory-daypack 21（結論後）／kids-sleeping-bag 21（QuickPick後）／portable-electric-kettle 21（はじめに後）／torch-burner 21（はじめに後）／pup-tent 18（はじめに後）／camp-backpack-beginner 17（QuickPick後）／inflatable-mat 16（リード後）／nanga-sleeping-bag 15（QuickPick後）／guy-rope-recommend 14（リード後）／helinox-chair 14（はじめに後）／soto-burner 14（はじめに後）／camp-air-pump 13（リード後）／car-side-tarp 13（はじめに後）。
+- **後始末**: 本セール終了（12/7）後にこの1行を外すか、12月の楽天スーパーSALE向けに書き換える（S04b の7記事も同様）。
+
+---
+
 ## 2026-11-27 northface-womens-backpack 新規（campkit-20261127-N95）
 
 - **変更記録（効果測定用）**: 2026-11-27 northface-womens-backpack 新規／狙いKW ノースフェイス リュック レディース（ノースフェイス レディース リュック おすすめ・ノースフェイス リュック 女性・ノースフェイス リュック レディース 通勤・ノースフェイス リュック レディース 小さめ）／基準: northface-backpack 28日 クリック2・表示75・平均7.8位（実行側で GSC から取得・`_tasks/data-campkit-gsc-page-28d-20261123.tsv`。参考: northface-commute-backpack クリック3・表示21・5.8位、ladies-hiking-backpack クリック4・表示62・9.9位、northface-capacity-guide は同ファイルに行なし）（カニバリ確認: northface-backpack・northface-commute-backpack・ladies-hiking-backpack・northface-capacity-guide）。GSC 該当クエリ（`_tasks/data-campkit-gsc-qp-28d-20261123.tsv`・data/ に GSC ファイル無し で確認）: 「ノース／north」を含むクエリ15行のうち「レディース」「女性」「ウィメンズ」「小さめ」「通勤」を含む行は0件（既存の該当はビッグショット・ホットショットの容量クエリのみ）＝需要は未計測。
