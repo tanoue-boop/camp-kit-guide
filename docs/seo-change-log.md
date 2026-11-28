@@ -315,6 +315,16 @@
 
 ---
 
+## 2026-11-29 vaude-backpack 新規（campkit-20261129-N99）
+
+- **変更記録（効果測定用）**: 2026-11-29 vaude-backpack 新規／狙いKW ファウデ リュック（VAUDE リュック・ファウデ バックパック・ファウデ リュック 通勤・ファウデ リュック 容量）／基準: deuter-backpack 28日 クリック49・表示532・平均7.2位、tatonka-backpack は同ファイルに行なし（28日の表示0）、outdoor-commute-backpack クリック5・表示78・平均7.5位（実行側で GSC から取得・`_tasks/data-campkit-gsc-page-28d-20261123.tsv`。data/ に GSC ファイル無し）（カニバリ確認: tatonka-backpack・deuter-backpack・outdoor-commute-backpack。いずれもファウデの製品を扱っていない）。GSC 該当クエリ（`_tasks/data-campkit-gsc-qp-28d-20261123.tsv`）: 「ファウデ／vaude」を含む行は0件＝需要は未計測。
+- **狙い**: 上位（YAMA HACK 6042・hinata・ねとらぼ fav の単品紹介・ヨドバシのブランドページ）はブランド紹介や単品紹介の型で、国内で両モールに出ているモデルの容量・重量・外寸・税込価格の数値比較や、通勤／自転車／日帰りの選び分けは無い（WebSearch の要約で確認）。国内流通は自転車用が多い実態に合わせ、「通勤＝ミネオ・サイクリスト パック／自転車＝アップヒル・トレイルベント・トレイルコントロール／日帰り＝アップヒル エアー・ウィザード」の3分類と比較表（用途・容量L・重量g・外寸cm・PC収納・楽天/Amazon税込・buy列）を主役にした。
+- **変更内容**: 9製品（すべてファウデ・比較枠0）。全製品 楽天 hb.afl＋Amazon amazonAsin、楽天とAmazonで色を一致（アップヒル 8＝ブライトグリーン・アップヒル 12＝バルティックシー・他7＝ブラック）。結論3行＋QuickPickMdx（ミネオ バックパック 23・アップヒル 16・ウィザード 24+4）、選び方3ポイント（用途別容量表・背面の作り・撥水とレインカバー）、比較表、用途別の製品解説、Tips5、見出し形式FAQ5問、選定基準と情報源（不採用5モデルの理由）、他の記事で比べる、まとめ。title「ファウデ（VAUDE）のリュックおすすめ9選【2026年】通勤・自転車・日帰りを容量8〜28L・重量350〜1,270gで比較」。
+- **内部リンク**: 本文→既存 deuter-backpack・tatonka-backpack・outdoor-commute-backpack・camp-backpack-capacity-guide・backpack-25l・bike-backpack・hydration-pack・day-hike-backpack・mountain-backpack-30l・deuter-commute-daypack。被リンクは deuter-backpack（タトンカ案内文の末尾に1文）・tatonka-backpack（他の記事で比べるに1行）。いずれも updatedAt 不変。
+- **効果測定**: 2〜3週間後に本記事の表示・クリックと、「ファウデ／vaude」クエリの出現を確認する。deuter-backpack（7.2位）の順位が落ちていないかも併せて見る。
+
+---
+
 ## 2026-11-28 northface-boulder-backpack 新規（campkit-20261128-N98）
 
 - **変更記録（効果測定用）**: 2026-11-28 northface-boulder-backpack 新規／狙いKW ノースフェイス ボルダー（ノースフェイス ボルダー デイパック・ノースフェイス ボルダー 容量・ノースフェイス ボルダー ミニ・ボルダー リュック 通勤）／基準: northface-commute-backpack 28日 クリック3・表示21・平均5.8位、northface-capacity-guide は同ファイルに行なし（28日の表示0）（実行側で GSC から取得・`_tasks/data-campkit-gsc-page-28d-20261123.tsv`。data/ に GSC ファイル無し。参考: northface-backpack 2・75・7.8位）（カニバリ確認: northface-capacity-guide・northface-commute-backpack・northface-backpack・northface-womens-backpack）。GSC 該当クエリ（`_tasks/data-campkit-gsc-qp-28d-20261123.tsv`）: 「ボルダー／ボルダ／boulder」を含む行は0件＝需要は未計測。
