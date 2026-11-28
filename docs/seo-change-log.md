@@ -315,6 +315,17 @@
 
 ---
 
+## 2026-11-29 eastpak-backpack 新規 → jansport-backpack に差し替え（campkit-20261129-N100）
+
+- **変更記録（効果測定用）**: 2026-11-29 eastpak-backpack 新規（※実施は jansport-backpack に差し替え）／狙いKW イーストパック リュック → 差し替え後の狙いKW ジャンスポーツ リュック（JanSport リュック・ジャンスポーツ バックパック・ジャンスポーツ リュック 通勤／通学・ジャンスポーツ リュック 容量）／基準: outdoor-commute-backpack 28日 クリック5・表示78・平均7.5位、herschel-backpack クリック3・表示20・平均5.9位（参考: outdoorproducts-backpack 1・3・8.0位、osprey-daily-backpack 90・670・5.9位）（実行側で GSC から取得・`_tasks/data-campkit-gsc-page-28d-20261123.tsv`。data/ に GSC ファイル無し）（カニバリ確認: outdoor-commute-backpack・herschel-backpack・outdoorproducts-backpack。いずれもジャンスポーツ・イーストパックの製品を扱っていない＝grep 0件）。GSC 該当クエリ（`_tasks/data-campkit-gsc-qp-28d-20261123.tsv`）: 「イーストパック／eastpak」を含む行は0件。「ジャンスポーツ／jansport」は1行（「10l ジャンスポーツ リュック」→ camp-backpack-capacity-guide・表示1・平均4.0位）。
+- **差し替えの理由**: 楽天市場のイーストパックの新品出品は、クライムスワールド（全件「並行輸入品」と明記）・laughrare／RAYMART（同）・drawers・LOCOMALL（同）など、国内正規品として確認できたのはポケモンコラボ1点（サックスバー）だけだった。タスクの「両モールでほぼ揃わない場合は他の未掲載ブランドに差し替えてよい」に従い、同じアメリカのキャンパス系デイパックで、楽天・Amazonの両方に公式ショップがあるジャンスポーツ（既存記事に掲載0件）へ差し替えた。slug・title も合わせて変更。
+- **狙い**: 上位（YAMA HACK 2219・my-best 1857・smartlog 122731・BE-PAL・マイナビおすすめナビ）はブランド横断のリュック紹介、またはイーストパックのパデッドパッカー等を数点挙げる型で、国内正規品の新品を両モールで買えるかの整理や、容量・PC収納インチ・重量・税込価格の数値比較は無い（WebSearch の要約で確認）。「街使い＝クロスタウン・クロスタウンプラス／通勤・通学＝ユニオンパック・ダブルトン・ビッグスチューデント／旅行・出張＝アガベ・オデッセイ」の3分類と比較表（用途・容量L・重量g・外寸cm・PC収納・楽天/Amazon税込・buy列）を主役にし、FAQ に「イーストパックではなくジャンスポーツを比べた理由」を入れてイーストパック系クエリの受け皿も兼ねた。
+- **変更内容**: 7製品（すべてジャンスポーツ・比較枠0・下限7）。全製品 楽天 hb.afl＋Amazon amazonAsin、色は7モデルともブラックで一致。結論3行＋QuickPickMdx（クロスタウンプラス・ビッグスチューデント・アガベ）、はじめに（保証・正規取扱店の推奨・差し替えの経緯）、選び方3ポイント（用途別容量表・PCスリーブの有無・腰と胸のストラップ）、比較表、用途別の製品解説、Tips5、見出し形式FAQ5問、選定基準と情報源（不採用5モデルの理由）、他の記事で比べる（各既存記事との役割分担）、まとめ。title「ジャンスポーツ（JanSport）のリュックおすすめ7選【2026年】通勤・通学・街使いを容量26〜39L・重量300〜1,300gで比較」。
+- **内部リンク**: 本文→既存 outdoor-commute-backpack・herschel-backpack・outdoorproducts-backpack・osprey-daily-backpack・northface-commute-backpack・backpack-25l・backpack-35l・camp-backpack-capacity-guide・day-hike-backpack・backpack-rain-cover・fjallraven-kanken。被リンクは herschel-backpack（「他ブランドと比べたいとき」に1行）・outdoorproducts-backpack（関連記事の一覧に1行）。いずれも updatedAt 不変。
+- **効果測定**: 2〜3週間後に本記事の表示・クリックと、「ジャンスポーツ／jansport」「イーストパック／eastpak」クエリの出現を確認する。herschel-backpack（5.9位）・outdoor-commute-backpack（7.5位）の順位が落ちていないかも併せて見る。
+
+---
+
 ## 2026-11-29 vaude-backpack 新規（campkit-20261129-N99）
 
 - **変更記録（効果測定用）**: 2026-11-29 vaude-backpack 新規／狙いKW ファウデ リュック（VAUDE リュック・ファウデ バックパック・ファウデ リュック 通勤・ファウデ リュック 容量）／基準: deuter-backpack 28日 クリック49・表示532・平均7.2位、tatonka-backpack は同ファイルに行なし（28日の表示0）、outdoor-commute-backpack クリック5・表示78・平均7.5位（実行側で GSC から取得・`_tasks/data-campkit-gsc-page-28d-20261123.tsv`。data/ に GSC ファイル無し）（カニバリ確認: tatonka-backpack・deuter-backpack・outdoor-commute-backpack。いずれもファウデの製品を扱っていない）。GSC 該当クエリ（`_tasks/data-campkit-gsc-qp-28d-20261123.tsv`）: 「ファウデ／vaude」を含む行は0件＝需要は未計測。
